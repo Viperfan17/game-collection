@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mario Kart Wii</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('2f6c6b1c-05a5-4931-be77-ca622edbef0c/c7e2c02e-f05f-4d55-a3ee-570b52e20740.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="2f6c6b1c-05a5-4931-be77-ca622edbef0c/a8607c5c-6f3b-4ce8-aead-f25fc12c93f7.ico"/> Mario Kart Wii</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="2f6c6b1c-05a5-4931-be77-ca622edbef0c/0de8dfa8-f7db-4821-9911-d73a24b8c8c5.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:57:43</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:24:18</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Wii">Nintendo Wii</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-4/10/2008">4/10/2008</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-80">80</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-82">82</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Kart racing">Kart racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo EAD">Nintendo EAD</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Mario_Kart_Wii" target="_blank">Wikipedia</a><br/><a href="https://www.nintendo.co.jp/wii/rmcj/" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Daisuke Kageyama">[People] artist: Daisuke Kageyama</a><br/><a href="#quicklink-[People] composer: Asuka Hayazaki">[People] composer: Asuka Hayazaki</a><br/><a href="#quicklink-[People] composer: Ryō Nagamatsu">[People] composer: Ryō Nagamatsu</a><br/><a href="#quicklink-[People] designer: Hirotake Ohtsubo">[People] designer: Hirotake Ohtsubo</a><br/><a href="#quicklink-[People] designer: Yoshihisa Morimoto">[People] designer: Yoshihisa Morimoto</a><br/><a href="#quicklink-[People] director: Yasuyuki Oyagi">[People] director: Yasuyuki Oyagi</a><br/><a href="#quicklink-[People] producer: Hideki Konno">[People] producer: Hideki Konno</a><br/><a href="#quicklink-[People] programmer: Ichiro Suzuki">[People] programmer: Ichiro Suzuki</a><br/><a href="#quicklink-[People] programmer: Katsuhisa Sato">[People] programmer: Katsuhisa Sato</a><br/><a href="#quicklink-[People] programmer: Keiichiro Kato">[People] programmer: Keiichiro Kato</a><br/><a href="#quicklink-[People] programmer: Yukihiko Ito">[People] programmer: Yukihiko Ito</a><br/><a href="#quicklink-[People] programmer: Yusuke Shiraiwa">[People] programmer: Yusuke Shiraiwa</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Mario Kart Wii</b></i> is a 2008 <a href="https://en.wikipedia.org/wiki/Kart_racing_game">kart racing game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>. It is the sixth installment in the <i><a href="https://en.wikipedia.org/wiki/Mario_Kart">Mario Kart</a></i> series, and was released in April 2008. In <i>Mario Kart Wii,</i> the player takes control of one of 24 <i>Mario</i> series characters from the <i><a href="https://en.wikipedia.org/wiki/Mario_(franchise)">Mario</a></i> series, who participate in races on 32 different <a href="https://en.wikipedia.org/wiki/Race_track">race tracks</a> using specialized items to hinder opponents or gain advantages.</p>
+
+<p><i>Mario Kart Wii</i> features multiple <a href="https://en.wikipedia.org/wiki/Single-player_video_game">single-player</a> and <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a> game modes including two- to four-person <a href="https://en.wikipedia.org/wiki/Split_screen_(video_games)">split screen</a>. Online multiplayer was supported until the discontinuation of <a href="https://en.wikipedia.org/wiki/Nintendo_Wi-Fi_Connection">Nintendo Wi-Fi Connection</a> in May 2014. <i>Mario Kart Wii</i> features an returning multiplayer mode – Battle Mode – the aim is to defeat the other players by attacking them with power-ups, destroying balloons which surround each kart. <i>Mario Kart Wii</i> uses the <a href="https://en.wikipedia.org/wiki/Wii_Remote">Wii Remote</a>'s <a href="https://en.wikipedia.org/wiki/Motion_controller">motion-controls</a> to provide intuitive and conventional <a href="https://en.wikipedia.org/wiki/Steering">steering</a> controls. Each copy of the game was <a href="https://en.wikipedia.org/wiki/Product_bundling">bundled</a> with the <a href="https://en.wikipedia.org/wiki/Wii_Wheel">Wii Wheel</a> accessory to augment this feature and mimic a <a href="https://en.wikipedia.org/wiki/Steering_wheel">steering wheel</a>.</p>
+
+<p>Development of <i>Mario Kart Wii</i> began shortly after the release of 2005's <a href="https://en.wikipedia.org/wiki/Mario_Kart_DS"><i>Mario Kart DS</i></a>. <a href="https://en.wikipedia.org/wiki/Hideki_Konno">Hideki Konno</a>—who originally produced the previous 2 games of the <i>Mario Kart</i> series returned as an producer. In his Nintendo composer debut—<a href="https://en.wikipedia.org/wiki/Ryō_Nagamatsu?action=edit&amp;redlink=1">Ryō Nagamatsu</a> [<a href="https://ja.wikipedia.org/wiki/永松亮">ja</a>] and Asuka Hayazaki (who composed 2005's <a href="https://en.wikipedia.org/wiki/Yoshi_Touch_&amp;_Go"><i>Yoshi Touch &amp; Go</i></a>) served as <i>Mario Kart Wii</i>'s main composers—who both used new interpretations of the familiar melodies from earlier games alongside original material to create <i>Mario Kart Wii</i>'s soundtrack.</p>
+
+<p><i>Mario Kart Wii</i> received critical acclaim upon critics and the general audiences upon release—with praise for the online mode, coupled with its characters, innovative gameplay, tracks, and karts, but received criticism for its item balancing and <a href="https://en.wikipedia.org/wiki/Dynamic_game_difficulty_balancing">rubber-band difficulty adjustment</a>. It was a commerical success—becoming the  best selling game of 2008 selling more than five million copies. In total, <i>Mario Kart Wii</i> sold over 37 million copies, making it the second best-selling <i>Mario Kart</i> game after <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8_Deluxe">Mario Kart 8 Deluxe</a></i> and one of the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_video_games">best-selling video games of all time</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Mario Kart Wii</i> is a <a href="https://en.wikipedia.org/wiki/Kart_racing">kart racing</a> game featuring <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> and <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> modes. The players control one of many selectable <a href="https://en.wikipedia.org/wiki/Characters_in_the_Mario_franchise"><i>Mario</i> franchise characters</a> and participate in races or battles using go-karts or bikes on courses thematically based on locations from the <a href="https://en.wikipedia.org/wiki/Mario_(franchise)"><i>Mario</i> franchise</a>. During gameplay, the player views the action from a <a href="https://en.wikipedia.org/wiki/Third-person_(video_games)">third-person perspective</a> that tracks the player from behind their kart. <i>Mario Kart Wii</i> supports four different control schemes. The primary control scheme is the <a href="https://en.wikipedia.org/wiki/Wii_Remote">Wii Remote</a>, optionally used in conjunction with the plastic <a href="https://en.wikipedia.org/wiki/Wii_Remote#Wii_Wheel">Wii Wheel</a> accessory, which uses the controller's <a href="https://en.wikipedia.org/wiki/Motion_controller">motion-controls</a> to simulate operating a <a href="https://en.wikipedia.org/wiki/Steering_wheel">steering wheel</a>. The other supported control schemes are the Wii Remote with the <a href="https://en.wikipedia.org/wiki/Wii_Remote#Nunchuk">Nunchuk</a> attachment; the <a href="https://en.wikipedia.org/wiki/Wii_Remote#Classic_Controller">Classic Controller</a>; and the <a href="https://en.wikipedia.org/wiki/GameCube_controller">GameCube controller</a>. While driving, the player collects <a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a> from <a href="https://en.wikipedia.org/wiki/Item_(game_terminology)">item</a> boxes placed in various points on the track—these power-ups allow the player to attack opponents, causing them to slow down or spin out of control; defend against such attacks; or gain boosts in speed. These power-ups include the series staple items, such as the <a href="https://en.wikipedia.org/wiki/Super_Mario#Mushroom">Mushroom</a>, <a href="https://en.wikipedia.org/wiki/Koopa_Troopa">Koopa Shell</a> projectiles, the <a href="https://en.wikipedia.org/wiki/Super_Mario#Invincibility">Super Star</a>, <a href="https://en.wikipedia.org/wiki/Banana_peel">banana peels</a> and lightning bolts, as well as new items such as the <a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros.">Mega Mushroom</a> and <a href="https://en.wikipedia.org/wiki/Mario_Bros.">POW Block</a>.</p>
+
+<p><i>Mario Kart Wii</i> features 24 <a href="https://en.wikipedia.org/wiki/Player_character">playable characters</a> from the <i>Mario</i> series, the largest roster of any <i>Mario Kart</i> game until the release of <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8">Mario Kart 8</a></i> in 2014. The game features characters who have appeared in previous installments, including <a href="https://en.wikipedia.org/wiki/Mario">Mario</a>, <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a>, <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Peach</a>, <a href="https://en.wikipedia.org/wiki/Yoshi">Yoshi</a>, <a href="https://en.wikipedia.org/wiki/Toad_(Nintendo)">Toad</a>, <a href="https://en.wikipedia.org/wiki/Donkey_Kong_(character)">Donkey Kong</a>, and <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a>, in addition to characters such as <a href="https://en.wikipedia.org/wiki/Rosalina_(Mario)">Rosalina</a>, <a href="https://en.wikipedia.org/wiki/Funky_Kong">Funky Kong</a>, and <a href="https://en.wikipedia.org/wiki/Bowser">Dry Bowser</a> who are playable for the first time. Unlike <i>Mario Kart DS</i>, where characters can drive a kart exclusive to that character and the standard go-kart, each character is assigned to one of three different weight classes, which affects the selection of vehicles the character can drive. In addition to this, <i>Mario Kart Wii</i> uses two different classes of vehicles, Karts and Bikes, with the latter being a new addition to the series. Bikes were also subdivided further into two categories: regular and sports bikes, with sports bikes featuring an alternate drift type known as inside drifting. <a href="https://en.wikipedia.org/wiki/Mii">Mii</a> characters saved in the console's <a href="https://en.wikipedia.org/wiki/Wii_Menu#Mii_Channel">Mii Channel</a> are also playable. Thirty-six vehicles are available in <i>Mario Kart Wii</i>, each of which has different properties that affect how the vehicle handles while driving. Half the characters and vehicles are initially unavailable to the player; certain objectives must be completed to <a href="https://en.wikipedia.org/wiki/Unlockable_(gaming)">unlock</a> each one. For example, the Jetsetter (also known as the Aero Glider in PAL regions) must be unlocked by earning a one-star rank or higher on all 150cc Retro Cups in Grand Prix mode.</p>
+
+<p>The game features eight cups—sets of four different tracks—for a total of 32 unique tracks. Like its predecessor <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_DS">Mario Kart DS</a></i>, <i>Mario Kart Wii</i> has 16 new courses and 16 courses from prior <i>Mario Kart</i> games.</p>
+
+<p><i>Mario Kart Wii</i> features multiple game modes: <a href="https://en.wikipedia.org/wiki/Grand_Prix_motor_racing">Grand Prix</a>, <a href="https://en.wikipedia.org/wiki/Time_trial#Video_games">Time Trials</a>, Versus, and Battle. All modes support <a href="https://en.wikipedia.org/wiki/Single-player_video_game">single-player</a> gameplay; Versus and Battle support <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game#Single-system">local multiplayer</a> for up to four players, with or without <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_in_video_games">computer-controlled players</a>. In Grand Prix, the player participates in four three-lap races from one of eight cups against eleven opponents. The player is awarded points at the end of each race based on their ranking. The total number of points collected, among other factors, determines the player's overall rank. Versus mode is similar to Grand Prix, but the presented courses and items are configurable. In Time Trials, the player must quickly complete the race in the fastest time possible—there are no opponents or items except for three Mushrooms given at the start of each race. The player can compete against a <a href="https://en.wikipedia.org/wiki/Ghost_(video_gaming)">ghost</a> character, which mimics a player's movements from an earlier race. Ghost data can be <a href="https://en.wikipedia.org/wiki/Saved_game">saved</a> in the Wii console memory.</p>
+
+<p>Battle mode is similar to that seen in previous installments in which players drive around an enclosed arena and attack each other using items. The players are divided into two teams, red and blue, and teammates cannot harm each other with their items. There are two variants of Battle mode available: Balloon Battle and Coin Runners. In Balloon Battle, each player's kart has three attached balloons. A player gains a point each time they pop or steal a balloon belonging to an opposing team player but loses a point each time they lose all balloons. In Coin Runners, the players collect coins scattered throughout the arena and attack opposing team members to make them drop coins. The team that has accumulated the most points or coins total when the three-minute time limit expires wins. There are ten <a href="https://en.wikipedia.org/wiki/Arena">arena</a> courses available for Battle mode, which include five original courses and five retro courses.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Online_play">Online play</a> via <a href="https://en.wikipedia.org/wiki/Nintendo_Wi-Fi_Connection">Nintendo Wi-Fi Connection</a> was available until its discontinuation on May 20, 2014. Versus and Battle modes were available and supported up to 12 participants, and up to two players could connect and play from the same Wii console. Players could compete against random players from within the same region or from any continent, or could compete only against players registered as friends. At the end of each race or match, each player's VR (versus rating) or BR (battle rating) would change based on their final ranking. The Mario Kart Channel also offered additional online information, including regional or worldwide rankings for Time Trials, and monthly Nintendo-sponsored tournaments with special objectives.</p>
+
+<h2>Development</h2>
+
+<p><i>Mario Kart Wii</i> is the sixth game in the <i><a href="https://en.wikipedia.org/wiki/Mario_Kart">Mario Kart</a></i> series, following <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_DS">Mario Kart DS</a></i>. <a href="https://en.wikipedia.org/wiki/Hideki_Konno">Hideki Konno</a>, who worked with the Software Development Department of <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a>'s <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_Analysis_&amp;_Development">Entertainment Analysis &amp; Development</a> (EAD) division and had previously worked on the first two <i>Mario Kart</i> games as well as <i>Mario Kart DS</i>, served as the game's producer. <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> acted as "General Producer" and gave miscellaneous advice on various aspects of the game.</p>
+
+<p>Features cut from <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_DS">Mario Kart DS</a></i> due to time constraints were implemented in <i>Mario Kart Wii</i> alongside various improvements to online play. The developers also wanted to avoid online races becoming more deserted as they progressed, thus altering the online matchmaking to allow players to join a race once it is finished for participation in the next one. The game was the first in the series to feature <a href="https://en.wikipedia.org/wiki/BMX">BMX motorbikes</a> as drivable vehicles, an idea which Konno had proposed since <i>Double Dash</i> out of his passion for <a href="https://en.wikipedia.org/wiki/Extreme_sports">extreme sports</a> but was rejected due to the seemingly bizarre image of Mario riding a bike. The game was briefly known internally under the name "<i>Mario Kart X</i>" before its final name was decided upon, referring to the "X" in the word "extreme".</p>
+
+<p><i>Mario Kart Wii</i> was officially announced at <a href="https://en.wikipedia.org/wiki/E3_2007">E3 2007</a>; the online features and the first footage of the game were shown at the Expo. During Nintendo of America CEO <a href="https://en.wikipedia.org/wiki/Reggie_Fils-Aimé">Reggie Fils-Aimé</a>'s presentation, he unveiled the game via a trailer that showed some of the new characters and tracks. The trailer also displayed that the game would include up to 12 simultaneous racers. Additional details of the game were later released in conjunction with the Nintendo Fall 2007 Conference held in October 2007, where it was revealed that it would include bikes and the Wii Wheel. New gameplay footage from the game was also shown, and the release date was revealed to be set for spring 2008.</p>
+
+<p>To complement <i>Mario Kart Wii</i>'s unique motion controls, a plastic, wheel-shaped casing for the <a href="https://en.wikipedia.org/wiki/Wii_Remote">Wii Remote</a> was included with some versions of the game. The designers tested roughly 30 different prototypes of the wheel with different shapes, colors, and weights based on real-life go-karts. The final design for the wheel was made to be as lightweight as possible for it to suit long-term periods of gameplay, and it was made entirely white despite experimentation with two-colored designs for it to fit with the color scheme of previous peripherals such as the <a href="https://en.wikipedia.org/wiki/Wii_Zapper">Wii Zapper</a> and the <a href="https://en.wikipedia.org/wiki/Wii_Balance_Board">Wii Balance Board</a>. A blue ring with the Wii logo inside of it was also placed on the backside of the wheel to give spectating players something interesting to look at; as a result, this blue ring ended up being featured in the game's logo.</p>
+
+<p>The game's music was composed by Asuka Hayazaki and <a href="https://en.wikipedia.org/wiki/Ryō_Nagamatsu?action=edit&amp;redlink=1">Ryō Nagamatsu</a> [<a href="https://ja.wikipedia.org/wiki/永松亮">ja</a>], who both used new interpretations of the familiar melodies from earlier games alongside original material. A 43-track official soundtrack was released in December 2011 as a <a href="https://en.wikipedia.org/wiki/Club_Nintendo">Club Nintendo</a> reward in Japan. The speaker on the Wii Remote is frequently used during gameplay, with <a href="https://en.wikipedia.org/wiki/Sound_effects_in_video_games">sound effects</a> being emitted from it. During the extensive testing of the different Wii Wheel <a href="https://en.wikipedia.org/wiki/Prototype">prototypes</a>, the developers decided to have the voice actors play the game during recording sessions.</p>
+
+<h2>Reception</h2>
+
+<p><i>Mario Kart Wii</i> received "generally favorable" reviews according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregation</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. Reviewers deemed the gameplay to be familiar and more safe and predictable than that of <i><a href="https://en.wikipedia.org/wiki/Mario_Kart:_Double_Dash">Mario Kart: Double Dash</a></i>. Tae K. Kim of <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> admired the variety of the character roster, though Bryn Williams of <i><a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a></i> felt that some of the unlockable characters were bland. Although Shane Bettenhausen of <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> and Ryan Davis of <i><a href="https://en.wikipedia.org/wiki/Giant_Bomb">Giant Bomb</a></i> acknowledged that some of the new tracks were inventive, they and Williams determined the track roster to be weaker and less creative than in previous entries. <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i> commented that the <a href="https://en.wikipedia.org/wiki/Wii_Remote#Wii_Wheel">Wii Wheel</a> worked very effectively and loved the different multiplayer modes. Lark Anderson of <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> praised the game for being easy to jump into for players of any skill level and stated that motorcycles provide a great alternative to go-karts. The additions of motorcycles and an online multiplayer mode were welcomed. The unbalanced items and <a href="https://en.wikipedia.org/wiki/Dynamic_game_difficulty_balancing">rubber band AI</a>, which were said to result in chance-influenced gameplay, were a common point of criticism, as was the truncation of the battle mode from previous titles.</p>
+
+<p>Kim was unimpressed by the graphics, and observed that their quality lowered in the split-screen multiplayer mode. Williams described the game as a "480p widescreen treat, delivering crisp, colorful graphics". Greg Nicksarlian of <i>GameZone</i> complimented the visuals as sharp and vibrant, but acknowledged their simplicity. Mark Bozon of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> summarized the visuals as basic but charming and polished. The music was generally considered to be unremarkable, and the voice acting was derided as repetitive and annoying.</p>
+
+<p>In 2010, <i>Mario Kart Wii</i> was included in the book <i><a href="https://en.wikipedia.org/wiki/1001_Video_Games_You_Must_Play_Before_You_Die">1001 Video Games You Must Play Before You Die</a></i>. Anthony John Agnello and David Roberts of <i><a href="https://en.wikipedia.org/wiki/GamesRadar+">GamesRadar+</a></i> ranked <i>Mario Kart Wii</i> #11 in their 2017 list of best <i>Mario Kart</i> games, the second-lowest ranking behind the cancelled <a href="https://en.wikipedia.org/wiki/Virtual_Boy">Virtual Boy</a> <i>Mario Kart</i>. They described the game as "a bloated, populist mess attempting to please everyone" that "feels like the most <i>Mario Kart</i> rather than the best <i>Mario Kart</i>, and as a result, it's as if it's missing the series' soul". The staff of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> ranked the game #18 in their 2019 list of "Top 25 Favourite Kart Racers", deeming it "yet another solid entry in the series" and saying that its expanded track roster and inclusion of both online and splitscreen multiplayer gameplay made it "one of the system’s go-to party games". Luke Plunkett of <i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i> ranked the game at #7 out of the nine best <i>Mario Kart</i> games; he felt that there was little reason to play the game after the improvements made by <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_7">Mario Kart 7</a></i> and <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8">8</a></i>, and that the motion controls were "straight garbage". The tracks Maple Treeway and Coconut Mall have been ranked among the series' best, while Matthew Wilkinson of <i><a href="https://en.wikipedia.org/wiki/Screen_Rant">Screen Rant</a></i> respectively ranked <a href="https://en.wikipedia.org/wiki/Rainbow_Road">Rainbow Road</a>, Wario's Gold Mine, and Moonview Highway as the first, eighth and ninth most difficult tracks in the series.</p>
+
+<h3>Sales</h3>
+
+<p><i>Mario Kart Wii</i> had a successful launch and sold 300,000 copies on the launch day in Japan alone, compared to <i>Mario Kart DS</i> which sold 160,000 copies on its first day and <i>Mario Kart: Double Dash</i> which sold 180,000 on its first day. In the week ending May 4, 2008, <i>Mario Kart Wii</i> had sold over a million copies in Japan alone, less than a month since its release in the region. In the UK, <i>Mario Kart Wii</i> was the best-selling video game in the week ending April 12, 2008, having "the eighth biggest opening sales week in UK software history," according to <a href="https://en.wikipedia.org/wiki/GfK_Chart-Track">GfK Chart-Track</a>/<a href="https://en.wikipedia.org/wiki/Video_game_content_rating_system#UK_Interactive_Entertainment_Association">ELSPA</a>. The game dwarfed all other five <i>Mario</i> Wii games released up until then for the Wii combined when comparing first-week sales. In the United States, <i>Mario Kart Wii</i> was the second-best-selling video game in April 2008, selling 1.12 million copies, according to the <a href="https://en.wikipedia.org/wiki/NPD_Group">NPD Group</a>; putting it behind the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> version of <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_IV">Grand Theft Auto IV</a></i> and ahead of the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> version, both released in the same week. It ranked the fourth-best-selling game of December 2008 in the United States, selling more than 979,000 copies. According to the NPD Group, <a href="https://en.wikipedia.org/wiki/GfK">GfK</a> Chart-Track, and <a href="https://en.wikipedia.org/wiki/Enterbrain">Enterbrain</a>, the game has sold 2.409 million copies in the United States, 687,000 in the United Kingdom, and 1.601 million in Japan, respectively, for a total of 4.697 million copies sold by August 1, 2008. As of March 2009, Nintendo has sold 15.4 million copies of <i>Mario Kart Wii</i> worldwide. As of January 4, 2009, it has sold 2,133,000 copies in Japan. It is also the fourth-best-selling game of Japan in 2008. According to the NPD Group, GfK Chart-Track, and Enterbrain, the game has sold 856,000 copies in the United States, 394,000 in the United Kingdom, and 218,000 in Japan, respectively, for a total of 1.468 million copies sold in the third quarter of 2008 (July–September). It was the second-best-selling game of 2008 in the United States, selling more than five million copies. In France, it sold 4.8 million units, which is more than it sold in Japan (3.7 million).</p>
+
+<p>With 37.38 million copies sold worldwide as of March 31, 2021, the game is the best-selling <i><a href="https://en.wikipedia.org/wiki/Mario_(franchise)">Mario</a></i> game for the Wii, the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_video_games">second-best-selling</a> racing game, and the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Wii_video_games">second-best-selling game for the Wii</a> behind <i><a href="https://en.wikipedia.org/wiki/Wii_Sports">Wii Sports</a></i>.</p>
+
+<p>The game won multiple Wii-specific awards from <i>IGN</i> in its 2008 video game awards, including Best Racing Game and Best Online Multiplayer Game. <i>IGN</i> also nominated it for Best Family Game for the Wii. During the <a href="https://en.wikipedia.org/wiki/12th_Annual_Interactive_Achievement_Awards">12th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>Mario Kart Wii</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Racing_Game_of_the_Year">Racing Game of the Year</a>". The game was ranked ninth in <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i>'s "Best of the Decade." It also won the award for "Favorite Video Game" at the <a href="https://en.wikipedia.org/wiki/2010_Kids'_Choice_Awards">2010 Kids' Choice Awards</a>. <i><a href="https://en.wikipedia.org/wiki/Guinness_World_Records">Guinness World Records</a></i> has awarded <i>Mario Kart Wii</i> with a record for being the best-selling racing video game of all time. In 2009, <i>Official Nintendo Magazine</i> placed the game fourth in a list of the greatest Nintendo games of all time.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

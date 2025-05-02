@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Super Smash Bros. Melee</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('0646399d-af59-42a2-bf7a-06f7a8ba6d33/8723965a-76ae-448f-8a8f-0a8ad4c2f7d3.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="0646399d-af59-42a2-bf7a-06f7a8ba6d33/588b8dcc-8fe5-4e76-a1a5-350fca7e0543.png"/> Super Smash Bros. Melee</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="0646399d-af59-42a2-bf7a-06f7a8ba6d33/a99b91f6-038a-4610-aadf-edb185243753.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:57:43</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:24:51</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Wii">Nintendo Wii</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/21/2001">11/21/2001</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-89">89</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-92">92</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Fighting">Fighting</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-HAL Laboratory">HAL Laboratory</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Melee" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/20050305230613/http://www.smashbros.com/battle/index.html" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Hitoshi Kobayashi">[People] artist: Hitoshi Kobayashi</a><br/><a href="#quicklink-[People] composer: Hirokazu Ando">[People] composer: Hirokazu Ando</a><br/><a href="#quicklink-[People] composer: Shogo Sakai">[People] composer: Shogo Sakai</a><br/><a href="#quicklink-[People] composer: Tadashi Ikegami">[People] composer: Tadashi Ikegami</a><br/><a href="#quicklink-[People] composer: Takuto Kitsuta">[People] composer: Takuto Kitsuta</a><br/><a href="#quicklink-[People] designer: Hitoshi Kobayashi">[People] designer: Hitoshi Kobayashi</a><br/><a href="#quicklink-[People] designer: Masahiro Sakurai">[People] designer: Masahiro Sakurai</a><br/><a href="#quicklink-[People] director: Masahiro Sakurai">[People] director: Masahiro Sakurai</a><br/><a href="#quicklink-[People] producer: Hiroaki Suga">[People] producer: Hiroaki Suga</a><br/><a href="#quicklink-[People] producer: Kenji Miki">[People] producer: Kenji Miki</a><br/><a href="#quicklink-[People] producer: Masayoshi Tanimura">[People] producer: Masayoshi Tanimura</a><br/><a href="#quicklink-[People] producer: Shigeru Miyamoto">[People] producer: Shigeru Miyamoto</a><br/><a href="#quicklink-[People] programmer: Yoshiki Suzuki">[People] programmer: Yoshiki Suzuki</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Super Smash Bros. Melee</b></i> is a 2001 <a href="https://en.wikipedia.org/wiki/Fictional_crossover">crossover</a> <a href="https://en.wikipedia.org/wiki/Fighting_game">fighting video game</a> developed by <a href="https://en.wikipedia.org/wiki/HAL_Laboratory">HAL Laboratory</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a>. It is the second installment in the <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros.">Super Smash Bros.</a></i> series. It features characters from Nintendo video game franchises such as <i><a href="https://en.wikipedia.org/wiki/Mario_(franchise)">Mario</a></i>, <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda">The Legend of Zelda</a></i>, <i><a href="https://en.wikipedia.org/wiki/Star_Fox">Star Fox</a></i>, <i><a href="https://en.wikipedia.org/wiki/Pokémon_(video_game_series)">Pokémon</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong">Donkey Kong</a></i> among others. The stages and gameplay modes reference or take designs from these franchises as well.</p>
+
+<p><i>Melee</i> includes all playable characters from <a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._(video_game)">the first game</a> and also adds characters from additional franchises such as <i><a href="https://en.wikipedia.org/wiki/Fire_Emblem">Fire Emblem</a></i>, of which no games had been released outside Japan at the time, in addition to new stages and gameplay modes. Like other games in the <i>Smash Bros.</i> series, <i>Melee</i>'s gameplay system offers an unorthodox approach to the fighting game genre, with a counter that measures damage with increasing percentages, representing the knockback the character will experience, rather than the depleting <a href="https://en.wikipedia.org/wiki/Health_(gaming)">health bar</a> seen in most fighting games.</p>
+
+<p><i>Melee</i> was first released in Japan in November 2001, in the Americas in December 2001, and in Europe and Australia in May 2002. The game received widespread acclaim from critics, earning praise for its visuals, simple controls, gameplay, and orchestrated soundtrack, as well as several awards and acknowledgments from various publications; it is now considered one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games ever made</a>. It achieved strong sales upon its release, becoming the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_GameCube_video_games">GameCube's best-selling title</a>, with over seven million copies sold by 2008. Considered one of the most competitively viable <i>Smash Bros.</i> games due to its fast-paced, aggressive gameplay and continuously developing <a href="https://en.wikipedia.org/wiki/Metagame">metagame</a>, <i>Melee</i> has been featured in many <a href="https://en.wikipedia.org/wiki/Competitive_gaming">competitive gaming</a> tournaments, boasting a dedicated <a href="https://en.wikipedia.org/wiki/Grassroots">grassroots</a> fan community which has kept its <a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._in_esports">competitive scene</a> alive well beyond the game's original lifespan. It was followed by <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Brawl">Super Smash Bros. Brawl</a></i> for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> in 2008.</p>
+
+<h2>Gameplay</h2>
+
+<p>Like its <a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._(video_game)">predecessor</a>, <i>Super Smash Bros. Melee</i> is a <a href="https://en.wikipedia.org/wiki/Platform_fighter">platform fighter</a> that differs from traditional fighting games as the objective is to force their opponents beyond the boundaries of the stage. Most attacks inflict damage and can, if enough damage is dealt, knock back the enemy. Each character's <a href="https://en.wikipedia.org/wiki/Health_(game_terminology)">health</a> is measured by a meter that represents damage as a percentage. The higher the percentage value, the farther the player gets knocked back, and the easier they are to knock off the stage, which will result in the character's death and the loss of a <a href="https://en.wikipedia.org/wiki/Life_(video_games)">stock</a>, or life. Unlike other games of the same genre, in which moves are entered by button-input combinations, most moves in <i>Super Smash Bros. Melee</i> can be accessed via one-button presses and a joystick direction. For example, by tilting the joystick to the side and pressing the "B" button, the character will use their "side special" attack. Tilting the joystick up, down, or not tilting it at all while pressing B will use the up, down, or neutral special, respectively.</p>
+
+<p>During battles, items related to <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> games or merchandise fall onto the game field. These items have purposes ranging from inflicting damage on the opponent to restoring health to the player. Some items are throwable (ranged items), some do melee damage (battering items), and some have an instant effect on the player (transforming items).</p>
+
+<p>Most stages have a theme relating to a Nintendo franchise or a specific Nintendo game and are interactive to the player. For example, the <a href="https://en.wikipedia.org/wiki/Mushroom_Kingdom">Mushroom Kingdom</a> stage is from <i>Super Mario Bros</i>, and the Temple stage is from <i>The Legend of Zelda</i>. Although the stages are rendered in three dimensions, players can only move on a two-dimensional plane. Not all stages are available immediately; some stages must be "unlocked" by achieving particular requirements. Some stages feature moving elements and platforms and hazards that harm players, while others lack these elements.</p>
+
+<h3>Single-player</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Single-player_video_game">Single-player</a> mode provides the player with a variety of <a href="https://en.wikipedia.org/wiki/Side-scrolling_video_game">side-scrolling</a> fighting challenges. The applicable modes range from "Classic Mode", which involves the player battling multiple opponents and a <a href="https://en.wikipedia.org/wiki/Boss_(video_gaming)">boss</a> character, to the "Home Run Contest", a minigame involving the player trying to launch a sandbag as far as possible with a <a href="https://en.wikipedia.org/wiki/Baseball_bat">Home Run Bat</a> for ten seconds. Some of these modes are personalized for the character; for example, the "Target Test" sets out a specialized area for a character in which they aim to destroy ten targets in the least amount of time they can. These areas may include references to that particular character's past and legacy. <i>Melee</i> introduced "Adventure Mode", which takes the player to several predefined universes of characters in the Nintendo franchise. "All-Star Mode" is an unlockable feature that requires the player to defeat every character in the game while having only one stock and three health supplements between battles.</p>
+
+<p>In the <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a> mode, up to four players or computer-controlled characters may fight in a <a href="https://en.wikipedia.org/wiki/Deathmatch_(video_games)">free-for-all</a> or on separate teams. The <a href="https://en.wikipedia.org/wiki/Central_processing_unit">central processing unit</a> (CPU) characters' <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">artificial intelligence</a> (AI) difficulty is ranked from one to nine in ascending order of difficulty. Individual players can also be handicapped; the higher the handicap, the stronger the player. Victory is determined in five ways, depending on the game type. The two most common multiplayer modes are “Time mode”, where the player or team with the most KOs and least falls wins after a predetermined amount of time, and "Stock mode", a battle in which the last player or team with lives remaining wins. This can be changed to less conventional modes like "Coin mode", which rewards the richest player as the victor. Players must collect coins created by hitting enemies and try not to lose them by falling off the stage; harder hits release higher quantities of coins. Other options are available, updating from <i>Super Smash Bros.</i>, such as determining the number and type of items that appear during the battle.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Trophies">Trophies</a> (known as "Figures" in the Japanese version) of various Nintendo characters and objects can be collected throughout the game. These trophies include figures of playable characters, accessories, and items associated with them as well as series and characters not otherwise playable in the game. The trophies range from the well-known to the obscure, and even characters or elements only released in Japan. <i>Super Smash Bros.</i> had a similar system of plush dolls; however, it only included the 12 playable characters. One trophy is exclusive to the Japanese version of the game.</p>
+
+<h2>Playable characters</h2>
+
+<p><i>Super Smash Bros. Melee</i> features 25 (26 if Zelda and Sheik are considered separate) characters, 13 (14 with Zelda and Sheik separate) more than its predecessor. Fourteen are available initially, while the other 11 characters require completing specific tasks to become available. Every character featured in the game is derived from a popular Nintendo franchise. All characters have a symbol that appears behind their damage meter which represents their series, such as a <a href="https://en.wikipedia.org/wiki/Triforce">Triforce</a> symbol behind <a href="https://en.wikipedia.org/wiki/Link_(The_Legend_of_Zelda)">Link's</a> damage meter and a Poké Ball behind a <a href="https://en.wikipedia.org/wiki/List_of_Pokémon">Pokémon species</a>. Some characters represent popular franchises, while others were less-known at the time of the release; <a href="https://en.wikipedia.org/wiki/Marth_(Fire_Emblem)">Marth</a> and <a href="https://en.wikipedia.org/wiki/Roy_(Fire_Emblem)">Roy</a> represent the <i><a href="https://en.wikipedia.org/wiki/Fire_Emblem">Fire Emblem</a></i> series, which was not released outside Japan at the time. The characters' appearance in <i>Super Smash Bros. Melee</i> led to a rise in the popularity of the series, including releasing it outside of Japan. References are made throughout the game to the relationship between characters of the same universe; in one of the events from "Event mode", <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> must defeat his enemy <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a> to rescue <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Peach</a>. Furthermore, each character has recognizable moves from their original series, such as <a href="https://en.wikipedia.org/wiki/Samus_Aran">Samus</a>'s firearms from the <a href="https://en.wikipedia.org/wiki/Metroid"><i>Metroid</i> series</a> and Link's arsenal of weapons.</p>
+
+<h2>Development and release</h2>
+
+<p><i>Super Smash Bros. Melee</i> was developed by <a href="https://en.wikipedia.org/wiki/HAL_Laboratory">HAL Laboratory</a>, with <a href="https://en.wikipedia.org/wiki/Masahiro_Sakurai">Masahiro Sakurai</a> as the head of production. <i>Mario</i> creator <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> served as co-producer. The game was one of the first games released on the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> and highlighted the advancement in graphics over the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a>. The project proposal/initial design document for the game was completed on July 5, 1999. Sakurai wanted to make an opening <a href="https://en.wikipedia.org/wiki/Full_motion_video">FMV</a> sequence to pay homage to the debut of the GameCube. HAL and Sakurai worked with three separate graphic houses in <a href="https://en.wikipedia.org/wiki/Tokyo">Tokyo</a> to make the opening sequence. On their official website, the developers posted screenshots and information highlighting and explaining the attention to <a href="https://en.wikipedia.org/wiki/Physics">physics</a> and detail in the game, with references to changes from its predecessor. The game was in development for 13 months, beginning around autumn 2000, and Sakurai called his lifestyle during this period "destructive" with no holidays and short weekends. Unlike the experimental first <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._(video_game)">Super Smash Bros.</a></i>, he felt great pressure to deliver a quality sequel, claiming it was the "biggest project I had ever led up to that point". Despite the stressful development cycle, in a 2010 interview, Sakurai proudly called <i>Melee</i> "the sharpest game in the series... it just felt really good to play", even compared to its successor, <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Brawl">Super Smash Bros. Brawl</a></i>.</p>
+
+<p>On the game's official Japanese website, Sakurai and the developers explained reasons for making particular characters playable and why some characters were not added. Initially, the development team wanted to replace Ness with <a href="https://en.wikipedia.org/wiki/Lucas_(Mother_3)">Lucas</a>, the main character of <i><a href="https://en.wikipedia.org/wiki/Mother_3">Mother 3</a></i>, but retained Ness in consideration of delays. Video game developer <a href="https://en.wikipedia.org/wiki/Hideo_Kojima">Hideo Kojima</a> originally requested the inclusion of <a href="https://en.wikipedia.org/wiki/Solid_Snake">Solid Snake</a> to Sakurai, and <a href="https://en.wikipedia.org/wiki/Yuji_Naka">Yuji Naka</a> of <a href="https://en.wikipedia.org/wiki/Sonic_Team">Sonic Team</a> requested the inclusion of <a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(character)">Sonic the Hedgehog</a> to Sakurai, but neither characters were added as the game was too far in development. Additional development time later enabled all three characters to be included in <i>Brawl</i>. Marth and Roy were initially intended to be playable exclusively in the Japanese version of <i>Super Smash Bros. Melee</i> due to <i>Fire Emblem'</i>s lack of representation in the West at the time; however, they received favorable attention during the game's North American localization, leading to the decision for the developers to include them in the Western version.</p>
+
+<p>Sakurai stated that the development team had suggested characters from four other games to represent the Famicom/NES era, until the developers eventually chose the <a href="https://en.wikipedia.org/wiki/Ice_Climber">Ice Climbers</a> to fulfill this role. Additionally, Ayumi Tachibana from <i><a href="https://en.wikipedia.org/wiki/Famicom_Detective_Club">Famicom Detective Club</a></i> was considered as a playable character, but was ultimately relegated to a cameo role as a trophy. The developers have noted characters that have very similar moves to each other on the website; such characters have been referred to as "clones" in the media.</p>
+
+<p>Shogo Sakai took over as composer of the game's opening in place of Hirokazu Ando on February 14, 2001. Voice recording also started that month, with the first sessions involving the Japanese <i>Star Fox</i> cast and <a href="https://en.wikipedia.org/wiki/Masachika_Ichimura">Masachika Ichimura</a>, who voiced Mewtwo.</p>
+
+<p>Nintendo presented the game at the <a href="https://en.wikipedia.org/wiki/E3_2001">Electronic Entertainment Expo 2001</a> as a playable demonstration. The next major exposition of the game came in August 2001 at <a href="https://en.wikipedia.org/wiki/Nintendo_Space_World">Space World</a>, when Nintendo displayed a playable demo that updated from the previous demo displayed at E3. <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> offered a playable tournament of the games for fans in which a GameCube and <i>Super Smash Bros. Melee</i> were prizes for the winner. Before the game's release, the Japanese official website included weekly updates, including screenshots and character profiles. Nintendo followed this trend with <i>Super Smash Bros. Brawl</i>, in which there were daily updates by the game's developer, Masahiro Sakurai. Japanese gaming magazine <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> reported that Nintendo advertised the game in between showings of <i><a href="https://en.wikipedia.org/wiki/Pokémon_4Ever">Pokémon 4Ever</a></i> across movie theaters in Japan. In January 2003, <i>Melee</i> was re-released as part of the <a href="https://en.wikipedia.org/wiki/Nintendo_Selects">Player's Choice</a> program, a marketing label used by Nintendo to promote video games that have sold more than a million copies. In August 2005, Nintendo bundled the game with the GameCube for $99.99.</p>
+
+<h3>Music</h3>
+
+<p><i>Super Smash Bros. Melee</i> features both new and re-arranged music from many of Nintendo's popular gaming franchises. In 2002, <a href="https://en.wikipedia.org/wiki/Enterbrain">Enterbrain</a> released a soundtrack in Japan titled <i>Dairantou Smash Brothers DX Orchestra Concert</i>. The same soundtrack was released in 2003 as <i>Smashing... Live!</i> as a bonus for subscribing to <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i> magazine in <a href="https://en.wikipedia.org/wiki/North_America">North America</a>, and also as a free gift in an issue of the British <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i>. The soundtrack does not include music taken directly from the game, but features many live orchestral arrangements performed by the <a href="https://en.wikipedia.org/wiki/New_Japan_Philharmonic">New Japan Philharmonic</a>. The game contains a number of unlockable tracks that can be obtained after making certain in-game accomplishments. On the same website, the developers have posted discussions about the game's music and voice acting between Masahiro Sakurai and the game's composers.</p>
+
+<h2>Reception</h2>
+
+<p><i>Super Smash Bros. Melee</i> received critical acclaim from reviewers, most of whom credited <i>Melee</i>'s expansion of gameplay features from <i>Super Smash Bros</i>. Focusing on the additional features, <i><a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a></i> commented that "Melee really scores big in the 'we've added tons of great extra stuff' department". Reviewers compared the game favorably to <i>Super Smash Bros.</i> <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>'s Fran Mirabella III stated that it was "in an entirely different league than the N64 version"; <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a>'</i>s Miguel Lopez praised the game for offering a more advanced "classic-mode" compared to its predecessor, while detailing the Adventure Mode as "really a hit-or-miss experience". Despite a mixed response to the single-player modes, many reviewers expressed the game's multiplayer mode as a strong component of the game. In their review of the game, <i>GameSpy</i> stated that "you'll have a pretty hard time finding a more enjoyable multiplayer experience on any other console".</p>
+
+<p><i>Melee</i>'s visuals garnered a positive reaction. <i>GameSpot</i> lauded the game's character and background models, stating that "the character models are pleasantly full-bodied, and the quality of their textures is amazing". <i>IGN</i>'s Fran Mirabella III praised the game's use of physics, animation and graphics, although his colleague Matt Casamassina thought that "some of the backgrounds lack the visual polish endowed upon the characters" when giving a second opinion about the game.</p>
+
+<p>Critics praised the game's orchestrated soundtrack; while <i>GameSpot</i>'s Greg Kasavin commented that "it all sounds brilliant". <i>GameSpy</i> praised the music for its nostalgic effect, with soundtracks ranging from multiple Nintendo series.</p>
+
+<p>Reviewers have welcomed the simplistic controls, but its "hyper-responsiveness", with the characters easily dashing and precise movements being difficult to perform, was expressed as a serious flaw of the game by <i>GameSpot</i>. With a milder criticism of controls, Bryn Williams of <i>GameSpy</i> commented that "movement and navigation seems slightly too sensitive". The basis of <i>Melee</i>'s gameplay system is the battles between Nintendo characters, which has been suggested as being overly hectic; <i>N-Europe</i> questioned whether the gameplay is "too Frantic?", even though they enjoyed the variety of modes on offer. Similarly, <i>Nintendo Spin</i>'s Clark Nielsen stated that "Melee was too fast for its own good", and "skill was more about just being able to wrap your head around what was happening as opposed to really getting into the combat". In regards to the pace of the game, <i>Edge</i> commented that it even made gameplay features such as "<a href="https://en.wikipedia.org/wiki/Blocking_(martial_arts)">blocking</a>" redundant, as the player is not given enough time to react to an attack.</p>
+
+<p>Despite the new features added to the game, some reviews criticized <i>Melee</i> for a lack of originality and for being too similar to its predecessor, <i>Super Smash Bros</i>. Caleb Hale from <i>GameCritics.com</i> noted that while it was "every bit as good as its Nintendo 64 predecessor" he also felt "the game doesn't expand much past that point". On a similar note, <i>Edge</i> stated that "it's not evolution; it's reproduction", in reference to a perceived lack of innovation. The nostalgic nature of the game received a positive reaction, as well as the accompanying stages and items that allude to past Nintendo games. Gaming journalists have welcomed the roster of 26 Nintendo characters, as well as the trophy system, which <i>Nintendo Spin</i> labeled as "a great addition to this game".</p>
+
+<h3>Sales</h3>
+
+<p>When released in Japan, it became the fastest selling GameCube game with 358,525 units sold in the week ending November 25, 2001. This success continued as the game sold more than a million units only two months after its release, making it the first GameCube title to reach a million copies. The game also sold well in North America, where it sold 250,000-copies in nine days. In the United States, <i>Super Smash Bros. Melee</i> was the 19th best-selling video game in 2001 according to the <a href="https://en.wikipedia.org/wiki/NPD_Group">NPD Group</a>. By July 2006, it had sold 3.2 million copies and earned $125 million in the United States alone. <i><a href="https://en.wikipedia.org/wiki/Next_Generation_(magazine)">Next Generation</a></i> ranked it as the fifth highest-selling game launched for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a> or GameCube between January 2000 and July 2006 in that country. Approximately 4.06 million units have been sold in the country as of December 27, 2007. With a software-to-hardware ratio of 3:4 at one time, some have attributed the increasing sales of the GameCube near the launch date to <i>Melee</i>. As of March 10, 2008, <i>Super Smash Bros. Melee</i> is the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_GameCube_video_games">best-selling GameCube game</a>, with more than seven million copies sold worldwide. It has been estimated that at one point in time 70% of all GameCube owners also owned <i>Melee</i>.</p>
+
+<p>Several publications have acknowledged <i>Super Smash Bros. Melee</i> in competitions and awards. In their "Best of 2001" awards, <i>GameSpy</i> chose it as Best Fighting GameCube Game, <i>IGN</i>'s reader choice chose it as <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a>, <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> chose it as Best Multiplayer and Best GameCube Game, and <i>GameSpot</i> chose it as the Best GameCube Game and tenth best game of the year. During the <a href="https://en.wikipedia.org/wiki/5th_Annual_Interactive_Achievement_Awards">5th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>Super Smash Bros. Melee</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Fighting_Game_of_the_Year">Console Fighting Game of the Year</a>" and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Animation">Outstanding Achievement in Animation</a>", which were ultimately awarded to <i><a href="https://en.wikipedia.org/wiki/Dead_or_Alive_3">Dead or Alive 3</a></i> and <i><a href="https://en.wikipedia.org/wiki/Oddworld:_Munch's_Oddysee">Oddworld: Munch's Oddysee</a></i>, respectively. It also received a nomination in <i>GameSpot</i>'s "Best Music" and "Best Fighting Game" categories.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/GameFAQs">GameFAQs</a></i> placed it sixth in a poll of the 100 best games ever and was in the final four of the <i>"Best. Game. Ever."</i> contest. In the 200th issue of <i>Electronic Gaming Monthly</i>, the editors selected <i>Melee</i> as the 92nd most influential game in their "Top 200 Games of Their Time" list, defining <i>Melee</i> as "Billions of things to unlock, plus Yoshi pummeling Pikachu with a bat". In a similar competition, <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i> named <i>Super Smash Bros. Melee</i> the 16th best game ever to appear on a Nintendo console, and selected it as the 2001 "Game of the Year". <i>IGN</i> named it the third best GameCube game of all-time in 2007 as a part of a feature reflecting on the GameCube's long lifespan, citing it as "the grand stage of fighters, much like Mario Kart is for racing fans". <i>GameSpy</i> chose it as fourth in a similar list, citing that it had "better graphics, better music, more characters, more gameplay modes, more secrets to discover" in comparison to its predecessor. The game was ranked 58th in <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a>'</i>s "100 Greatest Nintendo Games Ever" feature. In 2019, <i>Game Informer</i> ranked it as the 2nd best fighting game of all time. <i>Edge</i> ranked the game 91st on their 100 best Video Games in 2007.</p>
+
+<h2>Legacy</h2>
+
+<p>The inclusion of Marth and Roy in <i>Melee</i>'s roster led to increased awareness of the <i><a href="https://en.wikipedia.org/wiki/Fire_Emblem">Fire Emblem</a></i> series outside of Japan. This, combined with the high sales and positive reception of <i><a href="https://en.wikipedia.org/wiki/Advance_Wars">Advance Wars</a></i>, resulted in the next <i>Fire Emblem</i> title being localized. The game, simply called <i><a href="https://en.wikipedia.org/wiki/Fire_Emblem_(video_game)">Fire Emblem</a></i> in Western markets, is a prequel to <i><a href="https://en.wikipedia.org/wiki/Fire_Emblem:_The_Binding_Blade">Fire Emblem: The Binding Blade</a></i>, the game from which Roy originates. All future <i>Fire Emblem</i> titles to date, barring <i><a href="https://en.wikipedia.org/wiki/Fire_Emblem:_New_Mystery_of_the_Emblem">Fire Emblem: New Mystery of the Emblem</a></i>, have been released overseas.</p>
+
+<h3>Competitive scene</h3>
+
+<p><i>Super Smash Bros. Melee</i> is a widely played <a href="https://en.wikipedia.org/wiki/Competitive_video_game">competitive video game</a> and has been featured in several high-profile tournaments. Many consider it to be the most competitively viable game in the series. <i>Melee</i> version NTSC was first released on the GameCube in 2001 in Japan and later North America, Nintendo ran the first ever <i>Melee</i> tournament named <i>Premium Fight</i> most likely from August 25 to August 27, 2001.</p>
+
+<p>The tournaments increased in popularity, and an echelon of competitively successful top players emerged in each region of the United States and Japan. Professional gaming organizations began to take more notice of <i>Melee</i> and started sponsoring players professionally. Several professional <i>Melee</i> players including Christopher "KillaOR" McKenzie, Isai Alvarado, and Ken were seen in the 2005 "I'm a Professional Gamer" episode of the <a href="https://en.wikipedia.org/wiki/MTV">MTV</a> reality series <i><a href="https://en.wikipedia.org/wiki/True_Life">True Life</a></i>. Tournaments became larger, more televised and more professional. Increases in audience and competitor counts, as well as prize pools, were also seen. From 2004 to 2007, <a href="https://en.wikipedia.org/wiki/Major_League_Gaming">Major League Gaming</a> sponsored <i>Melee</i> on its Pro Circuit. <a href="https://en.wikipedia.org/wiki/Ken_Hoang">Ken Hoang</a>, also known as "The King of Smash" was considered to be the game's best player from 2003 to 2006, and has won over $50,000 from Smash tournaments.</p>
+
+<p><i>Melee</i> was also included in the <a href="https://en.wikipedia.org/wiki/Evolution_Championship_Series">Evolution Championship Series</a> (Evo) in 2007, a fighting game tournament held in <a href="https://en.wikipedia.org/wiki/Las_Vegas">Las Vegas</a>. Melee was hosted at Evo 2013 after a charity vote to decide the final game to be featured in its tournament lineup. Due to the large turnout and popularity that year, Evo again included <i>Melee</i> at their 2014, 2015, 2016, 2017, and 2018 events.</p>
+
+<p>The competitive <i>Smash</i> community was featured in a 2013 <a href="https://en.wikipedia.org/wiki/Crowd_funding">crowd-funded</a> documentary called <i><a href="https://en.wikipedia.org/wiki/The_Smash_Brothers">The Smash Brothers</a></i>. The film detailed the history of the professional scene and profiled seven prominent <i>Melee</i> players including Hoang, Azen, <a href="https://en.wikipedia.org/wiki/Mew2King">Jason "Mew2King" Zimmerman</a>, Isai, PC Chris, KoreanDJ, and Evo 2013 and Evo 2014 champion, <a href="https://en.wikipedia.org/wiki/Joseph_Marquez">Joseph "Mang0" Marquez</a>. Commentary footage from a <i>Melee</i> tournament is the origin of the <a href="https://en.wikipedia.org/wiki/Wombo_combo">Wombo combo</a> <a href="https://en.wikipedia.org/wiki/Internet_meme">internet meme</a>.</p>
+
+<p>In 2020, Project Slippi, a fork of the <a href="https://en.wikipedia.org/wiki/Dolphin_emulator">Dolphin emulator</a> for <i>Melee</i> designed to introduce quality-of-life features such as replays and online play, was updated to support <a href="https://en.wikipedia.org/wiki/Rollback_netcode">rollback netcode</a> and integrated matchmaking, allowing netplay across large distances with little latency. In the same year, an e-sports competition known as "<a href="https://en.wikipedia.org/wiki/The_Big_House_(tournament)">The Big House</a>" was sent a <a href="https://en.wikipedia.org/wiki/Cease_and_desist">cease and desist</a> by Nintendo, due to the usage of Slippi.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

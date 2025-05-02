@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Super Mario 3D World</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('de120ac0-bff9-44ee-adfe-1000206908ae/e9175e42-ae43-43ae-9f24-12af5447fb05.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="de120ac0-bff9-44ee-adfe-1000206908ae/434a23b2-2805-41bf-b3e0-d6054146246a.ico"/> Super Mario 3D World</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="de120ac0-bff9-44ee-adfe-1000206908ae/7ca319ac-422c-4665-b683-d096c89298ec.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 7:06:28</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:51:31</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Wii U">Nintendo Wii U</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/21/2013">11/21/2013</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-85">85</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-91">91</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo EAD Tokyo">Nintendo EAD Tokyo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_World" target="_blank">Wikipedia</a><br/><a href="https://supermario3dworld.nintendo.com" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Daisuke Watanabe">[People] artist: Daisuke Watanabe</a><br/><a href="#quicklink-[People] artist: Rikuto Yoshida">[People] artist: Rikuto Yoshida</a><br/><a href="#quicklink-[People] composer: Koji Kondo">[People] composer: Koji Kondo</a><br/><a href="#quicklink-[People] composer: Mahito Yokota">[People] composer: Mahito Yokota</a><br/><a href="#quicklink-[People] composer: Toru Minegishi">[People] composer: Toru Minegishi</a><br/><a href="#quicklink-[People] composer: Yasuaki Iwata">[People] composer: Yasuaki Iwata</a><br/><a href="#quicklink-[People] designer: Eisaku Sato">[People] designer: Eisaku Sato</a><br/><a href="#quicklink-[People] designer: Futoshi Shirai">[People] designer: Futoshi Shirai</a><br/><a href="#quicklink-[People] designer: Yuichi Iwasa">[People] designer: Yuichi Iwasa</a><br/><a href="#quicklink-[People] director: Kenta Motokura">[People] director: Kenta Motokura</a><br/><a href="#quicklink-[People] director: Koichi Hayashida">[People] director: Koichi Hayashida</a><br/><a href="#quicklink-[People] producer: Yoshiaki Koizumi">[People] producer: Yoshiaki Koizumi</a><br/><a href="#quicklink-[People] programmer: Hideyuki Sugawara">[People] programmer: Hideyuki Sugawara</a><br/><a href="#quicklink-[People] programmer: Norihiro Aoyagi">[People] programmer: Norihiro Aoyagi</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Super Mario 3D World</b></i> is a 2013 <a href="https://en.wikipedia.org/wiki/Platformer">platform game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>. It is the sixth original 3D platform game in the <a href="https://en.wikipedia.org/wiki/Super_Mario"><i>Super Mario</i> series</a> and the sequel to <i><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_Land">Super Mario 3D Land</a></i>, a 2011 title for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>. The game was re-released for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> as <i><b>Super Mario 3D World + Bowser's Fury</b></i> on February 12, 2021.</p>
+
+<p>Players control <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> and his friends attempting to rescue fairy-like creatures called Sprixies from <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a>, who invades the realm known as the Sprixie Kingdom. The gameplay is similar to previous <i>Mario</i> games, with players progressing through levels to reach Bowser. It features a character selector as well as introducing a <a href="https://en.wikipedia.org/wiki/Power-up">power-up</a> called the Super Bell, which turns the player into a cat, enabling them to climb walls and use a scratch attack.</p>
+
+<p><i>Super Mario 3D World</i> was acclaimed for its level design, presentation, replay value, and soundtrack, though some reviewers criticized its unreliable camera in the multiplayer mode. The game was a financial success, with the Wii U version selling 5.89 million units and the Nintendo Switch version selling 13.47 million units worldwide as of March 2024, becoming the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Wii_U_video_games">second best-selling game for Wii U</a> and one of the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_Switch_video_games">best-selling games for Nintendo Switch</a>. Between both versions, a total of 19.36 million units have been sold worldwide.</p>
+
+<h2>Gameplay</h2>
+
+<p>The game levels play similarly to those of <i>Super Mario 3D Land</i>, which combine the free-roaming gameplay of the <i>Super Mario</i> franchise's 3D games with the mechanics of its 2D side-scrollers, including a timer and a level-ending flagpole. Up to four concurrent players may control <a href="https://en.wikipedia.org/wiki/Player_character">characters</a>, who are <a href="https://en.wikipedia.org/wiki/Mario">Mario</a>, <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a>, <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Peach</a>, <a href="https://en.wikipedia.org/wiki/Toad_(Nintendo)">Toad</a>, and the unlockable <a href="https://en.wikipedia.org/wiki/Rosalina_(Mario)">Rosalina</a>. Similar to their appearances in <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._2">Super Mario Bros. 2</a></i>, each of the characters possesses unique abilities and controls differently: Mario has balanced running speed and jump height; Luigi jumps higher and falls slower, but has slightly lower traction; Peach can jump and briefly float through the air, but runs slowly; Toad runs the fastest, but cannot jump as high and falls faster; Rosalina can use the spin attack move as seen in the <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Galaxy">Super Mario Galaxy</a></i> games, but has the slowest running speed. The player can select any of the five characters to use before beginning a level, and up to four players may explore the same level simultaneously, sharing from a pool of <a href="https://en.wikipedia.org/wiki/Life_(video_games)#Extra_lives">lives</a>. Players are also able to pick up, carry, and throw each other.</p>
+
+<p>Levels are accessed through a world map, in which players can find hidden areas to earn more items or coins. Each level contains three collectable Green Stars, which are required to access certain levels, and each main level contains a hidden Stamp which was used in handwritten posts to the now defunct <a href="https://en.wikipedia.org/wiki/Miiverse">Miiverse</a> online community. Players can also view messages left by other players, both on the world map and after clearing a level, and can download 'Mii Ghosts', which are live records of other players completing levels. Ghosts can be raced against, and may hold gift prizes such as coins or extra lives. Additional Green Stars can be earned in Captain Toad, Mystery House, and Challenge levels.</p>
+
+<p>Along with items returning from previous games, such as the Fire Flower, Super Leaf, Mega Mushroom, Propeller Box, and <a href="https://en.wikipedia.org/wiki/Boomerang">Boomerang</a> Flower, several items are introduced. The Super Bell gives players a Cat Suit, allowing them to run faster, perform unique attacks and climb up walls to reach new areas. A variation of the Super Bell, the Lucky Bell, allows the player to temporarily transform their character into a <a href="https://en.wikipedia.org/wiki/Maneki-neko">lucky cat statue</a> that awards coins under certain conditions. Double Cherries make a <a href="https://en.wikipedia.org/wiki/Cloning">clone</a> of the player, allowing for more effective attacks and a higher chance of survival; the more Double Cherries a player uses, the more clones appear. Players can wear Cannon Boxes which fire shots at enemies, Light Blocks which can defeat ghosts, and <a href="https://en.wikipedia.org/wiki/Goomba">Goomba</a> masks which let them blend in with enemy Goombas. Players are able to pick up various objects, such as bombs, baseballs, and Piranha Plants (which can be used to defeat enemies or solve puzzles), and can ride in a Skating Shoe or on an aquatic dinosaur named Plessie.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Wii_U_GamePad">Wii U GamePad</a> allows players to rub the <a href="https://en.wikipedia.org/wiki/Touchscreen">touchscreen</a>, blow into the <a href="https://en.wikipedia.org/wiki/Microphone">microphone</a> to reveal hidden blocks or items, hinder enemies, activate mechanisms, and use <a href="https://en.wikipedia.org/wiki/Off-TV_Play">Off-TV Play</a>. The game is compatible with the <a href="https://en.wikipedia.org/wiki/Wii_Remote">Wii Remote</a>, Nunchuk, <a href="https://en.wikipedia.org/wiki/Classic_Controller">Classic Controller</a>, and <a href="https://en.wikipedia.org/wiki/Wii_U_Pro_Controller">Wii U Pro Controller</a>. An unlockable Luigi-themed version of <i><a href="https://en.wikipedia.org/wiki/Mario_Bros.">Mario Bros.</a></i>, <i>Luigi Bros.</i>, is accessed by clearing the game or by having save data from <i><a href="https://en.wikipedia.org/wiki/New_Super_Luigi_U">New Super Luigi U</a></i>.</p>
+
+<h2>Plot</h2>
+
+<p>Mario, Luigi, Peach, and Toad are watching a fireworks show near Princess Peach's Castle until they find a tilted glass <a href="https://en.wikipedia.org/wiki/Warp_pipe">pipe</a>. After Mario and Luigi fix it, a green fairy-like Sprixie princess appears and tells them that <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a> has kidnapped and trapped six other Sprixie princesses in jars. He arrives and captures her before escaping through the pipe, with the heroes subsequently entering it and pursuing him. They find themselves in a realm known as "The Sprixie Kingdom" and set off to find the Sprixies. Each of the Sprixies are rescued in the different worlds. After the heroes save the final one, Bowser recaptures all seven and heads to his <a href="https://en.wikipedia.org/wiki/Amusement_park">amusement park</a> fortress. Thereafter, Bowser uses the Super Bell to transform into a cat form called Meowser. The group proceeds to climb the tallest tower and defeat Meowser. The heroes say goodbye to the Sprixies and travel home through the pipe back to the <a href="https://en.wikipedia.org/wiki/Mushroom_Kingdom">Mushroom Kingdom</a>.</p>
+
+<h2>Development</h2>
+
+<p>Development on <i>Super Mario 3D World</i> began shortly after the release of <i><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_Land">Super Mario 3D Land</a></i> with <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_Analysis_&amp;_Development#Tokyo_Software_Development_Department">Nintendo EAD Tokyo</a> heading the project; <a href="https://en.wikipedia.org/wiki/1-Up_Studio">1-Up Studio</a> provided developmental assistance.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:NOTRS">better source needed</a></i>]</sup> A staff of 100 personnel, including producer <a href="https://en.wikipedia.org/wiki/Yoshiaki_Koizumi">Yoshiaki Koizumi</a>, wrote ideas for game mechanics on sticky notes, which were collected upon the studio walls. Ideas approved by the team would be implemented in-game for testing. Co-director Kenta Motokura stated, "We discussed and discarded a huge number of ideas during development – sometimes you just can't tell if an idea is good or bad by looking at it on the drawing board; when this happens, we try it out in-game. If we don't find the idea fun, it won't make it into the final product. There was a lot of back and forth on the course designs due to this." Co-director <a href="https://en.wikipedia.org/wiki/Koichi_Hayashida">Kōichi Hayashida</a> stated that <i>Super Mario 3D World</i> was intended to be a Wii U game for the fanbase of <i><a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros.">New Super Mario Bros.</a></i>, as well as a de facto continuation of <i><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_Land">Super Mario 3D Land</a></i>. Implementing the game's multiplayer feature was proven to be complicated, as the team's goal was to perfect the camera for all four players simultaneously without them "feel[ing..] left out". Motokura expressed that the game was designed to be both "highly intuitive and readily accessible". "We designed this game so that the players could really sink into it and clear all the courses without having to read lots of text or deal with difficult controls, whether playing by themselves or with others," Motokura added. Koizumi said that the team "went all out inserting elements [that allow] players to further enjoy the sprawling environments."</p>
+
+<p>Ideas for the game's feline costumery came early in development, to implement an attack mechanic, introduce the ability to climb walls, and help novice players to clear obstacles. "When we started out, we were thinking about different kinds of actions that Mario could do," said Motokura in an interview with <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>, "thinking about those different actions [...] it turned out that a cat was a perfect animal that everybody knows."</p>
+
+<p>Regarding power-ups, Motokura said the process of including power-ups being included involve balancing a novice player's experience between difficulty and "what was fun about the game". He added that the team wanted to introduce "new" ways to use classic power-ups, such as using the <a href="https://en.wikipedia.org/wiki/Fire_Flower">Fire Flower</a> on clear pipes.</p>
+
+<p>Inspiration for the Double Cherry, which <a href="https://en.wikipedia.org/wiki/Cloning">clones</a> a player character, came late in development when a level designer erroneously inserted an extra copy of Mario's character model into a level. The team was relieved to see that the game did not <a href="https://en.wikipedia.org/wiki/Crash_(computing)">crash</a> with two identical characters present, and were amused that both could be controlled simultaneously. Developers "scrambled" to include this feature in the final game. Motokura stated that it is also designed for single players to "[...help] replicate some situations" with multiplayer elements.</p>
+
+<p>The decision to include a free-roaming world map was "a very important element", and gave the team more "freedom" to locate higher-difficulty levels. "In just one world, the world map, you can have all kinds of different experiences. [...we] want to emphasize some of the other elements that are free-form within the world maps," Motokura said.</p>
+
+<p>According to Hayashida, Peach was originally not intended to be a playable character until producer <a href="https://en.wikipedia.org/wiki/Yoshiaki_Koizumi">Yoshiaki Koizumi</a> suggested for her inclusion. Speaking with <a href="https://en.wikipedia.org/wiki/Polygon_(website)">Polygon</a>, Koizumi reasoned that it's to emphasize female representation. "I feel like <i>Mario</i> games, as you know, have done lots of representation of male characters over the years", he said, "perhaps much more so than female — so it's actually really nice to be able to have a female playable character in the game." Miyamoto also commented on his own reasoning by saying "I'll add that cat women have a sexy side to them and I wanted to see what a feline Peach would look like (<i>laughs</i>)". Koizumi added, "I think she adds a lot to the sense of competition when you get in multiplayer. You can have different people choosing different characters based on their personality or whoever they like." Similarly, Rosalina was later added as a playable character. Motokura said, "I was thinking about what would be pleasing after the ending and wanted to bring in another female character in addition to Princess Peach. Rosalina has a following among the <i>Super Mario Galaxy</i> fanbase, and she appeared in <i><a href="https://en.wikipedia.org/wiki/Mario_Kart">Mario Kart</a></i> recently, so I think she's well known." <a href="https://en.wikipedia.org/wiki/Yoshi">Yoshi</a> was also planned at one point, but was dropped due to much of his moves being too similar to other functions of characters and items, such as Peach's floating, the Piranha Plant's chomping, and Plessie's riding abilities (who can allow three additional characters).</p>
+
+<p>According to Koizumi, the game was also planned to have a <a href="https://en.wikipedia.org/wiki/Stereoscopy#3D_viewers">stereoscopic 3D</a> feature similar to <i><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_Land">Super Mario 3D Land</a></i>, but was dropped due to multiplayer concerns over the use of <a href="https://en.wikipedia.org/wiki/Stereoscopy#3D_viewers">3D glasses</a>. <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a>, the creator of <i>Mario</i>, said that "the team had a strong desire from the very start to call it <i>3D World</i>".</p>
+
+<h3>Music</h3>
+
+<p>The game's soundtrack was composed by <a href="https://en.wikipedia.org/wiki/Mahito_Yokota">Mahito Yokota</a> (who is also the sound director), <a href="https://en.wikipedia.org/wiki/Toru_Minegishi">Toru Minegishi</a>, <a href="https://en.wikipedia.org/wiki/Koji_Kondo">Koji Kondo</a>, and Yasuaki Iwata, and performed by the Mario 3D World Big Band, which they formed after being inspired by <a href="https://en.wikipedia.org/wiki/Jazz">jazz</a> music. "There are naturally a lot of tracks performed live," stated Yokota. "We're arranging the music with a big-band feel, taking advantage of a full horn section with trumpets and saxophones." In addition to the game's new compositions, it features new arrangements from games such as <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._2">Super Mario Bros. 2</a></i> as well.</p>
+
+<p>In developing the music, Yokota mentioned that he worked on "fun, energetic" tracks to match the game's cat theme, with a few even using electric guitar and trombone tunes imitating a cat's "meowing" sounds. After working on <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Galaxy">Super Mario Galaxy</a></i> and <a href="https://en.wikipedia.org/wiki/Super_Mario_Galaxy_2">its successor</a>, one of Yokota's goals for the soundtrack is to shift musical direction from the games since the majority of <i>3D World</i> takes place on the ground. "The game chiefly takes place on <a href="https://en.wikipedia.org/wiki/Solid_earth">terra firma</a>, so there isn't the majestic or floaty feel of the <i>Mario Galaxy</i> series; instead, the music has a more rhythmic atmosphere, something you'll want to dance to," he said. When asking about live orchestrated soundtracks for the game, previously done in the <i>Super Mario Galaxy</i> games, a <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i> reporter was asked to "[w]ait for more information about that soon."</p>
+
+<p>A soundtrack was released for <a href="https://en.wikipedia.org/wiki/Club_Nintendo">Club Nintendo</a> members in Japan, Australia, and Europe, featuring 77 tracks across two CDs.</p>
+
+<h2>Release</h2>
+
+<p>In a January 2013 <a href="https://en.wikipedia.org/wiki/Nintendo_Direct">Nintendo Direct</a>, Nintendo teased that a new 3D <i>Mario</i> game was being produced by <a href="https://en.wikipedia.org/wiki/Nintendo_EAD_Tokyo">the development team</a> behind <i>Super Mario Galaxy</i>. The game was announced during the <a href="https://en.wikipedia.org/wiki/E3_2013">E3 2013</a> Nintendo Direct on June 11, 2013, along with a tentative release date of November 2013. It was released in Japan on November 21, 2013, North America on November 22, 2013, Europe on November 29, 2013, and in Australia on November 30, 2013.</p>
+
+<h3><i>Super Mario 3D World + Bowser's Fury</i></h3>
+
+<p>An enhanced <a href="https://en.wikipedia.org/wiki/Video_game_port">port</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <i><b>Super Mario 3D World + Bowser's Fury</b></i>, was announced on September 3, 2020, as part of the <a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._35th_Anniversary"><i>Super Mario Bros.</i> 35th Anniversary</a>-themed <a href="https://en.wikipedia.org/wiki/Nintendo_Direct">Nintendo Direct</a> and released worldwide on February 12, 2021, alongside Cat Mario and Cat Peach <a href="https://en.wikipedia.org/wiki/Amiibo">Amiibo</a> figures. The port adds an online multiplayer option, Amiibo functionality to spawn power-ups, a Snapshot feature for taking in-game screenshots, and four-player co-op to the Captain Toad levels. Other differences include the base speed of characters being increased and the stamps unlocked throughout the game, originally intended for the now-discontinued Miiverse service, can now be used to decorate the environment in Snapshot mode.</p>
+
+<p>The new <i>Bowser's Fury</i> campaign follows Mario as he winds up in a place known as Lake Lapcat and teams up with <a href="https://en.wikipedia.org/wiki/Bowser_Jr.">Bowser Jr.</a> in order to stop Bowser, who has been transformed by an inky substance into Fury Bowser. Unlike the main campaign, <i>Bowser's Fury</i> takes place in a large free-roaming area, similar to other <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> <i>Super Mario</i> games. Mario must explore the islands in order to retrieve Cat Shines. Bowser Jr., who can be controlled by a second player, can assist Mario by using his paintbrush to attack enemies and reveal secrets. Occasionally, Fury Bowser awakens and begins to attack, transforming the island in certain places. By collecting the Cat Shines, Mario gains access to the Giga Bell, a large version of the Super Bell, which transforms Mario into Giga Cat Mario so that he can take on Fury Bowser.</p>
+
+<h2>Reception</h2>
+
+<p><i>Super Mario 3D World</i> received "universal acclaim" on the Wii U version, and "generally favorable reviews" for the Switch port, according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregation</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. It won awards from many media outlets, including Game of the Year from <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i>, <i><a href="https://en.wikipedia.org/wiki/Digital_Spy">Digital Spy</a></i>, and <i><a href="https://en.wikipedia.org/wiki/MSN">MSN</a> UK</i>.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave the game a score of 38/40. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>'s Jose Otero gave <i>3D World</i> a 9.6/10, praising the visual design's "youthful energy," the "interesting risks" taken with the level designs, the "maddening challenge" offered by later worlds, and the "genuinely funny and memorable co-op". He said, "I reveled in the sheer brilliance of how much energy and gameplay mileage Nintendo has packed into every world." Otero's only complaint was that "the camera becomes a slight obstacle in four-player multiplayer". <i><a href="https://en.wikipedia.org/wiki/GameTrailers">GameTrailers</a></i> gave the game a score of 9.5, praising its gameplay and presentation, while criticizing camera issues and some odd control choices. Henry Gilbert of <i><a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a></i> gave the game a score of 4.5/5, praising improved multiplayer and some moments so brilliant that they can make some other levels seem dull by comparison. Luke Plunkett of <i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i> called it "a terrific video game...just not a very good Wii U game", praising the game itself, but lamenting that it doesn't do much to show off the Wii U's capabilities. Patrick Klepek at <i><a href="https://en.wikipedia.org/wiki/Giant_Bomb">Giant Bomb</a></i>, said "<i>World</i> continues to make the case that it's possible to reinvent a classic over and over again".</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Anime_News_Network">Anime News Network</a></i>'s Heidi Kemps gave the game an A grade, calling it "fun, imaginative, and filled with little surprises and delights". <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> rated the game 9/10, calling it "Wii U's best game to date," and "the most next-gen game that 2013 has yet produced," and stating that Mario is the most fun character to play as because "his cohorts' abilities aren't anything special". <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i>'s Chris Carter awarded the game a 10/10, praising the power-ups, such as the catsuit, which "opens up doors platforming-wise that weren't there before", and the Double Cherry, with which "Nintendo really outdid themselves in terms of the technical mechanics" to make possible, the "incredibly sharp" graphics, and "one of the best <a href="https://en.wikipedia.org/wiki/Original_soundtrack">OSTs</a> I've ever heard". Carter wrote that "the only downfall of the design is the selection of boss fights", as Nintendo "had achieved a level of platforming design that's close to perfection". <i><a href="https://en.wikipedia.org/wiki/Joystiq">Joystiq</a></i>'s Richard Mitchell gave the game 5/5 stars, praising the "astounding" visual craftsmanship, "excellent soundtrack", and "artful, purposeful design" which "communicates goals with complete clarity". <i>GameZone</i>'s Mike Splechta stated "With multiple characters to play as (harking back to <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._2">Super Mario Bros. 2</a></i>) and an unlockable fifth, a fantastic and unobtrusive multiplayer component and enough new power-ups to make even Mario's head spin, you're bound to have a highly enjoyable time with one of the best 3D platformers released thus far."</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i>'s Christian Donlan gave the game a 10/10, describing it as "an endless freewheeling treat of a game" with an "ad-libbed drive to...explore how many different situations Mario can be squashed into". He noted that this inventiveness carries over to the "lavish and quick-changing" soundtrack, saying it "is pastiche at its most skillful, its most panoramic." <i>Cheat Code Central</i>'s Jenni Lada gave the game a 5/5, calling it "the closest we will ever come to a perfect <i>Mario</i> game, one that is a culmination of every right decision ever made in the series." <i>Nintendo World Report</i> stated that it is a <i>Mario</i> game that one would want to continue playing once the game is beaten and may be the killer app of the Wii U, saying "Thankfully <i>3D World</i> isn't just a refinement of the <i>Mario</i> formula, it's a powerful re-imagining. It's an explosive cavalcade of color and excitement as well as a well thought out evolution of <i>Mario</i>." Bob Chipman of <i><a href="https://en.wikipedia.org/wiki/The_Escapist_(magazine)">The Escapist</a></i> gave the game four out of five stars, but was slightly critical of it, saying "Buy it if you love that little plumber, and enjoy the new toys, but don't expect your mind to be blown."</p>
+
+<h3>Sales</h3>
+
+<p>In Japan, the first week's sales in three days at retail, which doesn't include eShop download sales, totaled 99,588 copies sold and 57% of its initial shipment. The sales were considered low at first, but it maintained strong sales during the following weeks. By January 5, 2014, sales totaled about 400,000 units in Japan and was still on the weekly top 10 charts. In the UK, the game debuted at number 14, behind <i><a href="https://en.wikipedia.org/wiki/Knack_(video_game)">Knack</a></i>, which debuted at number 13. In the United States, it sold 215,000 units in its first eight days according to the <a href="https://en.wikipedia.org/wiki/NPD_Group">NPD Group</a>, debuting out of the Top 10. As of March 31, 2023, the Wii U version had sold 5.89 million units worldwide, making it the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Wii_U_video_games">second best-selling game for the console</a>.</p>
+
+<p><i>Super Mario 3D World + Bowser's Fury</i> launched at nearly three times the physical sales of the original in the UK, and became the fastest-selling release of 2021 in the region. In Japan, it was the best-selling retail game during its first week of release, with 250,018 copies sold. In the US, it was the best-selling game of February 2021. As of March 31, 2024, the Switch version had sold 13.47 million units worldwide. Between both versions, a total of million 19.36 units have been sold worldwide.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Captain_Toad:_Treasure_Tracker">Captain Toad: Treasure Tracker</a></i>, a spin-off game based on and expanding upon the game's Captain Toad puzzle-based levels, was released for the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> on November 13, 2014, in Japan, December 5, 2014, in North America and in January 2015 in PAL regions. It was re-released worldwide for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> and <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> on July 13, 2018. It received generally favourable reviews.</p>
+
+<p>In late 2014, downloadable content was released for <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8">Mario Kart 8</a></i>, adding Cat Peach to the playable roster and the Bell Cup. Elements from the game appear in <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Maker_2">Super Mario Maker 2</a></i>, as assets players can use while designing their course.</p>
+
+<p>In April 2021, three spirits from the <i><a href="https://en.wikipedia.org/wiki/Bowser's_Fury">Bowser's Fury</a></i> campaign appeared in <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Ultimate">Super Smash Bros. Ultimate</a></i>.</p>
+
+<p>The song "Attack! Fury Bowser" from <i>Bowser's Fury</i> was featured in 2023's <i><a href="https://en.wikipedia.org/wiki/The_Super_Mario_Bros._Movie">The Super Mario Bros. Movie</a></i>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Super Mario World</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('2642733e-0224-4f95-b56e-7d487928a819/e4624be8-60f9-4ced-9df6-b675c36c614e.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="2642733e-0224-4f95-b56e-7d487928a819/87396ba5-c71c-4972-8f60-1914d35c99f2.png"/> Super Mario World</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="2642733e-0224-4f95-b56e-7d487928a819/c41913c0-4fbd-4378-ba96-e11ba86a5121.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:52:10</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:30:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo SNES">Nintendo SNES</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-8/16/2023">8/16/2023</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-92">92</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo EAD">Nintendo EAD</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Super_Mario_World" target="_blank">PCGamingWiki</a><br/><a href="https://www.igdb.com/games/super-mario-world" target="_blank">IGDB</a><br/><a href="https://www.mobygames.com/game/super-mario-world" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Super_Mario_World" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Shigefumi Hino">[People] artist: Shigefumi Hino</a><br/><a href="#quicklink-[People] composer: Koji Kondo">[People] composer: Koji Kondo</a><br/><a href="#quicklink-[People] designer: Hideki Konno">[People] designer: Hideki Konno</a><br/><a href="#quicklink-[People] designer: Katsuya Eguchi">[People] designer: Katsuya Eguchi</a><br/><a href="#quicklink-[People] director: Takashi Tezuka">[People] director: Takashi Tezuka</a><br/><a href="#quicklink-[People] producer: Shigeru Miyamoto">[People] producer: Shigeru Miyamoto</a><br/><a href="#quicklink-[People] programmer: Toshihiko Nakago">[People] programmer: Toshihiko Nakago</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Super Mario World</b></i>, known in Japan as <i><b>Super Mario World: Super Mario Bros. 4</b></i>, is a 1990 <a href="https://en.wikipedia.org/wiki/Platformer">platform game</a> developed by <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_Analysis_&amp;_Development">Nintendo EAD</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Nintendo Entertainment System</a> (SNES). The player controls <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> on his quest to save <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Peach</a> and Dinosaur Land from the series' antagonist <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a> and the <a href="https://en.wikipedia.org/wiki/Characters_in_the_Mario_franchise#Koopalings">Koopalings</a>. The <a href="https://en.wikipedia.org/wiki/Gameplay">gameplay</a> is similar to that of earlier <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> games; players control Mario through a series of <a href="https://en.wikipedia.org/wiki/Level_(gaming)">levels</a> in which the goal is to reach the goalpost at the end. <i>Super Mario World</i> introduces <a href="https://en.wikipedia.org/wiki/Yoshi">Yoshi</a>, a ridable dinosaur who can eat enemies and spit some of them out as projectiles.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_Analysis_&amp;_Development">Nintendo Entertainment Analysis &amp; Development</a> developed the game, led by director <a href="https://en.wikipedia.org/wiki/Takashi_Tezuka">Takashi Tezuka</a> and producer and series creator <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a>. It is the first <i>Mario</i> game for the SNES and was designed to make the most of the console's technical features. The development team had more freedom compared to the series installments for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a> (NES). Yoshi was conceptualised during the development of the NES games but was not used until <i>Super Mario World</i> due to <a href="https://en.wikipedia.org/wiki/Computer_hardware">hardware</a> limitations.</p>
+
+<p><i>Super Mario World</i> is often considered one of the best games in the series and is cited as one of the <a href="https://en.wikipedia.org/wiki/Greatest_video_games_ever_made">greatest video games ever made</a>. It sold more than twenty million copies worldwide, making it the <a href="https://en.wikipedia.org/wiki/Best-selling_SNES_game">best-selling SNES game</a>. It also led to an <a href="https://en.wikipedia.org/wiki/Super_Mario_World_(TV_series)">animated television series of the same name</a> and a 1995 prequel, <i><a href="https://en.wikipedia.org/wiki/Yoshi's_Island">Yoshi's Island</a></i>. The game has been re-released on multiple occasions: It was part of the 1994 compilation <i><a href="https://en.wikipedia.org/wiki/Super_Mario_All-Stars_+_Super_Mario_World">Super Mario All-Stars + Super Mario World</a></i> for the SNES and was re-released for the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> as <i>Super Mario World: Super Mario Advance 2</i> in 2001, on the <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>, and <a href="https://en.wikipedia.org/wiki/New_Nintendo_3DS">New Nintendo 3DS</a> consoles, and as part of the <a href="https://en.wikipedia.org/wiki/Super_NES_Classic_Edition">Super NES Classic Edition</a>. Both the SNES and GBA versions were rereleased for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> as part of the <a href="https://en.wikipedia.org/wiki/Nintendo_Classics">Nintendo Classics</a> service.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Super Mario World</i> is a 2D <a href="https://en.wikipedia.org/wiki/Side-scrolling_video_game">side-scrolling</a> <a href="https://en.wikipedia.org/wiki/Platform_game">platform game</a> in which the player controls <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> or <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a>, the protagonists of the game. The game has similar <a href="https://en.wikipedia.org/wiki/Gameplay">gameplay</a> to earlier games in the <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> series – <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.">Super Mario Bros.</a></i>, <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._2">Super Mario Bros. 2</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._3">Super Mario Bros. 3</a></i> – but introduces new elements. As well as dashing and jumping, the player can also fly or float with the aid of the Cape Feather and P-Balloon and can execute the new Spin Jump move, which allows the player to crush enemies, bounce off normally-invulnerable ones safely or break certain blocks, with the latter only being possible if the player has a power-up active. The game has 96 <a href="https://en.wikipedia.org/wiki/Level_(gaming)">level</a> exits in total.</p>
+
+<p>The player navigates through the game via two game screens: an <a href="https://en.wikipedia.org/wiki/Overworld">overworld</a> map and a <a href="https://en.wikipedia.org/wiki/Side-scrolling_video_game">side-scrolling</a> course (some of which scroll automatically). The overworld map displays an overhead representation of the current world and has several paths leading from the world's entrance to a castle. Paths connect to action panels, fortresses, ghost houses, castles, and other map icons, allowing players to take different routes to reach the world's goal. Moving the on-screen character to an action panel or castle grants access to that course. The majority of the game takes place in 2D linear levels, populated with obstacles and enemies, which involves the player traversing the stage by dashing, jumping, and dodging or defeating enemies. The player is given a number of lives, which are lost if Mario comes into contact with an enemy while Small Mario, falls off the screen, gets crushed, touches lava, or runs out of time. The game ends when the player runs out of lives, although the player can continue from the most recent save point (a successfully completed castle, fortress or haunted house) by selecting "<a href="https://en.wikipedia.org/wiki/Glossary_of_video_game_terms#C">Continue</a>". Each world features a final stage with a <a href="https://en.wikipedia.org/wiki/Boss_(gaming)">boss</a> to defeat; each of the seven worlds features fortresses controlled by one of the <a href="https://en.wikipedia.org/wiki/Koopalings">Koopalings</a>, and the player also battles <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a> in his castle in the seventh and final world. <i>Super Mario World</i> includes a <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a> option which allows two players to play the game by alternating turns at navigating the overworld map and accessing stage levels; the first player controls Mario, while the second player controls his brother, Luigi.</p>
+
+<p>In addition to the <a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a> from previous games, such as the <a href="https://en.wikipedia.org/wiki/Super_Mushroom">Super Mushroom</a> and <a href="https://en.wikipedia.org/wiki/Fire_Flower">Fire Flower</a>, <i>Super Mario World</i> has a new power-up named the Cape Feather, which gives Mario a cape and the ability to fly, glide in the air, and use the cape as a sail. The game also introduces the ability to "store" an extra power-up in a box at the top centre of the screen. For example, if the player obtains a Fire Flower or a Cape Feather, then a Super Mushroom will appear in the box. Collecting a star grants Mario temporary invincibility from minor dangers. However, it does not protect the player from falling into lava or off the screen, nor if the player runs out of time. If Mario gets hit by an enemy, the stored item in the box will automatically drop. Alternatively, the player can manually release the stored item at any time.</p>
+
+<p>The game introduces <a href="https://en.wikipedia.org/wiki/Yoshi">Yoshi</a>, a dinosaur companion Mario can ride who is able to eat most enemies. If Yoshi attempts to eat a <a href="https://en.wikipedia.org/wiki/Koopa_Troopa">Koopa</a> or its shell, he can spit it out and fire it at enemies. If the player fails to spit the shell out within a certain amount of time, Yoshi will swallow it, rendering it useless. When holding any Koopa shell in his mouth, Yoshi gains the ability that corresponds to its color: a blue shell enables Yoshi to fly, a yellow shell causes him to emit dust clouds that defeat nearby enemies, and a red shell allows him to produce three fireballs that defeat enemies. Flashing Koopa shells produce all three abilities, while green shells produce none. The default Yoshi is green, but the game also has hidden blue, yellow, and red Yoshis; the player can obtain each colored Yoshi by finding its egg in the Star World areas and  feeding it either five enemies, a Super Mushroom, a Fire Flower, a Cape Feather, or a Starman causing the baby Yoshi to mature.</p>
+
+<p>Although the main objective is to navigate through seven worlds to reach the end of the game, the player can beat the game much faster by using secret Star Road routes. To access a hidden world, the player needs to find keys scattered throughout the game's levels. When a key is found, it must be brought to a keyhole to unlock either a new level or a Star Road. Exploring these secret stages can lead to other stages, such as the Special World. Completion of the Special Zone permanently changes some of the enemies' <a href="https://en.wikipedia.org/wiki/Sprite_(computer_graphics)">sprites</a> and alters the overworld map's color scheme.</p>
+
+<h2>Plot</h2>
+
+<p>The plot of <i>Super Mario World</i> is detailed in the instruction booklet. After bringing peace to the <a href="https://en.wikipedia.org/wiki/Mushroom_World">Mushroom World</a> in <i>Super Mario Bros. 3</i>, the brothers Mario and Luigi decide to go on vacation with Princess Toadstool to a place called Dinosaur Land, a prehistoric-themed world swarming with dinosaurs and other enemies. While resting on the beach, the princess is captured by Bowser. When Mario and Luigi wake up, they try to find her and, after hours of searching, come across a giant egg in the forest. It suddenly hatches and out of it comes a young dinosaur named Yoshi, who tells them his dinosaur friends have also been imprisoned in eggs by Bowser's kids, the evil Koopalings. Mario and Luigi soon realise that Bowser's forces must have captured Toadstool as well. Mario, Luigi, and Yoshi set out to rescue the princess and Yoshi's dinosaur friends, traversing through Dinosaur Land for Bowser and his Koopalings. To aid him, Yoshi gives Mario a cape as they begin their journey.</p>
+
+<p>Bowser receives news of Mario and Luigi's approach and dispatches his Koopalings to dispose of them. After the brothers defeat the children and rescue Yoshi's friends, they eventually reach Bowser's Castle, where they fight him in a final battle. They send Bowser flying into the sky and save Princess Toadstool, restoring peace to Dinosaur Land.</p>
+
+<h2>Development</h2>
+
+<p>The game was directed by <a href="https://en.wikipedia.org/wiki/Takashi_Tezuka">Takashi Tezuka</a>, while <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a>, the creator of both <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> and <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda">The Legend of Zelda</a></i>, served as producer. <a href="https://en.wikipedia.org/wiki/Shigefumi_Hino">Shigefumi Hino</a> took the role of graphics designer. <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_Analysis_&amp;_Development">Nintendo Entertainment Analysis &amp; Development</a> handled development with a team of ten people, including three main programmers and a character designer, most of whom had worked on past <i>Super Mario</i> titles. In a retrospective interview, the core team said Miyamoto wielded the most authority during development.</p>
+
+<p><i>Super Mario World</i> was the first <i>Mario</i> series game developed for the then-upcoming <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Nintendo Entertainment System</a> (SNES). As such, the team anticipated some difficulty in working with new and more advanced hardware. According to Tezuka, the software tools were not yet fully developed, and the team had to "go along with starting something new". Miyamoto acknowledged the team no longer had restrictions on certain <a href="https://en.wikipedia.org/wiki/Game_mechanics">mechanics</a> such as scrolling and the number of colours they could implement. As a hardware experiment, the team ported <i>Super Mario Bros. 3</i> to the SNES. However, it felt like the same game to them, despite the improved colours and sprites. After that, Miyamoto realised the team's goal would be to use the new hardware to create something "totally new".</p>
+
+<p>Miyamoto said he had wanted Mario to have a dinosaur companion ever since <i>Super Mario Bros.</i>, but Nintendo engineers could not add such a character into the game due to the limitations of the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a> (NES). The inspiration for Yoshi can be traced back even further; Miyamoto designed a green dragon for the 1984 game <i><a href="https://en.wikipedia.org/wiki/Devil_World">Devil World</a></i> which shared many similarities with Yoshi. During the development of <i>Super Mario Bros. 3</i>, Miyamoto had a number of sketches around his desk, including an image of Mario riding a horse. As development of <i>Super Mario World</i> progressed, the team opted to set the game in a "dinosaur land", so Tezuka asked designer Shigefumi Hino to draw a reptile-like creature based on Miyamoto's sketches. Hino originally produced a design that Tezuka deemed too reptilian, and "didn't really fit into the Mario world", so he encouraged the designer to create a "cuter" character. Tezuka speculated that Miyamoto's love of horse riding, as well as <a href="https://en.wikipedia.org/wiki/Country_music">country and western</a> themes, influenced Yoshi's creation.</p>
+
+<p>Reflecting on how he had created different melodies for <i>Super Mario Bros. 3</i>, composer <a href="https://en.wikipedia.org/wiki/Koji_Kondo">Koji Kondo</a> decided to reuse the same themes for <i>Super Mario World</i>, albeit in a <a href="https://en.wikipedia.org/wiki/Arrangement">rearranged</a> form. By doing this, he assumed players would be able to recognise the same melodies, while exposing them to new variations of music as they progressed through the game. As <i>Super Mario World</i> was the first game developed for the SNES, Kondo felt "overjoyed" at being able to compose music by using eight sounds at once. To express the technological novelty of the new console, he used several different instruments, implementing them all one after the other in the game's title song. As development progressed, Kondo grew concerned over how people would react to his unusual combinations of instruments as he noted the use of more traditional <a href="https://en.wikipedia.org/wiki/Square_wave_(waveform)">square waves</a> and <a href="https://en.wikipedia.org/wiki/Triangle_wave">triangle waves</a> had "gained acceptance" with consumers. For the game's sound effects, Kondo decided to use a variety of musical instruments, as opposed to square waves, to emphasise that the game used traditional technology with a hybrid of new materials. It took Kondo around a year and a half to write all the music for the game.</p>
+
+<p><i>Super Mario World</i> was produced during the <a href="https://en.wikipedia.org/wiki/Console_war#Sega_versus_Nintendo">console wars</a> – a result of the rivalry between Nintendo's SNES and <a href="https://en.wikipedia.org/wiki/Sega">Sega</a>'s two-year-old <a href="https://en.wikipedia.org/wiki/Sega_Genesis">Mega Drive</a> system – which outsold the console and led to intense competition between the two, being the first time since December 1985 Nintendo did not lead the market though it eventually overtook Sega. Sega's mascot, <a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(character)">Sonic the Hedgehog</a>, was seen by many as a faster and "cooler" alternative to Mario.</p>
+
+<h2>Release</h2>
+
+<p><i>Super Mario World</i> was first released in Japan on 21 November 1990 under the name of <i>Super Mario World: Super Mario Bros. 4</i>. It was one of two launch games for the SNES in Japan, along with <i><a href="https://en.wikipedia.org/wiki/F-Zero_(video_game)">F-Zero</a></i>. The game was released in North America on 23 August 1991. Nintendo also issued a version for <a href="https://en.wikipedia.org/wiki/Arcade_cabinet">arcade cabinets</a> so players could try the game before buying it.</p>
+
+<h3>Re-releases</h3>
+
+<p>The game was re-released in a special version of <i><a href="https://en.wikipedia.org/wiki/Super_Mario_All-Stars">Super Mario All-Stars</a></i>, <i>Super Mario All-Stars + Super Mario World</i>, as a <a href="https://en.wikipedia.org/wiki/Glossary_of_video_game_terms#P">pack-in game</a> for the SNES in December 1994. <i>All-Stars</i> contains <a href="https://en.wikipedia.org/wiki/Video_game_remake">enhanced remakes</a> of the first four <i>Super Mario</i> games released for the NES: <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.">Super Mario Bros.</a></i>, <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._2">Super Mario Bros. 2</a></i>, <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._3">Super Mario Bros. 3</a></i> and <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.:_The_Lost_Levels">Super Mario Bros.: The Lost Levels</a></i>. In contrast to the other games in the collection, <i>Super Mario World</i> is largely identical to the original version, but Luigi's <a href="https://en.wikipedia.org/wiki/Sprite_(computer_graphics)">sprites</a> were updated to make him a distinctive character rather than a <a href="https://en.wikipedia.org/wiki/Palette_swap">palette swap</a> of Mario.</p>
+
+<p><i>Super Mario World</i> was ported to the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> as <i>Super Mario World: Super Mario Advance 2</i> between 2001 and 2002. It features the same number of levels as the original, Luigi as a playable character in single player with his characteristic behaviour and appearance from <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._2">Super Mario Bros. 2</a></i>, <a href="https://en.wikipedia.org/wiki/Game_Link_Cable">Game Link Cable</a> support for four players in the <i><a href="https://en.wikipedia.org/wiki/Mario_Bros.">Mario Bros. Classic</a></i> mode, and the ability to save anywhere, rather than just after beating Ghost houses or Castles. Difficulty is lowered as being hit by an enemy no longer makes him lose all current power ups. Additionally, the alternate overworld map and enemy sprites that was normally unlocked by beating the Special World is now instead unlocked by finding every exit in each level. It received positive reviews; critics enjoyed its new inclusions and retention of the SNES original's "feel". <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> named it the best video game of February 2002.</p>
+
+<p>The SNES version was released on the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>'s <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> in Japan on 2 December 2006, in the United States on 5 February 2007, and in Europe on 9 February 2007. It was released for the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> in North America and Japan on 26 April 2013, and in Europe on 27 April 2013, along with the full launch of the Wii U Virtual Console. On March 3, 2016, the game was released for the Virtual Console service of the <a href="https://en.wikipedia.org/wiki/New_Nintendo_3DS">New Nintendo 3DS</a>. <i>Super Mario World</i> was also one of the 21 SNES games included in the <a href="https://en.wikipedia.org/wiki/Super_NES_Classic_Edition">Super NES Classic Edition</a> released in September 2017. On 5 September 2019, Nintendo released <i>Super Mario World</i> on their <a href="https://en.wikipedia.org/wiki/Nintendo_Classics">Nintendo Classics</a> service as a launch title, followed by the <i>Super Mario Advance 2</i> version on 25 May 2023.</p>
+
+<h2>Reception</h2>
+
+<p>Nintendo has sold 20.61 million copies of the game worldwide, making it the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Super_Nintendo_Entertainment_System_video_games">best-selling game for the SNES</a>. In the United States, <i>Super Mario Advance 2</i> for the Game Boy Advance sold 2.5 million copies and earned $74 million in revenue by August 2006. During the period between January 2000 and August 2006, it became the second highest-selling portable game in the United States.</p>
+
+<p><i>Super Mario World</i> received critical acclaim. In December 2019, review aggregator <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> ranked <i>Super Mario World</i> as the 78th highest-rated game of all time, with an aggregate score of 94% based on nine reviews.</p>
+
+<p>The visuals and presentation were two of the most praised aspects of the game. After its release, Rob Swan of <i><a href="https://en.wikipedia.org/wiki/Computer_and_Video_Games">Computer and Video Games</a></i> noted that the graphics were an excellent example of what the then-new SNES was capable of, while in the same review, Paul Glancey similarly remarked that the visuals were stunning, and he was grateful the game came free with the console. Four reviewers echoed this in <i>Electronic Gaming Monthly,</i> but commented that the game took little advantage of the SNES's capabilities compared to other games available for the system. Retrospective reviewers agreed the game's visuals were still of a high quality. Karn Bianco from <i>Cubed3</i> enjoyed the game's relaxed visual style, and praised Nintendo for keeping everything "nice and simple" designing a game perfect for children. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a>'</i>s Lucas Thomas heralded the game as a significant leap over the visuals of the <a href="https://en.wikipedia.org/wiki/Third_generation_of_video_game_consoles">8-bit era</a>, but in retrospect felt it did not distinguish itself from being a graphically-upgraded continuation of its predecessor, <i>Super Mario Bros. 3</i>. In contrast, Frédéric Goyon of <i><a href="https://en.wikipedia.org/wiki/Jeuxvideo.com">Jeuxvideo.com</a></i> thought the game brought out the full potential of the SNES (albeit less so than <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country">Donkey Kong Country</a></i>), and Nadia Oxford from <i><a href="https://en.wikipedia.org/wiki/Eurogamer#Subsidiaries">USGamer</a></i> also felt the game was a less rigid version of its predecessor. <i><a href="https://en.wikipedia.org/wiki/All_Media_Network#AllGame">AllGame</a></i>'s Skyler Miller and Alex Navarro of <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> both praised the game's well-drawn characters, colourful visuals and pleasing animation. Morgan Sleeper of <i><a href="https://en.wikipedia.org/wiki/Nintendo_Life">Nintendo Life</a></i> said <i>Super Mario World</i> was the "graphical holy grail" that retro-styled games aspire to, and he insisted that its design holds up well today.</p>
+
+<p>Critics commended the game's <a href="https://en.wikipedia.org/wiki/Replay_value">replay value</a> and unique gameplay in comparison to older <i>Super Mario</i> games. Four reviewers in <i>Electronic Gaming Monthly</i> praised the game's number of secrets and diversity among its levels, expressing appreciation that Nintendo did not recycle assets from <i>Super Mario Bros. 3</i>. Swan and Glancey enjoyed the addictive gameplay and the vast number of levels, while Dan Whitehead of <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> lauded the game's divergence from linear platforming and asserted that <i>Super Mario World</i> was an evolutionary leap for gaming in general. Likewise, Goyon appreciated the option of being able to finish the game by using alternative routes. Bianco opined that the game was "one of the smoothest platformers in existence" while Thomas thought its "masterful" and innovative level design enhanced the overall experience. Navarro similarly felt the game featured some of the best and most challenging levels the series has offered thus far, saying "nothing about the game feels out of place or superfluous". Miller considered the game's overall length to be its strongest aspect, while Oxford thought <i>Super Mario World</i>'s gameplay could be both straightforward and complex, owing to the myriad of secrets the game contained. In retrospect, Sleeper believed the game's biggest achievement was its <a href="https://en.wikipedia.org/wiki/Level_(video_games)">level design</a>, calling it an "unrivalled master class" with a constant sense of momentum.</p>
+
+<p>The game's audio was also well received by critics. Swan believed the game utilised the SNES' <a href="https://en.wikipedia.org/wiki/Pulse-code_modulation">PCM chip</a> to its fullest potential, and both he and Glancey agreed that the game's sound effects were "mindblowing". Thomas labelled the soundtrack "another one of Koji Kondo's classics," but in hindsight remarked that it was not as memorable as his earlier work. Goyon praised the originality of the game's soundtrack, and thought the technical contribution of the SNES allowed players to enjoy a "globally magnificent" composition. Both Goyon and <a href="https://en.wikipedia.org/wiki/Jason_Schreier">Jason Schreier</a> of <i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i> felt its rhythmic sound effects were important and helped to reinforce the game's atmosphere. Miller liked <i>Super Mario World</i>'s upbeat music, and particularly enjoyed the echoing sound effects heard when Mario was underground – a sentiment shared by other reviewers. Both Sleeper and Navarro wrote that the game featured the best music in the entire <i>Super Mario</i> series, with Sleeper praising Kondo's "timeless" soundtrack and memorable melodies.</p>
+
+<h3>Awards</h3>
+
+<p>The game received 1991 <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a> awards from <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i> and <i>Power Play</i>. Many retrospective critics declared <i>Super Mario World</i> one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games of all time</a>. In 2009, a poll conducted by <i><a href="https://en.wikipedia.org/wiki/Empire_(film_magazine)">Empire</a></i> voted it "the greatest game of all time". In 2009, <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i> placed the game 7th in a list of the greatest Nintendo games of all time. In its final issue in October 2014, <i>Official Nintendo Magazine</i> ranked <i>Super Mario World</i> the third-greatest Nintendo game of all time, behind <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Ocarina_of_Time">The Legend of Zelda: Ocarina of Time</a></i> and <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Galaxy">Super Mario Galaxy</a></i>. In 2012, <i>Nintendo Power</i> similarly named <i>Super Mario World</i> the fifth greatest game of all time, a step up from its eighth best ranking in their 2006 poll. The game has appeared on several "best video games of all time" lists such as those from <i>Electronic Gaming Monthly</i>, <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>, <i><a href="https://en.wikipedia.org/wiki/Retro_Gamer">Retro Gamer</a></i> and <i>GameSpot</i>. In 2007, <i>Retro Gamer</i> ranked it as the best platform game of all time, while <i>USgamer</i> listed it as the best <i>Super Mario</i> platform game ever in 2015. In 1996, <i><a href="https://en.wikipedia.org/wiki/GamesMaster_(magazine)">GamesMaster</a></i> ranked <i>Super Mario World</i> 3rd on their "The <i>GamesMaster</i> SNES Top 10" list. In 1995, <i><a href="https://en.wikipedia.org/wiki/Total!">Total!</a></i> listed the game 11th on its Top 100 SNES Games, at the time they opined <i>Super Mario World</i> is "a contender for the best game ever."</p>
+
+<h2>Legacy</h2>
+
+<p>As a pack-in game for the SNES, <i>Super Mario World</i> helped popularise the console, and became the best-selling game of its generation. Shigeru Miyamoto has said that <i>Super Mario World</i> is his favourite <i>Mario</i> game.</p>
+
+<p>Yoshi became one of the most important characters in the <i>Mario</i> franchise, re-appearing in later <i>Super Mario</i> games and in nearly all <i>Mario</i> sports and <a href="https://en.wikipedia.org/wiki/Spin-off_(media)">spin-off</a> games. Yoshi appears as the main <a href="https://en.wikipedia.org/wiki/Playable_character">playable character</a> in <i>Super Mario World</i>'s 1995 prequel <i><a href="https://en.wikipedia.org/wiki/Yoshi's_Island">Super Mario World 2: Yoshi's Island</a></i>, which helped lead to multiple <a href="https://en.wikipedia.org/wiki/List_of_Yoshi_video_games">video games focused on the character</a>. A <i>Super Mario World</i> <a href="https://en.wikipedia.org/wiki/Video_game_clone">clone</a>, <i><a href="https://en.wikipedia.org/wiki/Super_Mario's_Wacky_Worlds">Super Mario's Wacky Worlds</a></i>, was in development for the <a href="https://en.wikipedia.org/wiki/Philips_CD-i">Philips CD-i</a> device by <a href="https://en.wikipedia.org/wiki/NovaLogic">NovaLogic</a> from 1992 to 1993, but was cancelled because of the console's commercial failure. In a poll conducted in 2008, Yoshi was voted as the third-favourite video game character in Japan, with <a href="https://en.wikipedia.org/wiki/Cloud_Strife">Cloud Strife</a> and Mario placing second and first.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/DIC_Entertainment">DIC Entertainment</a> produced an <a href="https://en.wikipedia.org/wiki/Super_Mario_World_(TV_series)">animated series of the same name</a>, consisting of thirteen episodes, which ran on <a href="https://en.wikipedia.org/wiki/NBC">NBC</a> from September to December 1991. <i>Super Mario World</i> has a large <a href="https://en.wikipedia.org/wiki/ROM_hacking">ROM hacking</a> scene, with fans using applications such as <a href="https://en.wikipedia.org/wiki/Lunar_Magic">Lunar Magic</a> to create levels and insert new graphics, music, and mechanics; <i><a href="https://en.wikipedia.org/wiki/Kaizo_Mario_World">Kaizo Mario World</a></i> is notable for being featured in many <a href="https://en.wikipedia.org/wiki/Let's_Play">Let's Play</a> videos and popularizing the word <i><a href="https://en.wikipedia.org/wiki/Kaizo">Kaizo</a></i> to signify hacks of extreme difficulty. In a similar way, <i>Super Mario World</i> is one of the four games whose assets are available in <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Maker">Super Mario Maker</a></i>, a <a href="https://en.wikipedia.org/wiki/Game_creation_system">custom level creator</a> released for the Wii U in 2015, in its <a href="https://en.wikipedia.org/wiki/Super_Mario_Maker_for_Nintendo_3DS">port</a> to <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> in 2016, and its <a href="https://en.wikipedia.org/wiki/Super_Mario_Maker_2">2019 sequel</a>. The latter adds new snow and nighttime themes for <i>Super Mario  World</i> levels accompanied by new music composed by Kondo.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

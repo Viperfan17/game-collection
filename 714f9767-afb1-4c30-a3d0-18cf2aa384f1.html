@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Uncharted 2: Among Thieves</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('714f9767-afb1-4c30-a3d0-18cf2aa384f1/cfdaa984-e1bf-432c-905a-a72744af732c.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="714f9767-afb1-4c30-a3d0-18cf2aa384f1/166936c8-999a-4ced-afab-40591a5d5f19.ico"/> Uncharted 2: Among Thieves</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="714f9767-afb1-4c30-a3d0-18cf2aa384f1/b89cc50b-76f7-453d-a719-1873dff80a2a.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:54:57</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 3:25:47</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/13/2009">10/13/2009</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-89">89</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-96">96</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-third-person shooter">third-person shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Naughty Dog">Naughty Dog</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Sony Computer Entertainment">Sony Computer Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Uncharted_2:_Among_Thieves" target="_blank">Wikipedia</a><br/><a href="http://www.unchartedthegame.com" target="_blank">Official website</a><br/><a href="https://www.imdb.com/title/tt1349460/" target="_blank">IMDb</a><br/><a href="https://www.mobygames.com/game/uncharted-2-among-thieves" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Erick Pangilinan">[People] artist: Erick Pangilinan</a><br/><a href="#quicklink-[People] artist: Robh Ruppel">[People] artist: Robh Ruppel</a><br/><a href="#quicklink-[People] composer: Greg Edmonson">[People] composer: Greg Edmonson</a><br/><a href="#quicklink-[People] designer: Neil Druckmann">[People] designer: Neil Druckmann</a><br/><a href="#quicklink-[People] designer: Richard Lemarchand">[People] designer: Richard Lemarchand</a><br/><a href="#quicklink-[People] director: Amy Hennig">[People] director: Amy Hennig</a><br/><a href="#quicklink-[People] director: Bruce Straley">[People] director: Bruce Straley</a><br/><a href="#quicklink-[People] programmer: Dan Liebgold">[People] programmer: Dan Liebgold</a><br/><a href="#quicklink-[People] programmer: Pål-Kristian Engstad">[People] programmer: Pål-Kristian Engstad</a><br/><a href="#quicklink-[People] programmer: Travis McIntosh">[People] programmer: Travis McIntosh</a><br/><a href="#quicklink-[People] writer: Amy Hennig">[People] writer: Amy Hennig</a><br/><a href="#quicklink-[People] writer: Josh Scherr">[People] writer: Josh Scherr</a><br/><a href="#quicklink-[People] writer: Neil Druckmann">[People] writer: Neil Druckmann</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Uncharted 2: Among Thieves</b></i> is a 2009 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> developed by <a href="https://en.wikipedia.org/wiki/Naughty_Dog">Naughty Dog</a> and published by <a href="https://en.wikipedia.org/wiki/Sony_Computer_Entertainment">Sony Computer Entertainment</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>. It is the second game in the <i><a href="https://en.wikipedia.org/wiki/Uncharted">Uncharted</a></i> series. Set two years after <i><a href="https://en.wikipedia.org/wiki/Uncharted:_Drake's_Fortune">Uncharted: Drake's Fortune</a></i> (2007), the story follows <a href="https://en.wikipedia.org/wiki/Nathan_Drake">Nathan Drake</a>, <a href="https://en.wikipedia.org/wiki/Chloe_Frazer">Chloe Frazer</a> and <a href="https://en.wikipedia.org/wiki/Elena_Fisher">Elena Fisher</a> as they search for the <a href="https://en.wikipedia.org/wiki/Cintamani_Stone">Cintamani Stone</a> and <a href="https://en.wikipedia.org/wiki/Shambhala">Shambhala</a> while battling a militia led by war criminal <a href="https://en.wikipedia.org/wiki/List_of_Uncharted_characters#Zoran_Lazarević">Zoran Lazarević</a>.</p>
+
+<p>Development for <i>Uncharted 2: Among Thieves</i> began immediately following the success of <i>Uncharted: Drake's Fortune</i>. The development team drew inspiration from explorer <a href="https://en.wikipedia.org/wiki/Marco_Polo">Marco Polo</a> and his expeditions through archipelagos and eastern Asia. Naughty Dog developed an updated proprietary engine for <i>Uncharted 2: Among Thieves</i>, which runs exclusively on the Naughty Engine 2.0 system. These improvements enabled extensive <a href="https://en.wikipedia.org/wiki/Motion_capture">motion capture</a>, greater in-game cinematic sequences, and inclusion of an online multiplayer component, a first for the franchise.</p>
+
+<p><i>Uncharted 2: Among Thieves</i> received acclaim for its narrative, voice acting, graphics, technical achievements, and cinematic quality. It received <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a> accolades from numerous publications and award events, and is considered one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games ever made</a> and most significant games for the <a href="https://en.wikipedia.org/wiki/Seventh_generation_of_video_game_consoles">seventh console generation</a>. It sold more than six million copies worldwide, and was re-released on <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> as part of <i><a href="https://en.wikipedia.org/wiki/Uncharted:_The_Nathan_Drake_Collection">Uncharted: The Nathan Drake Collection</a></i>. A sequel, <i><a href="https://en.wikipedia.org/wiki/Uncharted_3:_Drake's_Deception">Uncharted 3: Drake's Deception</a></i>, was released in 2011.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Uncharted 2</i> is an <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> <a href="https://en.wikipedia.org/wiki/Platform_game">platform</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> played from a <a href="https://en.wikipedia.org/wiki/Third-person_view">third-person view</a>, with the player in control of <a href="https://en.wikipedia.org/wiki/Nathan_Drake">Nathan Drake</a>. Drake is physically adept and can jump, climb, and scale narrow ledges and wall faces to get between points. Drake can be equipped with up to two firearms – one single-handed and one two-handed – and a limited supply of grenades. Drake can pick up weapons, automatically replacing the existing weapon he was using, and additional ammunition from slain enemies. The player can direct Drake to take <a href="https://en.wikipedia.org/wiki/Cover_system_(gaming)">cover</a> behind corners or low walls using either aimed or blind-fire to kill his enemies. The player can also have Drake fire while moving. If Drake is undetected by his enemies, the player can attempt to use stealth to take them out, such as by sneaking up behind them to knock them out with one hit, or by pulling an unsuspecting foe over a ledge from which Drake is hanging. Some areas of the game require the player to solve puzzles with the use of Drake's journal, which provides clues to the puzzles' solutions. When enabled, a hint system provides gameplay clues, such as the direction of the next objective.</p>
+
+<p>Throughout the game are 100 special treasures and one secret relic that may be hidden or in difficult-to-reach places that the player can collect. Collecting these treasures, along with completing certain feats within the game, is tracked by the awarding of medals, which give the player in-game money to use to unlock extra content on the disc, including concept art, game movies, and game cheats such as guns with infinite ammunition. A large portion of the in-game medals is used to award trophies.</p>
+
+<h3>Multiplayer</h3>
+
+<p><i>Uncharted </i> features both competitive and <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">co-operative</a> multiplayer. The co-op multiplayer allows a maximum of three players to take the roles of Nathan and two other "hero" companions and features missions involving gunfights, platforming, and teamwork-based objectives. Players can also assist their comrades if they become critically injured or if they are grabbed by an enemy.</p>
+
+<p>The competitive multiplayer allows a maximum of ten players to play against each other in two teams of five. Six competitive modes are featured: <a href="https://en.wikipedia.org/wiki/Deathmatch_(video_games)">Deathmatch</a>, Plunder, Elimination, Turf War, King of the Hill and Chain Reaction. Deathmatch features two teams of five, with one team acting as heroes and the other as villains. Players can choose their own appropriate character models (such as Nathan, Elena, Sully, and new characters Tenzin and Chloe for the heroes team). As players accrue points and rank up, they can purchase more skins for both heroes and villains. Players can select two Boost abilities that assist them in the matches. Plunder is similar to the traditional <a href="https://en.wikipedia.org/wiki/Capture_the_flag">capture the flag</a> game mode, and sees each team attempt to capture the treasure from a central point in the map and return it to their base; the player carrying the treasure is slowed down a great deal, and may also choose to hurl the treasure away at any point, to keep it out of reach of the enemy or to pass it to a teammate. Elimination has two teams of five players against each other to kill everyone on the other team. In Elimination, the players do not respawn. The goal is to eliminate the other team three out of five times.</p>
+
+<p>Chain Reaction is a mode that is similar to Turf War. This has the player capturing posts, but the player must do them in a specific order – one team works out from their base needing to capture 1 through 5 while the other team starts from their home and needs to snag 5 through 1. King of the Hill has players capturing a hill, spawned on the map to score points. They must stay on the hill to score points while the enemy team tries to do the same.</p>
+
+<p>Gold Rush is a cooperative mode of play where 2–3 players must team up to obtain a treasure, which is randomly spawned on the map, and take it back to their base, much like Plunder. However, <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">AI</a> enemies try to stop the players from returning the treasure. If a player goes down and is not revived before the timer goes out, they will not come back until the next round. In each consecutive round, the enemies become tougher to defeat. Survival is the second cooperative mode of play, where 2–3 players must work together to defeat a total of ten waves of enemies, each wave becoming more and more difficult. In the new co-op game mode, "Siege", players team up to secure a zone while holding off waves of enemies. The multiplayer servers of <i>Uncharted 2: Among Thieves</i> were terminated on September 3, 2019.</p>
+
+<h2>Plot</h2>
+
+<p>Two years after the events of the <a href="https://en.wikipedia.org/wiki/Uncharted:_Drake's_Fortune">first game</a>, treasure hunter <a href="https://en.wikipedia.org/wiki/Nathan_Drake">Nathan "Nate" Drake</a> (<a href="https://en.wikipedia.org/wiki/Nolan_North">Nolan North</a>) is approached by former associate Harry Flynn (<a href="https://en.wikipedia.org/wiki/Steve_Valentine">Steve Valentine</a>) and Flynn's associate <a href="https://en.wikipedia.org/wiki/Chloe_Frazer">Chloe Frazer</a> (<a href="https://en.wikipedia.org/wiki/Claudia_Black">Claudia Black</a>) to help steal a <a href="https://en.wikipedia.org/wiki/Yuan_dynasty">Mongolian</a> <a href="https://en.wikipedia.org/wiki/Oil_lamp">oil lamp</a> connected to Italian explorer <a href="https://en.wikipedia.org/wiki/Marco_Polo">Marco Polo</a>'s doomed 1292 voyage from <a href="https://en.wikipedia.org/wiki/China">China</a>. The group plans to cheat Flynn's client and take Polo's treasure for themselves. Unbeknownst to Flynn, Chloe and Nate are former partners, and Chloe plans on escaping with Nate afterward. Nate and Flynn break into a museum in <a href="https://en.wikipedia.org/wiki/Istanbul">Istanbul</a> and find the lamp, which contains a map and flammable resin that reveals Polo's fleet was shipwrecked in <a href="https://en.wikipedia.org/wiki/Borneo">Borneo</a>, and was carrying the <a href="https://en.wikipedia.org/wiki/Cintamani_(jewel)">Cintamani Stone</a> from the fabled city of <a href="https://en.wikipedia.org/wiki/Shambhala">Shambhala</a>. Flynn double-crosses Nate, leaving him to be arrested.</p>
+
+<p>Three months later, Chloe helps free Nate with his long-term friend <a href='https://en.wikipedia.org/wiki/List_of_Uncharted_characters#Victor_"Sully"_Sullivan'>Victor "Sully" Sullivan</a> (<a href="https://en.wikipedia.org/wiki/Richard_McGonagle">Richard McGonagle</a>). She reveals that Flynn is working for Zoran Lazarević (<a href="https://en.wikipedia.org/wiki/Graham_McTavish">Graham McTavish</a>), a Serbian war criminal seeking the stone. In Borneo, Nate and Sully infiltrate Lazarević's camp, with Chloe as a <a href="https://en.wikipedia.org/wiki/Mole_(espionage)">mole</a>. Nate discovers that the stone never left Shambhala. They locate a temple containing the bodies of Polo's crew, as well as a <a href="https://en.wikipedia.org/wiki/Phurba">phurba</a> and map detailing that its carrier will gain passage to Shambhala through a temple in <a href="https://en.wikipedia.org/wiki/Nepal">Nepal</a>. Nate and Sully escape after being cornered by Flynn and his men.</p>
+
+<p>Sully backs out, so Nate and Chloe continue to Nepal, which has been ravaged by Lazarević's mercenaries. They encounter Nate's ex-girlfriend journalist <a href="https://en.wikipedia.org/wiki/Elena_Fisher">Elena Fisher</a> (<a href="https://en.wikipedia.org/wiki/Emily_Rose_(actress)">Emily Rose</a>) and cameraman Jeff (Gregory Myhre), tracking Lazarević. At the temple, Nate and Chloe use the phurba to uncover Shambhala's location in the <a href="https://en.wikipedia.org/wiki/Himalayas">Himalayas</a>. After Jeff is shot in an ambush, Chloe insists on abandoning him; Nate and Elena help him but are caught by Lazarević. Chloe switches sides to maintain her cover while Lazarević kills Jeff and obtains Shambhala's location from Nate, who escapes with Elena.</p>
+
+<p>With Elena's help, Nate catches up to Lazarević's train. He fights through it to find Chloe, but she refuses to leave after he compromised their mission to help Jeff and Elena. Flynn arrives and shoots Nate. Cornered, Nate causes an explosion that derails the train over a cliff. He escapes the hanging train car, recovers the phurba, and falls unconscious. A <a href="https://en.wikipedia.org/wiki/Tibet">Tibetan</a> <a href="https://en.wikipedia.org/wiki/Sherpa_people">Sherpa</a>, Tenzin (<a href="https://en.wikipedia.org/wiki/Pema_Dhondup">Pema Dhondup</a>), brings Nate to his village.</p>
+
+<p>Nate reunites with Elena and is introduced to German explorer, Karl Schäfer (<a href="https://en.wikipedia.org/wiki/René_Auberjonois">René Auberjonois</a>). Schäfer sends him and Tenzin after the remains of Schäfer's failed expedition for the Cintamani Stone decades ago. Nate and Tenzin travel through ice caves and fight off strange monsters. They discover that Schäfer was working for the <a href="https://en.wikipedia.org/wiki/Nazi">Nazi</a> <a href="https://en.wikipedia.org/wiki/Ahnenerbe">Ahnenerbe</a> and killed his men to protect the world from the stone. They return to repel an attack on the village by Lazarević, who kidnaps Schäfer and steals the phurba. Elena and Nate follow Lazarević's convoy to a monastery, where the mortally-wounded Schäfer warns Nate to destroy the stone before Lazarević can obtain its power.</p>
+
+<p>After reacquiring the phurba from Chloe, Nate and Elena unlock the secret passage to Shambhala underneath the monastery, but Lazarević corners them. With Chloe's cover blown, Lazarević forces Nate to open the pathway to Shambhala. The monsters attack but are killed by Lazarević, who reveals them as human-like guardians of Shambhala. After the gate is opened, unsuited guardians attack, allowing Nate, Elena, and Chloe to escape.</p>
+
+<p>In the city, the group discovers that the Cintamani Stone is a giant <a href="https://en.wikipedia.org/wiki/Amber">amber</a> derived, along with the flammable resin, from the <a href="https://en.wikipedia.org/wiki/Sap">sap</a> of an ancient <a href="https://en.wikipedia.org/wiki/Tree_of_life">tree of life</a>. The sap gives the drinker inhuman powers, explaining the guardians and Polo's doomed crew. Flynn, left for dead by Lazarević, ambushes them in a <a href="https://en.wikipedia.org/wiki/Suicide_attack">suicide attack</a>, seriously wounding Elena. Nate leaves her in Chloe's care and confronts Lazarević at the tree. Lazarević drinks the tree sap, becoming nearly invincible. By shooting explosive pockets of resin, Nate defeats Lazarević and leaves him to be killed by the guardians. As the city crumbles under the collapse of the tree and exploding resin, Nate and Chloe carry Elena to safety.</p>
+
+<p>In the village, Chloe advises Nate to tell Elena that he loves her, before bidding him farewell. Sully leaves a recovering Elena to Nate. The couple pays their respects at a memorial for Schäfer and kiss.</p>
+
+<h2>Development</h2>
+
+<p>First revealed by <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> in December 2008, the first teaser trailer showed a weary, wounded Nathan Drake marching through a snowstorm to reach a <a href="https://en.wikipedia.org/wiki/Phurba">phurba</a> half-buried in the snow. Lead character artist Richard Diamant remarked that the trailer was rendered in real-time, using the game's engine. A second teaser trailer was released soon after, showing a badly wounded Drake stuck in the remains of a wrecked train hanging precariously over a cliff. The story begins <i><a href="https://en.wikipedia.org/wiki/In_medias_res">in medias res</a> </i>with this opening. The narrative opens with a quote attributed to <a href="https://en.wikipedia.org/wiki/Marco_Polo">Marco Polo</a>: "I did not tell half of what I saw, for I knew I would not be believed".</p>
+
+<p>The game had three main writers: head writer <a href="https://en.wikipedia.org/wiki/Amy_Hennig">Amy Hennig</a>, <a href="https://en.wikipedia.org/wiki/Neil_Druckmann">Neil Druckmann</a> and <a href="https://en.wikipedia.org/wiki/Josh_Scherr">Josh Scherr</a>.</p>
+
+<p><i>Uncharted 2</i> features an online multiplayer component; Naughty Dog hired a dedicated multiplayer designer in August 2008 to work on this aspect of the game. The beta phase of the multiplayer was playable by those who bought early copies of the game <i><a href="https://en.wikipedia.org/wiki/Infamous_(video_game)">inFamous</a></i>. The beta was also accessible by annual subscribers of the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a> service, <a href="https://en.wikipedia.org/wiki/Qore_(PlayStation_Network)">Qore</a>, on June 3, to those who had subscribed to Qore by May 15. The beta codes from Qore began to be sent out on May 8, 2009.  Beta codes from <i>inFamous</i> shipped inside the game's packaging, on May 26. On September 15, another beta was released and an open beta was released to the EU and US on September 29 via the PSN store. Both expired on October 12. In the first year since the game's launch, more than 125 million matches and 10,500 <a href="https://en.wikipedia.org/wiki/Man-hour">man-years</a> had been played online.</p>
+
+<p>The development period was 22 months, with six months of the total spent in pre-production.</p>
+
+<p>One of the inspirations for the Tibetan village sequence was the 2008 video game <i><a href="https://en.wikipedia.org/wiki/The_Graveyard_(video_game)">The Graveyard</a></i> by <a href="https://en.wikipedia.org/wiki/Tale_of_Tales_(developer)">Tale of Tales</a>.</p>
+
+<h3>Motion capture</h3>
+
+<p>In <a href="https://en.wikipedia.org/wiki/E3_2009">E3 2009</a> videos from Naughty Dog showed the voice actors of the characters performing the motion captures in some of the scenes. The actors act out the scene wearing specially designed <a href="https://en.wikipedia.org/wiki/Motion_capture">motion capture</a> suits. Their performance was used to provide both motion capture and voice work. The actors would even rehearse together in a room and had discussions with the creative directors of the game before carrying out the performance to create a highly realistic and cinematic dialogue throughout the game.</p>
+
+<p>Naughty Dog intended to maximize the utilization of the <a href="https://en.wikipedia.org/wiki/Cell_microprocessor">Cell</a>'s SPUs, as their estimates for utilization in the first <i>Uncharted</i> were only around 30%. As a result, the game has more realistic environments and animations.  <i>Uncharted 2</i> has 564 in-game cinematic animations in comparison to 80 in <i>Uncharted: Drake's Fortune</i>.</p>
+
+<p><i>Uncharted 2</i> uses Naughty Engine 2.0, a revamped and optimized version of the <a href="https://en.wikipedia.org/wiki/Uncharted:_Drake's_Fortune#Graphics_and_technology">original engine</a> that has allowed the game to have real-time moving environments, more realistic textures, and animations. The Naughty Dog Game Engine 2.0 also works in harmony with <a href="https://en.wikipedia.org/wiki/Havok_Physics">Havok Physics</a>.</p>
+
+<p><i>Uncharted 2</i> uses between 90 and 100% of the Cell's processor and uses all 25GB of a single <a href="https://en.wikipedia.org/wiki/Blu-ray_Disc">Blu-ray Disc</a>. However, Evan Wells later pointed out:</p>
+
+<p>In the interview, Christophe Balestra also pointed out how important it was to ship every system with a hard drive:</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Screen_Space_Ambient_Occlusion">Screen Space Ambient Occlusion</a> for example, was done completely on the SPUs.</p>
+
+<h2>Post-release</h2>
+
+<h3>Special editions</h3>
+
+<p>Naughty Dog's creative director <a href="https://en.wikipedia.org/wiki/Amy_Hennig">Amy Hennig</a> revealed a special Fortune Hunter edition of <i>Uncharted 2</i> that was not obtainable in stores. The Fortune Hunter edition contains the game, a replica of the <a href="https://en.wikipedia.org/wiki/Phurba">Phurba Dagger</a> artifact and stand, a <a href="https://en.wikipedia.org/wiki/BradyGames">BradyGames</a> strategy guide, an art book, the official <a href="https://en.wikipedia.org/wiki/Soundtrack">soundtrack</a>, and a collector's case autographed by Naughty Dog. It was also said to include various downloadable content. A collector's edition of <i>Uncharted 2</i> was not announced for sale in the United States.</p>
+
+<p>SCEA marketing manager Asad Qizilbash told readers of the PlayStation Blog at the time that the limited edition giveaways took place on that blog, <a href="https://en.wikipedia.org/wiki/PlayStation_Home">PlayStation Home</a>, the game's multiplayer demo, and a few other unnamed places. Qizilbash also mentioned that only residents in the US were eligible to win. Only 200 copies were released.</p>
+
+<p>Exclusive to the PAL region, the <i>Uncharted 2</i> special edition contains the game, gold versions of the <a href="https://en.wikipedia.org/wiki/Beretta">Beretta</a> and <a href="https://en.wikipedia.org/wiki/AK-47">AK-47</a> weapons, two post cards, a PlayStation 3 theme, and multiplayer skins. The game comes packaged in a steel case by SteelBook. Never formally announced, the Special Edition was discovered on the game's official European launch site, with the only link for the special edition leading to one of Britain's major game retailers, <a href="https://en.wikipedia.org/wiki/Game_(retailer)">Game</a>.</p>
+
+<p>A <i>Game of the Year Edition</i> was released on October 12, 2010. Among other features, this edition includes all previously released downloadable content (with the exception of the Sidekicks Skin Pack), four motion comics, and <i>Pinball Heroes: Uncharted</i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PSP</a>. It was rereleased under the "<a href="https://en.wikipedia.org/wiki/Greatest_Hits_(budget_range)#PlayStation_3">Greatest Hits</a> label, and with <i><a href="https://en.wikipedia.org/wiki/Uncharted:_Drake's_Fortune">Uncharted: Drake's Fortune</a></i> as a "Greatest Hits DualPack", and an "Ultimate Combo Pack" which includes a metallic blue <a href="https://en.wikipedia.org/wiki/DualShock_3">DualShock 3</a> controller.</p>
+
+<p>The first pack of <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC) was released on November 27, 2009, and featured a new multiplayer map, "The Fort", from The Fortress chapter in <i>Drake's Fortune</i> for free. It was quickly followed by "Uncharted: Eye of Indra Multiplayer Skin Pack" in December, exclusively for the PAL PlayStation Store. It included all four parts of the motion comic <i>Uncharted: Eye of Indra</i> and two <i>Uncharted 2</i> multiplayer skins based on the motion comic. The pack contained Rika for the heroes and Pinkerton for the villains. The pack was later released in North America.</p>
+
+<p>Several packs were released in 2010: "PlayStation Heroes Skin Pack" was released in January, containing Sev and a Helghast soldier from <i><a href="https://en.wikipedia.org/wiki/Killzone_2">Killzone 2</a></i>, Nathan Hale and a Chimera from the <i>Resistance</i> series, and Cole (Evil and Good) along with Zeke from <i><a href="https://en.wikipedia.org/wiki/InFamous">inFamous</a></i>. A DLC pack that contained two new multiplayer maps, six skins based on <i>Uncharted: Drake's Fortune</i>, 12 PSN Trophies, and 13 medals was released in February. Skins were released as a single purchase and the 2 maps with the 12 PSN Trophies were released as a single purchase. A bundle of both purchases was also released. On April 22, the third expansion pack, "Siege" was released. This DLC pack contained a new co-op multiplayer mode known as <i>Siege</i>, two new multiplayer maps, six new character skins, and 11 PSN Trophies (10 of which are bronze, one of which is silver). Two of the six new skins are from <i>Uncharted: Drake's Fortune</i> and the other four are new and exclusive to the game. The "Sidekick Skin Pack" was released on August 26, containing 6 alternate appearances of previously available characters, and 2 new villain skins, Dillon and Mac. The "Golden Guns" DLC was released on December 12. This DLC pack contained gold skins for the AK-47 and Beretta weapons.</p>
+
+<p>In <a href="https://en.wikipedia.org/wiki/PlayStation_Home">PlayStation Home</a>, the PlayStation 3's online community-based service, Naughty Dog has released a themed <a href="https://en.wikipedia.org/wiki/List_of_PlayStation_Home_Game_Spaces">game space</a> for <i>Uncharted 2</i>, developed by Outso. This makes the second game space to be released from Naughty Dog, the first being the game space for <i>Uncharted: Drake's Fortune</i>. This space is called "Nepalese Village" and features the mini-games Mask Mayhem, Torch Race, and Fortunate Thieves with rewards. There's also an Uncharted 2 Blog that lets users access the <i>Uncharted 2</i> blog. It was released on October 23, 2009, in the European and North American versions of PlayStation Home. In the video on the PlayStation blog, Jack Buser, the director of Home for SCEA, describes the mini-game, Fortunate Thieves, as being a "full-on, interactive mini-<a href="https://en.wikipedia.org/wiki/Massively_multiplayer_online_game">MMO</a>". The <i>Uncharted</i> series is the first game series to have a game space for both games of the series in Home.</p>
+
+<p>Between the hours of 8 am <a href="https://en.wikipedia.org/wiki/Pacific_Time_Zone">PT</a> on November 5 and 12 pm PT on November 6, there was a contest in the North American Home (in which only U.S. citizens could participate), where users could win the <i>Uncharted 2: Among Thieves</i> – Fortune Hunter Edition. Between those times, users went to the <i>Uncharted 2</i> space and played the "Mask Mayhem" mini-game. The user who placed first on the <i>Uncharted 2</i> space's leader board won a copy of the Fortune Hunter Edition. Users had another chance to win the Fortune Hunter Edition in the <i>Uncharted 2</i> space between the times of 8 am PT November 20 and 12 pm PT November 21. Between those times, users had to try to get in first place on the "Fortunate Thieves" mini-game leader board to win the Fortune Hunter Edition. The user who placed first on the Fortunate Thieves leader board won the Fortune Hunter Edition.  Users had one final chance to win the Fortune Hunter Edition from 8 am PT December 18 to 12 pm PT December 21. Users had to play the "Torch Race" mini-game and be first on its leader board in the <i>Uncharted 2</i> space.</p>
+
+<p>An <i>Uncharted</i> apartment was released on May 6, 2010 for European and North American versions of PlayStation Home called the "Uncharted Fortune Hunter's Apartment". <i>Uncharted</i> themed costumes have also been released in Home. The apartment was released on May 27 in the Asian version.</p>
+
+<p>In 2015, <i>Uncharted 2: Among Thieves</i> was released as part of <i>Uncharted: The Nathan Drake Collection</i> for the PlayStation 4. Other games included in the compilation are <i><a href="https://en.wikipedia.org/wiki/Uncharted:_Drake's_Fortune">Uncharted: Drake's Fortune</a></i> and <i><a href="https://en.wikipedia.org/wiki/Uncharted_3:_Drake's_Deception">Uncharted 3: Drake's Deception</a></i>. There are several changes in elements of the gameplay, including the shooting and grenade mechanics, some controls, and the camera schemes. In-game <a href="https://en.wikipedia.org/wiki/Cutscene">cutscenes</a> were overhauled to improve lighting, visuals, and character models, while online leaderboards and <a href="https://en.wikipedia.org/wiki/Motion_blur">motion blur</a> were introduced. <i>The Nathan Drake Collection</i> contains only the <a href="https://en.wikipedia.org/wiki/Single-player_video_game">single-player story</a> modes, with all multiplayer content absent.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical response</h3>
+
+<p><i>Uncharted 2: Among Thieves</i> received universal acclaim, being praised as one of the best video games of all time, and earning numerous "Game of the Year" awards, including <a href="https://en.wikipedia.org/wiki/Spike_(TV_channel)">Spike's</a> <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards#2009_Awards">Video Game Awards</a>. The game got 41 perfect review scores, receiving a Metacritic score of 96 out of 100, making it the most critically acclaimed game of 2009.</p>
+
+<p>The first publication to review <i>Uncharted 2</i> was the French edition of <i><a href="https://en.wikipedia.org/wiki/PSM3">PSM3</a></i>. In their review, they called the game "long, visually stunning, deep and explosive, <i>Uncharted 2</i> combines all the qualities you can find in a videogame, and more! A new milestone has been reached in the videogame history". The magazine awarded the game 21/20, a score that was reached five years prior by <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_San_Andreas">Grand Theft Auto: San Andreas</a></i>. <i><a href="https://en.wikipedia.org/wiki/PlayStation:_The_Official_Magazine">PlayStation: The Official Magazine</a></i> awarded the game a perfect score. In their review, they stated: "Forget Game of The Year. This is one of the greatest games of all time!" The <a href="https://en.wikipedia.org/wiki/PlayStation:_The_Official_Magazine">British</a> edition of the magazine also gave the game a perfect score, named it the 2nd best <a href="https://en.wikipedia.org/wiki/PlayStation_3">PS3</a> game of all time, while readers of the same magazine voted it the greatest PlayStation game.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Hiawatha_Bray">Hiawatha Bray</a> of <i><a href="https://en.wikipedia.org/wiki/The_Boston_Globe">The Boston Globe</a></i> said:</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/The_Los_Angeles_Times">The Los Angeles Times</a></i> review suggested the game would "fit better on a big screen in some multiplex", and also added that "<i>Uncharted 2</i> is ridiculously immersive, so much so that you forget you are controlling the actions of treasure hunter Nathan Drake ... everything is done right". In a review for <i><a href="https://en.wikipedia.org/wiki/The_New_York_Times">The New York Times</a></i>, Seth Schiesel described it as "perhaps the best-looking game on any system, and no game yet has provided a more genuinely cinematic entertainment experience".</p>
+
+<p><i>Uncharted 2</i> also received praise from other developers. <i><a href="https://en.wikipedia.org/wiki/Battlefield_bad_company_2">Battlefield: Bad Company 2</a></i> producer Gordon Van Dyke said that "<i>Uncharted 2</i> is an amazing-looking game. But we're reaching that level of quality. It's going to be hard for any game to be able to make a claim that they look better...to even be close, to me is quite an honor as a developer. The one thing I did was when I looked at their game I was like, damn them! What have they done to the rest of us? I was looking for something where I could say, okay, that we're doing better".</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> gave the game a 9.5 out of 10, praising its "stunning visuals" and saying that "<i>Uncharted 2: Among Thieves</i> is fantastic", and calling the multiplayer mode "one of the best multiplayer experiences that you'll find in any game around ... it almost feels like Naughty Dog has given us an extra game for free". <i><a href="https://en.wikipedia.org/wiki/X-Play">X-Play</a></i>'s <a href="https://en.wikipedia.org/wiki/Adam_Sessler">Adam Sessler</a> gave the game a 5 out of 5, saying that "<i>Uncharted 2</i> has the best single-player I have ever played".</p>
+
+<p>The game was criticized for some negative issues, such as lapses in the control system. <i>The New York Times</i> noted that "... its finicky controls can frustrate at times". Tom Bramwell of <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> found that "there are ... a few occasions where the platforming lets you down ... despite the feeling you were jumping in the right direction". <i>IGN</i> described certain repetitive gunfight sequences as "a little aggravating" and complained about the "very linear" climbing sections, yet calling it a forced complaint.</p>
+
+<p>The game was placed 19th in <a href="https://en.wikipedia.org/wiki/ASCII_Media_Works">Dengeki online</a>'s reader poll of the best games of 2009, making it the only non-Japanese game in the list. For its 15th anniversary, IGN wrote "...it was <i>Uncharted 2</i> that set the template for the cinematic story-driven adventure game that would become PlayStation’s bread and butter in the years to come."</p>
+
+<p><a href="https://en.wikipedia.org/wiki/NPD_Group">NPD Group</a>'s sales data show that <i>Uncharted 2</i> was the top-selling game in the United States for October 2009, at about 537,000 units sold, while <a href="https://en.wikipedia.org/wiki/Media_Create">Media Create</a>'s sales data has <i>Uncharted 2</i> selling 47,000 units for its first day in Japan. Phil Rosenberg of SCE says the game has crossed the one million sold mark on November 12, 2009. According to gaming analyst <a href="https://en.wikipedia.org/wiki/Jesse_Divnich">Jesse Divnich</a>, <i>Uncharted 2</i> is the third first-party game on the PlayStation 3 to sell over 1 million units in North America. As of February 2010, the game has sold over 3.5 million copies worldwide, becoming the fastest selling first-party game on any PlayStation platform. <i>Uncharted 2</i> is now part of <a href="https://en.wikipedia.org/wiki/Sony">Sony</a>'s selection of <a href="https://en.wikipedia.org/wiki/List_of_Sony_Greatest_Hits_games#PlayStation_3">Greatest Hits</a>. Naughty Dog said that it sold 3.8 million worldwide in September 2010. By December 2011, over 5 million copies of the game had been sold. As of March 2015, <i>Uncharted 2</i> has sold 6.5 million copies.</p>
+
+<p><i>Uncharted 2: Among Thieves</i> received over 300 industry awards, including over 200 Game of the Year awards. At the 2009 <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Spike Video Game Awards</a>, it earned a record eight award nominations, winning three, including Game of the Year. <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>, among numerous other video gaming websites and publications awarded <i>Uncharted 2</i> their overall <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a> award. <i>Uncharted 2</i> received a record fifteen nominations during the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">AIAS</a> <a href="https://en.wikipedia.org/wiki/13th_Annual_Interactive_Achievement_Awards">13th Annual Interactive Achievement Awards</a>; it ultimately won ten of them, including <a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Game_of_the_Year">Game of the Year</a>, tying with fellow Naughty Dog game <i><a href="https://en.wikipedia.org/wiki/The_Last_of_Us">The Last of Us</a></i> (2013) for the most honored game in the Academy's history.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Transformers: Fall of Cybertron</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('5109725d-6c83-4ae4-8e59-95f83b4cf70e/808435a7-8416-41f1-bdd8-65151e3f72dd.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="5109725d-6c83-4ae4-8e59-95f83b4cf70e/ae1f56c2-6ba4-43ce-a9a5-f8be7529b9f1.png"/> Transformers: Fall of Cybertron</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="5109725d-6c83-4ae4-8e59-95f83b4cf70e/53cd323c-3747-47cb-abba-345d1802bac6.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 5:28:04</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 1:48:50</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-8/21/2012">8/21/2012</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-96">96</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-81">81</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-High Moon Studios">High Moon Studios</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Mercenary Technology">Mercenary Technology</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Noviy Disk">Noviy Disk</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Transformers:_Fall_of_Cybertron" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=10610" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/transformers-fall-of-cybertron" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/213120/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Transformers:_Fall_of_Cybertron" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/transformers-fall-of-cybertron" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Transformers:_Fall_of_Cybertron" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-2D">2D</a><br/><a href="#quicklink-Abstract">Abstract</a><br/><a href="#quicklink-Action">Action</a><br/><a href="#quicklink-Colorful">Colorful</a><br/><a href="#quicklink-Comedy">Comedy</a><br/><a href="#quicklink-Difficult">Difficult</a><br/><a href="#quicklink-Fast-Paced">Fast-Paced</a><br/><a href="#quicklink-Funny">Funny</a><br/><a href="#quicklink-Great Soundtrack">Great Soundtrack</a><br/><a href="#quicklink-Indie">Indie</a><br/><a href="#quicklink-Minimalist">Minimalist</a><br/><a href="#quicklink-Platformer">Platformer</a><br/><a href="#quicklink-Puzzle Platformer">Puzzle Platformer</a><br/><a href="#quicklink-Time Attack">Time Attack</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Transformers: Fall of Cybertron</b></i> is a <a href="https://en.wikipedia.org/wiki/Third-person_shooter">third-person shooter</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> based on the <i><a href="https://en.wikipedia.org/wiki/Transformers">Transformers</a></i> franchise, developed by <a href="https://en.wikipedia.org/wiki/High_Moon_Studios">High Moon Studios</a> and published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>. It is the sequel to the 2010 video game <i><a href="https://en.wikipedia.org/wiki/Transformers:_War_for_Cybertron">Transformers: War for Cybertron</a></i>, and directly follows the events of that game, as the <a href="https://en.wikipedia.org/wiki/Autobot">Autobots</a> struggle to defeat their <a href="https://en.wikipedia.org/wiki/Decepticon">Decepticon</a> foes in a <a href="https://en.wikipedia.org/wiki/Civil_war">civil war</a> for their home planet of Cybertron. The game was released on August 21, 2012, in North America and on August 24, 2012, in Europe for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. In 2016, it was released for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> on August 8, in Australia and on August 9, in North America. Mercenary Technology developed the game's Windows version, while Fun Labs developed the PlayStation 4 and Xbox One versions.</p>
+
+<p>Set as the prequel to <i><a href="https://en.wikipedia.org/wiki/Transformers:_Prime">Transformers: Prime</a></i>, the game tells the story of the Transformers, fictional robotic life forms, and the final days of conflict on their home planet of Cybertron. An origins subplot for the Dinobots is also told, reimagined from the <i><a href="https://en.wikipedia.org/wiki/Transformers:_Generation_1">Transformers: Generation 1</a></i> continuity. Other subplots also tell an adapted story for several characters. Some of the voice cast from the 1984 series <i><a href="https://en.wikipedia.org/wiki/The_Transformers_(TV_series)">The Transformers</a></i> return to reprise their roles, including <a href="https://en.wikipedia.org/wiki/Peter_Cullen">Peter Cullen</a> as Autobot leader <a href="https://en.wikipedia.org/wiki/Optimus_Prime">Optimus Prime</a> and <a href="https://en.wikipedia.org/wiki/Gregg_Berger">Gregg Berger</a> as <a href="https://en.wikipedia.org/wiki/Grimlock">Grimlock</a>. Other actors return to reprise their roles from <i>Transformers: War for Cybertron</i>.</p>
+
+<p><i>Fall of Cybertron</i> received generally favorable reviews from critics. Critics generally felt that the game was true to the <i>Transformers</i> franchise and provided good <a href="https://en.wikipedia.org/wiki/Fan_service">fan service</a>, but some thought that the story pace slowed at times. Gameplay was mostly praised, but some reviewers cited the removal of <i>War for Cybertron</i>'s cooperative campaign as a low point. Graphics and audio also received broadly positive comments. A spin-off, <i><a href="https://en.wikipedia.org/wiki/Transformers:_Rise_of_the_Dark_Spark">Transformers: Rise of the Dark Spark</a></i>, which is partially set between <i>War for Cybertron</i> and <i>Fall of Cybertron</i>, was released in June 2014. Later, following the expiration of the licensing deal between Activision and Hasbro, the game title was delisted from digital storefronts.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Transformers: Fall of Cybertron</i>, like its predecessor <i><a href="https://en.wikipedia.org/wiki/Transformers:_War_for_Cybertron">Transformers: War for Cybertron</a></i>, is a <a href="https://en.wikipedia.org/wiki/Third-person_shooter">third-person shooter</a>. Players can control each transformer in both its robot and vehicle forms. Instead of a traditional <a href="https://en.wikipedia.org/wiki/Health_(video_game)">health</a> system, the game features a system similar to the <a href="https://en.wikipedia.org/wiki/Halo_(series)"><i>Halo</i> series</a> of video games. The player character has both a regenerating shield and health, the latter of which can be replenished by a <a href="https://en.wikipedia.org/wiki/Health_pack">health pack</a>. The weapon selection in <i>Fall of Cybertron</i> is expanded, with new weapons that can take on very significant upgrades, including one that allows a weapon to fire up to 75% faster. These are purchased through <a href="https://en.wikipedia.org/wiki/Teletran_1">Teletran 1</a> kiosks found throughout the game.</p>
+
+<p>Every character has been given their own unique ability. For example, Jazz can fire a grappling hook to reach high or distant places, Optimus Prime can command the massive <a href="https://en.wikipedia.org/wiki/Metroplex_(Transformers)">Metroplex</a>, and the Combaticons have the ability to combine into the Decepticon <a href="https://en.wikipedia.org/wiki/Bruticus">Bruticus</a>. Segments in which players control Bruticus are designed to accommodate its larger size. Scale is maintained so the character towers over enemies. The Autobot Grimlock, who transforms into a robotic <a href="https://en.wikipedia.org/wiki/Tyrannosaurus">Tyrannosaurus</a>, is controlled differently than other characters. Carrying only a sword and shield, Grimlock cannot transform at will, instead accumulating <i>rage</i> as he battles opponents. When he gains enough rage, Grimlock is able to transform and inflict massive damage. The online cooperative campaign play featured in the first game has been removed in favor of levels that utilize each character's specific abilities.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Survival_mode">survival mode</a> Escalation from <i>War for Cybertron</i> returns. In this mode players must defend against increasingly difficult waves of enemies. As gameplay progresses, new sections of the level open, which give players access to upgraded weapons and abilities. Franchise characters are used in Escalation, while players can customize one of four character classes (Scientist, Infiltrator, Destroyer, and Titan) on 9 different maps (Sewers, Spire, Abandoned, Bowels, Array, Corrosion, Tempest, Convoy, Desolation) in competitive multiplayer. Autobot and Decepticon Transformers can be customized with parts earned through a ranking system or purchased through the game's marketplace. Several parts from famous Transformers can be used, such as heads, torsos, legs, and arms. Hundreds of pieces and color options are available. Players can also buy and upgrade their gear.</p>
+
+<h2>Synopsis</h2>
+
+<h3>Setting</h3>
+
+<p><i>Transformers: Fall of Cybertron</i> is a direct continuation of <i>Transformers: War for Cybertron</i>. Giant robotic life forms known as <a href="https://en.wikipedia.org/wiki/Transformers">Transformers</a> are at civil war. Two factions, the <a href="https://en.wikipedia.org/wiki/Autobot">Autobots</a> and the <a href="https://en.wikipedia.org/wiki/Decepticon">Decepticons</a>, vie for control of their home world, Cybertron. The events of the previous game have left the planet unable to sustain life, and the Autobots, desperate to ensure the continued existence of the Transformer race, seek to flee the planet. The Decepticons, still bent on domination, will stop at nothing to ensure that the Autobots either submit to the Decepticons or are eliminated. <i>Fall of Cybertron</i> depicts the final battle between the two robot factions, which results in the desolation of their home world, forcing the Autobots to seek refuge in our galaxy, the <a href="https://en.wikipedia.org/wiki/Milky_Way">Milky Way</a>. The developer, <a href="https://en.wikipedia.org/wiki/High_Moon_Studios">High Moon Studios</a>, hoped to show a darker tone than the original game. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>'s Matt Miller stated that the game "changes and improves upon so many of the fundamental ideas that the developer considers the game a natural successor rather than a true sequel."</p>
+
+<p><small>.mw-parser-output .citation{word-wrap:break-word}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}<b><a href="https://en.wikipedia.org/wiki/Transformers:_Fall_of_Cybertron#ref_a">^a</a></b> Not a playable character
+<b><a href="https://en.wikipedia.org/wiki/Transformers:_Fall_of_Cybertron#ref_b">^b</a></b> Downloadable content, playable only in multiplayer
+<b><a href="https://en.wikipedia.org/wiki/Transformers:_Fall_of_Cybertron#ref_c">^c</a></b> Alternate skin available (pre-order/downloadable content)
+<b><a href="https://en.wikipedia.org/wiki/Transformers:_Fall_of_Cybertron#ref_d">^d</a></b> Slag was renamed Slug in the game due to <a href="https://en.wiktionary.org/wiki/slag#Noun">Slag</a> being a derogatory term in some cultures
+<b><a href="https://en.wikipedia.org/wiki/Transformers:_Fall_of_Cybertron#ref_e">^e</a></b> Playable in escalation</small></p>
+
+<p>In the final days of the war for Cybertron, the Autobots attempt to flee their dying homeworld aboard the <i><a href="https://en.wikipedia.org/wiki/Ark_(Transformers)">Ark</a></i>, but their spacecraft comes under attack by the Decepticon flagship <i><a href="https://en.wikipedia.org/wiki/Nemesis_(Transformers)">Nemesis</a></i>. While <a href="https://en.wikipedia.org/wiki/Optimus_Prime">Optimus Prime</a> engages <a href="https://en.wikipedia.org/wiki/Megatron">Megatron</a> on the outer surface of the <i>Ark</i>, <a href="https://en.wikipedia.org/wiki/Bumblebee_(Transformers)">Bumblebee</a> is sent by <a href="https://en.wikipedia.org/wiki/Ratchet_(Transformers)">Ratchet</a> to find and assist the former. Just as Megatron is about to fire a killing shot, Bumblebee jumps in and takes it for Optimus.</p>
+
+<p>Six days earlier, Optimus leads the defensive against the Decepticons, who are attacking the docked <i>Ark</i>. After assisting <a href="https://en.wikipedia.org/wiki/List_of_The_Transformers_(TV_series)_characters">Perceptor</a>, <a href="https://en.wikipedia.org/wiki/Ironhide_(Transformers)">Ironhide</a>, and <a href="https://en.wikipedia.org/wiki/Warpath_(Transformers)">Warpath</a>, Optimus accidentally awakens the city-sized ancient Autobot Titan <a href="https://en.wikipedia.org/wiki/Metroplex_(Transformers)">Metroplex</a>, who helps turn the tide of the battle; he destroys two of the Decepticons' Warp Cannons but is seemingly killed by the last. While trying to destroy the last cannon himself, Optimus is captured by <a href="https://en.wikipedia.org/wiki/Starscream">Starscream</a> and the <a href="https://en.wikipedia.org/wiki/Combaticons">Combaticons</a>, who bring him before Megatron. Just as Megatron is about to execute Optimus, Metroplex comes back online and crushes  him to death. Starscream assumes leadership of the Decepticons and orders a tactical retreat. Despite their victory, the battle cost the Autobots all of their Energon, leaving them unable to fuel the <i>Ark</i>.</p>
+
+<p>Meanwhile, <a href="https://en.wikipedia.org/wiki/Jazz_(Transformers)">Jazz</a>, <a href="https://en.wikipedia.org/wiki/Cliffjumper">Cliffjumper</a> and <a href="https://en.wikipedia.org/wiki/Sideswipe_(Transformers)">Sideswipe</a>, tasked by Optimus with investigating the disappearance of the Lightning Strike Coalition Force - consisting of <a href="https://en.wikipedia.org/wiki/Grimlock">Grimlock</a>, <a href="https://en.wikipedia.org/wiki/Slag_(Transformers)">Slug</a>, <a href="https://en.wikipedia.org/wiki/Sludge_(Transformers)">Sludge</a>, <a href="https://en.wikipedia.org/wiki/Snarl_(Transformers)">Snarl</a><!--DO NOT CHANGE THIS TO SLAG. HE IS KNOWN AS SLUG IN&#x2D;GAME DUE TO SLAG BEING A DEROGATORY WORD IN SOME COUNTRIES--> and <a href="https://en.wikipedia.org/wiki/Swoop_(Transformers)">Swoop</a> - track their signatures to the Sea of Rust. While investigating a Decepticon presence in the area, they find Sludge's remains and an enormous tower in a lake of Energon firing a bright beam into Cybertron's orbit, operated by the Decepticon scientist <a href="https://en.wikipedia.org/wiki/Shockwave_(Transformers)">Shockwave</a>. Shockwave explains that the tower is a Space Bridge, used by their ancestors to find and travel to other planets, and flees after commanding a swarm of <a href="https://en.wikipedia.org/wiki/Insecticons">Insecticons</a> to attack the Autobots. After destroying the tower, Cliffjumper and Jazz escape with Sideswipe and report back to Optimus.</p>
+
+<p>After the Autobots salvage the Energon from the tower, Starscream and Combaticon leader <a href="https://en.wikipedia.org/wiki/Onslaught_(Transformers)">Onslaught</a> devise a plan to ambush the Autobot transport carrying the Energon and reclaim it. After the Combaticons <a href="https://en.wikipedia.org/wiki/Vortex_(Transformers)">Vortex</a>, <a href="https://en.wikipedia.org/wiki/Brawl_(Transformers)">Brawl</a> and <a href="https://en.wikipedia.org/wiki/Blast_Off_(Transformers)#Transformers:_Prime">Blast Off</a> destroy a bridge the transport must cross, Starscream leads an airstrike on the transport despite Onslaught's warning about its anti-aircraft cannons. Meanwhile, <a href="https://en.wikipedia.org/wiki/Swindle_(Transformers)">Swindle</a> destroys the transport's wheel struts, causing it to activate its flight mode and take off. Starscream orders a retreat, but the Combaticons ignore him and board the transport, combining to form the giant Decepticon <a href="https://en.wikipedia.org/wiki/Bruticus">Bruticus</a>. However, they inadvertently cause the transport to crash, losing half of the Energon, and Starscream arrests them for insubordination. Meanwhile, beneath the Decepticon capital of Kaon, <a href="https://en.wikipedia.org/wiki/Soundwave_(Transformers)">Soundwave</a> resurrects Megatron in a new, superior body. Megatron then challenges Starscream for leadership of the Decepticons during the latter's coronation and chases him away. After freeing the Combaticons, Megatron orders a full-scale assault on an Autobot stronghold in the ruins of their capital city, Iacon. There, Megatron finds the Decepticon Titan <a href="https://en.wikipedia.org/wiki/Trypticon">Trypticon</a>, trapped in stasis lock since <a href="https://en.wikipedia.org/wiki/Transformers:_War_for_Cybertron">his defeat at Optimus' hand</a>, but his intact power core allows Megatron to permanently transform him into the  <i>Nemesis</i>.</p>
+
+<p>Seeking revenge against Megatron, Starscream infiltrates Shockwave's tower laboratory and finds an imprisoned Grimlock. Starscream offers him freedom in exchange for his loyalty, but Grimlock escapes by throwing Starscream into the restraint controls. As he fights his way through the lab in search of Swoop, Slug, and Snarl, Grimlock learns that they were all captured while investigating the Space Bridge in the Sea of Rust and subsequently experimented on by Shockwave, giving them new alternate forms. Shockwave reveals that he is building a new Space Bridge to find another planet brimming with energy for the Decepticons to plunder, and based Grimlock's team's new forms on <a href="https://en.wikipedia.org/wiki/Dinosaur">creatures</a> he found on <a href="https://en.wikipedia.org/wiki/Earth">one such planet</a>. After rescuing his teammates from the Insecticon swarm leaders <a href="https://en.wikipedia.org/wiki/Bombshell_(Transformers)">Hardshell</a>, <a href="https://en.wikipedia.org/wiki/Kickback_(Transformers)">Kickback</a> and <a href="https://en.wikipedia.org/wiki/Shrapnel_(Transformers)">Sharpshot</a>, Grimlock contacts Optimus and informs him of the situation, then attempts to destroy the Space Bridge himself but is re-captured by Shockwave. He escapes by transforming into his dinosaur form and biting off Shockwave's left arm, then destroys the tower. This destabilizes the portal in Cybertron's orbit, giving the Autobots an opportunity to leave via the <i>Ark</i> before it closes.</p>
+
+<p>After Metroplex sacrifices himself by transferring all of his Energon to the <i>Ark</i>, the Autobots make a run for the portal but are intercepted by the <i>Nemesis</i>. Soundwave leads the first wave of troops onto the <i>Ark</i> through giant cables and deactivates the ship's automated defense system, while <a href="https://en.wikipedia.org/wiki/Jetfire_(Transformers)">Jetfire</a> destroys the cables and helps Jazz blast Bruticus off the ship after the Combiner destroyed the <i>Ark</i>'s fuel line. The game then returns to the opening scene of Bumblebee sacrificing himself to save Optimus from Megatron. The two resume their fight, but before the winner can be decided, both ships are pulled into the portal to an unknown destination. The portal then closes, leaving Cybertron a deserted ruin.</p>
+
+<h2>Development</h2>
+
+<p>During an investor conference in November 2010 <a href="https://en.wikipedia.org/wiki/Hasbro">Hasbro</a> confirmed that a sequel to the 2010 game <i>Transformers: War for Cybertron</i> would be developed. <i>Transformers: Fall of Cybertron</i> was officially announced on October 6, 2011, in an article posted on the gaming magazine <i>Game Informer</i>'s website. In the article, <i>Game Informer</i> noted that their November issue would contain an exclusive feature on the upcoming game and the cover would include concept art. <a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a>'s Chris Pereira wrote that fans would be excited to hear another original Transformers game from High Moon Studios was being developed, since the <a href="https://en.wikipedia.org/wiki/Transformers:_Dark_of_the_Moon_(video_game)">game</a> based on the film <i><a href="https://en.wikipedia.org/wiki/Transformers:_Dark_of_the_Moon">Transformers: Dark of the Moon</a></i> did not meet critical expectations. Henry Gilbert of <a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a> was also pleased to see an original game being developed and said "we're glad [...] developer High Moon Studios is back to what it does best: crafting new/old adventures for the Autobots and Decepticons". High Moon Studios originally announced that they would not be releasing <i>Fall of Cybertron</i> on the <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> platform but changed their plans. The Windows version was completed by Mercenary Technologies, while High Moon Studios handled the PlayStation 3 and Xbox 360 releases. The game is powered by <a href="https://en.wikipedia.org/wiki/Epic_Games">Epic Games</a>' <a href="https://en.wikipedia.org/wiki/Unreal_Engine_3">Unreal Engine 3</a> and utilizes the <a href="https://en.wikipedia.org/wiki/Havok_(software)">Havok</a> physics engine.</p>
+
+<h3>Design</h3>
+
+<p>Some characters who previously appeared in <i>War for Cybertron</i> feature updated appearances and transformation schemes, or moving parts that animate regardless of player action, similar to breathing. The character Optimus Prime was redesigned for a "more warrior-type feel", with more bulk added to his body mass. The weaponry in <i>Fall of Cybertron</i> was also modified and enhanced; the designers of the game put out a call to everyone in the studio for new weapon ideas. Matt Tieger of High Moon explained that in addition to new designs, each weapon could be upgraded, continuing, "We really made a conscious choice to make every upgrade a significant improvement, so one upgrade might increase your firing speed by 75%. We could have made the system so that there were a lot of upgrades that each improved your guns a little bit, but we wanted to make each upgrade feel like this giant thing. That way when players buy it they’re really going to feel the difference."</p>
+
+<p>At <a href="https://en.wikipedia.org/wiki/E3_2012">E3 2012</a> veteran Transformers voice actors <a href="https://en.wikipedia.org/wiki/Peter_Cullen">Peter Cullen</a> and <a href="https://en.wikipedia.org/wiki/Fred_Tatasciore">Fred Tatasciore</a> were confirmed to reprise their respective roles of Optimus Prime and Megatron. Tatasciore also voices Ratchet and the city-sized Transformer Metroplex. <a href="https://en.wikipedia.org/wiki/Gregg_Berger">Gregg Berger</a> voices Grimlock from <i><a href="https://en.wikipedia.org/wiki/The_Transformers_(TV_series)">The Transformers</a></i> for the first time in twenty-five years. Other cast members include: <a href="https://en.wikipedia.org/wiki/Troy_Baker">Troy Baker</a> as Jazz, Jetfire, and Kickback; <a href="https://en.wikipedia.org/wiki/Keith_Szarabajka">Keith Szarabajka</a> as Ironhide; <a href="https://en.wikipedia.org/wiki/Nolan_North">Nolan North</a> as Cliffjumper, Bruticus and Brawl; <a href="https://en.wikipedia.org/wiki/Steven_Blum">Steven Blum</a> as Shockwave, Swindle and Sharpshot; <a href="https://en.wikipedia.org/wiki/Isaac_C._Singleton_Jr.">Isaac C. Singleton Jr.</a> as Soundwave and <a href="https://en.wikipedia.org/wiki/Sam_Riegel">Sam Riegel</a> as Starscream. <a href="https://en.wikipedia.org/wiki/Jim_Ward_(voice_actor)">Jim Ward</a> provides the voice for Perceptor, David Boat voices Vortex, <a href="https://en.wikipedia.org/wiki/Travis_Willingham">Travis Willingham</a> performs as Sideswipe, Slug and Onslaught, <a href="https://en.wikipedia.org/wiki/Jamieson_Price">Jamieson Price</a> voices Warpath, and <a href="https://en.wikipedia.org/wiki/Keith_Silverstein">Keith Silverstein</a> portrays Blast-Off and Rumble.</p>
+
+<p>The game features <a href="https://en.wikipedia.org/wiki/Stan_Bush">Stan Bush</a>'s song "<a href="https://en.wikipedia.org/wiki/The_Touch_(Stan_Bush_song)">The Touch</a>", originally featured in the 1986 film <i><a href="https://en.wikipedia.org/wiki/The_Transformers:_The_Movie">The Transformers: The Movie</a></i>. The rerecorded 2007 version was used during promotional trailers for preorder items, while the game's end credits utilize both it and a remixed version of the song. The remixed version, called the "Power Mix", was based on the melancholy "<a href="https://en.wikipedia.org/wiki/Witwicky_family#Samuel_James_Witwicky">Sam</a>'s Theme" version of the song, which was created for possible inclusion in the live-action film <i><a href="https://en.wikipedia.org/wiki/Transformers:_Revenge_of_the_Fallen">Revenge of the Fallen</a></i>. The credits begin with the "Power Mix" version, and segue into the 2007 version. Bush later released the "Power Mix" on iTunes the following September.</p>
+
+<p>As of 2020, Activision has discontinued support for <i>Fall of Cybertron</i>, and the game's multiplayer servers have been shut down.</p>
+
+<h2>Marketing and release</h2>
+
+<p>The first official cinematic trailer for the video game was shown at the 2011 <a href="https://en.wikipedia.org/wiki/Spike_TV_Video_Game_Awards">Spike TV Video Game Awards</a> on December 10, 2011 and featured the song "<a href='https://en.wikipedia.org/wiki/"C"_Is_for_(Please_Insert_Sophomoric_Genitalia_Reference_Here)'>The Humbling River</a>" by <a href="https://en.wikipedia.org/wiki/Puscifer">Puscifer</a>. A second cinematic trailer, dubbed "Our World", was released in March 2012. Gameplay was shown during the 2012 <a href="https://en.wikipedia.org/wiki/Botcon">Botcon</a> convention. On July 5, 2012, the UK release date for the game was brought forward one week to August 24, 2012. A trailer featuring an in-game look at the city-sized Transformer Metroplex was released with the announcement. The song featured was an Everlove cover of the <a href="https://en.wikipedia.org/wiki/Siouxsie_and_the_Banshees">Siouxsie and the Banshees</a> song "Cities in Dust". The launch trailer was released on August 17, 2012, and featured the theme "The Last Kingdom" by Alessio Nanni and Daniel Lessner. The game was released in North America on August 21, 2012, and Europe on August 24.</p>
+
+<p>A toy line based on the game was manufactured by Hasbro under the <i>Transformers: Generations</i> banner. Bruticus, a character formed by combining five Decepticons, is part of the line. Other figures include Optimus Prime, Jazz, and Shockwave. It was announced the toy line would be released August 21, 2012, in North America, a week earlier than originally planned.</p>
+
+<p>In North America, <a href="https://en.wikipedia.org/wiki/Amazon.com">Amazon.com</a> and video game retailer <a href="https://en.wikipedia.org/wiki/GameStop">GameStop</a> offered preorder codes for downloadable content. GameStop offered a <i>G1 Retro Pack</i> that unlocks a <i>The Transformers</i> Generation 1 themed Optimus Prime skin, a Generation 1 inspired Megatron rifle based the character's alternate mode, and a Shockwave Blast Cannon. Amazon offered a Generation 2 Bruticus skin. In the United Kingdom, Play.com also offered preorder codes. The codes unlocked the Dinobot Swoop for use in the competitive multiplayer.</p>
+
+<p>Multiple downloadable content packs were released. The <i>Multiplayer Havoc Pack</i> launched on the game's release date of August 21, 2012, and contains five characters for use in multiplayer: Perceptor, Ultra Magnus, Blast Off, Wheeljack, and Zeta Prime. It also unlocks the associated customization pieces related to these characters. The Dinobots, excluding Sludge, make up the DLC <i>Dinobot Destructor Pack</i>, released on September 11. The Insecticons, G1 Optimus, Megatron, Hound, and G2 Bruticus were released as DLC for single and multiplayer in the <i>Massive Fury Pack</i> on September 25. Players can also purchase specific customization pieces for their multiplayer characters via <a href="https://en.wikipedia.org/wiki/Microtransaction">microtransactions</a>, allowing players to access content they would otherwise have to play to unlock.</p>
+
+<p>On August 8, 2016, Activision released <i>Fall of Cybertron</i> for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> in Australia without announcing it. These versions were developed by FunLabs.</p>
+
+<h2>Reception</h2>
+
+<p><i>Fall of Cybertron</i> has received generally positive reviews. The PlayStation 3 version received an aggregate score of 77/100 at <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, while the Xbox 360 and Windows versions both hold scores of 79/100. <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> reports similar scores; the Xbox 360 version has an aggregate score of 81.40%, the PlayStation 3 a score of 76.48%, and the Windows version a score of 79.17% <a href="https://en.wikipedia.org/wiki/Jeff_Gerstmann">Jeff Gerstmann</a> of <a href="https://en.wikipedia.org/wiki/Giant_Bomb">Giant Bomb</a> gave the game a 60% approval, the lowest score reported.</p>
+
+<p>Alec Meer of <a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a> praised the developer's focus on staying true to the Transformers source material: "Fall of Cybertron is a love-letter to a fictional universe created in 1984 that has ... continued to this day." Matt Miller of <i>Game Informer</i> agreed, calling the narrative "tightly crafted". <a href="https://en.wikipedia.org/wiki/G4_(U.S._TV_channel)">G4TV</a>'s Matt Keil lauded the story, character development and voice acting. He called the game "a cinematic shooter that stands on the strength of its design and gameplay". <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a>'s Kevin VanOrd stated that while the game's levels focused on flight are enjoyable and that some levels give players a sense of power, the campaign mode was "too often more exciting to watch than to play". Corey Cohen of <i><a href="https://en.wikipedia.org/wiki/Official_Xbox_Magazine">Official Xbox Magazine</a></i> gave high marks for the variety of characters players control during the campaign. He noted that each felt unique from the others, but thought that the game could have utilized the gargantuan transformer Metroplex more. Miller cited that the variety of playable Transformers and their unique abilities kept the game interesting, adding that the control scheme suited each unique character well.</p>
+
+<p>In a more critical review, Giant Bomb's Jeff Gerstmann felt that the game had uneven pacing and gameplay. "The highs in <i>Transformers: Fall of Cybertron</i> are very high [...] but it doesn't go far enough in that direction to stand out" he stated. Gerstmann disliked the <a href="https://en.wikipedia.org/wiki/Frame_rate">frame rate</a> drops during heavy action sequences. <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>'s Matt Cabral also noted this, but dismissed these moments as "occasional hiccups". Cabral gave high marks for visual presentation, including the transformations each character used to change forms. Both Cabral and Keil criticized the lack of cooperative campaign gameplay, a feature available in the game's predecessor, as a low point of <i>Fall of Cybertron</i>.</p>
+
+<p>According to the <a href="https://en.wikipedia.org/wiki/NPD_Group">NPD Group</a>, the game sold well during the month of its release, placing seventh in sales despite only being available during the last ten days. <i>Fall of Cybertron</i> sold 105,000 copies during its North America debut according to <a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a>.</p>
+
+<h2>Sequel</h2>
+
+<p>A video game titled <i><a href="https://en.wikipedia.org/wiki/Transformers:_Rise_of_the_Dark_Spark">Transformers: Rise of the Dark Spark</a></i> was developed by <a href="https://en.wikipedia.org/wiki/Edge_of_Reality">Edge of Reality</a> and published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>. Most of the game takes place between the events of <i>War for Cybertron</i> and <i>Fall of Cybertron</i>. It is also a crossover to the fourth live-action film <i><a href="https://en.wikipedia.org/wiki/Transformers:_Age_of_Extinction">Transformers: Age of Extinction</a></i>, and is therefore a tie-in to the film. It features characters from both timelines.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

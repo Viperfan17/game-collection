@@ -1,0 +1,340 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Webkinz</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('0d6d4ee7-5b9f-42e6-a2e2-3a51df955095/49530851-d88a-4452-90a0-357a4d30b5d2.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="0d6d4ee7-5b9f-42e6-a2e2-3a51df955095/5935fbb0-e150-4c1e-9365-20cda5c1f8ec.png"/> Webkinz</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="0d6d4ee7-5b9f-42e6-a2e2-3a51df955095/bb075ae4-22c3-45a1-a736-b1ecdbb64779.webp"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 23:34:03</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-6/19/2020">6/19/2020</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Arcade">Arcade</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Building">Building</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Life sim">Life sim</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Mini-games">Mini-games</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-MMO">MMO</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Ganz">Ganz</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Ganz Canada">Ganz Canada</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Touchscreen optimised">Touchscreen optimised</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Webkinz" target="_blank">PCGamingWiki</a><br/><a href="https://www.webkinz.com/" target="_blank">Official site</a><br/><a href="https://www.igdb.com/games/webkinz-next" target="_blank">IGDB</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Cartoon">Cartoon</a><br/><a href="#quicklink-Fantasy">Fantasy</a><br/><a href="#quicklink-Isometric">Isometric</a><br/><a href="#quicklink-Persistent">Persistent</a><br/><a href="#quicklink-Point and select">Point and select</a><br/><a href="#quicklink-Unity 2022">Unity 2022</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><b>Webkinz</b> is a stuffed animal and video game franchise by the <a href="https://en.wikipedia.org/wiki/Canadian">Canadian</a> toy company <a href="https://en.wikipedia.org/wiki/Ganz_(toy_company)">Ganz</a>. Webkinz <a href="https://en.wikipedia.org/wiki/Stuffed_animals">stuffed animals</a> have online counterparts in the video games <b>Webkinz Classic</b> and <b>Webkinz Next</b>. It was originally released by Ganz on April 15, 2005. However, Webkinz Day (the anniversary of Webkinz) is celebrated annually on April 29 annually because the creator, Karl Borst, did not want it to be so close to Easter.</p>
+
+<p>Each Webkinz toy has an attached tag with a unique "secret code" printed on it, allowing its owner to play with a <a href="https://en.wikipedia.org/wiki/Digital_pet">digital version of their pet</a> on <a href="https://en.wikipedia.org/wiki/IOS">iOS</a>, <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a>, and <a href="https://en.wikipedia.org/wiki/Desktop_computer">desktop computers</a>.  Sales of Webkinz plush toys are limited to the <a href="https://en.wikipedia.org/wiki/United_States">United States</a> and <a href="https://en.wikipedia.org/wiki/Canada">Canada</a>, but international users can buy virtual pets from the Ganz eStore. Plush toys made after October 2020 contain two secret codes for Webkinz Classic and Webkinz Next, respectively.</p>
+
+<p>In 2006, Webkinz Classic achieved one million concurrent players. During this same year, according to one estimate published in <i><a href="https://en.wikipedia.org/wiki/Wired_(magazine)">Wired</a></i>, <i>Webkinz</i> generated approximately $100 million in revenue. Ganz updated Webkinz Classic in 2015 to Webkinz X, a version that created a safer environment for young players.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> In October 2020, Ganz unveiled Webkinz Next, a 3D spin-off with different social features.</p>
+
+<h2>Game development</h2>
+
+<p>Karl Borst, the creative director of Webkinz, had the idea to link the new plush toy line to an online site, and later to a virtual world. Originally, the pet avatars were designed to be three-dimensional, but this was later replaced with cartoony pet designs, due to the difficulty of animating such a large variety of pets while including cute and expressive features.</p>
+
+<p>After the site’s premiere in 2005, users could register the code on the tag of their plush toys, and play games with the virtual version of their adopted Webkinz pet. The original site had among its features a few games in the arcade section, the “W-Shop” where users could use their in-game points for virtual items, and the ability to customize the pets’ rooms, but many more interactive features have been added to Webkinz World since, including a school (called the “Kinzville Academy”) where users can play minigames which improve their pets’ abilities, and a trivia section where users can earn points for answering questions.</p>
+
+<p>In 2015, a decade after the site’s launch, Ganz introduced a major update to the game (called Webkinz X), which had been failing due to certain technical errors in the coding. Webkinz X improved many of these problems, but also created many more, as the unique mixture of new code and code as old as 2005 resulted in several hundred in-game objects disappearing, or otherwise not functioning properly; the animation joints of some Webkinz avatars also were affected, often resulting in an awkward and disjointed appearance.</p>
+
+<p>The Webkinz World site was run by <a href="https://en.wikipedia.org/wiki/Adobe_Flash">Adobe Flash</a>, and in 2018, in accordance with Adobe’s decision to no longer support Flash Player, Ganz worked with Adobe to convert the entire game interface from an embedded Flash Player-driven web game into a desktop app, which can be downloaded directly from the Webkinz website.</p>
+
+<h2>Types of Webkinz</h2>
+
+<p>Webkinz are modeled after real pets and animals, as well as prehistoric animals and mythical creatures. Along with the regular Webkinz toys, there are also smaller, less expensive versions called Lil’ Kinz, as well as larger, more expensive versions in the Signature collection, which ran from April 2009 to December 2013. Lil’ Kinz unlock the same virtual items as a regular-size Webkinz, but feature a smaller in-game avatar.</p>
+
+<p>The Webkinz Signatures were designed by a different toy company which had partnered with Ganz, and included three different sub-lines of plush: Webkinz Signature, Webkinz Small Signature, and Webkinz Signature Endangered, the latter being based on real-life endangered species of animals, and unlocking a trivia section about the respective animal; purchasing a Signature also unlocked access to a virtual item from the Signature theme. Production of Signatures stopped when the contract Ganz held ended, and new Signature plushes were not made, in part to their steeper price. Ganz continues to release new Signature pets, albeit without their plush counterparts, with certain pets only available as special promotional items; virtual Signatures and other pets given away in this manner often run for an extremely steep price, ranging from $25 per code on third-party sites such as <a href="https://en.wikipedia.org/wiki/EBay">eBay</a>, to $2,000 per code (including several other virtual promotional items), when acquired through the Ganz eStore website itself.</p>
+
+<p>In May 2009, the Birthstone Pets series was released, with one new virtual Birthstone Pet (a brightly-colored dog with the corresponding birthstone on its hip) being released for each corresponding month. In April 2010, Ganz replaced the Birthstone Pets series with the Zodiac Pets series. Similarly, one Zodiac Pet was released every month, and were limited to just digital avatars, with no plush being made available; however, there was greater variety in the types of animals offered, not comprising only dogs as in the Birthstone Pets series, but including an eagle, a snake, a horse, a crab, and even a butterfly.</p>
+
+<p>In 2011, the CandyKinz series was released, which was originally composed of virtual-only pets with various dessert-related themes. Later, plush versions of some of the CandyKinz were made available, such as the Gingerbread Puppy. In June 2012, the Rockerz Pets series was released, which consisted of rock band-themed pets. The purchase of a plush toy unlocked a virtual pet and a virtual item from the Rockerz theme, in a similar manner as the Webkinz Signatures. Some later Rockerz pets were only available as digital avatars.</p>
+
+<p>In 2019, Ganz announced that the “first generation” of Webkinz plush was ending and that no new plush pets would be released for the time being, but fully virtual pets would still be created and available to purchase. In November 2020, Ganz resumed the creation of plush Webkinz toys for the spin-off game Webkinz Next. New pets include a code for Webkinz Classic and a code for Webkinz Next.</p>
+
+<h2>Gameplay</h2>
+
+<p>Each Webkinz <a href="https://en.wikipedia.org/wiki/Stuffed_animal">stuffed animal</a> and Webkinz accessory comes with an 8-character code, within a tag tied onto the plush. By registering this code on the Webkinz Classic desktop application or <a href="https://en.wikipedia.org/wiki/Mobile_app">mobile app</a>, the customer "<a href="https://en.wikipedia.org/wiki/Pet_adoption">adopts</a>" a pet in the <a href="https://en.wikipedia.org/wiki/Virtuality">virtual</a> Webkinz World. Without the code, the user will not get access to the full Webkinz World, but they can create a free account. On January 19, 2011, Ganz announced that Webkinz World accounts would no longer expire, meaning users would not have to buy a new pet each year to renew their account. However, certain features become inaccessible for accounts that have not registered a new pet for over a year, and accounts without active users are deleted after a certain period of time.</p>
+
+<p>All inactive accounts were once stored to later be unarchived upon retrieval, but it was announced by Ganz, that on Oct. 1, 2019, all archived accounts would be deleted after seven years of inactivity, due to storage issues, and a change in children’s online privacy laws. No new accounts were archived, and users with free accounts which had been abandoned for more than six months would be deleted.</p>
+
+<p>The Webkinz World is an <a href="https://en.wikipedia.org/wiki/Online_play">online play</a> area with <a href="https://en.wikipedia.org/wiki/Virtual_economy">its economy</a> controlled by Ganz. The user can earn money (called KinzCash) by adopting new pets, playing <a href="https://en.wikipedia.org/wiki/Online_games">online games</a>, answering general knowledge questions, and through daily activities like spinning the <i>Wheel of WOW</i>, playing <i>Wishing Well 2</i>, or completing jobs (minigames) available once every 8 hours. Each day, there is a Game of the Day which can be played for bonus KinzCash, and other bonuses are available each hour, full days on weekends, and afternoons only on weekdays. With each Webkinz toy purchased, more KinzCash, rooms, and items are added to the user's account.</p>
+
+<p>Many of the tasks in Webkinz World involve collecting items. For example, <a href="https://en.wikipedia.org/wiki/Recipe">recipes</a> are released for the players through <a href="https://en.wikipedia.org/wiki/Cookbook">cookbooks</a>, or (formerly) one of the in-game TV shows called <i>The Secret Chef</i>. "Gems" can be mined once a day at the <i>Curio Shop</i>, with a full set of gems being turned into the <i>Webkinz Crown of Wonder</i> and used to buy exclusive items. A similar feature, called <i>Alyssa's Star Challenge</i>, involves users clicking on colored stars to find valuable stars.</p>
+
+<p>The online world also contains many rare or exclusive items. Some of these items require developing a friendship with the Curio Shop owner to purchase, while others are obtained by registering other Webkinz accessories purchased in the real world. Each type of pet gets a special item, and food available exclusively for them. A "Pet of the Month" is announced at the beginning of each month. Users with the Pet of the Month on their account can participate in special minigames and rewards; if a person registers the announced pet in that month, they will also receive other exclusive items.</p>
+
+<h2>Criticism</h2>
+
+<ul>
+  <li>Parents have raised concerns regarding children’s use and potential overuse of the <i>Webkinz</i> toys.</li>
+  <li>Some parents have voiced concerns about the website’s <a href="https://en.wikipedia.org/wiki/Online_chat">online chat</a> system.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> The chat systems, known as <i>KinzChat</i> and <i>KinzChat Plus,</i> respectively, have various safety precautions; these include placing restrictions on who can send messages, disallowing users to type numbers or certain words, and banning certain users from speaking (KinzChat Plus), and opting for a “safe-chat” system wherein users can only post pre-written phrases from a list (regular KinzChat).</li>
+  <li>Some schools have expressed concern about the toys becoming a distraction from education. This has occasionally resulted in <i>Webkinz</i> being banned from school grounds. However, Webkinz World also features several educational games, including jigsaw puzzles, critical thinking games, word games, and trivia about the real world.</li>
+  <li>Some users had voiced criticism when the once advertisement-free site began displaying advertisements, previously only for their additional game-related products, but now also for movies, such as <i><a href="https://en.wikipedia.org/wiki/Alvin_and_the_Chipmunks_(film)">Alvin and the Chipmunks</a></i> and <i><a href="https://en.wikipedia.org/wiki/Bee_Movie">Bee Movie</a></i>. Due to this, an option for members to block advertisements promoting content that is not sponsored by or affiliated with Webkinz or Ganz had been created. However, if enabled, this option could not be changed until 30 days had passed. <sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></li>
+  <li>In 2007, rumors spread about a character that would kill Webkinz on the site, supposedly inserted by a disgruntled employee or a rival site. These claims were proven false.</li>
+  <li>Users criticized the platform's technical issues and glitches, particularly during periods of high traffic. Users have also reported slow loading times, unexpected logouts, and missing items, leading to frustration among both players and parents.</li>
+</ul>
+
+<h3>2020 data breach</h3>
+
+<p>In April 2020, a hacker gained access to the login information of almost 23 million players, which was later leaked. As a response to this, Ganz later strengthened their encryption and required all Webkinz users to reset their passwords.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

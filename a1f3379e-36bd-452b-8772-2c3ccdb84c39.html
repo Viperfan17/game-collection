@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Five Nights at Freddy&#39;s: World</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('a1f3379e-36bd-452b-8772-2c3ccdb84c39/7deeb56d-6811-4da1-ace1-730d2a09e29c.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="a1f3379e-36bd-452b-8772-2c3ccdb84c39/e4277952-ad84-46de-aa3c-d0e257e7e53f"/> Five Nights at Freddy&#39;s: World</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="a1f3379e-36bd-452b-8772-2c3ccdb84c39/4123bc7c-aae6-48e6-ab33-215c2647a852.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 2:51:33</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 4:27:07</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-1/21/2016">1/21/2016</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-RPG">RPG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Scott Cawthon">Scott Cawthon</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Scott Cawthon">Scott Cawthon</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/FNaF_World" target="_blank">PCGamingWiki</a><br/><a href="http://fnafworld.com/" target="_blank">Official site</a><br/><a href="https://steamdb.info/app/427920/" target="_blank">SteamDB</a><br/><a href="http://en.wikipedia.org/wiki/Five_Nights_at_Freddy%27s_(series)#FNaF_World" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Bird's-eye view">Bird's-eye view</a><br/><a href="#quicklink-Cartoon">Cartoon</a><br/><a href="#quicklink-Clickteam Fusion 2.5">Clickteam Fusion 2.5</a><br/><a href="#quicklink-Naval/watercraft">Naval/watercraft</a><br/><a href="#quicklink-Pre-rendered graphics">Pre-rendered graphics</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Side view">Side view</a><br/><a href="#quicklink-Turn-Based">Turn-Based</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>FNaF World</b></i> (<a href="https://en.wikipedia.org/wiki/Help:IPA/English">/fəˈnæf/</a> <a href="https://en.wikipedia.org/wiki/Help:Pronunciation_respelling_key"><i>fə-NAF</i></a>) is a 2016 <a href="https://en.wikipedia.org/wiki/Indie_game">indie</a> <a href="https://en.wikipedia.org/wiki/Adventure_game">adventure</a> <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing</a> video game created by <a href="https://en.wikipedia.org/wiki/Scott_Cawthon">Scott Cawthon</a>. It is the first official <a href="https://en.wikipedia.org/wiki/Spin-off_(media)">spin-off</a> to the <i><a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy's">Five Nights at Freddy's</a></i> series and the fifth game overall. The game was initially released for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> via <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> on January 21, 2016, and for <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a> on January 12, 2017, but has since been taken down from those two platforms and re-released as <a href="https://en.wikipedia.org/wiki/Freeware">freeware</a> on <a href="https://en.wikipedia.org/wiki/Game_Jolt">Game Jolt</a>.</p>
+
+<p>The original Steam release was met with negative reviews and backlash because of the game's unfinished state and technical issues, leading Cawthon to temporarily remove it from the platform in order to address these issues. An updated version of the game was released on February 8, 2016, on <a href="https://en.wikipedia.org/wiki/Game_Jolt">Game Jolt</a> free of charge. It was later re-released on Steam, but removed again in 2017, this time permanently. Ultimately, the game received mixed reviews and is considered to be the weakest title in the series, despite it gaining a small <a href="https://en.wikipedia.org/wiki/Cult_following">cult following</a> in the years following its release.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>FNaF World</i> is a role-playing game featuring two modes: Adventure and Fixed Party. It also has two difficulty levels to choose from, Normal and Hard. The player starts by choosing two parties consisting of four characters each. The starter characters can all be swapped in and out of the party. As the player continues, they collect more characters to place in their party, with there being 40 characters available in total from across the first four games. Along the way, a character known as Fredbear will give the player tips on what to do next. These tips frequently <a href="https://en.wikipedia.org/wiki/Break_the_fourth_wall">break the fourth wall</a> due to Fredbear's seeming awareness of the situation he is placed in.</p>
+
+<p>The gameplay consists of exploring the game world and accessing new areas. Once new areas are revealed and a special button is pressed in them, the player can teleport between each area through an overworld map. Many enemy characters can be found throughout the game, each exclusive to their own area, which can be battled with. Upon defeating an enemy, the player will gain <a href="https://en.wikipedia.org/wiki/Experience_point">experience points</a> and "Faz Tokens", which are used to buy upgrades such as "bytes" to aid the player during the game.</p>
+
+<p>The battles consist of <a href="https://en.wikipedia.org/wiki/Turns,_rounds_and_time-keeping_systems_in_games">turn-based</a> <a href="https://en.wikipedia.org/wiki/Random_encounter">random encounters</a>, with several <a href="https://en.wikipedia.org/wiki/Boss_(video_gaming)">boss battles</a>. For each turn, the player is given choices for each character and must choose one of their three commands, which differ depending on the characters. The commands have different color tags and have different impacts, including healing the team (pink), providing status buffs (white), single-target attacks (orange), area attacks (red), poisonous attacks (green), and possible instant-kill attacks (black), among others. Once a turn is used, the player has to wait for some time until the next turn begins. The player can also swap the current party with the reserve at any time. After each battle, all characters, including those who may have been knocked out, are restored to full health.</p>
+
+<h2>Development</h2>
+
+<p><i>FNaF World</i> was first announced on September 15, 2015, in a <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> post by Cawthon. Later, a trailer was uploaded to <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a>. The announcement was considered to be a hoax due to similar <a href="https://en.wikipedia.org/wiki/Public_relations">PR</a> actions taken by Cawthon, however, it was not disproven until its release. Cawthon noted that the game is a spin-off, considering the main plotline of <i><a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy's_(series)">Five Nights at Freddy's</a></i> completed with the fourth game. Originally planned for release on February 2, 2016, Cawthon later changed the date to January 22, 2016, only to end up releasing the game one day earlier, on January 21, via Steam.</p>
+
+<p>Upon release, the game received very strong criticism for missing key features and its unstable and generally unfinished state, which Cawthon later apologized for, stating that "[he] got too eager to show the things that were finished, that [he] neglected to pay attention to the things that weren't." He agreed with the community that he had rushed the release, and that the game's rough state was unacceptable. Cawthon stated that he would be working hard to get the game in order, but this eventually led to Cawthon temporarily taking the game off Steam, offering refunds to everyone who bought it. It was later announced that, once the game would be patched further, it would be released as <a href="https://en.wikipedia.org/wiki/Freeware">freeware</a>, first to <a href="https://en.wikipedia.org/wiki/Game_Jolt">Game Jolt</a>, and stay free from that point on. The Game Jolt version was released on February 8, 2016, and includes a new overworld and other features absent from the original release.</p>
+
+<p>On May 13, 2016, a second update to <i>FNaF World</i> was released, featuring new characters and a new map, as well as <a href="https://en.wikipedia.org/wiki/Voice_acting">voice acting</a>.</p>
+
+<p>On January 12, 2017, <i>FNaF World</i> was released on Android, but was removed the next day. On January 31, 2017, Cawthon dispelled any rumors of the highly speculated "Update 3", saying that no further updates will be made to the game. He expressed his dissatisfaction of the game, stating that most mistakes in development were made "very early", and that attempting to better the game would "be remaking the game from scratch". He later removed the game from Steam.</p>
+
+<p>In a 2018 interview, Cawthon revealed that after making the first <i>Five Nights at Freddy's</i> games that were horror in nature, he wanted to do something lighthearted with <i>FNaF World.</i> It was originally designed to be a mobile game but halfway into development, it became a PC game, which was something Cawthon later regretted. In hindsight, he felt the game should have been developed in later years as he felt it disrupted the series' canon and fans' expectations at the time. He described <i>FNaF World</i> as the least profitable game he has ever made and as such, it served as the "gemstone" of quality control to the franchise. Despite the major setback, Cawthon was grateful for the fanbase it had created.</p>
+
+<h2>Reception</h2>
+
+<p><i>FNaF World</i> had a generally mixed reception among critics and fans of the series, with many <a href="https://en.wikipedia.org/wiki/YouTuber">YouTubers</a> responsible for launching <i>Five Nights at Freddy's</i> to mainstream popularity expressing their disappointment with the game. <a href="https://en.wikipedia.org/wiki/Markiplier">Markiplier</a>, often regarded as one of the most popular and influential content creators to have covered the series, opted not to play <i>FNaF World</i>, likely influencing how many players responded to the spin-off. However, Angelo M. D'Argenio from <i><a href="https://en.wikipedia.org/wiki/The_Escapist_(magazine)">The Escapist</a></i> gave the game a decent review, stating that "<i>Five Nights at Freddy's World</i> is a retro parody <a href="https://en.wikipedia.org/wiki/JRPG">JRPG</a> that feels incomplete now, but is steadily getting better as patches come out", ultimately giving it a score of 3 out of 5 stars. The game ultimately failed to reach the level of success that other <i>Five Nights at Freddy's</i> titles did.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

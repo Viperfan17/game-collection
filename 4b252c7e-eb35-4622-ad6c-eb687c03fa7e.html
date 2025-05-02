@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sports Champions</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('4b252c7e-eb35-4622-ad6c-eb687c03fa7e/c9fabd26-198c-4e0a-b222-af67f8cd5659.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="4b252c7e-eb35-4622-ad6c-eb687c03fa7e/baf2ccfd-1114-405f-914d-5026480bbaf9.ico"/> Sports Champions</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="4b252c7e-eb35-4622-ad6c-eb687c03fa7e/84a2b9c0-0b5c-4dbb-bf94-f09a4c9f0091.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-7/15/2013">7/15/2013</a> 21:21:55</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 6:00:16</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:55:13</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-PlayStation">PlayStation</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-PlayStation">PlayStation</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-9/15/2010">9/15/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-76">76</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Sports">Sports</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-San Diego Studio">San Diego Studio</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Zindagi Games">Zindagi Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Sony Computer Entertainment">Sony Computer Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Sports_Champions" target="_blank">Wikipedia</a><br/><a href="https://www.mobygames.com/game/48315/sports-champions/" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] designer: Greg Wondra">[People] designer: Greg Wondra</a><br/><a href="#quicklink-[People] designer: Sean Levantino">[People] designer: Sean Levantino</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Sports Champions</b></i> is a 2010 <a href="https://en.wikipedia.org/wiki/Sports_game">sports</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/San_Diego_Studio">San Diego Studio</a> and Zindagi Games and published by <a href="https://en.wikipedia.org/wiki/Sony_Interactive_Entertainment">Sony Computer Entertainment</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>. It utilizes the <a href="https://en.wikipedia.org/wiki/PlayStation_Move">PlayStation Move</a> controller. The game is a collection of modern and medieval sports minigames. It was officially unveiled at the 2010 <a href="https://en.wikipedia.org/wiki/Game_Developers_Conference">Game Developers Conference</a> in <a href="https://en.wikipedia.org/wiki/San_Francisco">San Francisco</a> as a launch game for the PlayStation Move which would be bundled with the controller in several regions.</p>
+
+<h2>Gameplay</h2>
+
+<p>The game involves the player taking part in six unique <a href="https://en.wikipedia.org/wiki/Sports_game">sports games</a>. However unlike <i><a href="https://en.wikipedia.org/wiki/Wii_Sports">Wii Sports</a></i>, a similar collection of sports games for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, the game consists of a series of modern as well as medieval sports. The game deviates from the norm by including uncommon sports such as <a href="https://en.wikipedia.org/wiki/Disc_Golf">Disc Golf</a> and <a href="https://en.wikipedia.org/wiki/Bocce">Bocce</a>.</p>
+
+<p>Unlike <i><a href="https://en.wikipedia.org/wiki/Wii_Sports">Wii Sports</a></i>, <i><a href="https://en.wikipedia.org/wiki/Wii_Sports_Resort">Wii Sports Resort</a></i> and <i><a href="https://en.wikipedia.org/wiki/Kinect_Sports">Kinect Sports</a></i>, players can't make their own <a href="https://en.wikipedia.org/wiki/Avatar_(computing)">avatar</a>. Players can choose to participate as one of ten athletes in the various events. The game features three gameplay modes, Free Play, Challenge Mode and Champion Cup mode. In Free Play mode, players can play practice matches with their choice of gameplay options. Challenge mode allows players to compete in a series of events to increase their high scores. In Champion Cup mode, players compete against ten other athletes in an <a href="https://en.wikipedia.org/wiki/Olympic_Games">Olympic-like</a> event to become the ultimate champion. Players can also take part in the various modes along with up to three other friends in the game's multiplayer mode.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<h3>Sports</h3>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Table_tennis">Table tennis</a></li>
+</ul>
+
+<p>In Table Tennis, players use a Move controller accurately as a paddle which allows players to volley very precisely, perform heavy spins, lobs and slams. The <a href="https://en.wikipedia.org/wiki/PlayStation_Eye">PlayStation Eye</a> also monitors the player's body location to see how the player is positioned to adjust their character's orientation as well as position from the table. The precision of the Move also allows players to serve slices and spins accurately.</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Beach_Volleyball">Beach Volleyball</a></li>
+</ul>
+
+<p>With this sport, the player has no direct control over where the on screen character starts the match or stands. Instead of focusing on the placement of the character, the player is meant to concentrate on bumping, setting and spiking the ball. All of these three motions are not complicated, but the key to playing this game is timing. A coloured circle appears around the ball when it is coming to the player, and the size and colour of it lets the player know when it is best to make a motion and deliver a strike. This game is playable with both one or two Move controllers. It has Tatupu's beach volleyball medal gold, silver and bronze.</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Gladiator">Gladiator</a> Duel</li>
+</ul>
+
+<p>This sport allows players to use one or two Move controllers. When using two controllers, one controls a weapon such as a giant <a href="https://en.wikipedia.org/wiki/Mallet">Mallet</a>, or various swords like a <a href="https://en.wikipedia.org/wiki/Short_sword">short sword</a>, or a <a href="https://en.wikipedia.org/wiki/Katana">katana</a> and the other controls a <a href="https://en.wikipedia.org/wiki/Buckler">Buckler</a> which resembles a <a href="https://en.wikipedia.org/wiki/Shield">shield</a> that becomes smaller when the opponent hits  it. When using one controller the T button is used to present the buckler. Players can fill up a power meter to unleash a three-hit combo on their opponent. Other controls include players putting their hands on their hips to taunt the enemy as well as holding down the trigger and swinging the controller up to jump. The game will feature a wide array of enemies as well as a large assortment of unlockable weapons including some unusually strange weapons.</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Disc_golf">Disc golf</a></li>
+</ul>
+
+<p>In this game the player's objective is to throw a <a href="https://en.wikipedia.org/wiki/Frisbee">Frisbee</a> down a <a href="https://en.wikipedia.org/wiki/Golf">golf</a>-like course and try to get their Frisbee into the bucket before the opponent does. The Move detects the angle of the Frisbee, the power of the throw and the snap of the release, making it a very realistic experience.</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Bocce">Bocce</a></li>
+</ul>
+
+<p>In Bocce, two people take turns throwing wooden balls at a similar looking, albeit smaller wooden ball located down the field from the players. The person who gets their ball(s) closer to the smaller ball wins the point (or, if they have multiple balls that are the closest to the smaller ball, they can win multiple points). The player can also hit an opponent's ball so it rolls in any given direction, either further away or closer to the target ball. The Move detects the weight, spin and release of each throw, and then translates that into the direction and movement of the ball.</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Archery">Archery</a></li>
+</ul>
+
+<p>This is another sport in the game that allows a player to use either one or two Move controllers. When using two, the player hold one Move controller as if it were a bow, and the other as if it were an arrow. The player must reach back behind them and press and hold the T button to pull an arrow out of their quiver, nock the arrow by putting the two Move controllers next to each other, pull back with the Move that is controlling the arrow, and finally once the player has the desired tension, they must release the T button to fire the arrow. Depending on how far back you pull the arrow; the further it goes. When using one controller you reach back the same way, but to knock you simply point the Move controller straight out towards the screen.</p>
+
+<h2>Sequel</h2>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Sports_Champions_2">Sports Champions 2</a></i> was announced on May 31, 2012 on <i>PlayStation Blog</i> by a trailer. The trailer included <a href="https://en.wikipedia.org/wiki/Skiing">skiing</a>, <a href="https://en.wikipedia.org/wiki/Boxing">boxing</a> and many more sports for the user to play.</p>
+
+<h2>Reception</h2>
+
+<p>The game received "generally favorable reviews" according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregation</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. In Japan, where the game was ported for release on October 21, 2010, <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave it a score of 31 out of 40.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Joystiq">Joystiq</a></i> said: "<i>Sports Champions</i> is a great pack-in for Move and well worth buying on its own if you go the a la carte route with the hardware." <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> said: "Despite some missteps, <i>Sports Champions</i> is a solid offering for gamers, provided you can accept the shallow nature of a compilation such as this." <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> said: "<i>Sports Champions</i> is fun, but it's rough around the edges. The gameplay is solid for the most part and will provide you with some good times." <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> said: "<i>Sports Champions</i> is undoubtedly one of the strongest launch offerings for the PlayStation Move hardware. This isn't a game that you're likely to play solo for any serious amount of time, but it's certainly one that you'll keep coming back to in short bursts and anytime you have interested friends or relatives visiting."</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

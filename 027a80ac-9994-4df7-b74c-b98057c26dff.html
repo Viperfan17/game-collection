@@ -1,0 +1,380 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Skylanders: Spyro&#39;s Adventure</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('027a80ac-9994-4df7-b74c-b98057c26dff/cdfd549d-c358-4914-8da7-e9736601459c.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="027a80ac-9994-4df7-b74c-b98057c26dff/e65b26e4-4ef5-4028-8a0c-d6a4ce55ce2f.ico"/> Skylanders: Spyro&#39;s Adventure</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="027a80ac-9994-4df7-b74c-b98057c26dff/5b618a95-a157-4036-bc09-0890cd54a577.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/27/2025">4/27/2025</a> 10:06:45</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 9:13:22</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/12/2011">10/12/2011</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-69">69</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-82">82</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Brawler">Brawler</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Toys for Bob">Toys for Bob</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-TransGaming">TransGaming</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-XPEC Entertainment">XPEC Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Skylanders:_Spyro's_Adventure" target="_blank">PCGamingWiki</a><br/><a href="https://www.skylanders.com/video-games/skylanders-spyros-adventure" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=8622" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/skylanders-spyro-s-adventure" target="_blank">IGDB</a><br/><a href="http://strategywiki.org/wiki/Skylanders:_Spyro%27s_Adventure" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/skylanders-spyros-adventure" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Skylanders:_Spyro%27s_Adventure" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Lux Engine">Lux Engine</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Third Person">Third Person</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Skylanders: Spyro's Adventure</b></i> is a 2011 <a href="https://en.wikipedia.org/wiki/Toys-to-life">toys-to-life</a> <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing game</a> and the first video game in the <i><a href="https://en.wikipedia.org/wiki/Skylanders">Skylanders</a></i> series. It is played using with toy figures that interact with it through a "Portal of Power" that reads their tag through <a href="https://en.wikipedia.org/wiki/Near_field_communication">NFC</a>.</p>
+
+<p>It was released in October 2011 for North America, Europe, and Australia for <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> and PC/<a href="https://en.wikipedia.org/wiki/Windows">Windows</a>.</p>
+
+<p>Activision announced that as of June 3, 2012, the game had been the top-selling console and handheld video game worldwide for 2012. As of March 31, 2012, <a href="https://en.wikipedia.org/wiki/Activision">Activision</a> has sold over 30 million <i>Skylanders</i> toys, and sales were expected to exceed $500 million by the end of the year. A direct sequel, <i><a href="https://en.wikipedia.org/wiki/Skylanders:_Giants">Skylanders: Giants</a></i>, was released in 2012 for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> and <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>.</p>
+
+<h2>Version differences</h2>
+
+<p>The game was originally developed by <a href="https://en.wikipedia.org/wiki/Toys_for_Bob">Toys for Bob</a> for the Nintendo Wii, PlayStation 3 and Xbox 360 which feature some notable differences, including:</p>
+
+<ul>
+  <li>Many motion-controlled activities were reassigned to button inputs for specific actions.</li>
+  <li>The Wii version allows players to skip most of the game's cutscenes and dialogue, but the HD versions require the player to go through most cutscenes and dialogue.</li>
+  <li>On the Wii version, the character portraits used in dialogue have stylistic 2D artwork and use a transparent text box, while the HD versions use 3D character models and a solid black text box.</li>
+  <li>The rune icons in the story scroll menu are different.</li>
+  <li>The HD versions have different collision mechanics with abilities like Hex's Wall of Bones, which can be used to lift partner Skylanders in co-op mode and bypass obstacles.</li>
+  <li>The final level has a different layout halfway through, and the final boss is easier.</li>
+</ul>
+
+<p>The Wii and PlayStation 3 versions of <i>Spyro's Adventure</i> feature a wireless portal that uses AA batteries and includes a USB wireless connector. The Xbox 360 version of <i>Spyro's Adventure</i> features a different wired portal that is incompatible with the other version due to Microsoft's restrictions.</p>
+
+<h3>3DS version</h3>
+
+<p>The 3DS version of <i>Skylanders: Spyro's Adventure</i>, developed by Vicarious Visions includes a smaller portal with an infrared reader powered by AAA batteries that connects to a 3DS system, and equipped with a USB port that can be used for the console versions of the game. Instead of having to keep the Skylanders on the portal at all times, two Skylanders are "loaded" into the game, and the player can alternate between them until a new Skylander is loaded to replace them. The storyline in this version is different, and the set of non-playable characters is altered, with the exception of Eon. Additionally, the three Skylanders included in the starter pack are 'Ignitor', 'Stealth Elf', and 'Dark Spyro', a cosmetic variant of Spyro.</p>
+
+<p>This version is an action platformer in which players complete levels by collecting crystals to unlock more content. Each level is filled with crystals, which are earned by reaching the end of the level or fulfilling various tasks, such as defeating enemies or finding items. When a player collects a crystal, they trigger an enemy encounter with a time limit, during which they must defeat enemies and find clocks in the level to extend their time and avoid being caught by the chasing enemy. Notably, characters can make single and double jumps. The game is set in the Radiant Isles, a distinct realm in Skylands, where players face a different force of darkness led by Hektore. This version lacks co-op functionality.</p>
+
+<h2>Synopsis</h2>
+
+<p>Players take on the role of a Portal Master who controls 32 different Skylanders, including <a href="https://en.wikipedia.org/wiki/Spyro_(character)">Spyro</a>, by placing their figurines on the <i>Portal of Power</i>. These heroes are the protectors of the realm of Skylands, but after the Dark Portal Master Kaos ejected them from their world to Earth, they were frozen and transformed into toys. Due to the lack of magic in the human world, they are petrified and only the players can return them to their world. Once back in their home world, the Skylanders embark on a journey to defeat Kaos and save their world.</p>
+
+<h3>Characters</h3>
+
+<p>There are 32 standard characters and 8 different elements under which they are classified. The 8 elements are Magic, Water, Tech, Fire, Earth, Life, Air, and Undead, with four Skylanders for each element<i>.</i> Characters appear in the game by placing <i>a</i> character's figurine on the "Portal of Power". The "Starter Pack" has three characters to start with – <a href="https://en.wikipedia.org/wiki/Spyro_(character)">Spyro</a>, Trigger Happy, and Gill Grunt. Each character has different stats in areas such as health and speed, which can be affected by hats found throughout the game world. Special Elemental Gates require a Skylander with the corresponding element to pass through. With two players, only one player needs to be controlling a Skylander of the correct element.</p>
+
+<p>In addition to the standard character figures, there are also limited edition Gold, Silver, Crystal, Chrome, and Glow-in-the-Dark versions of certain characters these are referred to as "chase variants".</p>
+
+<p>The game begins with a village in Skylands being ravaged by a massive tornado and the player sending down a Skylander to save the villagers as Hugo mentions the destruction of the Core of Light and an individual named Master Eon.</p>
+
+<p>The player is then introduced to the Ruins, and it is explained that the Portal Masters and the Skylanders have worked to protect Skylands from The Darkness, with Master Eon and his Skylanders guarding the Core of Light, which repelled The Darkness. However, Kaos, a Dark Portal Master who previously attempted to destroy the Core of Light, returned from his banishment in the Outlands to destroy the Core and rule over Skylands. The Skylanders fought to protect the Core of Light, but Kaos unleashed a mysterious creature that destroyed the Core. In the aftermath, Eon became a spirit and the Skylanders, including <a href="https://en.wikipedia.org/wiki/Spyro_(character)">Spyro</a>, were banished from their world to Earth, where they were turned into a toy-like state as a result of it lacking magic. Though Master Eon survived the Core's destruction, he was unable to fight Kaos and the Darkness as a spirit. He and the Skylanders then awaited the arrival of a new Portal Master until the player arrived.</p>
+
+<p>To restore the Core of Light, the player must bring back the Eternal Source of each of the eight elements, which power the Core, as well as their corresponding artifacts, which make up the Core's form and inner workings. Despite Kaos' best efforts to stop the Skylanders, the Core of Light is restored. Humiliated and weakened, Kaos and his assistant Glumshanks retreat to the Outlands, Skylands' most desolate area. The player and the Skylanders journey to Kaos' Fortress for the final battle against him, his dark Skylanders and the <a href="https://en.wikipedia.org/wiki/Lernaean_Hydra">Hydra</a>, who was responsible for the Core of Light's destruction.</p>
+
+<p>Kaos is ultimately defeated, and Eon informs him that he is being banished not to the Outlands, but to Earth. Hugo sends Kaos to Earth, where he becomes a petrified figure like the Skylanders were.</p>
+
+<h2>Development</h2>
+
+<p>Toys for Bob was given the opportunity to revive a <a href="https://en.wikipedia.org/wiki/Vivendi">Vivendi</a> franchise, and they chose the <a href="https://en.wikipedia.org/wiki/Spyro"><i>Spyro the Dragon</i> franchise</a>. <a href="https://en.wikipedia.org/wiki/Paul_Reiche_III">Paul Reiche III</a> noted that "attempts to revive broad-audience mascot franchises haven't seen predictable success in the game industry. Just creating a new Spyro game after the traditional fashion was unlikely to work" and reinventing the character as a "really gritty, strange otherworldly Spyro" didn't seem like a promising idea. Reiche says he had considered integrating technology with toys and games for a while, and it was the kind of concept that was so outlandish that it was the most promising idea the team sketched out for the brand.</p>
+
+<p>The game's original working title was <i>Spyro's Kingdom</i>, which was a mature Spyro game with a much darker tone. However, the developers of Toys for Bob felt that this direction did not feel like "Spyro". They spent six months working on various directions the game could take with the time and budget Activision gave them.</p>
+
+<p>Executive producer Jeff Poffenbarger stated that the game is geared more towards younger gamers who have no prior knowledge of Spyro.</p>
+
+<p>The base of each toy contains an <a href="https://en.wikipedia.org/wiki/RFID">RFID</a> chip which communicates wirelessly with the portal when in near proximity to inform the game which toy is currently active. The RFID chip also retains several key stats including gold, level and upgrades purchased and won through gameplay and "Heroic Challenges" completed. Due to the use of RFID, the toys are portable between supported platforms while retaining their stats, allowing players to use their characters in other player's copy of the game with all upgrades. Additionally, two figures can be placed on the portal simultaneously, for cooperative or versus play.</p>
+
+<p>The game's original score was written primarily by <a href="https://en.wikipedia.org/wiki/Lorne_Balfe">Lorne Balfe</a>, with some additional compositions by Andrew Kawczynski and Pete Adams. The main theme was written by <a href="https://en.wikipedia.org/wiki/Hans_Zimmer">Hans Zimmer</a>.</p>
+
+<p>The game's main story was penned by <a href="https://en.wikipedia.org/wiki/Alec_Sokolow">Alec Sokolow</a> and <a href="https://en.wikipedia.org/wiki/Joel_Cohen_(writer)">Joel Cohen</a>, both of whom worked on <i><a href="https://en.wikipedia.org/wiki/Toy_Story">Toy Story</a></i>. The game was originally revealed to be exclusive for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, and was intended to be released in 2010. While the game was delayed, this allowed the developers to add features such as saving data to the toys, more polished content and story, and ports to additional platforms. As a result, the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/MacOS">MacOS</a>, and <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Windows</a> ports run on different engines than the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> version.</p>
+
+<p>According to Sterne Agee analyst Arvind Bathia, <i>Skylanders: Spyro's Adventure</i> "is testing apparently very well with kids", who are the game's target audience.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Nickelodeon_(Europe)">Nickelodeon of Europe</a> and Activision worked together to help sponsor a tour called Skylanders: Spyro's Adventure Live to help promote the game, ranging from September 10–11 at Liverpool, Williamson Square to September 17–18 at London, Westfield Stratford.</p>
+
+<p>In Japan, the game's release was handled by <a href='https://en.wikipedia.org/wiki/Toys_"R"_Us'>Toys "R" Us</a> and <a href="https://en.wikipedia.org/wiki/Square_Enix">Square Enix</a> and was released for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>. Rather than an Xbox 360 release, Japan received a unique <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> port which was released on July 12, 2013, nearly two years after its release in the western regions. This made <i>Skylanders</i> the first <i>Spyro</i> game to be released in Japan in almost 10 years since <i><a href="https://en.wikipedia.org/wiki/Crash_Bandicoot_Purple:_Ripto's_Rampage_and_Spyro_Orange:_The_Cortex_Conspiracy">Spyro Orange: The Cortex Conspiracy</a></i>.</p>
+
+<h2>Reception</h2>
+
+<p><i>Skylanders: Spyro's Adventure</i> received "generally favorable" reviews according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> gave it a 7.5 out of 10, praising its family-friendly gameplay and role-playing-style character progression, but criticized the lack of online multiplayer, the cost of buying a complete set of figures, the arbitrary inclusion of Spyro, and the unreliability of the Portal of Power peripheral. <i>Nintendo World Report</i> gave the game a 9 out of 10, praising the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> version for its gameplay and production values, and the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> version for its accessibility to younger gamers and overall design.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i> gave the game an 8 out of 10 saying, "It's not the most complex game on the market, but the innovative gadgetry and authentic thoughtfulness on the part of the developer stands out in a market so used to churning out the same old crap." <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> gave Skylanders an 8 out of 10. Skylanders was nominated for two Toy Industry Association awards: 'Game of the Year' and 'Innovative Toy of the Year'.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Giant_Bomb">Giant Bomb</a></i> reviewer <a href="https://en.wikipedia.org/wiki/Jeff_Gerstmann">Jeff Gerstmann</a> gave the game four out of five stars, stating "<i>Skylanders</i> is probably aimed at kids, but whatever. I am a legal adult...and I think it's still pretty cool."</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/15th_Annual_Interactive_Achievement_Awards">15th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> awarded <i>Skylanders</i> with "Outstanding Innovation in Gaming", along with nominations for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Family_Game_of_the_Year">Family Game of the Year</a>" and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Technical_Achievement">Outstanding Achievement in Gameplay Engineering</a>".</p>
+
+<h2>Sales</h2>
+
+<p>During the first quarter of 2012, <i>Skylanders</i> was the third most profitable game in North America and Europe, including sales of accessories and figures. According to Activision's internal estimates, sales of <i>Skylanders</i> toys exceeded those of the number one action figure line at the time, <i><a href="https://en.wikipedia.org/wiki/Star_Wars">Star Wars</a></i>.</p>
+
+<p>Over 30,000,000 <i>Skylanders</i> toys have been sold worldwide. Toy sales from the first game were twice to 3 times higher than Activision had originally expected, prompting the making of a sequel.</p>
+
+<p>As of December 2012, the <i>Skylanders</i> franchise sold more than $500 million in retail sales in the U.S., inclusive of accessory packs and figures. In 2012 alone, Skylanders: Giants, the sequel to Skylanders: Spyro's Adventure—the #1 best-selling kids' game of 2011—generated more than $195,000,000 in U.S. sales.</p>
+
+<h2>Sequels and other media</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Activision">Activision</a> announced a sequel, <i><a href="https://en.wikipedia.org/wiki/Skylanders:_Giants">Skylanders: Giants</a></i>, which was released in October 2012. A web game called <i>Skylanders: Universe</i> was created as well but was discontinued on 29 April 2013. A second sequel, <i><a href="https://en.wikipedia.org/wiki/Skylanders:_Swap_Force">Skylanders: Swap Force</a></i>, was released in October 2013. A third sequel, <i><a href="https://en.wikipedia.org/wiki/Skylanders:_Trap_Team">Skylanders: Trap Team</a></i>, was released in October 2014. A fourth sequel, <i><a href="https://en.wikipedia.org/wiki/Skylanders:_SuperChargers">Skylanders: SuperChargers</a></i> was released in September 2015. A fifth sequel, <i><a href="https://en.wikipedia.org/wiki/Skylanders:_Imaginators">Skylanders: Imaginators</a></i> was released in October 2016.</p>
+
+<p>On May 3, 2012, <i>Skylanders: The Machine of Doom</i>, a novel serving as a <a href="https://en.wikipedia.org/wiki/Prequel">prequel</a> to the first <i>Skylanders</i> game, was released on <a href="https://en.wikipedia.org/wiki/EBook">eBook</a> applications. It was written by <a href="https://en.wikipedia.org/wiki/Cavan_Scott">Cavan Scott</a> under the <a href="https://en.wikipedia.org/wiki/Pen_name">pen name</a> "Onk Beakman". Later novel adaptions under the <i>Skylanders: Mask of Power</i> series were written following a year after the first book's release; they are set after the events of <i>The Machine of Doom</i> and are also <a href="https://en.wikipedia.org/wiki/Prequel">prequels</a> to the first <i>Skylanders</i> game. The eighth and final book in the <i>Mask of Power</i> series was released on May 3, 2016.</p>
+
+<p>A comic series created by <a href="https://en.wikipedia.org/wiki/IDW_Publishing">IDW Publishing</a> is associated with the <i>Skylanders</i> franchise, and takes place in between the games starting with <i>Skylanders: Trap Team</i>.</p>
+
+<p>Activison had commented on the possibility of a <i>Skylanders</i> movie and TV series as something that they could look into in the future. While Activision confirmed on May 30, 2013, that there were no plans for a Skylanders movie adaption or a TV series, on November 6, 2015, they announced the opening of Activision Blizzard Studios, who are in the process of developing <i>Skylanders</i> into a film and television series; the latter being called <i><a href="https://en.wikipedia.org/wiki/Skylanders_Academy">Skylanders Academy</a></i>, which was released on <a href="https://en.wikipedia.org/wiki/Netflix">Netflix</a> on October 28, 2016.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

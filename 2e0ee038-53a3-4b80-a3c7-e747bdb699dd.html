@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Kinect Sports</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('2e0ee038-53a3-4b80-a3c7-e747bdb699dd/a4eae887-d464-4121-a3b9-aacab0bfe34a.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="2e0ee038-53a3-4b80-a3c7-e747bdb699dd/d4e20bd0-2729-4b1e-9f18-c2f32d01f0cf.png"/> Kinect Sports</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="2e0ee038-53a3-4b80-a3c7-e747bdb699dd/ecf250e6-f770-4834-9a09-38f8db52ecae.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-4/28/2014">4/28/2014</a> 19:38:03</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 7:53:26</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/4/2010">11/4/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-66">66</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-73">73</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Sports">Sports</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Rare">Rare</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Microsoft Game Studios">Microsoft Game Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Kinect_Sports" target="_blank">Wikipedia</a><br/><a href="https://marketplace.xbox.com/en-GB/Product/Kinect-Sports/66acd000-77fe-1000-9115-d8024d5308c9" target="_blank">Kinect Sports at xbox.com</a><br/><a href="https://web.archive.org/web/20110427192233/http://www.rare.co.uk/games/kinect-sports" target="_blank">Kinect Sports at Rare</a><br/><a href="https://www.mobygames.com/game/49344/kinect-sports/" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] composer: David Clynick">[People] composer: David Clynick</a><br/><a href="#quicklink-[People] composer: Robin Beanland">[People] composer: Robin Beanland</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Kinect Sports</b></i> is a <a href="https://en.wikipedia.org/wiki/Sports_video_game">sports video game</a> developed by <a href="https://en.wikipedia.org/wiki/Rare_(company)">Rare</a> and published by <a href="https://en.wikipedia.org/wiki/Xbox_Game_Studios">Microsoft Game Studios</a> for the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. The game utilizes the <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> motion-sensing peripheral and was released in North America on 4 November 2010 as a launch title for <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a>, then, a few days later, in Europe and Australia.</p>
+
+<p>The game is a collection of six sports simulations and eight mini-games, designed to demonstrate the motion-sensing capabilities of Kinect. The six sports included are: <a href="https://en.wikipedia.org/wiki/Ten-pin_bowling">ten-pin bowling</a>, <a href="https://en.wikipedia.org/wiki/Boxing">boxing</a>, <a href="https://en.wikipedia.org/wiki/Track_and_field">track and field</a>, <a href="https://en.wikipedia.org/wiki/Table_tennis">table tennis</a>, <a href="https://en.wikipedia.org/wiki/Beach_volleyball">beach volleyball</a> and <a href="https://en.wikipedia.org/wiki/Association_football">association football</a> ("soccer" in North America). Standing in front of the Kinect sensor, players compete by mimicking actions performed in real-life sports, such as throwing a javelin or kicking a football.</p>
+
+<p>The game received generally positive reviews from critics and sold over three million units as of April 2011. A sequel to the game, <i><a href="https://en.wikipedia.org/wiki/Kinect_Sports:_Season_Two">Kinect Sports: Season Two</a></i>, developed by <a href="https://en.wikipedia.org/wiki/Rare_(company)">Rare</a> and <a href="https://en.wikipedia.org/wiki/BigPark">BigPark</a>, was released in October 2011. Along with its sequel, <i>Kinect Sports</i> has been released in the <i>Kinect Sports Ultimate Collection</i> bundle on 18 September 2012, with additional bonus content and extra sports in <i>Season Two</i> added, <a href="https://en.wikipedia.org/wiki/Basketball">basketball</a>, <a href="https://en.wikipedia.org/wiki/Golf">golf</a> and <a href="https://en.wikipedia.org/wiki/Skiing">skiing</a>. A third entry, <i><a href="https://en.wikipedia.org/wiki/Kinect_Sports_Rivals">Kinect Sports Rivals</a></i>, was released for the <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> in 2014.</p>
+
+<h2>Gameplay</h2>
+
+<p>All six of the events in <i>Kinect Sports</i> support multiplayer both locally and online, with a mixture of competitive and cooperative play options. In addition, players can also take part in eight sport-based mini games, or join in the Party Play mode designed to accommodate a larger number of players amassed in the same room, divided into two teams.</p>
+
+<p>Players are represented in-game by their Xbox 360 avatar. Using the <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> sensor, the player's physical gestures and body movements are tracked and translated into in-game actions without the need for a controller.</p>
+
+<p>At the end of each event, players are shown a video compilation of their 'best bits' captured by the <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> sensor. Clips can be uploaded to the KinectShare website where they can be downloaded, deleted or shared directly with <a href="https://en.wikipedia.org/wiki/Facebook">Facebook</a>.</p>
+
+<h3>Sports</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Bowling">Bowling</a> takes place at Neon Lanes. Players are required to reach to their left or right to take up a ball before swinging their arm forwards to bowl, exaggerating the arm motion to add spin if required. Single player, local multiplayer and online multiplayer game modes are available. Bowling mini games include One Bowl Roll, in which the player must clear as many pin setups as possible before running out of chances, and Pin Rush, where the player is challenged to knock over as many pins as possible within a time limit.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Boxing">Boxing</a> takes place at Tornado Gardens. Players are encouraged to use their left and right arms to punch and block, both at head and body height. Single player, local multiplayer and online multiplayer game modes are available. It is the only sport without any mini games.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Track_&amp;_Field">Track &amp; Field</a> is a collection of five separate events, all of which take place at Flame Stadium. The events are <a href="https://en.wikipedia.org/wiki/Sprint_(running)">Sprint</a>, <a href="https://en.wikipedia.org/wiki/Javelin">Javelin</a>, <a href="https://en.wikipedia.org/wiki/Long_Jump">Long Jump</a>, <a href="https://en.wikipedia.org/wiki/Discus">Discus</a> and <a href="https://en.wikipedia.org/wiki/Hurdles">Hurdles</a>. Each event can be played individually (within the Mini Games area) or collectively as a <a href="https://en.wikipedia.org/wiki/Pentathlon">pentathlon</a>. Players must jog on the spot to run, jump to clear hurdles or make a long jump, and perform the relevant arm motion to throw a javelin or discus. Single player, local multiplayer and online multiplayer game modes are available.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Table_Tennis">Table Tennis</a> takes place at the Blade Center. Players are required to reach to their left or right to pick up a paddle before serving, and can then incorporate topspin, backspin and smash shots. Single player, local multiplayer and online multiplayer game modes are available. Table Tennis mini games include Paddle Panic, in which the player must take up a paddle in each hand and return as many balls as possible within a fixed time limit, and Rally Tally, where the player is challenged to maintain a single rally for as long as possible.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Soccer">Soccer</a> takes place at Lotus Park. As an attacker, the player is required to kick the ball to pass or shoot. As a defender, the player is encouraged to move from side to side to block passes and use their full body to block shots. Single player, local multiplayer and online multiplayer game modes are available. Soccer mini games include Super Saver, which puts the player in goal trying to block the striker's shots, and Target Kick, in which the player must beat the goalkeeper and launch the ball at goal-based targets.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Beach_Volleyball">Beach Volleyball</a> takes place at Waveside. Players serve by making an upward throwing motion with one hand and then a swinging motion with the other. The ball is passed or returned using bump, set and spike motions. Single player, local multiplayer and online multiplayer game modes are available. Beach Volleyball mini games include Bump Bash, in which the player must avoid as many thrown objects as possible, and Body Ball, where the player is required to return the ball using a specific body part.</p>
+
+<p>On 14 December 2010, a free downloadable <a href="https://en.wikipedia.org/wiki/Samsung">Samsung</a>-sponsored 'Party Pack' was made available for the game. The pack included six new mini games (one per sport: King of the Ring, Rapid Runner, Super Striker, Target Smash, Fruit Splatter and Pinvaders), and three new Party Play mascots.</p>
+
+<p>On 26 April 2011, a 'Calorie Challenge' game add-on was released. It introduced the titular mode in which players compete in a series of events against food-themed mascots. Players are tasked with burning a specific number of calories within an allotted time limit to complete each challenge.</p>
+
+<h2>Development</h2>
+
+<p><i>Kinect Sports</i> was first previewed at the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2010">Electronic Entertainment Expo in June 2010</a>. It was also previewed at Microsoft's <a href="https://en.wikipedia.org/wiki/Cirque_du_Soleil">Cirque du Soleil</a> event and subsequently launched alongside the <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> peripheral in <a href="https://en.wikipedia.org/wiki/North_America">North America</a> on 4 November  2010, in <a href="https://en.wikipedia.org/wiki/Europe">Europe</a> on 10 November 2010, and in <a href="https://en.wikipedia.org/wiki/Australia">Australia</a> on 18 November 2010.</p>
+
+<p><i>Kinect Sports</i> features a front end and Party Play voiceover recorded by <a href="https://en.wikipedia.org/wiki/Peter_Dickson_(presenter)">Peter Dickson</a> and a number of licensed music tracks from artists including <a href="https://en.wikipedia.org/wiki/Queen_(band)">Queen</a>, <a href="https://en.wikipedia.org/wiki/Robbie_Williams">Robbie Williams</a>, <a href="https://en.wikipedia.org/wiki/MC_Hammer">MC Hammer</a> and <a href="https://en.wikipedia.org/wiki/Gwen_Stefani">Gwen Stefani</a>. Celebratory stings from these tracks are used throughout the game when players score a goal, achieve a strike, break a record or win an otherwise crucial point.</p>
+
+<p>On 11 November 2010, a <i>Kinect Sports</i> <a href="https://en.wikipedia.org/wiki/Facebook">Facebook</a> app was released which sorts times set in the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> game into online leagues. Co-developed by Rare and web agency Nzime, the Facebook app uses an <a href="https://en.wikipedia.org/wiki/Xbox_LIVE">Xbox LIVE</a> gamertag to compare results with friends and other players in <i>Kinect Sports</i>, join or create leagues and watch video performances uploaded from the game.</p>
+
+<p>On 23 April 2011, <i>Kinect Sports</i> players set a new <a href="https://en.wikipedia.org/wiki/Guinness_World_Records">Guinness World Record</a> for the largest simultaneous 100m sprint with 10,539 participants.</p>
+
+<h2>Reception</h2>
+
+<p>The game received above-average reviews according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregation</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. In Japan, where the game was ported for release on 20 November 2010, <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave it a score of 29 out of 40, while <i>Famitsu X360</i> gave it 30 out of 40.</p>
+
+<p>Video game talk show <i><a href="https://en.wikipedia.org/wiki/Good_Game_(TV_program)">Good Game</a></i> gave it 7 out of 10, saying that it didn't feel like a Wii sports game and that you actually had to use your whole body to play it; however they said that the soccer felt a bit brain dead. Overall, they said, "It's a solid sports collection to show off Kinect and it is presented well with lots of great licensed music."</p>
+
+<p>As of April 2011, the game sold over three million units.</p>
+
+<h3>Awards</h3>
+
+<p><i>Kinect Sports</i> won an award for the <a href="https://en.wikipedia.org/wiki/7th_British_Academy_Video_Games_Awards">BAFTA Family Game of the Year</a> and was nominated for 5 other awards, including the <a href="https://en.wikipedia.org/wiki/Golden_Joystick_Awards">Golden Joystick Award</a> for Best Sports Game Award of 2011 and Best New IP, Audio Accomplishment and Technical Innovation awards in the Develop Awards 2011. It was a finalist for the New Game Brand award at the 2011 <i>MCV</i> Industry Excellence Awards. During the <a href="https://en.wikipedia.org/wiki/14th_Annual_Interactive_Achievement_Awards">14th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>Kinect Sports</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_for_an_Independent_Game">Casual Game of the Year</a>".</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Spider-Man: Web of Shadows</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('8acffedb-2739-4317-b2b4-78f063d82276/5fc0a98e-4d8f-4b63-91bd-91655c5fb474.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="8acffedb-2739-4317-b2b4-78f063d82276/1d4cf192-9297-4ed7-afca-6048fdaa53c9.ico"/> Spider-Man: Web of Shadows</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="8acffedb-2739-4317-b2b4-78f063d82276/36baba4b-d8b2-4891-a2f5-007400522d77.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:54:57</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:55:31</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/21/2008">10/21/2008</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-75">75</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Open world">Open world</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Aspyr Media">Aspyr Media</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Shaba Games">Shaba Games</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Treyarch">Treyarch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Spider-Man:_Web_of_Shadows" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=8952" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/spider-man-web-of-shadows" target="_blank">IGDB</a><br/><a href="https://www.mobygames.com/game/41616" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Spider-Man:_Web_of_Shadows" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Comic Book">Comic Book</a><br/><a href="#quicklink-Contemporary">Contemporary</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-North America">North America</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Supernatural">Supernatural</a><br/><a href="#quicklink-Third Person">Third Person</a><br/><a href="#quicklink-Treyarch NGL">Treyarch NGL</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Spider-Man: Web of Shadows</b></i> is a 2008 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> based on the <a href="https://en.wikipedia.org/wiki/Marvel_Comics">Marvel Comics</a> character <a href="https://en.wikipedia.org/wiki/Spider-Man">Spider-Man</a>. The game was released in October 2008 across multiple platforms, and encompasses three drastically different versions: one released for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, which features an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> and non-linear gameplay; one for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> (titled <i><b>Spider-Man: Web of Shadows – Amazing Allies Edition</b></i>), which is a <a href="https://en.wikipedia.org/wiki/2.5D">2.5D</a> side-scrolling <a href="https://en.wikipedia.org/wiki/Beat_'em_up">beat 'em up</a>; and one for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>, a <a href="https://en.wikipedia.org/wiki/Metroidvania">Metroidvania</a>-style beat 'em up. All three versions have several common elements, such as moral choices that alter the narrative, the ability to summon allies during fights, and a similar plot, despite different characters being featured. <i>Web of Shadows</i>' storyline is significantly darker than most previous Spider-Man games, as it revolves around a <a href="https://en.wikipedia.org/wiki/Symbiote_(comics)">symbiote</a> invasion threatening <a href="https://en.wikipedia.org/wiki/Manhattan">Manhattan</a>, which Spider-Man must stop with the help of several unlikely allies.</p>
+
+<p>Upon release, the game received generally mixed to positive reviews from critics, who singled out the boss fights, destructive combat, original story, gameplay and open-ended nature. However, the game's choice system received mixed reviews; although some praised how the player is able to create a dynamic experience with their choices, others were critical of the system's limitations. In addition, reviewers criticized the storyline's poor execution, bothersome camera controls, the inability to free-roam after completing the main storyline, lip-syncing issues and the subpar graphics.</p>
+
+<p><i>Spider-Man: Web of Shadows</i>, along with most other games published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a> that had used the Marvel license, was de-listed and removed from all digital storefronts on January 1, 2014. It was the only Spider-Man game developed by Shaba Games and was assisted by Treyarch (their last time on a Spider-Man game), as the license was then passed to <a href="https://en.wikipedia.org/wiki/Beenox">Beenox</a>, who went on to develop several Spider-Man games of their own, beginning with <i><a href="https://en.wikipedia.org/wiki/Spider-Man:_Shattered_Dimensions">Spider-Man: Shattered Dimensions</a></i> in 2010.</p>
+
+<h2>Gameplay</h2>
+
+<h3>Microsoft Windows, PlayStation 3, Wii, and Xbox 360</h3>
+
+<p><i>Spider-Man Web of Shadows</i> is a <a href="https://en.wikipedia.org/wiki/Third-person_games">third-person</a> <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> video game set in an <a href="https://en.wikipedia.org/wiki/Open_world">open-world</a> outer area of <a href="https://en.wikipedia.org/wiki/Manhattan">Manhattan</a>. The gameplay is very similar to that of previous Spider-Man titles (mainly <i><a href="https://en.wikipedia.org/wiki/Spider-Man_2_(2004_video_game)">Spider-Man 2</a></i>, <i><a href="https://en.wikipedia.org/wiki/Spider-Man_3_(video_game)">Spider-Man 3</a></i> and <i><a href="https://en.wikipedia.org/wiki/Ultimate_Spider-Man_(video_game)">Ultimate Spider-Man</a></i>), as it revolves around combat and exploration. Players control Spider-Man and can web swing, web zip, crawl walls, and use the 'spider-sense' to identify and lock onto enemies. The combat has been significantly improved compared to previous games, with players now able to fight enemies not only on the ground, but also on walls and in the air. The game introduces a "web strike" mechanic, which allows Spider-Man to attach a web line to the nearest enemy and pull himself towards them to deal damage.</p>
+
+<p>While free roaming, players may stumble upon various random events, such as gang fights, injured civilians that need to be taken to the hospital, and, in the later stages of the game, symbiote nests that must be destroyed. While entirely optional and not required for completing the game, these events reward the player with <a href="https://en.wikipedia.org/wiki/Experience_point">XP</a>, which can be used to unlock new fighting moves/combos for Spider-Man. Players can also earn XP from simply playing through the main story, completing challenges (such as defeating a given number of enemies), and finding collectibles hidden around the map. Collectibles also increase Spider-Man's health bar and web swinging speed.</p>
+
+<p>The player is able to switch between Spider-Man's traditional red and blue suit and the black <a href="https://en.wikipedia.org/wiki/Symbiote_(comics)">symbiote</a> suit at any time during gameplay. Each suit provides a different gameplay style, and features individual upgrades. Chris Scholz from <a href="https://en.wikipedia.org/wiki/Shaba_Games">Shaba Games</a> commented that the developers "<i>worked on really separating the black and red suits to give the player a different feel</i>". For example, while wearing the red suit, Spider-Man is faster and more agile with his attacks, whereas symbiote black suit Spider-Man is stronger and more destructive.</p>
+
+<p>At specific points in the story, the player is presented with choices that affect Spider-Man's morality. This is reflected in the 'reputation bar', which becomes red when Spider-Man has a positive reputation, and black when the reputation is negative. At higher reputation levels, Spider-Man is viewed as a hero, and civilians will act friendly towards him and cheer him on; at lower reputation levels, civilians will cower in fear in Spider-Man's presence or run away. The reputation bar also affects which allies Spider-Man can summon during fights: at high reputation levels, superheroes such as <a href="https://en.wikipedia.org/wiki/Luke_Cage">Luke Cage</a>, <a href="https://en.wikipedia.org/wiki/Moon_Knight">Moon Knight</a>, and <a href="https://en.wikipedia.org/wiki/Wolverine_(character)">Wolverine</a> can be summoned, whereas at low reputation levels, only villains like <a href="https://en.wikipedia.org/wiki/Black_Cat_(Marvel_Comics)">Black Cat</a>, <a href="https://en.wikipedia.org/wiki/Vulture_(Marvel_Comics)">Vulture</a>, <a href="https://en.wikipedia.org/wiki/Rhino_(character)">Rhino</a>, and <a href="https://en.wikipedia.org/wiki/Electro_(Marvel_Comics)">Electro</a> will come to Spider-Man's aid.</p>
+
+<p>The mini-map on the screen is also different from the style used in previous Spider-Man games. The traditional 2-D overhead view has been removed, replaced by a new 3D map with an "X", "Y" and "Z" axis which shows the player's position in three-dimensional space (north and south, as well as vertical position). Also, as a Wii exclusive, there are 6 alternate costumes (<a href="https://en.wikipedia.org/wiki/Spider-Carnage">Spider-Carnage</a> for the black suit, and Spider-Armor, <a href="https://en.wikipedia.org/wiki/Ben_Reilly">Ben Reilly</a>, <a href="https://en.wikipedia.org/wiki/Spider-Man_2099">Spider-Man 2099</a>, Cosmic Spider-Man, and <a href="https://en.wikipedia.org/wiki/Iron_Spider">Iron Spider</a> for the red suit).</p>
+
+<p>Although the player is unable to free-roam after the storyline's completion, this can be achieved through a secret method, which has the player watch the credits twice. Afterwards, when they select to continue the game, the player will start a new game, but will retain all their previous upgrades; this essentially acts as a <a href="https://en.wikipedia.org/wiki/New_Game_Plus">New Game Plus</a> mode.</p>
+
+<p>The PlayStation 2 and PlayStation Portable versions were released as <i>Spider-Man: Web of Shadows – Amazing Allies Edition</i> and are drastically different from the console and PC version. These versions do not feature an open world, and are instead 2.5D side-scrolling brawlers. Players can alternate between Spider-Man's two costumes at any time during gameplay, with the game providing several scenarios in which one suit is more useful than the other. For example, there are several weak walls which can only be destroyed by the black suited Spider-Man. Each suit has individual upgrades, which unlock new combos or increase Spider-Man's health bar.</p>
+
+<p>Like its title suggests, this version puts more emphasis on the ally system than the other versions, providing the biggest variety of allies and consumable power-ups. Instead of <a href="https://en.wikipedia.org/wiki/Cutscene">cutscenes</a>, the game features dialogue trees, during which the player must select Spider-Man's replies from several different options, which can make Spider-Man appear respectful, mean, or neutral. Depending on which reply is chosen, the player will receive upgrade points for Spider-Man's red suit, black suit, or both. These sections function similarly to the moral choices in the console and PC version, and can have a major impact on the game's story.</p>
+
+<p>The Nintendo DS version is also a 2.5D scrolling beat 'em up. Like in the other versions, Spider-Man has both his traditional red and blue suit and his symbiote black suit, which the player can switch between at any time during gameplay and which offer different playstyles (the red suit provides faster movement and attacks, whereas the black suit is slower, but has more devastating attacks). Players earn XP from defeating enemies, which can be used to unlock new combos for both suits. As the players progress through the story, they will also obtain upgrades that will allow them to explore more of the open world map and eventually reach the end of the game, similarly to the <i><a href="https://en.wikipedia.org/wiki/Castlevania">Castlevania</a></i> and <a href="https://en.wikipedia.org/wiki/Metroid"><i>Metroid</i> franchises</a>.</p>
+
+<p>The choice system has been redesigned to only consist of players choosing which mission to undergo next. This version features the fewest allies out of all the versions, with a total of four allies: Black Cat, the <a href="https://en.wikipedia.org/wiki/Norman_Osborn">Green Goblin</a>, <a href="https://en.wikipedia.org/wiki/Nightcrawler_(character)">Nightcrawler</a>, and <a href="https://en.wikipedia.org/wiki/Venom_(Marvel_Comics_character)">Venom</a>. It also features an exclusive revival system where, if the player's health depletes, they can spend one "life point" to attempt to revive the fallen Spider-Man by using the Touch Screen to draw health orbs to him, while poking at poison orbs to destroy them. The revival will be successful if Spider-Man receives enough health orbs before a time limit is reached.</p>
+
+<h2>Plot</h2>
+
+<h3>Microsoft Windows, PlayStation 3, Wii, and Xbox 360</h3>
+
+<p>The game begins with Spider-Man (Michael Vaughn) looking for <a href="https://en.wikipedia.org/wiki/Mary_Jane_Watson">Mary Jane Watson</a> (Dana Seltzer) amidst the <a href="https://en.wikipedia.org/wiki/Symbiote_(comics)">symbiote</a> invasion in <a href="https://en.wikipedia.org/wiki/Manhattan">Manhattan</a>. After finding her with <a href="https://en.wikipedia.org/wiki/Luke_Cage">Luke Cage</a> (<a href="https://en.wikipedia.org/wiki/Robert_Wisdom">Robert Wisdom</a>), he is attacked by an unknown assailant. Four days prior, Spider-Man has an encounter with <a href="https://en.wikipedia.org/wiki/Venom_(Marvel_Comics_character)">Venom</a> (<a href="https://en.wikipedia.org/wiki/Keith_Szarabajka">Keith Szarabajka</a>), during which part of the latter's symbiote attaches itself to Spider-Man, recreating his black suit. Spider-Man discovers he has more control over the symbiote, and easily defeats Venom, who flees afterward. Later, while helping Luke Cage deal with a gang war in <a href="https://en.wikipedia.org/wiki/Harlem">Harlem</a>, Spider-Man finds evidence that the <a href="https://en.wikipedia.org/wiki/Kingpin_(character)">Kingpin</a> (<a href="https://en.wikipedia.org/wiki/Gregg_Berger">Gregg Berger</a>) is responsible for the war. During a parley between the two gangs' leaders (<a href="https://en.wikipedia.org/wiki/James_C._Mathis_III">James C. Mathis III</a> and <a href="https://en.wikipedia.org/wiki/Isaac_C._Singleton_Jr.">Isaac C. Singleton Jr.</a>) and Cage, Spider-Man can either present the evidence in order to end the war peacefully, or let the gangs finish each other off.</p>
+
+<p>Afterwards, Spider-Man heads to Fisk Tower to confront the Kingpin, only to witness <a href="https://en.wikipedia.org/wiki/Black_Cat_(Marvel_Comics)">Black Cat</a> (<a href="https://en.wikipedia.org/wiki/Tricia_Helfer">Tricia Helfer</a>) leaving and begin chasing her. With assistance from <a href="https://en.wikipedia.org/wiki/Moon_Knight">Moon Knight</a> (<a href="https://en.wikipedia.org/wiki/Robin_Atkin_Downes">Robin Atkin Downes</a>), Spider-Man defeats Black Cat, who reveals she is working as a <a href="https://en.wikipedia.org/wiki/Double_agent">double agent</a> to bring down the Kingpin in an attempt to gain Spider-Man's affection. Returning or rejecting Black Cat's feelings, Spider-Man join forces with either her or Moon Knight to dismantle the Kingpin's operations, including his production of Goblin gliders, overseen by the <a href="https://en.wikipedia.org/wiki/Vulture_(Marvel_Comics)">Vulture</a> (<a href="https://en.wikipedia.org/wiki/Kristoffer_Tabori">Kristoffer Tabori</a>). During a fight with the Kingpin's men, Spider-Man is attacked by several symbiote-infected civilians, and decides to investigate. He encounters <a href="https://en.wikipedia.org/wiki/Wolverine_(character)">Wolverine</a> (<a href="https://en.wikipedia.org/wiki/Steve_Blum">Steve Blum</a>), who is also hunting symbiotes and mistakes Spider-Man for one, but the two settle their differences after a brief fight. Spider-Man's investigation leads him to Venom, who has been abducting and infecting civilians with his symbiote, but he escapes once again. As more people become infected, a <a href="https://en.wikipedia.org/wiki/S.H.I.E.L.D.">S.H.I.E.L.D.</a> team led by <a href="https://en.wikipedia.org/wiki/Black_Widow_(Natasha_Romanova)">Black Widow</a> (<a href="https://en.wikipedia.org/wiki/Salli_Saffioti">Salli Saffioti</a>) sets up quarantine camps across Manhattan. <a href="https://en.wikipedia.org/wiki/Electro_(Marvel_Comics)">Electro</a> (<a href="https://en.wikipedia.org/wiki/Liam_O'Brien">Liam O'Brien</a>) rampages through them in search of his sister but is defeated by Spider-Man, and escapes after being infected by a symbiote.</p>
+
+<p>Unable to contact any scientific genius, Spider-Man reluctantly breaks the <a href="https://en.wikipedia.org/wiki/Tinkerer_(Marvel_Comics)">Tinkerer</a> (William Utay) out of <a href="https://en.wikipedia.org/wiki/Ryker's_Island">Ryker's Island</a>, with help from an incarcerated <a href="https://en.wikipedia.org/wiki/Rhino_(character)">Rhino</a> (<a href="https://en.wikipedia.org/wiki/Fred_Tatasciore">Fred Tatasciore</a>), so that he would create a device to destroy the symbiotes without harming the hosts. However, by this point the symbiotes have taken over Manhattan, forcing S.H.I.E.L.D. to isolate it from the rest of New York. While S.H.I.E.L.D. constructs the Tinkerer's device, Spider-Man assists with various operations, such as persuading the Kingpin to aid S.H.I.E.L.D. and defeating Symbiote Electro, who also agrees to help after Spider-Man removes his symbiote. Spider-Man also defends the S.H.I.E.L.D. base at <a href="https://en.wikipedia.org/wiki/Stark_Tower">Stark Tower</a> from a symbiote attack, assists Moon Knight in protecting Spector Tower, and aids Wolverine with a civilian evacuation. During the evacuation, Wolverine gets infected by a symbiote, but Spider-Man defeats and rescues him, potentially ripping him in half under the black suit's influence.</p>
+
+<p>After assisting Mary Jane and Luke Cage with escorting civilians from Harlem to Fisk Tower, Spider-Man is devastated to learn the two have gone missing, and heads off to find them, leading to the game's opening sequence. The person who attacked him is revealed to be Symbiote Black Cat, whom he defeats with Mary Jane's help. However, Black Cat is severely injured in the process, forcing Spider-Man to leave her in Mary Jane's care, or infect her with a symbiote to heal her, which upsets Mary Jane. Meanwhile, S.H.I.E.L.D. installs the Tinkerer's completed device on the Trask Building, but Symbiote Vulture leads an aerial assault to destroy it. After defeating Symbiote Vulture, Spider-Man either activates the device, which eliminates all the symbiotes in Manhattan, including his black suit, or destroys it at Vulture's urging, who encourages him to rule over the symbiotes.</p>
+
+<p>Either way, Spider-Man learns Venom is attacking the <a href="https://en.wikipedia.org/wiki/Helicarrier">Helicarrier</a> and proceeds to plant explosives across the doomed aircraft, before being confronted by a giant, five-headed Venom. After destroying four heads and failing to kill Venom with a Helicarrier turret, Spider-Man persuades <a href="https://en.wikipedia.org/wiki/Eddie_Brock">Eddie Brock</a> to come out of Venom and pay for his actions. After Brock dies, either at Spider-Man's hands or by committing a heroic sacrifice, Spider-Man escapes from the Helicarrier, just as the explosives detonate, destroying the aircraft and Venom.</p>
+
+<p>In the aftermath, there are four endings regarding the suit paths:</p>
+
+<ul>
+  <li>In the main Red Suit ending, Spider-Man oversees Manhattan's return to normal while reconciling with Mary Jane as he takes her on a web-slinging ride now that Venom is gone and the villains are behind bars.</li>
+  <li>In the other Red Suit ending, Spider-Man leaves a message on Mary Jane's phone to apologize and hopes that she'll understand what he had to do to save Manhattan.</li>
+  <li>In the main Black Suit ending, Spider-Man rules Manhattan with a Symbiote-controlled Black Cat as the Symbiotes worship him.</li>
+  <li>In the other Black Suit ending, Spider-Man rules Manhattan vowing to get Mary Jane back as the Symbiotes worship him.</li>
+</ul>
+
+<p>In both Black Suit outcomes, Kingpin and Black Widow send a newly re-Venomized Wolverine after Spider-Man.</p>
+
+<p>After an encounter between Spider-Man and Venom, the latter inexplicably explodes, leaving no trace of Eddie Brock and causing Spider-Man to regain his symbiote black suit. Later, Spider-Man is surprised when <a href="https://en.wikipedia.org/wiki/Nick_Fury">Nick Fury</a> calls him and reveals that Venom has infested Manhattan with his symbiote, forcing S.H.I.E.L.D. to quarantine the city. He also explains that Spider-Man's previous encounters with the symbiote gives him more control over it, though he warns him that the symbiote can still influence his behavior. Tasked with collecting pieces for a sonic generator that can counter the symbiotes, Spider-Man first goes after the <a href="https://en.wikipedia.org/wiki/Shocker_(character)">Shocker</a> (<a href="https://en.wikipedia.org/wiki/Liam_O'Brien">Liam O'Brien</a>) to obtain his vibro gauntlets. Next, having been informed by the Kingpin, who is also trying to stop the symbiotes, that <a href="https://en.wikipedia.org/wiki/Spencer_Smythe">Spencer Smythe</a> and <a href="https://en.wikipedia.org/wiki/Advanced_Idea_Mechanics">A.I.M.</a> are working on a secret project involving <a href="https://en.wikipedia.org/wiki/Vibranium">vibranium</a>, Spider-Man infiltrates A.I.M.'s underground lab through the sewers. Along the way, he must avoid traps set by <a href="https://en.wikipedia.org/wiki/Kraven_the_Hunter">Kraven the Hunter</a> (<a href="https://en.wikipedia.org/wiki/Dwight_Schultz">Dwight Schultz</a>) and eventually confront him. Inside A.I.M.'s lab, Spider-Man encounters <a href="https://en.wikipedia.org/wiki/J._Jonah_Jameson">J. Jonah Jameson</a> (<a href="https://en.wikipedia.org/wiki/Daran_Norris">Daran Norris</a>), who was captured and cloned as part of a plot by Smythe to discredit both him and Spider-Man. After releasing either Jameson or his clone, Spider-Man defeats Rhino, who was hired to guard the lab, and escapes with the vibranium.</p>
+
+<p>Returning to Manhattan, Spider-Man encounters Luke Cage, who suggests teaming up to fight the symbiotes. While doing so, Spider-Man learns of the Tinkerer's plan to spread the infestation to other countries, and has the option to redirect a train full of symbiotes towards Cage to make his own travel through the city easier. After defeating Cage, who was either infected by a symbiote or is trying to remove Spider-Man's black suit, believing it has corrupted him, Spider-Man infiltrates the Tinkerer's lab, encountering a brainwashed Venom, who was captured by the Tinkerer for experimentation. Eventually, Spider-Man defeats the Tinkerer and foils his plan, despite the villain's escape.</p>
+
+<p>Afterwards, Spider-Man arrives on a symbiote-infested <a href="https://en.wikipedia.org/wiki/Helicarrier">Helicarrier</a> to build the sonic generator, but is forced to assist with the evacuation and reactivate the ship's defense systems. He encounters the <a href="https://en.wikipedia.org/wiki/Jackal_(Marvel_Comics_character)">Jackal</a> (<a href="https://en.wikipedia.org/wiki/Greg_Baldwin">Greg Baldwin</a>), hired by S.H.I.E.L.D. out of desperation for someone to analyze the symbiotes, who reveals that S.H.I.E.L.D. plans to weaponize the symbiotes and that he is in league with Spencer Smythe, who aims to control the symbiotes. However, Jackal betrays Smythe and tries to take Spider-Man's symbiote for his own ends. After defeating Jackal, Spider-Man escapes from the Helicarrier as it crashes in the city. Making his way to the crash site, Spider-Man finds a symbiote-infected <a href="https://en.wikipedia.org/wiki/Spider-Woman_(Jessica_Drew)">Jessica Drew</a> (<a href="https://en.wikipedia.org/wiki/Mary_Elizabeth_McGlynn">Mary Elizabeth McGlynn</a>), whom he defeats, and the blueprints for the sonic generator. He is then informed by Nick Fury that the sonic generator is on the top of Fisk Tower, so he goes there to combine the parts he collected to a super-computer, completing the generator. However, it is stolen by the Jackal while Spider-Man is busy fighting A.I.M. agents dispatched by Smythe. Claiming that he had nothing to do with the generator's theft and that it's too late to stop the symbiotes, Smythe then unleashes a mind-controlled Black Cat to kill Spider-Man, who either frees her from Smythe's control, or lets the mind-controlling device kill her so that he can take it for himself.</p>
+
+<p>Spider-Man finds the stolen generator in <a href="https://en.wikipedia.org/wiki/Central_Park">Central Park</a> and confronts Jackal, who reveals that he has modified it to control the symbiotes. After defeating Jackal, Spider-Man recovers the generator and programs it to either destroy or control the symbiotes. As the generator is powered up, Spider-Man finds a symbiote-filled fountain containing seven serpent heads with Venom's consciousness. Using the generator to supply energy that weaken the heads, Spider-Man defeats Venom, allowing him to stop the invasion or take over Manhattan as the new symbiote leader.</p>
+
+<p>The game begins with the symbiote invasion already in progress. After an encounter with several symbiotes, Spider-Man is infected by one, but is able to maintain control over it, leading to the re-creation of his black suit, which he can now remove at will. Afterwards, thinking Venom is responsible for the invasion, Spider-Man searches for him. Along the way he encounters Black Cat (Valerie Arem), who informs him that both <a href="https://en.wikipedia.org/wiki/Nightcrawler_(character)">Nightcrawler</a> (<a href="https://en.wikipedia.org/wiki/Yuri_Lowenthal">Yuri Lowenthal</a>) and the <a href="https://en.wikipedia.org/wiki/Norman_Osborn">Green Goblin</a> (<a href="https://en.wikipedia.org/wiki/Roger_L._Jackson">Roger L. Jackson</a>) require his assistance: the former is helping out with civilian evacuations, while the latter is setting up bombs to defeat the symbiotes.</p>
+
+<p>After choosing to help either of them twice or both once, and defeating several "super-symbiotes", Spider-Man arrives at a symbiote hive, where he finds and defeats Venom. However, the villain claims that he is not behind the invasion, but rather is trying to stop it as well. With Venom now too weak to accompany him, Spider-Man ventures deeper into the hive by himself and encounters the Symbiote Leader. After defeating him, the hive begins to collapse, but Spider-Man is able to escape in time. The ending of the game depends on who the player helped earlier.</p>
+
+<ul>
+  <li>If they helped either Nightcrawler twice or both him and the Green Goblin once, Manhattan is saved and the citizens are freed from the symbiotes' control, praising Spider-Man, who thinks of taking a shower after having gone to the sewers twice in a day.</li>
+  <li>If they helped the Green Goblin twice, Spider-Man realizes that with the symbiote leader gone, he is now in charge of the symbiotes. The infected citizens worship Spider-Man as their new leader while he swings through a New York City covered in symbiotes, reflecting upon how great power is simply a lot of power and that it is far better than sharing the responsibility.</li>
+</ul>
+
+<h2>Development</h2>
+
+<p>On April 17, 2008, Activision confirmed that <i>Spider-Man: Web of Shadows</i> was in development, and that the game would be released on the Microsoft Windows, Nintendo DS, PlayStation 2, PlayStation 3, PlayStation Portable, Wii, and Xbox 360 systems, and they confirmed that the story would center around an invasion on New York that Spider-Man and the other heroes and villains would have to deal with. Venom was confirmed as the main antagonist in June. Voice casting and direction was done by the husband and wife team of Keith and Valerie Arem.</p>
+
+<h2>Reception</h2>
+
+<p><i>Web of Shadows</i> received generally average to positive reviews. <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> and <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> gave it a score of 79% and 77 out of 100 for the DS version; 54% and 52 out of 100 for the Microsoft Windows version; 69% and 69 out of 100 for the PlayStation 2 version; 70% and 67 out of 100 for the PlayStation 3 version; 77% for the PlayStation Portable version; 68% and 68 out of 100 for the Xbox 360 version; and 65% and 63 out of 100 for the Wii version.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/IGN">IGN</a> criticized the story, and also pointed out that the lock-on camera has a tendency to detach itself, making mid-air battles difficult. <a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a> praised the PlayStation 3 and Xbox 360 versions of the game as having "plenty of cool "Spider-Man" moments throughout thanks to the basic locomotion and combat", which "settles into a rhythm of repetition", summing up with "<i>Shadows</i> might be the best <i>Spider-Man</i> game yet, but that's just a testament to the series' now-mediocre standards". <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> mentioned occasional technical issues with the graphics, sound, and camera, while praising the story, combat system, variety and "memorable" boss fights. <a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a> commented that "<i>Web of Shadows</i> manages to provide a good deal of fun even if it doesn't bring much new to the table", praising the animation and combat, and mentioning camera problems and visual glitches along with a repetition of objectives. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> criticized the voice acting, camera, and animation, claiming, "as explosive as the new combat is, it's all this game has to offer". <i><a href="https://en.wikipedia.org/wiki/X-Play">X-Play</a></i> gave the PlayStation 3 and Xbox 360 versions three stars out of five and said, "there's enough great gameplay here to make <i>Web of Shadows</i> recommendable for <i>Spider-Man</i> fans. The sheer level of glitches in the game, however, manages to take the fun factor down several notches".</p>
+
+<p>The DS version of the game, in contrast to the console versions, was relatively well-received, with reviewers praising level design similar to the <i><a href="https://en.wikipedia.org/wiki/Castlevania">Castlevania</a></i> and <a href="https://en.wikipedia.org/wiki/Metroid"><i>Metroid</i> franchises</a> while criticizing the short length.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

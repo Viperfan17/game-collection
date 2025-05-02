@@ -1,0 +1,405 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Super Mario 64</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('1f87fd55-223c-406d-a723-1da66e090f9c/0f3bdc1e-27f9-4e4e-b5c6-b9c61f05d909.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="1f87fd55-223c-406d-a723-1da66e090f9c/f8755d2b-eb7b-494b-b9b4-88215c0acf01.ico"/> Super Mario 64</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="1f87fd55-223c-406d-a723-1da66e090f9c/d0cd5555-55e5-4a55-859a-860dd18604a6.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:52:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:42:36</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo 64">Nintendo 64</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-5/2/2020">5/2/2020</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-94">94</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo EAD">Nintendo EAD</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Super_Mario_64" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=9364" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/super-mario-64" target="_blank">IGDB</a><br/><a href="http://strategywiki.org/wiki/Super_Mario_64" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/3533" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Super_Mario_64" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Third Person">Third Person</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Super Mario 64</b></i> is a 1996 <a href="https://en.wikipedia.org/wiki/Platformer">platform game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a>. It was released in Japan and North America in 1996 and <a href="https://en.wikipedia.org/wiki/PAL_region">PAL regions</a> in 1997. It is the first <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> game to feature <a href="https://en.wikipedia.org/wiki/3D_computer_graphics">3D</a> gameplay, combining traditional <i>Super Mario</i> gameplay, visual style, and characters in a large open world. In the game, <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a>, the primary antagonist of the <i>Super Mario</i> franchise, invades <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Peach</a>'s castle and hides the castle's sources of protection, the Power Stars, in many different worlds inside magical paintings. As <a href="https://en.wikipedia.org/wiki/Mario">Mario</a>, the player collects Power Stars to unlock enough of Princess Peach's castle to get to Bowser and rescue Princess Peach.</p>
+
+<p>Director <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> conceived a 3D <i>Super Mario</i> game during the production of <i><a href="https://en.wikipedia.org/wiki/Star_Fox_(1993_video_game)">Star Fox</a></i> (1993). Development lasted nearly three years: about one year on design and twenty months on production, starting with designing the <a href="https://en.wikipedia.org/wiki/Virtual_camera_system">virtual camera system</a>. The team continued with illustrating the 3D character models—at the time a relatively unattempted task—and refining <a href="https://en.wikipedia.org/wiki/Sprite_(computer_graphics)">sprite</a> movements. The sound effects were recorded by Yoji Inagaki and the score was composed by <a href="https://en.wikipedia.org/wiki/Koji_Kondo">Koji Kondo</a>.</p>
+
+<p><i>Super Mario 64</i> was highly anticipated by video game journalists and audiences, boosted by advertising campaigns and showings at the 1996 <a href="https://en.wikipedia.org/wiki/E3">E3</a> trade show. It received critical acclaim, with reviewers praising its ambition, visuals, level design, and gameplay, though some criticized its virtual camera system. It is the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_64_video_games">best-selling Nintendo 64 game</a>, with nearly twelve million copies sold by 2015.</p>
+
+<p>Retrospectively, <i>Super Mario 64</i> has been considered one of the <a href="https://en.wikipedia.org/wiki/Greatest_video_games_of_all_time">greatest video games of all time</a>. Numerous developers have cited it as an influence on <a href="https://en.wikipedia.org/wiki/3D_platform_game">3D platform games</a>, with its dynamic camera system and 360-degree <a href="https://en.wikipedia.org/wiki/Analog_control">analog control</a> establishing a new archetype for the genre, much as <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.">Super Mario Bros.</a></i> did for <a href="https://en.wikipedia.org/wiki/Side-scrolling">side-scrolling</a> platform games. It was remade as <i><a href="https://en.wikipedia.org/wiki/Super_Mario_64_DS">Super Mario 64 DS</a></i> for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> in 2004, and has been <a href="https://en.wikipedia.org/wiki/Video_game_port">ported</a> to other <a href="https://en.wikipedia.org/wiki/Nintendo_video_game_consoles">Nintendo consoles</a> since. The game has attracted a cult following, spawning many fangames and <a href="https://en.wikipedia.org/wiki/Video_game_modding">mods</a>, a large <a href="https://en.wikipedia.org/wiki/Speedrunning">speedrunning</a> presence, and enduring rumors surrounding game features.</p>
+
+<h2>Gameplay</h2>
+
+<h3>Controls</h3>
+
+<p><i>Super Mario 64</i> is a <a href="https://en.wikipedia.org/wiki/Platform_game#Third_dimension">3D platformer</a> in which the player controls the titular character <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> through various courses. Mario's abilities are far more diverse than in previous games. He can walk, run, jump, crouch, crawl, climb, swim, kick, grab objects, and punch using the <a href="https://en.wikipedia.org/wiki/Nintendo_64_controller">game controller</a>'s <a href="https://en.wikipedia.org/wiki/Analog_stick">analog stick</a> and buttons. He can execute special jumps by combining a regular jump with other actions, including the double and triple jumps, <a href="https://en.wikipedia.org/wiki/Long_jump">long jump</a>, <a href="https://en.wikipedia.org/wiki/Somersault">backflip</a>, and <a href="https://en.wikipedia.org/wiki/Wall_jump">wall jump</a>. The player can adjust the camera—operated by a <a href="https://en.wikipedia.org/wiki/Lakitu">Lakitu</a> broadcasting Mario—and toggle between <a href="https://en.wikipedia.org/wiki/First-person_(video_games)">first-person</a> and third-person view.</p>
+
+<p>Unlike many of its predecessors, <i>Super Mario 64</i> uses a <a href="https://en.wikipedia.org/wiki/Health_(game_terminology)">health point system</a>, represented by a pie shape consisting of eight segments. If Mario has taken damage, he can replenish his health either by collecting three types of coins—yellow, which replenishes one segment; red, equal to two yellow coins and which replenishes two segments; and blue, equal to five yellow coins and which replenishes five segments, by walking through a spinning heart or by jumping into water. Underwater, Mario's health instead represents how long he can hold his breath, slowly diminishing while underwater and replenishing when he surfaces. Finishing a course grants Mario an extra <a href="https://en.wikipedia.org/wiki/Life_(video_games)">life</a> for every 50 yellow coins the player collected, and <a href="https://en.wikipedia.org/wiki/Super_Mario#Extra_lives">extra life mushrooms</a> are hidden in various places such as trees and poles - they may either chase Mario through the air or fall to the ground and disappear shortly if not collected.</p>
+
+<p>In absence of the <a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a> normally found in previous games, such as the <a href="https://en.wikipedia.org/wiki/Super_Mario#Power-ups_and_transformations">Super Mushroom</a> and <a href="https://en.wikipedia.org/wiki/Super_Mario#Projectiles">Fire Flower</a>, three colors of translucent blocks—red, green, and blue—appear throughout many stages. Three switches of the same colors, found in three secret areas located in either stages or the castle itself, turn their corresponding blocks solid and permanently allow Mario to obtain three types of special cap power-ups throughout all of the stages. The Wing Cap allows Mario to fly after doing a triple jump or being shot from a <a href="https://en.wikipedia.org/wiki/Cannon">cannon</a>; the Metal Cap makes him immune to enemies, fire, noxious gases, allows him to withstand wind and water currents, perform on-land moves underwater, and have unlimited air capacity underwater; and the Vanish Cap renders him partially immaterial and invulnerable, and allows him to walk through some obstacles. Another implicit powerup is the shell remains after stomping a <a href="https://en.wikipedia.org/wiki/Koopa_Troopa">Koopa Troopa</a>, which Mario can use to run over enemies, and surf on water, lava, and quicksand.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Overworld">hub world</a> takes place in Princess Peach's Castle, which consists of three floors consisting of the castle's lobby, the main tower, and a basement, plus a moat and a courtyard outside the castle. The player's main objective is to look for paintings that, when jumped into, bring them into courses containing Power Stars, which upon their collection unlock more of the castle hub world. Each of the fifteen courses has seven Power Stars (six from named missions and one gained by collecting 100 coins in the level), and an additional fifteen are hidden as secrets and as bonuses, for a total of 120 Power Stars in the game.</p>
+
+<p>The courses are filled with enemies as well as friendly creatures that provide assistance or ask favors, such as <a href="https://en.wikipedia.org/wiki/Bob-omb">Bob-omb</a> Buddies, who will allow Mario to access cannons on request. Some Power Stars only appear after completing certain tasks, often hinted at by the name of the course. These challenges include collecting one hundred yellow coins or eight red coins on a stage, defeating a <a href="https://en.wikipedia.org/wiki/Boss_(video_gaming)">boss</a>, racing an opponent, and solving puzzles. The final level of the game is blocked by "endless stairs" similar to the <a href="https://en.wikipedia.org/wiki/Penrose_stairs">Penrose stairs</a> concept, but Mario can bypass them by collecting seventy Power Stars. The music in the endless stairs before collecting seventy Power Stars resembles a <a href="https://en.wikipedia.org/wiki/Shepard_scale">Shepard scale</a>. There are many hidden mini-courses and other secrets within the castle, which may contain extra Power Stars required for the full completion of the game. If the player returns to the game after collecting all 120 Power Stars, <a href="https://en.wikipedia.org/wiki/Yoshi">Yoshi</a> can be found on the roof of Princess Peach's Castle, who will give the player a message from the developers, accompanied by one hundred extra lives and an improved triple jump.</p>
+
+<h2>Plot</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Peach</a> uses a letter to invite Mario to come to her castle for a cake she has baked for him. When he arrives, Mario discovers that <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a> has invaded the castle and imprisoned the princess and her servants within its walls using the power of the castle's 120 Power Stars. The Power Stars are hidden in the castle's paintings, which serve as portals to other worlds where Bowser's minions keep watch over the Stars. Mario explores the castle and enters these worlds, gaining access to more rooms as he recovers more Stars. Mario unlocks three doors to different floors of the castle with keys obtained by defeating Bowser in hidden worlds. After getting at least 70 of the 120 Stars, Mario breaks the curse of the endless stairs that block the entrance to Bowser's final hiding place. After Mario defeats Bowser in the final battle, and Bowser escapes, swearing revenge, he obtains a special Power Star which gives him the Wing Cap, and he flies back to the castle's courtyard. Peach is released from the <a href="https://en.wikipedia.org/wiki/Stained_glass">stained-glass window</a> above the castle's entrance, and she rewards Mario by kissing him on the nose and baking the cake that she had promised him.</p>
+
+<p>Once Mario earns all 120 stars, he is able to access the roof of the castle via a cannon on the castle grounds, where Yoshi awaits him. Yoshi congratulates Mario on securing all 120 stars and grants him 99 <a href="https://en.wikipedia.org/wiki/Life_(video_games)">extra lives</a> in order to continue playing the game.</p>
+
+<h2>Development</h2>
+
+<p>In the early 1990s, <i>Super Mario</i> creator <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> conceived a 3D <i>Mario</i> design while developing the game <i><a href="https://en.wikipedia.org/wiki/Star_Fox_(1993_video_game)">Star Fox</a></i> (1993) for the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Nintendo Entertainment System</a>. <i>Star Fox</i> used the <a href="https://en.wikipedia.org/wiki/Super_FX">Super FX</a> graphics chip, which added more processing power; Miyamoto considered using the chip to develop a Super NES game, <i>Super Mario FX</i>, with gameplay based on "an entire world in miniature, like miniature trains". According to engineer Dylan Cuthbert, who worked on <i>Star Fox</i>, <i>Super Mario FX</i> was never the title of a game, but was the codename of the Super FX chip itself. Miyamoto reformulated the idea for the Nintendo 64, not for its greater power, but because its controller has more buttons for gameplay. At the January 1993 <a href="https://en.wikipedia.org/wiki/Consumer_Electronics_Show">Consumer Electronics Show</a> (CES), where <i>Star Fox</i> made its debut, Nintendo's booth demonstrated a talking 3D polygon animation of Mario's head; it returned in the start screen, programmed by <a href="https://en.wikipedia.org/wiki/Giles_Goddard_(video_game_programmer)">Giles Goddard</a>.</p>
+
+<p>Production of <i>Super Mario 64</i> began on September 7, 1994, at Nintendo's <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_Analysis_&amp;_Development">Entertainment Analysis &amp; Development</a> division, and concluded on May 20, 1996. According to Miyamoto, the development team consisted of around fifteen to twenty people. Development began with the characters and the <a href="https://en.wikipedia.org/wiki/Virtual_camera_system">camera system</a>; months were spent selecting a view and layout. The original concept involved the fixed path of an isometric game such as <i><a href="https://en.wikipedia.org/wiki/Super_Mario_RPG">Super Mario RPG</a></i>, which moved to a free-roaming 3D design, with some linear paths, particularly to coerce the player into Bowser's lair, according to Giles Goddard.</p>
+
+<p><i>Super Mario 64</i> is one of the first games for which Nintendo produced its illustrations internally instead of by <a href="https://en.wikipedia.org/wiki/Outsourcing">outsourcing</a>. The graphics were made using <a href="https://en.wikipedia.org/wiki/N-World">N-World</a>, a <a href="https://en.wikipedia.org/wiki/Silicon_Graphics">Silicon Graphics</a> (SGI)-based toolkit. The development team prioritized Mario's movement and, before levels were created, tested and refined Mario's animations on a simple grid. The 3D illustrations were created by <a href="https://en.wikipedia.org/wiki/Shigefumi_Hino">Shigefumi Hino</a>, <a href="https://en.wikipedia.org/wiki/Hisashi_Nogami">Hisashi Nogami</a>, Hideki Fujii, Tomoaki Kuroume, and Yusuke Nakano, and the game was animated by co-director <a href="https://en.wikipedia.org/wiki/Yoshiaki_Koizumi">Yoshiaki Koizumi</a> and Satoru Takiwaza. <a href="https://en.wikipedia.org/wiki/Yōichi_Kotabe">Yōichi Kotabe</a>, illustrator and character designer for the <i>Mario</i> series, made a 3D drawing of Mario from various angles and directed the creation of the character models. In an interview with <i><a href="https://en.wikipedia.org/wiki/The_Washington_Post">The Washington Post</a></i>, Yoshiaki Koizumi recalled that his challenge was animating the 3D models without any precedents. To assist players with <a href="https://en.wikipedia.org/wiki/Depth_perception">depth perception</a>, the team positioned a faux shadow directly beneath each object regardless of the area's lighting. Yoshiaki Koizumi described the feature as an "iron-clad necessity" which "might not be realistic, but it's much easier to play".</p>
+
+<p>Miyamoto's guiding design philosophy was to include more details than earlier games by using the Nintendo 64's power to feature "all the emotions of the characters". He likened the game's style to a 3D interactive cartoon. Some details were inspired by the developers' personal lives; for example, the <a href="https://en.wikipedia.org/wiki/List_of_Mario_franchise_characters#Enemy_characters">Boos</a> are based on assistant director <a href="https://en.wikipedia.org/wiki/Takashi_Tezuka">Takashi Tezuka</a>'s wife, who, as Miyamoto explained, "is very quiet normally, but one day she exploded, maddened by all the time Tezuka spent at work".</p>
+
+<p><i>Super Mario 64</i> was first run on an <a href="https://en.wikipedia.org/wiki/SGI_Onyx">SGI Onyx</a> emulator, which only emulated the console's <a href="https://en.wikipedia.org/wiki/Application_programming_interface">application programming interface</a> and not its hardware. The first test scenario for controls and physics involved Mario interacting with a golden rabbit, named "MIPS" after the Nintendo 64's <a href="https://en.wikipedia.org/wiki/MIPS_architecture">MIPS architecture</a> processors; the rabbit was included in the final game as a Power Star holder. <i>Super Mario 64</i> features more puzzles than earlier <i>Mario</i> games. It was developed simultaneously with <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Ocarina_of_Time">The Legend of Zelda: Ocarina of Time</a></i> but, as <i>Ocarina of Time</i> was released more than two years later, some puzzles were taken for <i>Super Mario 64</i>. The developers tried to include a <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> cooperative mode, whereby players would control Mario and his brother <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a> in <a href="https://en.wikipedia.org/wiki/Split_screen_(video_games)">split-screen</a>. Nevertheless, hardware constraints and the developers' inability to implement the mode satisfactorily led to its removal.</p>
+
+<p>The music was composed by veteran composer <a href="https://en.wikipedia.org/wiki/Koji_Kondo">Koji Kondo</a>, who created new interpretations of the familiar melodies from earlier media as well as new material. Yoji Inagaki was responsible for the sound design, tasked with producing hundreds of sound effects. He and Kondo felt that music and sound effects were equally important. According to Inagaki, the average Nintendo 64 game had about 500 sound effects, and made comparisons to <i>Ocarina of Time</i>, with 1,200, and <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Majora's_Mask">The Legend of Zelda: Majora's Mask</a></i>, with 2,000.</p>
+
+<p><i>Super Mario 64</i> is one of the first games to feature <a href="https://en.wikipedia.org/wiki/Charles_Martinet">Charles Martinet</a> as the voice of Mario, and Leslie Swan—then senior editor of <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i> and English <a href="https://en.wikipedia.org/wiki/Video_game_localization">localizer</a> for <i>Super Mario 64</i>—as the voice of Princess Peach.</p>
+
+<h2>Release</h2>
+
+<p><i>Super Mario 64</i> was first shown as a playable prototype in November 1995 at Nintendo Space World. This version was only fifty percent complete, and only about two percent of <a href="https://en.wikipedia.org/wiki/Texture_mapping">texture mapping</a> was finished. It featured thirty-two courses. Miyamoto had hoped to create more, possibly up to forty, but was ultimately reduced to fifteen. According to Nintendo of America chairman <a href="https://en.wikipedia.org/wiki/Howard_Lincoln">Howard Lincoln</a>, Miyamoto's desire to add more was a major factor in the decision to delay the Nintendo 64 release from Christmas 1995 to Summer 1996. Nintendo president <a href="https://en.wikipedia.org/wiki/Hiroshi_Yamauchi">Hiroshi Yamauchi</a> later said: "Game creators can finish games quickly if they compromise. But users have sharp eyes. They soon know if the games are compromised. [Miyamoto] asked for two more months and I gave them to him unconditionally". The game was later shown at <a href="https://en.wikipedia.org/wiki/E3">E3</a> 1996 with multiple Nintendo 64s set up for people to play. According to Giles Goddard, the stress of the project caused some programmers to quit or move to different departments.</p>
+
+<h3>Advertising and sales</h3>
+
+<p>Peter Main, Nintendo's vice president of marketing at the time, stated <i>Super Mario 64</i> was meant as the <a href="https://en.wikipedia.org/wiki/Killer_app">killer app</a> for the Nintendo 64. The US$20 million marketing campaign included videotapes sent to more than five hundred thousand <i>Nintendo Power</i> subscribers and advertisements shown on <a href="https://en.wikipedia.org/wiki/MTV">MTV</a>, <a href="https://en.wikipedia.org/wiki/Fox_Broadcasting_Company">Fox</a>, and <a href="https://en.wikipedia.org/wiki/Nickelodeon">Nickelodeon</a>.</p>
+
+<p><i>Super Mario 64</i> was officially released in Japan in June 1996, North America in September, and in Europe and Australia in March 1997. During its first three months of sale in North America, it sold more than two million copies and grossed $140 million in the United States, becoming the best-selling <a href="https://en.wikipedia.org/wiki/1996_in_video_games">video game of 1996</a>. It was also the best-selling game overall from 1995 to 2002. During the first three months of 1997, it was the second-best-selling <a href="https://en.wikipedia.org/wiki/Console_game">console game</a> at 523,000 units. By early 2001, it had sold 5.5 million units, and 5.9 million by September 2002.</p>
+
+<p>At the 1999 Milia festival in <a href="https://en.wikipedia.org/wiki/Cannes">Cannes</a>, <i>Super Mario 64</i> won a Gold ECCSELL prize for earning revenues above €21 million in the <a href="https://en.wikipedia.org/wiki/European_Union">European Union</a> in 1998. It had become the second most popular game on <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>'s <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> by June 2007, behind <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.">Super Mario Bros.</a></i> By March 2008, <i>Super Mario 64</i> sold 11.8 million copies worldwide, being the best-selling Nintendo 64 game. By 2015, <i>Super Mario 64</i> was the 12th most sold <i>Mario</i> game, with 11.91 million copies sold.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical reviews</h3>
+
+<p><i>Super Mario 64</i> received enthusiastic pre-release reception. <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> commented on the 1995 prototype's smoothness, and how the action "was a blast", despite the game being only fifty percent complete at the time. Ed Semrad of <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> agreed, praising the new 3D animation of <i>Mario</i> characters shown in only 2D before. Larry Marcus, a source analyst for <a href="https://en.wikipedia.org/wiki/Alex._Brown_&amp;_Sons">Alex. Brown &amp; Sons</a>, recalls <i>Super Mario 64</i> being the most anticipated game of E3 1996, remembering a field of teenagers "jostling for a test run".</p>
+
+<p><i>Super Mario 64</i> received critical acclaim, with a score of 94 out of 100 from <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> based on thirteen reviews, and a score of 96% from review aggregator <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a>, which ranked it the eighteenth best video game of all time based on twenty-two reviews.</p>
+
+<p>The design, variety of controls and use of 3D gameplay received praise from <a href="https://en.wikipedia.org/wiki/Video_game_journalism">video game publications</a>. <i>Maximum</i> found its strongest points were the sense of freedom and its replayability, comparing it to <i><a href="https://en.wikipedia.org/wiki/Super_Mario_World">Super Mario World</a></i> and citing its similar gimmick of allowing access to new areas upon finding switches. One of <i><a href="https://en.wikipedia.org/wiki/GameFan">GameFan</a></i>'s four reviewers, E. Storm, cited the water levels as "overjoy[ing]" and showed how <i>Super Mario 64</i> delved into an "entirely new realm of gaming". <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i> called it "beautiful in both looks and design". Doug Perry of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> agreed that it transitioned the series to 3D perfectly. <i>Electronic Gaming Monthly</i> discussed the levels in their initial review, praising them for their size and challenge, and later ranked it the fourth best console game of all time, arguing that it had breached the entire genre of 3D gaming while working virtually flawlessly.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Computer_and_Video_Games">Computer and Video Games</a></i> editor Paul Davies praised the 3D environment, and said that it enhanced the interaction, and described the control scheme as intuitive and versatile. <i><a href="https://en.wikipedia.org/wiki/Total!">Total!</a></i> hailed the gameplay as being so imaginative and having such variety that their reviewers were still "hooked" after one month. Writing for <i><a href="https://en.wikipedia.org/wiki/AllGame">AllGame</a></i>, Jonti Davies commented on the diversity of the gameplay and the abundance of activities found in each course. <i><a href="https://en.wikipedia.org/wiki/Nintendo_Life">Nintendo Life</a></i>'s Corbie Dillard agreed, calling the variety the game's "greatest genius". Writing for <a href="https://en.wikipedia.org/wiki/Game_Revolution"><i>GameRevolution</i></a>, Nebojsa Radakovic described <i>Super Mario 64</i> as one of the few "true" 3D platform games. <i><a href="https://en.wikipedia.org/wiki/N64_Magazine">N64 Magazine</a></i> likened it to an enormous playground which was a pleasure to experiment in, but opined that the exploration element was slightly brought down by how many hints and tips there were. Victor Lucas of <i><a href="https://en.wikipedia.org/wiki/EP_Daily">EP Daily</a></i> agreed, praising the freedom, but suggesting players "skip all the sign posts".</p>
+
+<p><i>Super Mario 64</i> also received praise for its graphics. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> praised the graphics for being "clean yet simple" and not detracting from the details of the game world. <i>GamePro</i> particularly praised the combination of unprecedented technical performance and art design, calling it "the most visually impressive game of all time". Paul Davies described the graphics as "so amazing to see, you find yourself stopping to admire [them]". Jonti Davies called the visuals phenomenal, and the frame rate respectable.<i><sup><a href="https://en.wikipedia.org/wiki/Super_Mario_64#cite_note-allgame-91">[87]</a></sup></i> Doug Perry found the graphics simple but magnificent, a sentiment shared by <i>Next Generation</i>. <i><a href="https://en.wikipedia.org/wiki/Hyper_(magazine)">Hyper</a></i> reviewer Nino Alegeropoulos called it the best-looking console game to date and opined that its high resolution and frame rate for the time made it look "infinitely better than a cartoon". <i>Total!</i> said that the graphics' lack of pixellation and jagged edges made it look like they were from a "top of the range graphics workstation".</p>
+
+<p>The camera system received mixed reviews. <a href="https://en.wikipedia.org/wiki/Next_Generation_(magazine)"><i>Next Generation</i></a> found that <i>Super Mario 64</i> was less accessible than previous <i>Mario</i> games, frustrated by the camera's occasional erratic movements and lack of optimal angle. Nebojsa Radakovic and Doug Perry added that the camera was sometimes blocked by or went through objects. <i>Electronic Gaming Monthly</i>'s Dan Hsu, Shawn Smith, and Crispin Boyer all removed half a point from their scores, claiming that the camera sometimes could not move to a wanted angle or rapidly shifted in an undesirable manner, a criticism that returned in <i>Electronic Gaming Monthly</i>'s <i>100 Best Games of All Time</i> list. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> stated in their 2007 re-review by present-day standards the camera "would almost be considered broken". <i>Nintendo Power</i> also noted the learning curve of the shifting camera. In contrast, Corbie Dillard claimed that the camera did not have any problems, and that it succeeded at helping the player traverse complex environments. This sentiment was shared by <i>Total!</i>, claiming that there were very few occasions where the camera was at a suboptimal angle. Paul Davies acknowledged that he was critical of the camera, saying that in some occasions it was difficult to position ideally, but ultimately dismissed it as "one hiccup" of a "revolutionary" game.</p>
+
+<p><i>Super Mario 64</i> won numerous awards, including various "Game of the Year" honors by members of the gaming media, and in Nintendo's own best-selling Player's Choice selection. It has been placed high on "<a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">the greatest games of all time</a>" lists by many reviewers, including <i>IGN</i>, <i>Game Informer</i>, <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i>, <i>Official Nintendo Magazine,<sup><a href="https://en.wikipedia.org/wiki/Super_Mario_64#cite_note-121">[116]</a></sup></i> <i>Electronic Gaming Monthly</i>, and <i>Nintendo Power</i>. <i>Electronic Gaming Monthly</i> awarded it a Gold award in its initial review, and it won <i>Electronic Gaming Monthly</i>'s Game of the Year for both editors' pick and readers' pick, and Nintendo 64 Game of the Year, Adventure Game of the Year, and Best Graphics. At the 1997 <a href="https://en.wikipedia.org/wiki/Computer_Game_Developers_Conference">Computer Game Developers Conference</a>, it was given <a href="https://en.wikipedia.org/wiki/Spotlight_Awards">Spotlight Awards</a> for Best Use of Innovative Technology, Best Console Game, and Best Game of 1996. <i>Maximum</i> gave it a "Maximum Game of the Month Award" before its international release, ranking it the greatest game the magazine had ever reviewed. <i><a href="https://en.wikipedia.org/wiki/Digitiser">Digitiser</a></i> ranked it the best <a href="https://en.wikipedia.org/wiki/1997_in_video_games">game of 1997</a>, above <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy_VII">Final Fantasy VII</a></i> as runner-up.</p>
+
+<h2>Legacy</h2>
+
+<p><i>Super Mario 64</i> was key to the early success of and anticipation for the Nintendo 64. Lee Hutchinson, a former <a href="https://en.wikipedia.org/wiki/GameStop">Babbage's</a> employee, notes how the game was spurred by a feverish video game press, and how the success of the game defied the rule that a wide variety of launch games was necessary for broad appeal. Eventually, the Nintendo 64 lost much of its market share to Sony's <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a>, partly due to <a href="https://en.wikipedia.org/wiki/Nintendo_64_Game_Pak">its cartridge</a> and controller design decisions, which were reportedly implemented by Miyamoto for <i>Super Mario 64</i>.</p>
+
+<p>In 2012, <i>Super Mario 64</i> was among the 80 entries in the <a href="https://en.wikipedia.org/wiki/Smithsonian_American_Art_Museum">Smithsonian American Art Museum</a>'s <a href="https://en.wikipedia.org/wiki/The_Art_of_Video_Games">The Art of Video Games</a> exhibit.</p>
+
+<h3>Influence</h3>
+
+<p><i>Super Mario 64</i> set many precedents for 3D platformers as one of the most influential video games. The game is known for its <a href="https://en.wikipedia.org/wiki/Nonlinear_gameplay">nonlinear</a>, open freedom, which has been acclaimed by <a href="https://en.wikipedia.org/wiki/Video_game_developer">video game developers</a> and journalists. <i><a href="https://en.wikipedia.org/wiki/1Up.com">1Up.com</a></i> wrote about its central hub world, which provides a safe tutorial and a level selector, and is now a staple of the 3D platformer genre. As the genre evolved, many of the series's conventions were rethought drastically, placing emphasis on exploration over traditional platform jumping, or "hop and bop" action. Though some disputed its quality, others argued that it established an entirely new genre for the series. Its mission-based level design inspired game designers such as <i><a href="https://en.wikipedia.org/wiki/GoldenEye_007_(1997_video_game)">GoldenEye 007</a></i> (1997) producer and director <a href="https://en.wikipedia.org/wiki/Martin_Hollis_(video_game_designer)">Martin Hollis</a> and the development team of <i><a href="https://en.wikipedia.org/wiki/Tony_Hawk's_Pro_Skater_(video_game)">Tony Hawk's Pro Skater</a></i>. <a href="https://en.wikipedia.org/wiki/Dan_Houser">Dan Houser</a>, a prominent figure in the development of the <a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto"><i>Grand Theft Auto</i> series</a>, stated, "Anyone who makes 3D games who says they've not borrowed something from <i>Mario</i> or <i>Zelda</i> [of the Nintendo 64] is lying". <a href="https://en.wikipedia.org/wiki/Square_Enix">Square Enix</a> has stated that a coincidental meeting with <a href="https://en.wikipedia.org/wiki/Disney">Disney</a> employees resulted in the creation of the <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts">Kingdom Hearts</a></i> series, inspired by <i>Super Mario 64</i>'s use of 3D environments and exploration. Chris Sutherland, who served as the lead designer for <a href="https://en.wikipedia.org/wiki/Banjo-Kazooie_(video_game)"><i>Banjo-Kazooie</i></a>, agreed that <i>Super Mario 64</i> set the benchmark for 3D platformers and claimed that any other game in the genre on the Nintendo 64 would inevitably be compared with <i>Super Mario 64</i>.</p>
+
+<p><i>Super Mario 64</i> introduced a free-floating camera that can be controlled independently of the character. To increase freedom of exploration and fluid control in a 3D world, <i>Super Mario 64</i> designers created a dynamic virtual <a href="https://en.wikipedia.org/wiki/Professional_video_camera">video camera</a> that turns and accelerates according to the character's actions. This camera system became the standard for 3D platformers. <i>Nintendo Power</i> praised the game's camera movements along with <i>The Legend of Zelda: Ocarina of Time</i>'s addition of the <a href="https://en.wikipedia.org/wiki/Strafing_(video_games)#Circle_strafing">lock-on camera</a> and concluded that the two games were trailblazers for the 3D era. <i><a href="https://en.wikipedia.org/wiki/PC_Magazine">PC Magazine</a></i>'s K. Thor Jensen considers <i>Super Mario 64</i> to be the first truly realized 3D platformer with the integration of camera control into its core gameplay, which he called the medium's true evolutionary leap.</p>
+
+<p><i>Super Mario 64</i>'s use of the analog stick was novel, offering more precise and wide-ranging character movements than the digital D-pads of other consoles. At the time, 3D games generally only allowed the player to either control the character in relation to a fixed camera angle or in relation to the character's perspective. <i>Super Mario 64</i>'s controls, in contrast, are fully analog and interpret a 360-degree range of motion into navigation through a 3D space relative to the camera. The analog stick allows for precise control over subtleties such as running speed. In 2005, <i>Electronic Gaming Monthly</i> ranked <i>Super Mario 64</i> the most important game since they began publication in 1989, stating that, while there were 3D games before it, "Nintendo's was the first to get the control scheme right".</p>
+
+<p>In July 2021, a pristine, sealed copy of <i>Super Mario 64</i> was auctioned for $1,560,000, the largest amount ever paid for a video game. <a href="https://en.wikipedia.org/wiki/Heritage_Auctions">Heritage Auctions</a>'s video games specialist said, "It seems impossible to overstate the importance of this title, not only to the history of Mario and Nintendo but to video games as a whole".</p>
+
+<p>A sequel was planned for the disk drive add-on, under the codename <i><a href="https://en.wikipedia.org/wiki/Super_Mario_128">Super Mario 128</a></i>. In July 1996, Nintendo insiders stated that Miyamoto was assembling a team consisting mostly of developers who had worked on <i>Super Mario 64</i>. Miyamoto affirmed that work on the sequel had only commenced at the time of the E3 1997 convention. The project was canceled due to its lack of progress and the commercial failure of the Nintendo 64 Disk Drive.</p>
+
+<p><i>Super Mario 64</i> successors include <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Sunshine">Super Mario Sunshine</a></i> for the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> and <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Galaxy">Super Mario Galaxy</a></i> for the Wii, building on its core design of power-ups and its 3D, open-ended gameplay. <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Galaxy_2">Super Mario Galaxy 2</a></i> includes a remake of <i>Super Mario 64</i>'s Whomp's Fortress level called Throwback Galaxy. <i><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_Land">Super Mario 3D Land</a></i> and <i><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_World">Super Mario 3D World</a></i> are departures from the open-ended design, instead focused on platforming reminiscent of 2D games.</p>
+
+<p>The Nintendo Switch game <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Odyssey">Super Mario Odyssey</a></i> returns to <i>Super Mario 64</i>'s open design; it includes numerous references to the latter. The '<i>Mario 64</i> Suit' and '<i>Mario 64</i> Cap', which change Mario's appearance to his in <i>Super Mario 64</i>, can be purchased after completing the main storyline. Additionally, Mario can travel to the Mushroom Kingdom, which includes Princess Peach's Castle and its courtyard. The Kingdom's Power Moons resemble <i>Super Mario 64</i>'s Power Stars.</p>
+
+<p>Rumors spread rapidly after the game's release. The most popular was a pervasive rumor that Luigi existed as an <a href="https://en.wikipedia.org/wiki/Secret_character_(video_games)">unlockable</a> character. In 1996, <i>IGN</i> offered a prize of $100 if a player could find Luigi, to no avail. Fueling the rumor was a very blurry message on a statue in the courtyard of Princess Peach's Castle, thought to say "L is real 2401". This was disproved in 1998, when a fan received a letter from Nintendo that the programmers included the text as a joke and it was not supposed to say anything. In July 2020, 24 years and 1 month after the initial release of <i>Super Mario 64</i>, unused assets for Luigi from the scrapped multiplayer mode were discovered in the game's development files, in an event known as the <a href="https://en.wikipedia.org/wiki/Nintendo_Gigaleak">Nintendo Gigaleak</a>.</p>
+
+<p>Satirical conspiracy theories about the game became popular in the early 2020s. These theories were grouped into an <a href="https://en.wikipedia.org/wiki/Internet_meme">Internet meme</a> of an <a href="https://en.wikipedia.org/wiki/Iceberg">iceberg</a> known as the "<i>Super Mario 64</i> iceberg", with less likely theories representing places being placed closer to the bottom of the "ocean". One popular theory was the "Wario Apparition", based on an E3 1996 presentation with <a href="https://en.wikipedia.org/wiki/Charles_Martinet">Charles Martinet</a> voicing a disembodied <a href="https://en.wikipedia.org/wiki/Wario">Wario</a> head. Some fans believed that the Wario head remained in some copies of the game. Conspiracy theorists have also spread the rumor that "every copy of <i>Super Mario 64</i> is personalized", claiming that certain bizarre phenomena existed in only certain copies of the game.</p>
+
+<p>In the years since the game's release, players have used glitches to reach previously unreachable parts of the game, including, in 2014, a coin not possible to be collected in ordinary play. <a href="https://en.wikipedia.org/wiki/Speedrun">Speedrun</a> techniques include the Lakitu skip, a glitch that disables a dialog box explaining camera movement; the Bob-omb clip, which uses a glitch in a Bob-omb's explosion animation to clip through walls; and the backwards long jump glitch, which involves the player performing a repetitive move, the "backwards long jump" (BLJ), allowing Mario to reach very high speed values and has numerous applications in speedrunning; the latter was patched in the <i>Rumble Pak</i> re-release in 1997 as well as the <i>Super Mario 3D All-Stars</i> re-release (with the <i>3D All-Stars</i> version being based on the <i>Rumble Pak</i> version's codebase). In 2013, <a href="https://en.wikipedia.org/wiki/YouTuber">YouTuber</a> <a href="https://en.wikipedia.org/wiki/Vinesauce">Vinesauce</a> posted a compilation of various corruptions of the game, replicated with a program named <i>naughty</i>. Another YouTuber, <a href="https://en.wikipedia.org/wiki/Pannenkoek2012">Pannenkoek2012</a>, creates highly technical and analytical videos of <i>Super Mario 64</i> glitches and mechanics, which have been covered many times by the video game press. The game has also inspired challenges that attempt to beat it with certain restrictions, such as not being able to press the A button, requiring deep understanding about the game's mechanics and bugs. In May 2024, a player named Marbler managed to beat the entire game without pressing the A button.</p>
+
+<p><i>Super Mario 64</i> has led to the creation of <a href="https://en.wikipedia.org/wiki/Fangame">fan-made</a> remakes, <a href="https://en.wikipedia.org/wiki/Video_game_modding">modifications</a> and <a href="https://en.wikipedia.org/wiki/ROM_hacking">ROM hacks</a>:</p>
+
+<ul>
+  <li><i>Super Mario 64: Chaos Edition</i>, a PC-emulated version of the original that loads codes which cause bizarre behavior. The game received coverage after streaming ensemble <a href="https://en.wikipedia.org/wiki/Vinesauce">Vinesauce</a> posted a playthrough of the game.</li>
+  <li><i>Super Mario Run 64</i>, converting the game into a <a href="https://en.wikipedia.org/wiki/2.5D">2.5D</a> <a href="https://en.wikipedia.org/wiki/Running_game_(video_game)">running game</a> in the spirit of <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Run">Super Mario Run</a></i></li>
+  <li><i>Super Mario 64 Online</i>, enabling <a href="https://en.wikipedia.org/wiki/Online_multiplayer">online multiplayer</a>. It was taken down after a copyright strike by Nintendo. It was later reuploaded and renamed to <i>Net64</i>.</li>
+  <li><i>Super Mario 64 Maker</i>, a <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Maker">Super Mario Maker</a></i>-like <a href="https://en.wikipedia.org/wiki/Level_editor">level editor</a></li>
+  <li><i>Super Mario 64 Odyssey</i>, featuring levels based on <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Odyssey">Super Mario Odyssey</a></i> and adding its mechanic of possessing enemies by throwing Mario's hat</li>
+  <li><i>Super Mario 64: Last Impact</i>, an original game that incorporates elements from other <i>Mario</i> games, such as the Fire Flower from <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.">Super Mario Bros.</a></i>, the F.L.U.D.D. cannon from <i>Super Mario Sunshine</i>, and the Bee Mushroom from <i>Super Mario Galaxy</i></li>
+  <li><i>Super Mario 64: Ocarina of Time</i>, in which the world of <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Ocarina_of_Time">The Legend of Zelda: Ocarina of Time</a></i> is recreated in <i>Super Mario 64</i>, with new gameplay elements, puzzles, and a story</li>
+  <li><i>Open World Mario 64</i>, a <a href="https://en.wikipedia.org/wiki/Battle_royale_game">battle royale</a>–style mod set on a huge map made up of all <i>Super Mario 64</i> levels, in the style of <i><a href="https://en.wikipedia.org/wiki/Fortnite_Battle_Royale">Fortnite Battle Royale</a></i> and <i><a href="https://en.wikipedia.org/wiki/PlayerUnknown's_Battlegrounds">PlayerUnknown's Battlegrounds</a></i></li>
+  <li><i>First Person Mario 64</i>, a modification that fixes the camera configuration on <a href="https://en.wikipedia.org/wiki/First-person_(video_games)">first-person</a>, often making the game much more challenging due to how the game demands acrobatic movements, and how the game does not render objects when they're too close to the camera.</li>
+  <li><i>Super Mario 64 FPS</i>, a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> remake of the original, speedran by YouTubers Falsepog and <a href="https://en.wikipedia.org/wiki/Alpharad">Alpharad</a></li>
+  <li><i>Super Mario 64 HD</i>, a <a href="https://en.wikipedia.org/wiki/High-definition_video">high-definition</a> <a href="https://en.wikipedia.org/wiki/Video_game_remake">remake</a> of the first level of <i>Super Mario 64</i>, Bob-Omb Battlefield, using the <a href="https://en.wikipedia.org/wiki/Unity_(game_engine)">Unity</a> <a href="https://en.wikipedia.org/wiki/Game_engine">game engine</a>. The project was taken down following a <a href="https://en.wikipedia.org/wiki/Copyright_infringement">copyright claim</a> by Nintendo.</li>
+</ul>
+
+<p>In 2013, a study was conducted to see the <a href="https://en.wikipedia.org/wiki/Neuroplasticity">plasticity</a> effects on the human brain after playing <i>Super Mario 64</i>—chosen for its navigation element and the ability to play in a three-dimensional environment—for at least thirty minutes every day for two months. The study concluded that doing the previously mentioned activity caused the <a href="https://en.wikipedia.org/wiki/Gray_matter">gray matter</a> (a major part of the <a href="https://en.wikipedia.org/wiki/Central_nervous_system">central nervous system</a>) to increase in the right <a href="https://en.wikipedia.org/wiki/Hippocampal_formation">hippocampal formation</a> and the right <a href="https://en.wikipedia.org/wiki/Dorsolateral_prefrontal_cortex">dorsolateral prefrontal cortex</a>—brain areas thought to contribute to <a href="https://en.wikipedia.org/wiki/Spatial_navigation">spatial navigation</a>, <a href="https://en.wikipedia.org/wiki/Working_memory">working memory</a>, and <a href="https://en.wikipedia.org/wiki/Motor_planning">motor planning</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

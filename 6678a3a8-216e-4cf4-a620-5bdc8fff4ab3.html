@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>SONIC X SHADOW GENERATIONS</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('6678a3a8-216e-4cf4-a620-5bdc8fff4ab3/5e4287dd-13c7-43a5-8576-718b5831292f.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="6678a3a8-216e-4cf4-a620-5bdc8fff4ab3/360c78fd-cd2d-442f-b915-1e250550c010.ico"/> SONIC X SHADOW GENERATIONS</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="6678a3a8-216e-4cf4-a620-5bdc8fff4ab3/acbaede3-2963-469d-af50-b92e1c888fb1.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:52:38</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:28:33</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Switch">Nintendo Switch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/24/2024">10/24/2024</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-95">95</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-80">80</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sonic Team">Sonic Team</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-SEGA">SEGA</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Achievements">Achievements</a><br/><a href="#quicklink-Cloud Saves">Cloud Saves</a><br/><a href="#quicklink-Family Sharing">Family Sharing</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Leaderboards">Leaderboards</a><br/><a href="#quicklink-Single Player">Single Player</a><br/><a href="#quicklink-Stats">Stats</a><br/><a href="#quicklink-Trading Cards">Trading Cards</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://steamcommunity.com/app/2513280" target="_blank">Community Hub</a><br/><a href="https://steamcommunity.com/app/2513280/discussions/" target="_blank">Discussions</a><br/><a href="https://steamcommunity.com/app/2513280/guides/" target="_blank">Guides</a><br/><a href="https://store.steampowered.com/news/?appids=2513280" target="_blank">News</a><br/><a href="https://store.steampowered.com/app/2513280" target="_blank">Store Page</a><br/><a href="https://pcgamingwiki.com/api/appid.php?appid=2513280" target="_blank">PCGamingWiki</a><br/><a href="https://steamcommunity.com/stats/2513280/achievements" target="_blank">Achievements</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-2D">2D</a><br/><a href="#quicklink-2D Platformer">2D Platformer</a><br/><a href="#quicklink-3D">3D</a><br/><a href="#quicklink-3D Platformer">3D Platformer</a><br/><a href="#quicklink-Action">Action</a><br/><a href="#quicklink-Adventure">Adventure</a><br/><a href="#quicklink-Cartoony">Cartoony</a><br/><a href="#quicklink-Colorful">Colorful</a><br/><a href="#quicklink-Family Friendly">Family Friendly</a><br/><a href="#quicklink-Fast-Paced">Fast-Paced</a><br/><a href="#quicklink-Great Soundtrack">Great Soundtrack</a><br/><a href="#quicklink-Linear">Linear</a><br/><a href="#quicklink-Platformer">Platformer</a><br/><a href="#quicklink-Psychological Horror">Psychological Horror</a><br/><a href="#quicklink-Quick-Time Events">Quick-Time Events</a><br/><a href="#quicklink-Replay Value">Replay Value</a><br/><a href="#quicklink-Romance">Romance</a><br/><a href="#quicklink-Score Attack">Score Attack</a><br/><a href="#quicklink-Singleplayer">Singleplayer</a><br/><a href="#quicklink-Soundtrack">Soundtrack</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					This product entitles you to download both the digital PS4® version and the digital PS5® version of this game.<br><br>Shadow the Hedgehog is back with Classic and Modern Sonic in SONIC X SHADOW GENERATIONS, an all-new collection featuring two unique experiences! <br><br>Play as Shadow in a brand-new story campaign featuring never-before-seen abilities that prove why he’s known as the Ultimate Life Form! Speed through iconic stages from Shadow’s history, discover hidden secrets in an expansive hub world, and unlock new powers to take on Black Doom and save the world.<br><br>SONIC X SHADOW GENERATIONS also includes a complete remaster of the highly acclaimed SONIC GENERATIONS, a time-traveling adventure featuring a greatest-hits collection of 3D and 2D Sonic stages, now with upgraded visuals and new bonus content.<br><br>Join Shadow as he embarks on a mission of discovery with bonus Playstation-exclusive extended prologue animations, featuring never-before-seen deleted scenes.<br><br>The Return of Shadow<br>In this new standalone campaign, Shadow’s nemesis, Black Doom, has reemerged and threatens to take over the world once again. Shadow must journey into his past, confront his painful memories, and unlock new dark powers to save the world.<br><br>Shadow Evolved<br>Harness Shadow’s new Doom Powers to battle hordes of enemies and tackle platforming challenges like never before. Surf on water, fly over obstacles, and stop time with the return of Chaos Control!<br><br>A Journey Through Time and Dimensions<br>Relive signature levels from Shadow’s previous adventures and accelerate through mind-bending stages in both 3D and 2D, warped by Black Doom’s influence as Shadow works to piece together the timeline and thwart his evil plans. <br><br>Explore the New White Space<br>Stretch your legs in an all-new hub world inspired by the open-zone gameplay of Sonic Frontiers. As Shadow gains new powers, he can explore further and uncover the secrets hidden throughout!<br><br>An Epic Time-Traveling Sonic Adventure<br>Past meets present in SONIC GENERATIONS! When Dr. Eggman teams up with his past self and the mysterious Time Eater to erase their past defeats and rewrite history, they scatter Sonic and his friends across space and time. Now, Modern and Classic Sonic will have to team up to defeat this dastardly trio and restore their timeline to normal!<br><br>The Best of Both Worlds, Remastered<br>Spin dash through a greatest-hits collection of 3D and 2D versions of iconic stages from past Sonic games, now with updated visuals and reworked cinematics. <br><br>More Collectibles, Bonus Content, and more!<br>Rescue Chao hiding in every level, rack up the highest pinball score in the Casino Nights Zone, and check out the museum for behind-the-scenes art, music, and more!  <br><br>If you already own the PS4® version of this game, you can get the PS5® digital version at no extra cost and you do not need to purchase this product. Owners of a PS4® disc copy must insert it into the PS5® every time they want to download or play the PS5® digital version. PS4® game disc owners who buy the PS5® Digital Edition disc-free console will not be able to get the PS5® version at no extra cost.
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

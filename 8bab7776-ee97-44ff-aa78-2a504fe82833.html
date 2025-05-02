@@ -1,0 +1,325 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Rock Band Unplugged</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('8bab7776-ee97-44ff-aa78-2a504fe82833/930863cc-2826-4c77-b7e1-09de5278f678.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="8bab7776-ee97-44ff-aa78-2a504fe82833/4b7ec35a-d61d-417f-8148-539fc6587115.png"/> Rock Band Unplugged</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="8bab7776-ee97-44ff-aa78-2a504fe82833/cc1e85a0-4887-4821-bc63-bb52f4883193.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 5:00:18</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:36:20</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation Portable">Sony PlayStation Portable</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-6/9/2009">6/9/2009</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-81">81</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Rhythm">Rhythm</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Backbone Entertainment">Backbone Entertainment</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Harmonix">Harmonix</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-MTV Games">MTV Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Rock_Band_Unplugged" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/20140222022324/http://www.rockband.com/games/unplugged" target="_blank">Rock Band Unplugged website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Rock Band Unplugged</b></i> is a 2009 <a href="https://en.wikipedia.org/wiki/Rhythm_game">rhythm game</a> developed by <a href="https://en.wikipedia.org/wiki/Harmonix">Harmonix</a> in partnership with <a href="https://en.wikipedia.org/wiki/Backbone_Entertainment">Backbone Entertainment</a>, published by <a href="https://en.wikipedia.org/wiki/MTV_Games">MTV Games</a>, and distributed by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>. It is the third installment in the <a href="https://en.wikipedia.org/wiki/Rock_Band"><i>Rock Band </i>series</a> and the first to be exclusively developed for a handheld <a href="https://en.wikipedia.org/wiki/Video_game_console">console</a>. The game was released in North America and Europe in June 2009.</p>
+
+<p>The core game is functionally similar to the note-matching gameplay of Harmonix's previous titles, <i><a href="https://en.wikipedia.org/wiki/Frequency_(video_game)">Frequency</a></i> and <i><a href="https://en.wikipedia.org/wiki/Amplitude_(2003_video_game)">Amplitude</a></i>, with the player responsible for playing all four instruments—<a href="https://en.wikipedia.org/wiki/Lead_guitar">lead</a> and <a href="https://en.wikipedia.org/wiki/Bass_guitar">bass guitar</a>, <a href="https://en.wikipedia.org/wiki/Drum">drums</a>, and <a href="https://en.wikipedia.org/wiki/Singing">vocals</a>—using the Portable's controls. Game modes are similar to <i>Rock Band'</i>s, and the soundtrack includes a number of songs that have already been a part of the <i>Rock Band</i> series. Additional tracks will be a time-limited exclusive to <i>Unplugged</i> before they are released as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> for the console games. The game supports the addition of new songs that can be purchased through the <a href="https://en.wikipedia.org/wiki/PlayStation_Store">PlayStation Store</a>.</p>
+
+<p><i>Rock Band Unplugged</i>, in addition to being released separately, was also released as part of a "Limited Edition Entertainment Pack" that also includes a <i>Rock Band Unplugged</i>-branded PSP, a 4GB memory card, and a voucher to download the movie <i><a href="https://en.wikipedia.org/wiki/School_of_Rock">School of Rock</a></i>. A voucher for an exclusive 5-song demo of <i>Rock Band Unplugged</i> that is compatible with downloadable content <!-- as opposed to the 3 half&#x2D;song demo in the PS Store --> was included with the <a href="https://en.wikipedia.org/wiki/PSP_Go">PSP Go</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p>The main gameplay modes in <i>Rock Band Unplugged</i> are similar to that of the console versions of the game. In Tour mode, the player creates a customized band, plays sets of songs at venues around the world, earning cash and fame, and unlocking new vehicles, venues, and staff. Songs completed in Tour mode then become available in Quick Play mode, which allows any song to be played without the need to create a band.</p>
+
+<p>Songs in <i>Rock Band Unplugged</i> feature tracks for the same four instruments as in <i>Rock Band</i>: lead guitar, bass guitar, drums, and vocals. During the Quick Play and Tour modes, gameplay is similar to Harmonix' previous games <i><a href="https://en.wikipedia.org/wiki/Frequency_(video_game)">Frequency</a></i> and <i><a href="https://en.wikipedia.org/wiki/Amplitude_(2003_video_game)">Amplitude</a></i>: The player presses combinations of buttons on the PSP to match notes in time with the rhythm of the currently-selected instrument. After completing a <a href="https://en.wikipedia.org/wiki/Phrase_(music)">phrase</a> without missing any notes, the instrument continues to play automatically for a set amount of time, allowing the player to switch to another instrument using the shoulder buttons. Successfully completing multiple phrases in a row builds a score multiplier, as well as allowing the song to play in its entirety. Not completing a phrase in a track for an extended period of time will drain the Crowd Meter for that instrument, eventually causing the instrument to fail. A failed track will eventually cause the entire band to fail if not saved in time.</p>
+
+<p>Overdrive is handled similarly to the main <i>Rock Band</i> series. By hitting certain white-colored sections of notes placed throughout a song, the player fills the Energy Meter. Once the meter is at least half full, the player may press down on the D-pad or X to activate Overdrive, which revives all failed instruments and enables a temporary state that boosts the score multiplier and slows the degradation of the Crowd Meter for all instruments.  During solos, the player is automatically switched to the appropriate instrument; each note is scored individually, and the phrasing and track-switching elements do not apply until the solo is over.</p>
+
+<p>Two additional modes, Band Survival Mode and Warmup Mode, are included in the "Extras" section of the game. In both modes, notes are scored individually, instead of being divided into phrases. Tracks will not play automatically, causing the Crowd Meter for unselected instruments to continually drop in Band Survival Mode. In Warmup Mode, only the currently-selected track is affected by missed notes.  No multiplayer mode is included in the game.</p>
+
+<p>The Nintendo DS version of <a href="https://en.wikipedia.org/wiki/Rock_Band_3">Rock Band 3</a> and <a href="https://en.wikipedia.org/wiki/Lego_Rock_Band">Lego Rock Band</a> feature identical gameplay to <i>Unplugged</i>.</p>
+
+<h2>Soundtrack</h2>
+
+<p><i>Rock Band Unplugged</i> features 41 tracks, all of them <a href="https://en.wikipedia.org/wiki/Master_recording">master recordings</a>, chosen from the songs present in <i>Rock Band 2</i> and those present in the main games' Music Store. The game uses the PSP's Wi-Fi capabilities to provide additional downloadable content from music providers through the PlayStation Store.  Players can also download new tracks to the PSP through the PC version of the PlayStation Store. Ten songs were made available for download on the day of the game's release, and two new songs were released each week until November 19, 2009, when further DLC development was cancelled; Harmonix, while stating that <i>Unplugged</i> has "run through [its] planned state", has not ruled out future downloadable content but are presently focused on other <i>Rock Band</i> projects. There is no cross-compatibility between music libraries for <i>Rock Band Unplugged</i> and the console versions of <i>Rock Band</i>, nor any interaction with the PlayStation 3 version of either <i>Rock Band</i> game.</p>
+
+<p>The songs included in the game are as follows:</p>
+
+<p>The songs included in the <i>Rock Band Unplugged Starter Pack</i> are as follows:</p>
+
+<h3>Downloadable content</h3>
+
+<p>Currently, "Toxicity", "Under the Bridge", "Back from the Dead", and "Smooth Criminal" are no longer available through the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a> store.</p>
+
+<h2><i> Band Unplugged Lite</i></h2>
+
+<p>On March 10, 2010, <i>Rock Band Unplugged Lite</i> was released on the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a>, which is a downloadable version of the game. The <i>Lite</i> version includes the 5 Starter Pack songs, but can accept all downloadable content (DLC). The in-game Music Store enables users to download any of the original <i>Rock Band Unplugged</i> songs for the same price as the existing downloadable songs. Original <i>Rock Band Unplugged</i> songs can only be purchased through the in-game Music Store, while additional DLC songs can be purchased from either the PlayStation Store or the in-game Music Store. The lite version was removed at one point from the PlayStation store.</p>
+
+<h2>Reception</h2>
+
+<p><i>Rock Band Unplugged</i> was met with generally positive reviews. The game's gameplay was praised, likening it to the success of Harmonix' previous games <i>Frequency</i> and <i>Amplitude</i>, and called a "unexpectedly nostalgic pleasure". It was further considered a general improvement on the standard <i>Rock Band</i> gameplay format, "adding a new level of depth for veteran players", and that by being in control of all parts of the band, the player would be more connected to their virtual band than in the console versions. Reviewers praised the use of sound, particularly the slight volume emphasis given to the current instrument that is being played, though recommended the use of headphones to overcome the poor speaker quality of the PSP unit. The choice of control scheme was also praised, which avoided introducing too many difficult button combinations on the PSP unit. The game's difficulty was also noted to be well-balanced both between songs and individual difficulty levels.</p>
+
+<p>Reviewers noted that the "World Tour" mode of the game suffered the same problems that both <i>Rock Band</i> games had when they were first released, in that without additional content, the player would be likely playing the same song several times over as they progress through the tour. The lack of multiplayer or online leaderboards for <i>Rock Band Unplugged</i> was considered its largest weakness. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>'s Greg Miller lamented that unlike the social nature of <i>Rock Band</i> on consoles, the lack of such interaction cooperative or competitively with a second player leaves little reason to come back to the game or purchase additional content. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i>'s Carolyn Petit, in considering the success of the multiplayer aspects of the other <i>Rock Band</i> titles, considered the omission "baffling". The cost of additional downloadable content, even in consideration of it being more of the same that already exists in the <i>Rock Band</i> series, remains the same, from $0.99 to $1.99 a song. Reviewers also criticized the need to repurchase such downloadable content for the game, with no way to reuse existing PlayStation 3 <i>Rock Band</i> content with the PSP game.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

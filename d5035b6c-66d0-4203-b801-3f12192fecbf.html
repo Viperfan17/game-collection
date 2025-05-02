@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Wii Sports Resort</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('d5035b6c-66d0-4203-b801-3f12192fecbf/bbc89ac3-6ba0-4f8e-9167-e434c7d7d189.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="d5035b6c-66d0-4203-b801-3f12192fecbf/fbc1cef2-d02f-4337-b9a5-5ab7e6e8cf02.png"/> Wii Sports Resort</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="d5035b6c-66d0-4203-b801-3f12192fecbf/0524723f-5826-4e1e-a6cf-8e6fa2598764.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:57:43</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:23:58</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Wii">Nintendo Wii</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-6/25/2009">6/25/2009</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-79">79</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-80">80</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Sports">Sports</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo EAD">Nintendo EAD</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Wii_Sports_Resort" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/20090718113827/http://www.wiisportsresort.com/" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] composer: Ryo Nagamatsu">[People] composer: Ryo Nagamatsu</a><br/><a href="#quicklink-[People] director: Takayuki Shimamura">[People] director: Takayuki Shimamura</a><br/><a href="#quicklink-[People] director: Yoshikazu Yamashita">[People] director: Yoshikazu Yamashita</a><br/><a href="#quicklink-[People] producer: Katsuya Eguchi">[People] producer: Katsuya Eguchi</a><br/><a href="#quicklink-[People] programmer: Soichi Nakajima">[People] programmer: Soichi Nakajima</a><br/><a href="#quicklink-[People] writer: Makoto Wada">[People] writer: Makoto Wada</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Wii Sports Resort</b></i> is a 2009 <a href="https://en.wikipedia.org/wiki/Sports_game">sports</a> <a href="https://en.wikipedia.org/wiki/Simulation_game">simulation</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> <a href="https://en.wikipedia.org/wiki/Video_game_console">video game console</a>. It is the sequel to <i><a href="https://en.wikipedia.org/wiki/Wii_Sports">Wii Sports</a></i> (2006). It is the first first-party Wii game to support the <a href="https://en.wikipedia.org/wiki/Wii_MotionPlus">Wii MotionPlus</a> accessory and the first game overall to require it, which was bundled with the game. <i>Wii Sports Resort</i> was first announced at <a href="https://en.wikipedia.org/wiki/E3_2008">E3 2008</a> and was released in Japan on June 25, 2009, and in nearly all other regions the following month. While <i>Wii Sports Resort</i> was first released as a stand-alone title, it was later <a href="https://en.wikipedia.org/wiki/Pack-in_game">bundled</a> with newer Wii consoles alongside <i>Wii Sports</i>.</p>
+
+<p><i>Wii Sports Resort</i> features a collection of twelve sports. The game makes full usage of the Wii MotionPlus accessory, an add-on to the <a href="https://en.wikipedia.org/wiki/Wii_Remote">Wii Remote</a> controller which gives it full omnidirectional movement detection. This is an improvement over the base controller, which only repeated straight-arm movement.</p>
+
+<p><i>Wii Sports Resort</i> received positive reviews from critics for its improved controls, gameplay, and graphics. It was a major commercial success, with 33.14 million copies sold worldwide, making it the third <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Wii_video_games">best-selling game on the Wii</a>, after its predecessor <i>Wii Sports</i> and <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_Wii">Mario Kart Wii</a></i>, as well as one of the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_video_games">best-selling video games of all time</a>. The game was followed by <i><a href="https://en.wikipedia.org/wiki/Wii_Sports_Club">Wii Sports Club</a></i> (2014) and <i><a href="https://en.wikipedia.org/wiki/Nintendo_Switch_Sports">Nintendo Switch Sports</a></i> (2022).</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Wii Sports Resort</i> is a sports video game set in a tropical <a href="https://en.wikipedia.org/wiki/Island">island</a> on an <a href="https://en.wikipedia.org/wiki/Archipelago">archipelago</a> named Wuhu Island. The first time a player starts the game, several instructional videos will play, then the strap usage screen and the Wii MotionPlus test. Finally, the player will skydive to Wuhu Island. Twelve different sports are available; like the original <i>Wii Sports</i> game, the sports are each played by holding the <a href="https://en.wikipedia.org/wiki/Wii_Remote">Wii Remote</a> (and in some cases, the <a href="https://en.wikipedia.org/wiki/Wii_Nunchuk">Nunchuk</a>) like the actual sport being replicated.</p>
+
+<p>Most notably, in <a href="https://en.wikipedia.org/wiki/Archery">archery</a>, the player holds the Wii Remote vertically to hold the <a href="https://en.wikipedia.org/wiki/Bow_(weapon)">bow</a> and pulls back the Nunchuk to pull back the bow's string. The new feature that <i>Wii Sports Resort</i> brings is <a href="https://en.wikipedia.org/wiki/Wii_MotionPlus">Wii MotionPlus</a> compatibility, which enables 1:1 control and allows the games to be played with greater accuracy. For example, the game's new variation, Table Tennis, gives the player greater control over adding <a href="https://en.wikipedia.org/wiki/Rotation">spin</a> to the ball by twisting the Wii Remote while swinging. In Golf, the player can spin the ball by rotating the Wii Remote while swinging. Some sports involving more than two players support <a href="https://en.wikipedia.org/wiki/Hotseat_(multiplayer_mode)">hot seat</a> multiplayer, in which just one Wii Remote is needed and is shared among players while taking turns. The only games returning from the original <i>Wii Sports </i>are Bowling and Golf, while Table Tennis was originally a game in <i><a href="https://en.wikipedia.org/wiki/Wii_Play">Wii Play</a></i> although played in a radically different way using the pointer instead of the movements of the player. The other nine sports are entirely new and unique to the game.</p>
+
+<h3>List of sports</h3>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Swordfighting">Swordplay</a> (including "Duel", "Speed Slice" and "Showdown") (<a href="https://en.wikipedia.org/wiki/Kendo">Kendo</a>-style)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Wakeboarding">Wakeboarding</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Frisbee">Frisbee</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Disc_golf">Disc golf</a> (as "Frisbee golf")</li>
+  <li><a href="https://en.wikipedia.org/wiki/Archery">Archery</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Basketball">Basketball</a> (as "3 Point Contest" and "Pickup Game")</li>
+  <li><a href="https://en.wikipedia.org/wiki/Table_tennis">Table tennis</a> (including "Return Challenge")</li>
+  <li><a href="https://en.wikipedia.org/wiki/Golf">Golf</a> </li>
+  <li><a href="https://en.wikipedia.org/wiki/Bowling">Bowling</a> (including "100 Pin" and "Spin Control")</li>
+  <li><a href="https://en.wikipedia.org/wiki/Personal_water_craft">Power cruising</a> (including a V.S. mode)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Canoeing">Canoeing</a> (including a V.S. mode)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Cycling">Cycling</a> (including a V.S. mode)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Air_sports">Air Sports</a> (<a href="https://en.wikipedia.org/wiki/Parachuting">parachuting</a>, <a href="https://en.wikipedia.org/wiki/Dogfight">dogfighting</a>, and <a href="https://en.wikipedia.org/wiki/Pilot_(aeronautics)">piloting</a> (referred to as "Island Flyover"))</li>
+</ul>
+
+<p>Some of these sports are one-player, and some have a different version of the sport that is two-player. Most sports support multiplayer; in those sports, the maximum number of players is two or four, depending on the game. Three of the previously available sports, <a href="https://en.wikipedia.org/wiki/Tennis">tennis</a>, <a href="https://en.wikipedia.org/wiki/Baseball">baseball</a> and <a href="https://en.wikipedia.org/wiki/Boxing">boxing</a>, are unavailable.</p>
+
+<h2>Setting</h2>
+
+<p>Wuhu Island is a fictional tropical island that is the largest of an <a href="https://en.wikipedia.org/wiki/Archipelago">archipelago</a> of various islands and rock formations.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot">dead link</a></i>]</sup> "Wedge Island" is the second largest island of the archipelago, where the golf minigame takes place in <i>Wii Sports Resort</i>. At the center-right of the island, a large volcano is prominent, called "Maka Wuhu" ("Mt. Tenganamanga" in the European version of the game). To the south, a town and beach can be seen, called "Wuhu Town" and "Sugarsand Beach", respectively.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Link_rot">dead link</a></i>]</sup> To the west, a group of wind turbines and a lighthouse can be observed. At the center of the island, there is a large lake, called "Duckling Lake", which contains a waterfall.</p>
+
+<h3>History</h3>
+
+<h4><i>Wii Sports</i> demo and <i>Wii Fit</i></h4>
+
+<p>Before being given a name, a similar but less detailed version of the island was featured in a playable demo at <a href="https://en.wikipedia.org/wiki/E3_2006">E3 2006</a> titled <i>Wii Sports: Airplane</i>, a minigame similar to <i><a href="https://en.wikipedia.org/wiki/PilotWings">PilotWings</a></i> where the player would fly a plane around an island, passing through rings on a set time limit. The game was showcased alongside other sports demos of other sport-related minigames, which were later incorporated into <i>Wii Sports</i>; the airplane minigame was never added into the final game, but was later repurposed in a jogging minigame for <i><a href="https://en.wikipedia.org/wiki/Wii_Fit">Wii Fit</a></i>. The island was called "Wii Fit Island" in the game's manual, although the island lacked certain characteristics that were refined later on in future Nintendo games, such as in <i>Wii Sports Resort</i>.</p>
+
+<h4><i>Wii Sports Resort</i></h4>
+
+<p>To celebrate the release of <i>Wii Sports Resort</i>, on 23 July 2009, Nintendo transformed a part of <a href="https://en.wikipedia.org/wiki/Times_Square">Times Square</a> in <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a> to a beach-style vacation area based on Wuhu Island, containing a beach, pool, lounge, and bar. Additionally, people who visited were allowed to play the full game before its intended release on 26 July 2009. In the Air Sports minigame, players can fly around the island freely, seeing more details than in other minigames.</p>
+
+<p>In an interview with <a href="https://en.wikipedia.org/wiki/Satoru_Iwata">Satoru Iwata</a> about <i>Wii Sports Resort</i>, <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a>'s intentions of the island was to make it a notable franchise, saying that he thought of having an island concept for more than 10 years. He suggested the island was so much of a concrete location, with polished graphics and key details, it was as if it has become its own character. He furthered that the island generated familiarity, stating, "We thought it would be a fun idea to have a location that everyone knows and then have all sorts of stuff going on there." Miyamoto agreed that the island would be featured in multiple genres of video games, listing <a href="https://en.wikipedia.org/wiki/Adventure_games">adventure games</a>, <a href="https://en.wikipedia.org/wiki/Role-playing_video_games">role-playing games</a>, and <a href="https://en.wikipedia.org/wiki/Simulation_games">simulation games</a>.</p>
+
+<h4>Later appearances</h4>
+
+<p>A few months after the release of <i>Wii Sports Resort</i>, <i><a href="https://en.wikipedia.org/wiki/Wii_Fit_Plus">Wii Fit Plus</a></i>, the sequel to <i>Wii Fit</i>, utilizes the island as its location in several of its minigames.</p>
+
+<p>Wuhu Island is the named location of the third installment of the <i><a href="https://en.wikipedia.org/wiki/PilotWings">PilotWings</a></i> series, titled <i><a href="https://en.wikipedia.org/wiki/PilotWings_Resort">PilotWings Resort</a></i>. The game features gameplay similar to the piloting minigame in <i>Wii Sports Resort</i>.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Mario_Kart_7">Mario Kart 7</a></i> includes three courses set on Wuhu Island, those being "Wuhu Loop", "Maka Wuhu", and "Wuhu Town". A glitch was later discovered where the player was able to skip sections of the Wuhu Loop and Maka Wuhu maps, which Nintendo fixed a few months later. The Wuhu Town map was also included in <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8_Deluxe">Mario Kart 8 Deluxe</a></i>.</p>
+
+<p>Wuhu island acts as a selectable stage in Nintendo's <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros.">Super Smash Bros.</a></i> series, first appearing in <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._for_Wii_U">Super Smash Bros. for Wii U</a></i>. On the stage, the players fight on an airplane that flies around the island, stopping at various locations. The stage returned in <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Ultimate">Super Smash Bros. Ultimate</a></i>.</p>
+
+<h2>Development</h2>
+
+<p>The idea for a sequel to <i>Wii Sports</i> was considered well before the idea of the Wii MotionPlus peripheral. Development only moved forward after realizing the new possibilities of the control. The game was first revealed at Nintendo's <a href="https://en.wikipedia.org/wiki/E3_2008">E3 2008</a> press conference. Two minigames, <a href="https://en.wikipedia.org/wiki/Fishing">fishing</a> and <a href="https://en.wikipedia.org/wiki/Water_slide">water slide</a> riding, were first considered for inclusion in the game but were scrapped during development. A prototype <a href="https://en.wikipedia.org/wiki/Kendama">kendama</a> minigame was also created, but it was left out of the final product as the developers felt it did not fit into the resort theme.</p>
+
+<p>While wishing to avoid sports that already were present in <i>Wii Sports</i>, <a href="https://en.wikipedia.org/wiki/Bowling">bowling</a> and <a href="https://en.wikipedia.org/wiki/Golf">golf</a> made their return in <i>Wii Sports Resort</i> with changes. Bowling was added with the inclusion of a 100-pin mode and the addition of Golf (with additional courses) was imposed by Miyamoto after he talked in an interview about the influence of the player's backswing in golf.</p>
+
+<p>The principal setting of <i>Wii Sports Resort</i>, Wuhu Island, originally appeared at <a href="https://en.wikipedia.org/wiki/E3_2006">E3 2006</a> in the scrapped "Airplane" mode for <i>Wii Sports</i> but was subsequently changed to fit the mold of the <i><a href="https://en.wikipedia.org/wiki/Wii_Fit">Wii Fit</a></i> series as "Wii Fit Island". It was then remolded again into the profile of a resort island, where it would earn its official name of Wuhu Island. Hotels, a castle, some rock formations and ruins of an older civilization, and various sports arenas (such as the tennis courts from <i>Wii Sports</i>, a bowling alley, and a swordplay arena) were added. The island has since appeared as a stage in Nintendo games such as <i><a href="https://en.wikipedia.org/wiki/Wii_Fit_Plus">Wii Fit Plus</a></i> (as well as its <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> counterpart <i><a href="https://en.wikipedia.org/wiki/Wii_Fit_U">Wii Fit U</a></i>), <i><a href="https://en.wikipedia.org/wiki/Pilotwings_Resort">Pilotwings Resort</a></i>, <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_7">Mario Kart 7</a></i>, <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8_Deluxe">Mario Kart 8 Deluxe</a></i>, <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._for_Nintendo_3DS_and_Wii_U">Super Smash Bros. for Wii U</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Ultimate">Super Smash Bros. Ultimate</a></i>.</p>
+
+<h2>Reception</h2>
+
+<p><i>Wii Sports Resort</i> has received generally “favorable reviews”, with an average score on <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> of 80%. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> gave it a 7.7 out of 10, saying that the controls were impressive and the graphics were superb compared to most Wii games. <i><a href="https://en.wikipedia.org/wiki/GameTrailers">GameTrailers</a></i> gave an 8.6 out of 10. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> gave it an 8.0 out of 10. <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> magazine gave it a 6 out of 10. On <i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i>, the average score between the editors' reviews and users was an 'A-.' <i>GamesRelay</i> gave the game a score of 8.2, citing it to be a fun-loving game for family and friends. <i>SPOnG.com</i>'s Tim Smith awarded the game 90%, calling <i>Wii Sports Resort</i> and the MotionPlus peripheral "simple but welcome additions to the Wii's line-up."</p>
+
+<p>In May 2010, the <a href="https://en.wikipedia.org/wiki/American_Heart_Association">American Heart Association</a> (AHA) endorsed the Wii to encourage sedentary people to take the first step toward fitness. The AHA heart icon covers the console, and its more active games, <i><a href="https://en.wikipedia.org/wiki/Wii_Fit_Plus">Wii Fit Plus</a></i> and <i>Wii Sports Resort</i>. <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i> listed <i>Wii Sports Resort</i> and its predecessor <i><a href="https://en.wikipedia.org/wiki/Wii_Sports">Wii Sports</a></i> as two of the best multi-player experiences in Nintendo history, stating that everyone can have fun with them, ranging from young children to grandparents. They also cite the wide range of sports available. Like its predecessor, <i>Wii Sports Resort</i> found success with senior citizens.</p>
+
+<p>Alex Spencer at <i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i> praised the island setting for its design and attributes, saying, "Wuhu Island is relaxing in a way that games rarely are." He also compared the island to other maps in video game titles at the time, such as <a href="https://en.wikipedia.org/wiki/Liberty_City_(Grand_Theft_Auto)">Liberty City</a> in <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_IV">Grand Theft Auto IV</a></i>, first criticizing the island for its blocky geometry and empty space, but admiring the design of the island when viewed from the sky, with such flaws of the island vanishing. A <a href="https://en.wikipedia.org/wiki/Paper_craft">paper craft</a> model was created to represent Wuhu Island, featured by <i><a href="https://en.wikipedia.org/wiki/Engadget">Engadget</a></i>.</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/13th_Annual_Interactive_Achievement_Awards">13th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>Wii Sports Resort</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Family_Game_of_the_Year">Family Game of the Year</a>". Additionally, the game received two nomination from the <a href="https://en.wikipedia.org/wiki/British_Academy_Games_Awards">British Academy Games Awards</a> for "Best Family and Social Game" and "Best Sports Game" winning the former.</p>
+
+<h3>Sales</h3>
+
+<p>In Japan, <i>Wii Sports Resort</i> sold 152,000 copies within its first day of release and over 514,000 copies in two weeks. In North America, it sold over 500,000 copies in its first week. By mid-July 2009, the game had sold over 2 million copies worldwide, with 600,000 copies sold in Europe and 828,000 sold in Japan. Nintendo announced that it had sold over one million units individually in the United States, Japan, and Europe, accounting for over 3 million copies sold by August 2009.</p>
+
+<p>In 2009, <i>Wii Sports Resort</i> sold 7.57 million copies, making it the second-biggest-selling game worldwide of that year. As of March 31, 2021, <i>Wii Sports Resort</i> has sold 33.14 million copies worldwide.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

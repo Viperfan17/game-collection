@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sonic Rivals 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('13d0233b-a45f-4749-aba5-bc9869a29410/93380828-57ef-4238-b11b-cd15f148ea46.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="13d0233b-a45f-4749-aba5-bc9869a29410/3e8e5a99-3ce4-48d0-b0c8-f3ebc6dee17b.ico"/> Sonic Rivals 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="13d0233b-a45f-4749-aba5-bc9869a29410/92e7399d-016b-4eee-bc70-68d3b42061e1.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 5:00:18</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:36:38</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation Portable">Sony PlayStation Portable</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/13/2007">11/13/2007</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-40">40</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-60">60</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Backbone Entertainment">Backbone Entertainment</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sega Studio USA">Sega Studio USA</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-SEGA">SEGA</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Sonic_Rivals_2" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] composer: Chris Rezanson">[People] composer: Chris Rezanson</a><br/><a href="#quicklink-[People] director: Takashi Iizuka">[People] director: Takashi Iizuka</a><br/><a href="#quicklink-[People] producer: Keith Palmer">[People] producer: Keith Palmer</a><br/><a href="#quicklink-[People] producer: Taylor Miller">[People] producer: Taylor Miller</a><br/><a href="#quicklink-[People] writer: Takashi Iizuka">[People] writer: Takashi Iizuka</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Sonic Rivals 2</b></i> is a 2007 racing video game, the sequel to the 2006 game <i><a href="https://en.wikipedia.org/wiki/Sonic_Rivals">Sonic Rivals</a></i>. The game was developed by <a href="https://en.wikipedia.org/wiki/Backbone_Entertainment">Backbone Entertainment</a> and supervised by <a href="https://en.wikipedia.org/wiki/Sonic_Team#Sega_Studio_USA_(Sonic_Team_USA)">Sega Studio USA</a>, for the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> handheld video game console. <i>Sonic Rivals 2</i> was released across November and December 2007. It received "mixed or average" reviews from critics.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Sonic Rivals 2</i> has four main Single Player modes. Story Mode is the main single player mode. Players go through each of the game's battle modes and levels to advance the plot. Each zone has three acts and a boss, with the exception of the final zone. The characters are divided into four teams, each of which has their own story. The game introduces a new mode called Free Play. In this single player mode, players can choose any one of the eight characters and play through the zones in traditional 2D Sonic fashion. They can also try Time Attacking, or finding the ten hidden <a href="https://en.wikipedia.org/wiki/Chao_(Sonic)">Chao</a> in the levels. There are no opponents for this mode. This is a first for many of the characters featured. In addition, players can also try the Cup Circuit and Single Event modes. Races and battle can be customized in every aspect, and players can try to earn cards by completing challenges. There are 150 different cards to collect, and each is tied to a certain achievement. For example, getting an S Rank in Knockout Mode unlocks a card of <a href="https://en.wikipedia.org/wiki/Mephiles_the_Dark">Mephiles the Dark</a>. The cards themselves contain art from various older <i>Sonic</i> games, and can unlock things such as alternate suits for the characters. Unlike the first game, only one card is needed to unlock a suit; and each character has four suits instead of the original three. The cards also unlock the Cup Circuits, and Chao Detectors for the Zones.</p>
+
+<p>Each stage has three acts and a boss, instead of the original game's two. Acts one and three are races, and act two is always a battle. In the story mode, the races may be substituted with single character missions such as "Time Attack,” "Collect X Rings,” and other challenges. Certain stages can be skipped in the story, depending on the character chosen.</p>
+
+<p><i>Sonic Rivals 2</i> boasts a new multiplayer "Battle Mode" with six different types of competition in addition to the main race mode. These modes are also worked into the story. The lengths of the battles can be set though the selection menus. In Knockout, each player starts with three rings. Players must knock all of the rings out of their opponent and then attack them to win. The first player to get the set number of knockouts wins. In Rings Battle, players have a set amount time to collect as many rings as possible. The player with the most rings at the end of the time limit wins.</p>
+
+<p>Capture the Chao is a <i>Sonic</i> themed version of <a href="https://en.wikipedia.org/wiki/Capture_the_Flag">Capture the Flag</a>. Players must steal a set number of Chao from their opponent's base and bring them back to their own base with their own Chao still there to win. In Laps Race, the first player to complete a set number of laps around the track wins. King of the Hill has an Omochao stationed at the top of the level with a light beam. Players earn points by simply standing under it. The first player to get the set number of points wins. Tag is a Sonic themed cross between <a href="https://en.wikipedia.org/wiki/Hot_Potato_(game)">Hot Potato</a> and <a href="https://en.wikipedia.org/wiki/Tag_(game)">Tag</a>. Each player has a time limit that drops when they hold the bomb. Players pass the bomb by attacking the other player. The first player to have their time limit expire loses.</p>
+
+<h3>Characters</h3>
+
+<p><i>Sonic Rivals 2</i> features eight playable characters, including all five characters from the <a href="https://en.wikipedia.org/wiki/Sonic_Rivals">previous title</a>. All characters use Homing Attack and Spin Dash to move through the levels. Collecting Rings or destroying enemies will also fill the Signature Meter; when the meter is full, players can use a character-specific Signature Move to gain an advantage. For example, Shadow's "Chaos Control" move has the ability to slow down the other player's movement for a few seconds.</p>
+
+<p>The character roster is split into teams of two (<a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(character)">Sonic</a> and <a href="https://en.wikipedia.org/wiki/Tails_(Sonic_the_Hedgehog)">Tails</a>; <a href="https://en.wikipedia.org/wiki/Shadow_the_Hedgehog">Shadow</a> and <a href="https://en.wikipedia.org/wiki/Metal_Sonic">Metal Sonic</a>; <a href="https://en.wikipedia.org/wiki/Silver_the_Hedgehog">Silver</a> and <a href="https://en.wikipedia.org/wiki/Espio_the_Chameleon">Espio</a>; <a href="https://en.wikipedia.org/wiki/Knuckles_the_Echidna">Knuckles</a> and <a href="https://en.wikipedia.org/wiki/Rouge_the_Bat">Rouge</a>), with each team having its own story campaign that tells the events of the game's story from their perspective.</p>
+
+<h2>Plot</h2>
+
+<p>Sonic and Tails are investigating the disappearances of several Chao. They discover that <a href="https://en.wikipedia.org/wiki/Doctor_Eggman">Doctor Eggman</a> has stolen the Chao and concealed them inside a haunted mansion. He plans to feed them to an interdimensional beast called the "<a href="https://en.wikipedia.org/wiki/Ifrit">Ifrit</a>" to make it invincible, then release the Ifrit to destroy the world. However, as he needs the seven <a href="https://en.wikipedia.org/wiki/Chaos_Emerald">Chaos Emeralds</a> to open the portal to the Ifrit's dimension, he secretly hires Rouge to collect them. When the Master Emerald also goes missing, Knuckles teams up with Rouge to find it.</p>
+
+<p>Meanwhile, <a href="https://en.wikipedia.org/wiki/Silver_the_Hedgehog">Silver the Hedgehog</a> returns from the future, which has been ruined by the Ifrit. In order to prevent this, he searches for and steals the Chao in order to hide them and keep them safe. Espio, having been hired to investigate the disappearances, initially believes Silver is taking the Chao for nefarious purposes, but agrees to join forces after discovering his true motivations. Elsewhere, Shadow is met by Metal Sonic, who is being used by Eggman as a communication device. Eggman reveals that the true perpetrator is <a href="https://en.wikipedia.org/wiki/Eggman_Nega">Eggman Nega</a> disguised as himself, who learned of the Ifrit by accessing <a href="https://en.wikipedia.org/wiki/Gerald_Robotnik">Gerald Robotnik</a>'s journals. Shadow and Metal Sonic set out to retrieve the Chaos Emeralds before Nega does.</p>
+
+<p>All of the teams meet up at the haunted mansion to confront Nega. Despite Rouge only collecting six of the Emeralds, the portal to the Ifrit's dimension still opens, and Nega dispatches his own "Metal Sonic 3.0" robot to awaken the Ifrit. Despite possessing some of their friends' minds, the Ifrit is successfully defeated by the heroes. Shadow and Metal Sonic close the portal, trapping themselves and Eggman Nega in the Ifrit's dimension. However, Metal Sonic reveals the seventh Chaos Emerald inside his chassis, and Shadow uses it to teleport them back to their dimension, leaving Nega behind.</p>
+
+<p>Sonic and Tails free all the Chao, taking them back to a Chao Garden to relax. Knuckles uses Eggman Nega's Emerald Detector to find the Master Emerald, only for Rouge to steal it and run off. Silver returns to the future, hoping things have been made right, while Espio is left to report to <a href="https://en.wikipedia.org/wiki/Vector_the_Crocodile">Vector</a> on the state of the case.</p>
+
+<h2>Reception</h2>
+
+<p><i>Sonic Rivals 2</i> received "mixed or average reviews" from critics according to <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, averaging a 60/100.</p>
+
+<p>In March 2009, <i>Sonic Rivals</i> was certified as part of <a href="https://en.wikipedia.org/wiki/Sony">Sony</a>'s <a href="https://en.wikipedia.org/wiki/List_of_Sony_Greatest_Hits_games">Greatest Hits</a> budget line, representing North American sales of at least 250,000. <i>Sonic Rivals 2</i> soon followed.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

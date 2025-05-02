@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Call of Duty: Mobile</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('cc993fd3-911f-4d99-9a10-66d968e33465/375d4047-4bf5-4856-9317-65baffece96b.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="cc993fd3-911f-4d99-9a10-66d968e33465/666454ea-ec64-4b8b-90f0-98c1306c76f8.png"/> Call of Duty: Mobile</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="cc993fd3-911f-4d99-9a10-66d968e33465/ad8631d2-5eae-4d2c-8e25-442c5f8ec2fb.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 7:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 7:42:59</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/1/2019">10/1/2019</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-81">81</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Battle royale">Battle royale</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-TiMi Studio Group">TiMi Studio Group</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Tencent Games">Tencent Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Call_of_Duty:_Mobile" target="_blank">PCGamingWiki</a><br/><a href="https://codm.qq.com/main.shtml" target="_blank">Official site</a><br/><a href="https://www.igdb.com/games/call-of-duty-mobile" target="_blank">IGDB</a><br/><a href="https://www.mobygames.com/game/135528" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Call_of_Duty:_Mobile" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Electron">Electron</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Unity 5">Unity 5</a><br/><a href="#quicklink-Zombies">Zombies</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Call of Duty: Mobile</b></i> is a 2019 <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/TiMi_Studio_Group">TiMi Studio Group</a> and published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a> for <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a> and <a href="https://en.wikipedia.org/wiki/IOS">iOS</a>. Released as a <a href="https://en.wikipedia.org/wiki/Free-to-play">free-to-play</a> title, it was one of the largest <a href="https://en.wikipedia.org/wiki/Mobile_game">mobile game</a> launches in history, generating over US$480 million with 270 million downloads within a year. <i>Call of Duty: Mobile</i> was published in other regions by <a href="https://en.wikipedia.org/wiki/Garena">Garena</a>, <a href="https://en.wikipedia.org/wiki/Tencent_Games">Tencent Games</a>, <a href="https://en.wikipedia.org/wiki/VNG_Corporation">VNG Corporation</a> and <a href="https://en.wikipedia.org/wiki/TiMi_Studio_Group">TiMi Studio Group</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p>The game's two primary modes are <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a> and <a href="https://en.wikipedia.org/wiki/Battle_royale_game">battle royale</a>. In each, players can choose to play ranked or non-ranked matches. Apart from standard matchmaking, a private room for both of these modes can also be accessed where players can invite and battle with their in-game friends. The game includes two types of in-game currencies: "Credits", which are earned through playing the game, and "COD Points", which are bought with real-world money. It is possible to play the full game without paying, though some exclusive character and weapon skins can only be bought with COD Points.</p>
+
+<h3>Multiplayer</h3>
+
+<p>The multiplayer mode is a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> similar to previous <a href="https://en.wikipedia.org/wiki/Call_of_Duty"><i>Call of Duty</i> games</a>. The game also has 'Scorestreaks,' which are special weapons that become available as the player reaches certain point thresholds.. The primary modes which the game features include <a href="https://en.wikipedia.org/wiki/Team_Deathmatch">Team Deathmatch</a>, Frontline, Domination, Hardpoint, Search and Destroy and Kill Confirmed. Additionally, the game features special and limited multiplayer modes that last for varying lengths of time. These include: <i><a href="https://en.wikipedia.org/wiki/Prop_Hunt">Prop Hunt</a></i>, <i>Rapid Fire</i>, <i>Sticks and Stones</i>, <i>2v2</i>, <i>Capture the Flag</i>, <i>One Shot One Kill</i>, <i>Snipers Only</i>, <i>Gun Game</i>, and <i>Attack of the Undead</i> among others.</p>
+
+<p>The game also includes <a href="https://en.wikipedia.org/wiki/Battle_royale_game">battle royale</a> modes featuring up to 100 players. Players can choose to play solo, in a duo, or in a four-man squad. At the start of a match, all players choose an ability from <a href="https://en.wikipedia.org/wiki/Healing">healing</a> to making a <a href="https://en.wikipedia.org/wiki/Launch_pad">launch pad</a>. Once all 100 players are ready, they board a transport plane that flies across the <a href="https://en.wikipedia.org/wiki/Map">map</a> in a randomized trajectory. This flight path changes every game. Every team is automatically given a jump leader who decides when and where the team will land, However, players can choose to break away and jump independently if they prefer.</p>
+
+<p>Each player starts with a knife as their only weapon. Scattered across the map are various weapons, vehicles, and equipment that players can use to eliminate enemies and increase their chances of survival. The mode has high tier loot zones (marked in yellow on the map) that provide players with better items. The safe zone gradually shrinks as the match progresses, forcing players to move inward. Those who remain outside the zone for too long will take continuous damage and eventually be eliminated. The last surviving player or team wins the match. Battle royale also has limited modes like Sniper Challenge, Battle Royale Alcatraz, Battle Royale Blackout, 20v20 Warfare, and Battle Royale Blitz. The game also features an MP/BR hybrid mode known as Ground War: Skirmish.</p>
+
+<ul>
+  <li><b>Revive System:</b> Some battle royale modes allow players to revive teammates if they collect their dog tags within a limited time.</li>
+  <li><b>Airdrops:</b> Supply drops periodically fall from the sky, containing rare weapons, armor, and perks.</li>
+  <li><b>Classes:</b> Players can choose from different character classes, such as Scout, Ninja, Medic, Defender, and more, each with unique abilities.</li>
+  <li><b>Boss Fights:</b> Some maps include AI-controlled bosses, such as the Butcher, which drop high-tier loot when defeated.</li>
+  <li><b>Vehicles:</b> The game features land, air, and water vehicles, such as ATVs, helicopters, and boats, which help players traverse the map quickly.</li>
+  <li><b>Customization:</b> Players can modify their loadouts with custom weapons, perks, and attachments before the match begins.</li>
+</ul>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Zombie">Zombies</a> mode was added in November 2019. It featured one map called Shi No Numa. It placed teams of players against zombies that attacked in waves. It was playable in <i>Endless Survival Mode</i>, which ran like the classic <a href="https://en.wikipedia.org/wiki/Call_of_Duty:_World_at_War">Call of Duty: World at War</a> experience, and <i>Raid Mode</i>, which threw a set number of waves at the players before transitioning to a boss encounter. The players could choose whether to play it on Normal or Heroic difficulty. The mode was removed in March 2020 due to it not reaching the desired level of quality. This mode was added back to the game in October 2022, again only featuring the Shi No Numa map.</p>
+
+<p>Undead Siege, a zombie survival mode, was added into the game in August 2021. In it, a team of four players have to survive and protect their teleportation device from continuous waves of zombies. During the day, players have to collect supplies which are used during the night to survive against a horde of zombies. In addition, players during the day also take part in Daytime <a href="https://en.wikipedia.org/wiki/Side_mission">Side Missions</a>, which include the Butcher, breaking the Aether Crystal Cluster, feeding 10 zombies to Cerberus and helping transport a big Aether Crystal. The mode has 3 difficulties - Casual, Hardcore and Nightmare. In casual, the team only has to survive for 3 nights while in other difficulties, the team has to survive for 5 nights.</p>
+
+<h2>Development and release</h2>
+
+<p><i>Call of Duty: Mobile</i> was announced in March 2019, with TiMi-J3, itself a <a href="https://en.wikipedia.org/wiki/TiMi_Studio_Group">TiMi Studio Group</a> division, which is a subsidiary of <a href="https://en.wikipedia.org/wiki/Tencent_Games">Tencent Games</a>, leading development. Many of the game's features were revealed at this announcement, promising a familiar experience for fans of the <a href="https://en.wikipedia.org/wiki/Console_game">console games</a>. The aim of the game was to take familiar aspects from the franchise's previous games and allow users to access them from their mobile devices. It features two in-game currencies, as well as a <a href="https://en.wikipedia.org/wiki/Battle_pass">battle pass</a>. The initial release was in Australia on June 15, 2019, following the soft-launches in Australia, Canada and Peru. <a href="https://en.wikipedia.org/wiki/Garena">Garena</a> released the game in Hong Kong, Indonesia, Macau, Malaysia, Philippines, Singapore, Taiwan, and Thailand on September 29, 2019. The game was released in Europe, North America and Latin America by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a> on September 30, 2019, and by Tencent Games in South Korea on October 1, 2019. VNG Games released the game after the worldwide release in partnership with Activision and TiMi Studios in Vietnam on April 20, 2020. Tencent Games published the game for <a href="https://en.wikipedia.org/wiki/Mainland_China">Mainland China</a> on December 24, 2020.</p>
+
+<p><i>Call of Duty: Mobile</i> features many playable characters, maps, and game modes from previous games in the series. Different control settings were included to cater to player's preferences. A "zombies" game mode was added to the game in November 2019. This game mode followed the classic <i>Call of Duty</i> zombies "survival" formula where the player fights off endless waves of zombies, aiming to survive as long as possible. A "Raid" mode was also included where the player had to defeat a set amount of waves of zombies before encountering one of two final bosses. <i>Call of Duty: Mobile</i> Zombies mode was removed on March 25, 2020, due to the game mode not meeting Activision's standards.</p>
+
+<h2>Esports</h2>
+
+<p>The <i>Call of Duty: Mobile</i> World Championship 2020 Tournament was a partnership between <a href="https://en.wikipedia.org/wiki/Activision_Blizzard">Activision Blizzard</a> and <a href="https://en.wikipedia.org/wiki/Sony_Mobile_Communications">Sony Mobile Communications</a>, and marks the game's entry into the top tier of <a href="https://en.wikipedia.org/wiki/Esports">esports</a>. It featured more than $1 million in total prizes, which include both cash and in-game cosmetics. Competing teams were drawn directly from the game's community through four open online qualifiers from April 20 to May 24, 2020. Eligible players ranked veteran or higher have the chance to play. The 2021 tournament featured a $2 million prize pool.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> In addition to the official Call of Duty: Mobile World Championship, third-party tournaments have emerged, providing additional competitive opportunities for players. Platforms such as <a href="https://moneygaminghq.com/">Money Gaming</a> host regular COD:Mobile Battle Royale events, allowing players of all skill levels to compete for real cash prizes.</p>
+
+<h2>Reception</h2>
+
+<p><i>Call of Duty: Mobile</i> received "generally favorable reviews", according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> wrote that the game “represents the best the juggernaut franchise has ever been on a handheld platform. The leveling path is rewarding, even without spending money, and there are lots of modes to jump around between, including an impressive battle royale mode.” <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> says “beyond its messy micro-transaction menus and the slight time-saving purchases, there's not much else in <i>Call of Duty: Mobile</i> that detracts from its faithful recreation of the exhilarating and fast-paced multiplayer action of the core series.” <i><a href="https://en.wikipedia.org/wiki/Polygon_(website)">Polygon</a></i> also praised the game stating, “<i>Call of Duty: Mobile</i> doesn’t come across like a deeply compromised or watered-down rendition of the age-old multiplayer format; it just feels like <i>Call of Duty</i>.”</p>
+
+<p>In the first month, the game had over 148 million downloads and generated nearly US$54 million in revenue, making it the largest mobile game launch in history. By June 2020, the game had generated over $327 million in revenue, and had seen over 250 million downloads. By October 2020, that figure had risen to over $480 million with 270 million downloads. As of February 2022, the game has generated over $1.5 billion globally in revenue from in-game spending and microtransactions, with the game having seen over 500 million downloads by May 2021.</p>
+
+<h3>Accolades</h3>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

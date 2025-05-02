@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Microsoft Solitaire Collection</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('34a1ed8a-a1e2-4d57-8f86-95e12f6a7069/d5764763-f009-4a7e-9a72-f8bf4e039e66.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="34a1ed8a-a1e2-4d57-8f86-95e12f6a7069/64953be0-d98c-40a3-9a51-d7ddd3902f08.ico"/> Microsoft Solitaire Collection</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="34a1ed8a-a1e2-4d57-8f86-95e12f6a7069/62b9e855-1273-4b1b-9760-fc0d55d7462d.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-10/28/2018">10/28/2018</a> 3:02:59</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 0:43:46</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/26/2012">10/26/2012</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Card/tile">Card/tile</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Arkadium">Arkadium</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Smoking Gun Interactive">Smoking Gun Interactive</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Xbox Game Studios">Xbox Game Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Cloud Saves">Cloud Saves</a><br/><a href="#quicklink-Single Player">Single Player</a><br/><a href="#quicklink-Touchscreen optimised">Touchscreen optimised</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Microsoft_Solitaire_Collection" target="_blank">PCGamingWiki</a><br/><a href="https://microsoftcasualgames.com/#solitaire" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=19720" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/microsoft-solitaire-collection" target="_blank">IGDB</a><br/><a href="https://www.mobygames.com/game/microsoft-solitaire-collection" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Microsoft_Solitaire_Collection" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Flip screen">Flip screen</a><br/><a href="#quicklink-Point and select">Point and select</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Top-down view">Top-down view</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Microsoft Solitaire Collection</b></i> is a <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/List_of_games_included_with_Windows#Microsoft_Casual_Games">Microsoft Casual Games</a>  and published by <a href="https://en.wikipedia.org/wiki/Xbox_Game_Studios">Xbox Game Studios</a> for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>. It combines the <a href="https://en.wikipedia.org/wiki/Microsoft_Solitaire">Solitaire</a>, <a href="https://en.wikipedia.org/wiki/Microsoft_FreeCell">FreeCell</a> and <a href="https://en.wikipedia.org/wiki/Microsoft_Spider_Solitaire">Spider Solitaire</a> titles that were included with previous versions of Windows. It also introduces <a href="https://en.wikipedia.org/wiki/Pyramid_(solitaire)">Pyramid</a> and <a href="https://en.wikipedia.org/wiki/Tri_Peaks_(game)">TriPeaks</a> to Windows for the first time, as well as new daily challenges and themes (though an older version of Pyramid was previously bundled in <i><a href="https://en.wikipedia.org/wiki/Microsoft_Entertainment_Pack#Microsoft_Entertainment_Pack_2">Microsoft Entertainment Pack 2</a></i> under the name "Tut's Tomb", and an older version of TriPeaks was previously bundled in <i>Microsoft Entertainment Pack 3</i>; both made the cut for <i><a href="https://en.wikipedia.org/wiki/Microsoft_Entertainment_Pack">Microsoft Entertainment Pack</a></i>). Unlike the games included in <a href="https://en.wikipedia.org/wiki/Windows_7">Windows 7</a> and earlier versions, <i>Microsoft Solitaire Collection</i> is <a href="https://en.wikipedia.org/wiki/Freemium">freemium</a> <a href="https://en.wikipedia.org/wiki/Adware">adware</a> with Xbox Live integration.</p>
+
+<p>The app's hub-based design was originally inspired by the design for <a href="https://en.wikipedia.org/wiki/Windows_8">Windows 8</a>'s Start screen in 2012. At the time, the developers considered the game a tool for helping users become more familiar with Windows 8. Unlike its predecessors, <i>Microsoft Solitaire Collection</i> is updated via the <a href="https://en.wikipedia.org/wiki/Microsoft_Store">Microsoft Store</a> and communicates with a Microsoft server in order to track achievements and offer daily challenges.</p>
+
+<h2>Overview</h2>
+
+<p><i>Microsoft Solitaire Collection</i>, designed by <a href="https://en.wikipedia.org/wiki/Microsoft_Studios">Microsoft Studios</a> and developed by <a href="https://en.wikipedia.org/wiki/Smoking_Gun_Interactive">Smoking Gun Interactive</a> (formerly <a href="https://en.wikipedia.org/wiki/Arkadium">Arkadium</a> and <a href="https://en.wikipedia.org/wiki/Next_Level_Games">Next Level Games</a>), includes <a href="https://en.wikipedia.org/wiki/Klondike_(solitaire)">Klondike</a> (classic Solitaire), <a href="https://en.wikipedia.org/wiki/Spider_(solitaire)">Spider</a>, <a href="https://en.wikipedia.org/wiki/FreeCell">FreeCell</a>, <a href="https://en.wikipedia.org/wiki/Pyramid_(solitaire)">Pyramid</a>, and <a href="https://en.wikipedia.org/wiki/Tri_Peaks_(game)">TriPeaks</a> game modes, as well as daily challenges. The default theme is similar to the default theme for card games in <a href="https://en.wikipedia.org/wiki/Windows_Vista">Windows Vista</a> and 7, but the other themes are different. It is also possible for users to create their own custom themes. Other new features include in-game music, cloud syncing, and Xbox Live integration. The hidden debug menu from classic card apps is no longer present, and the drop-down menus have been replaced with a universal hamburger menu and in-game hint and undo buttons at the bottom of the screen. (The Windows 8 version used the hidden <a href="https://en.wikipedia.org/wiki/Windows_shell#Charms">Charms bar</a> instead of the visible hamburger menu.)</p>
+
+<p>When a player wins a game, the game will randomly select a card animation based on animations from previous versions of Windows card games. The app has a dedicated page for statistics on Klondike, Spider, FreeCell, Pyramid, TriPeaks, Daily Challenge, and Star Club.</p>
+
+<p><i>Microsoft Solitaire Collection</i> was first made available for free download in <a href="https://en.wikipedia.org/wiki/Windows_8">Windows 8</a>'s <a href="https://en.wikipedia.org/wiki/Microsoft_Store">Windows Store</a>. Despite solitaire games previously being included in Windows for free since 1990, they were not included in <a href="https://en.wikipedia.org/wiki/Windows_8">Windows 8</a> or <a href="https://en.wikipedia.org/wiki/Windows_8.1">Windows 8.1</a> and were uninstalled during upgrades from previous systems. Instead, Microsoft produced the <a href="https://en.wikipedia.org/wiki/Adware">advertising-supported</a> <i>Microsoft Solitaire Collection</i> that users could download through the <a href="https://en.wikipedia.org/wiki/Windows_Store">Windows Store</a>. As a <a href="https://en.wikipedia.org/wiki/Windows_Runtime">Windows Runtime</a> app, it ran in fullscreen or in Windows 8's snapped mode, so it was designed to run in a variety of horizontal sizes but always stretch vertically across the entire screen.</p>
+
+<p>The Windows 10 version was introduced to Windows 10 beta testers preinstalled with the system in build 10061, in time to celebrate the 25th anniversary of Microsoft Solitaire. Some customization features were not included until after the initial public release of Windows 10. The developers noted the delay was due to major code changes that happened during the development of Windows 10. The Windows 10 version was designed to scale dynamically both vertically and horizontally. The main page's layout was rearranged to use vertical scrolling rather than horizontal scrolling.</p>
+
+<p>Since the original "Microsoft Solitaire" was Klondike solitaire but did not use the Klondike branding, some users were unaware it was Klondike. The Microsoft Casual Games team reportedly received frequent feedback to "Bring back the game mode from Windows 7" even though they already did. To address user confusion and help users find this game, the developers replaced the large polar bear on the Klondike tile with a Klondike deck and the words "Classic Solitaire".</p>
+
+<p><i>Microsoft Solitaire Collection</i> was made available for <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> and <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a> in August 2016 to beta testers in the Microsoft Casual Games Inner Circle. It was made publicly available on these platforms on November 23, 2016. Most iOS solitaire apps are integrated with <a href="https://en.wikipedia.org/wiki/Game_Center">Apple's Game Center</a>, but this one is exclusively integrated into Microsoft's ecosystem. Since these versions integrate directly with the cloud service, it is not necessary to have the Xbox app installed on an iOS or Android device in order to sync data and achievements.</p>
+
+<p>On the same day, a news bulletin launched from the app into a web browser announced that the Events feature would be publicly available in December 2016.</p>
+
+<h2>Advertisement controversy</h2>
+
+<p>The five basic game modes contain ads, displayed at the end of each game, and there are new features added in Windows 8 (Daily Challenges and Star Club) where users will see interstitial video ads roughly every 15 minutes, but only between games. Users can optionally pay $1.49/month or $9.99/year to get the Premium Edition of the game, which removes all advertisements, gives double coins for completing Daily Challenges and gives some bonuses in the basic TriPeaks and Pyramid game modes. Users who downloaded the iOS or Android app between November 23 and December 31, 2016, were given a month of Premium on that iOS or Android device.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Gizmodo">Gizmodo</a></i> characterized the change as a way to "nickel and dime" users, writing that "something which used to come on your PC for free is now corrupted by ad buys." <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i> wrote: "The ads in question aren't small banners that appear at the bottom of the screen while you play. They run over the full Solitaire window, some for 15 seconds and some for 30 seconds, and while they don't seem to pop up very often ... they can't be aborted." <i><a href="https://en.wikipedia.org/wiki/Telegraph.co.uk">The Telegraph</a></i> wrote that users are in "disbelief" that they would have to pay to play a game without being "interrupted by a slew of adverts." <i>Rock, Paper, Shotgun</i> said that the changes are a "particularly heartbreaking sign of the times" and that some users would find it "profoundly sinister" that "a large corporation is gathering and storing vast amounts of data on your computing habits, and not simply what you do in a browser."</p>
+
+<p>There are also in-app links to play or download other ad-supported Microsoft-branded games, including <a href="https://en.wikipedia.org/wiki/Microsoft_Mahjong">Microsoft Mahjong</a> and <a href="https://en.wikipedia.org/wiki/Microsoft_Minesweeper">Microsoft Minesweeper</a>.</p>
+
+<p>On August 3, 2021, Microsoft announced that the Premium Edition of the game would be added to their <a href="https://en.wikipedia.org/wiki/Xbox_Game_Pass">PC Game Pass</a> subscription service (then known as Xbox Game Pass for PC) on August 17, 2021.</p>
+
+<h2>Daily Challenges, Star Club, Events</h2>
+
+<p>Daily Challenges are posted every day. There is one of each game, which can be any difficulty. Star Club has challenges posted under different themes and can be any difficulty. Events are new almost every day and can have 5 to 30 challenges. Events can have all of one game, all one difficulty, or two or more games with mixed difficulties. When logged in, you can view your progress alongside other people around the world.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

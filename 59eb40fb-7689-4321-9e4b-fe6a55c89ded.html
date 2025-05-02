@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Liar&#39;s Bar</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('59eb40fb-7689-4321-9e4b-fe6a55c89ded/5063a8ba-2cfe-4cba-a33a-a9a63ee6067b.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="59eb40fb-7689-4321-9e4b-fe6a55c89ded/bb5f3459-15b0-44a3-b09f-3e3994a7ddb3.ico"/> Liar&#39;s Bar</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="59eb40fb-7689-4321-9e4b-fe6a55c89ded/49b34d91-4ddf-47da-a867-0d4f18b24e05.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>3h 43m 0s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-12/16/2024">12/16/2024</a> 1:01:53</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:29:48</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 0:10:16</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/2/2024">10/2/2024</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-90">90</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Casual">Casual</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Early Access">Early Access</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Indie">Indie</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Simulation">Simulation</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Strategy">Strategy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Curve Animation">Curve Animation</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Curve Animation">Curve Animation</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Co-Op">Co-Op</a><br/><a href="#quicklink-Family Sharing">Family Sharing</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Online Co-Op">Online Co-Op</a><br/><a href="#quicklink-Online Pvp">Online Pvp</a><br/><a href="#quicklink-Pvp">Pvp</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://steamcommunity.com/app/3097560" target="_blank">Community Hub</a><br/><a href="https://steamcommunity.com/app/3097560/discussions/" target="_blank">Discussions</a><br/><a href="https://steamcommunity.com/app/3097560/guides/" target="_blank">Guides</a><br/><a href="https://store.steampowered.com/news/?appids=3097560" target="_blank">News</a><br/><a href="https://store.steampowered.com/app/3097560" target="_blank">Store Page</a><br/><a href="https://pcgamingwiki.com/api/appid.php?appid=3097560" target="_blank">PCGamingWiki</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-3D">3D</a><br/><a href="#quicklink-Board Game">Board Game</a><br/><a href="#quicklink-Casual">Casual</a><br/><a href="#quicklink-Co-op">Co-op</a><br/><a href="#quicklink-Dark">Dark</a><br/><a href="#quicklink-Early Access">Early Access</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-FPS">FPS</a><br/><a href="#quicklink-Funny">Funny</a><br/><a href="#quicklink-Gambling">Gambling</a><br/><a href="#quicklink-Gore">Gore</a><br/><a href="#quicklink-Horror">Horror</a><br/><a href="#quicklink-Indie">Indie</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Online Co-Op">Online Co-Op</a><br/><a href="#quicklink-Puzzle">Puzzle</a><br/><a href="#quicklink-PvP">PvP</a><br/><a href="#quicklink-Strategy">Strategy</a><br/><a href="#quicklink-Tabletop">Tabletop</a><br/><a href="#quicklink-VR">VR</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3097560/extras/Sequence_01_1.gif?t=1741802069" /><h2 class="bb_tag"><strong>Welcome to Liar's Bar: The Ultimate Deception Playground!</strong></h2>Step into Liar's Bar, the most twisted and thrilling hangout in town. This isn't your average pub – it's a den of lies, deception, and mind games. Grab a seat at a table of four and immerse yourself in the ultimate <strong>first-person multiplayer online experience</strong> where cunning and trickery are the name of the game.<br><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3097560/extras/gif_01.gif?t=1741802069" /><h2 class="bb_tag">Two Game Modes with Early Access</h2><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3097560/extras/overview_liarsDeck_final_resized.png?t=1741802069" /><br><ul class="bb_ul"><li>Players take turns playing a card face down and declaring its value. The value should match the table’s value. (e.g., &quot;King&quot; or &quot;Queen&quot;).<br></li><li>When a player lays down a card, they might be lying about its value. If you suspect a lie, you can call their bluff.<br></li><li>If someone’s bluff is called and they were lying, they must play a round of Russian Roulette. Surviving one bullet out of 6 rounds of shells means you stay in the game; failing means game over for you.<br></li><li>After Russian Roulette is played, the cards are reset, and the game continues.</li></ul><br><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3097560/extras/overview_liarsDice_final_resized.png?t=1741802069" /><br><ul class="bb_ul"><li>Roll your dice. No one can see your roll, but everyone’s watching your next move. <br></li><li>On your turn, make a bid predicting the total number of dice on the table, showing a specific face (e.g., &quot;There are five 3’s&quot;). The next player must either raise the bid by increasing the number of dice or the face value (e.g., &quot;There are six 4’s&quot;) or challenge the previous bid. <br></li><li>Think someone’s lying? Challenge their bid! The loser drinks a bottle of poison. <br></li><li>Drink two bottles, and you’re out! The last one alive wins! </li></ul><h2 class="bb_tag">Why You'll Love Liar's Bar</h2><ul class="bb_ul"><li>Engaging multiplayer online experience <br></li><li>Thrilling bar games focused on lying and deception <br></li><li>Unique characters with captivating backstories <br></li><li>Regular updates with new games and characters<br></li><li>Immersive bar simulation </li></ul><h2 class="bb_tag">Meet the Cast</h2><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3097560/extras/characters_final.png?t=1741802069" /><br>Choose one of bar's unique and dark characters, each with their own twisted backstory:<h2 class="bb_tag"><strong>Scubby (the Bandit Guard Dog)</strong> </h2>This bandit guard dog, with his rugged tattoos and gritty demeanor, hides a secret softer side. Can you dig beneath the tough exterior to see what lies within?<h2 class="bb_tag"><strong>Foxy (the Gothic Vixen)</strong></h2> A seductive gothic vixen with an enigmatic past, Foxy uses her charm and wit to outmaneuver her opponents. Will her allure be your downfall?<h2 class="bb_tag"><strong>Bristle (the Butcher Pig)</strong></h2> Once a loving husband, this butcher pig now wears a haunting tattoo of his deceased wife on his chest. Driven by vengeance and guilt, can Bristle trust anyone, including himself?<h2 class="bb_tag"><strong>Toar (the Raging Bull)</strong></h2> A raging bull with a temper as fierce as his loyalty is unwavering. Can you channel his raw power without succumbing to his fury?<br><br>And many more to come!<h2 class="bb_tag">Follow Us</h2>Stay updated with the latest news and sneak peeks by following us on social media. <br>Don't miss out on the action!<br><br><strong>Grab a seat, order a drink, and get ready to lie!</strong>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

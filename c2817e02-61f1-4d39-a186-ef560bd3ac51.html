@@ -1,0 +1,384 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Marvel: Ultimate Alliance 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('c2817e02-61f1-4d39-a186-ef560bd3ac51/e83bfa1f-9031-429d-bf9c-afc546e070b5.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="c2817e02-61f1-4d39-a186-ef560bd3ac51/f0a4fd14-f465-49d9-828a-731578fcdc63.png"/> Marvel: Ultimate Alliance 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="c2817e02-61f1-4d39-a186-ef560bd3ac51/4fc56d3b-1627-4a1f-bebd-ac0ac1ef8777.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/27/2025">4/27/2025</a> 10:06:45</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 9:13:18</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-7/26/2016">7/26/2016</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-68">68</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action role-playing">Action role-playing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Vicarious Visions">Vicarious Visions</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Zoë Mode">Zoë Mode</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Marvel:_Ultimate_Alliance_2" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=5692" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/marvel-ultimate-alliance-2" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/433320/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Marvel_Ultimate_Alliance_2" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/marvel-ultimate-alliance-2" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Marvel:_Ultimate_Alliance_2" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Vicarious Visions Alchemy">Vicarious Visions Alchemy</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Marvel: Ultimate Alliance 2</b></i> is a 2009 <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> featuring characters from <a href="https://en.wikipedia.org/wiki/Marvel_Comics">Marvel Comics</a>. It is the sequel to 2006's <i><a href="https://en.wikipedia.org/wiki/Marvel:_Ultimate_Alliance">Marvel: Ultimate Alliance</a></i>, and the second installment in the <i>Marvel: Ultimate Alliance</i> series. The game was jointly developed by <a href="https://en.wikipedia.org/wiki/Vicarious_Visions">Vicarious Visions</a> (<a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>), <a href="https://en.wikipedia.org/wiki/N-Space">n-Space</a> (<a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> and <a href="https://en.wikipedia.org/wiki/Nintendo_Wii">Nintendo Wii</a>) and <a href="https://en.wikipedia.org/wiki/Savage_Entertainment">Savage Entertainment</a> (<a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>) and published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a> in September 2009. A port for the <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> and <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> by <a href="https://en.wikipedia.org/wiki/Zoë_Mode">Zoë Mode</a> was released in July 2016.</p>
+
+<p>Unlike the first game, which featured an original plot, <i>Ultimate Alliance 2</i>'s storyline is mostly based on the <i><a href="https://en.wikipedia.org/wiki/Secret_War_(comics)">Secret War</a></i> and <i><a href="https://en.wikipedia.org/wiki/Civil_War_(comics)">Civil War</a></i> story arcs from the Marvel comics. After a series of devastating attacks on the <a href="https://en.wikipedia.org/wiki/United_States">United States</a>, the American government passes the <a href="https://en.wikipedia.org/wiki/Superhero_Registration_Act">Superhero Registration Act</a>, which forces all super-powered individuals to act under official regulation, in an effort to reduce the chaos that results from their battles. The superhero community is left divided, as some, including <a href="https://en.wikipedia.org/wiki/Iron_Man">Iron Man</a>, support the Act, while others, such as <a href="https://en.wikipedia.org/wiki/Captain_America">Captain America</a>, oppose it. The two factions quickly find themselves in conflict with each other, all the while a new enemy threatens global peace. The game features two distinct storylines depending on which faction the player selects at the start, which cross over on several instances.</p>
+
+<p>Upon release, <i>Ultimate Alliance 2</i> received mixed to positive reviews from critics, who generally found it to be inferior to its predecessor. The game was praised for its branching narrative, improved writing and replay value, and new additions to the character roster, but criticized for the absence of certain elements from the first game (which "oversimplified" the gameplay, according to some critics and players)<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup>. After almost ten years without a new entry in the <i>Marvel: Ultimate Alliance</i> series, a <a href="https://en.wikipedia.org/wiki/Reboot_(fiction)">reboot</a>, <i><a href="https://en.wikipedia.org/wiki/Marvel_Ultimate_Alliance_3:_The_Black_Order">Marvel Ultimate Alliance 3: The Black Order</a></i>, was released in July 2019 by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a>, without the involvement of Activision (whose license to publish Marvel games expired in 2014).</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Marvel Ultimate Alliance 2</i> borrows much of its gameplay from its <a href="https://en.wikipedia.org/wiki/Marvel:_Ultimate_Alliance">predecessor</a>. The game allows players to select a team of four given characters from a larger pool of heroes and villains; team members are interchangeable and may be swapped during gameplay. General gameplay mechanics are similar to those of the <i><a href="https://en.wikipedia.org/wiki/X-Men_Legends">X-Men Legends</a></i> series. The game is played from an isometric <a href="https://en.wikipedia.org/wiki/Dungeon_crawl">dungeon crawl</a> perspective, supporting up to four players simultaneously. The Vicarious Visions version on PlayStation 3, PlayStation 4, Xbox 360, Xbox One and PC consoles of the game also features online play via the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a>, <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a>, and <a href="https://en.wikipedia.org/wiki/Windows_Live">Windows Live</a>/<a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> respectively.</p>
+
+<p>The power system also has been improved, allowing two characters to combine powers, yielding a new attack, known as a "<i>fusion</i>". Each playable character in the game has a unique fusion with every other playable character in the game. An example is <a href="https://en.wikipedia.org/wiki/Captain_America">Captain America</a> using his shield to reflect <a href="https://en.wikipedia.org/wiki/Storm_(Marvel_Comics)">Storm</a>'s lightning bolts. Players have the ability to <a href="https://en.wikipedia.org/wiki/Experience_point#Level-based_progression">level up</a> characters and earn new abilities and powers.</p>
+
+<p>The Vicarious Visions version on PS3, 360, PS4, Xbox One and PC consoles features an updated character progression system, with each character having four core powers that evolve as the character levels up similar to original <i>X-Men Legends</i>. The n-Space version on Nintendo DS, Nintendo Wii, PlayStation 2, and PlayStation Portable consoles of the game resembles the character progression system found in the original <i><a href="https://en.wikipedia.org/wiki/Marvel:_Ultimate_Alliance">Marvel: Ultimate Alliance</a></i> and original <i>X-Men Legends</i>, except the power set numbers are different, whereas the Nintendo DS version's power set number is limited to 4 powers limited like in the original <i>X-Men Legends</i>. While the Vicarious Visions version have an alternate costume that requires to be unlocked through defeating multiple enemies in specific conditions, n-space version does not feature an alternate costume selection.</p>
+
+<h2>Synopsis</h2>
+
+<p>The game begins with a military operation in <a href="https://en.wikipedia.org/wiki/Latveria">Latveria</a>, home of the supervillain <a href="https://en.wikipedia.org/wiki/Doctor_Doom">Doctor Doom</a>. "The story starts with <i><a href="https://en.wikipedia.org/wiki/Secret_War_(comics)">Secret War</a></i>. We're using <a href="https://en.wikipedia.org/wiki/Nick_Fury">Nick Fury's</a> invasion of Latveria as a jumping off point. The rest of the story is derived from the consequences of those actions", stated Dan Tanguay, creative director for Vicarious Visions.</p>
+
+<p>The game then follows the <i><a href="https://en.wikipedia.org/wiki/Civil_War_(comics)">Civil War</a></i> story arc: a fight between heroes and villains causes an explosion in <a href="https://en.wikipedia.org/wiki/Stamford,_Connecticut">Stamford, Connecticut</a>, killing 612 civilians (including a number of school children). The government labels the incident "super powered negligence", and the public demand a <a href="https://en.wikipedia.org/wiki/Registration_acts_(comics)#2006_Superhuman_Registration_Act">Superhuman Registration Act</a>. The government passes the act, and all meta-humans are forced to adhere to or disobey the law. In the game, players are able to choose between the Pro-Registration side, headed by <a href="https://en.wikipedia.org/wiki/Iron_Man">Iron Man</a> and <a href="https://en.wikipedia.org/wiki/Mister_Fantastic">Mister Fantastic</a>, or the Anti-Registration side, headed by <a href="https://en.wikipedia.org/wiki/Captain_America">Captain America</a> and <a href="https://en.wikipedia.org/wiki/Luke_Cage">Luke Cage</a>. These characters and several other characters are 'locked' into a specific side during the game's second act but can be used on either side during repeat playthroughs. Two different endings are available, determined by the side chosen at the beginning of the game. Tanguay stated that the story follows into the aftermath of the Civil War.</p>
+
+<h3>Plot</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Nick_Fury">Nick Fury</a> leads a team of superheroes on an unsanctioned attack on Castle Doom in Latveria after discovering that the newly elected prime minister, <a href="https://en.wikipedia.org/wiki/Lucia_von_Bardas">Lucia von Bardas</a>, has been supplying weapons to the <a href="https://en.wikipedia.org/wiki/Tinkerer_(Marvel_Comics)">Tinkerer</a>, who in turn sells them to supervillains. After the defeats of her forces, Castle Doom is destroyed in an explosion, with Von Bardas assumed dead. One year later, Von Bardas returns as a <a href="https://en.wikipedia.org/wiki/Cyborg">cyborg</a> and joins forces with several villains to destroy <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a> as revenge for the attack on Latveria. The heroes defeat Von Bardas, but the destruction and Fury's unlawful actions cause the U.S. government to consider the <a href="https://en.wikipedia.org/wiki/Registration_acts_(comics)">Superhuman Registration Act</a> (SRA). In light of this incident, Fury disappears and <a href="https://en.wikipedia.org/wiki/Maria_Hill">Maria Hill</a> is sworn in as the new Director of <a href="https://en.wikipedia.org/wiki/S.H.I.E.L.D.">S.H.I.E.L.D.</a>, while Iron Man begins lobbying against the act in <a href="https://en.wikipedia.org/wiki/Washington,_D.C.">Washington, D.C.</a></p>
+
+<p>Three days later during a telecast of <i><a href="https://en.wikipedia.org/wiki/New_Warriors">The New Warriors</a></i>, <a href="https://en.wikipedia.org/wiki/Nitro_(character)">Nitro</a> kills over 600 civilians in <a href="https://en.wikipedia.org/wiki/Stamford,_Connecticut">Stamford, Connecticut</a>, prompting the SRA's immediate passage as Iron Man changes his stance on it. Opposing the act, Captain America goes underground, along with several other superheroes (chiefly among them <a href="https://en.wikipedia.org/wiki/Luke_Cage">Luke Cage</a> and <a href="https://en.wikipedia.org/wiki/Iron_Fist_(character)">Iron Fist</a>) and S.H.I.E.L.D agents who form a group called "The White Star". In response, the Pro-Registration group, led by Iron Man and <a href="https://en.wikipedia.org/wiki/Mister_Fantastic">Mister Fantastic</a>, develops nanite technology and use it to mind control several supervillains to increase their ranks, including a new formation of the <a href="https://en.wikipedia.org/wiki/Thunderbolts_(comics)">Thunderbolts</a>. At this point, the player is given the ability to side with Anti-Registration or Pro-Registration factions; the missions and boss encounters during the following chapters differ based on which side the player chooses. The two sides have several skirmishes, including a Pro-Registration raid on a White Star base, and an Anti-Registration attack on a prison convoy carrying their allies.</p>
+
+<p>When the Anti-Registration heroes respond to a hostage situation at a <a href="https://en.wikipedia.org/wiki/Stark_Industries">Stark Industries</a> chemical plant, Iron Man appears and reveals it to have been a hoax. He attempts to negotiate with Captain America, promising <a href="https://en.wikipedia.org/wiki/Amnesty">amnesty</a>, but Captain America refuses and a battle ensues between the two factions. The nanite-controlled villains go haywire and attack the agents they were programmed to help, stealing explosives to destroy the facility. Disguised as one of the agents, Fury enlists the help of a group of heroes to disarm the bombs, but before he can disarm the final one, he is attacked by Venom. The explosion wounds the heroes and seemingly kills Fury, but he is revealed to be a <a href="https://en.wikipedia.org/wiki/Life_Model_Decoy">Life Model Decoy</a>. The real Fury saves the injured heroes and takes them to his hideout, where he has recruited the Tinkerer to help discover the malfunction's cause. To obtain a sample of the nanite formula, the group travels to Prison 42 in the <a href="https://en.wikipedia.org/wiki/Negative_Zone">Negative Zone</a>, where most of the captured heroes and villains are held. They collect the samples and Fury activates the prison's self-destruct system to prevent the nanites' spread but does not escape with the others; he and several other heroes are presumed dead.</p>
+
+<p>The heroes learn the nanites survived and have now spread worldwide, causing the SRA's temporary suspension to combat the threat. A group of heroes travels to <a href="https://en.wikipedia.org/wiki/Wakanda_(comics)">Wakanda</a>, where they help <a href="https://en.wikipedia.org/wiki/Black_Panther_(character)">Black Panther</a> and the <a href="https://en.wikipedia.org/wiki/Dora_Milaje">Dora Milaje</a> defend the country from nanite agents, now under the moniker of "The Fold." Establishing a temporary base in Wakanda, they develop a cure and learn that Fury survived, now under the Fold's control. The heroes infiltrate a base in Iceland to broadcast a nanite stasis signal that will paralyze those in the Fold's control, allowing them to be cured. At the culmination of their mission, the heroes face off against Tinkerer, revealed to be the Fold's creator, and a nanite-controlled Nick Fury enhanced with numerous superpowers. After defeating Fury, everyone is freed from the nanites, and Fury receives a presidential pardon.</p>
+
+<p>The game's ending depends on which side the player chose. In the Anti-Registration ending, Congress repeals the Superhero Registration Act and the President pardons the Anti-Registration heroes. In the Pro-Registration ending, Congress amends the Superhero Registration Act, making it voluntary, and Iron Man becomes the new Director of S.H.I.E.L.D.</p>
+
+<p>The game includes some format-specific characters, with additional characters released as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a>. In addition, each character on the PS3 and Xbox 360 versions has one alternate costume that can be unlocked during the course of the game. <a href="https://en.wikipedia.org/wiki/Stan_Lee">Stan Lee</a>, co-creator of Marvel Comics and creator of many of the characters, also lends his likeness and voice to New York Senator Lieber; this marks the first time Stan has made a physical cameo in a video game. On April 1, 2009, <a href="https://en.wikipedia.org/wiki/Aunt_May">Aunt May</a> was announced to be a playable character on the official website as part of an <a href="https://en.wikipedia.org/wiki/April_Fools'_Day">April Fool's</a> joke.</p>
+
+<p>Several playable characters also appear as bosses throughout the game, such as battling Iron Man if the player chooses the Anti-Registration path, or facing Captain America on the Pro-Registration path. Other playable characters are unlocked by defeating them, such as Deadpool, Green Goblin and Venom.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Juggernaut_(character)">Juggernaut</a> was available as a pre-order bonus incentive for the PlayStation 3 and Xbox 360 versions. A patch was released to allow those who do not have Juggernaut installed to play with others who have the character. On October 9, 2009, downloadable content was announced for the PlayStation 3 and Xbox 360 versions, which included new characters and comic missions, as well as new achievements. It was released on November 5, 2009, for PlayStation 3 and Xbox 360. Additionally the once pre-order exclusive character Juggernaut was available for $1.99/160MSP. The content was removed from both networks on December 31, 2009, with Activision claiming the content was "a limited time offer". On July 1, 2010, Activision re-released the DLC on Xbox Live and the PlayStation Network shortly thereafter, at Xbox Live where it was released on July 3, 2010, and at PlayStation Network where it was released on July 20, 2010. Players could purchase both the five-character DLC pack and the Juggernaut pre-order character for the same cost previously mentioned. Activision, however, stipulated that the content would only be available until December 31, 2010. The expansion packs returned to the European PlayStation Network in January 2012, but were not added back to Xbox Live. In January 2014, the packs were removed once again from the PlayStation Network. As the 2016 re-release is based on the Vicarious Visions versions, it includes all downloadable content by default.</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Black_Panther_(character)">Black Panther</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Blade_(character)">Blade</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Cable_(character)">Cable</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Captain_America">Captain America</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Cletus_Kasady">Carnage</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Cyclops_(Marvel_Comics)">Cyclops</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Daredevil_(Marvel_Comics_character)">Daredevil</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Deadpool">Deadpool</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Gambit_(Marvel_Comics)">Gambit</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Norman_Osborn">Green Goblin</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Hulk">Hulk</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Human_Torch">Human Torch</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Iceman_(Marvel_Comics)">Iceman</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Invisible_Woman">Invisible Woman</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Iron_Man">Iron Man</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Iron_Fist_(character)">Iron Fist</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Jean_Grey">Jean Grey</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Juggernaut_(character)">Juggernaut</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Luke_Cage">Luke Cage</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Magneto_(Marvel_Comics)">Magneto</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Mister_Fantastic">Mr. Fantastic</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Carol_Danvers">Ms. Marvel</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Nick_Fury">Nick Fury</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Robbie_Baldwin">Penance</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Betsy_Braddock">Psylocke</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Sentry_(Robert_Reynolds)">Sentry</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/She-Hulk">She-Hulk</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Songbird_(character)">Songbird</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Spider-Man">Spider-Man</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Storm_(Marvel_Comics)">Storm</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Thing_(comics)">Thing</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Thor_(Marvel_Comics)">Thor</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Mac_Gargan">Venom</a><!--We're using Mac Gargan who was confirmed as default version of the character, do not change to or add Eddie Brock --></li>
+  <li><a href="https://en.wikipedia.org/wiki/Wolverine_(character)">Wolverine</a></li>
+</ul>
+
+<h2>Development</h2>
+
+<p>The game was officially announced in a press release by Activision on February 8, 2008. <i>MUA2</i> was released on September 15, 2009. At <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">E3 2008</a>, it was given the official name of <i>Marvel: Ultimate Alliance 2: Fusion</i>, which would later be shortened to <i>Marvel: Ultimate Alliance 2</i>. On February 5, 2009, a new trailer was released, revealing that the story would continue from the <i>Secret War</i> saga into Marvel Comic's <i>Civil War</i>. Three days later, the game was featured at <a href="https://en.wikipedia.org/wiki/New_York_Comic_Con">New York Comic Con</a>, where players were able to take <a href="https://en.wikipedia.org/wiki/Green_screen">green screen</a> pictures and have themselves superimposed into the game's backdrops.</p>
+
+<p>Vicarious Visions, developers for the PlayStation 3 and Xbox 360 versions, upgraded the Alchemy engine in several ways, including adding <a href="https://en.wikipedia.org/wiki/Havok_(software)">Havok physics technology</a>, a new 3D sound system, and <a href="https://en.wikipedia.org/wiki/Lip-syncing">lip-syncing</a>. Vicarious Visions also had a development blog which began on February 6, 2009 and which is updated bi-monthly. Users could follow Vicarious Visions' creative director Dan Tanguay and executive producer Jennifer Oneal on <a href="https://en.wikipedia.org/wiki/Twitter">Twitter</a> as they answered questions and posted news about <i>MUA2</i>.</p>
+
+<p>The Nintendo DS, PlayStation 2 and Nintendo Wii versions were developed by <a href="https://en.wikipedia.org/wiki/N-Space">n-Space</a>, with <a href="https://en.wikipedia.org/wiki/Savage_Entertainment">Savage Entertainment</a> porting the PS2 version to the PSP. Version 3.5 of the Alchemy engine was used, and a team of around thirty developers worked approximately thirteen months to develop the game. Online multiplayer for the Wii is not supported due to time constraints during development. Several changes were made to the next-gen versions of MUA2 late during n-Space's development, accounting for the fact that Stan Lee does not cameo in these versions, that there are no alternate costumes, nor on-the-fly character swapping. n-Space created a series of articles to address fan concerns, the "perceived shortcoming[s]" of the game, and to answer questions. The Wii version of the game used <a href="https://en.wikipedia.org/wiki/WiiConnect24">WiiConnect24</a> to implement a feature known as B.R.A.G. (Broadcast Realtime Accomplishment Gloating), which allows players to share level results and high scores, and also features extensive use of the Wii remote for puzzles and manning turrets. Users could also follow n-Space president and founder Dan O'Leary via Twitter to receive updates on the game.</p>
+
+<p>In 2020, the multiplayer servers for <i>Marvel Ultimate Alliance 2</i> were shut down.</p>
+
+<h2>Reception and sales</h2>
+
+<p>The PlayStation 3 and Xbox 360 versions of <i>Marvel: Ultimate Alliance 2</i> have received positive reviews from most critics, and <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> currently holds the game at 74/100 for the PlayStation 3 and 73/100 for the Xbox 360. <a href="https://en.wikipedia.org/wiki/Brian_Michael_Bendis">Brian Michael Bendis</a>, writer for <a href="https://en.wikipedia.org/wiki/Marvel_Comics">Marvel Comics</a>, was given an early opportunity to play the game, to which he later tweeted: "Happy to give a huge thumbs up for '<i>Ultimate Alliance 2</i>.' The stills do it no justice. It's gorgeous". The Nintendo DS and Wii fared much poorer, holding 65/100 and 50/100 for their respective platforms.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i>'s Kevin VanOrd stated that the game delivers "the button-mashing, power-flinging, over-the-top action fans of the original would expect", additionally praising the branched story and unlockables, citing additional replay value. However, the reviewer cited "technical oddities" and said that the "RPG elements were stripped down". <i><a href="https://en.wikipedia.org/wiki/1Up.com">1Up.com</a></i>'s Thierry Nguyen was more critical, saying that the game was "like <a href="https://en.wikipedia.org/wiki/Ben_Reilly">Ben Reilly</a>: almost, but not quite as good as the original", citing issues with alternate costumes that "seem pretty lame", "a persistent feeling of oversimplification" and that a hope that "either <a href="https://en.wikipedia.org/wiki/Raven_Software">Raven</a> returns as the developer or Vicarious Visions learns from its missteps". He did however praise a "more coherent story", new fusion abilities, and gameplay tweaks. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>'s Greg Miller gave the game a 7.7 /10, praising its new fusions and "healthy cast" but criticizing the game's similar gameplay to its predecessor, inconsistent voice acting, and its weak CG cutscenes.</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/13th_Annual_Interactive_Achievement_Awards">13th Annual Interactive Achievement Awards</a>, <i>Marvel: Ultimate Alliance 2</i> received a nomination for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Story">Outstanding Achievement in Adapted Story</a>" by the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a>.</p>
+
+<p>According to the NPD sales group the Xbox 360 version of <i>Marvel: Ultimate Alliance 2</i> was seventh in sales for September 2009, selling 236,000 units. However, the sales dropped in October 2009, with the game no longer listed in the top ten in sales.</p>
+
+<h2>Reboot</h2>
+
+<p>On December 6, 2018, a third game was announced in the <i>Ultimate Alliance</i> franchise titled <i><a href="https://en.wikipedia.org/wiki/Marvel_Ultimate_Alliance_3:_The_Black_Order">Marvel Ultimate Alliance 3: The Black Order</a></i>. Unlike the previous games which were released on multiple consoles, this installment is published by Nintendo as a <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> exclusive. The game features a team of heroes uniting to prevent <a href="https://en.wikipedia.org/wiki/Thanos">Thanos</a> and the <a href="https://en.wikipedia.org/wiki/Black_Order_(comics)">Black Order</a> from obtaining the <a href="https://en.wikipedia.org/wiki/Infinity_Stones">Infinity Stones</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sonic &amp; All-Stars Racing Transformed</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('41f4d4b3-f615-4ffb-b97f-6931041302bb/c6bc4ea3-11b5-423a-b094-5c78024d2501.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="41f4d4b3-f615-4ffb-b97f-6931041302bb/78d1fecd-7067-4022-baa8-ac8bbb4058e3.png"/> Sonic &amp; All-Stars Racing Transformed</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="41f4d4b3-f615-4ffb-b97f-6931041302bb/5ac6e446-69d0-4f18-b073-9a4cfd4fd543.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:54:57</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:59:17</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/16/2012">11/16/2012</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-90">90</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-76">76</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sumo Digital">Sumo Digital</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-SEGA">SEGA</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Sonic_%26_All-Stars_Racing_Transformed" target="_blank">PCGamingWiki</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Andy Ritson">[People] artist: Andy Ritson</a><br/><a href="#quicklink-[People] composer: Richard Jacques">[People] composer: Richard Jacques</a><br/><a href="#quicklink-[People] designer: Gareth Wilson">[People] designer: Gareth Wilson</a><br/><a href="#quicklink-[People] director: Steven Zalud">[People] director: Steven Zalud</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Sonic &amp; All-Stars Racing Transformed</b></i> is a <a href="https://en.wikipedia.org/wiki/Kart_racing_game">kart racing game</a> developed by <a href="https://en.wikipedia.org/wiki/Sumo_Digital">Sumo Digital</a> and published by <a href="https://en.wikipedia.org/wiki/Sega">Sega</a>. It was released for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, and <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> in November 2012; for <a href="https://en.wikipedia.org/wiki/PlayStation_Vita">PlayStation Vita</a> in December 2012; for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> in January 2013; for <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> in February 2013; and for <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a> and <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> devices in January 2014. The PS3 and Wii U versions of the game were released in Japan on May 15, 2014.</p>
+
+<p><i>Sonic &amp; All-Stars Racing Transformed</i> is the sequel to <i><a href="https://en.wikipedia.org/wiki/Sonic_&amp;_Sega_All-Stars_Racing">Sonic &amp; Sega All-Stars Racing</a></i>, and the fourth installment in the <i>Sega All-Stars</i> series. The game was a launch title for the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> in North America and Europe. <i>Sonic &amp; All-Stars Racing Transformed</i> received positive reviews from critics, with many praising the character roster and major improvements from its predecessor. It received a nomination for "Best Racing Game of 2012" from <i><a href="https://en.wikipedia.org/wiki/GameTrailers">GameTrailers</a></i>, and was nominated for a <a href="https://en.wikipedia.org/wiki/Golden_Joystick_Awards">Golden Joystick Award</a> in 2013 for the "Best Multiplayer" category, losing to <i><a href="https://en.wikipedia.org/wiki/Payday_2">Payday 2</a></i>. Sumo Digital developed a third racing game in the <i>Sonic</i> series, <i><a href="https://en.wikipedia.org/wiki/Team_Sonic_Racing">Team Sonic Racing</a></i>. The vehicle transformation mechanic featured in <i>Sonic &amp; All-Stars Racing Transformed</i> appears in the upcoming <i><a href="https://en.wikipedia.org/wiki/Sonic_Racing:_CrossWorlds">Sonic Racing: CrossWorlds</a></i>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Sonic &amp; All-Stars Racing Transformed</i> is a kart racing game in which players race against each other using over 20 characters from various <a href="https://en.wikipedia.org/wiki/Sega">Sega</a> franchises, such as <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog">Sonic the Hedgehog</a></i>, <i><a href="https://en.wikipedia.org/wiki/Jet_Set_Radio">Jet Set Radio</a></i> and <i><a href="https://en.wikipedia.org/wiki/Space_Channel_5">Space Channel 5</a></i>. It features new mechanics and improvements from the previous game. At certain points in a race, vehicles can alternate between car, boat and plane modes. The car mode handles similarly to the previous game, in which players can earn boost by drifting around corners or performing tricks whilst in the air. Boat mode features <a href="https://en.wikipedia.org/wiki/Boating">boating</a> physics, requiring players to consider their vehicle's turbulence. They may be affected by waves made in the water, some of which can be used to leap into the air and perform stunts. Plane mode, the fastest of the three forms, gives players the freedom to move both vertically and horizontally. Like the other modes, players can 'air-drift' around corners to earn boost and can perform <a href="https://en.wikipedia.org/wiki/Aileron_roll">rolls</a> to quickly adjust their position, earning boost for narrowly dodging obstacles. Players alternate between these modes by driving through blue transformation gates. Certain tracks in the game <a href="https://en.wikipedia.org/wiki/Terraforming">terraform</a> as players proceed through them, offering different playstyles between each lap.</p>
+
+<p>Several varieties of weapons have been added, including explosive hot rod engines, freezing snowballs, blowfish, and swarms of wasps that appear at the front of the pack. In the Japanese version, the blowfish are replaced with garbage Puyos from the <i><a href="https://en.wikipedia.org/wiki/Puyo_Puyo">Puyo Puyo</a></i> series. All-Star Moves return, though these are awarded slightly differently, and can be used in online multiplayer. During races, players can collect star tokens, found scattered around the course or earned by attacking opponents, which can be spent in a slot machine between events to earn random bonuses, such as enhanced items or faster recovery from certain weapons.</p>
+
+<p>The main campaign is the Career Mode which, along with returning features such as <a href="https://en.wikipedia.org/wiki/Grand_Prix_motor_racing">Grand Prix</a>, Time Attack and Single Race, mainly revolves around the World Tour mode. This mode involves going through a branching series of events, ranging from standard races to various challenges, including earning time by drifting, maneuvering through traffic or fighting against large tanks. Completing these challenges on various difficulties earn stars which are used to open up new branches and unlock new characters and mods. Racing with each character in any mode earns XP which unlock modifications that alter the stats of each vehicle. The game features 16 new tracks inspired by games like <i><a href="https://en.wikipedia.org/wiki/Nights_into_Dreams">Nights into Dreams</a></i>, <i><a href="https://en.wikipedia.org/wiki/Super_Monkey_Ball_(series)">Super Monkey Ball</a></i>, <i><a href="https://en.wikipedia.org/wiki/Panzer_Dragoon_(series)">Panzer Dragoon</a></i>, <i><a href="https://en.wikipedia.org/wiki/Golden_Axe_(series)">Golden Axe</a></i>, <i><a href="https://en.wikipedia.org/wiki/After_Burner">After Burner</a></i> and <i><a href="https://en.wikipedia.org/wiki/Burning_Rangers">Burning Rangers</a></i>, as well as four returning locations from the first game and mirror versions of each track. The game features online multiplayer on all versions and four player split-screen multiplayer for the consoles. Some of the career modes can be played in split-screen multiplayer. The <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> version features unique minigames and features that utilize the <a href="https://en.wikipedia.org/wiki/Wii_U_GamePad">Wii U GamePad</a> and can support up to five players via split-screen.</p>
+
+<h3>Playable characters</h3>
+
+<p><i>Sonic &amp; All-Stars Racing Transformed</i> features 24 characters in all major versions of the game, including one downloadable content character. The Wii U, Nintendo 3DS and Xbox 360 versions each received one additional playable character based on their respective console's <a href="https://en.wikipedia.org/wiki/Avatar_(computing)">avatar</a> systems, while the Windows version received seven additional playable characters, including two released as downloadable content. In the mobile version of the game, titled <i>Sonic Racing Transformed</i>, there were only 15 playable characters, four of which could only be unlocked through in-app purchases.</p>
+
+<ul>
+  <li>AGES</li>
+  <li><a href="https://en.wikipedia.org/wiki/Super_Monkey_Ball#Characters">AiAi</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Alex_Kidd">Alex Kidd</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Samba_de_Amigo">Amigo</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Amy_Rose">Amy</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Avatar_(Xbox)">Avatar</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Crazy_Taxi">B.D. Joe</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Jet_Set_Radio">Beat</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Danica_Patrick">Danica Patrick</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Doctor_Eggman">Dr. Eggman</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Football_Manager">Football Manager</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Company_of_Heroes_2">General Winter</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Golden_Axe#Characters">Gilius</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Jet_Set_Radio">Gum</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Joe_Musashi">Joe Musashi</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Knuckles_the_Echidna">Knuckles</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Super_Monkey_Ball#Characters">MeeMee</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Metal_Sonic">Metal Sonic</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Mii">Mii</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Nights_(character)">NiGHTS</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Pudding_(character)">Pudding</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Wreck-It_Ralph">Ralph</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Nights_into_Dreams">Reala</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Shenmue">Ryo</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Shadow_the_Hedgehog">Shadow</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Shogun:_Total_War">Shogun</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(character)">Sonic</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Tails_(Sonic_the_Hedgehog)">Tails</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Team_Fortress_2#Characters_and_setting">Team Fortress</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Ulala_(Space_Channel_5)">Ulala</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Skies_of_Arcadia#Characters">Vyse</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Total_War:_Rome_II">Willemus</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/The_Yogscast">Yogscast</a></li>
+</ul>
+
+<h2>Development and release</h2>
+
+<p>The game's development staff contains members of <a href="https://en.wikipedia.org/wiki/Bizarre_Creations">Bizarre Creations</a>, developer of <i><a href="https://en.wikipedia.org/wiki/Blur_(video_game)">Blur</a></i>, <i><a href="https://en.wikipedia.org/wiki/Metropolis_Street_Racer">Metropolis Street Racer</a></i>, and the <a href="https://en.wikipedia.org/wiki/Project_Gotham_Racing_series"><i>Project Gotham Racing</i> series</a> of racing video games, and of <a href="https://en.wikipedia.org/wiki/Black_Rock_Studio">Black Rock Studio</a>, developer of <i><a href="https://en.wikipedia.org/wiki/Split/Second">Split Second: Velocity</a></i> and <i><a href="https://en.wikipedia.org/wiki/Pure_(video_game)">Pure</a></i>. The console and PlayStation Vita versions run on a new internal engine, codenamed "Sumo", at 30 <a href="https://en.wikipedia.org/wiki/Frames_per_second">fps</a>, while the 3DS version was built from the ground up. Longtime Sega music composer <a href="https://en.wikipedia.org/wiki/Richard_Jacques">Richard Jacques</a> handled the game's soundtrack, which features both original tracks and remixed Sega tunes. The development team cites <i><a href="https://en.wikipedia.org/wiki/Wave_Race">Wave Race</a></i> and <i><a href="https://en.wikipedia.org/wiki/Hydro_Thunder">Hydro Thunder</a></i> as their inspirations for the water-based racing segments. At <a href="https://en.wikipedia.org/wiki/E3_2012">E3 2012</a>, it was announced that <a href="https://en.wikipedia.org/wiki/JR_Motorsports">JR Motorsports</a> <a href="https://en.wikipedia.org/wiki/NASCAR_Xfinity_Series">NASCAR Nationwide Series</a> driver <a href="https://en.wikipedia.org/wiki/Danica_Patrick">Danica Patrick</a> would be appearing as a playable guest character in the game. She drives the "Danicar", a vehicle co-designed by Patrick for <a href="https://en.wikipedia.org/wiki/Mattel">Mattel</a>'s <a href="https://en.wikipedia.org/wiki/Hot_Wheels">Hot Wheels</a> toy line. A car that was shown as a promotion during E3 2012 (pictured on the right) was also raced by Patrick during the <a href="https://en.wikipedia.org/wiki/Andy's_Frozen_Custard_300">O'Reilly Auto Parts Challenge</a> in <a href="https://en.wikipedia.org/wiki/Texas_Motor_Speedway">Texas Motor Speedway</a> on November 7, 2012, about a week before release. The game features Ralph from the animated <a href="https://en.wikipedia.org/wiki/Disney">Disney</a> film <i><a href="https://en.wikipedia.org/wiki/Wreck-It_Ralph">Wreck-It Ralph</a></i>, in which Sonic, Dr. Eggman, and other Sega characters make cameo appearances. <a href="https://en.wikipedia.org/wiki/Ristar">Ristar</a> makes a cameo appearance as the game's flagman. The Xbox 360 version features playable <a href="https://en.wikipedia.org/wiki/Avatar_(Xbox_Live)">Avatars</a>, while the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> and <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> versions include playable <a href="https://en.wikipedia.org/wiki/Mii">Miis</a>. A Bonus Edition of the game was available for pre-order or to get after release as long as it was available, which included <a href="https://en.wikipedia.org/wiki/Metal_Sonic">Metal Sonic</a> as a playable character, <i><a href="https://en.wikipedia.org/wiki/OutRun">OutRun</a></i> Bay, and additional stickers for the player's license. A port of the game for Windows was released in January 2013 and featured additional exclusive characters, including characters from <a href="https://en.wikipedia.org/wiki/Valve_Corporation">Valve</a>'s <i><a href="https://en.wikipedia.org/wiki/Team_Fortress_2">Team Fortress 2</a></i>.</p>
+
+<p>In response to fans requesting additional characters as downloadable content, game director Steve Lycett posted on Sega's official forums, challenging them to organize a vote to nominate characters for him to recommend to Sega. Seven characters were chosen for recommendation, including <a href="https://en.wikipedia.org/wiki/Shenmue">Ryo Hazuki</a>, <a href="https://en.wikipedia.org/wiki/Hatsune_Miku">Hatsune Miku</a>, <a href="https://en.wikipedia.org/wiki/Segata_Sanshiro">Segata Sanshiro</a>, <a href="https://en.wikipedia.org/wiki/Vectorman">Vectorman</a>, <a href="https://en.wikipedia.org/wiki/ToeJam_&amp;_Earl">ToeJam &amp; Earl</a>, <a href="https://en.wikipedia.org/wiki/Bayonetta_(character)">Bayonetta</a>, and <a href="https://en.wikipedia.org/wiki/Ristar">Ristar</a>. On January 24, 2013, Lycett confirmed that one of those characters had been approved for development, later revealed to be Ryo Hazuki. An additional character, General Winter from <i><a href="https://en.wikipedia.org/wiki/Company_of_Heroes_2">Company of Heroes 2</a></i>, was released as part of a free update for the PC version on July 4, 2013. On August 5, 2013, Willemus from <i><a href="https://en.wikipedia.org/wiki/Total_War:_Rome_II">Total War: Rome II</a></i> was added to the PC version as a free update. As part of a collaboration with <a href="https://en.wikipedia.org/wiki/The_Yogscast">The Yogscast</a> and <a href="https://en.wikipedia.org/wiki/Humble_Bundle">Humble Bundle</a>, Yogscast's Simon Lane was released as a downloadable character for the PC version on December 6, 2013, with all proceeds going to charity. A stream by The Yogscast previewing the character showed Ryo Hazuki from the <i><a href="https://en.wikipedia.org/wiki/Shenmue">Shenmue</a></i> series, who had not yet been announced for inclusion. On January 14, 2014, Ryo became available for purchase as a DLC on <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> for the PC version. Due to technical issues, the Android and iOS versions were taken down soon after their release.</p>
+
+<p>On October 4, 2016, the Xbox 360 version was added to the <a href="https://en.wikipedia.org/wiki/List_of_backward-compatible_games_for_Xbox_One_and_Series_X/S">list of backward-compatible games</a> for the <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, and later extended to the <a href="https://en.wikipedia.org/wiki/Xbox_Series_X_and_Series_S">Xbox Series X/S</a>. The game later received an update on November 15, 2021 to increase the target <a href="https://en.wikipedia.org/wiki/Frame_rate">frame rate</a> to 60 frames per second on the Xbox Series X/S.</p>
+
+<h2>Reception</h2>
+
+<p>The game has received positive reviews from critics. It holds a <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> rating of 82 for the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> versions, 78 for the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> version, and 79 for the PC version. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> gave the game a score of 8.6, calling it "a bright, handsome and thoroughly enjoyable ride." <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i> gave the game 8/10, saying "Sega has cherry-picked the best elements of kart racers and applied it to the best arcade racing games to create a sleeper hit that’s great fan service and great fun." <i><a href="https://en.wikipedia.org/wiki/GameTrailers">GameTrailers</a></i> gave the game a score of 8.7. <i><a href="https://en.wikipedia.org/wiki/Empire_(magazine)">Empire</a></i> stated that "Sonic's second turn behind the wheel is a surprisingly complex offering, a kart racer that provides both an immediate surface appeal to newcomers and enough 'fair frustration' to maintain the interests of seasoned race gamers chasing that perfect result," giving the game 4/5 stars.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> writer Britton Peele gave positive reviews to the Xbox 360 and PlayStation 3 versions of the game, but gave a more mixed review to the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> version. While Peele described the title as "far from a poor man's <i><a href="https://en.wikipedia.org/wiki/Mario_Kart">Mario Kart</a></i>", the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> version received a day-one patch that appeared to render the game's Boost Race levels unwinnable. Peele also said the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> version's online Battle mode levels were also broken, with characters spawning in mid-air and collectable items for one of the version's exclusive modes not appearing at all. Sumo Digital has since released a patch to address the respective issues. <i><a href="https://en.wikipedia.org/wiki/1Up.com">1Up.com</a></i> gave the game an A− stating: "But even if the game doesn't have a Daytona car driving a Sega Rally car (still my ultimate fantasy), it doesn't change the fact that Transformed is a largely improved sequel over its predecessor, and that one wasn't so bad to begin with. The old Sega is still in the new Sega, and that's a fun thought."</p>
+
+<p>As of March 2013, the game has sold 1.36 million copies worldwide.</p>
+
+<h3>Awards and nominations</h3>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

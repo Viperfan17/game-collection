@@ -1,0 +1,388 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>PlayStation All-Stars Battle Royale</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('54354eaf-87cc-48b2-950c-72dbb37106da/43d75627-e4e0-497c-8aec-44325146c2d8.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="54354eaf-87cc-48b2-950c-72dbb37106da/8639cf32-4f1a-4a51-8d74-5158dc0e32f8.ico"/> PlayStation All-Stars Battle Royale</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="54354eaf-87cc-48b2-950c-72dbb37106da/258bca60-65e9-44f9-9bbc-e7ea85ff9d90.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/27/2025">4/27/2025</a> 10:06:45</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 9:14:43</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/20/2012">11/20/2012</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-65">65</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-75">75</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform fighter">Platform fighter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-SuperBot Entertainment">SuperBot Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Sony Computer Entertainment">Sony Computer Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/PlayStation_All-Stars_Battle_Royale" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/20131212110652/http://www.playstationallstarsbattleroyale.com/" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[Game Engine] Bluepoint Engine">[Game Engine] Bluepoint Engine</a><br/><a href="#quicklink-[People] composer: John King">[People] composer: John King</a><br/><a href="#quicklink-[People] designer: Seth Killian">[People] designer: Seth Killian</a><br/><a href="#quicklink-[People] director: Omar Kendall">[People] director: Omar Kendall</a><br/><a href="#quicklink-[People] producer: Chan Park">[People] producer: Chan Park</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>PlayStation All-Stars Battle Royale</b></i> is a 2012 <a href="https://en.wikipedia.org/wiki/List_of_crossovers_in_video_games">crossover</a> <a href="https://en.wikipedia.org/wiki/Fighting_game">fighting game</a> developed by SuperBot Entertainment and published by <a href="https://en.wikipedia.org/wiki/Sony_Computer_Entertainment">Sony Computer Entertainment</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Vita">PlayStation Vita</a>. It features various characters drawn from video game franchises owned by or strongly associated with <a href="https://en.wikipedia.org/wiki/PlayStation">PlayStation</a> competing against each other in multiplayer battles.</p>
+
+<p>Development of <i>PlayStation All-Stars Battle Royale</i> began in 2009 under the working title of <i>Title Fight</i>. The game's existence was leaked prior to its official announcement in April 2012, along with a significant number of its playable characters. <i>PlayStation All-Stars Battle Royale</i> was one of the first games to be included in Sony's <a href="https://en.wikipedia.org/wiki/Cross-buy">cross-buy</a> program, allowing those who purchased the game for PlayStation 3 to receive a free copy of the PlayStation Vita port.</p>
+
+<p>The game received mixed reviews. Critics praised the game's multiplayer components and gameplay mechanics, but the game was criticized for its lack of content and presentation.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>PlayStation All-Stars Battle Royale</i> is a <a href="https://en.wikipedia.org/wiki/Platform_fighter">platform fighter</a>, similar to the style of <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a>'s <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros.">Super Smash Bros.</a></i> series. Up to four players can battle each other using characters from various Sony franchises such as <i><a href="https://en.wikipedia.org/wiki/God_of_War_(franchise)">God of War</a></i>, <i><a href="https://en.wikipedia.org/wiki/PaRappa_the_Rapper">PaRappa the Rapper</a></i>, <i><a href="https://en.wikipedia.org/wiki/Infamous_(series)">Infamous</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper">Sly Cooper</a></i>, as well as third-party franchises like <i><a href="https://en.wikipedia.org/wiki/BioShock_(series)">BioShock</a></i>. Battles take place on a <a href="https://en.wikipedia.org/wiki/2D_computer_graphics">2D</a> plane, with players able to freely move around a stage to approach or escape their opponents. Different attacks are performed by pressing one of three attack buttons in combination with a directional input. Players damage their opponents to receive "AP" orbs that build up a power meter at the bottom of the screen. Players can also find orbs scattered across the stage during the match, or can perform throw attacks to remove AP orbs from their opponents. Earning enough power allows players to use one of three levels of special attacks named "Super Moves" which can be used to defeat opponents and earn points. Level 1 super moves have the lowest AP cost but typically cover a short range and can only hit one character; in contrast, Level 3 supers require significant amounts of AP but have an extended duration time and can potentially defeat multiple opponents before they expire.</p>
+
+<p>Battles take place in one of fifteen different battle arenas, with many featuring elements and stage hazards that can damage characters and cause them to lose AP. Each stage is based on a combination of two games, such as "Sandover Village" (based on <i><a href="https://en.wikipedia.org/wiki/Jak_and_Daxter">Jak and Daxter</a></i> and <i><a href="https://en.wikipedia.org/wiki/Everybody's_Golf">Hot Shots Golf</a></i>), "Dreamscape" (based on <i><a href="https://en.wikipedia.org/wiki/LittleBigPlanet">LittleBigPlanet</a></i> and <i><a href="https://en.wikipedia.org/wiki/Buzz!">Buzz!</a></i>), "Stowaways" (based on <i><a href="https://en.wikipedia.org/wiki/Uncharted">Uncharted</a></i> and <i><a href="https://en.wikipedia.org/wiki/BioShock_Infinite">BioShock Infinite</a></i>), and "Hades" (based on <i>God of War</i> and <i><a href="https://en.wikipedia.org/wiki/Patapon">Patapon</a></i>). As time passes, a stage's second representation takes hold, usually introducing an additional hazard into the level. During gameplay, item pick-ups will spawn on the battlefield, such as the Hedgehog Grenade from <i><a href="https://en.wikipedia.org/wiki/Resistance_(video_game_series)">Resistance</a></i>, the Gravity Shield from <i><a href="https://en.wikipedia.org/wiki/Wipeout_(video_game_series)">Wipeout</a></i>, Baumusu's Axe from <i><a href="https://en.wikipedia.org/wiki/Rise_of_the_Kasai">Rise of the Kasai</a></i>, and Razor Claws from <i><a href="https://en.wikipedia.org/wiki/Ratchet_&amp;_Clank">Ratchet &amp; Clank</a></i>. These items can be used to augment a player or attack an opponent, causing them to lose AP. Both stage hazards and items can be disabled in the game's options menu.</p>
+
+<p>The game features a traditional single-player arcade mode, in which players must defeat several randomly-selected opponents, followed by a character-specific rival battle and, ultimately, a battle against the game's main antagonist and <a href="https://en.wikipedia.org/wiki/Boss_(video_games)#Final_boss">final boss</a>, <a href="https://en.wikipedia.org/wiki/Polygon_Man">Polygon Man</a>, the former mascot for the Sony PlayStation in North America. Multiplayer modes include time-based matches, where players compete to achieve the most kills within a time limit; stock-based matches, where players attempt to be the last one standing; and kill-limit matches, where players compete to be the first to reach a certain number of kills. The game also features a single-player challenge mode, in which players attempt to complete specific objectives. Completing matches and fulfilling objectives with a character will gain them <a href="https://en.wikipedia.org/wiki/Experience_point">experience points</a>; leveling up a character will unlock bonuses such as in-game costumes, victory animations, and profile icons. Prior to the shutdown of its online multiplayer servers, the game featured <a href="https://en.wikipedia.org/wiki/Cross-platform_play">cross-platform play</a> between the PlayStation 3 and PlayStation Vita versions.</p>
+
+<h2>Characters</h2>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Rapture_(BioShock)#Big_Daddy">Big Daddy</a> (<i><a href="https://en.wikipedia.org/wiki/BioShock_(series)">BioShock</a></i>)</li>
+  <li>Cole MacGrath (<i><a href="https://en.wikipedia.org/wiki/Infamous_(series)">Infamous</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Killzone_2#Story">Colonel Radec</a> (<i><a href="https://en.wikipedia.org/wiki/Killzone">Killzone</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Dante_(Devil_May_Cry)">Dante</a> (<i><a href="https://en.wikipedia.org/wiki/DmC:_Devil_May_Cry">DmC: Devil May Cry</a></i>)</li>
+  <li>Emmett Graves (<i><a href="https://en.wikipedia.org/wiki/Starhawk_(2012_video_game)">Starhawk</a></i>)</li>
+  <li>Evil Cole MacGrath (<i>Infamous</i>)</li>
+  <li>Fat Princess (<i><a href="https://en.wikipedia.org/wiki/Fat_Princess">Fat Princess</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Heihachi_Mishima">Heihachi Mishima</a> (<i><a href="https://en.wikipedia.org/wiki/Tekken">Tekken</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Isaac_Clarke">Isaac Clarke</a> (<i><a href="https://en.wikipedia.org/wiki/Dead_Space">Dead Space</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Characters_of_the_Jak_and_Daxter_series#Jak">Jak</a> and <a href="https://en.wikipedia.org/wiki/Daxter">Daxter</a> (<i><a href="https://en.wikipedia.org/wiki/Jak_and_Daxter">Jak and Daxter</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Kat_(Gravity_Rush)">Kat</a> and Dusty (<i><a href="https://en.wikipedia.org/wiki/Gravity_Rush">Gravity Rush</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Kratos_(God_of_War)">Kratos</a> (<i><a href="https://en.wikipedia.org/wiki/God_of_War_(franchise)">God of War</a></i>)</li>
+  <li>Nariko (<i><a href="https://en.wikipedia.org/wiki/Heavenly_Sword">Heavenly Sword</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Nathan_Drake">Nathan Drake</a> (<i><a href="https://en.wikipedia.org/wiki/Uncharted">Uncharted</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/PaRappa">PaRappa</a> (<i><a href="https://en.wikipedia.org/wiki/PaRappa_the_Rapper">PaRappa the Rapper</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Raiden_(Metal_Gear)">Raiden</a> (<i><a href="https://en.wikipedia.org/wiki/Metal_Gear">Metal Gear</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Ratchet_and_Clank_(characters)">Ratchet and Clank</a> (<i><a href="https://en.wikipedia.org/wiki/Ratchet_&amp;_Clank">Ratchet &amp; Clank</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Sackboy">Sackboy</a> (<i><a href="https://en.wikipedia.org/wiki/LittleBigPlanet">LittleBigPlanet</a></i>)</li>
+  <li>Sir Daniel Fortesque (<i><a href="https://en.wikipedia.org/wiki/MediEvil_(series)">MediEvil</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Sly_Cooper_(character)">Sly Cooper</a> (<i><a href="https://en.wikipedia.org/wiki/Sly_Cooper">Sly Cooper</a></i>)</li>
+  <li>Spike (<i><a href="https://en.wikipedia.org/wiki/Ape_Escape">Ape Escape</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Sweet_Tooth_(Twisted_Metal)">Sweet Tooth</a> (<i><a href="https://en.wikipedia.org/wiki/Twisted_Metal">Twisted Metal</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Toro_Inoue">Toro Inoue</a> (<i><a href="https://en.wikipedia.org/wiki/Doko_Demo_Issyo">Doko Demo Issyo</a></i>)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Characters_of_God_of_War#Zeus">Zeus</a> (<i>God of War</i>)</li>
+</ul>
+
+<h3>Notes</h3>
+
+<h2>Plot</h2>
+
+<p>Rumors begin circulating that an unknown entity is seeking the strongest warriors in all worlds, gathering many powerful opponents to prove itself superior. Heroes and villains from the many worlds begin searching for this new threat, either seeking to protect their worlds or in pursuit of fortune. After crossing many worlds and defeating those they encounter along the way, the player character encounters the source of the challenge, <a href="https://en.wikipedia.org/wiki/Polygon_Man">Polygon Man</a>, who attacks them. After Polygon Man is defeated, the victor absorbs his power and returns to their own world, where they decide how to use their newfound power.</p>
+
+<h2>Development</h2>
+
+<p><i>PlayStation All-Stars Battle Royale</i> was originally going to be developed by <a href="https://en.wikipedia.org/wiki/Naughty_Dog">Naughty Dog</a>, who was in the middle of the development of <i><a href="https://en.wikipedia.org/wiki/The_Last_of_Us">The Last of Us</a></i>. Publisher Sony Computer Entertainment therefore decided to form SuperBot Entertainment in 2009 specifically to work on the game. Game development began in 2009 with a creative team that included members from several Sony and former third party development teams. Omar Kendall, formerly a designer on the <i><a href="https://en.wikipedia.org/wiki/Ultimate_Fighting_Championship#Video_games">UFC</a></i> series, the <i><a href="https://en.wikipedia.org/wiki/Backyard_wrestling#Video_games">Backyard Wrestling</a></i> franchise, and <i><a href="https://en.wikipedia.org/wiki/X-Men:_Next_Dimension">X-Men: Next Dimension</a></i>, assumed the role of game director after joining SuperBot. In early 2011, it was discovered that the independent studio based in California, SuperBot Entertainment, was working on an un-announced "combat heavy" multiplayer title for the PlayStation 3. In November 2011, images of the game (then codenamed as <i>Title Fight</i>) popped up online, showing Sweet Tooth from the <i>Twisted Metal</i> series and Kratos from <i>God of War</i>. It was claimed the game features a number of Sony mascots such as Parappa the Rapper, Sly Cooper, Nathan Drake (<i>Uncharted</i>), Colonel Mael Radec (<i>Killzone</i>) and Fat Princess. Arenas include a Sandover Village stage (from <i>Jak &amp; Daxter</i>), a <i>Hot Shots Golf</i> stage, a <i>LittleBigPlanet</i> stage and a <i>Buzz!</i> trivia mini-game.</p>
+
+<p>SuperBot Entertainment was linked as developer of the game, who confirmed to be working on a "very amazing PS3 game" for Sony Computer Entertainment America. According to a job advert, SuperBot was after a senior combat designer with "a strong familiarity with fighting games and fighting game theory". Another job advert asked for a lead designer with "a strong familiarity with online mode and matchmaking design as they apply to console gaming". When <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> contacted Sony to ask about the rumor that they were making a "PlayStation 3 exclusive <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros.">Smash Bros.</a></i> rival", Sony declined to comment stating "we do not comment on rumor or speculation". Numerous other developers, including Sony's own <a href="https://en.wikipedia.org/wiki/Santa_Monica_Studio">Santa Monica Studio</a>, <a href="https://en.wikipedia.org/wiki/Bluepoint_Games">Bluepoint Games</a>, <a href="https://en.wikipedia.org/wiki/Blind_Squirrel_Games">Blind Squirrel Games</a> and <a href="https://en.wikipedia.org/wiki/Magic_Pixel_Games">Magic Pixel Games</a> contributed to development.</p>
+
+<p>In April 2012, the name <i>PlayStation All-Stars Battle Royale</i> was revealed via a Sony survey that asked gamers what they thought of the name of the game, and the game itself, which was uncovered and published by <i>PlayStation Lifestyle</i>. The site claimed the PlayStation 3 exclusive would be announced at <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">E3</a> the following June. Shortly after this, Sony registered the domain for www.playstationallstarsbattleroyale.com, alongside the shorter www.playstationallstars.com. On April 23, 2012, a tweet by the newly formed SuperBot Entertainment Twitter page said: "Boot sequence initiated." At the same time, <i><a href="https://en.wikipedia.org/wiki/GameTrailers_TV_with_Geoff_Keighley">GTTV</a></i> promised to reveal a major new PlayStation exclusive on April 26. The game was officially revealed on the April 26, 2012 episode of <i>GTTV</i> as <i>PlayStation All-Stars Battle Royale</i>.</p>
+
+<p>In May 2012, in an interview to <i><a href="https://en.wikipedia.org/wiki/Digital_Trends">Digital Trends</a></i>, game director Omar Kendall was asked about the possibility of a PlayStation Vita version of <i>PlayStation All-Stars Battle Royale</i>, and he simply replied, "Maybe... stay tuned." A Vita version was announced at the <a href="https://en.wikipedia.org/wiki/E3_2012">E3 2012</a>, to be developed by <a href="https://en.wikipedia.org/wiki/Bluepoint_Games">Bluepoint Games</a>, and was confirmed to feature cross-play with the PlayStation 3. In July 2012, it was announced that former <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> community manager and <a href="https://en.wikipedia.org/wiki/Evolution_Championship_Series">Evolution Championship Series</a> (Evo) co-founder Seth Killian had taken a role at <a href="https://en.wikipedia.org/wiki/Santa_Monica_Studio">Santa Monica Studio</a>, where he would assist <i>PlayStation All-Stars</i> developer Superbot Entertainment.</p>
+
+<p>Several public and private multiplayer betas were held between July and October 2012. The multiplayer betas featured a limited roster of characters and stages, and were used to test server loads, matchmaking, and cross-platform play between PlayStation 3 and PlayStation Vita. In late July, files found in one of the multiplayer beta versions of the game pointed to an array of unannounced characters and stages, including levels set in the worlds of <i><a href="https://en.wikipedia.org/wiki/Resistance_(video_game_series)">Resistance</a></i>, <i><a href="https://en.wikipedia.org/wiki/Uncharted_3:_Drake's_Deception">Uncharted 3</a></i>, <i>PaRappa the Rapper</i>, <i>LittleBigPlanet</i>, <i>Killzone</i>, <i><a href="https://en.wikipedia.org/wiki/LocoRoco">LocoRoco</a></i>, <i><a href="https://en.wikipedia.org/wiki/BioShock_Infinite">BioShock Infinite</a></i> and more. An array of character names were also uncovered inside the demo's files, including <i><a href="https://en.wikipedia.org/wiki/DmC:_Devil_May_Cry">DmC: Devil May Cry</a></i>'s Dante, Evil Cole from <i><a href="https://en.wikipedia.org/wiki/Infamous_(series)">Infamous</a></i>, Raiden from <i><a href="https://en.wikipedia.org/wiki/Metal_Gear">Metal Gear</a></i> and others. A number of leaks uncovered the information, which started on Reddit. Resourceful users of the <i>GameFAQs</i> forums and NeoGAF each added more information, which also included a list of in-game items. SuperBot producer Chan Park later acknowledged the leak's legitimacy, though he noted that changes had been made since the beta build's development and that the leaked content did not fully reflect the content found within the final game. The last of the leaked characters were officially announced on August 31, 2012.</p>
+
+<p>On August 13, 2012, SuperBot Entertainment announced that the game had been delayed by one month from its original October 2012 release to November 2012. Chan Park claimed that the delay "will let us spend more time polishing and tuning the game, and it will give us a chance to incorporate some of the great feedback we're receiving from the current limited beta to ensure we are creating the best possible fighting game experience."</p>
+
+<h2>Release</h2>
+
+<p>Originally scheduled for a worldwide release in October 2012, <i>PlayStation All-Stars Battle Royale</i> was delayed and released on November 20, 2012 in North America, November 21, 2012 in Europe, November 22, 2012 in Australia and New Zealand, November 23, 2012 in the UK and Ireland, and January 31, 2013 in Japan. Players who pre-ordered the game received a voucher for a <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> pack, which included an exclusive set of costumes for all of the game's playable characters. With the exception of the third-party characters, these costumes were later released as premium DLC on the PSN store; the third-party costumes were instead offered as free DLC several months after launch. As part of Sony's cross-buy initiative, players who purchased the PlayStation 3 version received a voucher for a free copy of the PlayStation Vita version.</p>
+
+<h3>Marketing</h3>
+
+<p>On May 1, 2012, Sony announced the PlayStation Store Royale Contenders Sale – a <i>PlayStation All-Stars Battle Royale</i> sale to celebrate the announcement of the game. The sale included discounts on titles such as <i><a href="https://en.wikipedia.org/wiki/God_of_War_Collection">God of War Collection</a></i>, <i><a href="https://en.wikipedia.org/wiki/God_of_War:_Origins_Collection">God of War: Origins Collection</a></i>, <i><a href="https://en.wikipedia.org/wiki/Killzone_3">Killzone 3 Multiplayer</a></i>, and <i><a href="https://en.wikipedia.org/wiki/The_Sly_Collection">The Sly Collection</a></i>. The sale began on May 2 and ran for one week.</p>
+
+<p>At <a href="https://en.wikipedia.org/wiki/Gamescom">Gamescom</a> 2012, Sony Computer Entertainment announced their new cross-buy program, in which players who purchased new PlayStation 3 copies of the game would be able to download the PlayStation Vita version at no additional cost. <i>PlayStation All-Stars</i>, along with <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper:_Thieves_in_Time">Sly Cooper: Thieves in Time</a></i> and <i><a href="https://en.wikipedia.org/wiki/Ratchet_&amp;_Clank:_Full_Frontal_Assault">Ratchet &amp; Clank: Full Frontal Assault</a></i>, were the first games announced for the program.</p>
+
+<p>The music track "Genesis" by <a href="https://en.wikipedia.org/wiki/Justice_(band)">Justice</a> was featured in several pieces of promotional material following the game's announcement, while the game's opening uses the song "<a href="https://en.wikipedia.org/wiki/Finale_(song)">Finale</a>" by <a href="https://en.wikipedia.org/wiki/Madeon">Madeon</a>. The game's advertising included a television commercial produced by the <i><a href="https://en.wikipedia.org/wiki/Robot_Chicken">Robot Chicken</a></i> creative team.</p>
+
+<p>On November 15, 2012, Seth Killian announced that the first downloadable content for <i>PlayStation All-Stars Battle Royale</i> would arrive in the form of two new playable characters: Kat from <i><a href="https://en.wikipedia.org/wiki/Gravity_Rush">Gravity Rush</a></i> and Emmett Graves from <i><a href="https://en.wikipedia.org/wiki/Starhawk_(2012_video_game)">Starhawk</a></i>, along with a new stage, "Fearless", based on <i>Heavenly Sword</i> and <i><a href="https://en.wikipedia.org/wiki/Wipeout_(video_game)">WipEout</a></i>. The characters were available for free during the first two weeks of their release, though the new stage was not. Killian also mentioned that Kat and Emmett, along with all future potential DLC characters, would be treated "just like the 20 launch characters," complete with single-player story modes, minions, trials, unlockable costumes, and more content. The DLC was released on February 12, 2013. Players are still able to access downloadable content stages in online ranked matches even if they do not own the content. Additional costumes and minions are also available to purchase as DLC. After Sony Computer Entertainment ended its working agreement with Superbot Entertainment in January 2013, it was announced that forthcoming DLC would be handled by Santa Monica Studio. On February 27, 2013, Zeus from the <i>God of War</i> series and Isaac Clarke from the <i>Dead Space</i> series were revealed as the second set of downloadable characters. Zeus and Isaac were released on March 19, along with a new stage, "Graveyard", based on <i>MediEvil</i> and <i><a href="https://en.wikipedia.org/wiki/The_Unfinished_Swan">The Unfinished Swan</a></i>. A voucher to download Zeus and Isaac Clarke was included with all new copies of <i><a href="https://en.wikipedia.org/wiki/God_of_War:_Ascension">God of War: Ascension</a></i>.</p>
+
+<p>Shortly after <a href="https://en.wikipedia.org/wiki/E3_2013">E3 2013</a>, <a href="https://en.wikipedia.org/wiki/Shuhei_Yoshida">Shuhei Yoshida</a> of <a href="https://en.wikipedia.org/wiki/PlayStation_Studios">SCE Worldwide Studios</a> commented on future DLC releases, mentioning the game's sale of 1 million units but claiming "it was not enough to have the momentum in terms of a business standpoint to continue to add characters or do a sequel". Both <a href="https://en.wikipedia.org/wiki/Oddworld#Characters">Abe</a> from the <i><a href="https://en.wikipedia.org/wiki/Oddworld">Oddworld</a></i> series and Dart from <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Dragoon">The Legend of Dragoon</a></i> were planned for release as downloadable characters, along with a stage based on <i>Gravity Rush</i> and <i><a href="https://en.wikipedia.org/wiki/Journey_(2012_video_game)">Journey</a></i>; however, due to low sales of previous content, development on this content was cancelled. On August 4, 2013 Santa Monica Studios confirmed that there would be no more DLC characters or stages, but said that they planned on releasing four outfits formerly exclusive to those who pre-ordered the game, as well as skins for Zeus and Isaac.</p>
+
+<p>In September 2018, Sony notified players that the multiplayer servers for several of their PlayStation 3 titles, including <i>PlayStation All-Stars</i>, would be shut down the following month. Sales of the game's online pass were also halted in preparation for this change. The shutdown was later pushed back to January 31, 2019, at which point all of the game's online features were disabled.</p>
+
+<h2>Reception</h2>
+
+<p><i>PlayStation All-Stars Battle Royale</i> received generally average reviews. Critics praised the game's multiplayer and fighting mechanics, but criticized its lack of content, still images in campaign mode and few cutscenes. The use of super moves as the only way to defeat a player had mixed reception. While some critics thought it lacked depth, others believed that filling up the meter to land a knock-out added strategy to an otherwise only decent fighting experience. The game currently holds a 74 score for the PlayStation 3 version and a 75 score for the PlayStation Vita version on <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>.</p>
+
+<p>Video game talk show <i><a href="https://en.wikipedia.org/wiki/Good_Game_(television_series)">Good Game</a></i>'s two presenters both gave the game a 6 out of 10. While the game's combat mechanics were praised, criticism was drawn towards the "flawed" Super Moves mechanic, saying, "In most fighting games each attack you do is chipping away your opponent's health bar. Or in <i>Smash Bros.</i> it's adding to their damage counter, and the higher their damage the further your attacks knocked them, but in this game all you have is the super meter! Each attack adds fuel to it. But if you miss with your super, all the attacking you did for the last few minutes amounts to nothing. Essentially all your progress is erased". The selection of playable characters also drew criticism, as the hosts felt many of the characters were added due to their marketing appeal rather than appropriateness for a fighting game.</p>
+
+<p><i>PaRappa</i> character designer Rodney Greenblat was happy to see PaRappa return to video games, but wasn't happy to see him in a violent game. "I'm very happy that PaRappa is making a bit of a comeback, but not so happy about him being in a weapon filled battle game. Actually the Battle Royal game is fun, and I have to do what I can to get Parappa back in the game scene. My hope is that Sony realizes the golden true potential of Parappa and asks me to design some new games. I've learned a lot, and I think Parappa could be great again," said Greenblat.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> gave the game an 8/10, declaring "It combines characters, environments and ideas into a tight package that’s worthy of consideration for anyone who owns a PlayStation 3 and PlayStation Vita and considers themselves a brand loyalist or simply a longtime fan ... I know it’ll be hard for some skeptics to believe, but PlayStation All-Stars is its own game, and it even happens to do some things better than what inspired it." <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> gave the game a 6.5/10, commenting "There are better, more fluid games out there for the serious fighter, and there are more accessible ones for those interested in a bit of silliness. In attempting to mix the two, <i>PlayStation All-Stars Battle Royale</i> merely ends up being competent at both and the master of neither."</p>
+
+<p>On December 21, 2012, the game was nominated for <i>IGN'</i>s Best Overall Fighting Game and won the <i>IGN</i> People's Choice Award.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> awarded <i>PlayStation All-Stars Battle Royale</i> with <a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Fighting_Game_of_the_Year">Fighting Game of the Year</a> during the <a href="https://en.wikipedia.org/wiki/16th_Annual_D.I.C.E._Awards">16th Annual D.I.C.E. Awards</a>.</p>
+
+<h3>Sales and future</h3>
+
+<p>Shuhei Yoshida confirmed that over a million copies of the game had been sold by June 12, 2013, though he conceded that, at the time, this was not enough to justify a sequel or developing further DLC for the game. He stated that while he was personally happy with the cross-over implementation of the characters and worlds, he saw more potential for it to come together using different gameplay mechanics. In August 2013, a <a href="https://en.wikipedia.org/wiki/Free-to-play">free-to-play</a> minigame collection, <i><a href="https://en.wikipedia.org/wiki/PlayStation_All-Stars_Island">PlayStation All-Stars Island</a></i>, was released for <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> devices as a cross-promotion with <a href="https://en.wikipedia.org/wiki/Coke_Zero">Coke Zero</a>. The game was later made available for <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a> platforms as well, but both platforms only saw a limited release in specific European territories.</p>
+
+<h2>Legacy</h2>
+
+<p>In February 2013, <a href="https://en.wikipedia.org/wiki/Sony_Computer_Entertainment">Sony Computer Entertainment</a> cut ties with Superbot and the company was seeking a new publisher.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

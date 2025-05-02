@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Disney Infinity 3.0</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('a78ca99e-cb7c-480d-886a-8b2c6382abc0/315f68a9-cbe9-4381-a05a-8c2ab8d1ceba.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="a78ca99e-cb7c-480d-886a-8b2c6382abc0/630064ae-5fda-46db-897c-ab99fd1b9a1a.ico"/> Disney Infinity 3.0</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="a78ca99e-cb7c-480d-886a-8b2c6382abc0/c9afcb67-0f40-4776-9680-d4e894afed1e.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>4m 3s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 7:30:03</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:54:57</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 7:28:42</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/29/2015">10/29/2015</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-69">69</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-81">81</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Avalanche Software">Avalanche Software</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Blind Squirrel Games">Blind Squirrel Games</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Heavy Iron Studios">Heavy Iron Studios</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Ninja Theory">Ninja Theory</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sumo Digital">Sumo Digital</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-United Front Games">United Front Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Disney Interactive Studios">Disney Interactive Studios</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-LucasArts">LucasArts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Disney_Infinity_3.0" target="_blank">PCGamingWiki</a><br/><a href="https://infinity.disney.com/" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=30032" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/disney-infinity-3-dot-0" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/541670/" target="_blank">SteamDB</a><br/><a href="https://www.mobygames.com/game/disney-infinity-30-gold-edition" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Disney_Infinity_3.0" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/disney-infinity-30-gold-edition/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] composer: Chuck E. Myers">[People] composer: Chuck E. Myers</a><br/><a href="#quicklink-[People] composer: James Dooley">[People] composer: James Dooley</a><br/><a href="#quicklink-[People] composer: Kevin Manthei">[People] composer: Kevin Manthei</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Disney Infinity 3.0</b></i> (also known as <i><b>Disney Infinity: Star Wars</b></i>) is a 2015 <a href="https://en.wikipedia.org/wiki/Toys-to-life">toys-to-life</a> <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> developed by <a href="https://en.wikipedia.org/wiki/Avalanche_Software">Avalanche Software</a> and published by <a href="https://en.wikipedia.org/wiki/Disney_Interactive_Studios">Disney Interactive Studios</a>. It was released for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> and <a href="https://en.wikipedia.org/wiki/Apple_TV">Apple TV</a>. It is the third and final installment in the <a href="https://en.wikipedia.org/wiki/Toys-to-life">toys-to-life</a> <i><a href="https://en.wikipedia.org/wiki/Disney_Infinity">Disney Infinity</a></i> series and the last game to be published by the company before their closure. It was developed by <a href="https://en.wikipedia.org/wiki/Avalanche_Software">Avalanche Software</a> and <a href="https://en.wikipedia.org/wiki/Heavy_Iron_Studios">Heavy Iron Studios</a> with additional help from <a href="https://en.wikipedia.org/wiki/Ninja_Theory">Ninja Theory</a>, Studio Gobo, <a href="https://en.wikipedia.org/wiki/Sumo_Digital">Sumo Digital</a>, and <a href="https://en.wikipedia.org/wiki/United_Front_Games">United Front Games</a>. It is the sequel to <i><a href="https://en.wikipedia.org/wiki/Disney_Infinity_2.0">Disney Infinity 2.0</a></i> (2014). In contrast to its predecessor, which focused on <a href="https://en.wikipedia.org/wiki/Marvel_Comics_characters">Marvel Comics characters</a> and playsets, <i>3.0</i> has a focus on the <i><a href="https://en.wikipedia.org/wiki/Star_Wars">Star Wars</a></i> franchise. The game was announced on May 5, 2015, and was released on August 28, 2015 in Europe and on August 30, 2015 in North America.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Disney Infinity 3.0</i> features similar gameplay mechanics to <i><a href="https://en.wikipedia.org/wiki/Disney_Infinity_(video_game)">Disney Infinity</a></i> and <i><a href="https://en.wikipedia.org/wiki/Disney_Infinity_2.0">Disney Infinity 2.0</a></i>. Although sharing many key elements, the game's combat system has been redesigned to become more in-depth and complex. The game's combat system is influenced by the <i><a href="https://en.wikipedia.org/wiki/Star_Wars:_The_Force_Unleashed">Star Wars: The Force Unleashed</a></i> and <a href="https://en.wikipedia.org/wiki/Star_Wars:_The_Force_Unleashed_II">its sequel</a>, <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts">Kingdom Hearts</a></i> and most of the <a href="https://en.wikipedia.org/wiki/Spider-Man">Spider-Man</a>'s aerial combat-themed <a href="https://en.wikipedia.org/wiki/Spider-Man_in_video_games">video game series</a> (except <i><a href="https://en.wikipedia.org/wiki/Ultimate_Spider-Man_(video_game)">Ultimate Spider-Man</a></i>). <a href="https://en.wikipedia.org/wiki/Lightsaber">Lightsabers</a> have been integrated into combat, due to the inclusion of <i>Star Wars</i> characters. Characters who use lightsabers in combat can utilize additional weapons. For instance, playable character Luke Skywalker has the ability to use a blaster and a lightsaber, which used together can juggle enemies in the air. Full <a href="https://en.wikipedia.org/wiki/Combo_(video_gaming)">combos</a> have been integrated, which allows the player to pause mid-combo and branch off into another variation of the combo. Playable characters with the ability to use the Force, in <i>Star Wars</i> mythology, have the ability to push and pull enemies during combat. Special attacks, which were introduced in <i>Disney Infinity: Marvel Super Heroes</i>, have returned. Only the bearer of a close-ranged weapon (such as lightsabers and other blade or staff weapons), including the characters who have their own primary close-ranged weapons (like Mulan, whose primary weapon is a staff,  similar to the Jedi and Sith's own primary lightsaber), and characters who can fly are able to perform an aerial combo. Instead of waiting for a progress bar to fill up for a special attack to be performed, a new feature allows the attack to be released early, but the effects of the attack are not as strong. Auto-lock when firing ranged weapons at targets has been enhanced, so players no longer have to move closer to enemies in order to auto-lock on their positions.</p>
+
+<h2>Plot</h2>
+
+<h3><i>Twilight of the Republic</i></h3>
+
+<p>The <i>Twilight of the Republic</i> Playset storyline is based on the era of the <i>Star Wars</i> prequel trilogy. Set during the events of <i><a href="https://en.wikipedia.org/wiki/Star_Wars:_The_Clone_Wars_(2008_TV_series)">Star Wars: The Clone Wars</a></i>, <a href="https://en.wikipedia.org/wiki/Obi-Wan_Kenobi">Obi-Wan Kenobi</a>, <a href="https://en.wikipedia.org/wiki/Anakin_Skywalker">Anakin Skywalker</a>, <a href="https://en.wikipedia.org/wiki/Yoda">Yoda</a> and <a href="https://en.wikipedia.org/wiki/Ahsoka_Tano">Ahsoka Tano</a> discover a reactivated Droid factory on the planet Geonosis. The four Jedi then decide to find out who is the mastermind behind the newly minted droid army. As the story progresses, the pair cross paths with <a href="https://en.wikipedia.org/wiki/General_Grievous">General Grievous</a>, <a href="https://en.wikipedia.org/wiki/Jabba_the_Hutt">Jabba the Hutt</a>, <a href="https://en.wikipedia.org/wiki/Cad_Bane">Cad Bane</a>, <a href="https://en.wikipedia.org/wiki/Mace_Windu">Mace Windu</a>, <a href="https://en.wikipedia.org/wiki/Sebulba">Sebulba</a>, <a href="https://en.wikipedia.org/wiki/Padmé_Amidala">Padmé Amidala</a> and the main antagonist <a href="https://en.wikipedia.org/wiki/Darth_Maul">Darth Maul</a>, and travel to planets Coruscant, Naboo, Geonosis and Tatooine.</p>
+
+<p>The <i>Rise Against the Empire</i> Playset storyline is based on the events of the original <i>Star Wars</i> trilogy, with some differences. The playset revolves around <a href="https://en.wikipedia.org/wiki/Luke_Skywalker">Luke Skywalker</a>, his sister <a href="https://en.wikipedia.org/wiki/Princess_Leia">Leia</a>, <a href="https://en.wikipedia.org/wiki/Han_Solo">Han Solo</a> and <a href="https://en.wikipedia.org/wiki/Chewbacca">Chewbacca</a> finding themselves locked in battle with <a href="https://en.wikipedia.org/wiki/Darth_Vader">Darth Vader</a>.</p>
+
+<p>A playset based on <i><a href="https://en.wikipedia.org/wiki/Star_Wars:_Episode_VII_-_The_Force_Awakens">Star Wars: Episode VII - The Force Awakens</a></i> was announced at the 2015 D23 Expo and released in December of that year as a tie-in to the movie; it features <a href="https://en.wikipedia.org/wiki/Finn_(Star_Wars)">Finn</a>, <a href="https://en.wikipedia.org/wiki/Rey_(Star_Wars)">Rey</a>, <a href="https://en.wikipedia.org/wiki/Kylo_Ren">Kylo Ren</a>, and <a href="https://en.wikipedia.org/wiki/Poe_Dameron">Poe Dameron</a> as playable characters.</p>
+
+<p>In the <i><a href="https://en.wikipedia.org/wiki/Inside_Out_(2015_film)">Inside Out</a></i> playset, Riley falls asleep watching a horror movie and chaos ensues in her subconscious. This scatters some of Riley's memories all over Imagination Land and the emotions must find and return them to headquarters before Riley awakens.</p>
+
+<p>In the Marvel Battlegrounds playset, <a href="https://en.wikipedia.org/wiki/Loki_(Marvel_Cinematic_Universe)">Loki</a> teams up with <a href="https://en.wikipedia.org/wiki/Ultron_(Marvel_Cinematic_Universe)">Ultron</a> to manipulate all of the universe's heroes into fighting each other using robot duplicates while they steal one of the six <a href="https://en.wikipedia.org/wiki/Infinity_Stones">Infinity Stones</a> from the <a href="https://en.wikipedia.org/wiki/Asgard_(comics)">Asgardian vault</a>. All Marvel characters from <i><a href="https://en.wikipedia.org/wiki/Disney_Infinity_2.0">Disney Infinity 2.0</a></i> are playable in this playset, along with new characters introduced in 3.0. This is the first and only <i>Disney Infinity</i> play set to utilize four-player local gameplay.</p>
+
+<p>In the <i><a href="https://en.wikipedia.org/wiki/Finding_Dory">Finding Dory</a></i> playset, <a href="https://en.wikipedia.org/wiki/Dory_(Finding_Nemo)">Dory</a> learns of a flood at the Marine Life Institute that has washed the littlest fish into all the wrong tanks. Together with Nemo, Marlin, Hank, Bailey and Destiny, she returns to rescue them and lead them out to safety. Along the way, she makes new fish friends and customizes a new reef area as a sanctuary for the rescued fish.</p>
+
+<p>The Toy Box Takeover expansion game begins with <a href="https://en.wikipedia.org/wiki/Mickey_Mouse">Mickey</a> summoning his friends. When <a href="https://en.wikipedia.org/wiki/List_of_The_Incredibles_characters#Syndrome">Syndrome</a> gets his hands on Merlin and Mickey's Wand he teams up with all the other villains for control of the Toy Box. Toy Box Takeover features six dungeon crawler-style levels that can be accessed by any playable character, except for any characters the game considers a car. The player must take down Syndrome's minions before confronting him in his protected base.</p>
+
+<p>The Toy Box Speedway expansion game is a battle racing game, similar to the races in the Cars Play Set from the original <i>Disney Infinity</i> and the <i>Mario Kart</i> game series. Like its dungeon-crawler counterpart, Toy Box Takeover, any playable character may enter it.</p>
+
+<h2>Development</h2>
+
+<p>Since <i><a href="https://en.wikipedia.org/wiki/Disney_Infinity_(video_game)">Disney Infinity</a></i>, there have been hints of <i><a href="https://en.wikipedia.org/wiki/Star_Wars">Star Wars</a></i> joining the line of games. The "ultimate unlocks" in the first two <i>Infinity</i> games were a lightsaber and a landspeeder, respectively. Prior to the release of <i><a href="https://en.wikipedia.org/wiki/Disney_Infinity_2.0">Disney Infinity 2.0</a></i> in 2014, series producer John Vignocchi hinted that a future installment could have characters from <a href="https://en.wikipedia.org/wiki/Lucasfilm">Lucasfilm</a>. The title's existence was first revealed following a leak from Chinese retailer Taobao showing potential character and figure designs for the third installment. German retailer Saturn would later leak images of the game's Starter Pack featuring the characters of <a href="https://en.wikipedia.org/wiki/Anakin_Skywalker">Anakin Skywalker</a> and <a href="https://en.wikipedia.org/wiki/Ahsoka_Tano">Ahsoka Tano</a> from <i><a href="https://en.wikipedia.org/wiki/Star_Wars:_The_Clone_Wars_(2008_TV_series)">Star Wars: The Clone Wars</a></i>. The game was officially revealed by <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> on May 5, 2015.</p>
+
+<p>Studio Gobo, <a href="https://en.wikipedia.org/wiki/Ninja_Theory">Ninja Theory</a> and <a href="https://en.wikipedia.org/wiki/United_Front_Games">United Front Games</a> were among development groups that worked on the game's Playsets. In order to create a more complex combat system, compared to the first two installments, Disney decided to also have Ninja Theory revamp the game's combat, after <a href="https://en.wikipedia.org/wiki/LucasArts">LucasArts</a> had expressed interest in working with the company. United Front Games was chosen for their combat experience on <a href="https://en.wikipedia.org/wiki/Sleeping_Dogs_(video_game)">Sleeping Dogs</a> to develop the Marvel Battlegrounds playset.</p>
+
+<h2>Release</h2>
+
+<p><i>Disney Infinity 3.0</i> was released on August 30, 2015 in North America. The Starter Pack, which includes the game disc, Anakin Skywalker and Ahsoka Tano character figurines, one playset piece (Twilight of the Republic), one web card and the Disney Infinity Base, was released on the game's launch. The game also received a <a href="https://en.wikipedia.org/wiki/Digital_distribution_of_video_games">digital download</a> release. Exclusively in Europe, <i>Disney Infinity 3.0</i> had a game disc-only release without the figurines, web cards and Disney Infinity Base, that are included in the Starter Pack.</p>
+
+<p>A Saga Bundle Starter Pack was available at launch for the PS3 and PS4. It contains the basic starter pack, Rise Against the Empire playset, and <a href="https://en.wikipedia.org/wiki/Boba_Fett">Boba Fett</a> figure. Boba Fett was a timed exclusive to this pack and was released on his own in March 2016.</p>
+
+<p>Power Disc Packs, which unlock additional content in the game, are no longer sold in blind packs, contrary to the use of blind packs in the previous two games. Instead, power discs were released in identifiable packaging.</p>
+
+<p>A special Power Disc based on <a href="https://en.wikipedia.org/wiki/Mickey_Mouse">Mickey Mouse</a>'s <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts">Kingdom Hearts</a></i> role was given out at Disney's 2015 D23 Expo. Controversially, it is an expo exclusive and was not sold in stores. Despite this, it does not affect a player's chance to get 100% completion.</p>
+
+<h2>Reception</h2>
+
+<p><i>Disney Infinity 3.0</i> received very positive reviews from video game critics who praised the refinements to the Toy Box, Play Sets, combat, and reduced bugs.</p>
+
+<h3>End of non-console support</h3>
+
+<p>Between the March 2016 releases of the <i>Marvel Battlegrounds</i> Play Set and the then-new Marvel and Baloo figures, and the cancellation of the <i>Disney Infinity</i> series, players of the <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Windows</a>, <a href="https://en.wikipedia.org/wiki/Mobile_game">mobile</a> and <a href="https://en.wikipedia.org/wiki/Apple_TV">Apple TV</a> versions noticed that the game was not updated for those platforms to support the new figures or Play Set. The <i>Disney Infinity</i> account confirmed that the new content would be available on consoles.</p>
+
+<p>Due to Disney's decision to shut down Avalanche Software and end its toys-to-life business, Disney began to gradually retire the <i>Disney Infinity</i> franchise, leaving it as a trilogy. On July 29, 2016, the in-game purchase system was completely removed for the Windows (except the <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> version), iOS, Android, and Apple TV versions of the game. Before they did, Disney closed its game without letting anyone know. On September 30, 2016, the Windows (standalone launcher version), Apple TV, Google, and Amazon versions of the game were removed from their respective online stores (and became unplayable), and new toybox submissions ceased to be accepted. The Steam versions of <i>2.0</i> and <i>3.0</i> were also taken down with Disney Interactive announcing that "Gold Editions" of all installments of the trilogy would be provided to allow continued use of the full games and all their content after the online servers are shut down. Anyone who purchased <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> for those versions in-game or via Steam received the "Gold Editions" for free, and any webcodes that were redeemed still apply. Disney released the "Gold Editions" of all three <i>Disney Infinity</i> games—including <a href="https://en.wikipedia.org/wiki/Disney_Infinity_(video_game)">the first game</a>, which was previously never released either on Steam or in a full version (with playsets) on PC—on December 9, 2016 via Steam. The original Steam releases of the second and third games were completely delisted and disabled. On January 3, 2017, in-game purchases in the <a href="https://en.wikipedia.org/wiki/Windows_8">Windows 8</a>/<a href="https://en.wikipedia.org/wiki/Windows_10">10</a> versions (from the <a href="https://en.wikipedia.org/wiki/Windows_Store">Windows Store</a>) were disabled as well. On the morning of March 3, 2017, in addition to the discontinuation of all aforementioned online services, Disney also shut down all officially related websites, including Online Profiles linked to Disney Accounts and the official forums. Apple TV and Windows 8/10 versions were unplayable as well on that day.</p>
+
+<p>In October 2017, Disney quietly announced a series of action figures entitled "Toy Box" exclusive to <a href="https://en.wikipedia.org/wiki/Disney_Store">Disney Store</a> locations. The line consists of characters from <a href="https://en.wikipedia.org/wiki/Pixar_Animation_Studios">Pixar</a>, <i><a href="https://en.wikipedia.org/wiki/Star_Wars">Star Wars</a></i>, and <a href="https://en.wikipedia.org/wiki/Marvel_Comics">Marvel</a> properties in their <i>Disney Infinity</i> designs.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

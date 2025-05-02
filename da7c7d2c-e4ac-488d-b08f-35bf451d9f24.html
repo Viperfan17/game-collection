@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>New Super Mario Bros. 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('da7c7d2c-e4ac-488d-b08f-35bf451d9f24/c99573c7-8f8e-4a45-9ee4-2b3f54c0a1d0.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="da7c7d2c-e4ac-488d-b08f-35bf451d9f24/7f001731-7127-44cc-a477-f9a208d81a9a.png"/> New Super Mario Bros. 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="da7c7d2c-e4ac-488d-b08f-35bf451d9f24/4d43a9a6-37c0-42cc-b35a-2581006da381.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:45:40</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:43:14</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo 3DS">Nintendo 3DS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-7/28/2012">7/28/2012</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-78">78</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo EAD">Nintendo EAD</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros._2" target="_blank">Wikipedia</a><br/><a href="http://newsupermariobros2.nintendo.com" target="_blank">Official website</a><br/><a href="https://www.nintendo.co.jp/3ds/abej/" target="_blank">Official Japanese website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Masaaki Ishikawa">[People] artist: Masaaki Ishikawa</a><br/><a href="#quicklink-[People] composer: Kenta Nagata">[People] composer: Kenta Nagata</a><br/><a href="#quicklink-[People] director: Yusuke Amano">[People] director: Yusuke Amano</a><br/><a href="#quicklink-[People] producer: Hiroyuki Kimura">[People] producer: Hiroyuki Kimura</a><br/><a href="#quicklink-[People] producer: Takashi Tezuka">[People] producer: Takashi Tezuka</a><br/><a href="#quicklink-[People] programmer: Kenji Higashiyama">[People] programmer: Kenji Higashiyama</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>New Super Mario Bros. 2</b></i> is a 2012 <a href="https://en.wikipedia.org/wiki/Platformer">platform game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>. It is the third installment in the <a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros._series"><i>New Super Mario Bros.</i> series</a>, following 2009's <i><a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros._Wii">New Super Mario Bros. Wii</a></i>, and is a direct sequel to the original <i><a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros.">New Super Mario Bros.</a></i> released in 2006 for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>. It is the first Nintendo-published game to be released simultaneously in both <a href="https://en.wikipedia.org/wiki/Digital_distribution">downloadable</a> and <a href="https://en.wikipedia.org/wiki/Nintendo_3DS_game_card">physical</a> forms.</p>
+
+<p><i>New Super Mario Bros. 2</i>'s plot is similar to its predecessors, focusing on Mario and Luigi's efforts to rescue <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Peach</a> from <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a> and the <a href="https://en.wikipedia.org/wiki/Koopalings">Koopalings</a>. It has a heavier emphasis on <a href="https://en.wikipedia.org/wiki/Super_Mario#Collectibles">coin</a>-<a href="https://en.wikipedia.org/wiki/Item_(gaming)">collecting</a> than other <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> games, with multiple unique <a href="https://en.wikipedia.org/wiki/Item_(gaming)">items</a> dedicated to producing large numbers of coins. <i>New Super Mario Bros. 2</i> features nine worlds that consist of six main worlds and three special worlds. Those worlds total 81 levels, many of which have multiple exits to unlock more areas in the game to play and explore. The game also features a specialized <a href="https://en.wikipedia.org/wiki/Game_mechanics#Game_modes">mode</a> called "Coin Rush", which focuses exclusively on quickly completing a series of stages while collecting as many coins as possible. Additional Coin Rush stages were made available for purchase as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> shortly after the game's release.</p>
+
+<p><i>New Super Mario Bros. 2</i> received generally positive reviews, with critics praising its <a href="https://en.wikipedia.org/wiki/Level_design">level design</a>, gameplay, and graphics, but criticizing its low difficulty, lack of innovation, and strong similarity to the earlier <i>New Super Mario Bros.</i> games due to its reuse of various assets from prior games and recycled soundtrack from <i>New Super Mario Bros. Wii</i>. <i>New Super Mario Bros. 2</i> is the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_3DS_video_games">fifth best-selling game for the Nintendo 3DS</a>, with 13.41 million copies sold worldwide as of September 30, 2022. A follow-up to the game and a sequel to <i>New Super Mario Bros. Wii</i>, titled <i><a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros._U">New Super Mario Bros. U</a></i>, was released as a <a href="https://en.wikipedia.org/wiki/Launch_title">launch title</a> for the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> on November 18, 2012.</p>
+
+<h2>Gameplay</h2>
+
+<p>Like the previous games in the <a href="https://en.wikipedia.org/wiki/Super_Mario#2006–2016:_2D_revival_and_path-focused_3D_games"><i>New Super Mario Bros.</i> series</a>, <i><a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros.">New Super Mario Bros.</a></i> and <i><a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros._Wii">New Super Mario Bros. Wii</a></i>, <i>New Super Mario Bros. 2</i> is a <a href="https://en.wikipedia.org/wiki/2D_computer_graphics">2D</a> platformer, and some of the characters and objects in the game are <a href="https://en.wikipedia.org/wiki/Polygonal_modeling">3D polygonal</a> renderings on 2D backgrounds. This results in a <a href="https://en.wikipedia.org/wiki/2.5D">2.5D</a> effect (also seen previously in the first <i>New Super Mario Bros.</i> game) that visually simulates <a href="https://en.wikipedia.org/wiki/3D_computer_graphics">3D graphics</a>. <i>New Super Mario Bros. 2</i> continues the style of gameplay from the first <i>New Super Mario Bros.</i> game, featuring side-scrolling platform action as <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> or <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a> attempts to rescue <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Peach</a> from <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a> and the <a href="https://en.wikipedia.org/wiki/Koopalings">Koopalings</a>. Power-ups include the Mini Mushroom and Mega Mushroom returning from the first game, and the Super Leaf from <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._3">Super Mario Bros. 3</a></i>, which allows the player to tail-whip enemies or to fly. Similarly to <i><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_Land">Super Mario 3D Land</a></i>, an Invincibility Leaf will appear if the player loses at least five lives during any non-cannon levels. The Invincibility Leaf grants both the abilities of the Super Leaf and invincibility until the end of the stage. The story has both <a href="https://en.wikipedia.org/wiki/Single-player_video_game">single-player</a> and <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> options; two players, each with their own Nintendo 3DS and copy of the game, play together simultaneously as Mario and Luigi. Like the previous games, players can collect three Star Coins hidden throughout each level, which can be spent to unlock new areas on the overworld map.</p>
+
+<p><i>New Super Mario Bros. 2</i> has a strong emphasis on collecting gold coins, in which the emphasis features various new items that are dedicated to producing large numbers of coins. These include Gold Flowers that can turn blocks into coins, rings that can temporarily turn enemies gold, and a mask-esque block that produces coins as Mario (or Luigi) runs. All coins collected are totaled on the <a href="https://en.wikipedia.org/wiki/Title_screen">title screen</a> and the <a href="https://en.wikipedia.org/wiki/Overworld">overworld</a> map. If the player has <a href="https://en.wikipedia.org/wiki/StreetPass">SpotPass</a> enabled in the game, this total can be uploaded to the <a href="https://en.wikipedia.org/wiki/Nintendo_Network">Nintendo Network</a> and the player will be updated with the grand total of all coins collected by all players worldwide.</p>
+
+<p>In addition to the main game, which consists of 81 levels, <i>New Super Mario Bros. 2</i> features a Coin Rush mode, made accessible after the player completes the first world in the game. In Coin Rush, the player must play through three randomly chosen levels collecting as many coins as possible. Both Star Coins and Moon Coins add several coins to the player's running total in this mode. However, the player is given only one life and each level gives a time limit of 50 or 100 seconds. The 1-up Mushrooms are replaced by Gold Mushrooms in this mode. If checkpoint flags have been passed or timers have been collected, the time limit will be extended. Getting to the top of the ending flag causes the number of coins gained in a level to double. If the player completes the run, the accumulated total of coins that are collected can be saved as the player's high score, which can be transmitted to and challenged by other players via StreetPass. Additional course packs can be purchased as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a>.</p>
+
+<h2>Development</h2>
+
+<p>In 2010, <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> stated that both side-scrolling and 3D <i>Mario</i> games were in development for the Nintendo 3DS. Following the release of <i><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_Land">Super Mario 3D Land</a></i>, the untitled 2D <i>Super Mario</i> game was announced during a meeting of investors by the president of <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a>, <a href="https://en.wikipedia.org/wiki/Satoru_Iwata">Satoru Iwata</a>, in late January 2012. He described it as a "totally new side-scrolling action <i>Super Mario</i> in 2D as a key title for the Nintendo 3DS". Nintendo planned to release the game "in the next fiscal year", which started in April 2012 and ended in March 2013. It was subsequently announced to be released on August 17, 2012 in Europe, and August 19, 2012 in North America.</p>
+
+<p>The game was announced as <i>New Super Mario Bros. 2</i>, a direct sequel to 2006's <i>New Super Mario Bros.</i>, during a Nintendo Direct conference on April 21, 2012, with tentative release dates for <a href="https://en.wikipedia.org/wiki/Japan">Japan</a>, <a href="https://en.wikipedia.org/wiki/North_America">North America</a>, <a href="https://en.wikipedia.org/wiki/Europe">Europe</a>, and <a href="https://en.wikipedia.org/wiki/Australia">Australia</a> in August 2012. Nintendo stated <i>New Super Mario Bros. 2</i> was created "specifically as a pick-up-and-play experience", accommodating players of all skill levels. It was the first retail 3DS game to also be released as a <a href="https://en.wikipedia.org/wiki/Digital_distribution">download</a> on the <a href="https://en.wikipedia.org/wiki/Nintendo_eShop">Nintendo eShop</a> on the day of its release. The first three packs of courses for Coin Rush mode were released as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> in Japan and Europe on October 2, 2012, followed by North America on October 4, 2012. Six more packs were released. The second and third set of two packs was released worldwide on October 25, 2012 and December 5, 2012 respectively and the last set of two was released on December 20, 2012 in North America and Europe and on December 21, 2012 in Japan. The final "Gold Classics Pack" was released on November 27, 2012 to celebrate the 300 billion coins milestone and was available to download for free until the end of January 2013. In 2014, an updated version featuring all the DLC pre-installed was released, <i>New Super Mario Bros. 2: Gold Edition</i>. This version was available exclusively at <a href="https://en.wikipedia.org/wiki/Walmart">Walmart</a> for <a href="https://en.wikipedia.org/wiki/Black_Friday_(shopping)">Black Friday 2014</a> as a digital copy pre-installed on the limited edition <i>New Super Mario Bros. 2: Gold Edition Nintendo 3DS XL</i> bundle for $399.</p>
+
+<p>The game was not developed by the same team in charge of the first two <i>New Super Mario Bros.</i> games headed by Shigeyuki Asuke, as they were busy working on <i><a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros._U">New Super Mario Bros. U</a></i>. Instead, it was made by a newly assembled team composed of newer employees, though <i>Mario</i> developer Takashi Tezuka was involved in both games as producer, it was meant to teach newer employees about the development of <i>Super Mario</i> games.</p>
+
+<p>The game's <a href="https://en.wikipedia.org/wiki/Video_game_music">soundtrack</a> was composed by <i><a href="https://en.wikipedia.org/wiki/Mario_Kart">Mario Kart</a></i> veteran Kenta Nagata, though most of the soundtrack is recycled from <i><a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros._Wii">New Super Mario Bros. Wii</a></i> with minor alterations, which was composed by Shiho Fujii, Ryo Nagamatsu, and Kenta Nagata.</p>
+
+<h2>Reception</h2>
+
+<p><i>New Super Mario Bros. 2</i> has received generally positive reviews. It holds an aggregated score of 78.40% on <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> and 78/100 on <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, it is the lowest-rated console mainline Mario game. The game was given a 36/40 by <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> with a 9 from each of the four reviewers. <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> gave the game a 9/10, stating "This platforming perfection is what makes <i>Mario</i> games so fun, and in that regard, <i>New Super Mario Bros. 2</i> definitely succeeds with its own share of secrets, collectibles, and branching pathways that can be unlocked depending on how you should advance through the game." <i>Nintendo Life</i> gave the game 9 out of 10 stars, saying "It's immense fun, boasts brilliant level design and offers enough repeat play appeal to keep you glued to your 3DS system for weeks."</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i> gave the game 90% out of 100, heavily criticizing the game for its 3D effects and lack of progression in the <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> series, summarizing that "<i>New Super Mario Bros. 2</i> is the very definition of bitter-sweet, giving with one hand and then taking away with the other. By default it's the best side-scrolling platformer on the 3DS and yes, it's even better than the original <i>New Super Mario Bros.</i> But that came out six years ago now, and in that time we'd really expected the series to have progressed a little further than just a 3D effect and Coin Rush mode."</p>
+
+<p>Tom Sykes of <i><a href="https://en.wikipedia.org/wiki/Nintendo_Gamer">Nintendo Gamer</a></i> gave the game 80 out of 100, praising the new features, but criticizing it for being too similar to its predecessors. "This is a great 2D platformer, but it's lacking the vital creative spark that turns a great 2D platformer into a classic one. We've come to expect more than straight sequels from mainline <i>Mario</i> games, and until this generation we hadn't truly been offered one. That's a definite disappointment, but on the upside, more <i>NSMB</i> is hardly a bad thing. With its obsessive focus on coin collecting, <i>NSMB2</i> does a few things differently to its predecessor, but not enough to stand tall as its own game. It's a fine companion piece to the original DS game, however, and one that's likely to reside in your 3DS for quite some time."</p>
+
+<p>As of 30 September 2022, 13.41 million copies of <i>New Super Mario Bros. 2</i> have been sold worldwide, making it the fifth best-selling game for the system.</p>
+
+<p><i>New Super Mario Bros. 2</i> was nominated for "Best Handheld Game" at <a href="https://en.wikipedia.org/wiki/Spike_(TV_channel)">Spike</a>'s 10th Annual <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Video Game Awards</a>.</p>
+
+<h2>Legacy</h2>
+
+<p>A stage based on <i>New Super Mario Bros. 2</i> appears in <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._for_Nintendo_3DS">Super Smash Bros. for Nintendo 3DS</a></i> and <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Ultimate">Super Smash Bros. Ultimate</a></i>, titled "Golden Plains". If a player collects 100 coins, the character will turn golden and gain both increased attack power and flinch resistance.</p>
+
+<p>Mario's transformation when he touches a Gold Flower, Gold Mario, appears in <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8#Mario_Kart_8_Deluxe">Mario Kart 8 Deluxe</a></i> and <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_Tour">Mario Kart Tour</a></i> as an unlockable character. An <a href="https://en.wikipedia.org/wiki/Amiibo">Amiibo</a> figure was released based on this transformation.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

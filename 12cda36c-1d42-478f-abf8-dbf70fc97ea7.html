@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Burnout Dominator</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('12cda36c-1d42-478f-abf8-dbf70fc97ea7/21199d8c-07b7-4fde-991b-365e24f01278.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="12cda36c-1d42-478f-abf8-dbf70fc97ea7/162cdad0-379d-44cd-b7b1-fe9df8aa2727.ico"/> Burnout Dominator</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="12cda36c-1d42-478f-abf8-dbf70fc97ea7/0c9007c7-186a-45ed-ac4a-2252940f4eaa.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 5:00:18</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:35:22</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation Portable">Sony PlayStation Portable</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-3/6/2007">3/6/2007</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-74">74</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-76">76</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-EA UK">EA UK</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Burnout_Dominator" target="_blank">Wikipedia</a><br/><a href="https://www.mobygames.com/game/burnout-dominator" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[Game Engine] RenderWare">[Game Engine] RenderWare</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Burnout Dominator</b></i> is a 2007 <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing video game</a> developed by <a href="https://en.wikipedia.org/wiki/EA_UK">EA UK</a> and published by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> for <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>. It retains the core gameplay of the series, as players race at top speeds through dozens of World Tour events testing "reckless skill-based" driving techniques.</p>
+
+<p>This is the only <i>Burnout</i> game that was not developed by <a href="https://en.wikipedia.org/wiki/Criterion_Games">Criterion Games</a> although the logo appears at the startup, and the first <i>Burnout</i> game in the series since <i><a href="https://en.wikipedia.org/wiki/Burnout_2:_Point_of_Impact">Burnout 2: Point of Impact</a></i> to not feature the "Crash Mode". At the time <i>Dominator</i> was being developed, Criterion was busy working on <i><a href="https://en.wikipedia.org/wiki/Burnout_Paradise">Burnout Paradise</a></i> and was waiting to re-introduce the mode in a new form for the latter title, but <a href="https://en.wikipedia.org/wiki/Criterion_Games">Criterion Games</a> are listed as "the makers of this game" in the game manual and credited as developer on the official Electronic Arts site. This was also the final <i>Burnout</i> game to be released on both the PlayStation 2 and PlayStation Portable.</p>
+
+<h2>Gameplay</h2>
+
+<p>The main focus in <i>Burnout Dominator</i> is the return of "Burnouts", which are the result of draining a complete boost meter without stopping. The boost meter in <i>Burnout Dominator</i> is primarily orange flames prior to a full boost meter, at which point in time the flames turn blue (known as "Supercharge Boost"). Driving dangerously while using supercharge boost will light up the arrows on the boost meter, and when they are all lit, one can obtain a Burnout once the current supercharge boost has drained. The process can be continually repeated allowing the player to get a Burnout Chain. Prior to <i>Burnout Dominator</i>, Burnouts were last seen in <i><a href="https://en.wikipedia.org/wiki/Burnout_2:_Point_of_Impact">Burnout 2: Point of Impact</a></i>.</p>
+
+<p>Features removed from the previous game, <i><a href="https://en.wikipedia.org/wiki/Burnout_Revenge">Burnout Revenge</a></i>, include Traffic Checking (the ability to ram into smaller vehicles heading in the same direction as the player's vehicle), Traffic Attack Mode, Crash Mode (a puzzle-oriented mode, in which one's vehicle is driven into an intersection full of traffic with the aim to cause the largest amount of damage possible), and <a href="https://en.wikipedia.org/wiki/Online_game">online multiplayer</a> support. Also, unlike all of the Criterion developed <i>Burnout</i> games, the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> version of <i>Burnout Dominator</i> does not support USB steering wheels such as the Logitech Driving Force or Logitech Driving Force Pro.</p>
+
+<p>The main <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> mode known as the World Tour is split into 7 different series, based on the different classes of car that are in the game. The series are <a href="https://en.wikipedia.org/wiki/Classic_car">Classic</a>, Factory, <a href="https://en.wikipedia.org/wiki/Car_tuning">Tuned</a>, <a href="https://en.wikipedia.org/wiki/Hot_rod">Hot Rod</a>, <a href="https://en.wikipedia.org/wiki/Supercar">Super</a>, Race Specials and Dominator. The vehicle lineup is mostly new with some cars from previous two <i>Burnout</i> titles peppered into the game (such as the Custom Coupe Ultimate, Euro Circuit Racer and Works M-Type). The events and new challenges in the World Tour include:</p>
+
+<ul>
+  <li>Race (standard racing for the finish line)</li>
+  <li>Road Rage (timed event where the goal is to takedown as many opponent drivers as possible)</li>
+  <li>Eliminator (similar to race, but the driver in last place every 30 seconds is eliminated from the race)</li>
+  <li>Burning Lap (single lap time trial)</li>
+  <li>Maniac Mode (this mode involves players driving as dangerously as they can to earn the highest scores possible by earning drifts, air, oncoming and near misses)</li>
+  <li>Grand Prix (an event with three races on different tracks, the racer with the most points at the end of the Grand Prix wins)</li>
+  <li>Drift Challenge (a challenge mode where the aim is to obtain as many feet as possible by drifting)</li>
+  <li>Near Miss Challenge (same as Drift Challenge, but focusing on narrowly missing traffic to earn scores)</li>
+  <li>Burnout Challenge (same as Drift Challenge, but focusing on obtaining Burnouts)</li>
+</ul>
+
+<p>The other single-player mode in <i>Burnout Dominator</i> is known as "Record Breaker", and this mode allows one to set high scores for Race, Road Rage, Time Attack and Maniac Mode, without being restricted to specific event/location/series combinations that exist in the World Tour mode. Co-existing with the Record Breaker mode, the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> version of the game allowed uploading of high scores via the Burnout HQ option, which could be viewed in the EA Nation section of the <i>Burnout Dominator</i> website.</p>
+
+<p>The PlayStation Portable version received <a href="https://en.wikipedia.org/wiki/DLC_(video_gaming)">downloable content</a> in the form of two additional tracks, named Carnival City and Red Gate, based on South America and Eastern Europe respectively.</p>
+
+<h2>Reception</h2>
+
+<p><i>Burnout Dominator</i> received "favourable" reviews on both platforms according to video game <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

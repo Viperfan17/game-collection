@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Action 52</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('1848d4d6-a4b9-4004-90bf-f330cc8d9747/9db6aa9e-e079-440b-b1b4-1ac698736f75.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="1848d4d6-a4b9-4004-90bf-f330cc8d9747/16a814fd-399a-4085-bac2-a4f62f1478a4.png"/> Action 52</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="1848d4d6-a4b9-4004-90bf-f330cc8d9747/9b4cc6c1-95ca-438d-b5c9-0a16b8307de2.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:51:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:39:16</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Entertainment System">Nintendo Entertainment System</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-1991">1991</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-12">12</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Various">Various</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Active Enterprises">Active Enterprises</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-FarSight Technologies">FarSight Technologies</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Active Enterprises">Active Enterprises</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Action_52" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/20070929190209/http://www.arkfullofsorrow.com/a52text.htm" target="_blank">List of all Action 52 games</a><br/><a href="http://www.atarihq.com/tsr/special/active.html" target="_blank">Active Enterprises exposed</a><br/><a href="http://www.cheetahmengames.com/index.html" target="_blank">Cheetahmengames.com</a><br/><a href="https://archive.today/20130116160715/http://www.action52prototype.com/" target="_blank">Action52Prototype.com</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Javier Pérez">[People] artist: Javier Pérez</a><br/><a href="#quicklink-[People] composer: Ed Bogas">[People] composer: Ed Bogas</a><br/><a href="#quicklink-[People] composer: Genesis:">[People] composer: Genesis:</a><br/><a href="#quicklink-[People] composer: Javier Pérez">[People] composer: Javier Pérez</a><br/><a href="#quicklink-[People] composer: Mario González">[People] composer: Mario González</a><br/><a href="#quicklink-[People] composer: NES:">[People] composer: NES:</a><br/><a href="#quicklink-[People] composer: Nu Romantic Productions (Mark Steven Miller and Jason Scher)">[People] composer: Nu Romantic Productions (Mark Steven Miller and Jason Scher)</a><br/><a href="#quicklink-[People] designer: Mario González">[People] designer: Mario González</a><br/><a href="#quicklink-[People] director: Jay Obernolte">[People] director: Jay Obernolte</a><br/><a href="#quicklink-[People] director: Vince Perri">[People] director: Vince Perri</a><br/><a href="#quicklink-[People] producer: Jay Obernolte">[People] producer: Jay Obernolte</a><br/><a href="#quicklink-[People] producer: Raul Gomila">[People] producer: Raul Gomila</a><br/><a href="#quicklink-[People] producer: Vince Perri">[People] producer: Vince Perri</a><br/><a href="#quicklink-[People] programmer: Albert Hernández">[People] programmer: Albert Hernández</a><br/><a href="#quicklink-[People] programmer: Cronos Engineering, Inc.">[People] programmer: Cronos Engineering, Inc.</a><br/><a href="#quicklink-[People] writer: Mario González">[People] writer: Mario González</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Action 52</b></i> is an unlicensed <a href="https://en.wikipedia.org/wiki/Multicart">multicart</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> compilation developed by Active Enterprises for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a> and by <a href="https://en.wikipedia.org/wiki/FarSight_Studios">FarSight Technologies</a> for the <a href="https://en.wikipedia.org/wiki/Sega_Genesis">Sega Genesis</a>. The NES version was released in 1991, followed by the Genesis version in 1993. The multicart consists of 52 games in a variety of <a href="https://en.wikipedia.org/wiki/Video_game_genre">genres</a>, mostly <a href="https://en.wikipedia.org/wiki/Shoot_'em_up">scrolling shooters</a> and <a href="https://en.wikipedia.org/wiki/Platform_game">platformers</a>. The "featured" game is <i><a href="https://en.wikipedia.org/wiki/The_Cheetahmen">The Cheetahmen</a></i>, which was part of Active's failed attempt to create a franchise similar to the <i><a href="https://en.wikipedia.org/wiki/Teenage_Mutant_Ninja_Turtles">Teenage Mutant Ninja Turtles</a></i>.</p>
+
+<p>The NES version of <i>Action 52</i> sold poorly and became infamous among gamers for the poor quality and functionality of its games; it is often considered to be one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_notable_for_negative_reception">worst games of all time</a>. The Genesis version is widely considered superior, though still of subpar quality. Many <a href="https://en.wikipedia.org/wiki/Video_game_collecting">video game collectors</a> value <i>Action 52</i> for its notoriety and rarity. It initially retailed for the comparatively high price of <a href="https://en.wikipedia.org/wiki/United_States_dollar">US$</a>199 (equivalent to $459 in 2024).</p>
+
+<h2>Gameplay</h2>
+
+<h3>NES</h3>
+
+<p>The NES version of <i>Action 52</i> includes games that cover a variety of <a href="https://en.wikipedia.org/wiki/Video_game_genre">genres</a>, the most common types being <a href="https://en.wikipedia.org/wiki/Shoot_'em_up">vertical shooters</a> set in outer space, and <a href="https://en.wikipedia.org/wiki/Platform_game">platformers</a>. The games have major programming flaws, and some of them <a href="https://en.wikipedia.org/wiki/Hang_(computing)">freeze</a> or <a href="https://en.wikipedia.org/wiki/Crash_(computing)">crash</a>, while others include incomplete or endless levels, confusing design, and unresponsive controls. The featured game of this version is <i><a href="https://en.wikipedia.org/wiki/The_Cheetahmen">The Cheetahmen</a></i>, being the 52nd and last game, where characters from the previous 51 games appear as enemies.</p>
+
+<p>Each game is given a brief description in the manual for <i>Action 52</i>. Some of the descriptions cover games from the early development of <i>Action 52</i> that were very different from the games of corresponding titles; for example, <i>Jigsaw</i> is described as a game involving a jigsaw puzzle, but the game titled as such on the final product is a platformer involving a construction worker avoiding construction tools.</p>
+
+<p>Active Enterprises advertised a contest involving <i>Ooze</i>, the fifth game of this version. Players who could complete Level 6 of the game could enter a draw for $104,000 ($52,000 cash and a scholarship with the same value). <i>Ooze</i> was reported to consistently crash on Level 2; therefore, it was impossible to qualify for the contest without using an <a href="https://en.wikipedia.org/wiki/Emulator">emulator</a>. After the contest had been cancelled, a Revision B of <i>Action 52</i> was released which fixed this crashing problem, among some others.</p>
+
+<p>The opening sequence of the NES version uses a <a href="https://en.wikipedia.org/wiki/Think_Break">Yeah! Woo!</a> <a href="https://en.wikipedia.org/wiki/Break_(music)">drum break</a> sampled from <a href="https://en.wikipedia.org/wiki/Rob_Base_and_DJ_E-Z_Rock">Rob Base and DJ E-Z Rock</a>'s song "<a href="https://en.wikipedia.org/wiki/It_Takes_Two_(Rob_Base_&amp;_DJ_E-Z_Rock_song)">It Takes Two</a>."</p>
+
+<p>Few of the games from the NES version of <i>Action 52</i> appear in the Sega Genesis version; although many of the titles have been retained, the games themselves have been rebuilt from scratch for the most part. For example, <i>Haunted Hills</i> appears in both versions, but the player character's gender is different (female in the NES version and male in the Genesis version), as is the setting, which is inside a haunted house in the NES version, and outside of one in the Genesis version. In the Genesis version of <i>The Cheetahmen</i>, the titular characters rescue <a href="https://en.wikipedia.org/wiki/Cheetah">cheetah</a> cubs from Dr. Morbis and his minions.</p>
+
+<p>Many, though not all, of the numerous technical issues with the NES version have been fixed in the Genesis version, which also takes advantage of the Genesis's superior hardware. Each game is color-coded on the main menu screen; "Beginner" games are green, "Intermediate" games are purple, "Expert" games are yellow, "Challenge" games are white, and multiplayer games are blue. The 52nd game, also titled <i>Challenge</i>, consists of a random sequence of the highest levels of the other single-player games. Also included in the Genesis version are the Randomizer, which selects a game at random, and a music demo mode.</p>
+
+<h2>Development</h2>
+
+<p>The creator of <i>Action 52</i> was Vince Perri, a businessman from <a href="https://en.wikipedia.org/wiki/Miami,_Florida">Miami, Florida</a>, and the owner and founder of Active Enterprises. According to Perri, "I happened to see my son playing an illegal product made in <a href="https://en.wikipedia.org/wiki/Taiwan">Taiwan</a> that had 40 games on it. The whole neighborhood went crazy over it ... I figured I'd do it legally. It's obvious when you see something like that, you know there's something there". Perri met Mario González at a <a href="https://en.wikipedia.org/wiki/Recording_studio">recording studio</a> in Miami, where González was working as a <a href="https://en.wikipedia.org/wiki/Sound_engineer">sound engineer</a>. González overheard Perri talking to the studio's owner about his idea for a multicart with 52 original games. González informed Perri that he and his friends, Javier Pérez and Albert Hernández, were into making games; the trio created a <i><a href="https://en.wikipedia.org/wiki/Tetris">Tetris</a></i> clone called <i>Megatris</i> as proof of their abilities. Perri was impressed with the game and, alongside Raúl Gomila, hired them as well as an unknown fourth developer to create the game, with Hernández acting as the main programmer, González composing the music, and González, Pérez, and the fourth developer working on the graphics.</p>
+
+<p>The four were flown to <a href="https://en.wikipedia.org/wiki/Salt_Lake_City">Salt Lake City, Utah</a>, where they were trained for a week on using an NES <a href="https://en.wikipedia.org/wiki/Game_development_kit">development kit</a> by <a href="https://en.wikipedia.org/wiki/List_of_Acclaim_Entertainment_subsidiaries#Acclaim_Studios_Salt_Lake_City">Sculptured Software</a>. The developers, who used an <a href="https://en.wikipedia.org/wiki/Atari_ST">Atari ST</a>, were given three months to complete <i>Action 52</i>, leaving little time for playtesting and fixing bugs. González believes that Perri was well-intentioned in his ideas, but made serious errors due to his lack of knowledge of the gaming industry. González composed most of the game's original music, most notably the <i>Cheetahmen</i> theme; however, some themes, such as <i>Streemerz</i> and <i>Time Warp Tickers</i>, were taken from sample music composed by <a href="https://en.wikipedia.org/wiki/Ed_Bogas">Ed Bogas</a> for <i>The Music Studio</i>, published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a> for the Atari ST. González also confirms that, in addition to many unused <a href="https://en.wikipedia.org/wiki/Tile-based_video_game">tiles</a>, <i>Action 52</i> has eight extra game templates, because the distributor configured the cartridges to contain 60 games by default.</p>
+
+<p>In 1993, Perri showcased <i>Action 52</i> at the <a href="https://en.wikipedia.org/wiki/Consumer_Electronics_Show">International Winter Consumer Electronics Show</a>. He claimed to have raised $5 million for the multicart from private backers in Europe and Saudi Arabia. Technical work was contracted out to Cronos Engineering, Inc., a <a href="https://en.wikipedia.org/wiki/Boca_Raton,_Florida">Boca Raton</a> company who had previously done work for <a href="https://en.wikipedia.org/wiki/IBM">IBM</a>. González created <i><a href="https://en.wikipedia.org/wiki/The_Cheetahmen">The Cheetahmen</a></i>, intended by Perri to launch a multimedia franchise and merchandise line that would compete with <i><a href="https://en.wikipedia.org/wiki/Teenage_Mutant_Ninja_Turtles">Teenage Mutant Ninja Turtles</a></i>. A <i>Cheetahmen</i> promotional comic, illustrated by Joe Martinez, was included in the <i>Action 52</i> package. However, other planned merchandise was eventually cancelled, such as a <i>Cheetahmen</i> animated television series, full comic book series, T-shirts, and action figures.</p>
+
+<p>The Sega Genesis version of <i>Action 52</i> was developed by <a href="https://en.wikipedia.org/wiki/FarSight_Studios">FarSight Technologies</a>, under the direction of <a href="https://en.wikipedia.org/wiki/Jay_Obernolte">Jay Obernolte</a>, using a <a href="https://en.wikipedia.org/wiki/Macintosh_LC">Macintosh LC</a>. FarSight's experienced programmers, along with the returning Pérez and Hernández (González did not participate, as he was spending more time with his girlfriend, whom he would eventually marry), developed this version in a one-year timeframe. This version was also playtested, and thus had far fewer glitches than the NES version. Mark Steven Miller and Jason Scher of Nu Romantic Productions composed the music for the Genesis version. Active Enterprises also planned to have FarSight develop an SNES version of <i>Action 52</i> and a sports-themed multicart titled <i>Sports 5</i>, but Active left the gaming industry shortly after.</p>
+
+<h2>Reception</h2>
+
+<p>Critical reaction to <i>Action 52</i> has been consistently negative. <a href="https://en.wikipedia.org/wiki/AllGame">AllGame</a> editor Skyler Miller described the game as an "unlicensed but legal multicart" containing "NES games of extremely poor quality." <a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a> gave a highly critical review, noting that "there's nothing worth playing in the lot." A <a href="https://en.wikipedia.org/wiki/Rock_Paper_Shotgun">Rock, Paper, Shotgun</a> retrospective review in 2019 delivered the similar criticism, stating that "all the games in the collection were creatively bankrupt rush jobs" and that the best games in the collection could be described as "minigames which functioned."</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Atlas_Obscura">Atlas Obscura</a> gave similar criticism and noted that there was a remake project in 2010 to remake all of the games in the cartridge due to their low quality and that 23 were completed, but no updates have come from the project since then.</p>
+
+<h2>Legacy</h2>
+
+<p>The 2024 game <i><a href="https://en.wikipedia.org/wiki/UFO_50">UFO 50</a></i> had a similar idea behind it, being a compilation of 50 retro-style games. The development team included the creators of <i><a href="https://en.wikipedia.org/wiki/Spelunky">Spelunky</a></i> and <i><a href="https://en.wikipedia.org/wiki/Downwell_(video_game)">Downwell</a></i>.</p>
+
+<p>The entirety of <i>Action 52</i> has also been covered in a video review by the internet personality and YouTube content creator <a href="https://en.wikipedia.org/wiki/James_Rolfe">James Rolfe</a> (as his persona, the <a href="https://en.wikipedia.org/wiki/Angry_Video_Game_Nerd">Angry Video Game Nerd</a>), which was originally released at Cinemassacre.com on April 30, 2010. Despite his comedic exaggerations, the review pointed out severe cases of repeating themes, crashing or non-functional games, critical bugs, and misleading titles.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Skate 3</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('93a0c58e-1061-445f-9410-86c48d5de611/fef676e8-e1f0-4b8c-9796-033c02b9d5be.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="93a0c58e-1061-445f-9410-86c48d5de611/911439bc-bc64-4c1b-93e6-0103429c2adf.ico"/> Skate 3</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="93a0c58e-1061-445f-9410-86c48d5de611/a63ac7e8-efec-4518-878a-41628ed7427c.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/27/2025">4/27/2025</a> 10:06:45</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 9:06:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-5/11/2010">5/11/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-94">94</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-80">80</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Sports">Sports</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-EA Black Box">EA Black Box</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Skate_3" target="_blank">Wikipedia</a><br/><a href="http://www.ea.com/skate-3" target="_blank">Official website</a><br/><a href="https://www.mobygames.com/game/skate-3" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] composer: Del the Funky Homosapien">[People] composer: Del the Funky Homosapien</a><br/><a href="#quicklink-[People] composer: John King">[People] composer: John King</a><br/><a href="#quicklink-[People] composer: Mark Mothersbaugh">[People] composer: Mark Mothersbaugh</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Skate 3</b></i> is a 2010 <a href="https://en.wikipedia.org/wiki/Skateboarding">skateboarding</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a>, the third installment in the <i><a href="https://en.wikipedia.org/wiki/Skate_(series)">Skate</a></i> series and the sequel to 2009's <i><a href="https://en.wikipedia.org/wiki/Skate_2">Skate 2</a></i>, developed by <a href="https://en.wikipedia.org/wiki/EA_Black_Box">EA Black Box</a> and published by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a>. It was released worldwide in May 2010 for <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. The game takes place in the fictional city of Port Carverton, which embraces skateboarding, unlike considering it a crime in the second game. The player character goes by the alias "The Legend". After failing to "<i>Jump The Shark</i>", their goal becomes creating a successful skateboarding team. It is the player's goal to sell one million boards by completing challenges. The game introduced some new features including new tricks, a park builder, and "Easy" and "Hardcore" modes instead of just "Normal" mode.</p>
+
+<p>The game received generally favorable reviews from critics. In 2014, the game's popularity increased because of <a href="https://en.wikipedia.org/wiki/Let's_Play">Let's Play</a> channels on <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a>, showcasing the game's humorous <a href="https://en.wikipedia.org/wiki/Ragdoll_physics">ragdoll physics</a> and glitches.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Skate 3</i> is a <a href="https://en.wikipedia.org/wiki/Skateboarding">skateboarding</a> <a href="https://en.wikipedia.org/wiki/Extreme_sports">extreme sports</a> game set in an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> place and played from a <a href="https://en.wikipedia.org/wiki/Third-person_(video_games)">third-person perspective</a>. The game takes place in the fictional city of Port Carverton, which embraces skateboarding, unlike the "skateboarding is a crime" mentality portrayed in the second game. Although the location is a more colorful and friendlier place than <i>Skate 2</i>'s de-saturated, and grainy streets, the gameplay provides a similar feel to the first and second games. Port Carverton is made up of three districts, Downtown, the University, and Industrial. Although the overall look of the city is very clean (except industrial) each district has its own unique designs and monuments. Downtown is full of slick rigid ledges and rails, while the University is full of banks and open areas. Industrial is the most unusual; it is home to a huge quarry that has bricks of stone.</p>
+
+<p>Several notable skateboarding professionals appear throughout the game, such as <a href="https://en.wikipedia.org/wiki/Danny_Way">Danny Way</a>, <a href="https://en.wikipedia.org/wiki/Darren_Navarette">Darren Navarette</a>, <a href="https://en.wikipedia.org/wiki/Terry_Kennedy_(skateboarder)">Terry Kennedy</a>, <a href="https://en.wikipedia.org/wiki/Eric_Koston">Eric Koston</a>, <a href="https://en.wikipedia.org/wiki/Chris_Cole_(skateboarder)">Chris Cole</a>, <a href="https://en.wikipedia.org/wiki/Pat_Duffy">Pat Duffy</a>, <a href="https://en.wikipedia.org/wiki/Rob_Dyrdek">Rob Dyrdek</a> and <a href="https://en.wikipedia.org/wiki/Jason_Lee_(actor)">Jason Lee</a> who voices the character Coach Frank.</p>
+
+<p>In contrast with the original <i>Skate</i>, two new difficulty levels have been added: "Easy" and "Hardcore" modes. "Easy Mode" allows the player to perform tricks easier and provides greater control of the character. "Hardcore Mode" attempts a more realistic simulation of skateboarding and requires the player to perform tricks precisely. It adds a more realistic feel to the game unlike Easy. It would also be recommended for players who have more experience. The game also features an introductory "Skate School", where Coach Frank (Jason Lee) teaches players the basics of skateboarding. This feature is optional and the area can also be visited for unrestricted skateboarding.</p>
+
+<p><i>Skate 3</i> features a "Skate.Park" mode that allows players to build custom <a href="https://en.wikipedia.org/wiki/Skate_park">skate parks</a> and object dropper.</p>
+
+<p>EA introduced three new online game modes: "1-Up", "Domination", and "Own The Lot". In "1-Up", players compete in turns to beat the other team's last score in a given time period. In "Domination", teams compete to gain the most points on set spots in an area within a time 
+limit. In "Own The Lot", two or more players try to complete tasks before their time limit ends. Returning modes include "S.K.A.T.E" and "Hall of Meat".</p>
+
+<p>Unlike the previous <i>Skate</i> games, <i>Skate 3</i> has no offline multiplayer game modes on the disc. Players must purchase the "San Van Party Pack" downloadable content in order to access the offline "Party Play" mode.</p>
+
+<h2>Plot</h2>
+
+<p>Some time after <i><a href="https://en.wikipedia.org/wiki/Skate_2">Skate 2</a></i>, the player character has proven that they are one of the best, and now goes by the alias "The Legend". They are attending the Port Carverton University. After a failed attempt to "<i>Jump The Shark</i>", a Thrasher challenge at the stadium, their next goal in life is to be a skateboarding mogul by making a team composed of skaters like them. Their goal is selling over a million boards while doing the same odd jobs around Port Carverton. When one million boards are sold, players are able to wear new styles of clothing for their skater and the plot ends there.</p>
+
+<h2>Development</h2>
+
+<p>Characters such as <a href="https://en.wikipedia.org/wiki/Joey_Brezinski">Joey Brezinski</a>, Dan Drehobl, Benny Fairfax, <a href="https://en.wikipedia.org/wiki/Josh_Kalis">Josh Kalis</a>, Lizard King, <a href="https://en.wikipedia.org/wiki/Andrew_Reynolds_(skateboarder)">Andrew Reynolds</a>, <a href="https://en.wikipedia.org/wiki/Chris_Haslam_(skateboarder)">Chris Haslam</a>, <a href="https://en.wikipedia.org/wiki/Terry_Kennedy_(skateboarder)">Terry Kennedy</a>, <a href="https://en.wikipedia.org/wiki/Chris_Cole_(skateboarder)">Chris Cole</a>, <a href="https://en.wikipedia.org/wiki/Jason_Dill">Jason Dill</a>, and <a href="https://en.wikipedia.org/wiki/Rob_Dyrdek">Rob Dyrdek</a> are featured in the game. New tricks were introduced, like the <a href="https://en.wikipedia.org/wiki/Darkslide">darkslide</a>, underflip, and dropping into a ramp or bowl.</p>
+
+<h3>Music</h3>
+
+<p>The soundtrack contains 46 licensed tracks and was composed by <a href="https://en.wikipedia.org/wiki/John_King_(record_producer)">John King</a> of <a href="https://en.wikipedia.org/wiki/The_Dust_Brothers">The Dust Brothers</a>, <a href="https://en.wikipedia.org/wiki/Mark_Mothersbaugh">Mark Mothersbaugh</a> of <a href="https://en.wikipedia.org/wiki/Devo">Devo</a>, and <a href="https://en.wikipedia.org/wiki/Del_the_Funky_Homosapien">Del the Funky Homosapien</a>. King composed the original score for the game. Mothersbaugh and Del the Funky Homosapien provided music for a different area in Port Carverton. When on "Interactive Mode", the list of the songs on the "Music Player" start to play as the player is in a challenge. When the player quits the challenge, the music stops. Once the skater has traveled far enough from the spot at which they just played in Career mode, the instrumental songs start to play again. The game also features music by composer Dan Diaz, who continued to work with the franchise after writing for <i><a href="https://en.wikipedia.org/wiki/Skate_2">Skate 2</a></i> and <i><a href="https://en.wikipedia.org/wiki/Skate_It">Skate It</a></i>.</p>
+
+<h2>Reception</h2>
+
+<p><i>Skate 3</i> received "generally favorable reviews" from critics on both platforms according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. In Japan, <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave both console versions each a score of three sevens and one eight for a total of 29 out of 40.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/The_A.V._Club">The A.V. Club</a></i> gave the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> version a B+. <i>411Mania</i> gave the same console version a score of eight out of ten. <i><a href="https://en.wikipedia.org/wiki/The_Daily_Telegraph">The Daily Telegraph</a></i> gave the same console version eight out of ten, but noted its difficult mechanics for mastering the game. <i><a href="https://en.wikipedia.org/wiki/Wired_(magazine)">Wired</a></i> similarly gave it eight stars out of ten, praising control scheme, realistic setting and wide range of multiplayer options. <i><a href="https://en.wikipedia.org/wiki/The_Escapist_(magazine)">The Escapist</a></i> gave the same console version four stars out of five, also considering the game accessible for newcomers. <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> gave the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PS3</a> version seven out of ten, being more critical of game similar to its predecessor.</p>
+
+<p>EA shut down the game's servers around the end of 2016, but prior to the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2018">Electronic Entertainment Expo 2018</a> in June and in late 2019 after <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2019">that year's expo</a>, EA reactivated the servers, leading to speculation of either a remaster of <i>Skate 3</i> or a new title in the <i>Skate</i> series.</p>
+
+<h2>Legacy and sequel</h2>
+
+<p>The game became a popular staple of <a href="https://en.wikipedia.org/wiki/Let's_Play">Let's Play</a> <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a> channels like <a href="https://en.wikipedia.org/wiki/PewDiePie">PewDiePie</a>, due to its humorous <a href="https://en.wikipedia.org/wiki/Ragdoll_physics">ragdoll physics</a> and glitches resulting in the game being a high-selling game as late as 2014, requiring EA to issue a reprinting of the title. The game was also one of the most requested titles to be added to the <a href="https://en.wikipedia.org/wiki/List_of_Xbox_360_games_compatible_with_Xbox_One">Xbox One backwards compatibility feature</a>, and was made <a href="https://en.wikipedia.org/wiki/Backwards_compatibility">backwards compatible</a> in November 2016.</p>
+
+<p>At the June 2020 EA Play event, a new <i>Skate</i> title was confirmed to be in development, commonly known by fans as <i>Skate 4</i>. This was later revealed to be a reboot of sorts, simply titled <i>skate.</i> After some time, a handful of trailers were sporadically released, one of which confirming that the game was going to be playable on <a href="https://en.wikipedia.org/wiki/Personal_computer">PC</a>. A playtest began in July 2022. Modders were able to create an online version of a pre-alpha build of the game, titling it <i>Skate. Online</i>, giving players not accepted into the playtest a taste of what could be the next <i>Skate</i> game.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

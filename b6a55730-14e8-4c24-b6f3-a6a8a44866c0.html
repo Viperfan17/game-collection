@@ -1,0 +1,359 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Donkey Kong 64</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('b6a55730-14e8-4c24-b6f3-a6a8a44866c0/fa134647-d94d-43c8-a36f-8c457faf2c1c.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="b6a55730-14e8-4c24-b6f3-a6a8a44866c0/b5dceebe-4ff7-4e3a-8f46-825155a1300a.png"/> Donkey Kong 64</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="b6a55730-14e8-4c24-b6f3-a6a8a44866c0/e2706960-0962-403f-a784-6f65a21e6d90.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:52:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:42:00</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo 64">Nintendo 64</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/22/1999">11/22/1999</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-90">90</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Rare">Rare</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Donkey_Kong_64" target="_blank">Wikipedia</a><br/><a href="http://www.donkeykong64.com/index_ns.html" target="_blank">Official website</a><br/><a href="http://www.mariowiki.com/Donkey_Kong_64" target="_blank">Donkey Kong 64 at the Super Mario Wiki</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Mark Stevenson">[People] artist: Mark Stevenson</a><br/><a href="#quicklink-[People] composer: Grant Kirkhope">[People] composer: Grant Kirkhope</a><br/><a href="#quicklink-[People] director: George Andreas">[People] director: George Andreas</a><br/><a href="#quicklink-[People] producer: Shigeru Miyamoto">[People] producer: Shigeru Miyamoto</a><br/><a href="#quicklink-[People] programmer: Chris Sutherland">[People] programmer: Chris Sutherland</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Donkey Kong 64</b></i> is a 1999 <a href="https://en.wikipedia.org/wiki/Platform_game">platform game</a> developed by <a href="https://en.wikipedia.org/wiki/Rare_(company)">Rare</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a>. It is the first <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong">Donkey Kong</a></i> game to feature 3D gameplay. As the gorilla <a href="https://en.wikipedia.org/wiki/Donkey_Kong_(character)">Donkey Kong</a>, the player explores themed <a href="https://en.wikipedia.org/wiki/Level_(video_games)">levels</a> to collect items and rescue his kidnapped family members from <a href="https://en.wikipedia.org/wiki/King_K._Rool">King K. Rool</a> who seeks to destroy DK Isles. The player completes <a href="https://en.wikipedia.org/wiki/Minigame">minigames</a> and puzzles as five playable Kong characters—each with their own special abilities—to receive bananas and other collectibles. In <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> modes, up to four players can compete in <a href="https://en.wikipedia.org/wiki/Deathmatch_(video_games)">deathmatch</a> and <a href="https://en.wikipedia.org/wiki/Last_man_standing_(video_games)">last man standing</a> games.</p>
+
+<p>Rare began working on <i>Donkey Kong 64</i> in 1997, following the completion of <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country_3">Donkey Kong Country 3</a></i> (1996). It was conceived as a <a href="https://en.wikipedia.org/wiki/2.5D">2.5D</a> platformer similar to <i>Country</i> before becoming a more open-ended game using the <a href="https://en.wikipedia.org/wiki/Game_engine">engine</a> from Rare's <i><a href="https://en.wikipedia.org/wiki/Banjo-Kazooie_(video_game)">Banjo-Kazooie</a></i> (1998). A 16-person team with many recruits from the <i><a href="https://en.wikipedia.org/wiki/Banjo-Kazooie">Banjo</a></i> group finished it in 1999. It was published by Nintendo in North America in November and worldwide in December. <i>Donkey Kong 64</i> was the first of two games to require the Nintendo 64 <a href="https://en.wikipedia.org/wiki/Nintendo_64_accessories#Expansion_Pak">Expansion Pak</a>, an accessory that added <a href="https://en.wikipedia.org/wiki/Random-access_memory">memory</a> resources. The US$22 million marketing campaign included advertisements, <a href="https://en.wikipedia.org/wiki/Sweepstake">sweepstakes</a>, and a national tour.</p>
+
+<p><i>Donkey Kong 64</i> received acclaim and was Nintendo's top seller during the 1999 <a href="https://en.wikipedia.org/wiki/Holiday_season">holiday season</a>; it ultimately sold 5.27 million copies worldwide. It won the 1999 <a href="https://en.wikipedia.org/wiki/Game_Critics_Awards">E3 Game Critics award</a> for Best Platform Game and multiple awards and nominations from magazines. Reviewers praised the exceptional size and length, but criticized its camera controls and emphasis on item collection and backtracking. Some cited its gameplay and visual similarities to <i>Banjo-Kazooie</i> as a detriment. Critics said <i>Donkey Kong 64</i> did not match the revolutionary impact of <i>Donkey Kong Country</i> but was still among the Nintendo 64's best 3D platform games.</p>
+
+<p><i>Donkey Kong 64</i> was Rare's final <i>Donkey Kong</i> game prior to its acquisition by <a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a> in 2002 and the last major <i>Donkey Kong</i> game until <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Jungle_Beat">Jungle Beat</a></i> (2004). It was rereleased on Nintendo's <a href="https://en.wikipedia.org/wiki/Wii_U_Virtual_Console">Wii U Virtual Console</a> in 2015. Retrospective reviews of <i>Donkey Kong 64</i> were mixed; critics considered it emblematic of the tedium in Rare's "collectathon" adventure platformers. The "<a href="https://en.wikipedia.org/wiki/DK_Rap">DK Rap</a>", a song featured in the introduction, garnered infamy as one of the worst songs in a video game.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Donkey Kong 64</i> is a 3D <a href="https://en.wikipedia.org/wiki/Platformer">platforming</a> <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> in which the player, as <a href="https://en.wikipedia.org/wiki/Donkey_Kong_(character)">Donkey Kong</a> and <a href="https://en.wikipedia.org/wiki/List_of_Donkey_Kong_characters">his friends</a>, explores an island and collects items to progress through <a href="https://en.wikipedia.org/wiki/Minigame">minigames</a> and puzzles. The game follows a <a href="https://en.wikipedia.org/wiki/Donkey_Kong#Story_and_characters">traditional storyline for the series</a>: <a href="https://en.wikipedia.org/wiki/King_K._Rool">King K. Rool</a> and his reptilian <a href="https://en.wikipedia.org/wiki/Kremlings">Kremlings</a> invade the idyllic DK Isle and kidnap Donkey Kong's friends, planning to power up their Blast-O-Matic weapon and destroy the island. After a tutorial, the player embarks as Donkey Kong to rescue the others from their kidnappers and stop K. Rool's plan. While exploring the in-game world and completing puzzle minigames, the player collects two types of bananas: colored bananas, which are color-coded differently for each Kong character, award the player with banana medals and can be traded for access to each world's <a href="https://en.wikipedia.org/wiki/Boss_(video_games)">boss fight</a>; and golden bananas, a certain number of which are required to unlock each new in-game world.</p>
+
+<p>Most of the puzzles are simple and involve rearranging items, manipulating switches and tiles, or matching items as in the game <a href="https://en.wikipedia.org/wiki/Concentration_(card_game)">Concentration</a>. Minigames include races, <a href="https://en.wikipedia.org/wiki/Minecart">minecart</a> rides, and barrels that shoot the characters as <a href="https://en.wikipedia.org/wiki/Projectile">projectiles</a>. There are five such golden banana-rewarding objectives for each of five playable characters across seven themed worlds—200 goals in total, in addition to a connecting <a href="https://en.wikipedia.org/wiki/Overworld">overworld</a>. The worlds' themes include underwater, forest, jungle, and industry. Unlike prior <i>Donkey Kong</i> games, the objectives <a href="https://en.wikipedia.org/wiki/Nonlinear_gameplay">can be completed in any order</a>. The player can <a href="https://en.wikipedia.org/wiki/Fast_travel">fast travel</a> between sections of the <a href="https://en.wikipedia.org/wiki/Level_(video_games)">level</a> with designated warp pads and can swap between characters in designated swap barrels. The player collects banana coins, which can be spent to unlock new weapons and abilities, and other collectibles such as weapon ammunition and blueprint puzzle pieces.<!--if needed: http://www.ign.com/articles/1999/11/23/the&#x2D;secrets&#x2D;of&#x2D;donkey&#x2D;kong&#x2D;64--> As in other Rare games, the player often encounters an impasse such as an indestructible object or out-of-reach area, and must acquire a new ability with which to eventually backtrack and resolve it.</p>
+
+<p>Donkey Kong's kidnapped friends become playable characters after being rescued. Each of the five characters begin with basic abilities and can purchase additional, unique abilities from <a href="https://en.wikipedia.org/wiki/Cranky_Kong">Cranky Kong</a> as the game progresses, which are necessary to solve certain puzzles. For example, Donkey Kong can operate levers, <a href="https://en.wikipedia.org/wiki/Chunky_Kong">Chunky Kong</a> can lift rocks, <a href="https://en.wikipedia.org/wiki/Tiny_Kong">Tiny Kong</a> can crawl through holes, <a href="https://en.wikipedia.org/wiki/Diddy_Kong">Diddy Kong</a> can fly, and <a href="https://en.wikipedia.org/wiki/Lanky_Kong">Lanky Kong</a> can float. The characters each use unique projectiles and musical instruments. For example, some doors can be opened only with Donkey Kong's coconut projectiles and others can be opened only with Diddy Kong's guitar. There are more special abilities than face buttons on the controller, so button combinations are needed to trigger some abilities. Combinations also trigger special modes, including alternative camera angles, a sniper mode, and a snapshot mode which unlocks more in-game secrets. Playable versions of the original <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_(arcade_game)">Donkey Kong</a></i> (1981) and <i><a href="https://en.wikipedia.org/wiki/Jetpac">Jetpac</a></i> (1983) are hidden within the game, and playing through them is required to finish the story. The player-character can also transform into animals, such as Rambi the Rhino and Enguarde the Swordfish, who recur from earlier series games. Optional hardware support includes a <a href="https://en.wikipedia.org/wiki/Widescreen">widescreen</a> mode and <a href="https://en.wikipedia.org/wiki/Rumble_Pak">Rumble Pak</a> compatibility.</p>
+
+<p>A separate multiplayer mode has six minigames for two to four players. Monkey Smash is an open arena, <a href="https://en.wikipedia.org/wiki/Deathmatch_(video_games)">deathmatch</a>-style minigame in which up to four players find ammo and use their respective projectile weapons from the single-player game to damage other players before losing all their own <a href="https://en.wikipedia.org/wiki/Health_(game_terminology)">lives</a>. Battle Arena is a king-of-the-hill minigame in which players use weapons and explosives to knock each other off the edge of a platform. Each mode has several sub-types in which players can compete based on time or score.</p>
+
+<h2>Development</h2>
+
+<h3>Conception</h3>
+
+<p>The British studio <a href="https://en.wikipedia.org/wiki/Rare_(company)">Rare</a>, which created the successful <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country">Donkey Kong Country</a></i> games for the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Nintendo Entertainment System</a> in the mid-1990s, developed <i>Donkey Kong 64</i>, with <a href="https://en.wikipedia.org/wiki/Gregg_Mayles">Gregg Mayles</a> leading the effort. Development began in 1997, shortly after the completion of <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country_3:_Dixie_Kong's_Double_Trouble!">Donkey Kong Country 3: Dixie Kong's Double Trouble!</a></i> (1996). It was originally reported as an intended release on the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a>'s <a href="https://en.wikipedia.org/wiki/64DD">64DD</a> add-on, but transitioned to cartridge while the 64DD was delayed and eventually canceled. Rare artist Carl Tilley disputed the possibility of a 64DD release, recalling to <i><a href="https://en.wikipedia.org/wiki/Did_You_Know_Gaming%3F">Did You Know Gaming?</a></i> that "Rare [management] wouldn't have wanted to release on the DD. Hardware sales dictated where best to sell the game." <i><a href="https://en.wikipedia.org/wiki/Time_Extension">Time Extension</a></i> argued that early reports of a 64DD release were "a mistake, a mistranslation, or simply talks between upper management." <a href="https://en.wikipedia.org/wiki/Grant_Kirkhope">Grant Kirkhope</a> stated that <i>Project Dream</i> was the 64DD title being developed by Rare at the time, not <i>Donkey Kong 64</i>. A team of 16 people worked on the game across three years, and an additional eight members assisted in its later stages. George Andreas served as the project's director.</p>
+
+<p>Rare conceived <i>Donkey Kong 64</i> as a linear, <a href="https://en.wikipedia.org/wiki/2.5D">2.5D</a> platform game similar to the <i>Donkey Kong Country</i> games. The Nintendo 64 was still new, and at the time Rare did not have a common <a href="https://en.wikipedia.org/wiki/Game_engine">game engine</a>. The linear version was developed for around 18 months before it was eliminated in favor of a more open-ended approach similar to Rare's 1998 game <i><a href="https://en.wikipedia.org/wiki/Banjo-Kazooie_(video_game)">Banjo-Kazooie</a></i> (1998). Many developers transitioned from the <i><a href="https://en.wikipedia.org/wiki/Banjo-Kazooie">Banjo</a></i> team, and the final version was built atop the <i>Banjo</i> game engine.</p>
+
+<p>The character models were designed and animated from scratch. Rare was unable to reuse the models from the <i>Donkey Kong Country</i> series, where they had been <a href="https://en.wikipedia.org/wiki/Pre-rendering">pre-rendered</a> and modeled with <a href="https://en.wikipedia.org/wiki/Non-uniform_rational_B-spline">NURBs</a> using <a href="https://en.wikipedia.org/wiki/PowerAnimator">PowerAnimator</a>; <i>Donkey Kong 64</i>'s real-time 3D graphics could only use polygons, so the team used a new tool, Gamegen. The pre-rendered models were used as reference for the polygon models and textures, such as for the interior of the Kongs' mouths. Though the real-time graphics prevented Rare from reproducing the level of detail seen in the <i>Donkey Kong Country</i> series, they allowed for more expressive characters. Rendering satisfactory models proved challenging; lead artist Mark Stevenson noted that "[b]eing able to see this character from any angle, you'd make an animation, put it in the game, and you'd think it looked good side-on, but awful from every other angle!"</p>
+
+<p>The strong emphasis on collectibles was a design choice made at the request of Rare co-founder <a href="https://en.wikipedia.org/wiki/Tim_Stamper">Tim Stamper</a> to distinguish <i>Donkey Kong 64</i> from <i>Banjo-Kazooie</i>. According to director George Andreas, "I'd always go back to him and say 'Here's some' and he'd go 'No, more things'". Retrospectively, Andreas commented that he should have reined himself in; particularly, he would have liked to unify the color-coded banana system. Rare attempted to differentiate <i>Donkey Kong 64</i> from <i>Banjo-Kazooie</i> through its variety of playable characters, cinematic set-pieces, and bombastic <a href="https://en.wikipedia.org/wiki/Boss_battle">boss battles</a>. According to Andreas, Donkey Kong creator <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> was appalled when he saw Donkey Kong shoot a realistic shotgun used as a placeholder during a pre-release demonstration, and quickly sketched the coconut gun used in the final game.</p>
+
+<p>A removed feature, "<a href="https://en.wikipedia.org/wiki/Stop_'N'_Swop">Stop 'N' Swop</a>", allowed data to be transferred from <i>Banjo-Kazooie</i> to <i>Donkey Kong 64</i> to unlock in-game bonuses. During development, Rare discovered the Nintendo 64 retained <a href="https://en.wikipedia.org/wiki/Flash_memory">flash memory</a> for several seconds after a cartridge's removal. They implemented a <a href="https://en.wikipedia.org/wiki/Hot_swapping">hot swapping</a> feature whereby removing the <i>Donkey Kong 64</i> cartridge and quickly inserting the <i>Banjo-Kazooie</i> cartridge, while the former's memory was still in the console, would unlock bonus content. Nintendo requested Stop 'N' Swop's removal when Rare submitted <i>Donkey Kong 64</i> for approval. Nintendo was concerned the Nintendo 64 would not retain <a href="https://en.wikipedia.org/wiki/RDRAM">RDRAM</a> long enough for the feature to work and that it could potentially damage consoles. Specifically, Nintendo 64 models produced after <i>Banjo-Kazooie</i>'s release reduced the amount of time the console retained flash memory, making Stop 'N' Swop nearly impossible to activate as intended.</p>
+
+<p><i>Donkey Kong 64</i> was the first of two games to require the Nintendo 64's <a href="https://en.wikipedia.org/wiki/Nintendo_64_accessories#Expansion_Pak">Expansion Pak</a>, a console <a href="https://en.wikipedia.org/wiki/Computer_memory">RAM</a> upgrade bundled with the game. The Expansion Pak was previously used to power optional higher-resolution graphics, but in the case of <i>Donkey Kong 64</i>, it was marketed as improving the frame rate and rendering of objects at a distance. Chris Marlow, who was working on <i><a href="https://en.wikipedia.org/wiki/Conker's_Bad_Fur_Day">Conker's Bad Fur Day</a></i> (2001) at the time, claimed that Rare could not resolve a bug that occurred without the Expansion Pak and thus they were forced, at great expense, to bundle the game with the memory upgrade. However, Stevenson called Marlow's story a "myth" and said that the decision to use the Expansion Pak was made early. Though such a bug did exist toward the end of development, according to Stevenson, the Expansion Pak was not the solution for the problem and it was not introduced for that reason. According to Stevenson, the Expansion Pak was used to power the dynamic <a href="https://en.wikipedia.org/wiki/Computer_graphics_lighting">lighting system</a>. Nintendo stated that the choice to bundle, rather than selling the accessory separately, would avoid consumer confusion.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Grant_Kirkhope">Grant Kirkhope</a> composed the soundtrack, which <i><a href="https://en.wikipedia.org/wiki/Nintendo_Life">Nintendo Life</a></i> described as closer in spirit to <i>Banjo-Kazooie</i> than to <a href="https://en.wikipedia.org/wiki/David_Wise_(composer)">David Wise</a>'s <i>Donkey Kong Country</i> soundtracks. However, Kirkhope commented that he tried to retain the darker, atmospheric tone that Wise brought to <i>Donkey Kong Country</i>, and included a remix of Wise's "Jungle Japes". <i>Donkey Kong Country 3</i> composer <a href="https://en.wikipedia.org/wiki/Eveline_Fischer">Eveline Fischer</a> was originally assigned to <i>Donkey Kong 64</i>; Kirkhope became involved after he was asked for assistance, and he provided Donkey Kong's voice.</p>
+
+<p>The "<a href="https://en.wikipedia.org/wiki/DK_Rap">DK Rap</a>", which introduces the Kong character abilities, was conceived and written by Andreas, scored and recorded by Kirkhope, and performed by Andreas and <a href="https://en.wikipedia.org/wiki/Chris_Sutherland_(programmer)">Chris Sutherland</a>. It was intended to be a lighthearted joke, although critics interpreted it as a serious songwriting attempt. <a href="https://en.wikipedia.org/wiki/Nintendo_of_America">Nintendo of America</a> ran a "DK Rap" contest in which fans record their own version of the rap to win prizes including a trip to its headquarters.</p>
+
+<h2>Promotion and release</h2>
+
+<p>Rare announced <i>Donkey Kong 64</i> with a single screenshot on its website and coverage in the January 1999 issue of <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i>. <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> wrote that it was playable by the <a href="https://en.wikipedia.org/wiki/E3_1997">1997 Electronic Entertainment Expo</a>, though <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> said that it debuted at <a href="https://en.wikipedia.org/wiki/E3_1999">the 1999 event</a>.<!--more citations, if needed: {{r|IGN: Stellar|IGN: 99}}--> It was also demonstrated at Nintendo's 1999 trade show <a href="https://en.wikipedia.org/wiki/Nintendo_Space_World">Spaceworld</a>. <i>Donkey Kong 64</i> was expected to be a bestseller, as the console's "crowning achievement" in graphics and sound.</p>
+
+<p><i>Donkey Kong 64</i>'s sizable US$22 million marketing campaign doubled the typical budget for a major Nintendo release. The campaign included a 60-second commercial played at over 10,000 movie theaters during the holiday season, and additional advertisements via billboards, print, and radio. A promotional "The Beast Is Back" tour brought a truck outfitted with Nintendo games across the United States, and a separate sweepstakes between the series and <a href="https://en.wikipedia.org/wiki/Dr_Pepper">Dr Pepper</a> was advertised in <a href="https://en.wikipedia.org/wiki/Supermarket">supermarkets</a>. Nintendo projected sales of 2.5 million copies within one year, and later that year increased the number to 4 million copies (1.5 million more than for <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Ocarina_of_Time">The Legend of Zelda: Ocarina of Time</a></i>), including 1 million of the translucent green Nintendo 64 bundles. Polled retailers expected <i>Donkey Kong 64</i> to be the top console game sold during the 1999 holiday season. It had little <a href="https://en.wikipedia.org/wiki/Holiday_season">holiday season</a> competition from Nintendo, as Nintendo had moved releases including <i><a href="https://en.wikipedia.org/wiki/Mario_Party_2">Mario Party 2</a></i>, <i><a href="https://en.wikipedia.org/wiki/Perfect_Dark">Perfect Dark</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Pokémon_Stadium">Pokémon Stadium</a></i> into the next year.</p>
+
+<p>Rare and Nintendo released <i>Donkey Kong 64</i> in North America in November 1999, and a worldwide release followed the next month. Nintendo offered a special bundle of the game and console, including a banana yellow-colored game cartridge, its required Expansion Pak, and a transparent green "<a href="https://en.wikipedia.org/wiki/Jolly_Rancher">Jolly Rancher</a>-style" Nintendo 64 console.</p>
+
+<p>In April 2015, <i>Donkey Kong 64</i> was digitally rereleased as one of the first Nintendo 64 games added to Nintendo's <a href="https://en.wikipedia.org/wiki/Wii_U_Virtual_Console">Wii U Virtual Console</a> catalog. This was the game's first rerelease, as it had not appeared on the <a href="https://en.wikipedia.org/wiki/Wii_Virtual_Console">Wii Virtual Console</a>. Why it was never released on the Wii Virtual Console is unknown, although <i>Nintendo World Report</i> speculated that it may have been related to the fact that it contains both the original arcade <i>Donkey Kong</i> (which was already available on the Virtual Console) and <i>Jetpac</i> (which Nintendo does not hold the rights to) as playable bonuses.</p>
+
+<h2>Reception</h2>
+
+<p><i>Donkey Kong 64</i> received critical acclaim—"universal acclaim", according to video game <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. It became the Nintendo 64's top seller during the 1999 holiday season and Nintendo's chief defense against competitor <a href="https://en.wikipedia.org/wiki/Sega">Sega</a>'s introduction of its <a href="https://en.wikipedia.org/wiki/Dreamcast">Dreamcast</a> console. As a bestseller, <i>Donkey Kong 64</i> joined Nintendo's "<a href="https://en.wikipedia.org/wiki/Player's_Choice">Player's Choice</a>" game selection, where high sales continued through the next holiday season. Cumulative worldwide sales were 5.27 million, including more than 2.3 million copies in North America by 2004. It won the 1999 <a href="https://en.wikipedia.org/wiki/Game_Critics_Awards">E3 Game Critics award</a> for Best Platform Game, and several annual awards from <i>Nintendo Power</i>, including best overall game of 1999. <i>Donkey Kong 64</i> received nominations for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Game_of_the_Year">Game of the Year</a>" and "Console Game of the Year" by the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> during the <a href="https://en.wikipedia.org/wiki/3rd_Annual_Interactive_Achievement_Awards">3rd Annual Interactive Achievement Awards</a> (now known as the <a href="https://en.wikipedia.org/wiki/D.I.C.E._Awards">D.I.C.E. Awards</a>). <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> named it an "Editor's Choice". <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> described <i>Donkey Kong 64</i> as the biggest and most ambitious Nintendo 64 game as of its release, but very similar to <i>Banjo-Kazooie</i> in its platforming and puzzle design. Similarities between the two games was a common refrain. Overall, reviewers were more impressed by its visuals than by its other elements, such as gameplay.</p>
+
+<p>Reviewers criticized the emphasis on collecting items and backtracking—"an interactive <a href="https://en.wikipedia.org/wiki/Egg_hunt">egg hunt</a>". This had become a trend in Rare's games, and <i>Donkey Kong 64</i> followed the "predictable formula" of making players collect multiple sets of items and in full for a special ending. <i>Next Generation</i> noted Rare's propensity for backtracking. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> more diplomatically assumed that players who liked collecting items would be titillated by its <a href="https://en.wikipedia.org/wiki/Replay_value">replay value</a>, and those who did not would be frustrated by its chores. <i><a href="https://en.wikipedia.org/wiki/The_Cincinnati_Enquirer">The Cincinnati Enquirer</a></i> applauded the minigames as a "welcome diversion [which] add to the fun of an already massive adventure", and which are so good they would have worked as their own released games on previous-generation consoles. <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">EGM</a></i> said the puzzles and minigames are fun the first time through, but they quickly become worn when replayed with increasingly tighter time restrictions. <i>GameSpot</i>, however, considered parts of <i>Donkey Kong 64</i>'s gameplay "cerebral", requiring the consideration of several simultaneous tasks to solve later puzzles. Already familiar with concepts borrowed from <i><a href="https://en.wikipedia.org/wiki/Super_Mario_64">Super Mario 64</a></i>, <i>Ocarina of Time</i>, and <i>Banjo-Kazooie</i>, critics considered the player's tasks less innovative or interesting to decipher. In retrospective reviews, <i><a href="https://en.wikipedia.org/wiki/Nintendo_Life">Nintendo Life</a></i> described the chore of collecting objects "excessive" and repetitive. They suggested that backtracking, for instance, could be reduced by letting the player switch between characters at any time.</p>
+
+<p>The size and length were frequently noted. With an estimated 30 hours in basic gameplay, <i>IGN</i> called it Rare's <i><a href="https://en.wikipedia.org/wiki/War_and_Peace">War and Peace</a></i>. <i><a href="https://en.wikipedia.org/wiki/GameFan">GameFan</a></i> wrote that "big" is an understatement, and "the adventure found within is mastodonic". Writers from <i><a href="https://en.wikipedia.org/wiki/AllGame">AllGame</a></i> and <i>EGM</i> became frequently lost or distracted in its world. The ingenuity of the boss battles, particularly the final battle against K. Rool, was highlighted, although the story's ending disappointed <i>EGM</i>. Reviewers found little entertainment in the multiplayer mode but praised the gameplay variety between the five characters. The controls also frustrated reviewers, between slow movement speed and camera angle issues. For example, characters who become unresponsive during their attack animations are vulnerable to encroaching enemies. <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> wrote that the lack of camera improvements over <i>Banjo-Kazooie</i> was inexcusable.</p>
+
+<p>Even with the RAM expansion for graphics, <i>Donkey Kong 64</i>'s visuals were only found marginally—if at all—better than that of its contemporary games, such as the previous year's <i>Banjo-Kazooie</i>. <i>IGN</i> avowed that <i>Donkey Kong 64</i> was not as pretty as <i>Banjo-Kazooie</i>, especially in its water and backgrounds, though it still ranked among the console's prettiest games because the setting is barren and nondescript at first, and only later introduces lighting effects and richer textures. <i>IGN</i> hoped for more from Rare, praising the particle effects (such as in the desert wind), but considering its dynamic lighting overused. <i><a href="https://en.wikipedia.org/wiki/N64_Magazine">N64 Magazine</a></i> said the enhanced effects were most often used for decoration, though they also played some role in puzzles based on illuminating paths. Graphical difficulties were reported even with the extra memory, such as frame rate slowdowns and distant features not appearing in any detail, though overall they commended the graphical flourishes. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> also saw a lack of variety in the environment.</p>
+
+<p>The characters were praised for their personalities, animations, and portrayal of Rare's signature humor. Several reviewers noted the personalities shown in character animations. <i>IGN</i> considered the characters less baffling than those of other Rare games, and sometimes funny. <i>GameFan</i> found that the addition of the three new playable characters to the series offered little personality that would be missed.</p>
+
+<p><i>IGN</i> said that the music was less clever than <i>Banjo-Kazooie</i>'s, but Kirkhope's soundtrack still delivered a variety of moods and fit the setting. Aural clues in the surround sound and the quality of the underwater effects impressed <i>GameSpot</i>. Reviewers criticized the opening "DK Rap" as "embarrassing" and among the worst video game music. <i>GamePro</i> said it was humorous but lowbrow. Eight years later, <i><a href="https://en.wikipedia.org/wiki/Nintendo_Life">Nintendo Life</a></i> said the song was "loved by some, loathed by others", similar to the game itself.</p>
+
+<p>The consensus was that <i>Donkey Kong 64</i> lacked the revolutionary potential of <i>Donkey Kong Country</i> but was of a sufficient high quality to sell well during the holiday season. <i><a href="https://en.wikipedia.org/wiki/The_Cincinnati_Enquirer">The Cincinnati Enquirer</a></i> described its platform style as coupled with many others, such as <i>Super Mario 64</i>, <i>Banjo-Kazooie</i>, and <i><a href="https://en.wikipedia.org/wiki/Jet_Force_Gemini">Jet Force Gemini</a></i> (1999): "Replace the story line, the graphics and a couple of gameplay elements and you basically have the same game". Nonetheless, he said "its mastering of elements that have been done to death may be just the spark needed" to evolve the genre in games released in later years, celebrating its gameplay as addictive and some of the best on the Nintendo 64. Though hyped fans would be disappointed, <i>IGN</i> said that <i>Donkey Kong 64</i> remains an excellent and expansive platformer with an overwhelming amount of things to do. <i>GameFan</i>, on the other hand, was most disappointed by how it "truly offers nothing new" and compared its monotony and repetition with the 1999 film <i><a href="https://en.wikipedia.org/wiki/Eyes_Wide_Shut">Eyes Wide Shut</a></i>: "a big bloated project with not enough brilliant moments to justify the numbness ... [of] sitting through the whole thing", it "fails to live up to the Rare name". <i>Donkey Kong 64</i>'s 3D platforming was commonplace by the time of its release and, according to <i>GameSpot</i>, would have fared better as a Nintendo 64 <a href="https://en.wikipedia.org/wiki/Launch_game">launch game</a>. With its competition considered, <i><a href="https://en.wikipedia.org/wiki/Daily_Radar">Daily Radar</a></i> wrote that <i>Donkey Kong 64</i> was simply the best 3D platform game on the console. <i>Edge</i> qualified this thought: <i>Donkey Kong 64</i> was the closest any third-party developer had come to outdoing Nintendo's mastery of game structure and was "a fine effort ... in its own right", but its gameplay was derivative and unimaginative compared to the freedom and flexibility of Nintendo's <i>Super Mario 64</i>.</p>
+
+<p>In a retrospective review, <i>Nintendo Life</i> found the Wii U controller an easy substitute for the Nintendo 64's controls.</p>
+
+<h2>Legacy</h2>
+
+<p>Rare's 3D platformers became notorious for their emphasis on collecting items, and <i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i> remembered <i>Donkey Kong 64</i> as "the worst offender" with hundreds of color-coded bananas. Other retrospective reviewers agreed. <i>Electronic Gaming Monthly</i> wrote: "As ... <i>Super Mario 64</i> breathed life into the 3D platforming genre, <i>Donkey Kong 64</i> sucked it all out" and solidified Rare's reputation for making "collect-a-thon" games. The indie developer behind <i><a href="https://en.wikipedia.org/wiki/A_Hat_in_Time">A Hat in Time</a></i>, a spiritual successor to <i>Banjo-Kazooie</i>, blamed <i>Donkey Kong 64</i> for the "collect-a-thon platform adventurer" genre's decline in popularity. The game holds a <a href="https://en.wikipedia.org/wiki/Guinness_World_Record">Guinness World Record</a> for most collectible items in a platform game.</p>
+
+<p><i>Retro Gamer</i> and <i>Game Informer</i> both remembered the reception as "mixed", in consideration of its similarities with <i>Banjo-Kazooie</i> and lack of genre-pushing changes. Though decently reviewed, this and Rare's subsequent Nintendo 64 releases did not meet the extolment of the company's preceding games, and lackluster sales led to a staff exodus that culminated with the company's acquisition by <a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a> in 2002. <i>Donkey Kong 64</i> was resultingly Rare's final <i>Donkey Kong</i> game; the series did not receive another major installment until <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Jungle_Beat">Donkey Kong Jungle Beat</a></i> (2004) five years later. <i>Electronic Gaming Monthly</i> noted at the game's launch, that the Nintendo 64 was approaching the end of its lifecycle, as gamers turned their sights to the Sega <a href="https://en.wikipedia.org/wiki/Dreamcast">Dreamcast</a> and Sony <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>. <i>IGN</i> later named <i>Donkey Kong 64</i> as worthy of a <a href="https://en.wikipedia.org/wiki/Video_game_remake">remake</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> handheld console. In 2009, <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i> placed the game 89th in a list of the best Nintendo games, calling it "a forgotten classic".</p>
+
+<p>The "DK Rap" is still remembered for its negative reception, but an upswing in popularity happened more than a decade after release as an <a href="https://en.wikipedia.org/wiki/Internet_meme">Internet meme</a>. Sutherland believes this happened because those who played the game as children had realized the song was meant to be taken as a joke, not a serious songwriting attempt. Similarly, Kirkhope commented that "it's a bit like <a href="https://en.wikipedia.org/wiki/ABBA">ABBA</a>, the way they've kind of come back into fashion over the years". Renditions of the "DK Rap" appeared in <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Melee">Super Smash Bros. Melee</a></i> (2001) and <i><a href="https://en.wikipedia.org/wiki/Donkey_Konga">Donkey Konga</a></i> (2003). In 2017, Kirkhope composed a similar rap for <i><a href="https://en.wikipedia.org/wiki/Yooka-Laylee">Yooka-Laylee</a></i>, a platform game made in homage to Rare's works. The rap plays during Donkey Kong's introduction in <i><a href="https://en.wikipedia.org/wiki/The_Super_Mario_Bros._Movie">The Super Mario Bros. Movie</a></i> (2023), included at the behest of Donkey Kong's voice actor <a href="https://en.wikipedia.org/wiki/Seth_Rogen">Seth Rogen</a>. Kirkhope was flattered by the song's inclusion but disappointed he did not receive credit; the film simply credits it as originating from <i>Donkey Kong 64</i>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

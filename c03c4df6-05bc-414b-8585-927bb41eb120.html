@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Splatoon 3</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('c03c4df6-05bc-414b-8585-927bb41eb120/b90812b7-ac56-4bab-89f3-3b7bb87125df.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="c03c4df6-05bc-414b-8585-927bb41eb120/3d8d0500-fabb-4ebd-a709-d3c328be048a.png"/> Splatoon 3</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="c03c4df6-05bc-414b-8585-927bb41eb120/b9cfff9a-4a64-474e-bba5-3b9bcf2897f5.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>7m 12s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 9:43:50</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:52:38</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:28:39</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Switch">Nintendo Switch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-9/9/2022">9/9/2022</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-83">83</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-third-person shooter">third-person shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo EPD">Nintendo EPD</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Splatoon_3" target="_blank">Wikipedia</a><br/><a href="https://splatoon.nintendo.com" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Seita Inoue">[People] artist: Seita Inoue</a><br/><a href="#quicklink-[People] composer: Ryo Nagamatsu">[People] composer: Ryo Nagamatsu</a><br/><a href="#quicklink-[People] composer: Sayako Doi">[People] composer: Sayako Doi</a><br/><a href="#quicklink-[People] composer: Shiho Fujii">[People] composer: Shiho Fujii</a><br/><a href="#quicklink-[People] composer: Toru Minegishi">[People] composer: Toru Minegishi</a><br/><a href="#quicklink-[People] composer: Toshiyuki Sudo">[People] composer: Toshiyuki Sudo</a><br/><a href="#quicklink-[People] composer: Yumi Takahashi">[People] composer: Yumi Takahashi</a><br/><a href="#quicklink-[People] designer: Kenji Matsumoto">[People] designer: Kenji Matsumoto</a><br/><a href="#quicklink-[People] designer: Yoshihiko Ito">[People] designer: Yoshihiko Ito</a><br/><a href="#quicklink-[People] designer: Yoshiteru Fukuda">[People] designer: Yoshiteru Fukuda</a><br/><a href="#quicklink-[People] director: Seita Inoue">[People] director: Seita Inoue</a><br/><a href="#quicklink-[People] director: Shintaro Sato">[People] director: Shintaro Sato</a><br/><a href="#quicklink-[People] producer: Hisashi Nogami">[People] producer: Hisashi Nogami</a><br/><a href="#quicklink-[People] programmer: Seiichi Yamaguchi">[People] programmer: Seiichi Yamaguchi</a><br/><a href="#quicklink-[People] programmer: Soichi Nakajima">[People] programmer: Soichi Nakajima</a><br/><a href="#quicklink-[People] programmer: Toshikazu Kiuchi">[People] programmer: Toshikazu Kiuchi</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Splatoon 3</b></i> is a 2022 <a href="https://en.wikipedia.org/wiki/Third-person_shooter">third-person shooter</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>. It is the third game in the <i><a href="https://en.wikipedia.org/wiki/Splatoon">Splatoon</a></i> series following <i><a href="https://en.wikipedia.org/wiki/Splatoon_2">Splatoon 2</a></i>. Like its predecessors in the <i>Splatoon</i> series, the game consists of <a href="https://en.wikipedia.org/wiki/Online_multiplayer">online multiplayer</a> (<a href="https://en.wikipedia.org/wiki/Player_versus_player">player versus player</a> and <a href="https://en.wikipedia.org/wiki/Player_versus_environment">player versus environment</a>) alongside a single-player campaign, both featuring combat based around ink-firing weapons.</p>
+
+<p>The game was first revealed in a teaser trailer on 17 February 2021 and was subsequently released on 9 September 2022.  The game received generally favorable reviews, with praise for its additional maps, single player campaign, customization options, and gameplay mechanics, but criticism for its matchmaking and disconnection issues and lack of new content. As of 31 March 2024, <i>Splatoon 3</i> has sold 11.96 million copies worldwide (2.64 million copies in the first week alone), making it the fastest-selling game in the franchise and one of the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_Switch_video_games">best-selling Switch games</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p>Like its predecessors in the <i><a href="https://en.wikipedia.org/wiki/Splatoon">Splatoon</a></i> series, <i>Splatoon 3</i> is a <a href="https://en.wikipedia.org/wiki/Third-person_shooter">third-person shooter</a>. Players choose to be either an <a href="https://en.wikipedia.org/wiki/Inkling_(Splatoon)">Inkling</a> or Octoling as their <a href="https://en.wikipedia.org/wiki/Player_character">player character</a>. Both wield weaponry that uses colored ink as ammunition. Weapons are diverse in ability and imagery, with most resembling household objects. For example, Rollers are large paint rollers that can cover large amounts of area in ink but are generally limited to close-range combat, while Chargers are weapons which resemble a sniper rifle, and have long range for sniping opponents but are less effective at painting the ground. <i>Splatoon 3</i> expands upon this by adding new main, sub, and special weapons to the game. Main weapons are chosen by the player, and include a sub weapon and a special weapon. sub weapons act as secondary weapons that use up more ink.  special weapons require the player to cover the ground with a varying amount of ink in order to charge up their gauge to deploy a powerful effect. Inklings and Octolings have the ability to morph into a squid or octopus form, respectively. This form is referred to as the "swim form", and can be used to climb ink-covered walls or swim through ink faster than the humanoid forms can walk. Weapons have a finite amount of ink ammunition, and submerging in ink via the swim form replenishes it quicker than in humanoid form. All main weapons from <i>Splatoon 2</i> returned in <i>Splatoon 3,</i> with the edition of 15 new ones</p>
+
+<h3>Modes</h3>
+
+<h4>Competitive</h4>
+
+<p>Returning from its predecessors as a playable online multiplayer game mode is Regular Battle, known as Turf War. In Turf War, two teams of four players compete to cover the most amount of the map's area in their respective ink color for three minutes. Each team can cover over an area covered by the opponents ink with their own color. When walked on, the opposing team's ink slows movement, gradually deals damage and prevents the use of the player's swim form. Each player is equipped with a weapon set, chosen before each match, and each set comes with secondary and special weapons in addition to its main weapon. Secondary weapons provide alternative methods of attacking the other team and inking the ground; for example, Splat Bombs that explode a second after contact with the surface and Burst Bombs that explode upon impact. When enough ground is covered in a player's ink, they may use a special weapon, which are primarily used to attack the opposing team. Weapons and other forms of attack can deal damage to opposing players; when enough damage is given, they will "splat" their opponent, forcing them to restart from their starting location. Whichever team covers the largest portion of the field at the end of the match is declared the winner.</p>
+
+<p>Once a player gains enough <a href="https://en.wikipedia.org/wiki/Experience_point">experience points</a> to reach level 10, they gain access to a ranked mode called Anarchy Battles, featuring several different battle types. A game lasts for a maximum of five minutes plus <a href="https://en.wikipedia.org/wiki/Overtime_(sports)">overtime</a> if certain conditions depending on the game mode are met. Clam Blitz is an <a href="https://en.wikipedia.org/wiki/Goal_(sports)">invasion game</a> with elements inspired by <a href="https://en.wikipedia.org/wiki/Basketball">basketball</a> and <a href="https://en.wikipedia.org/wiki/American_football">American football</a>. The game mode sees players collect golden <a href="https://en.wikipedia.org/wiki/Clam">clams</a> and deposit them in the opponent's goals. A Power Clam is needed to break open the opposing basket to score, which is created by collecting eight regular clams. The team who deposited the most clams by the end of the match or has depleted their remaining score to 0 is declared the winner. Splat Zones plays similarly to <a href="https://en.wikipedia.org/wiki/King_of_the_hill_(game)">king of the hill</a>; two teams aim to control one or two "splat zones" for a set amount of time. A zone is controlled when it is 70% covered in a teams ink, and if the map has two zones both must be controlled for the timer to count down. Tower Control functions similarly to Payload from <i><a href="https://en.wikipedia.org/wiki/Team_Fortress_2">Team Fortress 2</a></i>, requiring a team to escort a moving tower. When the tower is controlled by one team, it moves toward that team's goal line, stopping to clear <a href="https://en.wikipedia.org/wiki/Glossary_of_video_games#checkpoint">checkpoints</a> along the way, with a team winning when the tower reaches their goal line or making it the furthest when time runs out. The Rainmaker game mode functions similarly to <a href="https://en.wikipedia.org/wiki/Capture_the_flag">capture the flag</a>, in which players attempt to carry a weapon called the Rainmaker from the center of the stage to various checkpoints until they reach the opponent's side of the map.</p>
+
+<p>This game also sees the return of "<a href="https://en.wikipedia.org/wiki/Splatoon#Splatfests">Splatfests</a>", where players choose to join one of three teams (compared to the two teams in the previous games) over a particular theme, and over three days they engage in matches to gain the most points for victory. In <i>Splatoon 3</i>, a new "Tricolor Turf War" mode can be played during the second half of a Splatfest, where one team of four players defends an "Ultra Signal" at the center of the map from two teams of two attacking players. When an attacking team takes control of the Ultra Signal, it will summon a "Sprinkler of Doom", which will automatically ink a portion of the map's area for that team.</p>
+
+<h4>Salmon Run Next Wave</h4>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">co-op</a> <a href="https://en.wikipedia.org/wiki/Player_versus_environment">player versus environment</a> (PvE) mode Salmon Run returns, titled Salmon Run Next Wave. The main goal is to collect Golden Eggs, obtained by splatting special enemies known as "Boss Salmonids", and depositing them into the egg basket. Salmon Run Next Wave uses the same basic gameplay as it does in <i><a href="https://en.wikipedia.org/wiki/Splatoon_2">Splatoon 2</a></i>, where the player, employed by Grizzco Industries, teams up with three other players to fight waves of enemies known as "Salmonids". If a player gets splatted, the game's version of getting killed, another player can revive them by shooting them with ink. If the quota for eggs is not met within the time limit or the entire team is wiped out, the shift ends. Each "shift" typically lasts three waves, though, in Next Wave, a fourth "Xtrawave" sometimes occurs, where players team up to defeat a King Salmonid. By successfully meeting the quota of golden eggs for all waves in a shift, the player can increase their rank within Grizzco. Next Wave adds the ability to throw golden eggs along with new enemies and new "Known Occurrence" events. Salmon Run is also no longer limited to certain times of day; players are able to access Salmon Run at any time, even during Splatfests. A new addition to <i>Splatoon 3</i> is "Big Run", an event where Salmonids invade the city of Splatsville. Players defend Splatsville by fighting invading Salmonids on an online competitive map, instead of the unique stages typically used for Salmon Run. After a few days, the event ends and participating players receive a prize. This event occurs every few months. There is also another Salmon Run event called "Eggstra Work", where teams compete to get the most golden eggs in a predetermined shift consisting of 5 waves.</p>
+
+<h4>Tableturf Battle</h4>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Digital_collectible_card_game">digital collectible card game</a> based on Turf War in which players build a <a href="https://en.wikipedia.org/wiki/Deck_of_cards">deck</a> of collected cards. In Tableturf Battle, each card can be used to apply a pattern on a grid, and after a "special attack" is charged, it can be used to place a pattern overwriting the opponent's patterns.</p>
+
+<h2>Setting</h2>
+
+<p>The <i>Splatoon</i> games take place on a version of <a href="https://en.wikipedia.org/wiki/Earth">Earth</a> set far in the future after the extinction of humanity and almost all mammal life, suggested to be due to <a href="https://en.wikipedia.org/wiki/Climate_change">climate change</a>, where much of oceanic life has evolved to live on land. <i>Splatoon 3</i> takes place five years after the events of <i><a href="https://en.wikipedia.org/wiki/Splatoon_2">Splatoon 2</a></i> in the Splatlands, a sun-scorched desert inhabited by battle-hardened Inklings and Octolings, and Splatsville, a city of chaos that seems to have developed rapidly since the last Splatfest, Chaos vs. Order. The game's design is themed around chaos due to the outcome of the last Splatfest.</p>
+
+<p>The story mode of <i>Splatoon 3</i>, titled Return of the Mammalians, is set in a new location called Alterna, a large, snowy area littered with incomplete structures and hazardous Fuzzy Ooze, an ink-like substance mostly covered in brown fur, with a rocket at its center. It focuses on the reappearance of <a href="https://en.wikipedia.org/wiki/Mammal">mammals</a>, which have been long-<a href="https://en.wikipedia.org/wiki/Extinction">extinct</a>.</p>
+
+<p>The <i><a href="https://en.wikipedia.org/wiki/Splatoon_3:_Side_Order">Side Order</a></i> DLC story is set in the Order Sector, a <a href="https://en.wikipedia.org/wiki/Virtual_reality">virtual reality</a> based on the Inkopolis Square area from <i>Splatoon 2</i>, which has been drained of color.</p>
+
+<h3>Plot</h3>
+
+<p>Upon following the elderly squid Craig Cuttlefish into a crater covered with lethal Fuzzy Ooze, the player is recruited by Cuttlefish into the New Squidbeak Splatoon as Agent 3 along with their pet Salmonid Smallfry. Smallfry is able to eat and destroy some of the ooze, allowing passage further into the crater. They fight Octarian enemies mutated with fur, which Cuttlefish believes are responsible for once again stealing the Great Zapfish that powers Splatsville. At the crater's base, Octarian leader DJ Octavio accuses Cuttlefish of taking his Octarian warriors. After defeating Octavio, he denies taking the Zapfish despite having previously done so in the first two games. The ground breaks open, and Cuttlefish and Agent 3 fall into the remains of the underground city Alterna, which the fuzzy Octarians have turned into a base. In Alterna, Agent 3 meets <a href="https://en.wikipedia.org/wiki/Callie_and_Marie">Callie and Marie</a> of the New Squidbeak Splatoon, as well as the Captain, the player protagonist of <a href="https://en.wikipedia.org/wiki/Splatoon_(video_game)">the first game</a>, and realizes that Cuttlefish has gone missing. They are approached by the <a href="https://en.wikipedia.org/wiki/Japanese_idol">idol</a> group Deep Cut, who are searching Alterna for treasure and believe the Squidbeak Splatoon is there for the same reason. Aided by an <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">artificial intelligence</a> named O.R.C.A., they explore the city in search of Cuttlefish, but are repeatedly led to signals from the members of Deep Cut and forced to fight them over the "treasure", which appears to be junk. It is revealed that Mr. Grizz, CEO of Grizzco and organizer of Salmon Run, has kidnapped Cuttlefish and is responsible for taking the Great Zapfish and Octarian army, proving Octavio's innocence. Mr. Grizz explains that he aims to restore mammal life to Earth by converting other life into mammals by using the Fuzzy Ooze.</p>
+
+<p>After using the treasure to assemble a cutting device and reaching the rocket at the center of Alterna, Deep Cut confronts the Splatoon again and after being given the treasure for free (as the team no longer needs it), explain their intention to sell the treasure for charity, and team up with the Splatoon to defeat Mr. Grizz; they also become Marie's employees, to the latter's dismay. Eventually, they reach the top of the rocket where Cuttlefish is being held and find Mr. Grizz having "dehydrated" the former for his "essence", seemingly killing him. Mr. Grizz, who is a massive bear and one of the only remaining mammals, explains that the rocket is rigged to explode and cover the entire Earth in Fuzzy Ooze, reviving mammal life at the expense of all other life on the planet. The Captain rehydrates Cuttlefish with his tears as Mr. Grizz launches the rocket into space, and Deep Cut provides Agent 3 a lift onto it using their tamed eels and shark. Agent 3, with help from DJ Octavio and Smallfry, who transforms into a "Hugefry" form (resembling a giant <a href="https://en.wikipedia.org/wiki/Coho_salmon">coho salmon</a>), defeats Mr. Grizz and destroys the rocket. Agent 3, Little Buddy, and Octavio return to Earth with the Great Zapfish, and Mr. Grizz is seen floating in space during the credits.</p>
+
+<h2>Development</h2>
+
+<p><i>Splatoon 3</i> was developed by <a href="https://en.wikipedia.org/wiki/Nintendo_EPD">Nintendo EPD</a>, with additional work done by <a href="https://en.wikipedia.org/wiki/Monolith_Soft">Monolith Soft</a>, who also assisted in the development of previous <i>Splatoon</i> games, as well as <a href="https://en.wikipedia.org/wiki/Systems_Research_&amp;_Development">SRD</a> and <a href="https://en.wikipedia.org/wiki/Bandai_Namco_Studios">Bandai Namco Studios Singapore &amp; Malaysia</a>. The game makes use of NLPN, Nintendo's <a href="https://en.wikipedia.org/wiki/In-house_software">in-house</a> <a href="https://en.wikipedia.org/wiki/Server_(computing)">server</a> system, which supports expanded lobby features and better <a href="https://en.wikipedia.org/wiki/Matchmaking_(video_games)">matchmaking</a>.</p>
+
+<p>At <a href="https://en.wikipedia.org/wiki/E3_2019">E3 2019</a>, after the announcement of <i><a href="https://en.wikipedia.org/wiki/Splatoon_2">Splatoon 2</a></i>'s final Splatfest, "Chaos vs. Order", <i>Splatoon</i> producer <a href="https://en.wikipedia.org/wiki/Hisashi_Nogami">Hisashi Nogami</a> stated that a third entry in the series was not in development. In an "Ask the Developer" interview on Nintendo's website, it was revealed that the direction of <i>Splatoon 3</i>'s world was decided after Team Chaos won <i>Splatoon 2</i>'s final Splatfest, with the developers planning for both outcomes before the Splatfest winner was decided. In a <a href="https://en.wikipedia.org/wiki/Nintendo_Direct"><i>Splatoon 3</i> Direct</a> on 10 August 2022, Nintendo confirmed that the game  would receive two years worth of updates releasing every three months using a seasonal approach, which would feature the addition of more stages and weapons, as well as large-scale paid <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC).</p>
+
+<h2>Marketing and release</h2>
+
+<p><i>Splatoon 3</i> was announced with a teaser trailer in a Nintendo Direct on 17 February 2021. The trailer revealed items, weapons, abilities, and an apocalyptic design. More details were revealed later that year in September, including the name of <i>Splatoon 3</i>'s single-player mode, Return of the Mammalians.</p>
+
+<p>A trailer for <i>Splatoon 3</i>'s co-op mode "Salmon Run" premiered in a Nintendo Direct on 9 February 2022. On 22 April, Nintendo uploaded a video to its <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a> channel showing gameplay of the "Turf War" game mode, as well as providing an exact release date of 9 September 2022. Additionally, <i><a href="https://en.wikipedia.org/wiki/Splatoon_2:_Octo_Expansion">Splatoon 2: Octo Expansion</a></i> was announced to be included with the Expansion Pack tier of <a href="https://en.wikipedia.org/wiki/Nintendo_Switch_Online">Nintendo Switch Online</a>. In July, Nintendo announced a special edition <a href="https://en.wikipedia.org/wiki/Nintendo_Switch_OLED_model">Nintendo Switch OLED model</a> themed on the game, with a release date of 26 August 2022. In addition, the company announced a <i>Splatoon 3</i>-themed <a href="https://en.wikipedia.org/wiki/Nintendo_Switch_Pro_Controller">Pro Controller</a> and carrying case, which released alongside the game.</p>
+
+<p>On 10 August 2022, Nintendo broadcast a <i>Splatoon 3</i>-focused Nintendo Direct, revealing the date for the game's Splatfest World Premiere, a limited time demo Splatfest. Nintendo announced that the game would have <a href="https://en.wikipedia.org/wiki/Amiibo">amiibo</a> support, with several new figurines that can be used to take photos with the characters in-game and receive special gear items, similar to past <i>Splatoon</i> titles. It introduced three new "<a href="https://en.wikipedia.org/wiki/Japanese_idol">idol</a>" characters known as Big Man, Shiver, and Frye, collectively referred to as "Deep Cut". Also announced in the Nintendo Direct, the game is set to receive both large-scale paid DLC and two years of support via free updates. On 25 August 2022, a Nintendo Treehouse Presentation was broadcast which showcased the single-player story mode and the multiplayer lobby, alongside weapons and multiplayer maps.</p>
+
+<p>The pre-launch Splatfest World Premiere event was held on 27 and 28 August 2022 with a <a href="https://en.wikipedia.org/wiki/Rock-paper-scissors">rock-paper-scissors</a> theme, which Team Rock won in all regions. The game was released worldwide on 9 September 2022. In a trailer on 11 October 2022, it was announced that the <i>Splatoon 3</i> amiibo would launch on 11 November.  During Nintendo Live 2022 on 9 October, a <i>Splatoon 3</i> concert was held starring Deep Cut.</p>
+
+<p>In a Nintendo Direct released on 8 February 2023, two waves of DLC were announced, with the first wave including Inkopolis (the main hub from the first game) and the second wave including a new <a href="https://en.wikipedia.org/wiki/Single-player_video_game">single player campaign</a> called <a href="https://en.wikipedia.org/wiki/Splatoon_3:_Side_Order">Side Order</a>. This mode was later revealed to be a <a href="https://en.wikipedia.org/wiki/Roguelite">roguelite</a>, and featured a new story with Agent Eight, the protagonist of <i>Splatoon 2: Octo Expansion</i>. Side Order was released on 22 February 2024.</p>
+
+<p>On 16 September 2024, Nintendo announced that the game would no longer receive regular content updates, although patches and seasonal events would continue.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical reception</h3>
+
+<p><i>Splatoon 3</i> received "generally favorable" reviews according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> reviewer Brendan Graeber called the third installment's multiplayer "more than just a simple upgrade", citing its additional maps, weapons, bosses, and customization, as well as its revamped lobby system. However, he criticized the game's lack of a "huge addition" similar to <i>Splatoon 2</i>'s Salmon Run. Reviewing the game's single-player mode, he appreciated the new take on the series' <a href="https://en.wikipedia.org/wiki/Overworld">hub world</a>, as well as the returning ideas from <i>Splatoon 2</i>'s <i>Octo Expansion</i>. He praised the story mode's lore, as well as its characters, while lamenting the reuse of enemies from previous games. He also reviewed Tableturf Battle, calling it a "lackluster card game" that "consistently ends with a whimper instead of a bang". <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i>'s Chris Carter also praised how <i>Return of the Mammalians</i> interacted with the game's multiplayer modes, by both teaching the player important mechanics and rewarding them with useful items, as well as appreciating how the story mode was tailored for <a href="https://en.wikipedia.org/wiki/Speedrunning">speedrunning</a>.</p>
+
+<p>Martin Robinson of <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> criticized the lack of significant new content, saying that even the largest new additions are not something "that can be applauded too enthusiastically", and other features "basic [ones] you'd expect of a contemporary online multiplayer game". However, he called the <i>Splatoon</i> series "one of the most polished, playable and impeccably executed series" from Nintendo. He also compared the game's story mode to the <a href="https://en.wikipedia.org/wiki/Mario_(franchise)"><i>Mario</i> franchise</a>, saying that while it evoked some of the best parts of <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Sunshine">Super Mario Sunshine</a></i>, the abstract nature of the levels failed to meet the best <i>Mario</i> levels.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i>'s Patricia Hernandez lamented the amount of disconnections while matchmaking and playing online, saying that it is "inexcusable".</p>
+
+<p>Brian Shea of <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> praised the larger amount of content available at launch compared to previous entries in the series, as well as how the game blended new and returning content, calling it the series "best entry to date". He also praised the game's movement, saying that "few games match the smooth, intuitive mobility <i>Splatoon</i> gives you while submerged and cruising through a map".</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Wired_(magazine)">Wired</a></i>'s Reid McCarter praised the game's original, cartoony characters, as opposed to brand crossovers and realistic graphics.</p>
+
+<p>On 12 September 2022, Nintendo reported that <i>Splatoon 3</i> had sold 3.45 million copies domestically within the first three days of launch, becoming the fastest-selling video game of all time in Japan (surpassing the previous record holder <i><a href="https://en.wikipedia.org/wiki/Pokémon_Black_and_White">Pokémon Black and White</a></i>) at the time, as well as one of the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_Switch_video_games">best-selling games on the Nintendo Switch</a>. <a href="https://en.wikipedia.org/wiki/Share_(finance)">Shares</a> of Nintendo were noted to have increased by 5.5 percent on the Tuesday following the announcement, the largest increase since December 2020. <i>Splatoon 3</i> debuted at the top spot on the UK boxed charts, where it remained for three weeks until being pushed to second place by <i><a href="https://en.wikipedia.org/wiki/FIFA_23">FIFA 23</a></i>. As of 18 October 2022, <i>Splatoon 3</i> was reported to be the highest-selling video game of 2022 in Japan, just over one month after its release.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

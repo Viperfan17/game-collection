@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Operation Flashpoint: Red River</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('7fd94491-f343-4325-b240-a5e3b20d6160/fc48a9ac-3ac1-4b09-9c7f-9fa1c6332350.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="7fd94491-f343-4325-b240-a5e3b20d6160/6b48833b-963e-4bb0-8a1f-ef555d3fcabb.ico"/> Operation Flashpoint: Red River</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="7fd94491-f343-4325-b240-a5e3b20d6160/71f1b510-ea52-44e9-8bbc-35f0f1d72a7c.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 7:31:29</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-4/21/2011">4/21/2011</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-90">90</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-65">65</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-FPS">FPS</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Tactical shooter">Tactical shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Codemasters">Codemasters</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Codemasters">Codemasters</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Operation_Flashpoint:_Red_River" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=6781" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/operation-flashpoint-red-river" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/44340/" target="_blank">SteamDB</a><br/><a href="https://www.mobygames.com/game/51621" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Operation_Flashpoint:_Red_River" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/operation-flashpoint-red-river" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Contemporary">Contemporary</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-EGO 2.0">EGO 2.0</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Operation Flashpoint: Red River</b></i> is a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> video game developed and published by <a href="https://en.wikipedia.org/wiki/Codemasters">Codemasters</a> for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. It is the sequel to the previous game <i><a href="https://en.wikipedia.org/wiki/Operation_Flashpoint:_Dragon_Rising">Operation Flashpoint: Dragon Rising</a></i> and the final game of the Operation Flashpoint series.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Operation Flashpoint: Red River</i> is a <a href="https://en.wikipedia.org/wiki/Tactical_shooter">tactical shooter</a>. The player has the choice of playing the campaign co-operatively. However, the game does not feature competitive multiplayer. The game does not feature a mission editor or <a href="https://en.wikipedia.org/wiki/Software_development_kit">SDK</a>. The player will be able to choose between four classes of Marines; rifleman, grenadier, scout, and automatic rifleman, each with their own weapons and abilities. The player will gain experience during gameplay, which can be used to unlock weapons, attachments and <a href="https://en.wikipedia.org/wiki/Experience_point#Perks">perks</a>. For example, a scout could acquire an enhancement that will reduce the amount of bullet drop. The game's director Sion Lenton said "Operation Flashpoint: Red River is being built around four player co-op online play, complete with a strong narrative, new enemies and combat scenarios to deliver gameplay that immerses players in the reality of war like never before." The enemies will be able to kill the player with a single shot. The single player campaign will be divided into three distinct acts.</p>
+
+<p>The game uses a video camera style feedback in the game for the action. With shots near the player getting dirt in the players vision similar to a lens would, and damage scrambling the screen, along with losing stamina causes parts of the screen to scramble and freeze in some places until the player rests.</p>
+
+<h2>Plot</h2>
+
+<p>The player assumes control of "Outlaw 2 Bravo", a <a href="https://en.wikipedia.org/wiki/United_States_Marine_Corps">United States Marine Corps</a> <a href="https://en.wikipedia.org/wiki/Fireteam">fireteam</a> during a fictional conflict in <a href="https://en.wikipedia.org/wiki/Tajikistan">Tajikistan</a> in 2013.</p>
+
+<p>The terrorist group, <a href="https://en.wikipedia.org/wiki/East_Turkestan_Islamic_Movement">East Turkestan Islamic Movement</a> (ETIM) launches <a href="https://en.wikipedia.org/wiki/Mortar_(weapon)">mortar</a> attacks on a U.S. <a href="https://en.wikipedia.org/wiki/Forward_operating_base">forward operating base</a> (FOB) in <a href="https://en.wikipedia.org/wiki/Afghanistan">Afghanistan</a>, prompting the United States to launch <i>Operation Enduring Shield</i>, invading western Tajikistan to wipe out the insurgent threat. Outlaw platoon is tasked with capturing several villages and an airfield, along with defusing <a href="https://en.wikipedia.org/wiki/Improvised_explosive_device">IEDs</a> and taking several insurgent positions. The unit is then tasked with securing and repairing a dam, while at the same time reinforcing Forward Operating Base Viper, located close by.</p>
+
+<p>Outlaw is ordered to quell the remaining insurgents located in a stronghold. After reaching the stronghold, the <a href="https://en.wikipedia.org/wiki/People's_Republic_of_China">Chinese</a> <a href="https://en.wikipedia.org/wiki/People's_Liberation_Army">People's Liberation Army</a> intervenes, having invaded eastern Tajikistan in retaliation for the ETIM massacring Chinese athletes during the <a href="https://en.wikipedia.org/wiki/London">London</a> <a href="https://en.wikipedia.org/wiki/2012_Summer_Olympics">2012 Summer Olympics</a>. Outlaw is ordered to slow the PLA advance while other Marines are evacuated to a secondary FOB. After Outlaw reaches the FOB, it is attacked by a PLA <a href="https://en.wikipedia.org/wiki/Mechanized_infantry">mechanized</a> division. After a fierce battle, Outlaw barely escapes from the FOB, with their commanding officer telling them that they are the only unit who made it out.</p>
+
+<p>The remaining marines conduct a guerilla war against the PLA. First, they ambush and destroy a PLA supply convoy in order to cripple the PLA <a href="https://en.wikipedia.org/wiki/Line_of_communication">supply lines</a>. After that, the members of Outlaw learn that in order to halt the PLA advance in western Tajikistan, the remaining Marines need to prevent a set of bridges from falling in the PLA's hands. Even though they are heavily outnumbered, the Marines manage to hold out long enough for reinforcements to arrive from Afghanistan.</p>
+
+<p>After the fight at the bridges the Marines start pushing the PLA back. They fight through PLA defenses and towns to secure an old fortress and establish a new FOB there. In order to have air support for the last battle, Outlaw attacks PLA <a href="https://en.wikipedia.org/wiki/Surface-to-air_missile">SAMs</a> at an old <a href="https://en.wikipedia.org/wiki/Observatory">observatory</a>. After knocking out the SAMs, Outlaw launches an attack on a town in the middle of the battle. After pushing through the town, with support from <a href="https://en.wikipedia.org/wiki/LAV-25">LAVs</a>, Outlaw holds off a massive PLA counterattack with help from artillery and aircraft. In the end, the U.S. Marines push the PLA back across the border, into China.</p>
+
+<h2>Reception</h2>
+
+<p>The game has received mixed reviews. <i>Strategy Informer</i> stated that the game "fills in a niche between fast-paced action games and hyper-realistic military simulators". <i>VideoGamer.com</i> says the campaign is of far higher quality than in its predecessor, <i>Dragon Rising</i>. <i>IGN</i> was disappointed in player movement being locked to only a very small section of the wide-open terrain. <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i> criticized the poor artificial intelligence of players' teammates and the overly macho voice acting. "Red River takes all the things the Flashpoint name is associated with – creative, emergent destruction and go-anywhere realism – and lets them wash away." <i>GameZone</i> gave the game a 7.5 out of 10, stating "Operation Flashpoint: Red River isn’t your typical shooter. You’re not going to be a gunslinger, running into a compound to take out a horde of enemies like a one-man wolf pack. It’s a slower, more tactical, squad-based shooter that relies on teamwork, strategy, and finesse."</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> praised the game's realism, tense gameplay, and realistic dialogue, noting that the missions were intentionally long and arduous, while criticizing the game's animation, vehicle sections, and <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_in_video_games">AI</a>. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> wrote, "...as Red River demonstrates, an unchecked dedication to realism can cripple the entertainment factor," while similarly criticizing the AI, recommending the four-player co-op experience over playing solo. <i><a href="https://en.wikipedia.org/wiki/VentureBeat">VentureBeat</a></i> noted that the game "compels to hardcore audiences only", heavily criticizing the tedious nature of the game. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> and <i><a href="https://en.wikipedia.org/wiki/GamesRadar+">GamesRadar+</a></i> praised the tactical missions, co-op campaign, and player expression, while taking issue with the lackluster graphics and poor AI.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Wii Sports</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('dec1d2f9-e8a6-4fc5-b1a2-822322a8d3f9/7369db1f-d678-4b5e-884a-763cc3e3f1a3.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="dec1d2f9-e8a6-4fc5-b1a2-822322a8d3f9/191d4c49-381a-403a-82d7-f6448d256662.png"/> Wii Sports</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="dec1d2f9-e8a6-4fc5-b1a2-822322a8d3f9/ba4f93a8-75b5-4afd-ae48-24f0c011d7b7.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>8m 30s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-4/28/2025">4/28/2025</a> 0:42:49</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/25/2025">4/25/2025</a> 1:29:19</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:25:40</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Wii">Nintendo Wii</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/19/2006">11/19/2006</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-75">75</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-76">76</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Sports">Sports</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo EAD">Nintendo EAD</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Wii_Sports" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/20180818143935/https://www.nintendo.com/games/detail/1OTtO06SP7M52gi5m8pD6CnahbW8CzxE" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] composer: Kazumi Totaka">[People] composer: Kazumi Totaka</a><br/><a href="#quicklink-[People] designer: Junji Morii">[People] designer: Junji Morii</a><br/><a href="#quicklink-[People] director: Keizo Ohta">[People] director: Keizo Ohta</a><br/><a href="#quicklink-[People] director: Takayuki Shimamura">[People] director: Takayuki Shimamura</a><br/><a href="#quicklink-[People] director: Yoshikazu Yamashita">[People] director: Yoshikazu Yamashita</a><br/><a href="#quicklink-[People] producer: Katsuya Eguchi">[People] producer: Katsuya Eguchi</a><br/><a href="#quicklink-[People] producer: Kiyoshi Mizuki">[People] producer: Kiyoshi Mizuki</a><br/><a href="#quicklink-[People] programmer: Tsutomu Kaneshige">[People] programmer: Tsutomu Kaneshige</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Wii Sports</b></i> is a 2006 <a href="https://en.wikipedia.org/wiki/Sports_game">sports</a> <a href="https://en.wikipedia.org/wiki/Simulation_game">simulation</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> <a href="https://en.wikipedia.org/wiki/Video_game_console">video game console</a>. The game was released in North America along with the Wii on 19 November 2006, and in Japan, Australia, and Europe the following month. It was included as a <a href="https://en.wikipedia.org/wiki/Pack-in_game">pack-in game</a> with the console in all territories except Japan, making it the first sports game included with the launch of a Nintendo system since <i><a href="https://en.wikipedia.org/wiki/Mario's_Tennis">Mario's Tennis</a></i> for the <a href="https://en.wikipedia.org/wiki/Virtual_Boy">Virtual Boy</a> in 1995. The game was later released on its own as part of the <i><a href="https://en.wikipedia.org/wiki/Nintendo_Selects">Nintendo Selects</a></i> collection of games.</p>
+
+<p><i>Wii Sports</i> is a collection of five sports simulations designed to demonstrate the motion-sensing capabilities of the <a href="https://en.wikipedia.org/wiki/Wii_Remote">Wii Remote</a>. The five sports included are <a href="https://en.wikipedia.org/wiki/Tennis">tennis</a>, <a href="https://en.wikipedia.org/wiki/Baseball">baseball</a>, <a href="https://en.wikipedia.org/wiki/Bowling">bowling</a>, <a href="https://en.wikipedia.org/wiki/Golf">golf</a>, and <a href="https://en.wikipedia.org/wiki/Boxing">boxing</a>. Players use the Wii Remote to mimic actions performed in real-life sports, such as swinging a <a href="https://en.wikipedia.org/wiki/Racket_(sports_equipment)">tennis racket</a> or rolling a <a href="https://en.wikipedia.org/wiki/Bowling_ball">bowling ball</a>. The rules for each game are simplified to make them more accessible to new players. The game also features training and fitness modes that monitor players' progress in the sports.</p>
+
+<p><i>Wii Sports</i> was well-received by critics and audiences, and is considered one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest games of all time</a>. It was also a commercial success, selling 82 million copies worldwide, becoming the best-selling Nintendo video game, as well as the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_video_games">third-best-selling video game of all time</a> and the best-selling game exclusive to one console. It has been featured on television in Wii commercials, news reports, and other programming. The game has become a popular means for social gatherings and competitions among players of varying ages.</p>
+
+<p>In 2009, a sequel, <i><a href="https://en.wikipedia.org/wiki/Wii_Sports_Resort">Wii Sports Resort</a></i>, was released. A <a href="https://en.wikipedia.org/wiki/High-definition_video">high-definition</a> <a href="https://en.wikipedia.org/wiki/Video_game_remake">remake</a> of <i>Wii Sports</i> titled <i><a href="https://en.wikipedia.org/wiki/Wii_Sports_Club">Wii Sports Club</a></i> was released in 2014 for the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>. Another sequel, <i><a href="https://en.wikipedia.org/wiki/Nintendo_Switch_Sports">Nintendo Switch Sports</a></i>, was released for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> in 2022.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Wii Sports</i> consists of five separate sports games—<a href="https://en.wikipedia.org/wiki/Tennis">tennis</a>, <a href="https://en.wikipedia.org/wiki/Baseball">baseball</a>, <a href="https://en.wikipedia.org/wiki/Bowling">bowling</a>, <a href="https://en.wikipedia.org/wiki/Golf">golf</a>, and <a href="https://en.wikipedia.org/wiki/Boxing">boxing</a>—accessed from the main menu. The games use the motion sensor capabilities of the Wii Remote to control the player's <a href="https://en.wikipedia.org/wiki/Handedness">dominant</a> arm and/or the appropriate sports equipment it wields. Boxing utilizes both Wii Remote and Nunchuk gestures to control both of the player's arms. The player moves the remote in a similar manner to how the separate games are played in real life; for example, holding and swinging the Wii Remote like a <a href="https://en.wikipedia.org/wiki/Golf_club_(equipment)">golf club</a>, <a href="https://en.wikipedia.org/wiki/Baseball_bat">baseball bat</a>, <a href="https://en.wikipedia.org/wiki/Tennis_racket">tennis racket</a> or <a href="https://en.wikipedia.org/wiki/Bowling_ball">bowling ball</a>. Some aspects of the gameplay are computer controlled. In tennis, player movement is controlled by the game's <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_in_video_games">AI</a>, while the swinging of the <a href="https://en.wikipedia.org/wiki/Racquet">racket</a> is controlled by the player. Baseball consists of <a href="https://en.wikipedia.org/wiki/Batting_(baseball)">batting</a> and <a href="https://en.wikipedia.org/wiki/Pitcher">pitching</a>, with all of the fielding and baserunning handled by the computer. Due to their <a href="https://en.wikipedia.org/wiki/Turn_(game)">turn</a>-based nature, golf and bowling support <a href="https://en.wikipedia.org/wiki/Hotseat_(multiplayer_mode)">hotseat</a> multiplayer and can be played with just one Wii Remote that can be shared among players.</p>
+
+<p>The in-game players are taken from the Wii's <a href="https://en.wikipedia.org/wiki/Mii_Channel">Mii Channel</a>, which allows the user to create a <a href="https://en.wikipedia.org/wiki/Mii">Mii</a> (a customized <a href="https://en.wikipedia.org/wiki/Avatar_(computing)">avatar</a>) that can be imported into games that support the feature. <i>Wii Sports</i> is the first Wii title to use this feature. Miis saved on the Wii will appear in the crowd during bowling games and as members of human-controlled teams in baseball. Miis created on one Wii can be transferred onto the <a href="https://en.wikipedia.org/wiki/Computer_data_storage">internal memory</a> of a <a href="https://en.wikipedia.org/wiki/Wii_Remote">Wii Remote</a> for use on another Wii with different save data.</p>
+
+<p>After a game, a player is awarded or penalized skill points based on performance relative to the computer's skill level, though some games do not calculate points during multiplayer sessions. The game keeps track of these points by charting them on a graph, as well as increasing the size of the crowd in Tennis and Boxing single-player modes. After obtaining 1000 skill points in a sport, a player is awarded a "pro" level, along with a cosmetic feature for their Mii in Bowling and Boxing. A Mii newly turned pro will receive a message on the <a href="https://en.wikipedia.org/wiki/Wii_Message_Board">Wii Message Board</a> notifying them. <i>Wii Sports</i> also features a fitness test that calculates a player's fitness age (ranging from 20 to 80 years old, 20 being the best possible). The test gauges the player's performance in three randomly chosen challenges in each test from the training mode that have been played at least once, and can only be taken once a day per Mii. Calculating the fitness age takes into account a player's balance, speed, and stamina. Fitness age results are graphed over one, two, or three months, with daily results posted on the Wii Message Board. The challenges from the fitness test are taken from another mode in <i>Wii Sports</i>, the training mode. The training mode allows players to practice three challenges for each sport. In these challenges, players can earn medals by reaching certain scores. Medals range from bronze to platinum, bronze being the easiest, and platinum being the hardest.</p>
+
+<h2>Development</h2>
+
+<p><i>Wii Sports</i> was produced by <a href="https://en.wikipedia.org/wiki/Katsuya_Eguchi">Katsuya Eguchi</a>, who managed Software Development Group 2 at <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_Analysis_and_Development">Nintendo Entertainment Analysis and Development</a>. With the Wii, Nintendo desired to reach those who had not played video games before. To do this, they needed software that allowed both long time and first time players to interact together in a fun way. Nintendo also wanted players to use the system daily and intended the game to be the console's flagship title to help accomplish this. <i>Wii Sports</i> was designed as a simple introductory title meant to offer something for both gamers and non-gamers. Sports were chosen as the theme because of the widespread familiarity with them. Rather than feature professional athletes or have realistic graphics, the game was designed to be simple so that anyone could play. Gameplay like running towards a ball in tennis was excluded to maintain simplicity. At one point in development, <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> characters were used, but were removed from the game because of feedback from players who preferred Miis. The <a href="https://en.wikipedia.org/wiki/Non-player_character">non-player characters</a> in the game were also created using the Mii Channel toolset. The game supports a <a href="https://en.wikipedia.org/wiki/16:9_aspect_ratio">16:9 widescreen ratio</a> and <a href="https://en.wikipedia.org/wiki/Progressive_scan">progressive scan</a>, runs at 60 <a href="https://en.wikipedia.org/wiki/Frame_rate">frames per second</a>, and makes use of the Wii Remote's <a href="https://en.wikipedia.org/wiki/Accelerometer">accelerometer</a> to interpret the player's motion. Motion-sensing actions, like pitching and hitting, were prioritized to make them as realistic as possible. Because Nintendo did not expect players to purchase the Wii solely to play <i>Wii Sports</i>, they <a href="https://en.wikipedia.org/wiki/Product_bundling">bundled</a> the game with the console in all regions except Japan; Nintendo believed players would be more likely to play <i>Wii Sports</i> through this distribution method. They also felt players that enjoyed the game would increase its popularity by word of mouth. Initially, <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> and Nintendo President <a href="https://en.wikipedia.org/wiki/Satoru_Iwata">Satoru Iwata</a> were hesitant to include the game as a pack-in title, but were convinced by Nintendo of America President <a href="https://en.wikipedia.org/wiki/Reggie_Fils-Aimé">Reggie Fils-Aimé</a>, who believed that <i>Wii Sports</i> would be key to the success of the Wii console.</p>
+
+<p>Before the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">Electronic Entertainment Expo</a> (E3) Media and Business Summit of 2006, the first sport in the game was announced as <i>Wii Sports: Tennis</i>. It was later announced, at Nintendo's press conference prior to <a href="https://en.wikipedia.org/wiki/E3_2006">E3 2006</a>, it would be part of a sports package. Iwata introduced this package as <i>Wii Sports</i>, and stated it would include tennis, golf, and baseball. The game was featured as both a video demonstration and an on-stage playable <a href="https://en.wikipedia.org/wiki/Game_demo">demo</a>. The demo featured Iwata and Fils-Aimé in a doubles tennis match against Miyamoto and Scott Dyer, a contest winner. The other sports titles were on display at E3 and shared a similar naming convention to the tennis game, such as <i>Wii Sports: Baseball</i>, <i>Wii Sports: Golf</i>, and <i>Wii Sports: Airplane</i>. At the time, <a href="https://en.wikipedia.org/wiki/Baseball">baseball</a> only featured a batting simulation. The airplane title was similar to <i><a href="https://en.wikipedia.org/wiki/Pilotwings">Pilotwings</a></i> and required the player to maneuver an airplane through rings within a time frame. It was not included in the final game, but was later incorporated into <i><a href="https://en.wikipedia.org/wiki/Wii_Sports_Resort">Wii Sports Resort</a></i>. At the Nintendo World event on 14 September 2006, Reggie Fils-Aime confirmed the game's five playable sports and announced that <i>Wii Sports</i> would be included free with every Wii console.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical responses</h3>
+
+<p><i>Wii Sports</i> received "generally favorable" reviews from critics, according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. <i><a href="https://en.wikipedia.org/wiki/GameTrailers">GameTrailers</a></i> called it a good complement to the Wii console and referred to all five games as a "nice total package". They commented that the games provided enough gameplay for long time gamers without making it inaccessible to novices. <i>GameTrailers</i> stated, however, that the lack of a tournament mode was a detractor, and did not recommend paying for the game if it did not come bundled with the system. <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> also commented that the free addition of the game with the Wii was a positive. Matt Casamassina of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> called it a "successful showpiece for <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a>'s new hardware" and enjoyed the ability to import Miis. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> editor Ryan Davis complimented the multiplayer aspect and the fitness test. Reviewers praised the game's controls and ease of use. Casamassina referred to the controls as "revolutionary" and described them as intuitive. <i>GamePro</i> echoed similar comments, praising the ease of play and realistic motion controls, while Davis commented that the motion controls were sometimes erratic. Common criticism focused on the graphics and lack of depth in the separate games. Casamassina stated that the game "comes up short in depth and visuals", and called the graphics "generic" and "archaic". Other reviewers said the graphics were on par with Nintendo's older gaming systems, the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> and <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a>. Davis criticized the oversimplified nature of the games, and GamePro stated that the separate games offered less depth than regular console sports games. <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i> listed <i>Wii Sports</i> along with its sequel, <i>Wii Sports Resort</i>, as two of the greatest multiplayer experiences in Nintendo's history, stating that everyone from young children to grandparents can enjoy the games. The magazine praised the grouping of sports and the game's longevity. In 2009, <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i> said the game was "Responsible for the biggest turn-around the console wars has ever seen", placing it 21st on a list of the greatest Nintendo games. In 2019, the game was ranked 28th on <i><a href="https://en.wikipedia.org/wiki/The_Guardian">The Guardian</a></i> newspaper's The 50 Best Video Games of the 21st Century list.</p>
+
+<p>The separate games garnered their own reception among critics. Casamassina called bowling, tennis, and baseball "fun and addictive", while Tom Bramwell of <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> said baseball, golf, and boxing were lacking in gameplay depth when compared to tennis and bowling. <i><a href="https://en.wikipedia.org/wiki/PC_Magazine">PC Magazine</a></i> columnist <a href="https://en.wikipedia.org/wiki/John_C._Dvorak">John C. Dvorak</a>, an avid bowler, praised the realistic physics used in bowling and stated, "Nintendo did a stupendous job of coding." He complimented the addition of physical activity to video gaming but complained that long-term use caused his wrist and shoulder to become sore. Casamassina ranked bowling as the best experience of the five. Before its release, <i>IGN'</i>s Craig Harris commented on an <a href="https://en.wikipedia.org/wiki/Exploit_(online_gaming)">exploit</a> allowing easy <a href="https://en.wikipedia.org/wiki/Strike_(bowling)">strikes</a> in the bowling game that removed the challenge and replays value. After the release, he stated that the exploit was not fixed. <i>GameTrailers</i> called golf the most in-depth, but criticized the lack of multiple courses and unpredictable controls when trying to slice or hook a shot. <i>GamePro</i> said golf offered the most content and was the best looking of every game, but commented that its controls were the most difficult to use. <i>GameTrailers</i> called tennis the most accessible and easy to play, but criticized the difficulty of putting spin on a shot. Casamassina stated that tennis was one of the more enjoyable games, but the lack of movement control was a detractor. <i>GameTrailers</i> called baseball the most "worthless" because of the luck factor associated with the computer-controlled fielding. They called boxing the best workout on <i>Wii Sports</i>, but criticized the difficult timing needed to punch properly. Casamassina criticized boxing for being "like a chore" and ranked it as the worst experience of the five sports.</p>
+
+<p>By the end of 2007, <i>Wii Sports</i> was the best-selling Wii game. In Japan, where the game was not included with the Wii console, the game sold 176,167 copies in the first two days of release, a record for a <a href="https://en.wikipedia.org/wiki/History_of_video_game_consoles_(seventh_generation)">seventh generation console</a> game in Japan. By February 2007, it had sold over a million copies. In early May 2007, game-industry research firm <a href="https://en.wikipedia.org/wiki/Media_Create">Media Create</a> placed <i>Wii Sports</i> third in their list of top-20 games in Japan. It was the <a href="https://en.wikipedia.org/wiki/2007_in_video_gaming#Japan">best-selling game of 2007 in Japan</a> with 1,911,520 copies sold. It was the tenth best-selling game in Japan in 2008, selling 841,736 copies in that year. The game sold 45.71 million copies—including bundled copies—worldwide by March 2009. By January 2011, worldwide sales were reported at 75.66 million, which increased to 82.90 million by March 2021.</p>
+
+<p><i>Wii Sports</i>'s debut at 2006 E3 garnered it several awards. At the event, it won the <a href="https://en.wikipedia.org/wiki/Game_Critics_Awards">Game Critics Award</a> for "Best Sports Game". <i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i> listed it as the "Best Wii Game" and "Most Original Game" in their "Best of E3 2006" feature. Following its release, <i>Wii Sports</i> received multiple awards from various organizations, websites, and magazines. <i>IGN</i> awarded it "Best Sports Game of 2006" and second best game of 2006. <a href="https://en.wikipedia.org/wiki/Time_(magazine)"><i>Time</i> magazine</a> listed the game as the number one game of 2006 in their list of "Top 10 Video Games of 2006". <i>Wii Sports</i> won <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i>'s 2006 "Innovation Award". <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> awarded it "Best Multiplayer Experience" in their 2006 "<i>1Up</i> Network Awards". At the <a href="https://en.wikipedia.org/wiki/10th_Annual_Interactive_Achievement_Awards">10th Annual Interactive Achievement Awards</a>, <i>Wii Sports</i> won "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Technical_Achievement">Outstanding Achievement in Gameplay Engineering</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Game_Design">Outstanding Achievement in Game Design</a>", and "Outstanding Innovation in Gaming", while also receiving nominations for "Console Game of the Year" and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Game_of_the_Year">Overall Game of the Year</a>". In 2007, the game won the "Innovation Award" and "Best Game Design" at the <a href="https://en.wikipedia.org/wiki/Game_Developers_Choice_Awards">Game Developers Choice Awards</a>, and won "Grand Prize" in the entertainment division of the <a href="https://en.wikipedia.org/wiki/Japan_Media_Arts_Festival">Japan Media Arts Festival</a>. At the 2007 <a href="https://en.wikipedia.org/wiki/British_Academy_Video_Games_Awards">British Academy Video Games Awards</a>, <i>Wii Sports</i> won six out of seven award nominations: Sports, Innovation, Gameplay, Multiplayer, Casual, and Strategy and Simulation. <i>The New York Times</i> named <i>Wii Sports</i> as the Game of the Year, while Gamasutra proclaimed it as the most important game of 2006. In 2010, the game was included as one of the titles in the book <i>1001 Video Games You Must Play Before You Die</i>. The game was additionally nominated for "Favorite Video Game" at the <a href="https://en.wikipedia.org/wiki/2013_Kids'_Choice_Awards">2013 Kids' Choice Awards</a>, but it lost to <i><a href="https://en.wikipedia.org/wiki/Just_Dance_4">Just Dance 4</a></i>.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<h2>Impact</h2>
+
+<p><i>Wii Sports</i>, a major factor in the Wii's worldwide success, was the first game among a number of <a href="https://en.wikipedia.org/wiki/Wii_(series)">core Wii games</a> being developed at the same time, with the same philosophy; other games were released as <i><a href="https://en.wikipedia.org/wiki/Wii_Play">Wii Play</a></i>, <i><a href="https://en.wikipedia.org/wiki/Wii_Fit">Wii Fit</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Wii_Music">Wii Music</a></i>. A direct sequel to <i>Wii Sports</i>, titled <i><a href="https://en.wikipedia.org/wiki/Wii_Sports_Resort">Wii Sports Resort</a></i>, was released in 2009. Matt, a minor NPC opponent from the game, became an <a href="https://en.wikipedia.org/wiki/Internet_meme">Internet meme</a>, in part due to his high difficulty compared to other AI opponents. Due to this popularity, Matt later appeared in another sequel, <i><a href="https://en.wikipedia.org/wiki/Nintendo_Switch_Sports">Nintendo Switch Sports</a></i>, where a <a href="https://en.wikipedia.org/wiki/Cheat_code">cheat code</a> can unlock him as a boss opponent in <a href="https://en.wikipedia.org/wiki/Chambara">Chambara</a>. <i><a href="https://en.wikipedia.org/wiki/Wired_(magazine)">Wired</a></i> included <i>Wii Sports</i> in its list of "The 15 Most Influential Games of the Decade" at #8, for its role in popularizing motion controls and having a major impact on the "videogame landscape." In 2019, <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> named it one of the most influential games of the 21st century, citing its accessibility, broad appeal, and long-term impact on console development at Nintendo and other game hardware designers. <i>Wii Sports</i> was later inducted into the <a href="https://en.wikipedia.org/wiki/World_Video_Game_Hall_of_Fame">World Video Game Hall of Fame</a> in May 2023.</p>
+
+<p>After the Wii's release, players began incurring injuries while playing <i>Wii Sports</i>, among other games, when they accidentally hit other players or objects while swinging the Wii Remote. This string of accidents, and others related to players throwing the Wii Remote while playing <i>Wii Sports</i>, prompted Nintendo president <a href="https://en.wikipedia.org/wiki/Satoru_Iwata">Satoru Iwata</a> to develop a campaign to reduce such incidents. In regard to the issue, Nintendo spokesman Yasuhiro Minagawa commented, "People tended to get a bit excited, especially while playing the game, and in some cases the remote would come loose from their hands." Nintendo responded by offering replacement Wii Remote wrist straps that were almost twice as thick. Other injuries include muscle, tendon, and ligament injuries from excess playing of simulated sports on the Wii—dubbed "Wii-itis".</p>
+
+<p><i>Wii Sports</i> has also been cited as a game that can provide a bonding experience among family members, and as a means of exercising and losing weight when played regularly. A study involving 13- to 15‑year-old teenagers was conducted by the <a href="https://en.wikipedia.org/wiki/Liverpool_John_Moores_University">Liverpool John Moores University</a> in 2007 and concluded that players used 2% more energy than by playing on other consoles. They stated that it was no substitute for playing a real sport, but could contribute to weight management. Similar energy expenditure results were found in a small 2010 study of adults with bilateral <a href="https://en.wikipedia.org/wiki/Spastic_cerebral_palsy">spastic cerebral palsy</a> at the <a href="https://en.wikipedia.org/wiki/Erasmus_University_Medical_Center">Erasmus University Medical Center</a> in <a href="https://en.wikipedia.org/wiki/Rotterdam">Rotterdam</a>, Netherlands. The researchers noted that the tennis and boxing games "seem to provide at least moderate-intensity exercise" and that they "may be useful as treatment to promote more active and healthful lifestyles" in patients. <i>Wii Sports</i> has been used to aid in the <a href="https://en.wikipedia.org/wiki/Physical_therapy">physical therapy</a> of a boxer at the <a href="https://en.wikipedia.org/wiki/Glenrose_Rehabilitation_Hospital">Glenrose Rehabilitation Hospital</a> in Canada, stroke victims in <a href="https://en.wikipedia.org/wiki/Minneapolis">Minneapolis, Minnesota</a> and <a href="https://en.wikipedia.org/wiki/Raleigh,_North_Carolina">Raleigh, North Carolina</a>, and injured soldiers in <a href="https://en.wikipedia.org/wiki/Prescott,_Arizona">Prescott, Arizona</a>; <a href="https://en.wikipedia.org/wiki/Washington,_D.C.">Washington, D.C.</a>; and <a href="https://en.wikipedia.org/wiki/Landstuhl">Landstuhl, Germany</a>.</p>
+
+<p>The game, along with <i>Wii Fit</i>, has been credited with attracting more casual, female, and elderly gamers. <i>Wii Sports</i> has become a popular means for social gatherings and competitions. Residents at senior centers and retirement homes have formed leagues using <i>Wii Sports</i> bowling. After its <a href="https://en.wikipedia.org/wiki/Australia">Australian</a> release, Nintendo and <a href="https://en.wikipedia.org/wiki/Myer">Myer</a>, an Australian department store chain, held a <i>Wii Sports</i> tennis tournament in January 2007 in <a href="https://en.wikipedia.org/wiki/Melbourne">Melbourne</a>, Australia. The winners competed against professional tennis players <a href="https://en.wikipedia.org/wiki/Pat_Cash">Pat Cash</a> and <a href="https://en.wikipedia.org/wiki/Mark_Woodforde">Mark Woodforde</a>, and were awarded new Wiis. An unofficial <i>Wii Sports</i> tennis tournament titled "Wiimbledon" was held in the <a href="https://en.wikipedia.org/wiki/Brooklyn">Brooklyn, New York</a> bar <a href="https://en.wikipedia.org/wiki/Barcade">Barcade</a> on 23 June 2007. It featured 128 competitors, many of whom were dressed in costumes.</p>
+
+<p><i>Wii Sports</i> has been featured on television multiple times. It was seen in commercials for the Wii console, and in news features on <a href="https://en.wikipedia.org/wiki/American_Broadcasting_Company">ABC</a> and <a href="https://en.wikipedia.org/wiki/NBC">NBC</a>. The game has appeared on various comedy shows. An episode of <i><a href="https://en.wikipedia.org/wiki/Late_Night_with_Conan_O'Brien">Late Night with Conan O'Brien</a></i> featured host <a href="https://en.wikipedia.org/wiki/Conan_O'Brien">Conan O'Brien</a> competing against his guest, tennis star <a href="https://en.wikipedia.org/wiki/Serena_Williams">Serena Williams</a>, in a match of <i>Wii Sports</i> tennis. On an episode of the <i><a href="https://en.wikipedia.org/wiki/Rick_Mercer_Report">Rick Mercer Report</a></i>, former Canadian prime minister <a href="https://en.wikipedia.org/wiki/Jean_Chrétien">Jean Chrétien</a> beat <a href="https://en.wikipedia.org/wiki/Rick_Mercer">Rick Mercer</a> in a game of <i>Wii Sports</i> boxing. The boxing game also appeared on an episode of <i><a href="https://en.wikipedia.org/wiki/The_Colbert_Report">The Colbert Report</a></i> where a clip featured Mii versions of <a href="https://en.wikipedia.org/wiki/Stephen_Colbert_(character)">Stephen Colbert</a> and <a href="https://en.wikipedia.org/wiki/Speaker_of_the_United_States_House_of_Representatives">Speaker of the House</a> <a href="https://en.wikipedia.org/wiki/Nancy_Pelosi">Nancy Pelosi</a> boxing. At the <a href="https://en.wikipedia.org/wiki/80th_Academy_Awards">80th Academy Awards</a> Show, host <a href="https://en.wikipedia.org/wiki/Jon_Stewart">Jon Stewart</a> and <a href="https://en.wikipedia.org/wiki/Jamia_Simone_Nash">Jamia Simone Nash</a> were caught playing <i>Wii Sports</i> tennis on one of the event's gigantic projection screens after a commercial break as part of a joke. <i>Wii Sports</i> has also been featured in mainstream movies such as <i><a href="https://en.wikipedia.org/wiki/Tropic_Thunder">Tropic Thunder</a></i>, and in commercials for products such as <a href="https://en.wikipedia.org/wiki/Kellogg_Cereal">Kellogg's Smart Start</a>.</p>
+
+<h2>Sequels and remake</h2>
+
+<h3><i>Wii Sports Resort</i></h3>
+
+<p>A sequel, <i>Wii Sports Resort</i>, was first revealed at Nintendo's <a href="https://en.wikipedia.org/wiki/History_of_the_Electronic_Entertainment_Expo#2008">E3 2008</a> presentation. Development moved forward after the extent of the <a href="https://en.wikipedia.org/wiki/Wii_MotionPlus">Wii MotionPlus</a> was realized, though the idea for a sequel existed sooner. The game features 12 sports, (2 from the original) including <a href="https://en.wikipedia.org/wiki/Swordplay">swordplay</a>, <a href="https://en.wikipedia.org/wiki/Wakeboarding">wakeboarding</a>, <a href="https://en.wikipedia.org/wiki/Frisbee">Frisbee</a>, <a href="https://en.wikipedia.org/wiki/Archery">archery</a>, <a href="https://en.wikipedia.org/wiki/Basketball">basketball</a>, <a href="https://en.wikipedia.org/wiki/Table_tennis">table tennis</a>, golf, bowling, <a href="https://en.wikipedia.org/wiki/Personal_water_craft">power cruising</a>, <a href="https://en.wikipedia.org/wiki/Canoeing">canoeing</a>, <a href="https://en.wikipedia.org/wiki/Cycle_sport">cycling</a>, and <a href="https://en.wikipedia.org/wiki/Air_sports">air sports</a> (<a href="https://en.wikipedia.org/wiki/Parachuting">parachuting</a> and <a href="https://en.wikipedia.org/wiki/Piloting_(navigation)">piloting</a>). The game was first released in South Korea on 24 June 2009 and in Japan on 25 June 2009 before being released in other markets in July 2009. As of March 2020, the game has sold over 30 million units, and is a fan-favorite for kids all across the globe.</p>
+
+<p>On 18 September 2013, <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> announced <i>Wii Sports Club</i> for the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> <a href="https://en.wikipedia.org/wiki/Nintendo_eShop">Nintendo eShop</a>. The game features the five games of <i>Wii Sports</i> remade in high-definition graphics, with <a href="https://en.wikipedia.org/wiki/List_of_games_that_support_Wii_MotionPlus">support</a> for the <a href="https://en.wikipedia.org/wiki/Wii_MotionPlus">Wii MotionPlus</a> (similar to <i>Wii Sports Resort</i>) and online multiplayer. The game uses a "Club" system, in which players are registered to regional or national clubs, communicating with each other via <a href="https://en.wikipedia.org/wiki/Miiverse">Miiverse</a>, and compete against other clubs for rankings. After a 24-hour free trial period, players can purchase a day pass to access all of the games, or purchase full access to the individual games. Tennis and Bowling were first released on 30 October 2013, golf was first released on 18 December 2013 and Baseball and Boxing were first released at the end of June 2014. A retail version of <i>Wii Sports Club</i> was released in July 2014.</p>
+
+<p>On 9 February 2022, during a <a href="https://en.wikipedia.org/wiki/Nintendo_Direct">Nintendo Direct</a> presentation, it was announced that a sequel titled <i>Nintendo Switch Sports</i> would be released for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> on 29 April 2022. It features some of the sports from <i>Wii Sports</i> and <i>Wii Sports Resort</i> such as <a href="https://en.wikipedia.org/wiki/Bowling">Bowling</a>, <a href="https://en.wikipedia.org/wiki/Tennis">Tennis</a>, <a href="https://en.wikipedia.org/wiki/Golf">Golf</a>, <a href="https://en.wikipedia.org/wiki/Fencing">Chambara</a> (a type of Swordplay), and <a href="https://en.wikipedia.org/wiki/Basketball">Basketball</a> with some new additions like <a href="https://en.wikipedia.org/wiki/Soccer">soccer</a>, <a href="https://en.wikipedia.org/wiki/Volleyball">volleyball</a>, and <a href="https://en.wikipedia.org/wiki/Badminton">badminton</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

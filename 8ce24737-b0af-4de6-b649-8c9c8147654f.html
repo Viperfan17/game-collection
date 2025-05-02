@@ -1,0 +1,325 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Wipeout Pulse</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('8ce24737-b0af-4de6-b649-8c9c8147654f/6cb7d8cb-ae81-432b-b728-1c5372e3326a.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="8ce24737-b0af-4de6-b649-8c9c8147654f/bda23ad2-9dab-40cd-9733-da6e1e6cbcfa.png"/> Wipeout Pulse</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="8ce24737-b0af-4de6-b649-8c9c8147654f/18d2a274-439a-487c-a8a3-6085df066dc6.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 5:00:18</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:37:12</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation Portable">Sony PlayStation Portable</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-12/13/2007">12/13/2007</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-74">74</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-82">82</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Spiral House">Spiral House</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Studio Liverpool">Studio Liverpool</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Sony Computer Entertainment">Sony Computer Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Wipeout_Pulse" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] designer: Studio Liverpool">[People] designer: Studio Liverpool</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Wipeout Pulse</b></i> (stylised as <i><b>wipEout pulse</b></i>) is a <a href="https://en.wikipedia.org/wiki/Racing_game">racing</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/Studio_Liverpool">Studio Liverpool</a> and published by <a href="https://en.wikipedia.org/wiki/Sony_Computer_Entertainment">Sony Computer Entertainment</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>. A <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> port developed by Spiral House was released only in <a href="https://en.wikipedia.org/wiki/Europe">Europe</a> in June 2009. The game is the seventh instalment of the <a href="https://en.wikipedia.org/wiki/Wipeout_(video_game_series)"><i>Wipeout</i> series</a> and serves as a sequel to <i><a href="https://en.wikipedia.org/wiki/Wipeout_Pure">Wipeout Pure</a></i> (2005). It takes place in 2207 and revolves around players competing in the FX400 anti-gravity racing league.</p>
+
+<p>The game was developed by Studio Liverpool. Production was centered around focusing on the feedback left by fans regarding <i>Wipeout Pure</i>, and improving on aspects where the development team thought they had failed in with the predecessor. The game features sixteen licensed music tracks from <a href="https://en.wikipedia.org/wiki/Electronica">electronica</a> artists, including <a href="https://en.wikipedia.org/wiki/Kraftwerk">Kraftwerk</a>. <i>Wipeout Pulse</i> received positive reviews upon release. Critics praised the graphics and presentation, although some criticized the repetitiveness and high difficulty.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Wipeout Pulse</i> is a racing game set in 2207, ten years after the events of <i><a href="https://en.wikipedia.org/wiki/Wipeout_Pure">Wipeout Pure</a></i>. As with its predecessor, the game revolves around players competing in the FX400 <a href="https://en.wikipedia.org/wiki/Anti-gravity">anti-gravity</a> racing league. Players pilot anti-gravity ships owned by racing corporations (collectively referred to as "teams" in-game). There are eight teams in <i>Wipeout Pulse</i>, with one ship available for each – although the player eventually gains the ability to change the appearance of their ships. Each ship has different characteristics; depending on the team chosen, its ship will vary in terms of handling, speed, acceleration and shield strength.</p>
+
+<p>Every ship is equipped with an energy shield which will protect the player from damage sustained from weapon fire or colliding with walls, although energy is taken away if this happens. If the shield completely runs out, the ship will explode and the player will be eliminated from the race. In addition, the player's ship is equipped with <a href="https://en.wikipedia.org/wiki/Air_brake_(aeronautics)">air brakes</a> which can be used for manoeuvring through difficult corners at high speed. The game features a number of weapons which can be utilized to destroy other opponents or for self-defense. Defensive weapons range from shields—which make the player's ship invulnerable to damage for a short period—to land mines and stationary bombs. Offensive weaponry vary from machine guns, missiles, plasma bolts, and a "quake" – which comes in the form of a devastating earthquake that will damage all opponents.</p>
+
+<p>The campaign mode features sixteen grids divided into cells, each containing a separate event which varies from ordinary races to tournaments. Once the player finishes the event in a single cell, they will earn "completion points" needed to progress to the next grid. Clearing a cell will unlock additional cells adjoining it. Returning game modes from <i>Wipeout Pure</i> include single races, tournaments, time trials, and the "Zone" mode, which involves the player's ship automatically accelerating to extreme speeds. A returning game mode from <i><a href="https://en.wikipedia.org/wiki/Wipeout_3">Wipeout 3</a></i> is "Eliminator", which revolves around a group of competitors attempting to destroy each other the quickest in a set amount of time.</p>
+
+<p>While the game only ships with twelve tracks, these can be driven both forward and backwards; the race's direction is marked by the suffix "White" or "Black" on the race's title (i.e. "Talon's Junction White"). The "Black" variations often take alternate routes, and feature different weapon and boost pad locations.</p>
+
+<p>The game features a number of extras. Players can take screenshots of in-progress races at any time from the Pause menu in the PSP version. Players are rewarded for using the same team's ship over and over via a "Loyalty" system which unlocks new ship skins. Players were able to create custom skins for any ships at the game's central website using an Adobe Shockwave-based client, which could be downloaded to the PSP by the creator and/or the public at large. Lap times and other records could also be uploaded to the game's website which features a global ranking leaderboard. Both features are no longer available as the site and the game servers were shut down.</p>
+
+<p>A demo of the game was also released on the <a href="https://en.wikipedia.org/wiki/PlayStation_Store">PlayStation Store</a> on 13 December 2007, which included one track (Moa Therma) and one team (Feisar), as well as Ad-Hoc support for playing with users who purchased the full game (or owned the <a href="https://en.wikipedia.org/wiki/Universal_Media_Disc">UMD</a>).</p>
+
+<h2>Expansion packs</h2>
+
+<p><i>Wipeout Pulse</i>, like its predecessor <i>Wipeout Pure</i>, also has <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> packs that include new ships and tracks as well as new campaign grids. A total of four packs were released, each including a new ship, two track variants (i.e. a "White" variant for a track and a "Black" variant for another track, and in order to get all variants one has to obtain all four packs) and a new campaign grid named after the downloaded pack. These packs were available to download for the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> version for a price from the <a href="https://en.wikipedia.org/wiki/PlayStation_Store">PlayStation Store</a> in the European region only. All downloadable packs are already included with the PS2 port.</p>
+
+<h2>Development</h2>
+
+<p><i>Wipeout Pulse</i> was developed by <a href="https://en.wikipedia.org/wiki/Studio_Liverpool">Studio Liverpool</a>. Colin Berry, the lead designer of the game, stated in an interview that the team had received a lot of positive feedback from <i><a href="https://en.wikipedia.org/wiki/Wipeout_Pure">Wipeout Pure</a></i>, and was willing to use parts of the feedback to "help shape some elements of <i>Pulse</i>". According to Berry, some people had felt that the previous game was too difficult; the ships were considered too fast and the <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">artificial intelligence</a> (AI) too advanced, whereas others thought that the game was too easy and they wanted "something more challenging to keep them coming back". The development team also took steps to decrease the feeling of repetition, which was often cited as one of the main complaints of <i>Wipeout Pure</i>. In addition, the team altered the game's difficulty settings so that players were given the choice to change the speed of the game at any time, in the event that they "got stuck". Reflecting on this, Berry said: "We want the people who buy it, to see all the game, we do not want to lock them out".</p>
+
+<p>During development, the team decided early on to focus on creating new content rather than bringing back old race tracks which were featured in previous <i>Wipeout</i> games. Berry, however, acknowledged that classic tracks "went down well" and sought out the possibility of introducing them through future <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC). Berry stated that by the end of <i>Wipeout Pure</i>, Studio Liverpool had designed almost 100 tracks as potentials to include in subsequent games, although the team were only satisfied with 32 of them. The remainder of the tracks were either disregarded or amalgamated into other games. Berry reflected that the tracks using the same <a href="https://en.wikipedia.org/wiki/3D_computer_graphics">3D computer graphics</a> software as its predecessor meant that certain repetition appeared and caused the team to "dry up on ideas". The developers recognised that track design was an important aspect to the game, and also accepted the difficulty in designing a track that is both memorable and enjoyable. Berry felt concerned that the team were starting to repeat design features, and thus decided to create new variables to the track design: as a result of this, the team conceptualised the "mag strip" – a section of a track which would feature artificial gravity so that a player could safely circumnavigate loops, steep slopes, and upside down sections.</p>
+
+<p>After the release of <i>Wipeout Pure</i> on the PlayStation Portable, rumours circulated that a <a href="https://en.wikipedia.org/wiki/Porting">port</a> was in development for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>. In January 2009, Sony issued a statement saying: "There are over 9.5 million PS2s in the UK and we will continue to support this large userbase with software on an ongoing basis". The PlayStation 2 version was released exclusively in Europe in June 2009, featuring enhanced graphics, two-player splitscreen mode and all of the DLC.</p>
+
+<p>The game also features sixteen licensed music tracks in addition to customisable soundtracks from <a href="https://en.wikipedia.org/wiki/Electronica">electronica</a> artists, including <a href="https://en.wikipedia.org/wiki/Aphex_Twin">Aphex Twin</a>, <a href="https://en.wikipedia.org/wiki/Kraftwerk">Kraftwerk</a>, <a href="https://en.wikipedia.org/wiki/DJ_Fresh">DJ Fresh</a>, and <a href="https://en.wikipedia.org/wiki/Skream">Skream</a>.</p>
+
+<h2>Reception</h2>
+
+<p>The game received positive reviews upon release. It holds an average score of 82 percent at <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, based on an aggregate of 40 reviews.</p>
+
+<p>Critics unanimously praised the game's visuals and presentation. Jeff Haynes of <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> stated that the game was "<i>Wipeout</i> at its purest", praising the visual presentation of the courses, cities, and other environments. Gabe Graziani of <a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a> thought the graphics were beautiful and also commended the design of the tracks. Eduardo Zacarias of GameZone stated that <i>Wipeout Pulse</i> was a "very visually pleasing game with some solid visual effects", and also praised the detailed tracks and ships. A reviewer from <a href="https://en.wikipedia.org/wiki/Game_Revolution">Game Revolution</a> considered the game's level of detail to the tracks and smooth frame rate to be "staggering" on a handheld. The reviewer also praised the "meticulously constructed" backdrops and "incredibly styled" presentation. Guy Cocker of <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> said that the visuals were "superb", though he thought that many aspects were similar to its predecessor, <i>Wipeout Pure</i>. A reviewer from <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> described the visuals as "even smoother, brighter, and sharper than Pure's".</p>
+
+<p>The various aspects of gameplay were mostly praised, although some reviewers criticised the game's repetitiveness and difficulty. Tom Bradwell from <a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a> praised the new "Elimination" mode, stating that it was initially "alarming" and frustrating, but admitted that it "grows to be rather good". Cocker enjoyed the new tracks, the difficulty levels, and the promise of <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a>, although he noted that it had not been made available in the United States at the time of his review. Game Revolution's reviewer surmised that <i>Wipeout Pulse</i> was a more refined version of <i>Wipeout Pure</i>, stating that despite all of the solid and reliable gameplay, the game did not revolutionise the series. Regarding general gameplay, Zacarias opined that <i>Wipeout Pulse</i> "doesn't deliver" despite the variety in the game modes and "racetrack front". Haynes similarly gave a negative opinion on the gameplay, stating that the repetition of tracks and balance of weapons for the AI was disappointing. Graziani criticised the game's difficulty, saying that it was "extremely challenging to the point of being impenetrable for the uninitiated". <i>Edge</i>'s reviewer described the game as simply another installment of <i><a href="https://en.wikipedia.org/wiki/Wipeout_(video_game_series)">Wipeout</a></i>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

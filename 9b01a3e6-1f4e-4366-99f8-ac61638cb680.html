@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>GAME OF THE YEAR 420BLAZEIT 2: -=Dank Dreams and Goated Memes=- Edition </title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('9b01a3e6-1f4e-4366-99f8-ac61638cb680/11c21f3f-750b-4dd7-9532-c35b86abae4f.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="9b01a3e6-1f4e-4366-99f8-ac61638cb680/67347fd0-6490-4a18-86d8-7187eb1b7ba2.ico"/> GAME OF THE YEAR 420BLAZEIT 2: -=Dank Dreams and Goated Memes=- Edition </h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="9b01a3e6-1f4e-4366-99f8-ac61638cb680/4e3909ca-af84-4ff5-a3e0-99027ba4f5cb.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/25/2025">4/25/2025</a> 23:19:02</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 22:36:41</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-9/22/2024">9/22/2024</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Normal Wholesome Games">Normal Wholesome Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Normal Wholesome Games">Normal Wholesome Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Game Demo">Game Demo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://steamcommunity.com/app/2624280" target="_blank">Community Hub</a><br/><a href="https://steamcommunity.com/app/2624280/discussions/" target="_blank">Discussions</a><br/><a href="https://steamcommunity.com/app/2624280/guides/" target="_blank">Guides</a><br/><a href="https://store.steampowered.com/news/?appids=2624280" target="_blank">News</a><br/><a href="https://store.steampowered.com/app/2624280" target="_blank">Store Page</a><br/><a href="https://pcgamingwiki.com/api/appid.php?appid=2624280" target="_blank">PCGamingWiki</a><br/><a href="https://steamcommunity.com/stats/2624280/achievements" target="_blank">Achievements</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-3D">3D</a><br/><a href="#quicklink-Action">Action</a><br/><a href="#quicklink-Aliens">Aliens</a><br/><a href="#quicklink-Boomer Shooter">Boomer Shooter</a><br/><a href="#quicklink-Colorful">Colorful</a><br/><a href="#quicklink-Combat">Combat</a><br/><a href="#quicklink-Comedy">Comedy</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-FPS">FPS</a><br/><a href="#quicklink-Funny">Funny</a><br/><a href="#quicklink-Illuminati">Illuminati</a><br/><a href="#quicklink-Linear">Linear</a><br/><a href="#quicklink-Memes">Memes</a><br/><a href="#quicklink-Parody">Parody</a><br/><a href="#quicklink-Psychedelic">Psychedelic</a><br/><a href="#quicklink-Satire">Satire</a><br/><a href="#quicklink-Sequel">Sequel</a><br/><a href="#quicklink-Shooter">Shooter</a><br/><a href="#quicklink-Singleplayer">Singleplayer</a><br/><a href="#quicklink-Surreal">Surreal</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3245860/extras/new_memes_new_dreams.gif?t=1727054715" /></p><p class="bb_paragraph">The illuminati have stolen all the world’s memes! You’re an ex secret-service agent turned to a peaceful life of painting, but now you’re needed one more time to fight back. lets be real its an FPS game that's a sequel to the original you know exactly what to expect why are u still reading this don't let ur memes be dreams</p><p class="bb_paragraph"> </p><p class="bb_paragraph">featuring a state of da art creamy meme slider to adjust ur meme levels to your liking. this took a team of 483 developers 7 years to build making this now a AAAAA game get rekt scrubs </p><p class="bb_paragraph"> </p><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3245860/extras/BORDER_png.png?t=1727054715" /> </p><p class="bb_paragraph"> </p><p class="bb_paragraph"></p><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3245860/extras/GAMEPLAYBLUNT.gif?t=1727054715" /></p><p class="bb_paragraph"> </p><p class="bb_paragraph"> </p><p class="bb_paragraph"><strong>Many gr9 moments:</strong> </p><ul class="bb_ul"><li><p class="bb_paragraph">High-security prison outbreak where you’ll stop along the way to do some laundry </p></li><li><p class="bb_paragraph">Speed your convertible through zombie-infested streets because yes you’re a badass but you’re also late for work </p></li><li><p class="bb_paragraph">Blow up a helicopter </p></li><li><p class="bb_paragraph">Infiltrate Area 51 to stop a world-threatening event planned by the Illuminati  </p></li><li><p class="bb_paragraph">… aliens </p></li><li><p class="bb_paragraph">And more!!!1!!</p></li></ul><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3245860/extras/BORDER_png.png?t=1727054715" /></p><p class="bb_paragraph"></p><p class="bb_paragraph"></p><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3245860/extras/WEPONZ.gif?t=1727054715" /> </p><p class="bb_paragraph"> </p><p class="bb_paragraph"> </p><p class="bb_paragraph"><strong>Headshot with your favs:</strong> </p><ul class="bb_ul"><li><p class="bb_paragraph">Glock, duh </p></li><li><p class="bb_paragraph">Deagle (only if ur cool) </p></li><li><p class="bb_paragraph">Golden AK </p></li><li><p class="bb_paragraph">Sniper Rifle  </p></li><li><p class="bb_paragraph">Rocket Launcher </p></li><li><p class="bb_paragraph">Throwable spliff aka doobie aka joint aka blunt </p></li><li><p class="bb_paragraph">Gun that shoots bowling balls (becuz f*** it why not) </p></li><li><p class="bb_paragraph">AND MORE!!!!</p><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3245860/extras/BORDER_png.png?t=1727054715" /></p><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3245860/extras/420_somewhere.gif?t=1727054715" /></p></li></ul><p class="bb_paragraph"> </p><p class="bb_paragraph"> </p><p class="bb_paragraph">420BLAZEIT 2 will feature a healthy amount of IMAGINARY “consumables” that grant you cool powers so you can truly 420 BLAZE IT 360 NO SCOPE IT like an EPICC GAMER(™)  </p><p class="bb_paragraph"> </p><p class="bb_paragraph">“This game changed my entire life before it i had a respectable job and family now im a leet gamer gettin 480 headshoots no scope blaze it every day. 10/10” - this could be u!!!</p><p class="bb_paragraph"></p><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3245860/extras/BORDER_png.png?t=1727054715" /></p><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3245860/extras/wishlist_us.gif?t=1727054715" /> </p><p class="bb_paragraph"> </p><p class="bb_paragraph"> </p><p class="bb_paragraph"></p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

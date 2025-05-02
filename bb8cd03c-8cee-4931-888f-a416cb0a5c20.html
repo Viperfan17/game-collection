@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Transformers: War for Cybertron</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('bb8cd03c-8cee-4931-888f-a416cb0a5c20/52936915-d1ee-4b46-b1c9-776d2b4f768a.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="bb8cd03c-8cee-4931-888f-a416cb0a5c20/5004e061-491e-4f6b-8034-eb8c463efc72.ico"/> Transformers: War for Cybertron</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="bb8cd03c-8cee-4931-888f-a416cb0a5c20/5f1d02a8-a45e-4203-a365-f38e7adfc514.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>1h 53m 0s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-4/21/2020">4/21/2020</a> 6:02:16</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:29:47</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 1:48:43</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-6/22/2010">6/22/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-74">74</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-71">71</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-High Moon Studios">High Moon Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://steamcommunity.com/app/42650" target="_blank">Community Hub</a><br/><a href="https://steamcommunity.com/app/42650/discussions/" target="_blank">Discussions</a><br/><a href="https://steamcommunity.com/app/42650/guides/" target="_blank">Guides</a><br/><a href="https://store.steampowered.com/news/?appids=42650" target="_blank">News</a><br/><a href="https://store.steampowered.com/app/42650" target="_blank">Store Page</a><br/><a href="https://pcgamingwiki.com/api/appid.php?appid=42650" target="_blank">PCGamingWiki</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Action">Action</a><br/><a href="#quicklink-Adventure">Adventure</a><br/><a href="#quicklink-Controller">Controller</a><br/><a href="#quicklink-Co-op">Co-op</a><br/><a href="#quicklink-Mechs">Mechs</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Online Co-Op">Online Co-Op</a><br/><a href="#quicklink-Open World">Open World</a><br/><a href="#quicklink-Robots">Robots</a><br/><a href="#quicklink-Sci-fi">Sci-fi</a><br/><a href="#quicklink-Shooter">Shooter</a><br/><a href="#quicklink-Singleplayer">Singleplayer</a><br/><a href="#quicklink-Third Person">Third Person</a><br/><a href="#quicklink-Third-Person Shooter">Third-Person Shooter</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Transformers: War for Cybertron</b></i> is a <a href="https://en.wikipedia.org/wiki/Third-person_shooter">third-person shooter</a> video game based on the <i><a href="https://en.wikipedia.org/wiki/Transformers">Transformers</a></i> franchise, developed by <a href="https://en.wikipedia.org/wiki/High_Moon_Studios">High Moon Studios</a> and published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>. It was released for <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> and <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> in June 2010. <a href="https://en.wikipedia.org/wiki/Transformers:_War_for_Cybertron_(Nintendo_DS)">Two portable versions</a> were released for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>, one featuring an <a href="https://en.wikipedia.org/wiki/Autobot">Autobot</a> campaign, the other a <a href="https://en.wikipedia.org/wiki/Decepticon">Decepticon</a> campaign. A game for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, <i><a href="https://en.wikipedia.org/wiki/Transformers:_Cybertron_Adventures">Transformers: Cybertron Adventures</a></i>, was developed by <a href="https://en.wikipedia.org/wiki/Next_Level_Games">Next Level Games</a> and utilizes the same characters and setting as <i>War for Cybertron</i>.</p>
+
+<p>Set on the Transformers' home planet of Cybertron, prior to their arrival on Earth, the game depicts the deadly <a href="https://en.wikipedia.org/wiki/Civil_war">civil war</a> between <a href="https://en.wikipedia.org/wiki/Autobot">Autobots</a> and <a href="https://en.wikipedia.org/wiki/Decepticon">Decepticons</a>. Players may pick either faction to play as, as each has its own separate campaign (though the Decepticon campaign chronologically takes place first). The game's plot revolves around Dark Energon, a more dangerous and destructive version of Energon, the substance which powers all Transformers. While the Decepticon leader <a href="https://en.wikipedia.org/wiki/Megatron">Megatron</a> seeks this substance for himself, believing it will allow him to return the planet to its "golden age", the Autobots, led by <a href="https://en.wikipedia.org/wiki/Optimus_Prime">Optimus Prime</a>, attempt to stop him, knowing it would instead doom their homeworld.</p>
+
+<p><i>War for Cybertron</i> received generally favorable reviews, with many viewing it as an improvement over past <i>Transformers</i> games. It was praised for its multiplayer, character designs, and voice acting, with criticism reserved for the visual design of the game's setting. A sequel, <i><a href="https://en.wikipedia.org/wiki/Transformers:_Fall_of_Cybertron">Transformers: Fall of Cybertron</a></i>, was released in August 2012, and a third game, <i><a href="https://en.wikipedia.org/wiki/Transformers:_Rise_of_the_Dark_Spark">Transformers: Rise of the Dark Spark</a></i>, was released in June 2014.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>War for Cybertron</i> is played from a third-person perspective. Transformers are classified into four main categories: Leader, Soldier, Scientist, and Scout. Each character in the campaign is classified as one of these types, and their weaponry, abilities and vehicle form are largely influenced by their character class. Players can change between forms at will, and each form has unique abilities. While in robot form characters can also collect different weapons, reminiscent of those found in <a href="https://en.wikipedia.org/wiki/First-person_shooters">first-person shooters</a>. While in vehicle form each character can boost their speed.</p>
+
+<p>Each campaign level gives the player a choice of three Transformers. The campaign can be played in single-player or cooperatively via online multiplayer, and players can enter or leave the game at any time. If fewer than three players are present, the game's AI controls the remaining playable characters. Cooperative and competitive modes of the game are limited to online play, with no <a href="https://en.wikipedia.org/wiki/Split_screen_(computer_graphics)">split screen</a> features available. The game levels are designed to allow characters to comfortably navigate and play the game in either mode.</p>
+
+<h3>Multiplayer</h3>
+
+<p>Competitive multiplayer games do not allow players to control official, named characters, and instead must design their own Transformer.  Similar to the campaign, generic multiplayer characters are split into four character classes.  Contrary to the campaign, however, each created character features some amount of customization.  Players can select a base model and vehicle form, then alter major colors for their character and modify weapon loadouts and abilities based on that character class. The multiplayer aspect also features an experience and leveling system, including perks, and upgrades reminiscent of <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Modern_Warfare_2">Call of Duty: Modern Warfare 2</a></i>, another Activision game.</p>
+
+<p><i>War for Cybertron</i> has several multiplayer modes to choose from. <a href="https://en.wikipedia.org/wiki/Deathmatch_(gaming)">Deathmatch</a> is a free-for-all game type where the player with the most kills at the end of the game is the winner. In <a href="https://en.wikipedia.org/wiki/Deathmatch_(gaming)#Other_forms_of_deathmatch">Team Deathmatch</a> players are divided into Autobot and Decepticon teams.  The winning team is the one who earns the most kills. Conquest is a capture-and-hold style game, similar to the conquest mode found in the <a href="https://en.wikipedia.org/wiki/Star_Wars:_Battlefront_(series)"><i>Star Wars: Battlefront</i></a> series.  Multiple control points are spread across the level.  The object is for players to capture enemy control points by standing near them for a set amount of time while defending their own control points.  In Countdown to Extinction players must take an active bomb and place it at an enemy base, similar to the Assault mode in the <i><a href="https://en.wikipedia.org/wiki/Halo_(series)">Halo</a></i> series. Power Struggle is the game's equivalent to the common <a href="https://en.wikipedia.org/wiki/King_of_the_Hill_(game)">King of the Hill</a> game type. Finally Code of Power is a mode consisting of two and a half minute rounds where teams vie for a giant melee weapon. Also available is the Escalation game mode, the only multiplayer mode where players can control characters from the campaign or <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a>.  Players choose a faction and then work cooperatively to defeat continuous waves of enemy robots until all players are defeated, similar to the Horde mode found in <i><a href="https://en.wikipedia.org/wiki/Gears_of_War_(series)">Gears of War</a></i> and the <i>Halo</i> series Firefight game modes. Players earn credits by defeating enemies which can be used to unlock ammunition, weaponry, health and new areas in each map.</p>
+
+<h2>Synopsis</h2>
+
+<h3>Setting</h3>
+
+<p><i>War for Cybertron</i> is set on the planet Cybertron, prior to the Transformers' contact with the planet Earth. Robotic in nature, each Transformer has the ability to transform from their robot mode to an alternate form, usually a vehicle, such as a tank or jet. The Transformers are engaged in <a href="https://en.wikipedia.org/wiki/Total_war">total</a> <a href="https://en.wikipedia.org/wiki/Civil_war">civil war</a> with one another, with two factions emerging: the <a href="https://en.wikipedia.org/wiki/Decepticon">Decepticons</a>, a splinter group led by the powerful and ruthless <a href="https://en.wikipedia.org/wiki/Megatron">Megatron</a>, who seeks to conquer Cybertron to force a regime change, perceiving the current leadership as weak and corrupt; and the <a href="https://en.wikipedia.org/wiki/Autobot">Autobots</a>, who follow the command of Zeta Prime and seek to put an end to Megatron's revolution and restore peace and order to Cybertron. However, after Zeta Prime is killed in battle, an inexperienced leader named <a href="https://en.wikipedia.org/wiki/Optimus_Prime">Optimus</a> must take his place and lead the Autobots to victory before Megatron can corrupt the planet, itself a Transformer, with <a href="https://en.wikipedia.org/wiki/Dark_Energon">Dark Energon</a>.</p>
+
+<p>Both factions have their own campaign, each containing five chapters, and players may choose either to play through first. Chronologically, the Decepticon campaign takes place first, with the Autobot story directly following it.</p>
+
+<p><small>.mw-parser-output .citation{word-wrap:break-word}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}<b><a href="https://en.wikipedia.org/wiki/Transformers:_War_for_Cybertron#ref_a">^a</a></b> Originally a <a href="https://en.wikipedia.org/wiki/Pre-order">pre-order</a> bonus
+<b><a href="https://en.wikipedia.org/wiki/Transformers:_War_for_Cybertron#ref_b">^b</a></b> Downloadable content for multiplayer
+<b><a href="https://en.wikipedia.org/wiki/Transformers:_War_for_Cybertron#ref_c">^c</a></b> Not playable in campaign
+<b><a href="https://en.wikipedia.org/wiki/Transformers:_War_for_Cybertron#ref_d">^d</a></b> Not playable in multiplayer
+<b><a href="https://en.wikipedia.org/wiki/Transformers:_War_for_Cybertron#ref_e">^e</a></b> Unlocked as a multiplayer character</small></p>
+
+<p>The Decepticon leader <a href="https://en.wikipedia.org/wiki/Megatron">Megatron</a> seeks to return Cybertron to its "<a href="https://en.wikipedia.org/wiki/Golden_Age">Golden Age</a>" using the legendary <a href="https://en.wikipedia.org/wiki/Dark_Energon">Dark Energon</a>, an unstable, corrupting substance of immense power which is rumored to be kept in an orbital research station guarded by the neutral Sky Commander <a href="https://en.wikipedia.org/wiki/Starscream">Starscream</a>. Megatron leads the Decepticons, including Barricade and <a href="https://en.wikipedia.org/wiki/Brawl_(Transformers)">Brawl</a>, in an assault on the station, fighting their way through Starscream's troops and seizing control of the Dark Energon manufacturing plant. After Megatron successfully immerses himself in it, Starscream offers his <a href="https://en.wikipedia.org/wiki/Fealty">fealty</a> to Megatron in exchange for teaching him how to control Dark Energon. Megatron accepts when Starscream reveals he knows how to manufacture more Dark Energon. Shocked by Starscream's betrayal, his partner <a href="https://en.wikipedia.org/wiki/Jetfire">Jetfire</a> escapes to warn the Autobot leader Zeta Prime.</p>
+
+<p>Now Decepticons, Starscream and his fellow Seekers, <a href="https://en.wikipedia.org/wiki/Thundercracker">Thundercracker</a> and <a href="https://en.wikipedia.org/wiki/Skywarp">Skywarp</a>, are ordered by Megatron to reactivate an Energon Bridge beneath Cybertron's surface, which will feed the station with raw Energon and allow more Dark Energon to be manufactured. Once they succeed, Megatron develops a plan to infect Cybertron's core with Dark Energon and launches a full-scale assault on Iacon City, the Autobot capital, to obtain the Omega Key, which will grant him access to the core. As the Decepticons lay siege on the city, Megatron, <a href="https://en.wikipedia.org/wiki/Soundwave_(Transformers)">Soundwave</a>, and <a href="https://en.wikipedia.org/wiki/Breakdown_(Transformers)">Breakdown</a> confront Zeta Prime, defeating him and obtaining the Key. However, Zeta reveals that the Key is not the actual means to unlocking the core, but rather a device that summons the real key: a colossal Autobot called <a href="https://en.wikipedia.org/wiki/Omega_Supreme">Omega Supreme</a>.</p>
+
+<p>With Omega pursuing them and destroying everything in his path, Megatron, Soundwave, and Breakdown devise a plan to lure him into an ambush using commandeered Autobot turrets. They succeed, and Omega is shot down, plummeting into Cybertron's lower levels. Omega makes a last stand against the Decepticons but is soon corrupted with Dark Energon and taken prisoner. After forcing Omega to unlock Cybertron's core, Megatron infects it with Dark Energon, which quickly begins to spread over the entire planet, revealed to be a living Transformer.</p>
+
+<p>While defending Iacon from the invading Decepticons, Autobot soldier <a href="https://en.wikipedia.org/wiki/Optimus_Prime">Optimus</a> is informed by scout <a href="https://en.wikipedia.org/wiki/Bumblebee_(Transformers)">Bumblebee</a> about Zeta Prime's presumed death. Temporarily assuming leadership of the Autobots, Optimus recruits Bumblebee and <a href="https://en.wikipedia.org/wiki/Ratchet_(Transformers)">Ratchet</a> to reactivate Iacon's defenses and communication grid. The trio then travels to the Decagon Plaza and defeats Starscream, thwarting the Decepticon attack. Soon after, the Autobots receive a distress call from Zeta, who is still alive and being held prisoner in the Decepticon capital city of Kaon. Optimus, Bumblebee, and <a href="https://en.wikipedia.org/wiki/Sideswipe_(Transformers)">Sideswipe</a> allow themselves to be captured in order to infiltrate the prison complex, whereupon they break free with the help of  <a href="https://en.wikipedia.org/wiki/Air_Raid_(Transformers)">Air Raid</a> and rescue the other Autobot prisoners. As the prisoners escape using Decepticon transports, the trio fights their way to Zeta's cell, guarded by Soundwave and his minions Frenzy, Rumble, and <a href="https://en.wikipedia.org/wiki/Laserbeak">Laserbeak</a>. The Autobots fight them off, but Zeta succumbs to his injuries. Optimus brings Zeta's body before the Autobot High Council, who name him the new Prime and inform him of Megatron's activities.</p>
+
+<p>Tasked with purging Cybertron's core of Dark Energon, Optimus, his friend <a href="https://en.wikipedia.org/wiki/List_of_The_Transformers_(TV_series)_characters">Ironhide</a>, and rookie Autobot soldier <a href="https://en.wikipedia.org/wiki/Warpath_(Transformers)">Warpath</a> travel to the core's entrance, discovering it has been converted into a Decepticon stronghold. The trio frees Omega Supreme, who has been tortured with Dark Energon, and defend Ratchet while he heals him, whereupon Omega grants the Autobots access to the core. Fighting their way past Deception soldiers and a Cybertronian worm corrupted by Dark Energon, the Autobots eventually reach the core, which speaks to Optimus. It reveals that the only way to fix the damages done by the Dark Energon is to reboot itself, which will leave Cybertron a cold, barren and lifeless planet for millions of years. However, the core can stay partially alive during this time if Optimus carries a small piece of it with him. Optimus accepts the burden and the core bestows the Autobot <a href="https://en.wikipedia.org/wiki/Matrix_of_Leadership">Matrix of Leadership</a> into Optimus' chest.</p>
+
+<p>With Cybertron beginning to shut down, Optimus orders the evacuation of all Autobot cities. As the evacuation transports reach orbit, many are destroyed by Starscream's orbital space station, which Megatron has converted into a superweapon. The Aerialbots—<a href="https://en.wikipedia.org/wiki/List_of_The_Transformers_(TV_series)_characters#Aerialbots">Silverbolt</a>, Jetfire, and Air Raid—lead a secret mission to infiltrate the station and destroy it from within. However, they soon discover that the station is actually a massive Decepticon known as <a href="https://en.wikipedia.org/wiki/Trypticon">Trypticon</a>, who transforms into his robot form. The Aerialbots battle Trypticon, who is knocked out of orbit and crash-lands in Iacon. Optimus confronts him there and defeats him with Bumblebee and Ironhide's help. Later, Optimus commissions a massive vessel known as the <i><a href="https://en.wikipedia.org/wiki/Ark_(Transformers)">Ark</a></i> to transport the remaining Autobots into space, with only a small group led by Optimus staying behind on Cybertron to fight off Megatron's forces for as long as possible.</p>
+
+<h2>Development and marketing</h2>
+
+<p><i>War for Cybertron</i> was announced December 16, 2009, and was released in North America on June 22, 2010 with the <a href="https://en.wikipedia.org/wiki/PAL_region">PAL region</a> release following on June 25, 2010. It is powered by <a href="https://en.wikipedia.org/wiki/Unreal_Engine_3">Unreal Engine 3</a>.  Physics for the game are handled using the <a href="https://en.wikipedia.org/wiki/Havok_(software)">Havok physics library</a>. A demo was released on June 10, 2010 which allowed for players to play various multiplayer matches using two of the game's character classes.  Developer High Moon Studios designed the friendly AI so that as a player progresses through the story any accompanying characters will help the player, but still require the player to advance through the game.  "The buddies don't advance the story for you.  They get to the point to kinda show you where to go, but then they'll take up defensive positions and wait for you to progress the story" said Game Director Matt Tieger.  "They're not finishing objectives for you, but they like to stay near you, they'll heal you if you get too wounded, they're pretty smart."</p>
+
+<h3>Setting and plot</h3>
+
+<p><i>War for Cybertron</i> developer High Moon Studios and publisher Activision worked closely with Hasbro to create the design and story for the game. "I want to make the game I've been waiting 25 years to play" said Tieger.  The studio brought the concept and idea to Hasbro for approval. It began with a sketch of Bumblebee. "That was that first sketch that we slid across the table to Hasbro and said 'What do you guys think?'  And that's where it all started" said Tieger. High Moon presented the idea of setting the game on Cybertron during the Transformers' civil war between the Autobots and Decepticons.  Aaron Archer, Senior Design Director for Hasbro, stated of the Cybertron-based setting "that's a really cool place [...] and the early days of that civil war between the Autobots and Decepticons was a story that hadn't really been fleshed out in any format."</p>
+
+<p>Each of the characters was totally redesigned for the game, taking cues from previous iterations from the Transformers lore.  "What they've allowed us to do is take a licensed property and treat it like a brand new <a href="https://en.wikipedia.org/wiki/Intellectual_property">IP</a>" stated Tieger. The vehicle modes for car-based characters initially consisted of wheels, however, the developers found that it crippled gameplay by removing the player's ability to <a href="https://en.wikipedia.org/wiki/Strafing_(gaming)">strafe</a> while in vehicle mode.  Taking the dilemma to Hasbro, the two companies agreed that characters would turn their wheels down and hover while in vehicle mode, allowing for more movement.  The vehicles would then revert to the traditional wheeled mode while using a character's boost, maintaining what the <i>Transformers</i> license had established with previous <a href="https://en.wikipedia.org/wiki/Canon_(fiction)">canon</a>.</p>
+
+<p>The world of Cybertron was designed in such a way that the Transformers would have a proper scale on their homeworld.  "It doesn't make sense that things would be smaller than them in their world," Tieger said, adding "the key character in scale was making their world gigantic and huge."  Matt Krystek, Lead Designer at High Moon stated that since the game is not tied to a movie they were able to tell their own story.  He cited the <a href="https://en.wikipedia.org/wiki/Transformers:_Generation_1">G1 universe</a> as the inspiration for the game. Jim Daly, Lead Concept Artist at High Moon also cited the G1 universe as the main inspiration for the design of Cybertron itself, also stating that there were elements from Disney's <a href="https://en.wikipedia.org/wiki/Tron_(franchise)">TRON</a>, <a href="https://en.wikipedia.org/wiki/Blade_Runner">Blade Runner</a>, and the <a href="https://en.wikipedia.org/wiki/Alien_(franchise)">Aliens franchise</a>.</p>
+
+<p>Hasbro's Aaron Archer stated the game would be only part of a bigger group of media.  "This won't be the only touch point.  It's a big place that we're going to build off of." At a <a href="https://en.wikipedia.org/wiki/BotCon">BotCon 2010</a> panel, <i>War for Cybertron</i> Creative Director Matt Tieger stated Activision is currently in talks with Hasbro on creating additional titles. He also added that Hasbro is "considering" expanding the brand further into the realm of video games. Joe Moscone, Senior Account Manager for Hasbro's public relations team, further clarified that <i>War for Cybertron</i> is in the same continuity as the <i><a href="https://en.wikipedia.org/wiki/Transformers:_Prime">Transformers: Prime</a></i> animated series and <i><a href="https://en.wikipedia.org/wiki/Transformers:_Exodus">Transformers: Exodus</a></i> novel, and that this would be the primary continuity going forward. Hasbro has released a toy line based on the <i>War for Cybertron</i> setting.  Transforming figures of Optimus Prime, Bumblebee, Megatron and Soundwave from the game have been released by Hasbro under the <i>Transformers: Generations</i> banner.</p>
+
+<p>The soundtrack for the console versions was composed by <a href="https://en.wikipedia.org/wiki/Tyler_Bates">Tyler Bates</a>. The ending theme is "Till All Are One" by <a href="https://en.wikipedia.org/wiki/Stan_Bush">Stan Bush</a>, from his 2007 album <i>In This Life</i>. <a href="https://en.wikipedia.org/wiki/Peter_Cullen">Peter Cullen</a> returns to voice Optimus, having voiced the character several times in the <i>Transformers</i> franchise.  Other voice actors include <a href="https://en.wikipedia.org/wiki/Kari_Wahlgren">Kari Wahlgren</a> as Arcee, <a href="https://en.wikipedia.org/wiki/Liam_O'Brien">Liam O'Brien</a> as Air Raid, <a href="https://en.wikipedia.org/wiki/Johnny_Yong_Bosch">Johnny Yong Bosch</a> as Bumblebee, <a href="https://en.wikipedia.org/wiki/Fred_Tatasciore">Fred Tatasciore</a> as Megatron, Ratchet, Omega Supreme, and Trypticon, <a href="https://en.wikipedia.org/wiki/Keith_Szarabajka">Keith Szarabajka</a> as Ironhide, <a href="https://en.wikipedia.org/wiki/Steven_Blum">Steven Blum</a> as Barricade and Shockwave, <a href="https://en.wikipedia.org/wiki/Nolan_North">Nolan North</a> as Brawl, and <a href="https://en.wikipedia.org/wiki/Sam_Riegel">Sam Riegel</a> as Starscream.</p>
+
+<p>Two downloadable content packs were produced for console versions of the game.  The first, entitled simply <i>Character and Map Pack 01</i>, was announced on July 2, 2010.  <i>Character and Map Pack 01</i> contains the three previously pre-order exclusive characters, Demolishor, Jazz and Shockwave, as well as two new characters, Onslaught and Scattershot.  Four new multiplayer maps are also included.  Two maps are exclusive to the game's Escalation mode, while the other two are used in all other game modes. It was released July 27, 2010. The second pack, known as <i>Character and Map Pack 02</i>, adds the characters Dead End and Zeta Prime and five new maps. It was released September 7, 2010.</p>
+
+<h2>Reception</h2>
+
+<p>Critical reaction has been generally positive, with many reviews citing that <i>War for Cybertron</i> is an improvement over past <i>Transformers</i> games. Aggregate scores across all three platforms were fairly uniform. The PC version holds a score of 76.25% at <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> and 76/100 at <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. The PlayStation 3 version has a 78.47% and 77/100 at the two aggregate sites, while the Xbox 360 version reports scores of 79.45% and 76/100.  Individual review scores ranged from a 50% approval by <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> magazine to a 94% approval by Gaming Trend.</p>
+
+<p>Reviewers praised the in-game voice acting.  <a href="https://en.wikipedia.org/wiki/G4_(U.S._TV_channel)">G4TV</a>'s Matt Kell noted that Peter Cullen's voice work as Optimus was "commanding and familiar", adding that the other actors "even do their best to replicate the voices of the original cartoon."  Mike Nelson of <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> agreed and noted the game's excellent dialogue, stating "the script has all the overwrought melodrama you’d expect from giant talking robots." Several critics also gave high marks for <i>War for Cybertron</i>'s multiplayer.  <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>'s Arthur Gies noted the influences from <i><a href="https://en.wikipedia.org/wiki/Unreal_Championship">Unreal Championship</a></i>, <i><a href="https://en.wikipedia.org/wiki/Tribes_(video_game_series)">Tribes</a></i>, <i><a href="https://en.wikipedia.org/wiki/Team_Fortress_2">Team Fortress 2</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Battlefield:_Bad_Company_2">Battlefield: Bad Company 2</a></i> adding that "<i>War for Cybertron</i> leverages its transformation mechanic to create something that feels shockingly new." Tom McShea of <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> noted that the game's Escalation mode provided a <i>Transformers</i> twist on <i><a href="https://en.wikipedia.org/wiki/Gears_of_War_(series)">Gears of War</a></i>'s Horde mode.  <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i>'s Kat Bailey noted that the multiplayer was "probably the most appealing part of the package", adding it had a "strong suite [of] options." <a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a>'s Matt Miller lauded the ability to play through the game's campaign with up to three players online, as did <a href="https://en.wikipedia.org/wiki/G4_(U.S._TV_channel)">G4TV</a>'s Matt Kell.  Both reviewers also praised the new character designs, with Kell calling them "inventive." <a href="https://en.wikipedia.org/wiki/Wired.com">Wired.com</a>'s John Mix Meyer gave praise to the game's campaign length, stating "The game’s 10-hour single-player campaign means there’s plenty of time for the crazy transformations to strut their stuff."  John Hamblin of <a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a> praised the transformation animations.  He stated players will "occasionally wish there was a <i><a href="https://en.wikipedia.org/wiki/Max_Payne">Max Payne</a></i> slow-mo option so you could appreciate the nuance of these feats a little more."</p>
+
+<p>The repetitive visual design of Cybertron drew criticism from critics. Tom McShea of <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> stated that "the majority of the game entails walking through similar-looking corridors." <a href="https://en.wikipedia.org/wiki/Giant_Bomb">Giant Bomb</a>'s <a href="https://en.wikipedia.org/wiki/Jeff_Gerstmann">Jeff Gerstmann</a> also cited repetitive visuals, but conceded that "the metallic world of Cybertron doesn't lend itself particularly well to a lot of environmental variety."  1UP.com's Matt Miller also raised issue with the repetitive visuals, but provided a counterpoint in saying "there are a host of features in place to save the game from spiraling into mediocrity." John Hamblin of Eurogamer and Tom McShea of GameSpot also pointed out the game's vast lack of ammunition.  "Watching Lord Megatron repeatedly suffering the indignity of being shot at by drones while he desperately scours the debris looking for an elusive ammo box [...] is just sad" stated Hamblin.  He was further critical of the game's checkpoint system, which often leaves players in difficult situations upon respawning.</p>
+
+<p>The first downloadable content pack received mixed reception from IGN's Arthur Gies.  While he praised the design of the multiplayer maps, he noted that the lack of online players for <i>War for Cybertron</i> hurt the ability to play the new content online.  Gies stated that he attempted to host the two Escalation maps, adding that he waited for several minutes for players to join, but had no success. "That's the problem", he stated. "<i>War for Cybertron</i>'s multiplayer is all-but-abandoned." Gies went on to cite a peak population of approximately 4,600 players on <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a>, 800 on <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a>, and only 158 players on the PC version at the time of his writing.  Despite the lack of online players he felt the content may fit a player's needs, stating "If you've got nine other friends who bought <i>War for Cybertron</i> and can set up your own private matches, then <i>Character and Map Pack 01</i> might be worth checking out."</p>
+
+<p>The game sold 219,000 units in the United States.</p>
+
+<h2>Sequel</h2>
+
+<p>A sequel to <i>War for Cybertron</i> was announced in November 2010. "This is the most highly-rated, critical success of any game that's had the Hasbro brand yet and we're looking forward to a sequel in 2012," stated Hasbro representative Mark Belcher. The game was slated for a 2012 release, and its official title, <i>Transformers: Fall of Cybertron</i>, was revealed on October 6, 2011. It is a direct continuation of <i>War for Cybertron</i>, completing the story of the planet Cybertron's demise and the exodus of the Transformers. One new Autobot character, <a href="https://en.wikipedia.org/wiki/Grimlock">Grimlock</a>, was confirmed in the title announcement.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

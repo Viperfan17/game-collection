@@ -1,0 +1,421 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Call of Duty: Modern Warfare 3</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('67bc523f-dab4-4f30-be7c-58a747352e32/2c6f70cb-601a-4305-9854-a780485edbde.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="67bc523f-dab4-4f30-be7c-58a747352e32/44a58e86-436d-4dd3-b4d6-7418d7089a48.ico"/> Call of Duty: Modern Warfare 3</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="67bc523f-dab4-4f30-be7c-58a747352e32/562eb45e-cd77-4343-9d4d-123c1c89dc28.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-4/23/2015">4/23/2015</a> 18:55:00</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/8/2011">11/8/2011</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-90">90</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-89">89</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-FPS">FPS</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Aspyr Media">Aspyr Media</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Infinity Ward">Infinity Ward</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Raven Software">Raven Software</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sledgehammer Games">Sledgehammer Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Aspyr Media">Aspyr Media</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Noviy Disk">Noviy Disk</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Call_of_Duty:_Modern_Warfare_3" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=1478" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/call-of-duty-modern-warfare-3" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/115300/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Call_of_Duty:_Modern_Warfare_3" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/53441" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Call_of_Duty:_Modern_Warfare_3" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/call-duty-modern-warfare-3/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Contemporary">Contemporary</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Europe">Europe</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-IW 5.0">IW 5.0</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Call of Duty: Modern Warfare 3</b></i> is a 2011 <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter game</a> developed by <a href="https://en.wikipedia.org/wiki/Infinity_Ward">Infinity Ward</a> and <a href="https://en.wikipedia.org/wiki/Sledgehammer_Games">Sledgehammer Games</a> and published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>. The game was released worldwide in November 8 2011 for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, and <a href="https://en.wikipedia.org/wiki/OS_X">OS X</a>. It is the sequel to <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Modern_Warfare_2">Call of Duty: Modern Warfare 2</a></i> (2009), serving as the third and final installment in the original <i>Modern Warfare</i> trilogy and the eighth <i>Call of Duty</i> installment overall. A <a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Modern_Warfare_3_–_Defiance">separate version</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> was developed by <a href="https://en.wikipedia.org/wiki/N-Space">n-Space</a>, while <a href="https://en.wikipedia.org/wiki/Treyarch">Treyarch</a> developed the game's <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> port. In <a href="https://en.wikipedia.org/wiki/Japan">Japan</a>, <a href="https://en.wikipedia.org/wiki/Square_Enix">Square Enix</a> published the game with a separate subtitled and dubbed version.</p>
+
+<p>The game's campaign follows <i>Modern Warfare 2</i> and begins right after the events of its final mission. Similar to <i>Modern Warfare 2</i>, it is centered on Task Force 141, which contains <a href="https://en.wikipedia.org/wiki/Captain_Price">Captain Price</a>, <a href="https://en.wikipedia.org/wiki/Soap_MacTavish">Soap MacTavish</a>, and a newly introduced playable character, Yuri. Alongside the <a href="https://en.wikipedia.org/wiki/Delta_Force">Delta Force</a> and <a href="https://en.wikipedia.org/wiki/Special_Air_Service">Special Air Service</a>, they hunt <a href="https://en.wikipedia.org/wiki/Vladimir_Makarov_(Call_of_Duty)">Vladimir Makarov</a> (the main antagonist of the trilogy), a Russian terrorist who leads the Russian Ultranationalist party. He led several terror attacks across <a href="https://en.wikipedia.org/wiki/Europe">Europe</a>, triggering a large-scale war between the <a href="https://en.wikipedia.org/wiki/Ultranationalism">Ultranationalists</a> and friendly forces. For the game's multiplayer mode, new mode types and <a href="https://en.wikipedia.org/wiki/Killstreak">killstreak</a> choices were brought in. Improvements were also made to the mode that solved issues that appeared in <i>Modern Warfare 2</i>.</p>
+
+<p>Using an enhanced version of <i>Modern Warfare 2</i>'s <a href="https://en.wikipedia.org/wiki/IW_engine">IW engine</a>, development for the game began in 2010 with more than one developer studio. Prior to development, Infinity Ward co-founders Jason West and Vince Zampella left the company to form <a href="https://en.wikipedia.org/wiki/Respawn_Entertainment">Respawn Entertainment</a>. Other members had been fired or had left the company following the duo's departure. Sledgehammer Games had joined the <i>Modern Warfare 3</i> development force, with Raven Software also developing the game's multiplayer mode. Following a large leak containing detailed information about the game, multiple teaser trailers were released, with each showcasing a location featured in the game's campaign, leading up to a full reveal.</p>
+
+<p><i>Modern Warfare 3</i> received positive reviews from critics, with praise for its gameplay, campaign, and multiplayer, although there was some criticism for its story and lack of innovation. It won the award for Best Shooter at the 2011 <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Spike Video Game Awards</a>, as well as <a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Action_Game_of_the_Year">Action Game of the Year</a> at the <a href="https://en.wikipedia.org/wiki/15th_Annual_Interactive_Achievement_Awards">15th Annual Interactive Achievement Awards</a>. It was a massive commercial success. Within 24 hours of going on sale, the game sold 6.5 million copies in the United States and the United Kingdom and grossed $400 million, contemporaneously making it the largest entertainment launch ever.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Modern Warfare 3</i> is a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> video game much like its predecessors. <i>Modern Warfare 3</i> for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> has <a href="https://en.wikipedia.org/wiki/Dedicated_server">dedicated server</a> support.</p>
+
+<h3>Campaign</h3>
+
+<p>The player assumes the role of various characters during the single-player campaign, changing perspectives throughout the progression of the story, which, like its predecessors, is divided into three sets of missions called "Acts". Each mission in an act features a series of objectives that are displayed on the <a href="https://en.wikipedia.org/wiki/Head-up_display_(video_gaming)">heads up display</a>, which marks the direction and distance between such objectives and the player. Damage to the player is shown by the visualization of blood-spatter or red-outs on the screen. The player's health regenerates over time as long as the player character avoids taking damage for a limited time. Mission objectives vary in their requirements, ranging from having the player arrive at a particular checkpoint, to eliminating enemies in a specified location, to standing their ground against enemy squadrons, directing remote-operated weapons, and planting explosive charges on enemy installations. The player is also accompanied by fellow soldiers who cannot be issued orders. Like its predecessor, the game includes an interactive scene of a terror attack against civilians, which the player is given the option of skipping due to the portrayal of graphic and potentially upsetting content, including harm to children.</p>
+
+<p><i>Modern Warfare 3</i> features a new mode, called Survival. This mode allows between one and two players to fight massive waves of enemies, with each wave becoming increasingly difficult. It differs from the Nazi Zombies mode in <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_World_at_War">Call of Duty: World at War</a></i>, principally in that enemies no longer spawn at fixed locations as the zombies do, but instead appear at tactical positions based on the current location of the player. The mode is available on all multiplayer maps in the game. Players earn in-game cash for items such as weapons, upgrades, ammo, air/ground support, and equipment if they kill or assist in killing enemies, while more items can be unlocked by earning XP which is also increased by killing enemies. <i>Special Ops</i> also returns from <i>Modern Warfare 2</i>. These challenge missions feature up to 48 stars, unlike its previous installment, which featured 69. Some weapons in Spec Ops are exclusive to that game mode and are not available for play in multiplayer mode.</p>
+
+<p>The entire <i>Killstreak</i> reward system has been altered to make it more difficult for players to get early unlocks. Killstreaks are now known as <i>Pointstreaks</i>, and kills are no longer the only way to increase the player's point streak. Completing objectives such as planting a bomb or capturing a flag in <i>Capture The Flag</i> awards points towards the player's Pointstreak. Pointstreak rewards are organized into three different "strike packages" called <i>Assault</i>, <i>Support</i>, and <i>Specialist</i>.</p>
+
+<p>The <i>Assault</i> strike package works the same as the Killstreak reward system in <i>Modern Warfare 2</i> and <i>Black Ops</i>: the player must earn more and more points without dying. Once the player is killed, their points are reset to zero. Likewise, the <i>Specialist</i> strike package rewards players with perks after every second consecutive kill. Upon death, however, the player loses all the perks and the points are reset to zero. In contrast, the <i>Support</i> strike package is awarded based on the total points that the player has earned over the entire match, regardless of how often the player dies. If a player switches to a custom class with a different reward system (either <i>assault</i> or <i>specialist</i>) during gameplay, all points are automatically reset to 0. Players are allowed to choose which Pointstreak rewards they want to use when they gain it during the match, rather than choosing them between rounds.</p>
+
+<p>Along with revamping the entire Killstreak reward system, <i>Modern Warfare 3</i> also has a completely modified Ranking and Unlocks system, which does not use a currency system for unlocks. The player's primary weapon levels up alongside the player, and unlocks a number of "Proficiency" perks such as <i>Attachments</i>, (allows two attachments and is a successor to the "Bling" and "Warlord" perks), <i>Kick</i> (reduced recoil while aiming down the player's sight) and <i>Focus</i> (reduced flinching while under fire). Only one Proficiency can be put on a primary weapon. Another new addition is the ability to equip "Hybrid Scopes" on a weapon, such as a <a href="https://en.wikipedia.org/wiki/Holographic_weapon_sight">holographic sight</a> with a <a href="https://en.wikipedia.org/wiki/Red_dot_magnifier">red dot magnifier</a>, allowing players to switch between magnified and non-magnified. <i>Modern Warfare 3</i> introduces a new "Prestige Shop" which will unlock only after the player has selected the option to prestige for the first time. The "Prestige Shop" allows Prestige players to use tokens they gain from using the Prestige option to buy exclusive features such as double XP and an extra custom weapon class. The player is able to Prestige 20 times.</p>
+
+<p>Several controversial perks in <i>Modern Warfare 2</i>, accused of being too overpowered, have been removed in <i>Modern Warfare 3</i>. Diving from standing to prone, known as "dolphin diving", has been removed due to balancing issues. <i>Modern Warfare 3</i> utilized Treyarch's hot fix system to fix bugs and glitches. <i>Modern Warfare 3</i> features a local and online split-screen option. (Not available for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> version.)</p>
+
+<p>New game modes were added:</p>
+
+<ul>
+  <li>Kill Confirmed: players must collect floating <a href="https://en.wikipedia.org/wiki/Dog_tag">dog tags</a> from the corpse of a downed enemy before the kill can be registered. However, the opposing team can pick up the dog tag as well to deny the other team a kill, which denies the other team a point.</li>
+  <li>Team Defender: both teams attempt to capture a flag dropped by the first person who is killed when the match starts, the team of the person who holds the flag will get double points for their kills; while the team without the flag only gets the default number per kill.</li>
+  <li>Private matches also now include pre-made game modes including: "Infected" (where the infected kill enemies to recruit them to their team), "Drop Zone" (where the player must hold a drop zone for points and care packages), "Team Juggernaut" (each team plays alongside an AI Juggernaut character), "Gun Game" (be the first to get one kill with every gun in the game), "One in the Chamber" (in which players are only allowed one pistol with one bullet and three lives where they can only get more bullets by killing other players), and "Juggernaut" (free for all against a juggernaut, kill the juggernaut to become it). Along with this, players are allowed to create their own game modes with customized settings such as number of players and time limit.</li>
+</ul>
+
+<p>The Special Ops game mode from <i>Modern Warfare 2</i> is present in <i>Modern Warfare 3</i>, and includes new features which make it more replayable and similar to other game modes, such as Nazi Zombies from previous <i>Call of Duty</i> games, and Hordes from <i><a href="https://en.wikipedia.org/wiki/Gears_of_War">Gears of War</a></i>. The two main Special Ops modes include one that is generally the same as the last Modern Warfare game, and a new wave-based game, Survival, where the player is inserted into a multiplayer map alone or with a single partner and defends an area against waves of enemies. The players can buy support options unlocked with money earned during each round via the means of killing the enemy and completing the optional objectives on each wave, which vary from getting multi-kills to not taking damage. You gain experience for killing them which allows for more weapons to be unlocked, as well as other support options. The model also works with the DLC multiplayer maps.</p>
+
+<p><i>Call of Duty: Elite</i> was an online service developed by <a href="https://en.wikipedia.org/wiki/Beachhead_Studios">Beachhead Studios</a> for the multiplayer portion of <i>Modern Warfare 3</i> (as well as the previous installment in the series, <a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Black_Ops"><i> </i>Black Ops<i></i></a>). It was first showcased at <a href="https://en.wikipedia.org/wiki/E3_2011">E3 2011</a> and was released on November 8, 2011, to coincide with the release of <i>Modern Warfare 3</i>. The free version included features such as lifetime statistics and social networking integration. It included monthly <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a>. The service was shut down by Activision on February 28, 2014, and did not support <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Ghosts">Call of Duty: Ghosts</a></i>.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC) available for <i>Modern Warfare 3</i> is an assortment of additional <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> maps, Special Ops missions, and Face-Off Maps that came as part of the <a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Elite">Call of Duty ELITE</a> Premium membership. Downloadable content was split into four unique "Content Collections," each with 2-3 content packs.</p>
+
+<p>During the release of <i>Modern Warfare 3</i> and <i>Call of Duty</i>'s <i>Elite</i> service, premium members of the service were promised 20 pieces of DLC over a 9-month period, with content releases for each platform every month. This number was increased to 22 on <i>Call of Duty</i>'s official Elite Content Calendar. Initially, all downloadable content was only available to <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Elite">Call of Duty: Elite</a></i> premium members. <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> users received all DLC about a month before <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> users regardless of Elite membership due to a special contract between <a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a> and <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>. As an example, the first Collection dropped on Xbox 360 on January 24, and on February 28 on the PS3. Content Drops were released monthly exclusively to all <i>Call of Duty: Elite</i> premium and founder members. There were a total of 9 monthly DLC releases up until the end of <i>Modern Warfare 3</i>' 2012 content season. September was the last month DLC was released for Xbox 360, and October was the last month for PlayStation 3. Since <i>Call of Duty: Elite</i> was not available for PC gamers, DLC was only released in the form of Content Collections.</p>
+
+<p>On May 9, 2012, it was announced that the Face-Off mode would be introduced to Modern Warfare 3. It included smaller maps, which promoted fast gameplay matches. Face-Off included options for <a href="https://en.wikipedia.org/wiki/1v1">1v1</a>, <a href="https://en.wikipedia.org/wiki/Glossary_of_video_game_terms">2v2</a>, and <a href="https://en.wikipedia.org/wiki/Glossary_of_video_game_terms">3v3</a> battles. Two free Face-Off maps became available for all <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a> Gold subscribers on May 15, 2012, regardless of <i>Call of Duty: Elite</i> membership.</p>
+
+<h2>Story</h2>
+
+<h3>Characters</h3>
+
+<p>The game sees the return of Task Force 141 members <a href="https://en.wikipedia.org/wiki/Soap_MacTavish">Captain John "Soap" MacTavish</a> (<a href="https://en.wikipedia.org/wiki/Kevin_McKidd">Kevin McKidd</a>), <a href="https://en.wikipedia.org/wiki/Captain_Price">Captain John Price</a> (<a href="https://en.wikipedia.org/wiki/Billy_Murray_(actor)">Billy Murray</a>) and Russian loyalist "Nikolai", who are on the run after killing the rogue General Shepherd, the main antagonist of <a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Modern_Warfare_2#Plot">the previous game</a>. Task Force 141 was officially disavowed due to Shepherd's death, with the truth of his involvement in igniting <a href="https://en.wikipedia.org/wiki/World_War_III">World War III</a> known only to Price, Soap, and Nikolai. For most of the game, the player controls Yuri, an ex-<a href="https://en.wikipedia.org/wiki/Spetsnaz_GRU">Spetsnaz</a> operator and former associate of Russian Ultranationalist terrorist Makarov, who joins Task Force 141 on their hunt for Makarov, who returns as the game's main antagonist. Several playable characters have been added, including <a href="https://en.wikipedia.org/wiki/Delta_Force">Delta Force</a> operator Staff Sergeant Derek "Frost" Westbrook; <a href="https://en.wikipedia.org/wiki/Special_Air_Service">Special Air Service</a> Sergeant Marcus Burns; and Andrei Harkov, a Russian <a href="https://en.wikipedia.org/wiki/Federal_Protective_Service_(Russia)">FGS</a> agent tasked with protecting the Russian President. Just like President Al-Fulani in <a href="https://en.wikipedia.org/wiki/Call_of_Duty_4:_Modern_Warfare">the first game</a>, Soap is only "playable" during the game's opening sequence; while Price becomes the player character in the game's final mission, and is the only character in the trilogy who speaks while playable. The player also takes brief control of a civilian tourist in London, seconds before he and his family are killed by a chemical agent; as well as an <a href="https://en.wikipedia.org/wiki/Lockheed_AC-130">AC-130</a> TV Operator during the Battle of Paris.</p>
+
+<p>New non-player characters (NPCs) include Delta Force operatives "Sandman" (<a href="https://en.wikipedia.org/wiki/William_Fichtner">William Fichtner</a>), "Truck" (<a href="https://en.wikipedia.org/wiki/Idris_Elba">Idris Elba</a>), and "Grinch" (<a href="https://en.wikipedia.org/wiki/Timothy_Olyphant">Timothy Olyphant</a>), who serve as Frost's squadmates. Captain MacMillan briefly returns from <i>Call of Duty 4: Modern Warfare</i> as Baseplate. <a href="https://en.wikipedia.org/wiki/Craig_Fairbrass">Craig Fairbrass</a>, who originally voiced the characters <a href="https://en.wikipedia.org/wiki/Call_of_Duty_4:_Modern_Warfare#Characters">Gaz</a> and <a href="https://en.wikipedia.org/wiki/Ghost_Riley">Ghost</a>, returns to voice SAS operative Sergeant Wallcroft, who originally had a minor role in the first <i>Modern Warfare</i>.</p>
+
+<p>Locations featured in the game include <a href="https://en.wikipedia.org/wiki/India">India</a>, the <a href="https://en.wikipedia.org/wiki/United_States">United States</a>, <a href="https://en.wikipedia.org/wiki/Sierra_Leone">Sierra Leone</a>, the <a href="https://en.wikipedia.org/wiki/United_Kingdom">United Kingdom</a>, <a href="https://en.wikipedia.org/wiki/Germany">Germany</a>, <a href="https://en.wikipedia.org/wiki/Somalia">Somalia</a>, <a href="https://en.wikipedia.org/wiki/France">France</a>, the <a href="https://en.wikipedia.org/wiki/Czech_Republic">Czech Republic</a>, <a href="https://en.wikipedia.org/wiki/Russia">Russia</a>, and the <a href="https://en.wikipedia.org/wiki/United_Arab_Emirates">United Arab Emirates</a>.</p>
+
+<p>In August 2016, Soap (Brandon Hughes) and Price (Kobi Hughes) are extracted by Nikolai to a safe house in <a href="https://en.wikipedia.org/wiki/Himachal_Pradesh">Himachal Pradesh</a>, but are soon attacked by Makarov's forces. At Price's request, Nikolai contacts his "best man," a former Spetsnaz operator named Yuri, with a common grudge against Makarov.</p>
+
+<p>Concurrently, a <a href="https://en.wikipedia.org/wiki/Delta_Force">Delta Force</a> squad codenamed "Metal" assists the defending American forces in <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a> from the Russian military. After taking down a <a href="https://en.wikipedia.org/wiki/Radio_jamming">radio jammer</a> atop the <a href="https://en.wikipedia.org/wiki/New_York_Stock_Exchange_Building">New York Stock Exchange Building</a>, Team Metal aids <a href="https://en.wikipedia.org/wiki/Navy_SEALs">Navy SEALs</a> in hijacking an <a href="https://en.wikipedia.org/wiki/Oscar_II-class_submarine">Oscar II-class submarine</a> and using its missile payload to destroy the <a href="https://en.wikipedia.org/wiki/Russian_Navy">Russian Navy</a> in <a href="https://en.wikipedia.org/wiki/New_York_Bay">New York Bay</a>. With air superiority reestablished and the enemy fleet destroyed, the United States goes on the offensive. As a result, Russia withdraws all its forces from the <a href="https://en.wikipedia.org/wiki/East_Coast_of_the_United_States">East Coast</a>.</p>
+
+<p>Three months later, <a href="https://en.wikipedia.org/wiki/President_of_Russia">Russian President</a> Boris Vorshevsky flies to <a href="https://en.wikipedia.org/wiki/Hamburg">Hamburg</a> to take part in peace talks with the United States protected by Harkov. However, his security detail is ambushed by Makarov’s forces aboard the plane, forcing it to <a href="https://en.wikipedia.org/wiki/Emergency_landing">crash land</a>. They assault the crash site, kill Harkov and the remaining <a href="https://en.wikipedia.org/wiki/Federal_Protective_Service_(Russia)">FGS</a> agents guarding Vorshevsky, and kidnap him. Makarov demands he relinquish Russia's nuclear launch codes, threatening his daughter's life if he does not comply. Additionally, Makarov smuggles <a href="https://en.wikipedia.org/wiki/Chemical_weapon">chemical bombs</a> from <a href="https://en.wikipedia.org/wiki/Sierra_Leone">Sierra Leone</a> to several <a href="https://en.wikipedia.org/wiki/NATO">NATO</a> member capital cities and military bases, with Task Force 141 failing to prevent the deadly cargo from leaving the country. The <a href="https://en.wikipedia.org/wiki/Special_Air_Service">SAS</a> identify one of the bombs as it is shipped into <a href="https://en.wikipedia.org/wiki/London">London</a> but are unable to intervene in time as it detonates, along with the rest across the continent. With NATO crippled by the attacks, Russia, now under Makarov's control, invades Europe.</p>
+
+<p>Team Metal rescues the <a href="https://en.wikipedia.org/wiki/Vice_President_of_the_United_States">Vice President of the United States</a> in Hamburg while NATO scrambles to repel the Russians. Task Force 141 acquires a lead from MacMillan that a Somali <a href="https://en.wikipedia.org/wiki/Black_market">black market</a> warlord named Waraabe is associated with the chemical weapons. The team assaults his compound in <a href="https://en.wikipedia.org/wiki/Bosaso">Bosaso</a>, cornering and interrogating the warlord into revealing that a man, Viktor "Volk" Khristenko, CEO of Ultranationalist <a href="https://en.wikipedia.org/wiki/Front_organization">front company</a> Fregata Industries, was responsible for constructing the bombs and is located in <a href="https://en.wikipedia.org/wiki/Paris">Paris</a>. Price then executes Waraabe and relays the intelligence to Team Metal, who are deployed to capture Volk with assistance from the <a href="https://en.wikipedia.org/wiki/GIGN">GIGN</a>. Volk is captured, and under interrogation, he reveals that Makarov is meeting with his associates in <a href="https://en.wikipedia.org/wiki/Prague">Prague</a>. Price, Soap, and Yuri infiltrate the city, but the meeting turns out to be a trap, during which Sergeant Kamarov, a Russian loyalist and close contact with Price, is killed by Makarov, who addresses Yuri as "his friend." In the ensuing fight, Soap suffers an injury that causes the knife wound he sustained while fighting with Shepherd to reopen; he dies of blood loss just after revealing Makarov's association with Yuri to Price.</p>
+
+<p>An enraged Price interrogates Yuri at gunpoint, demanding to know his past with Makarov. Yuri explains that he was present in <a href="https://en.wikipedia.org/wiki/Pripyat">Pripyat</a> during <a href="https://en.wikipedia.org/wiki/All_Ghillied_Up">Zakhaev's attempted assassination</a> in 1996 and became disillusioned with the Ultranationalist cause following the nuclear detonation in the Middle East in 2011, with Makarov revealed to have personally detonated the bomb. Yuri attempted to thwart <a href="https://en.wikipedia.org/wiki/No_Russian">the massacre at Zakhaev International Airport</a> but was critically wounded by Makarov upon learning of his betrayal before being rescued by security forces. After learning this, Price begrudgingly continues to work with Yuri. Receiving further help from MacMillan, the two infiltrate Makarov's castle base in rural <a href="https://en.wikipedia.org/wiki/Czech_Republic">Czech Republic</a> to acquire intel on his whereabouts, learning that he has located President Vorshevsky's daughter, Alena, in <a href="https://en.wikipedia.org/wiki/Berlin">Berlin</a> and intends to kidnap her. Price relays the intelligence to Team Metal, who despite assistance from the <a href="https://en.wikipedia.org/wiki/Bundeswehr">Bundeswehr</a>, fail to reach her before Makarov's men capture her. They track her and the President to a diamond mine in <a href="https://en.wikipedia.org/wiki/Siberia">Siberia</a>, launching a rescue operation with Task Force 141. Team Metal sacrifices themselves to hold off Makarov's forces long enough for Vorshevsky, Alena, and 141 to escape as the mine collapses on top of them. With the President safe and Makarov's machinations publicly revealed, relations between Russia and the U.S. come to peace, the war in Europe ends, and Makarov goes into hiding.</p>
+
+<p>By January 2017, Price, Nikolai, and Yuri have tracked Makarov to a hotel in <a href="https://en.wikipedia.org/wiki/Dubai">Dubai</a>. Price and Yuri don modified <a href="https://en.wikipedia.org/wiki/Bomb_suit">EOD suits</a> to assault the building, cornering Makarov on the rooftop. He gains the upper hand in the ensuing struggle and prepares to execute Price but is distracted by Yuri, whom he kills. Price then tackles Makarov and wraps a steel cable around his neck before plunging him through a skylight, <a href="https://en.wikipedia.org/wiki/Hanging">hanging</a> him. A victorious Price then lights a cigar as first responders approach the hotel.</p>
+
+<h2>Development</h2>
+
+<p>A 2010 Q3 earnings call from <a href="https://en.wikipedia.org/wiki/Activision">Activision</a> confirmed that the eighth installment of the franchise was currently in development by <a href="https://en.wikipedia.org/wiki/Sledgehammer_Games">Sledgehammer Games</a> and <a href="https://en.wikipedia.org/wiki/Raven_Software">Raven Software</a> and due for release "during the back half of 2011". This was revealed to be <a href="https://en.wikipedia.org/wiki/Infinity_Ward">Infinity Ward</a>'s <i>Call of Duty: Modern Warfare 3</i>, with the latter developers co-developing multiplayer. <i>Call of Duty: Modern Warfare 3</i> was known to be in development after a legal dispute between Infinity Ward co-founders Jason West and Vince Zampella and Activision resulted in the pair being fired from the company. Several dozen Infinity Ward employees followed West and Zampella as a result of the ongoing dispute, causing Activision to enlist the services of Sledgehammer Games and Raven Software to assist in the development of the title. The game was said to have been in development since only two weeks after the release of their previous game, <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Modern_Warfare_2">Call of Duty: Modern Warfare 2</a></i>. Also reported was that Sledgehammer was aiming for a "bug free" first outing in the <i>Call of Duty</i> franchise, and also set a goal for <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> review scores above 95 percent. <i>Modern Warfare 3</i> utilizes the <a href="https://en.wikipedia.org/wiki/IW_Engine">MW3 Engine</a>, unofficially the IW 5.0 Engine. Improvements include better streaming and audio. Sledgehammer Games announced the game to be the first entry in the <i>Modern Warfare</i> series to have built-in support for color-blind gamers.</p>
+
+<p>The <i><a href="https://en.wikipedia.org/wiki/PlayStation_Official_Magazine_(UK)">Official UK PlayStation Magazine</a></i> lent credence to speculation that <i>Modern Warfare 3</i> would be a prequel starring fan-favorite character Ghost. The magazine's sources strengthened a rumor which first reared its head online early in January 2011. On the Rumor Machine page in its issue (055), OPM points to "insider whispers" which suggest: "Infinity Ward's next <i>Modern Warfare</i> title will be a prequel, with Ghost in the lead role." According to <i><a href="https://en.wikipedia.org/wiki/PSM3">PSM3</a></i>, the first snippet of <i>Modern Warfare 3</i> gameplay would be revealed in mid-April. According to the publication's May 2011 issue, insider rumors say "the next in Activision's megaton FPS series will be announced in mid-April".</p>
+
+<p>On May 13, 2011, the video game website <a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a> revealed the existence of <i>Modern Warfare 3</i> following a massive leak. According to Kotaku, this leak came from multiple sources who may or may not work at Activision and Infinity Ward. The leak contained thorough information about the game, confirming that it would be a direct sequel to <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Modern_Warfare_2">Call of Duty: Modern Warfare 2</a></i>, as well as details regarding weapons, levels, and modes found in the game. In response to the leaks, Robert Bowling tweeted "A lot of hype &amp; a lot of leaked info on <i>MW3</i>, some still accurate, some not. To avoid spoiling the experience, I'd wait for the real reveal." Just hours after the leaked assets appeared on Kotaku, four teaser trailers were released on the official <i>Call of Duty</i> <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a> page, separately titled "America", "England", "France" and "Germany", indicating the various locales of the game.</p>
+
+<h2>Marketing</h2>
+
+<p>On May 23, 2011, Activision released the first gameplay trailer for <i>Call of Duty: Modern Warfare 3</i> on YouTube ahead of its official premiere during the <a href="https://en.wikipedia.org/wiki/NBA">NBA</a> <a href="https://en.wikipedia.org/wiki/2011_NBA_Playoffs">Western Conference Finals</a>. On May 31, 2011, Activision announced <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Elite">Call of Duty: Elite</a></i>, a new social service for the <i>Call of Duty</i> community to track and compare statistics, create videos and access premium content. The service is fully integrated into <i>Call of Duty: Modern Warfare 3</i>, and launched on November 8, 2011, to coincide with the game's release. On June 6, 2011, at 11:00 AM (PDT), the first live gameplay demo of <i>Modern Warfare 3</i> was presented by Robert Bowling and Glen Schofield at <a href="https://en.wikipedia.org/wiki/E3_2011">E3 2011</a>. On June 14, 2011, 12:35 PM (EST), the first live gameplay demo of the new Survival Mode was played by <a href="https://en.wikipedia.org/wiki/Jimmy_Fallon">Jimmy Fallon</a> and <a href="https://en.wikipedia.org/wiki/Simon_Pegg">Simon Pegg</a> on <i><a href="https://en.wikipedia.org/wiki/Late_Night_with_Jimmy_Fallon">Late Night with Jimmy Fallon</a></i>. On August 9, 2011, the trailer for the new Survival Mode was released on YouTube. On September 2, 2011, the multiplayer world premiere trailer was released on YouTube. On September 3, 2011, another multiplayer trailer was released on YouTube showing off the heads-up display along with various weapons, perks, and killstreaks. On October 6, 2011, a second full-length cinematic trailer was released. On October 22, 2011, the launch trailer was released.</p>
+
+<p>On July 19, 2011, UK distributor Lygo unveiled a range of <a href="https://en.wikipedia.org/wiki/Turtle_Beach_Systems">Turtle Beach Ear Force</a> <i>Modern Warfare 3</i> gaming headsets that launched in November 2011. The headsets are distinguished by custom audio presets designed by the audio teams at developers Infinity Ward and Sledgehammer Games "in order to provide the ultimate immersion into the cinematic world of <i>Modern Warfare 3</i>". On August 24, 2011, Activision revealed the official <i>Modern Warfare 3</i> sunglasses. These <i>Call of Duty</i>-branded glasses come from technology eyewear manufacturer GUNNAR – in a licensed partnership with Activision – and join its "Advanced Gaming Eyewear" line. They come with a limited edition <i>Modern Warfare 3</i> carrying case and cleaning cloth. The product is sold exclusively in North America at Best Buy retail locations and at select European retailers. Microsoft released two limited-edition <i>Modern Warfare 3</i>-themed accessories on October 11, 2011, a wireless controller and a wireless headset. On September 29, 2011, Munitio announced a partnership with Activision in order to make a special edition <i>Modern Warfare 3</i> 9 mm "billet" earphone featuring the <i>Modern Warfare 3</i> logo, among other things. The earphones were available for pre-order and were released on October 23, 2011. On October 18, 2011, <a href="https://en.wikipedia.org/wiki/Logitech">Logitech</a> announced a partnership with Activision in order to make a special edition <i>Modern Warfare 3</i> mouse and keyboard which feature many things, including the <i>Modern Warfare 3</i> logo.</p>
+
+<p>On September 2, 2011, <a href="https://en.wikipedia.org/wiki/Jeep">Jeep</a> announced a partnership with Activision for the second year in a row, to make a special edition <i>Modern Warfare 3</i> Jeep based on the <a href="https://en.wikipedia.org/wiki/Jeep_Wrangler">Wrangler Rubicon</a> model. The Jeep comes with various features including the interior and exterior being designed with a <i>Modern Warfare 3</i> theme. Jeep dealers started selling this model in November 2011.</p>
+
+<p>On August 24, 2011, the <a href="https://en.wikipedia.org/wiki/PepsiCo">PepsiCo</a>-owned brand <a href="https://en.wikipedia.org/wiki/Mountain_Dew">Mountain Dew</a> officially announced on their Facebook page that they would be promoting the game with their "Game Fuel" soda variants, which would be cherry-citrus-flavored (the original Game Fuel that promoted <i><a href="https://en.wikipedia.org/wiki/Halo_3">Halo 3</a></i> in 2007 and brought back in 2009 to promote <i><a href="https://en.wikipedia.org/wiki/World_of_Warcraft">World of Warcraft</a></i>) and Tropical-flavored (a new flavor that was tested by 500 Dew Labs members). The drinks featured codes to give the player double experience points in-game, depending on the size of the drink. Another PepsiCo-owned brand, <a href="https://en.wikipedia.org/wiki/Doritos">Doritos</a>, promoted the game with its "Cool Ranch" and "Nacho Cheese" flavors and also followed the same rules as the Mountain Dew promotion. Both promotions started on October 10, 2011, and ended on December 31, 2011. In Australia, 500 ml cans of <a href="https://en.wikipedia.org/wiki/V_(drink)">V Energy Drink</a> have been branded with the <i>Modern Warfare 3</i> logo, along with a branded code which can be used for downloads and previews.</p>
+
+<p>To promote the game, Activision held a two-day event called <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Experience_2011">Call of Duty: Experience 2011</a></i> (<i>Call of Duty: XP</i> for short) which took place in <a href="https://en.wikipedia.org/wiki/Los_Angeles">Los Angeles</a> from September 2–3, 2011. It featured many things including the reveal of the new multiplayer which attendees were able to play for the first time. In addition, all attendees received the Hardened Edition for free as a gift for attending. At a <i>Call of Duty: Modern Warfare 3</i> VIP party in Amsterdam, Dutch porn star and avid fan of the series Kim Holland was originally invited to attend the event until she was suddenly uninvited when Activision discovered her profession. In her blog, she shared her opinion and feelings towards Activision's sudden decision, writing: "People murdering people is neat, [...] but love-makers are dirty?" Activision did not respond to any comments about the subject.</p>
+
+<p>Activision had planned to set up an official website to promote the game, however, the domain name "ModernWarfare3.com" had already been taken and was used for an anti-<i>Call of Duty</i> website and redirecting users to <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a>'s game <i><a href="https://en.wikipedia.org/wiki/Battlefield_3">Battlefield 3</a></i>. Activision filed a <a href="https://en.wikipedia.org/wiki/United_States_dollar">US</a>$2,600 complaint against the site with the <a href="https://en.wikipedia.org/wiki/National_Arbitration_Forum">National Arbitration Forum</a>. On September 8, 2011, Activision won the complaint and acquired the rights to the domain name. In November 2011, actors <a href="https://en.wikipedia.org/wiki/Jonah_Hill">Jonah Hill</a> and <a href="https://en.wikipedia.org/wiki/Sam_Worthington">Sam Worthington</a> (who voiced the main character Alex Mason in <i>Black Ops,</i> the previous game to <i>Modern Warfare 3</i>), and NBA athlete <a href="https://en.wikipedia.org/wiki/Dwight_Howard">Dwight Howard</a> starred in commercials advertising the game.</p>
+
+<h2>Release</h2>
+
+<p>Two weeks before the release of the game, it was reported that half of the PC version had been uploaded online after being stolen from a warehouse in Fresno, California. Investigators working on behalf of Activision searched torrent websites for traces of the game as well as visiting people who had downloaded a copy across the United States and requested that they remove it or they would face a fine of <a href="https://en.wikipedia.org/wiki/United_States_dollar">US</a>$5,000.</p>
+
+<p>As early as late October, reports were already surfacing about copies being sold early to people with gameplay videos uploaded online. On November 3, 2011, it was reported that copies of the game were already being sold early in the United States. <a href="https://en.wikipedia.org/wiki/Kmart_(United_States)">K-Mart</a> had already started selling copies of the game before its scheduled release date with copies already appearing on <a href="https://en.wikipedia.org/wiki/EBay">eBay</a> and <a href="https://en.wikipedia.org/wiki/Craigslist">Craigslist</a>. This was due to an error made by one of the shipping companies that told Walmart to sell copies of the game immediately after receiving the shipments. However, Activision contacted K-mart about this and had the issue resolved.</p>
+
+<p>French site <a href="https://en.wikipedia.org/wiki/TF1">TF1</a> News reported that a truck suffered a collision with a car on November 6, 2011, in <a href="https://en.wikipedia.org/wiki/Créteil">Créteil</a>, south <a href="https://en.wikipedia.org/wiki/Paris">Paris</a>, before two masked individuals emerged from the car. The criminals reportedly used tear gas to neutralize the truck drivers before hopping in and making off with the video game shipment said to be worth 400,000 Euros. A separate report said the truck contained a delivery of 6000 copies of <i>Modern Warfare 3</i>.</p>
+
+<p>Shortly after the game's release, a man from <a href="https://en.wikipedia.org/wiki/Aurora,_Colorado">Aurora, Colorado</a> who did not receive a copy of the game at his local Best Buy, despite pre-ordering it, claimed to be so angry that he "could blow this place up". He was also reported as having threatened to shoot employees once they left the store. Lomon Sar, age 31, was issued a citation and court summons by police responding to the disturbance. The game was released for OS X on May 20, 2014.</p>
+
+<h3>Retail versions</h3>
+
+<p><i>Modern Warfare 3</i> was released in two different retail versions across the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> platforms: Standard and Hardened. The standard version consists of the game and an instructional manual and is the only version available for the Microsoft Windows platform. Contents within the Hardened Edition include the game disc with "unique art", one-year membership to Call of Duty: Elite, "special founder status" on Call of Duty: Elite which includes an exclusive in-game emblem, player card, weapon camouflage, clan XP boost, and more exclusive benefits, premium collectible <a href="https://en.wikipedia.org/wiki/Optical_disc_packaging#Unique_cases">Steelbook</a> case, exclusive animated timeline theme for PS3 only, exclusive Spec Ops Juggernaut <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a> avatar outfit for Xbox 360 only, and a limited edition, collectible field journal, which chronicles "the entire saga with 100+ pages of authentic military sketches, diagrams, and written entries."</p>
+
+<p>Robert Bowling of <a href="https://en.wikipedia.org/wiki/Infinity_Ward">Infinity Ward</a> confirmed that there will be no Prestige Edition of <i>Modern Warfare 3</i>. In the past, the Prestige editions of previous <i>Call of Duty</i> games have included physical items such as a remote-controlled car for <i>Black Ops</i>, a pair of night vision goggles and a life-sized plastic head to put them on for <i>Modern Warfare 2</i>.</p>
+
+<p>On August 19, 2011, UK retailer <a href="https://en.wikipedia.org/wiki/Game_(retailer)">Game</a> announced an Intel Pack of <i>Modern Warfare 3</i>. It comes with a British special forces avatar for both the Xbox 360 and PlayStation 3 versions, as well as a Brady strategy guide. On September 3, 2011, Activision and Microsoft jointly announced a special, limited <i>Modern Warfare 3</i> version of the Xbox 360 with a 320 GB hard disk. The unit is designed by the <i>Call of Duty</i> team and includes two custom wireless controllers, a copy of <i>Modern Warfare 3</i>, and features custom sounds when the console is turned on/off or when the disc tray is ejected. A one-month subscription to Xbox Live Gold is also included, as well as exclusive avatar items.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical response</h3>
+
+<p><i>Call of Duty: Modern Warfare 3</i> received "generally positive" reviews, according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, except for the Wii, where it received "mixed or average" reviews.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/The_Daily_Telegraph">The Daily Telegraph</a></i> gave the game's Xbox 360 version 5 stars out of 5, stating that even as "the series has always been renowned for elements like the excellent sound design, the gloss, polish, and compulsion of its gameplay," it is "a game that not only lives up to the brand hype but exceeds it. A game where the mass appeal is justified and the expectations are met." Gaming Evolution gave the PS3 and Xbox 360 versions a 9.0 out of 10, stating "Modern Warfare 3 lives up to the hype. It is proving itself the one of the best FPS the genre has to offer." <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> gave the game's Xbox 360 version a 9.0 out of 10.0, pointing out that the game offers "great multiplayer, [a] fun campaign, tons of content, but [also] a forgettable story."</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> qualifies its review, stating that "the series' signature thrills have lost some of their luster. <i>Modern Warfare 3</i> iterates rather than innovates, so the fun you have is familiar", but concludes by affirming that "fortunately, [the game is] also utterly engrossing and immensely satisfying, giving fans another reason to rejoice in this busy shooter season". <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> gave the game an 8/10 noting that it is a "ferocious and satisfying game that knows exactly what players expect, and delivers on that promise with bullish confidence" but with "an outmoded single-player campaign".</p>
+
+<p>Reviews for the Wii version of the game have been less favorable, with <i>IGN</i> rating it a 4.5 out of 10, noting the lacking graphics and <a href="https://en.wikipedia.org/wiki/Nintendo_Wi-Fi_Connection">poor friend code system</a>.</p>
+
+<p>Following early critical reaction of the 2023 game <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Modern_Warfare_III">Call of Duty: Modern Warfare III</a></i> (essentially the third in a separate reboot series) before its official release, this game was subjected to <a href="https://en.wikipedia.org/wiki/Review_bombing">review bombing</a> bringing the Metacritic user score as low as 3.5. IGN attributed this as players' confusion between the two titles and confirmed Metacritic was in the process of removing these reviews.</p>
+
+<p>Activision has said that it believes <i>Call of Duty: Modern Warfare 3</i> day-one shipments were the largest for any game ever. "The record number of pre-orders from <i>Modern Warfare 3</i> drove the largest day-one shipments in our history, and in the industry's history," said Activision Publishing CEO Eric Hirshberg during an earnings call on November 8, 2011. Hirshberg said more than 1.5 million people queued at 13,000 shops at midnight on Monday to buy <i>Modern Warfare 3</i>, "making it the largest retail release in Activision's history and in the industry's history".</p>
+
+<p>Activision reported sales figures for <i>Modern Warfare 3</i> in the U.S. and UK being more than 6.5 million copies sold on launch day and grossed $400 million in the US and UK alone in its first 24 hours, making it the biggest entertainment launch of all time. It is the third year in a row that the <i>Call of Duty</i> series has broken the same record. 2010's <i>Black Ops</i> grossed $360 million on day one; in 2009, <i>Modern Warfare 2</i> brought in $310 million. <a href="https://en.wikipedia.org/wiki/Activision_Blizzard">Activision Blizzard</a> president and CEO <a href="https://en.wikipedia.org/wiki/Bobby_Kotick">Bobby Kotick</a> stated that "the launch of <i>Call of Duty: Modern Warfare 3</i> is the biggest entertainment launch of all time in any medium, and we [Activision] achieved this record with sales from only two territories."</p>
+
+<p>The title grossed more than $775 million globally in its first five days of availability, exceeding the $650 million record set by 2010's <i>Call of Duty: Black Ops</i> and the $550 million one achieved by 2009's <i>Modern Warfare 2</i>. To be exact, it has beaten theatrical box office, book, and video game sales records for five-day worldwide sell-through in dollars.</p>
+
+<p><i>Modern Warfare 3</i> went on to gross $1 billion throughout the world in 16 days of availability, beating <a href="https://en.wikipedia.org/wiki/Avatar_(2009_film)"><i>Avatar</i></a>'s record of 19 days, according to Activision.</p>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/NPD_Group">NPD Group</a>, <i>Modern Warfare 3</i> was November's biggest-selling game of the month in the U.S. <i>Modern Warfare 3</i> sales surpassed first-month sales of the 2010s <i>Black Ops</i> by 7 percent, and sales for November sit at around the 9 million unit mark. In November 2013, <i>IGN</i> confirmed that <i>Modern Warfare 3</i> sold 26.5 million copies, becoming the highest-selling game in the <i>Call of Duty</i> series.</p>
+
+<p><i>Modern Warfare 3</i> topped the UK video game sales chart in its first week, becoming the biggest video game launch in history by revenue. By November 21, 2011, the game remained the bestselling title in the United Kingdom, despite sales dropping by 87%. <i>Modern Warfare 3</i> held the top spot on the UK charts for four weeks running. It was replaced by <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_V:_Skyrim">The Elder Scrolls V: Skyrim</a></i> in its fifth week on the market.</p>
+
+<p>The PlayStation 3 version of <i>Modern Warfare 3</i> also topped the Japanese chart in its first week on sale, shifting 180,372 copies, while the Xbox 360 version sold around 30,000.</p>
+
+<p><i>Modern Warfare 3</i> received the "Best Shooter" award at the 2011 <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Spike Video Game Awards</a>; it was also nominated for "Best Multiplayer Game". During the <a href="https://en.wikipedia.org/wiki/15th_Annual_Interactive_Achievement_Awards">15th Annual Interactive Achievement Awards</a>, <i>Modern Warfare 3</i> was awarded with "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Action_Game_of_the_Year">Action Game of the Year</a>" by the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a>; it also received nominations for outstanding achievement in "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Online_Game_of_the_Year">Connectivity</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Online_Game_of_the_Year">Online Gameplay</a>", and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Audio_Design">Sound Design</a>".</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

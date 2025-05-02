@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sonic Rivals</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('b35e2049-6c33-4549-b1dc-cd171b20fd47/74c31c57-7dcf-446f-a10b-841642dcc6c7.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="b35e2049-6c33-4549-b1dc-cd171b20fd47/2629c3ca-c0cc-499b-9e8e-e78420322b29.ico"/> Sonic Rivals</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="b35e2049-6c33-4549-b1dc-cd171b20fd47/47e4ef2f-e334-4a29-9ee3-47c179a7b4d0.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 5:00:18</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:36:32</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation Portable">Sony PlayStation Portable</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/21/2006">11/21/2006</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-56">56</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-64">64</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Backbone Entertainment">Backbone Entertainment</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sega Studio USA">Sega Studio USA</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-SEGA">SEGA</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Sonic_Rivals" target="_blank">Wikipedia</a><br/><a href="http://www.gamespot.com/psp/driving/sonicrivals/news.html?sid=6148913&amp;mode=previews" target="_blank">GameSpot interview with Takashi Iizuka</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Ryan Slemko">[People] artist: Ryan Slemko</a><br/><a href="#quicklink-[People] composer: Chris Rezanson">[People] composer: Chris Rezanson</a><br/><a href="#quicklink-[People] director: Takashi Iizuka">[People] director: Takashi Iizuka</a><br/><a href="#quicklink-[People] producer: Taylor Miller">[People] producer: Taylor Miller</a><br/><a href="#quicklink-[People] writer: Takashi Iizuka">[People] writer: Takashi Iizuka</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Sonic Rivals</b></i> is a 2006 <a href="https://en.wikipedia.org/wiki/Action_game">action</a>-<a href="https://en.wikipedia.org/wiki/Racing_video_game">racing</a> video game developed by <a href="https://en.wikipedia.org/wiki/Backbone_Entertainment">Backbone Entertainment</a> and <a href="https://en.wikipedia.org/wiki/Sega_Studio_USA">Sega Studio USA</a>, and published by <a href="https://en.wikipedia.org/wiki/Sega">Sega</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> (PSP); it is a game in the <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog">Sonic the Hedgehog</a></i> series, and follows the heroes needing to stop Doctor Eggman Nega from turning everyone and the world into cards. The gameplay involves racing against other characters to get to the goal before them, as well as defeating the boss before the opponent does.</p>
+
+<p>Development on <i>Sonic Rivals</i> originated from a traditional <a href="https://en.wikipedia.org/wiki/Platform_game">platform game</a> Backbone was developing, before <i>Sonic</i> series producer <a href="https://en.wikipedia.org/wiki/Takashi_Iizuka_(game_designer)">Takashi Iizuka</a> stepped in and changed its direction, as well as deciding on the PSP as the system it would release on due to having greater processing power than the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>; the developers also took inspiration from the <a href="https://en.wikipedia.org/wiki/Sega_Genesis">Sega Genesis</a> games, as well as other games up to <i><a href="https://en.wikipedia.org/wiki/Sonic_Rush">Sonic Rush</a></i> (2005) due to wanting to return to the 2D gameplay style.</p>
+
+<p><i>Sonic Rivals</i> released in North America in November 2006, and other territories in December; it is one of the few games in the franchise not to see a release in Japan. Upon release, it was a commercial success, but received generally mixed reviews from critics, who praised the graphics and audio, while the gameplay drew mixed reactions for its controls, level design, and <a href="https://en.wikipedia.org/wiki/Rubber_banding_(games)">rubber banding</a>. A sequel titled <i><a href="https://en.wikipedia.org/wiki/Sonic_Rivals_2">Sonic Rivals 2</a></i> was released in 2007 for the same system, and handled by the same developers.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Sonic Rivals</i> is a <a href="https://en.wikipedia.org/wiki/Side-scrolling_video_game">side-scrolling video game</a> similar to the original <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog">Sonic the Hedgehog</a></i> games for the <a href="https://en.wikipedia.org/wiki/Sega_Genesis">Sega Genesis</a>, but with a <a href="https://en.wikipedia.org/wiki/2.5D">2.5D</a> perspective. Characters race to the finish line while avoiding the level's obstacles. The game contains six zones, each with three respective acts, the third being a boss battle, totaling in 17 stages. Boss battles at the end of levels require the player to defeat the boss before the competing character does. Five different characters are playable; <a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(character)">Sonic the Hedgehog</a>, <a href="https://en.wikipedia.org/wiki/Knuckles_the_Echidna">Knuckles the Echidna</a>, <a href="https://en.wikipedia.org/wiki/Shadow_the_Hedgehog">Shadow the Hedgehog</a>, <a href="https://en.wikipedia.org/wiki/Silver_the_Hedgehog">Silver the Hedgehog</a>, and <a href="https://en.wikipedia.org/wiki/Metal_Sonic">Metal Sonic</a>, but gameplay is identical for all characters. The game features power-ups to collect that offer additional offensive and defensive abilities.</p>
+
+<p><i>Sonic Rivals</i> features several different modes. In Story Mode, each of the four playable characters have separate story lines, and must race each other to the finish line in each stage in order to thwart <a href="https://en.wikipedia.org/wiki/Doctor_Eggman">Doctor Eggman</a>'s various schemes. In Challenge Mode, the player is given a goal to complete, such as hitting their opponent a certain number of times during a race or battle. Wireless Play Mode features multiplayer games and races whereby players can wager cards, or just race for fun. It is played <a href="https://en.wikipedia.org/wiki/Ad_hoc">ad hoc</a>, and players can customize their racers using collectible cards won in Single player, trade cards with friends, and wager cards on races. Also a cup circuit mode is available where players race a rival for the chance to win a specific cup.</p>
+
+<p>The game includes an extensive collectible card system that spans a total of 150 cards. Performing specific objectives throughout the game will give the player a collectible cards. Such tasks include finishing a level, getting a certain number of rings, hitting a rival a certain number of times and getting to the goal within a certain amount of time. The cards themselves feature pictures of characters and boxart from a variety of past games in the <i>Sonic</i> series. The cards themselves are used to unlock secret costumes and items that alter the appearance of the characters. While they add a customizable aspect to the game, they are merely aesthetic; they do not affect gameplay.</p>
+
+<h2>Plot</h2>
+
+<p>When the mysterious Onyx Island appears out of nowhere, <a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(character)">Sonic</a> and <a href="https://en.wikipedia.org/wiki/Tails_(character)">Tails</a> fly there to investigate. They confront <a href="https://en.wikipedia.org/wiki/Doctor_Eggman">Doctor Eggman</a>, who reveals his latest device: a camera which can turn people and things into cards, having already done so to <a href="https://en.wikipedia.org/wiki/Amy_Rose">Amy</a>. He turns Tails into a card just as Knuckles arrives, angry at Eggman for using his device on the <a href="https://en.wikipedia.org/wiki/Master_Emerald">Master Emerald</a> as well. Eggman announces his plan to conquer the world by turning everything to cards, challenging Sonic and Knuckles to stop him as he flees. The two heroes both set out independently to stop his plan. Elsewhere, <a href="https://en.wikipedia.org/wiki/Shadow_the_Hedgehog">Shadow</a> receives a distress signal from Eggman, but upon finding him, the doctor denies sending one. He later receives a communication from <a href="https://en.wikipedia.org/wiki/Rouge_the_Bat">Rouge</a> warning him she has stumbled upon a dangerous secret about Eggman, but she is turned to a card before she can continue. Suddenly, <a href="https://en.wikipedia.org/wiki/Silver_the_Hedgehog">Silver</a> appears from the future, and tells Shadow he needs to get to Eggman first.</p>
+
+<p>After numerous conflicts, the heroes discover that Dr. Eggman had been imprisoned in a card before everything began, and that the Eggman the heroes have been interacting with is <a href="https://en.wikipedia.org/wiki/Eggman_Nega">Eggman Nega</a> in disguise. Nega is revealed to have traveled back from the future, plotting to use the camera to remove Eggman's failed schemes from existence and rewrite their family history, with Onyx Island being a future version of Angel Island he brought back to further his plan. His ruse exposed, Nega escapes into space, planning to use his camera to turn the whole planet into a card. The heroes rescue Tails and the real Eggman, who aid them in reaching Nega's space station to stop his plan. After a final battle with the heroes, Nega is defeated and captured in a card. The prisoners of the other cards are restored, and Silver takes Onyx Island and Nega's card with him back to the future.</p>
+
+<h2>Development and release</h2>
+
+<p><i>Sonic Rivals</i> was developed as a collaborative effort between <a href="https://en.wikipedia.org/wiki/Sega">Sega</a> and <a href="https://en.wikipedia.org/wiki/Backbone_Entertainment">Backbone Entertainment</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> (PSP). The game's concept originated from a traditional <a href="https://en.wikipedia.org/wiki/Platform_game">platform game</a> Backbone designed. <a href="https://en.wikipedia.org/wiki/Takashi_Iizuka_(game_designer)">Takashi Iizuka</a> became involved with the game, and he changed its direction to a racing game. The majority of development was handled by Backbone with assistance from <a href="https://en.wikipedia.org/wiki/Sega_Studio_USA">Sega Studio USA</a>, although some aspects, such as the story, were done by Sega. The developers chose to create the game on the PSP over the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>, due to its stronger processing power and higher graphical quality.</p>
+
+<p>According to producer Taylor Miller, the goal of the developers was to return to the gameplay style of the original <a href="https://en.wikipedia.org/wiki/Sega_Genesis">Sega Genesis</a> <i>Sonic</i> games, but with new elements such as competition. In designing the stages, Sega provided Backbone with <a href="https://en.wikipedia.org/wiki/Level_design">level design</a> maps from all the 2D games as a reference, and Backbone looked to all games up to <i><a href="https://en.wikipedia.org/wiki/Sonic_Rush">Sonic Rush</a></i> for inspiration. Building alternate paths—a common feature of the original games—was cited as challenging, with the goal of allowing as many rivalry interactions as possible. In choosing playable characters, Backbone focused on characters who maintained the biggest rivalries in the <i>Sonic</i> franchise, such as Sonic and Shadow. Silver, then a new character, was added to "mix things up". One challenge was coming up with the art direction for the game; Backbone sought to maintain the look and feel of <i>Sonic</i> while still stylizing the game to stand out. <a href="https://en.wikipedia.org/wiki/Kazuyuki_Hoshino">Kazuyuki Hoshino</a> and Hiroshi Nishiyama assisted with art and environment direction, respectively.</p>
+
+<p>The game's existence was revealed on <a href="https://en.wikipedia.org/wiki/GameStop">GameStop</a>'s website in May 2005, though Sega denied it was in development. <i>Sonic Rivals</i> was announced on May 6, 2006. It was showcased at the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">Electronic Entertainment Expo</a> (E3) later that month, and at the <a href="https://en.wikipedia.org/wiki/Games_Convention">Games Convention</a> in August 2006. The game was released in North America on November 17, 2006, and Europe on December 1, 2006.</p>
+
+<h2>Reception</h2>
+
+<p><i>Sonic Rivals</i> received "mixed or average" reviews from critics, scoring a 64/100 on Metacritic, and 66.17% on GameRankings. Both it and <i>Rivals 2</i> were later re-released in North America and Europe as part of the <a href="https://en.wikipedia.org/wiki/Greatest_Hits_(PlayStation)">Greatest Hits</a> and <a href="https://en.wikipedia.org/wiki/Essentials_(PlayStation)">Essentials</a> lines respectively, indicating over 250,000 units were sold by the end of 2007, as well as part of the <i>Double Rivals Attack Pack!</i> on October 18, 2011.</p>
+
+<p>Reviewers consistently praised the game's presentation. Juan Castro of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> wrote that the game had tons of "graphical flourishes" that made it belong on the handheld, a sentiment shared by Greg Mueller of <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i>. The music received similar praise, with GameSpot finding the music upbeat, although <a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a> said it was "nowhere near as good" as previous games in the series.</p>
+
+<p>The gameplay, however, drew mixed reactions; a common critique was the game's <a href="https://en.wikipedia.org/wiki/Rubber_banding_(games)">rubber banding</a> mechanic making the opponent close to the player no matter how fast they were travelling. <i>GameSpot</i> said "if you freeze your rival with an ice blast, he will be slowed momentarily but will inexplicably catch up within seconds", while GameSpy felt there was never a moment where it was impossible to catch up to them. Rob Fahey called it "one of the most blatant and annoying instances of rubber-banding AI we've ever seen" in his review for <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

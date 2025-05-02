@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Endless Ocean</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('f0a783b2-c062-49f2-b127-94680a325f1a/c18ba76f-7878-415f-93e1-11212935aa83.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="f0a783b2-c062-49f2-b127-94680a325f1a/a5e314ce-1cd6-4cf0-b936-bb1f45c39a32.png"/> Endless Ocean</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="f0a783b2-c062-49f2-b127-94680a325f1a/9fd9e181-ebe6-4ced-92e2-74712db0fec4.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:57:43</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:24:10</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Wii">Nintendo Wii</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-8/2/2007">8/2/2007</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-76">76</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-72">72</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Arika">Arika</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Endless_Ocean" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/20090107042718/http://www.touchgenerations.com/enGB/games_Wii_TGP/endless_ocean/overview_endless_ocean.php" target="_blank">Endless Ocean</a><br/><a href="https://www.nintendo.co.jp/wii/rfbj/index.html" target="_blank">Official site</a><br/><a href="http://www.endlessocean.com/eo/main/pc/index.html" target="_blank">Official site</a><br/><a href="https://www.mobygames.com/game/wii/endless-ocean" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] director: Akira Kurabayashi">[People] director: Akira Kurabayashi</a><br/><a href="#quicklink-[People] director: Masaki Tawara">[People] director: Masaki Tawara</a><br/><a href="#quicklink-[People] producer: Hitoshi Yamagami">[People] producer: Hitoshi Yamagami</a><br/><a href="#quicklink-[People] producer: Ichiro Mihara">[People] producer: Ichiro Mihara</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Endless Ocean</b></i> (known as <i><b>Forever Blue</b></i> in <a href="https://en.wikipedia.org/wiki/Japanese_language">Japanese</a>) is a <a href="https://en.wikipedia.org/wiki/Scuba_diving">scuba diving</a> <a href="https://en.wikipedia.org/wiki/Adventure_game">adventure game</a> developed by <a href="https://en.wikipedia.org/wiki/Arika">Arika</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>. It is considered a spiritual successor to <i><a href="https://en.wikipedia.org/wiki/Everblue">Everblue</a></i>, another scuba diving adventure game series also developed by Arika. It was released in <a href="https://en.wikipedia.org/wiki/Japan">Japan</a> on August 2, 2007, <a href="https://en.wikipedia.org/wiki/Europe">Europe</a> on November 9, 2007, and <a href="https://en.wikipedia.org/wiki/North_America">North America</a> on January 21, 2008, after originally being scheduled for release in October 2007.</p>
+
+<p>A sequel, <i><a href="https://en.wikipedia.org/wiki/Endless_Ocean_2:_Adventures_of_the_Deep">Endless Ocean 2: Adventures of the Deep</a></i> was released in Japan on September 17, 2009, in Europe on February 5, 2010, and in North America on February 22, 2010, under the name <i>Endless Ocean: Blue World</i>. A third game in the series, <i><a href="https://en.wikipedia.org/wiki/Endless_Ocean_Luminous">Endless Ocean Luminous</a></i>, was released on the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> in all regions on May 2, 2024.</p>
+
+<h2>Gameplay and plot</h2>
+
+<p>In <i>Endless Ocean,</i> the player plays as a <a href="https://en.wikipedia.org/wiki/Scuba_diving">scuba diver</a> exploring the Manaurai sea, a fictional sea in the <a href="https://en.wikipedia.org/wiki/South_Pacific_Ocean">South Pacific</a>, in search of sea life and sunken treasure under the guidance of their assistant, Katherine Sunday.  In the sea, they will encounter several marine species, ranging from smaller fish and <a href="https://en.wikipedia.org/wiki/Penguin">penguins</a> to <a href="https://en.wikipedia.org/wiki/Whale_shark">whale sharks</a>, <a href="https://en.wikipedia.org/wiki/Manta_ray">manta rays</a> and <a href="https://en.wikipedia.org/wiki/Sperm_whale">sperm whales</a>, as well as <a href="https://en.wikipedia.org/wiki/Dolphin">dolphins</a> and other <a href="https://en.wikipedia.org/wiki/Cetacean">cetaceans</a> that can be trained to perform certain behaviors and become companions. Species such as <a href="https://en.wikipedia.org/wiki/Shark">sharks</a> are also present; however, they pose no threat to the player. The player also has access to a large <a href="https://en.wikipedia.org/wiki/Aquarium">aquarium</a>, which they can populate with species they have identified. The sea's various locations provide a means for the player to experience diving, <a href="https://en.wikipedia.org/wiki/Cave_diving">cave diving</a>, <a href="https://en.wikipedia.org/wiki/Deep_diving">deep-water</a> <a href="https://en.wikipedia.org/wiki/Oceanic_trench">trench exploration</a>, <a href="https://en.wikipedia.org/wiki/Wreck_diving">wreck diving</a>, and other activities that might not otherwise be possible in a single real-world setting.</p>
+
+<p>Late in the game, Katherine tells the player that in the past, her father set out in search of a unique whale called the White Mother, but never returned. The player and Katherine set out to find the White Mother, which entails seeking out the four types of whales present in the game, <a href="https://en.wikipedia.org/wiki/Humpback_whale">humpback whale</a>, <a href="https://en.wikipedia.org/wiki/North_Atlantic_right_whale">North Atlantic right whale</a>, sperm whale, and <a href="https://en.wikipedia.org/wiki/Blue_whale">blue whale</a>, and placing motion sensors on different points of the map. Eventually, one of the sensors is set off, and the player witnesses the White Mother, a large <a href="https://en.wikipedia.org/wiki/Albinism">albino</a> blue whale, as Katherine remembers her father.</p>
+
+<h2>Music</h2>
+
+<p>The song "Prayer", composed by <a href="https://en.wikipedia.org/wiki/Secret_Garden_(duo)">Secret Garden</a> and performed by <a href="https://en.wikipedia.org/wiki/Hayley_Westenra">Hayley Westenra</a>, is featured in the game and its trailers. Westenra also contributes several other songs, including a rendition of the <a href="https://en.wikipedia.org/wiki/Māori_language">Maori</a> folk song "<a href="https://en.wikipedia.org/wiki/Pokarekare_Ana">Pokarekare Ana</a>". Players can transfer their <a href="https://en.wikipedia.org/wiki/MP3">MP3</a> music files to an <a href="https://en.wikipedia.org/wiki/SD_card">SD card</a> and listen to them while playing. <i>Endless Ocean</i> is the second game on the Wii to use this feature, the first being <i><a href="https://en.wikipedia.org/wiki/Excite_Truck">Excite Truck</a></i>.</p>
+
+<h3>Soundtrack</h3>
+
+<ul>
+  <li>Embrace of Manaurai/Moon of Manaurai</li>
+  <li>Prayer</li>
+  <li><a href="https://en.wikipedia.org/wiki/Pokarekare_Ana">Pokarekare Ana</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Oh_Shenandoah">Oh Shenandoah</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Amazing_Grace">Amazing Grace</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Hine_e_Hine">Hine e Hine</a></li>
+  <li>E Pari Ra</li>
+  <li><a href="https://en.wikipedia.org/wiki/Benedictus_(Song_of_Zechariah)">Benedictus</a></li>
+  <li>River of Dreams</li>
+  <li><a href="https://en.wikipedia.org/wiki/The_Water_Is_Wide_(song)">The Water is Wide</a></li>
+</ul>
+
+<h2>Release</h2>
+
+<p>The game was released in  Japan on August 2, 2007. On August 10, 2007, <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> issued a <a href="https://en.wikipedia.org/wiki/Product_recall">product recall</a> in after a major bug was found in copies of the game, later re-releasing the game in Japan with the bug removed. The bug caused the screen to go blank and caused the console to freeze when the player put one or more <a href="https://en.wikipedia.org/wiki/Bowmouth_guitarfish">bowmouth guitarfish</a> into the aquarium, which did not affect the exploration mode.</p>
+
+<h2>Reception</h2>
+
+<p>The game received "average" reviews according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregation</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. In Japan, <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave it a score of 10/10, 8/10, 9/10, and 8/10 for a total of 35 out of 40, praising the open-ended exploration aspect of the game, the scale of the play area and its soundtrack.</p>
+
+<p><i>Endless Ocean</i> had sold at least 50,000 copies in Japan.</p>
+
+<h2>Legacy</h2>
+
+<p>A sequel, <i><a href="https://en.wikipedia.org/wiki/Endless_Ocean_2:_Adventures_of_the_Deep">Endless Ocean 2: Adventures of the Deep</a></i> was released in Japan under the name <i>Forever Blue: Call of the Ocean</i> on September 17, 2009, and in Europe on February 5, 2010.  It was released in North America on February 22, 2010, under the name <i>Endless Ocean: Blue World</i>.</p>
+
+<p>Another entry, <i><a href="https://en.wikipedia.org/wiki/Endless_Ocean_Luminous">Endless Ocean Luminous</a>,</i> was announced on February 21, 2024, and was released on <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> on May 2, 2024.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

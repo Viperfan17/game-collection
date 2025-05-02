@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Super Street Fighter II</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('39f9bdf1-8feb-4c86-82e6-61178659d035/24d526c9-54f1-4e4b-83db-1743a29b1370.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="39f9bdf1-8feb-4c86-82e6-61178659d035/664c652d-7790-4f90-8204-d1a9f275c865.png"/> Super Street Fighter II</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="39f9bdf1-8feb-4c86-82e6-61178659d035/9179c136-2b98-4e2b-b39e-0881784074b3"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:52:10</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 2:26:47</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo SNES">Nintendo SNES</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-9/14/1993">9/14/1993</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-77">77</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Arcade">Arcade</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Fighting">Fighting</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Rozner Labs Software Group">Rozner Labs Software Group</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Super_Street_Fighter_II" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=9460" target="_blank">HowLongToBeat</a><br/><a href="http://strategywiki.org/wiki/Super_Street_Fighter_II" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/10119" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Super_Street_Fighter_II" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Pixel art">Pixel art</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Side view">Side view</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Super Street Fighter II: The New Challengers</b></i> is a 1993 <a href="https://en.wikipedia.org/wiki/Fighting_game">fighting game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> for <a href="https://en.wikipedia.org/wiki/Arcade_video_game">arcades</a>. It is the fourth game in the <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_II">Street Fighter II</a></i> sub-series of <i><a href="https://en.wikipedia.org/wiki/Street_Fighter">Street Fighter</a></i> games, following <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_II_Turbo">Street Fighter II Turbo</a></i> (1992). It refines and balances the existing character roster from the previous versions, and introduces four new characters, including <a href="https://en.wikipedia.org/wiki/Cammy">Cammy</a> and <a href="https://en.wikipedia.org/wiki/Dee_Jay">Dee Jay</a>. It is the first game on Capcom's <a href="https://en.wikipedia.org/wiki/CP_System_II">CP System II</a> hardware, with more sophisticated <a href="https://en.wikipedia.org/wiki/Graphic">graphics</a> and audio over the original CP System hardware used in previous versions of <i>Street Fighter II</i>.</p>
+
+<p><i>Super Street Fighter II</i> was ported to the <a href="https://en.wikipedia.org/wiki/Super_Nintendo">Super Nintendo</a> and <a href="https://en.wikipedia.org/wiki/Sega_Genesis">Sega Genesis</a> home consoles in 1994 followed by a number of computer platforms later. <i>Super Street Fighter II</i> was followed in 1994 by <i><a href="https://en.wikipedia.org/wiki/Super_Street_Fighter_II_Turbo">Super Street Fighter II Turbo</a></i>, a fifth version of <i>Street Fighter II</i>, which further balances the characters and adds features.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Super Street Fighter II</i> features the following changes from <i>Street Fighter II: Hyper Fighting</i>.</p>
+
+<h3>Graphics and audio</h3>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Heads-up_display">HUD</a> and all of the stages and character portraits feature new graphics. The original <a href="https://en.wikipedia.org/wiki/Attract_mode">opening sequence</a> and <a href="https://en.wikipedia.org/wiki/Attract_mode">unused sequence</a>, which has two generic characters fighting in front of a crowd, was replaced by a new opening featuring lead character <a href="https://en.wikipedia.org/wiki/Ryu_(Street_Fighter)">Ryu</a> launching a <i><a href="https://en.wikipedia.org/wiki/Hadouken">Hadouken</a></i> projectile toward the screen.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> . The music and sound effects were remade and a new announcer was introduced, who also recorded new voice samples for <a href="https://en.wikipedia.org/wiki/Ken_Masters">Ken</a>, <a href="https://en.wikipedia.org/wiki/Guile_(Street_Fighter)">Guile</a>, and Sagat.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p><i>Super Street Fighter II</i> features a new scoring system tracking <a href="https://en.wikipedia.org/wiki/Combo_(video_gaming)">combos</a>, first attacks, reversals, and recoveries made by the player, and awards bonus points accordingly.</p>
+
+<p>Players choose one of eight character color schemes: the character's original color scheme, their color scheme from <i>Champion Edition</i> and <i>Hyper Fighting</i>, or one of five new color schemes.</p>
+
+<p>The faster game speed introduced in <i>Hyper Fighting</i> was reduced to the same speed level as <i>Champion Edition</i>. The faster game speed would later return in <i>Super Turbo</i>.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p>An alternate version of <i>Super Street Fighter II</i> that features eight-player <a href="https://en.wikipedia.org/wiki/Single-elimination_tournament">single-elimination tournament</a> gameplay. <i>Super Street Fighter II: The Tournament Battle</i> requires four networked arcade cabinets. This edition consists of three sets of four simultaneous matches: the initial eliminations, the semifinals, and the finals. After the first set, the players are re-arranged by outcome. The winning players are sent to either of the first two cabinets, and losing players are sent to the others. In the finals, the players competing for first place are sent to the first cabinet, the third-place players to the second cabinet, and so on.</p>
+
+<h2>Characters</h2>
+
+<p>All twelve World Warriors from the previous <i>Street Fighter II</i> games return, many with basic and special techniques refined to adjust the overall balance. Some of the characters received new special techniques such as Ryu's <i>Fire Hadōken</i> (renamed <i>Shakunetsu Hadōken</i> in the <i>Street Fighter Alpha</i> series), a flaming <i>Shoryuken</i> for Ken, <a href="https://en.wikipedia.org/wiki/Zangief">Zangief</a>'s <i>Atomic Buster</i>, and <a href="https://en.wikipedia.org/wiki/M._Bison">M. Bison</a>'s <i>Devil Reverse</i>.</p>
+
+<p>Four newcomers are introduced: <a href="https://en.wikipedia.org/wiki/T._Hawk">T. Hawk</a>, a Native American warrior from <a href="https://en.wikipedia.org/wiki/Mexico">Mexico</a> whose ancestral homeland was taken from him by Shadaloo; <a href="https://en.wikipedia.org/wiki/Fei_Long">Fei Long</a>, a Hong Kong movie star who wishes to test his martial arts against real opponents; <a href="https://en.wikipedia.org/wiki/Dee_Jay">Dee Jay</a>, a <a href="https://en.wikipedia.org/wiki/Kickboxing">kickboxing</a> musician from <a href="https://en.wikipedia.org/wiki/Jamaica">Jamaica</a> seeking inspiration for his next song; and <a href="https://en.wikipedia.org/wiki/Cammy">Cammy</a>, a 19-year-old female special forces agent from England with a mysterious past tied to M. Bison. Eight opponents are chosen at random, followed by the four Shadaloo Bosses (<a href="https://en.wikipedia.org/wiki/Balrog_(Street_Fighter)">Balrog</a>, <a href="https://en.wikipedia.org/wiki/Vega_(Street_Fighter)">Vega</a>, <a href="https://en.wikipedia.org/wiki/Sagat_(Street_Fighter)">Sagat</a>, and M. Bison).</p>
+
+<h2>Home versions</h2>
+
+<h3>Super NES</h3>
+
+<p>The Super NES version of <i>Super Street Fighter II</i>, released on June 25, 1994 in Japan, and during the same month in North America and Europe, is the third <i>Street Fighter</i> game released for the console, following the original <i>Street Fighter II</i> and <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_II_Turbo">Street Fighter II Turbo</a></i> (a clone<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Please_clarify">clarification needed</a></i>]</sup> of <i>Hyper Fighting</i> from the Arcade). It is on a 32 megabit cartridge supporting the <a href="https://en.wikipedia.org/wiki/XBAND">XBAND</a> online network. It has several new game modes such as Group Battle and Time Challenge, and the eight-player Tournament mode from the arcade version, in addition to the previous games' Arcade and Versus modes. Several levels of speed can also be chosen. Like in the SNES version of <i>Turbo</i>, the background music stops between rounds and restarts from the beginning at the next round. Unlike the Sega Genesis version, the SNES version has the blood for the character's beat up portraits removed or replaced with sweat due to Nintendo's strict censorship policy at the time. This version was re-released on the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> in Japan on November 8, 2011, the PAL region on April 12, 2012, and in North America on April 26, 2012. The Japanese version appeared on the <a href="https://en.wikipedia.org/wiki/SNES_Classic_Edition">Super Famicom Classic Edition</a>, but was replaced by <i>Street Fighter II Turbo</i> in the SNES Classic Edition.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Sega_Genesis">Mega Drive/Genesis</a> version was released simultaneously with its SNES counterpart in all three regions, almost identical. Like the SNES version, the Genesis version supports the XBAND online network although only for its North American release. The Genesis version is on a 40 Megabit cartridge, with additional voice clips of the announcer such as stating the names of the fighters (in place of "you win" or "you lose" on the SNES version). In the Options menu, the player can choose to play the Super Battle mode on "Normal" or "Expert" difficulty; the latter increases the number of opponents from the arcade version's 12 to all 16 characters. Several levels of speed can also be chosen.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/X68000">X68000</a> version was released exclusively in Japan on September 30, 1994. The graphics are reproduced faithfully from the arcade version, with only a few omissions made (the message when a new challenger interrupts a match in 1-Player mode has differently-colored fonts, and the aurora in Cammy's stage is a different color). For voices, all the spatial processing and echo processing specific to the CP System II hardware were removed. Like the X68000 version of <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_II':_Champion_Edition">Street Fighter II Dash</a></i>, the game is compatible with multiple <a href="https://en.wikipedia.org/wiki/Pulse-code_modulation">pulse-code modulation</a> (PCM) drivers on a X68030 or higher models. A message from the game's sound team is hidden in one of the ADPCM sound files containing music. Like the previous X68000 version, it was sold with an adapter for the CPS Fighter joystick controller.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/FM_Towns">FM Towns</a> version was released exclusively in Japan on October 28, 1994. The player characters reproduced faithfully from the arcade version, but the backgrounds lack the original's parallax scrolling effect. The Q-Sound soundtrack of the arcade version is reproduced faithfully in this version, with an arranged version offered as an alternative (this version was later featured in the 3DO version of <i>Super Turbo</i> and console versions of <i>Hyper Street Fighter II</i>). A color edit that allows players to alter each character's color scheme was added. Like the X68000 version, it also included an adapter for the CPS Fighter joystick controller.</p>
+
+<p><i>Super Street Fighter II</i> was ported to <a href="https://en.wikipedia.org/wiki/MS-DOS">MS-DOS</a> by Rozner Labs and published by Capcom in <a href="https://en.wikipedia.org/wiki/1996_in_video_gaming">1996</a> (despite the fact that its successor, <i>Super Street Fighter II Turbo</i>, had already been ported to the same system by <a href="https://en.wikipedia.org/wiki/Eurocom">Eurocom</a> and published by <a href="https://en.wikipedia.org/wiki/GameTek">GameTek</a> the year prior).</p>
+
+<p>The game was ported to the <a href="https://en.wikipedia.org/wiki/Amiga">Amiga</a> computer by Freestyle Software and published by <a href="https://en.wikipedia.org/wiki/U.S._Gold">U.S. Gold</a> in 1995.</p>
+
+<p>It is in the original <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_Collection">Street Fighter Collection</a></i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> and <a href="https://en.wikipedia.org/wiki/Sega_Saturn">Sega Saturn</a>, released in <a href="https://en.wikipedia.org/wiki/1997_in_video_gaming">1997</a>. However, this version lacks the 8-player tournament that appeared in the arcade and on other versions.</p>
+
+<p>A home arcade cabinet featuring <i>Super Street Fighter II</i>, <i>Turbo</i>, and <i>Champion Edition</i>, was released by <a href="https://en.wikipedia.org/wiki/Arcade1Up">Arcade1Up</a>.</p>
+
+<p>It is in the <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_30th_Anniversary_Collection">Street Fighter 30th Anniversary Collection</a></i> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Windows</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>.</p>
+
+<h2>Reception</h2>
+
+<h3>Arcade</h3>
+
+<p>In Japan, <i>Game Machine</i> listed <i>Super Street Fighter II</i> in its November 1, 1993 issue as being the most-popular table arcade game at the time. It became the sixth highest-grossing <a href="https://en.wikipedia.org/wiki/1994_in_video_games">arcade game of 1994</a> in Japan.</p>
+
+<p>In North America, Capcom launched the game with up to 1,000 <i>Super Street Fighter II</i> units distributed to arcade operators on a revenue-sharing basis. <i>RePlay</i> reported that <i>Super Street Fighter II</i> was the most-popular arcade game in <a href="https://en.wikipedia.org/wiki/1993_in_video_games">November 1993</a>. <i><a href="https://en.wikipedia.org/wiki/Play_Meter">Play Meter</a></i> later listed <i>Super Street Fighter II</i> as the eighth most-popular <a href="https://en.wikipedia.org/wiki/Arcade_video_game">arcade video game</a> and fifth top <a href="https://en.wikipedia.org/wiki/Arcade_conversion">arcade conversion</a> kit in January 1994.</p>
+
+<p>In early 1994, Capcom projected sales of <i>Super Street Fighter II</i> to reach 100,000 arcade units sold worldwide.</p>
+
+<p>In Japan, the Super Famicom version was the third best-selling <a href="https://en.wikipedia.org/wiki/1994_in_video_games">video game of 1994</a> with 941,000 sales that year, In North America, it topped the Sega Genesis and Super NES sales charts for two months in 1994, from July to August. By the end of the year, the Sega Genesis version had outsold the SNES version in the United States, with the Genesis version becoming one of the year's top ten best-selling video games in the region. Eventually, 2 million copies were sold worldwide.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> gave a generally positive review of the Genesis version. They wrote that it was a solid conversion of the arcade game, but "<i>Super</i> was never the game it could have been in the arcades, and the same imbalances and flaws that hurt the coin-op still affect the home versions." They said the new features were "pretty cosmetic or just downright boring and unimportant", and that music and voices of the Genesis version were all inferior to the SNES version, but concluded "<i>Super</i> is still <i>Street Fighter</i>" and "<i>Street Fighter</i> is still the best fighting game ever made". They gave a more positive review for the SNES version, while citing some of the same issues with the core game.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> gave the SNES version 28 out of 40 (7 out of 10 average), with all four reviewers concurring that though it was the best version of <i>Street Fighter II</i> to date, the additions were limited given how many versions had already been released, and Capcom should have put out a <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_III">Street Fighter III</a></i> with new mechanics instead. They made similar comments on the Genesis version, and two of the reviewers additionally criticized it more than the Super NES version, such as the poor quality of the digitized voices.</p>
+
+<p>In the February 1994 issue of <i><a href="https://en.wikipedia.org/wiki/Gamest">Gamest</a></i>, <i>Super Street Fighter II</i> was nominated for <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Best Game of 1993</a>, ultimately ranked at third. In the category of Best Fighting Games, <i>Super</i> won three more third-place prizes in the categories of "Best Fighting Games", "Best Graphics", and "Best VGM" (<a href="https://en.wikipedia.org/wiki/Video_game_music">video game music</a>). Cammy, who was introduced in <i>Super</i>, placed fifth in the list of Best Characters of 1993, with Dee Jay and T. Hawk at 36 and 37.</p>
+
+<p>In 1994, <i><a href="https://en.wikipedia.org/wiki/Mega_(magazine)">Mega</a></i> magazine listed <i>Super Street Fighter II</i> as the second <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">Best Game of All Time</a>. In 1995, Total! rated the game 6th on its "Top 100 SNES Games."  They lauded <i>Super Street Fighter II</i> writing: "One of the finest beat-‘em-ups and one of the most well-crafted games ever." In 2018, <a href="https://en.wikipedia.org/wiki/Complex_Networks">Complex</a> ranked the game 26th on their "The Best Super Nintendo Games of All Time."</p>
+
+<p>In 2009, <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i> ranked the game 10th on a list of the greatest Nintendo games of all time.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

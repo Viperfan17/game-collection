@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ghosts &#39;n Goblins</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('f693ccad-fdd8-4482-b8a4-8f6cf2934c05/ee718c38-7e24-4dda-9ae5-f4c13bb4d08d.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="f693ccad-fdd8-4482-b8a4-8f6cf2934c05/b16f39e8-ce1a-4252-91f2-b62ddb636ae6.ico"/> Ghosts &#39;n Goblins</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="f693ccad-fdd8-4482-b8a4-8f6cf2934c05/eee6a8cc-2874-42a8-8b75-0caf2f21e7cd.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:51:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:39:49</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Entertainment System">Nintendo Entertainment System</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-9/4/1985">9/4/1985</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-66">66</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Pacific Dataworks International">Pacific Dataworks International</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Taito">Taito</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Ghosts_'n_Goblins" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=3923" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/ghosts-n-goblins" target="_blank">IGDB</a><br/><a href="http://strategywiki.org/wiki/Ghosts_%27n_Goblins" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/ghosts-n-goblins" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Ghosts_%27n_Goblins_(video_game)" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Fantasy">Fantasy</a><br/><a href="#quicklink-Scrolling">Scrolling</a><br/><a href="#quicklink-Side view">Side view</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Ghosts 'n Goblins</b></i>, known as <i><b>Makaimura</b></i> in Japan, is a 1985 <a href="https://en.wikipedia.org/wiki/Platformer">platform</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> for <a href="https://en.wikipedia.org/wiki/Arcade_video_game">arcades</a>. It is the first game in the <i><a href="https://en.wikipedia.org/wiki/Ghosts_'n_Goblins">Ghosts 'n Goblins</a></i> franchise, and it has been <a href="https://en.wikipedia.org/wiki/Ported">ported</a> to numerous home platforms.</p>
+
+<p>It was a major commercial success across arcades and home systems. It was among the top ten highest-grossing arcade games of 1986 in Japan and the US, the year's sixth best-selling computer game in the UK, and <a href="https://en.wikipedia.org/wiki/NES">NES</a> version sold over 1.6 million cartridges worldwide. It initially received generally positive reviews from critics. It is often cited as one of the most difficult games of all time, and retrospectively it has been considered <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">one of the greatest video games ever made</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p>The player controls a <a href="https://en.wikipedia.org/wiki/Knight">knight</a> named <a href="https://en.wikipedia.org/wiki/Arthur_(Ghosts_'n_Goblins)">Sir Arthur</a>, who must defeat <a href="https://en.wikipedia.org/wiki/Zombie">zombies</a>, <a href="https://en.wikipedia.org/wiki/Giant">giants</a> (referred to as "big men"), <a href="https://en.wikipedia.org/wiki/Demon">demons</a>, <a href="https://en.wikipedia.org/wiki/Cyclopes">cyclopes</a>, <a href="https://en.wikipedia.org/wiki/Dragons">dragons</a>, and other <a href="https://en.wikipedia.org/wiki/Monster">monsters</a> to rescue Princess Prin-Prin, who has been kidnapped by <a href="https://en.wikipedia.org/wiki/Astaroth">Astaroth</a> (also called the Devil or Great Satan, to distinguish him from another boss demon named <a href="https://en.wikipedia.org/wiki/Satan">Satan</a>), king of Demon World. Along the way, the player can pick up new weapons, bonuses, and extra suits of armor that can help in this task.</p>
+
+<p>The player can only be hit twice before losing a life, which results in having to restart the level, or starting at the checkpoint if the player has reached it. Furthermore, the player will lose a life if a level is not completed within a set time limit. After defeating Astaroth, the final boss, the player must then replay the entire game on a higher difficulty level to reach the genuine final ending.</p>
+
+<h2>Ports</h2>
+
+<p><i>Ghosts 'n Goblins</i> was ported to <a href="https://en.wikipedia.org/wiki/Amiga">Amiga</a>, <a href="https://en.wikipedia.org/wiki/Amstrad_CPC">Amstrad CPC</a>, <a href="https://en.wikipedia.org/wiki/Atari_ST">Atari ST</a>, <a href="https://en.wikipedia.org/wiki/Commodore_64">Commodore 64</a>, <a href="https://en.wikipedia.org/wiki/Commodore_16">Commodore 16</a>, <a href="https://en.wikipedia.org/wiki/Game_Boy_Color">Game Boy Color</a>, <a href="https://en.wikipedia.org/wiki/IBM_PC_compatible">IBM PC compatibles</a>, <a href="https://en.wikipedia.org/wiki/NEC_PC-8801">NEC PC-8801</a>, <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a>, and <a href="https://en.wikipedia.org/wiki/ZX_Spectrum">ZX Spectrum</a>.</p>
+
+<h3>Consoles</h3>
+
+<p>The Famicom version was released on June 13, 1986, and was the first Famicom game to utilize a 128 KB cartridge. The North American NES version was released on November 1, 1986, and in Europe in 1989. The Famicom/NES version was programmed by Micronics and published by <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a>. A hidden in-game credits screen verifies that it was scored by the original composer, <a href="https://en.wikipedia.org/wiki/Ayako_Mori?action=edit&amp;redlink=1">Ayako Mori</a>. Upon defeating the game a second time, the player is given the following message:</p>
+
+<p>The Famicom/NES ports served as the basis for the Game Boy Color version, which utilized <a href="https://en.wikipedia.org/wiki/Password">passwords</a> to allow the player to access certain levels. <a href="https://en.wikipedia.org/wiki/Allister_Brimble">Allister Brimble</a> scored this version.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Commodore_64">Commodore 64</a> version, released in 1986, contains music by <a href="https://en.wikipedia.org/wiki/Mark_Cooksey">Mark Cooksey</a>, which borrows from <a href="https://en.wikipedia.org/wiki/Frédéric_Chopin">Frédéric Chopin</a>'s <a href="https://en.wikipedia.org/wiki/Prelude,_Op._28,_No._20_(Chopin)">Prelude Op. 28, No. 20</a>. Due to the limited resources on the Commodore 64, it was somewhat different from the arcade version as it only features certain levels. In 2015, Ghosts'n Goblins Arcade, a fan-made version more closely matching the original arcade game, was ported to C64.</p>
+
+<p>The version for <a href="https://en.wikipedia.org/wiki/Commodore_16">Commodore 16</a>/116 and <a href="https://en.wikipedia.org/wiki/Commodore_Plus/4">Commodore Plus/4</a>, also released in 1986 by Elite Systems, was even more limited than the C64 version. It was written to work on a Commodore 16, which had only 16 KB of RAM. Therefore, this version features only two levels and no music. In addition, the remaining two levels and the gameplay are simplified.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p>A version for the <a href="https://en.wikipedia.org/wiki/Amiga">Amiga</a> was released in 1990. While the hardware of the Amiga allowed an almost perfect conversion of the arcade game, it failed to emulate the success of the Commodore 64 version. The player starts the game with six lives, and no music plays unless the Amiga was equipped with at least 1 <a href="https://en.wikipedia.org/wiki/Megabyte">megabyte</a> of <a href="https://en.wikipedia.org/wiki/RAM">RAM</a>. The standard configuration of an <a href="https://en.wikipedia.org/wiki/Amiga_500">Amiga 500</a> had 512 <a href="https://en.wikipedia.org/wiki/Kilobyte">kilobytes</a>.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Mark_Cooksey">Mark Cooksey</a> scored the C64, Amiga and ST versions. <a href="https://en.wikipedia.org/wiki/David_Whittaker_(video_game_composer)">David Whittaker</a> scored the Amstrad CPC version.</p>
+
+<h2>Reception</h2>
+
+<h3>Commercial performance</h3>
+
+<p>The arcade game was a major hit. In Japan, <i>Game Machine</i> listed <i>Makaimura</i> on their October 1, 1985 issue as being the second most-popular arcade game for the previous two weeks, before it went on to be the fourth highest-grossing table arcade game during the first half of 1986 and the overall tenth highest-grossing table arcade game of 1986.</p>
+
+<p>In the United States, advance sales topped a thousand arcade units prior to release in the region, with test units each earning about $400 per week. <i>Ghosts 'n Goblins</i> went on to become America's ninth highest-grossing arcade game of 1986. In the United Kingdom, it had a slow start, initially appearing mainly at <a href="https://en.wikipedia.org/wiki/Pubs">pubs</a> and <a href="https://en.wikipedia.org/wiki/Nightclub">clubs</a> rather than major <a href="https://en.wikipedia.org/wiki/Amusement_arcades">amusement arcades</a> in late 1985, before the game went on to become a major arcade hit by 1986.</p>
+
+<p>The NES version was a best-seller, with 1.64 million units sold worldwide. On home computers, it was the top-selling game in the United Kingdom for two months during July–August 1986, and it went on to become the sixth best-selling game of 1986 in the UK. The success of <i><a href="https://en.wikipedia.org/wiki/Commando_(video_game)">Commando</a></i> (1985) and <i>Ghosts 'n Goblins</i> have been credited as the products "that shot" Capcom to "8-bit <a href="https://en.wikipedia.org/wiki/Silicon">silicon</a> stardom" in the mid-1980s.</p>
+
+<p>The arcade game received a positive review from Clare Edgeley of <i><a href="https://en.wikipedia.org/wiki/Computer_and_Video_Games">Computer and Video Games</a></i> magazine in 1985. <i><a href="https://en.wikipedia.org/wiki/Computer_Gaming_World">Computer Gaming World</a></i> called the NES version of <i>Ghosts 'n Goblins</i> "an excellent example of what the [NES] can do ... while hardly groundbreaking, [it] represents the kind of game that made Nintendo famous".</p>
+
+<p><i>Ghosts 'n Goblins</i> was runner-up in the category of Arcade Game of the Year at the <a href="https://en.wikipedia.org/wiki/Golden_Joystick_Awards">Golden Joystick Awards</a>. In the 1986 <a href="https://en.wikipedia.org/wiki/Famitsu_Awards"><i>Famitsu</i> Best Hit Game Awards</a>, the Famicom version received the "Best Port" award.</p>
+
+<p>The NES version of <i>Ghosts 'n Goblins</i> was rated the 129th best game made on a Nintendo system in <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i>'s Top 200 Games list. Writing in 2007, Marcel van Duyn of <i><a href="https://en.wikipedia.org/wiki/Nintendo_Life">Nintendo Life</a></i> gave the game 7 out of 10 stars, declaring that it provided "appeal and enjoyment" to fans of the series, while criticising its platforming and finding that it was "less fun than its contemporaries".</p>
+
+<p>The game is often cited as an example of one of the most difficult games of all time, due to its extremely hard level design and the fact that the player dies within two hits while the enemies can spawn unexpectedly all over the map. Moreover, the player must play through all of the levels again at a higher difficulty setting unlocked after completing the levels regularly in order to beat the game, without any way to save. <i>Gamerant</i> named it the 5th hardest video game of all time. In a 2011 review, Lucas Thomas of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> opined that the game was so hard it would be a "waste of time" for most players, as they would not be able to justify the eight-dollar price tag the game had at the time.</p>
+
+<h2>Legacy</h2>
+
+<h3>Sequels</h3>
+
+<p><i>Ghosts 'n Goblins</i> was followed by a series of <a href="https://en.wikipedia.org/wiki/Sequel">sequels</a> and <a href="https://en.wikipedia.org/wiki/Spin-off_(media)">spin-offs</a> eventually becoming Capcom's 8th best-selling game franchise, selling over 4.4 million units. Its sequels include <i><a href="https://en.wikipedia.org/wiki/Ghouls_'n_Ghosts">Ghouls 'n Ghosts</a></i>, <i><a href="https://en.wikipedia.org/wiki/Super_Ghouls_'n_Ghosts">Super Ghouls 'n Ghosts</a></i>, <i><a href="https://en.wikipedia.org/wiki/Ultimate_Ghosts_'n_Goblins">Ultimate Ghosts 'n Goblins</a></i> and <i><a href="https://en.wikipedia.org/wiki/Ghosts_'n_Goblins_Resurrection">Ghosts 'n Goblins Resurrection</a></i> in addition to producing the <i><a href="https://en.wikipedia.org/wiki/Gargoyle's_Quest">Gargoyle's Quest</a></i> and <i><a href="https://en.wikipedia.org/wiki/Maximo:_Ghosts_to_Glory">Maximo</a></i> spin-off series. Though originating as an <a href="https://en.wikipedia.org/wiki/Arcade_game">arcade</a> title, the franchise has been featured on a variety of <a href="https://en.wikipedia.org/wiki/Personal_computer">PC</a> and <a href="https://en.wikipedia.org/wiki/Video_game_console">video game consoles</a> with a later entry in the series, <i><a href="https://en.wikipedia.org/wiki/Ghosts_'n_Goblins:_Gold_Knights">Ghosts 'n Goblins: Gold Knights</a></i>, being released on the <a href="https://en.wikipedia.org/wiki/IOS">iOS</a>. Additionally, the franchise frequently makes cameo appearances — the character of Arthur in particular — in other Capcom titles, the latest of which being <i><a href="https://en.wikipedia.org/wiki/Marvel_vs._Capcom:_Infinite">Marvel vs. Capcom: Infinite</a></i> (in which Firebrand, the Red Arremer that protagonizes the <i>Gargoyle's Quest</i> spin-off, also appears).</p>
+
+<p>The NES version was also re-released for download for Nintendo's <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> in North America on December 10, 2007 (<a href="https://en.wikipedia.org/wiki/Wii">Wii</a>) and October 25, 2012 (<a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>) and in the PAL region on October 31, 2008 (Wii) and January 3, 2013 (Nintendo 3DS) while the Wii U version was released in both regions on May 30, 2013. The arcade version was released on the Wii's Virtual Console Arcade in Japan on November 16, 2010, the PAL region on January 7, 2011 and in North America on January 10, 2011.</p>
+
+<p>The original arcade version of the game was also included in the compilation <i><a href="https://en.wikipedia.org/wiki/Capcom_Generations">Capcom Generations Vol.2: Chronicles of Arthur</a></i> for the <a href="https://en.wikipedia.org/wiki/PlayStation">PlayStation</a> (in <a href="https://en.wikipedia.org/wiki/Japan">Japan</a> and <a href="https://en.wikipedia.org/wiki/Europe">Europe</a>) and <a href="https://en.wikipedia.org/wiki/Sega_Saturn">Sega Saturn</a> (in Japan only), which also contained <i>Ghouls 'n Ghosts</i> and <i>Super Ghouls 'n Ghosts</i>. The three games (based on their <i>Capcom Generation</i> versions) were later collected as part of <i><a href="https://en.wikipedia.org/wiki/Capcom_Classics_Collection">Capcom Classics Collection</a></i>. The game was also featured in the compilation <i><a href="https://en.wikipedia.org/wiki/Capcom_Arcade_Cabinet">Capcom Arcade Cabinet</a></i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>.</p>
+
+<p>The Game Boy version was included in the <a href="https://en.wikipedia.org/wiki/Classic_NES_series">Classic NES series</a> for the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a>, but only in Japan.</p>
+
+<p>Nintendo re-released the NES version of <i>Ghosts 'n Goblins</i> as part of the company's <a href="https://en.wikipedia.org/wiki/NES_Classic_Edition">NES Classic Edition</a>.</p>
+
+<p>The NES version of <i>Ghosts 'n Goblins</i> was re-released as part of the launch of the <a href="https://en.wikipedia.org/wiki/Nintendo_Classics">Nintendo Classics</a> service, while an SP version, which allows immediate access of the final level, was added to the service on December 13, 2018.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

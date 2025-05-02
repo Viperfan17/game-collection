@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Street Fighter II</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('e22acd30-a22f-4302-8ed3-6e7c37b68aca/3af674a1-e4b0-43c5-9b97-45bcb24736b2.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="e22acd30-a22f-4302-8ed3-6e7c37b68aca/63392f25-34c4-47e9-9e43-4bb455b24ab7.png"/> Street Fighter II</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="e22acd30-a22f-4302-8ed3-6e7c37b68aca/b731cae7-8edc-41ea-ad15-dc04f42a1f10.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:52:10</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:30:09</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo SNES">Nintendo SNES</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-1992">1992</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Arcade">Arcade</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Fighting">Fighting</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Creative Materials">Creative Materials</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-U.S. Gold">U.S. Gold</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Street_Fighter_II" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=9238" target="_blank">HowLongToBeat</a><br/><a href="http://strategywiki.org/wiki/Street_Fighter_II" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/6239" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Street_Fighter_II" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Pixel art">Pixel art</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Side view">Side view</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Street Fighter II: The World Warrior</b></i> is a 1991 <a href="https://en.wikipedia.org/wiki/Fighting_game">fighting game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> for <a href="https://en.wikipedia.org/wiki/Arcade_game">arcades</a>. It is the second installment in the <i><a href="https://en.wikipedia.org/wiki/Street_Fighter">Street Fighter</a></i> series and the sequel to 1987's <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_(video_game)">Street Fighter</a></i>. It is the fourteenth game to use Capcom's <a href="https://en.wikipedia.org/wiki/CP_System">CP System</a> <a href="https://en.wikipedia.org/wiki/Arcade_system_board">arcade system board</a>. <i>Street Fighter II</i> vastly improved many of the concepts introduced in the first game, including the use of <a href="https://en.wikipedia.org/wiki/Fighting_game#Special_attacks_and_combos">special command-based moves</a>, a <a href="https://en.wikipedia.org/wiki/Combo_(video_games)">combo</a> system, a six-button configuration, and a wider selection of <a href="https://en.wikipedia.org/wiki/Player_character">playable characters</a>, each with a unique fighting style.</p>
+
+<p>Designed by <a href="https://en.wikipedia.org/wiki/Yoshiki_Okamoto">Yoshiki Okamoto</a> and <a href="https://en.wikipedia.org/wiki/Akira_Yasuda">Akira Yasuda</a>, who had previously worked on <a href="https://en.wikipedia.org/wiki/Final_Fight_(video_game)"><i>Final Fight</i></a>, <i>Street Fighter II</i> is regarded as <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">one of the greatest video games of all time</a> and the most important and influential fighting game ever made. Its launch is seen as a revolutionary moment within its genre, credited with popularizing the fighting genre during the 1990s and inspiring other producers to create their own fighting series. Additionally, it prolonged the survival of the declining video game arcade business market by stimulating business and driving the fighting game genre. It prominently features a popular two-player mode that obligates direct, human-to-human competitive play, inspiring grassroots tournament events, culminating in <a href="https://en.wikipedia.org/wiki/Evolution_Championship_Series">Evolution Championship Series</a> (EVO). <i>Street Fighter II</i> shifted the arcade competitive dynamic from achieving personal-best high scores to head-to-head competition, including large groups.</p>
+
+<p><i>Street Fighter II</i> became the best-selling game since the <a href="https://en.wikipedia.org/wiki/Golden_age_of_arcade_video_games">golden age of arcade video games</a>. By 1994, it had been played by an estimated 25 million people in the United States alone. More than 200,000 <a href="https://en.wikipedia.org/wiki/Arcade_cabinet">arcade cabinets</a> and 15 million software units of every version of <i>Street Fighter II</i> have been sold worldwide, earning an estimated $10 billion in total revenue, making it one of the top three highest-grossing video games of all time as of 2017 and the best-selling fighting game until 2019. More than 6.3 million <a href="https://en.wikipedia.org/wiki/SNES">SNES</a> <a href="https://en.wikipedia.org/wiki/ROM_cartridge">cartridges</a> of <i>Street Fighter II</i> were sold, making it Capcom's <a href="https://en.wikipedia.org/wiki/List_of_best-selling_video_games">best-selling</a> single software game for the next two decades, its best-selling game on a single platform, and the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Super_Nintendo_Entertainment_System_video_games">highest-selling third-party game</a> on the SNES. Due to its major success, a <a href="https://en.wikipedia.org/wiki/Street_Fighter_II#Updated_versions">series of updated versions</a> were released with additional features and characters, starting with 1992's <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_II:_Champion_Edition">Street Fighter II: Champion Edition</a></i>; its major successor was <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_III">Street Fighter III</a></i> in 1997.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Street Fighter II</i> follows several conventions and rules established by its 1987 predecessor <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_(video_game)">Street Fighter</a></i>. The player engages opponents in a series of timed one-on-one, close-quarters combat matches. In order to win a round, the player must either completely drain the opponent's health bar by landing attacks, or have more health left than the opponent when the timer runs out. Neither fighter wins the round if they have equal health when time expires or if they simultaneously knock each other out. The first fighter to win two rounds is declared the victor of the match.</p>
+
+<p>While a single-player game is in progress, a second player may join at any time, immediately starting a head-to-head match. The winner continues in single-player mode.</p>
+
+<p>The original <i>Street Fighter II</i> allowed up to 10 rounds per match; this maximum is reduced to four rounds starting with <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_II:_Champion_Edition">Champion Edition</a></i>. If there is no clear winner by the end of the final round, either the computer-controlled opponent will win by default in a single-player match or both fighters will lose in a two-player match. After every third match in the single-player mode, a <a href="https://en.wikipedia.org/wiki/Bonus_stage">bonus stage</a> gives a chance to earn additional points by smashing a car, wooden barrels, or metal oil drums. After each match, the location for the next one is selected on a <a href="https://en.wikipedia.org/wiki/World_map">world map</a>.</p>
+
+<p>Like in <i>Street Fighter</i>, the controls are an eight-directional joystick and six attack buttons. The joystick can jump, crouch, walk left and right, and block. A tradeoff of strength and speed are given by three punch buttons and three kick buttons, each of light, medium, and heavy. The player can perform a variety of basic moves in any position, including new grabbing and throwing attacks. Special moves are performed by combinations of directional and button-based commands.</p>
+
+<p><i>Street Fighter II</i> differs from its predecessor due to the selection of multiple <a href="https://en.wikipedia.org/wiki/Player_character">playable characters</a>, each with distinct fighting styles and special moves including combos. According to <i>IGN</i>, "the concept of combinations, linked attacks that can't be blocked when they're timed correctly, came about more or less by accident. <i>Street Fighter II</i>'s designers didn't quite mean for it to happen, but players of the original game eventually found out that certain moves naturally flowed into other ones." This <a href="https://en.wikipedia.org/wiki/Combo_(video_gaming)">combo</a> system was later adopted as a standard feature of fighting games and was expanded upon in this series.</p>
+
+<h2>Plot</h2>
+
+<p>The leader of the Shadaloo organization, M. Bison, in his global domination plan sets up a world fighting tournament, to select the best fighters to work in his Shadaloo organization through brainwashing. Many of the other characters in the game have personal reasons for wanting revenge on Bison.</p>
+
+<h2>Characters</h2>
+
+<p>The original <i>Street Fighter II</i> features a roster of eight playable characters. This includes Ryu and Ken—the main protagonists from <i>Street Fighter</i>—plus six new international newcomers. In the single-player tournament, the player fights the other seven main fighters, then the final opponents—a group of four <a href="https://en.wikipedia.org/wiki/Central_processing_unit">CPU</a>-only opponents known as the Grand Masters, which includes Sagat from <i>Street Fighter</i>.</p>
+
+<p>Playable characters:</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Ryu_(Street_Fighter)">Ryu</a>, a Japanese martial artist seeking no fame or even the crown of "champion", but only to hone his <a href="https://en.wikipedia.org/wiki/Ansatsuken">Ansatsuken</a> <a href="https://en.wikipedia.org/wiki/Karate">Karate</a> skills with the inner power of Chi. He dedicates his life to perfect his own potential while abandoning everything else such as having no family and few friends; his only bond is with Ken. He is the winner of the previous tournament. He is not convinced that he is the greatest fighter in the world and comes to this tournament in search of fresh competition.</li>
+  <li><a href="https://en.wikipedia.org/wiki/E._Honda">E. Honda</a>, a <a href="https://en.wikipedia.org/wiki/Sumo">sumo</a> wrestler from Japan. He aims to improve the negative reputation of sumo wrestling by proving to competitors that he is a legitimate athlete.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Blanka">Blanka</a>, a beastlike mutant from Brazil who was raised in the jungle. He enters the tournament to uncover more origins about his forgotten past.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Guile_(Street_Fighter)">Guile</a>, a former United States Air Force special forces operative seeking to defeat <a href="https://en.wikipedia.org/wiki/M._Bison">M. Bison</a>, who killed his best friend <a href="https://en.wikipedia.org/wiki/Charlie_(Street_Fighter)">Charlie</a>.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Ken_Masters">Ken</a>, Ryu's best friend, greatest rival and former training partner, from the United States. Ryu's personal challenge rekindled Ken's fighting spirit and persuaded him to enter the World Warrior tournament, as well as feeling unenthusiastic in his fighting potential due to spending too much time with his fiancée.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Chun-Li">Chun-Li</a>, a Chinese martial artist who works as an <a href="https://en.wikipedia.org/wiki/Interpol">Interpol</a> officer. Much like Guile, she does not enter the World Warrior tournament for any personal glory except proving that she can defeat any man who challenges her. Chun-Li's ambition in the past was tracking down the movements of the smuggling operation known as Shadaloo. Her goal now is her trail being led to the tournament by seeking to avenge her deceased father by holding the <i>Grand Master's</i> leader of the crime syndicate responsible.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Zangief">Zangief</a>, a professional wrestler and <a href="https://en.wikipedia.org/wiki/Sambo_(martial_art)">sambo</a> fighter from the Soviet Union. He aims to prove "Soviet Strength" is the strongest form of strength, particularly by defeating American opponents with his bare hands.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Dhalsim">Dhalsim</a>, a fire-breathing <a href="https://en.wikipedia.org/wiki/Yoga">yoga</a> master from India. Even though he is a pacifist, he uses the money earned from fighting to lift people out of poverty.</li>
+</ul>
+
+<p>CPU-exclusive characters, in the order of appearance:</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Balrog_(Street_Fighter)">Balrog</a>, an American <a href="https://en.wikipedia.org/wiki/Boxer_(boxing)">boxer</a> with a similar appearance to <a href="https://en.wikipedia.org/wiki/Mike_Tyson">Mike Tyson</a>. Called M. Bison in Japan. Once one of the world's greatest heavyweight boxers, he began working for Shadaloo for easy money.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Vega_(Street_Fighter)">Vega</a>, a Spanish <a href="https://en.wikipedia.org/wiki/Bullfighter">bullfighter</a> who wields a claw and uses a unique style of <a href="https://en.wikipedia.org/wiki/Ninja">ninjutsu</a>. Called Balrog in Japan. He is vain and wishes to eliminate ugly people from the world.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Sagat_(Street_Fighter)">Sagat</a>, a <a href="https://en.wikipedia.org/wiki/Muay_Thai">Muay Thai</a> kickboxer from Thailand and former World Warrior champion from the original <i>Street Fighter</i>. He was once known as <i>The King of Street Fighters</i> until he got demoted as <i>The King of Muai Thai</i> in his own tournament due to a narrow defeat at the hands of Ryu's <i>shoryuken</i> (rising dragon punch) which left a deep gash across his chest. Ever since that moment he felt disgrace, and will do anything to have a grudge match with Ryu to get his title back, even if it takes joining forces with Shadaloo.</li>
+  <li><a href="https://en.wikipedia.org/wiki/M._Bison">M. Bison</a>, the leader of the criminal organization Shadaloo, who uses a mysterious power known as Psycho Power, and the final opponent of the game. Called Vega in Japan.</li>
+</ul>
+
+<p>Takayuki Nakayama stated in an interview that many character design ideas were trialled and dropped along the development process. Rejected character designs for <i>Street Fighter II</i> included another <a href="https://en.wikipedia.org/wiki/Bullfighter">bullfighter</a> and an American amateur wrestler.</p>
+
+<h2>Regional differences</h2>
+
+<p>With the exception of Sagat, the Shadaloo Bosses have different names in the Japanese version. The African-American boxer known as Balrog in the international versions was designed as a <a href="https://en.wikipedia.org/wiki/Pastiche">pastiche</a> of real-life boxer <a href="https://en.wikipedia.org/wiki/Mike_Tyson">Mike Tyson</a> and was originally named M. Bison (short for "Mike Bison", with "Mike" being one of the American opponents faced in <i>Street Fighter</i>). Vega and M. Bison were originally named Balrog and Vega, respectively. When <i>Street Fighter II</i> was localized for the overseas market, the names of the bosses were rotated, out of concern that the boxer's similarities to Tyson could have led to a <a href="https://en.wikipedia.org/wiki/Personality_rights">likeness infringement lawsuit</a>.</p>
+
+<p>The characters in the Japanese version have more than one win quote and if the player loses a match against the CPU in the Japanese version, a random playing tip will be shown at the bottom of the continue screen. While the ending text for the characters was originally translated literally, a few changes were made due to creative differences from Capcom's U.S. marketing staff. For example, the name of Guile's fallen friend (who later debuted as a playable fighter in <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_Alpha">Street Fighter Alpha</a></i>) was changed from Nash to <a href="https://en.wikipedia.org/wiki/Charlie_(Street_Fighter)">Charlie</a>, since a staff member from Capcom USA said that Nash is not a natural sounding English name.</p>
+
+<h2>Development</h2>
+
+<p>Although the original punching-pad cabinet of <i>Street Fighter</i> had not been very popular, the alternate six-button version was more successful, which began to generate interest in a sequel. Capcom began to make fighting games a priority after <i>Final Fight</i> was commercially successful in the United States. <a href="https://en.wikipedia.org/wiki/Yoshiki_Okamoto">Yoshiki Okamoto</a> recounted: "The basic idea at Capcom was to revive <i>Street Fighter</i>, a good game concept, to make it a better-playing arcade game."</p>
+
+<p>Development of <i>Street Fighter II</i> took about two years and about 35 to 40 people, with <a href="https://en.wikipedia.org/wiki/Noritaka_Funamizu">Noritaka Funamizu</a> as a producer, and <a href="https://en.wikipedia.org/wiki/Akira_Nishitani">Akira Nishitani</a> and <a href="https://en.wikipedia.org/wiki/Akira_Yasuda">Akira Yasuda</a> in charge of the game and character design, respectively. The budget was estimated at $2,450,000 (equivalent to $5,660,000 in 2024).</p>
+
+<p>Funamizu notes that the developers did not particularly prioritize <i>Street Fighter II</i>'s <a href="https://en.wikipedia.org/wiki/Balance_(game_design)">balance</a>; he primarily ascribes the game's success to its appealing animation patterns. The quality of animation benefited from the developers' use of the <a href="https://en.wikipedia.org/wiki/CP_System">CPS-1</a> hardware, with advantages including allowing different characters to occupy different amounts of memory. For example, <a href="https://en.wikipedia.org/wiki/Ryu_(Street_Fighter)">Ryu</a> can occupy 8 <a href="https://en.wikipedia.org/wiki/Megabit">megabits</a> and <a href="https://en.wikipedia.org/wiki/Zangief">Zangief</a> 12 megabits.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Combo_(video_gaming)">combo</a> system came about by accident:</p>
+
+<p>The vast majority of in-game music was composed by <a href="https://en.wikipedia.org/wiki/Yoko_Shimomura">Yoko Shimomura</a>. This is ultimately the only game in the series on which Shimomura worked, as she left the company for <a href="https://en.wikipedia.org/wiki/Square_(video_game_company)">Square</a> two years later. Isao Abe, a Capcom newcomer, handled a few additional tracks ("Versus Screen", "Sagat's Theme", and "Here Comes A New Challenger") for <i>Street Fighter II</i> and became the main composer on the subsequent versions. The sound programming and sound effects were overseen by Yoshihiro Sakaguchi, the composer on <i>Street Fighter</i>.</p>
+
+<p>Location testing began in Japan. It was then exhibited in the United Kingdom at London's <a href="https://en.wikipedia.org/wiki/Amusement_Trades_Exhibition_International">Amusement Trades Exhibition International</a> (ATEI) in January 1991. The same month, Capcom held a two-week location test in North America, before unveiling the game at Capcom's distributor conference on February 1, 1991, held at <a href="https://en.wikipedia.org/wiki/Marriott_Hotels_&amp;_Resorts">Marriott Harbor Beach</a>, <a href="https://en.wikipedia.org/wiki/Fort_Lauderdale,_Florida">Fort Lauderdale, Florida</a>. Capcom introduced <i>Street Fighter II</i> as its "greatest video game ever".</p>
+
+<h2>Updated versions</h2>
+
+<p><i>Street Fighter II</i> spawned a series of revisions, each refining the play mechanics, graphics, character roster, and other aspects of the game:</p>
+
+<ul>
+  <li><i><b><a href="https://en.wikipedia.org/wiki/Street_Fighter_II:_Champion_Edition">Street Fighter II: Champion Edition</a></b></i>, released in March 1992, rebalances characters' power levels, allows both players in two-player matches to select the same character (distinguished by alternate costume colors) and allows players to choose the four previously computer-only boss characters.</li>
+  <li><i><a href="https://en.wikipedia.org/wiki/Street_Fighter_II_Turbo"><b>Street Fighter II Turbo</b>: Hyper Fighting</a></i>, released in December 1992, increases the playing speed and gave some characters new special moves. It was created as Capcom's official response to a wave of unauthorized modifications for arcade cabinets of <i>Champion Edition</i> that appeared throughout 1992, such as the so-called <a href="https://en.wikipedia.org/wiki/Street_Fighter_II:_Rainbow_Edition">"Rainbow Edition"</a>.</li>
+  <li><i><a href="https://en.wikipedia.org/wiki/Super_Street_Fighter_II:_The_New_Challengers"><b>Super Street Fighter II</b>: The New Challengers</a></i>, released in September 1993, used the more advanced <a href="https://en.wikipedia.org/wiki/CP_System_II">CP System II</a> which allowed for updated graphics and audio. It introduces four new characters, but relieved the speed increase of <i>Street Fighter II Turbo: Hyper Fighting</i>.</li>
+  <li><i><b><a href="https://en.wikipedia.org/wiki/Super_Street_Fighter_II_Turbo">Super Street Fighter II Turbo</a></b></i>, released in February 1994, combines the improvements of <i>Super Street Fighter II</i> with the previous <i>Turbo (Hyper Fighting)</i> edition. It allows for a selective game speed, introduces powered-up special moves called Super Combos, and adds a new hidden character.</li>
+</ul>
+
+<p>In addition to the official updated versions, numerous counterfeit modified versions of <i>Street Fighter II</i> were in wide circulation. For example, nine different counterfeit versions were available on the Super Famicom in Japan by December 1992.</p>
+
+<p>All of the <i>Street Fighter II</i> arcade games have been ported to various platforms, as individual releases and also in compilations. Later home console ports further reinvented elements from the arcades: <i><b><a href="https://en.wikipedia.org/wiki/Hyper_Street_Fighter_II">Hyper Street Fighter II</a></b></i> released in December 2003 (which was later given an arcade release), <i><b><a href="https://en.wikipedia.org/wiki/Super_Street_Fighter_II_Turbo_HD_Remix">Super Street Fighter II Turbo HD Remix</a></b></i> released in November 2008, and <i><a href="https://en.wikipedia.org/wiki/Ultra_Street_Fighter_II:_The_Final_Challengers"><b>Ultra Street Fighter II</b>: The Final Challengers</a></i> released in May 2017; the latter of which added three additional characters who previously debuted outside the <i>Street Fighter II</i> line of titles.</p>
+
+<h2>Ports</h2>
+
+<h3>Super NES</h3>
+
+<p><i>Street Fighter II</i> was released for the <a href="https://en.wikipedia.org/wiki/Super_Famicom">Super Famicom</a> on June 10, 1992, in Japan, followed by a North American release for the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">SNES</a> in August and a European release in December. It is the first game released on a 16-megabit SNES cartridge. Many aspects from the arcade versions were either changed or simplified in order to fit into the smaller memory capacity. This version has a secret code allowing both players to control the same character in a match, which is not possible in the original arcade version. The second player uses the same alternate color palette introduced in <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_II:_Champion_Edition">Street Fighter II: Champion Edition</a></i>. The four Shadaloo Bosses are still non-playable, but the code enables their <i>Champion Edition</i> color palette. Tatsuya Nishimura, who had recently joined Capcom from <a href="https://en.wikipedia.org/wiki/Tose_Co.,_Ltd.">TOSE</a>, arranged the soundtrack with assistance from Shimomura, Abe, and Sakaguchi.</p>
+
+<p>The American SNES cartridge was re-released in November 2017 as a limited edition item to celebrate the anniversary of the <i>Street Fighter</i> series.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/U.S._Gold">U.S. Gold</a> released versions of <i>Street Fighter II</i> for various <a href="https://en.wikipedia.org/wiki/Home_computer">home computer</a> platforms in Europe, namely the <a href="https://en.wikipedia.org/wiki/Amiga">Amiga</a>, <a href="https://en.wikipedia.org/wiki/Atari_ST">Atari ST</a>, <a href="https://en.wikipedia.org/wiki/Commodore_64">Commodore 64</a>, <a href="https://en.wikipedia.org/wiki/IBM_PC_compatible">PC</a> (<a href="https://en.wikipedia.org/wiki/DOS">DOS</a>), and <a href="https://en.wikipedia.org/wiki/ZX_Spectrum">ZX Spectrum</a>. These were all developed by Creative Materials, except the ZX Spectrum version by <a href="https://en.wikipedia.org/wiki/Tiertex_Design_Studios">Tiertex Design Studios</a>. The PC version was also published in North America by <a href="https://en.wikipedia.org/wiki/Hi-Tech_Expressions">Hi-Tech Expressions</a>.  These versions suffer numerous inaccuracies, such as missing graphical assets and music tracks, miscolored palettes, and lack of six-button controls due to these platforms having only one or two-button joysticks as standard at the time. Though officially advertised by US Gold along with the C64 and ZX Spectrum conversions and anticipated in magazines, the <a href="https://en.wikipedia.org/wiki/Amstrad_CPC">Amstrad CPC</a> development by Creative Materials was canceled.</p>
+
+<p>This standalone handheld machine was missing Chun-Li and Dhalsim.</p>
+
+<p>The Game Boy version of <i>Street Fighter II</i> was released on August 11, 1995, in Japan, and in September 1995 internationally. It is missing Dhalsim, E. Honda, and Vega. The graphics, character portraits, and stages are based on <i>Super Street Fighter II</i>, although some moves (ex: Blanka's Amazon River Run) from <i>Super Street Fighter II Turbo</i> are included. Because the Game Boy only has two buttons, the strength of punches and kicks is determined by the duration of button presses.</p>
+
+<p><i>Street Fighter II</i>, <i>Champion Edition</i>, and <i>Turbo</i> are in the compilation <i><a href="https://en.wikipedia.org/wiki/Capcom_Generations">Capcom Generation 5</a></i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> and <a href="https://en.wikipedia.org/wiki/Sega_Saturn">Sega Saturn</a>, which was released in North America and Europe as <i>Street Fighter Collection 2</i>. All three games are in <i><a href="https://en.wikipedia.org/wiki/Capcom_Classics_Collection">Capcom Classics Collection Vol. 1</a></i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> and <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a>, and in <i>Capcom Classics Collection Reloaded</i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>. In 2011, all three games were released on <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> devices as the <i>Street Fighter II Collection</i>, though the compilation was later delisted from the <a href="https://en.wikipedia.org/wiki/App_Store_(iOS/iPadOS)">App Store</a>. In 2018, <i>Street Fighter II</i> was one of the many games included in the <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_30th_Anniversary_Collection">Street Fighter 30th Anniversary Collection</a></i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> and <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>.</p>
+
+<h2>Reception</h2>
+
+<h3>Commercial</h3>
+
+<p>By 1994, <i>Street Fighter II</i> had been played by an estimated 25 million people in the United States alone, across arcades and homes. All versions of <i>Street Fighter II</i> are estimated to have grossed a total of $10.61 billion in revenue, mostly from the arcade market. As of 2017, it is one of the top three highest-grossing video games of all time, along with <i><a href="https://en.wikipedia.org/wiki/Space_Invaders">Space Invaders</a></i> (1978) and <i><a href="https://en.wikipedia.org/wiki/Pac-Man">Pac-Man</a></i> (1980).</p>
+
+<h4>Arcade versions</h4>
+
+<p><i>Street Fighter II</i> was not immediately successful in Japan, as most arcade players were initially playing it solo, rather than multiplayer as originally intended. Yoshiki Okamoto was disappointed with its initial performance, and was told he should have produced another solo beat 'em up like <i>Final Fight</i> instead. After Japanese arcade magazine <i><a href="https://en.wikipedia.org/wiki/Gamest">Gamest</a></i> began publishing articles informing readers about the "battle play" feature, the game began gaining considerable popularity in Japanese arcades. In Japan, <i><a href="https://ja.wikipedia.org/wiki/ゲームマシン">Game Machine</a></i> magazine listed the game on their April 1, 1991 issue as being the second most-successful <a href="https://en.wikipedia.org/wiki/Table_arcade_cabinet">table arcade cabinet</a> of the month, outperforming games such as <i><a href="https://en.wikipedia.org/wiki/Detana!!_TwinBee">Detana!! TwinBee</a></i> and <i><a href="https://en.wikipedia.org/wiki/King_of_the_Monsters_(video_game)">King of the Monsters</a></i>, before <i>Street Fighter II</i> topped the charts two weeks later. It went on to become the highest-grossing <a href="https://en.wikipedia.org/wiki/1991_in_video_games">arcade game of 1991</a> in Japan, and then it again became the highest-grossing <a href="https://en.wikipedia.org/wiki/1992_in_video_games">arcade game of 1992</a>. <i>Street Fighter II Turbo</i> became the highest-grossing <a href="https://en.wikipedia.org/wiki/1993_in_video_games">arcade game of 1993</a>, with <i>Street Fighter II Dash</i> (<i>Champion Edition</i>) at number four and <i>The World Warrior</i> at number nine.</p>
+
+<p><i>Street Fighter II</i> was similarly successful in the <a href="https://en.wikipedia.org/wiki/Western_world">Western world</a>. In the United States, the game was more immediately successful as it exceeded expectations in test markets, with individual machines earning $1,300–1,400 per week, Capcom USA sales representative Jeff Walker predicted it would "become the kit of 1991" and <i>RePlay</i> magazine said the game showed there was "plenty of life" left in the then struggling arcade business. By March, it had become a blockbuster and the top-grossing game in the United States, giving a substantial boost in earnings for street operators. It topped the <i>RePlay</i> arcade software charts from May 1991 through August 1992, for a total of 16 months. On the <i><a href="https://en.wikipedia.org/wiki/Play_Meter">Play Meter</a></i> arcade charts, it was the top-grossing video game during January–February 1992 and May 1992. <i>Street Fighter II</i> was the highest-grossing arcade game of 1991 in the United States, and one of the top five highest-grossing arcade conversion kits of 1992 (below <i>Champion Edition</i>). Its success was considered phenomenal; by 1992, it had turned around the convenience store segment of the coin-op industry and become the best-selling arcade game in ten years. <i><a href="https://en.wikipedia.org/wiki/Electronic_Games">Electronic Games</a></i> noted in its October 1992 issue, "Not since the <a href="https://en.wikipedia.org/wiki/Golden_age_of_arcade_video_games">early 1980s</a> has an arcade game received so much attention and all-out fanatical popularity." It was similarly successful in Australia, where it was performing strongly after 16 months on the market, with <i>Leisure Line</i> magazine noting in 1992 that not "since the days of <i><a href="https://en.wikipedia.org/wiki/Space_Invaders">Space Invaders</a></i> (1978) has a game had such longevity".</p>
+
+<p>In 1991, 50,000 arcade units were sold worldwide, including 17,000 units in Japan, with Capcom reporting continued production of arcade units due to repeat orders. In the United Kingdom, <i><a href="https://en.wikipedia.org/wiki/Your_Commodore">Your Commodore</a></i> reported in July 1991 that spectators were betting on players at <a href="https://en.wikipedia.org/wiki/London_West_End">London West End</a> arcades. Between early 1991 and early 1993, <i>Street Fighter II</i> had captured about 60% of the global coin-op market, including 10,000 units installed in the United Kingdom by mid-1991, with individual machines in the UK estimated to be taking between <a href="https://en.wikipedia.org/wiki/Pound_sterling">£</a>70–1,000 per week over the next two years. <i>Street Fighter II</i> generated an estimated annual revenue of £260 million in the UK alone for the two years between mid-1991 and mid-1993, totaling £520 million ($913 million at the time, equivalent to $2.05 billion in 2024).</p>
+
+<p>The company sold more than 60,000 <a href="https://en.wikipedia.org/wiki/Arcade_machines">arcade machines</a> of the original <i>Street Fighter II</i>, including about 20,000 to 25,000 units in the United States. It was followed by <i>Street Fighter II′</i> (<i>Dash</i> or <i>Champion Edition</i>), of which 140,000 arcade units were sold in Japan alone, where it cost <a href="https://en.wikipedia.org/wiki/Japanese_yen">¥</a>160,000 (<a href="https://en.wikipedia.org/wiki/United_States_dollar">$</a>1300) for each unit, amounting to ¥22.4 billion ($182 million) revenue generated from hardware sales in Japan (equivalent to $420 million in 2024), in addition to about 20,000 to 25,000 units sold in the United States. On the US <i>RePlay</i> arcade charts for July 1992, <i>Champion Edition</i> was number one on the upright cabinets chart (above <a href="https://en.wikipedia.org/wiki/Midway_Games">Midway</a>'s <i><a href="https://en.wikipedia.org/wiki/Mortal_Kombat_(1992_video_game)">Mortal Kombat</a></i>) while the original <i>Street Fighter II</i> was number two on the coin-op software chart (below <a href="https://en.wikipedia.org/wiki/SNK_Playmore">SNK</a>'s <i><a href="https://en.wikipedia.org/wiki/World_Heroes">World Heroes</a></i>). <i>Street Fighter II</i> generated $1.5 billion (equivalent to $3.36 billion in 2024) annually in 1993, making it the year's highest-grossing entertainment product, above the film <i><a href="https://en.wikipedia.org/wiki/Jurassic_Park_(film)">Jurassic Park</a></i>. In January 1994, Capcom referred to <i>Street Fighter II</i> as "the most successful video game series of the decade" while promoting <i>Super Street Fighter II</i>. In early 1994, Capcom projected sales of <i>Super Street Fighter II</i> to reach 100,000 arcade units. According to the March 1995 issue of <i><a href="https://en.wikipedia.org/wiki/GameFan">GameFan</a></i>, the game had earned "billions of dollars in profit".</p>
+
+<p>In addition to Capcom's official arcade units, many pirated counterfeit <i>Street Fighter II</i> arcade clone units were sold across the world. <i>RePlay</i> noted in January 1993 that <i>Street Fighter II</i> had "single-handedly re-ignited the worldwide black market in counterfeit <a href="https://en.wikipedia.org/wiki/Printed_circuit_board">PCBs</a> and speed-up kits". Many counterfeit arcade units often outsold official <i>Street Fighter II</i> <a href="https://en.wikipedia.org/wiki/Arcade_cabinet">arcade cabinets</a> in various markets. For example, about 200,000 counterfeits were in <a href="https://en.wikipedia.org/wiki/Mexico">Mexico</a> alone, where Capcom did not officially sell the game. Bondeal from <a href="https://en.wikipedia.org/wiki/Hong_Kong">Hong Kong</a> produced 3,000 copied arcade units per month for markets like <a href="https://en.wikipedia.org/wiki/Latin_America">Latin America</a>, and a <a href="https://en.wikipedia.org/wiki/Taiwan">Taiwanese</a> firm produced 20,000 copied arcade units in 1991; in Taiwan, up to 150,000 clone units were manufactured by 1992. Many counterfeit units were in <a href="https://en.wikipedia.org/wiki/South_Korea">South Korea</a>, such as a trader selling about 100 <i>Street Fighter II</i> PCBs by 1992. Seven different versions of the game claimed to be sequels in 1992, mostly from Hong Kong, and one named <i>Champion of Champion Editions</i> reportedly was in British arcades. Capcom and its partners took legal action against counterfeit arcade units in regions such as <a href="https://en.wikipedia.org/wiki/Southeast_Asia">Southeast Asia</a>, <a href="https://en.wikipedia.org/wiki/North_America">North America</a>, South Korea, and <a href="https://en.wikipedia.org/wiki/Puerto_Rico">Puerto Rico</a>.</p>
+
+<h4>Home conversions</h4>
+
+<p>The numerous home conversions of <i>Street Fighter II</i> are listed among Capcom's Platinum-class games, with more than one million units sold worldwide. In Japan, 1 million copies of the Super Famicom version were sold in June 1992 within the first two weeks of its release, at a retail price of <a href="https://en.wikipedia.org/wiki/Japanese_yen">¥</a>10,780 (equivalent to $85.12 then, or $191 in 2024). The February 1992 issue of <i><a href="https://en.wikipedia.org/wiki/Gamest">Gamest</a></i> in Japan said that, due to low stock, the console versions were selling for much higher at ¥15,000 (equivalent to about $119.19 at the time, or $267 in 2024). It topped the Japanese <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> sales charts from June through July to August 1992. It was a multi-million seller in Japan by December 1992.</p>
+
+<p>In the United States, 750,000 units of the SNES version were sold between July 15 and September 30, 1992, with a retail price of $74.99 (equivalent to $170 in 2024). According to <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i>: "Never has a game taken the country [by] storm as this one has." It remained America's top-selling Super NES game for much of late 1992, in August and then October, November, and December. In 1992 in North America, 2 million units were sold. In the United Kingdom, <i>Street Fighter II</i> replaced <i><a href="https://en.wikipedia.org/wiki/Super_Mario_World">Super Mario World</a></i> as the bundled game for the SNES, and the SNES and Amiga versions made it the second best-selling home video game of 1992, below <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_2">Sonic the Hedgehog 2</a></i> for the Mega Drive. Worldwide, four million <i>Street Fighter II</i> cartridges had been sold by September 1992, 5 million units by the end of 1992, and over 6 million by 1993. The SNES version became the company's <a href="https://en.wikipedia.org/wiki/List_of_best_selling_video_games">best-selling</a> single consumer game software, at more than 6.3 million units, and it remains its best-selling game software on a single platform. By 1993, 10 million units of all home software versions had been sold, and 11.9 million units for Nintendo and Sega consoles by March 1994.</p>
+
+<p>The SNES versions of <i>Street Fighter II Turbo</i> and <i>Super Street Fighter II</i> had 4.1 million and two million unit sales, respectively, followed by the Mega Drive/Genesis version of <i>Street Fighter II: Special Champion Edition</i> with 1.65 million sales. In total, more than 14 million copies were sold for the SNES and Mega Drive/Genesis consoles. The SNES version of <i>Street Fighter II</i> was Capcom's best-selling single game until 2013, when it was surpassed by <i><a href="https://en.wikipedia.org/wiki/Resident_Evil_5">Resident Evil 5</a></i>. The Amiga version was successful in the United Kingdom, where it became the best-selling home computer software of 1992, though only being available for the last 16 days of the year. <i>Street Fighter II</i> also topped the UK's Amiga sales chart in January 1993, and the UK's Atari ST chart in March 1993. In 2008, <i><a href="https://en.wikipedia.org/wiki/Super_Street_Fighter_II_Turbo_HD_Remix">Super Street Fighter II Turbo HD Remix</a></i> broke both the first-day and first-week sales records for a download-only game. <i>Street Fighter II</i> was the best-selling fighting game with 15.5 million units sold across all versions and platforms, until it was surpassed by <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Ultimate">Super Smash Bros. Ultimate</a></i> in 2019.</p>
+
+<p>Like the arcades, the home conversions were impacted by <a href="https://en.wikipedia.org/wiki/Copyright_infringement">copyright infringement</a>. Upon release of the SNES version in 1992, thirteen different unauthorized versions were reportedly available for the Super Famicom.</p>
+
+<h2>Legacy</h2>
+
+<h3>Sequels</h3>
+
+<p>The <i>Street Fighter II</i> games were followed by several sub-series of <i>Street Fighter</i> games and spinoffs, including <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_EX">Street Fighter EX</a></i>, <i><a href="https://en.wikipedia.org/wiki/Super_Gem_Fighter_Mini_Mix">Pocket Fighter</a></i>, <i><a href="https://en.wikipedia.org/wiki/Super_Puzzle_Fighter_II_Turbo">Super Puzzle Fighter II Turbo</a></i>, and <i>Vs.</i> series. A prequel to <i>Street Fighter II</i>, <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_Alpha">Street Fighter Alpha</a></i>, was released in 1995. The direct sequel to <i>Street Fighter II</i>, <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_III">Street Fighter III</a></i>, would be released in 1997. Capcom released <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_IV">Street Fighter IV</a></i> for the arcades in July 2008, followed by Xbox 360 and PlayStation 3 in February 2009 and Microsoft Windows in July 2009. <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_V">Street Fighter V</a></i> was released for the PlayStation 4 and Windows in 2016. <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_6">Street Fighter 6</a></i> was released for the PlayStation 4, PlayStation 5, Windows and Xbox Series X/S in June 2023, an arcade version was released in Japan in December 2023.</p>
+
+<ul>
+  <li>The characters joined the <i><a href="https://en.wikipedia.org/wiki/G.I._Joe:_A_Real_American_Hero">G.I. Joe: A Real American Hero</a></i> lineup in 1993, as Hasbro bought their toy rights.</li>
+  <li>An unofficial South Korean animation, <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_(Korean_Animation)">Street Fighter</a></i>, was produced by Daiwon Animation in 1992 and features the cast of <i>Street Fighter II</i>. The Hong Kong movie <i><a href="https://en.wikipedia.org/wiki/Future_Cops">Future Cops</a></i> has a renamed cast of <i>Street Fighter II</i> characters.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></li>
+  <li>Two film adaptations were released in 1994: <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_II:_The_Animated_Movie">Street Fighter II: The Animated Movie</a></i>, a Japanese anime film produced by <a href="https://en.wikipedia.org/wiki/Group_TAC">Group TAC</a>; and <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_(1994_film)">Street Fighter</a></i>, an American live-action film starring <a href="https://en.wikipedia.org/wiki/Jean-Claude_Van_Damme">Jean-Claude Van Damme</a>.</li>
+  <li>A U.S. <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_(TV_series)">Street Fighter</a></i> cartoon follows a combined plot of the live-action movie and the game series. An unrelated anime, <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_II_V">Street Fighter II V</a></i>, features younger characters similar to <i><a href="https://en.wikipedia.org/wiki/Street_Fighter:_The_Legend_of_Chun-Li">The Legend of Chun-Li</a></i>.</li>
+  <li>Capcom sponsored IndyCar driver <a href="https://en.wikipedia.org/wiki/Kenji_Momota">Kenji Momota</a> at the <a href="https://en.wikipedia.org/wiki/1992_Indianapolis_500">1992 Indianapolis 500</a>, providing a <i>Street Fighter</i> livery for his No. 88 car, which failed to qualify.</li>
+</ul>
+
+<p><i>Street Fighter II</i> is regarded as one of the most influential video games of all time, and the most important fighting game in particular. The release of <i>Street Fighter II</i> in 1991 is often considered a revolutionary moment in the fighting game genre. It has the most accurate joystick and button scanning <a href="https://en.wikipedia.org/wiki/Subroutine">routine</a> in the genre, allowing players to reliably execute multi-button special moves, and its graphics use Capcom's <a href="https://en.wikipedia.org/wiki/CP_System">CPS arcade chipset</a>, with highly detailed characters and <a href="https://en.wikipedia.org/wiki/Level_(video_games)">stages</a>. Whereas previous games allow players to combat a variety of computer-controlled fighters, <i>Street Fighter II</i> allows human combat.</p>
+
+<p>The popularity of <i>Street Fighter II</i> surprised the gaming industry, as arcade owners bought more machines to keep up with demand. It was responsible for introducing the <a href="https://en.wikipedia.org/wiki/Combo_(video_gaming)">combo</a> mechanic, which came about when skilled players learned that they could combine several attacks with no time for the opponent to recover. Its success inspired a wave of other fighting games, which were initially often labeled as "<a href="https://en.wikipedia.org/wiki/Video_game_clone">clones</a>" or imitators, including titles such as <i><a href="https://en.wikipedia.org/wiki/Guardians_of_the_'Hood">Guardians of the 'Hood</a></i>, <i><a href="https://en.wikipedia.org/wiki/Art_of_Fighting">Art of Fighting</a></i>, <i><a href="https://en.wikipedia.org/wiki/Time_Killers">Time Killers</a></i>, <i><a href="https://en.wikipedia.org/wiki/Mortal_Kombat">Mortal Kombat</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Killer_Instinct_(video_game_series)">Killer Instinct</a></i>. <i>Street Fighter II</i> also influenced the development of the combat mechanics of <a href="https://en.wikipedia.org/wiki/Beat_'em_up">beat 'em up</a> game <i><a href="https://en.wikipedia.org/wiki/Streets_of_Rage_2">Streets of Rage 2</a></i>. However, <i>Street Fighter II</i> also received criticism for its depiction of street violence, and for having inspired numerous other violent games in the industry.</p>
+
+<p><i>Street Fighter II</i> was the <a href="https://en.wikipedia.org/wiki/List_of_highest-grossing_arcade_games">best-selling arcade video game</a> by far since the <a href="https://en.wikipedia.org/wiki/Golden_age_of_arcade_video_games">golden age of arcade video games</a>, bringing an arcade renaissance in the early 1990s. Its impact on home video games was equally crucial, becoming a long-lasting <a href="https://en.wikipedia.org/wiki/Killer_application">system-seller</a> for the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Nintendo Entertainment System</a>. Since then, up until the late 1990s, numerous best-selling home video games were arcade ports. In 2005, <i>Electronic Gaming Monthly</i> ranked it the ninth most important game since they began publication in 1989, stating no game "did more to prop up arcades" in the 1990s and it was the first killer app for the SNES.</p>
+
+<p>The game popularized the concept of "face-to-face", tournament-level competition between two players instead of just <a href="https://en.wikipedia.org/wiki/High_score">high scores</a>. This enabled the competitive <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a> and <a href="https://en.wikipedia.org/wiki/Deathmatch_(gaming)">deathmatch</a> modes found in modern <a href="https://en.wikipedia.org/wiki/Action_game">action games</a>. <a href="https://en.wikipedia.org/wiki/John_Romero">John Romero</a>, for example, cited the competitive multiplayer of <i>Street Fighter II</i> as an influence on the deathmatch mode of seminal <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> <i><a href="https://en.wikipedia.org/wiki/Doom_(1993_video_game)">Doom</a></i>.</p>
+
+<p>It is an innovation in revision series, with Capcom continuously upgrading and <a href="https://en.wikipedia.org/wiki/Expansion_pack">expanding</a> the arcade game instead of releasing a sequel. This furthered the practice of <a href="https://en.wikipedia.org/wiki/Patch_(computing)">patches</a> and <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> found in modern video games.</p>
+
+<p><i>Street Fighter II</i> has been frequently <a href="https://en.wikipedia.org/wiki/Sampling_(music)">sampled</a> and referenced in <a href="https://en.wikipedia.org/wiki/Hip_hop_music">hip hop music</a>, by artists such as <a href="https://en.wikipedia.org/wiki/The_Lady_of_Rage">The Lady of Rage</a>, <a href="https://en.wikipedia.org/wiki/Nicki_Minaj">Nicki Minaj</a>, <a href="https://en.wikipedia.org/wiki/Lupe_Fiasco">Lupe Fiasco</a>, <a href="https://en.wikipedia.org/wiki/Dizzee_Rascal">Dizzee Rascal</a>, <a href="https://en.wikipedia.org/wiki/Lil_B">Lil B</a>, <a href="https://en.wikipedia.org/wiki/Sean_Price">Sean Price</a>, and <a href="https://en.wikipedia.org/wiki/Madlib">Madlib</a>. This started with <a href="https://en.wikipedia.org/wiki/Hi-C_(rapper)">Hi-C</a>'s "<a href="https://en.wikipedia.org/wiki/Swing'n">Swing'n</a>" (1993) and <a href="https://en.wikipedia.org/wiki/DJ_Qbert">DJ Qbert</a>'s "<a href="https://en.wikipedia.org/wiki/Demolition_Pumpkin_Squeeze_Musik">Track 10</a>" (1994) which sampled <i>Street Fighter II</i>, and the <a href="https://en.wikipedia.org/wiki/Street_Fighter_(soundtrack)"><i>Street Fighter</i> film soundtrack</a> (1994) which is the first major film soundtrack to consist almost entirely of hip hop music. According to DJ Qbert, "I think hip-hop is a cool thing, I think <i>Street Fighter</i> is a cool thing". According to <i><a href="https://en.wikipedia.org/wiki/Vice_(magazine)">Vice</a></i> magazine, "<i>Street Fighter</i>'s mixture of competition, bravado, and individualism easily translate into the trials and travails of a rapper." The "Perfect" sample was used by <a href="https://en.wikipedia.org/wiki/Kanye_West">Kanye West</a> and <a href="https://en.wikipedia.org/wiki/Drake_(musician)">Drake</a> in <i><a href="https://en.wikipedia.org/wiki/The_Life_of_Pablo">The Life of Pablo</a></i> (2016). <a href="https://en.wikipedia.org/wiki/UK_hip_hop">UK rap</a> includes <a href="https://en.wikipedia.org/wiki/Grime_(music_genre)">grime</a> <a href="https://en.wikipedia.org/wiki/DJ">DJ</a> <a href="https://en.wikipedia.org/wiki/Logan_Sama">Logan Sama</a> saying, "<i>Street Fighter</i> is just a huge cultural thing that everyone experienced growing up [with] such a huge impact that it has just stayed in everyone's consciousness." According to Jake Hawkes of Soapbox, "grime was built around lyrical clashes [and] the 1v1 setup of these clashes was easily equated with <i>Street Fighter</i>'s 1 on 1 battles." Grime MCs such as Dizzee Rascal were sampling <i>Street Fighter II</i> in 2002, and <i>Street Fighter II</i> has been sampled "by almost every grime MC". It became an integral part of <a href="https://en.wikipedia.org/wiki/BBC_Radio_1Xtra">BBC Radio 1Xtra</a> DJ <a href="https://en.wikipedia.org/wiki/Charlie_Sloth">Charlie Sloth</a>'s <i>Fire in the Booth</i> <a href="https://en.wikipedia.org/wiki/Freestyle_rap">freestyle</a> segments, using samples such as "Hadouken", "Shoryuken", and the "Perfect" announcer sound.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

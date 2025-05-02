@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>NES Open Tournament Golf</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('9631e3c1-27ea-4677-bf0d-a0e0ebee1582/b37c64eb-0bbe-4431-87dd-15d9c33a1f11.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="9631e3c1-27ea-4677-bf0d-a0e0ebee1582/379a66aa-cbc2-4058-9152-c7586e47849f.png"/> NES Open Tournament Golf</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="9631e3c1-27ea-4677-bf0d-a0e0ebee1582/b2b8381a-354e-4615-ab58-8a58f73cf136.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:51:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:40:20</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Entertainment System">Nintendo Entertainment System</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-9/20/1991">9/20/1991</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-62">62</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Sports (golf)">Sports (golf)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-HAL Laboratory">HAL Laboratory</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo R&D2">Nintendo R&D2</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/NES_Open_Tournament_Golf" target="_blank">Wikipedia</a><br/><a href="https://www.nintendo.com/jp/famicom/software/fmc-gj/index.html" target="_blank">Golf Japan Course</a><br/><a href="https://www.nintendo.com/jp/famicom/software/fmc-gu/index.html" target="_blank">Golf U.S. Course</a><br/><a href="https://www.nintendo.com/jp/famicom/software/fmc-mog/index.html" target="_blank">Mario Open Golf</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Eiji Aonuma">[People] artist: Eiji Aonuma</a><br/><a href="#quicklink-[People] artist: Mikio Mishima">[People] artist: Mikio Mishima</a><br/><a href="#quicklink-[People] composer: Akito Nakatsuka">[People] composer: Akito Nakatsuka</a><br/><a href="#quicklink-[People] composer: Shinobu Amayake">[People] composer: Shinobu Amayake</a><br/><a href="#quicklink-[People] composer: Yumiko Kanki">[People] composer: Yumiko Kanki</a><br/><a href="#quicklink-[People] director: Kenji Miki">[People] director: Kenji Miki</a><br/><a href="#quicklink-[People] producer: Masayuki Uemura">[People] producer: Masayuki Uemura</a><br/><a href="#quicklink-[People] programmer: Kenichi Nakajima">[People] programmer: Kenichi Nakajima</a><br/><a href="#quicklink-[People] programmer: Kyosuke Shirota">[People] programmer: Kyosuke Shirota</a><br/><a href="#quicklink-[People] programmer: Satoru Iwata">[People] programmer: Satoru Iwata</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>NES Open Tournament Golf</b></i>, known in Japan as <i><b>Mario Open Golf</b></i>, is a 1991 <a href="https://en.wikipedia.org/wiki/Sports_video_game">sports video game</a> developed by <a href="https://en.wikipedia.org/wiki/HAL_Laboratory">HAL Laboratory</a> and <a href="https://en.wikipedia.org/wiki/Nintendo_Research_&amp;_Development_2">Nintendo R&amp;D2</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a>. It is the fourth golf game to feature <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> as a player character, after <i>Family Computer Golf: U.S. Course</i>.</p>
+
+<p><i>NES Open Tournament Golf</i> received mixed-to-positive reviews.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>NES Open Tournament Golf</i> is a traditional golf game incorporating certain characters from the <i><a href="https://en.wikipedia.org/wiki/Mario_(franchise)">Mario</a></i> series. The player's primary objective is to hit the ball into each hole with the fewest strokes by the end of gameplay. Using a birds-eye view prior to the swing, the player can change clubs and the general direction and range that the ball will travel. During the swing, the view shifts to a third-person perspective and the player can determine the power the shot will have by timing a button press for a marker to stop at the desired point of the power meter then another button press to determine what kind of shot the ball will be. Various gameplay aspects can effect how the ball will travel such as wind and ball spin.</p>
+
+<p>In the game, the player plays as <a href="https://en.wikipedia.org/wiki/Mario">Mario</a>, with <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Toadstool</a> (Peach) acting as the <a href="https://en.wikipedia.org/wiki/Caddie">caddie</a> giving the player tips and information. In modes with options for multiplayer, the second player plays as <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a>, with <a href="https://en.wikipedia.org/wiki/Princess_Daisy">Princess Daisy</a> acting as the caddie.</p>
+
+<h2>International and Japanese regional differences</h2>
+
+<p><i>NES Open Tournament Golf</i>'s original version, released in Japan as <i>Mario Open Golf</i>, has cut content from the international release of the game. <i>Mario Open Golf</i> features ninety unique playable holes spread across five courses whereas the international release features fifty four holes across three courses. Forty of the holes present in the international release are shared with the Japanese release of the game, such as how hole one of the Australia course in <i>Mario Open Golf</i> is hole nine in the <i>US Course</i> internationally. Other holes in the international release share layouts with the original version but were changed in order to decrease the difficulty.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> In the Japanese release, each course must be unlocked, with the only one available at the start being the <i>Japan Course</i>.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p>The background music between both versions differ, with the exception of a few tracks that are used in both. Minor graphical changes are present and are most evident between the two versions respective title screens.</p>
+
+<h2><i>Family Computer Golf: Japan Course</i> and <i>US Course</i></h2>
+
+<p><i>Family Computer Golf: Japan Course</i>, released for the Disk System on February 21, 1987, is similar to the original <i>Golf</i>, which was released for the Famicom in 1984. In this version of the game, players can consistently see the bird's eye view of the course on the right-side of the screen, while the left side of the screen consistently shows a third-person view. Two modes of play are available in the game, stroke play and match play. Though the course designs are similar to those found in <i>NES Open Tournament Golf</i>, the controls are slightly different. Players can choose between three different speeds at which they hit the ball, and they can also cycle between golf clubs. In this version the default club will always be a 1W, in comparison to later games in which an appropriate club would be pre-selected. The scorecard in this game is nearly identical to the one found in <i>NES Open Tournament Golf</i>. The game came on a blue disk card, when most disks at the time were yellow. The blue disk indicated that it could be used in machines called a <a href="https://en.wikipedia.org/wiki/Disk_Fax">Disk Fax</a> as part of a contest in Japan. Players' high scores were saved on the disk, and by using the name entry feature in the game to enter their personal data, players could send the data to Nintendo using the Disk Fax. The winners of the contest received a golden disk containing a more difficult version of the game.</p>
+
+<p><i>Family Computer Golf: U.S Course</i>, released for the Disk System on June 14, 1987, is similar to the original <i>Golf</i> and <i>Mario Open Golf</i>. In this version of the game, a bird's eye view of the course is shown on the center of the screen, while the right side of the screen shows a third-person view. Once players are ready to hit the ball, the bird's eye view transitions to a screen with just the third-person view. This concept was slightly modified and used in <i>Mario Open Golf</i>, which was released in September 1991.</p>
+
+<h2>Re-releases</h2>
+
+<p>A version of <i>NES Open Tournament Golf</i>, branded as <i>Mario's Open Golf</i>, was one of the few titles released for Nintendo's <a href="https://en.wikipedia.org/wiki/PlayChoice-10">PlayChoice-10</a> arcade machines.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> PlayChoice-10 games varied slightly from their original NES counterparts, as additional circuitry was needed to allow the game to run on the arcade machine. <i>Mario's Open Golf</i> for the PlayChoice-10 was most similar to that of <i>NES Open Tournament Golf</i>, more so than <i>Mario Open Golf</i> for the Famicom. In this release, similarly to the original Japanese version, there was no option for the tournament mode.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p><i>NES Open Tournament Golf</i> was also released for the <a href="https://en.wikipedia.org/wiki/Wii">Nintendo Wii</a> <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> on June 18, 2007,<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> Virtual Console on July 5, 2012, and the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> Online service on October 10, 2018.</p>
+
+<h2>Other media</h2>
+
+<p><i>Mario Open Golf</i> is one of the video games featuring in the manga titled <i>Cyber Boy</i>, by Nagai Noriaki, published by Coro Coro Comic and Shogakukan, from 1991 to 1993.</p>
+
+<p>A microgame based on <i>NES Open Tournament Golf</i> appears in <i><a href="https://en.wikipedia.org/wiki/WarioWare:_Twisted!">WarioWare: Twisted!</a></i>. In the microgame the player must sink a putt before time runs out. This microgame was later featured in <i><a href="https://en.wikipedia.org/wiki/WarioWare_Gold">WarioWare Gold</a></i>.</p>
+
+<p>Mario's outfit from this game, which itself is from <i>Family Computer Golf: US Course</i>, is an alternate costume for the character in <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._for_Nintendo_3DS_and_Wii_U">Super Smash Bros. for Nintendo 3DS and Wii U</a></i>, as well as in <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Odyssey">Super Mario Odyssey</a></i> and <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Ultimate">Super Smash Bros. Ultimate</a></i>. <i><a href="https://en.wikipedia.org/wiki/Mario_Golf:_Super_Rush">Mario Golf: Super Rush</a></i> and <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_Tour">Mario Kart Tour</a></i> also included Luigi's outfit in addition to Mario's.</p>
+
+<h2>Reception</h2>
+
+<p>German magazines <i>Megablast</i> and <i>Play Time</i> gave <i>NES Open Tournament Golf</i> scores of 71% and 62% respectively.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> gave a score of 7.5 upon its port to the Wii Virtual Console.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> gave a mixed score of 5 out of 10, mainly criticizing the game for its outdated jerky controls.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

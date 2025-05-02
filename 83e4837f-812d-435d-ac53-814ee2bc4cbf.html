@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Darkstalkers Resurrection</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('83e4837f-812d-435d-ac53-814ee2bc4cbf/d4741033-d56f-4e1d-8bda-fe222ec9e5e7.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="83e4837f-812d-435d-ac53-814ee2bc4cbf/efbd4b05-b2fb-4c13-ae46-a6edcb887176.png"/> Darkstalkers Resurrection</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="83e4837f-812d-435d-ac53-814ee2bc4cbf/9784e1b7-4f75-492d-afd1-4cc7d5c7e7f6.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 7:37:31</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 7:38:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-3/12/2013">3/12/2013</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-82">82</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Fighting">Fighting</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Iron Galaxy Studios">Iron Galaxy Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Darkstalkers_Resurrection" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/20200104183352/http://www.capcom.co.jp/VR/" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Stanley "Artgerm" Lau">[People] artist: Stanley "Artgerm" Lau</a><br/><a href="#quicklink-[People] producer: Derek Neal">[People] producer: Derek Neal</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Darkstalkers Resurrection</b></i> is a 2013 <a href="https://en.wikipedia.org/wiki/Fighting_video_game">fighting video game</a> developed by <a href="https://en.wikipedia.org/wiki/Iron_Galaxy">Iron Galaxy Studios</a> and published by <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a>. It is a compilation of two classic Capcom's 2D fighting games: <i><a href="https://en.wikipedia.org/wiki/Night_Warriors:_Darkstalkers'_Revenge">Night Warriors: Darkstalkers' Revenge</a></i> (1995) and <i><a href="https://en.wikipedia.org/wiki/Darkstalkers_3">Darkstalkers 3</a></i> (1997), which are the second and third of the <i><a href="https://en.wikipedia.org/wiki/Darkstalkers">Darkstalkers</a></i> series. The game features HD visuals, online multiplayer, replay sharing, spectator mode, and in-game <a href="https://en.wikipedia.org/wiki/Unlockable_(gaming)">unlockables</a>. It was released on the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a> and <a href="https://en.wikipedia.org/wiki/Xbox_Live_Arcade">Xbox Live Arcade</a> as a downloadable title, and received a positive critical reception, though the publisher claimed it has failed commercially.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Darkstalkers Resurrection</i> features online play and other new enhancements in the same respect to Iron Galaxy Studios' previous Capcom arcade re-releases <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_III:_3rd_Strike">Street Fighter III: Third Strike Online Edition</a></i> and <i><a href="https://en.wikipedia.org/wiki/Marvel_vs._Capcom_Origins">Marvel vs. Capcom Origins</a></i>. The game utilizes the <a href="https://en.wikipedia.org/wiki/GGPO">GGPO</a> netcode to provide smooth online gameplay. <a href="https://en.wikipedia.org/wiki/Matchmaking_(video_games)">Matchmaking</a> follows in the footsteps of Iron Galaxy Studios' earlier products and introduces additional options such as region matching and <a href="https://en.wikipedia.org/wiki/Ping_(video_gaming)">ping display</a>. Aside from the standard ranked and player matches, <i>Resurrection</i> also includes an online tournament mode. The game adds HD filtering with multiple viewing options, <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a> replay uploads, eight-player lobbies and a tutorial mode which provides in-depth tips to the mechanics of the game. Players who complete in-game challenges receive points which can be redeemed to unlock bonus content via the "Vault" system, including custom artwork by Stanley "Artgerm" Lau, concept art, videos, and other rewards.</p>
+
+<h2>Development</h2>
+
+<p><i>Darkstalkers Resurrection</i> was announced by Capcom executive producer, <a href="https://en.wikipedia.org/wiki/Yoshinori_Ono_(game_producer)">Yoshinori Ono</a>, during the <i>Street Fighter</i> 25th Anniversary panel at <a href="https://en.wikipedia.org/wiki/New_York_Comic_Con">New York Comic Con</a> on October 11, 2012. According to Capcom USA senior vice president Christian Svensson, <i>Resurrection</i> had been in development for about a year before its announcement. When the time to decide whether <i>Night Warriors: Darkstalkers' Revenge</i> or <i>Darkstalkers 3</i> would receive the HD treatment arrived during planning cycles, <i>Resurrection</i> producer Derek Neal revealed that his team was "agonizing over which to release". Due to the divide in the community's preference between the two titles, Capcom opted to release both instead as a dual pack. Neal stated that games would be left unchanged in terms of <a href="https://en.wikipedia.org/wiki/Balance_(game_design)">balance</a> and priority with the intention of remaining faithful to the original arcade versions. In December–January 2013, Capcom ran the "Embrace the Dark" character creation competition.</p>
+
+<h2>Release</h2>
+
+<p><i>Darkstalkers Resurrection</i> was scheduled to be released between March 12–14 in North America, Europe and Japan. On March 14, the day of the game's regional release, two tie-in books are published in Japan: the manga collection <i>Vampire Resurrection Official Anthology Comic</i> (ヴァンパイア リザレクション オフィシャルアンソロジーコミック, <i>Banpaia Rizarekushon Ofisharu Ansorojī Komikku</i>) and the art book <i>Vampire Artworks</i> (ヴァンパイア アートワークス, <i>Banpaia Ātowākusu</i>), featuring works of Capcom's Japanese artists.</p>
+
+<h2>Reception</h2>
+
+<p><i>Darkstalkers Resurrection</i> received universally positive reviews, resulting in the averaged ratings of more than 80% at both <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> and <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> for both platforms. Svensson said that while the game had appeared in digital bestseller top ten lists, it has not managed to sell enough copies to be considered commercially successful.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

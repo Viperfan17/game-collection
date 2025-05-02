@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>The Orange Box</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('5f9907da-1665-4748-8a26-77504e38e72c/a2626af8-ad92-4800-9591-bff911be5e71.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="5f9907da-1665-4748-8a26-77504e38e72c/6262754b-df15-4beb-a2f9-816589246448.png"/> The Orange Box</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="5f9907da-1665-4748-8a26-77504e38e72c/6259f4d1-bc7e-449c-8c9e-8f8d53f868e3.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/27/2025">4/27/2025</a> 10:06:45</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 9:14:29</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/10/2007">10/10/2007</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-96">96</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-94">94</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Various">Various</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Valve">Valve</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Valve">Valve</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/The_Orange_Box" target="_blank">Wikipedia</a><br/><a href="http://orange.half-life2.com/" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[Game Engine] Source">[Game Engine] Source</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>The Orange Box</b></i> is a video game <a href="https://en.wikipedia.org/wiki/Bundled_software">compilation</a> containing five games developed and published by <a href="https://en.wikipedia.org/wiki/Valve_Corporation">Valve</a>. Two of the games included—<i><a href="https://en.wikipedia.org/wiki/Half-Life_2">Half-Life 2</a></i> and its first <a href="https://en.wikipedia.org/wiki/Stand-alone_expansion_pack">stand-alone expansion</a>, <i><a href="https://en.wikipedia.org/wiki/Half-Life_2:_Episode_One">Episode One</a></i>—had previously been released in 2004 and 2006 as separate products. Three new games were also included in the compilation: the second stand-alone expansion, <i><a href="https://en.wikipedia.org/wiki/Half-Life_2:_Episode_Two">Half-Life 2: Episode Two</a></i>; the <a href="https://en.wikipedia.org/wiki/Puzzle_video_game">puzzle game</a> <i><a href="https://en.wikipedia.org/wiki/Portal_(video_game)">Portal</a></i>; and <i><a href="https://en.wikipedia.org/wiki/Team_Fortress_2">Team Fortress 2</a></i>, the <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer game</a> sequel to <i><a href="https://en.wikipedia.org/wiki/Team_Fortress_Classic">Team Fortress Classic</a></i>. Valve also released a <a href="https://en.wikipedia.org/wiki/Soundtrack">soundtrack</a> containing music from the games within the compilation. A separate product entitled <i>The Black Box</i> was planned, which would have included only the new games, but was later canceled.</p>
+
+<p><i>The Orange Box</i> was released for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> and the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> in October 2007, while the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> version, developed by <a href="https://en.wikipedia.org/wiki/EA_UK">EA UK</a> and not Valve, was released in December 2007. A digital <i>Orange Box</i> pack, containing the five games, was released in May 2010 for <a href="https://en.wikipedia.org/wiki/MacOS">Mac OS X</a> following the release of <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> for the platform, while a similar version for <a href="https://en.wikipedia.org/wiki/Linux">Linux</a> followed after the Steam's clients release for Linux in early 2013.</p>
+
+<p><i>The Orange Box</i> received widespread critical acclaim, with <i>Portal</i> being recognized as a surprise favorite of the package. The PlayStation 3 version of <i>The Orange Box</i>, however, was criticized for containing several technical shortcomings that were not present in the other versions, only a few of which were fixed through a single <a href="https://en.wikipedia.org/wiki/Patch_(computing)">patch</a>.</p>
+
+<h2>Overview</h2>
+
+<p><i>The Orange Box</i> features five complete games compiled into one retail unit: <i>Half-Life 2</i> and its two continuations, <i>Episode One</i> and <i>Episode Two</i>; <i>Portal</i>; and <i>Team Fortress 2</i>. All of these games use Valve's <a href="https://en.wikipedia.org/wiki/Source_(game_engine)">Source engine</a>. At its launch the game was priced similar to other <a href="https://en.wikipedia.org/wiki/AAA_(video_game_industry)">AAA</a> video game releases of the era. With it costing $49.95 on PC and $59.95 on console in the United States.</p>
+
+<p>Through the <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> platform for the <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Windows</a> version, the games can collect and report in-depth data such as where the player's character died, completion time, and total victories in multiplayer modes. This data is compiled to generate gameplay statistics for <i>Episode One</i>, <i>Episode Two</i>, and <i>Team Fortress 2</i>.</p>
+
+<p>Although <i>Half-Life 2</i> has the largest proportion of <a href="https://en.wikipedia.org/wiki/Xbox_Live#Gamerscore">Achievements</a>, there are 99 spread across all five games, exceeding the 50-Achievement limit that Microsoft maintains to feature the most Achievements of any Xbox 360 product. These Achievements include killing a certain number of monsters, finding hidden weapon caches, or other tasks specific to each game.</p>
+
+<p>All the games on The Orange Box except <i>Half-Life 2</i> (on consoles and on PC prior to its 2024 20th anniversary update) contain in-game commentary that can be enabled, allowing the player to listen to the developers discuss the creation and purpose of particular sections and components of each game. This has been a feature of every Valve game since <i><a href="https://en.wikipedia.org/wiki/Half-Life_2:_Lost_Coast">Half-Life 2: Lost Coast</a></i> due to the commentary's popularity in that game, according to <a href="https://en.wikipedia.org/wiki/Erik_Wolpaw">Erik Wolpaw</a>, lead writer for <i>Portal</i>.</p>
+
+<h3><i>Half-Life 2</i></h3>
+
+<p><i>Half-Life 2</i> is a <a href="https://en.wikipedia.org/wiki/Science_fiction">science fiction</a> <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> game and the sequel to <i><a href="https://en.wikipedia.org/wiki/Half-Life_(video_game)">Half-Life</a></i>. While remaining similar in style to the original, <i>Half-Life 2</i> introduces new concepts to the series such as physics-based <a href="https://en.wikipedia.org/wiki/Puzzles">puzzles</a> and vehicle sections. The game takes place in the fictional <a href="https://en.wikipedia.org/wiki/City_17">City 17</a> and surrounding areas as the player takes on the role of scientist <a href="https://en.wikipedia.org/wiki/Gordon_Freeman">Gordon Freeman</a>. Freeman is thrust into a <a href="https://en.wikipedia.org/wiki/Dystopia">dystopian</a> environment in which the aftermath of the events of <i>Half-Life</i> have come to bear fully upon human society, and he is forced to fight against increasingly unfavorable odds in order to survive. In his struggle, he is joined by various acquaintances, including former <a href="https://en.wikipedia.org/wiki/Black_Mesa_Research_Facility">Black Mesa</a> colleagues, oppressed citizens of City 17, and the <a href="https://en.wikipedia.org/wiki/Vortigaunt">Vortigaunts</a>, all of whom later prove to be valuable allies. <i>Half-Life 2</i> received critical acclaim, including 35 <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a> awards, when it was originally released for Windows in 2004. As of December 3, 2008, over 6.5 million copies of Half-Life 2 have been sold at retail. Although Steam sales figures are unknown, their rate surpassed retail's in mid-2008 and they are significantly more profitable per-unit.</p>
+
+<p><i>Half-Life 2: Episode One</i> <a href="https://en.wikipedia.org/wiki/Episodic_games">continues</a> from the events of <i>Half-Life 2</i>. Building on the original, <i>Episode One</i> added cooperative play with friendly <a href="https://en.wikipedia.org/wiki/Non-player_character">non-player characters</a> such as <a href="https://en.wikipedia.org/wiki/Alyx_Vance">Alyx Vance</a>, whose new abilities complement Freeman's abilities and allow her to comprehend and respond to the player's actions by lending help. It is set immediately after the end of <i>Half-Life 2</i> in the war-torn City 17 and nearby areas. <i>Episode One</i> follows scientist Gordon Freeman and his companion Alyx Vance as they continue to cope with the events chronicled in <i>Half-Life 2</i> and humanity's continuing struggle against the <a href="https://en.wikipedia.org/wiki/Combine_(Half-Life_2)">Combine</a>. The game was originally released in 2006 for Windows as a standalone game and was generally well received.</p>
+
+<p><i>Half-Life 2: Episode Two</i> was first of three original new games included as a part of <i>The Orange Box</i> and focuses on expansive environments, travel, and less linear play. In the game, Gordon Freeman and the series' other major characters move away from City 17 to the surrounding wilderness following the closing events of <i>Episode One</i>. The game was praised for its new environments and features  and was well received by critics.</p>
+
+<p><i>Portal</i> is a <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person</a> <a href="https://en.wikipedia.org/wiki/Action_game">action</a>/<a href="https://en.wikipedia.org/wiki/Video_puzzle_game">puzzle</a> game that was first available as a part of <i>The Orange Box</i> as one of its three original new games. The game consists primarily of a series of puzzles, solved by creating portals which the player and simple objects can pass through in order to reach an exit point, under the supervision of an <a href="https://en.wikipedia.org/wiki/AI">AI</a>-programmed robot named <a href="https://en.wikipedia.org/wiki/GLaDOS">GLaDOS</a>. The portal system and the unusual physics it creates are the emphasis of the game. <i>Portal</i> was a surprise favorite of <i>The Orange Box</i>, receiving widespread praise and several Game of the Year awards.</p>
+
+<p><i>Team Fortress 2</i> is a <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a> team-based <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> that was first available as part of <i>The Orange Box</i> as one of its three original new games.  The game is a sequel to the original <i><a href="https://en.wikipedia.org/wiki/Quake_(series)">Quake</a></i> <a href="https://en.wikipedia.org/wiki/Mod_(computer_gaming)">modification</a>, <i><a href="https://en.wikipedia.org/wiki/Team_Fortress">Team Fortress</a></i>, and Valve's <i>Half-Life</i> modification, <i><a href="https://en.wikipedia.org/wiki/Team_Fortress_Classic">Team Fortress Classic</a></i>. Its focus is on two competing teams that attack each other in order to achieve varying objectives, including capturing control points or defending them from attack, or <a href="https://en.wikipedia.org/wiki/Capture_the_flag">capturing a flag</a>. Players can choose to play as one of nine classes in these teams, each with different strengths and weaknesses. Unlike most other <a href="https://en.wikipedia.org/wiki/Source_(game_engine)">Source</a>-powered games, <i>Team Fortress 2</i> features a cartoon art style and non-realistic graphics. <i>Team Fortress 2</i> was very well received by critics; it was particularly praised for its unique artistic direction and graphics. In June 2011, the Steam version of <i>Team Fortress 2</i> became <a href="https://en.wikipedia.org/wiki/Free-to-play">free-to-play</a>.</p>
+
+<h2>Development</h2>
+
+<h3><i>The Black Box</i></h3>
+
+<p>Valve planned on releasing an additional compilation for Windows entitled <i>The Black Box</i>, which would have contained only the three new games released as a part of the Orange Box—<i>Half-Life 2: Episode Two</i>, <i>Portal</i>, and <i>Team Fortress 2</i>. <i>The Black Box</i> was later cancelled for retail and only made available through <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> exclusively to owners of certain <a href="https://en.wikipedia.org/wiki/ATI_(brand)">ATI</a> graphics cards, who received a voucher for a free copy of <i>The Black Box</i>.</p>
+
+<p>During development, the simultaneous release of two game compilation packages with different content combinations was touted by Valve as a new direction for the game industry. <a href="https://en.wikipedia.org/wiki/Gabe_Newell">Gabe Newell</a>, co-founder of Valve, said, "<i>The Black Box</i> and <i>The Orange Box</i> represent a new approach to publishing multiple products on multiple platforms." After first discontinuing <i>The Black Box</i>, however, Valve released all the new material for individual download via Steam.</p>
+
+<p><i>The Black Box</i> was to be priced US$10 lower than <i>The Orange Box</i> which would have made it $39.95 on PC and $49.95 on console in the U.S. if it used <i>The Orange Box</i> launch price as a baseline. To compensate for the cancellation of <i>The Black Box</i>, Valve offered gift subscriptions to Steam users who had previously purchased <i>Half-Life 2</i> or <i>Half-Life 2: Episode One</i> and then purchased <i>The Orange Box</i> so that they could give their second copies of those two games as gifts to people added to their Steam Friends list. Still, the cancellation of <i>The Black Box</i> sparked complaints from game critics and consumers alike, unhappy that they were obliged to pay for games that they already owned. It also raised concerns among those who had bought the ATI <a href="https://en.wikipedia.org/wiki/Radeon_HD_2900">Radeon HD 2900 XT</a> graphics card, which came with a voucher for <i>The Black Box</i>, but Valve clarified that only the retail version of <i>The Black Box</i> had been cancelled. While Valve never expressed its reasons for this decision, industry writers speculated that it might have been to increase profits on retail copies or to avoid customer confusion between similar game packages and their availability across the platforms.</p>
+
+<p>While the Windows and Xbox 360 versions of <i>The Orange Box</i> were developed and published by Valve, the development of the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> <a href="https://en.wikipedia.org/wiki/Porting">port</a> was outsourced to the <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> studio <a href="https://en.wikipedia.org/wiki/EA_UK">EA UK</a>. In an interview with <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> magazine before the game's release, Valve co-founder Gabe Newell commented, "I think the people who have <i>The Orange Box</i> on the PS3 are going to be happy with their game experience. We've done the PC and 360 versions here and EA has a team doing the PS3 version – and they'll make the PS3 version a good product; EA got the job done in putting a lot of people with PS3 experience on the project. But I think it's harder to get it to the same standard as the 360 and PC versions". Despite this, he noted that Valve will probably handle PlayStation 3 versions of its products in the future.</p>
+
+<p>In a preview of <i>The Orange Box</i> in November 2007, <a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a> revealed numerous problems with the late <a href="https://en.wikipedia.org/wiki/Beta_build">beta build</a> of EA's PlayStation 3 version of <i>The Orange Box</i>, citing pervasive <a href="https://en.wikipedia.org/wiki/Frame_rate">frame rate</a> issues which, they claimed, "at best merely hinder gameplay and at worst make the experience downright unplayable." <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>'s Hilary Goldstein disagreed, writing that although EA "is one of the worst offenders when it comes to porting games to the PS3," the frame rate issues were not bad enough "to make me throw my controller in disgust."</p>
+
+<p>On January 3, 2008, IGN reported that Valve employees had created a <a href="https://en.wikipedia.org/wiki/Threaded_discussion">thread</a> on Valve's <a href="https://en.wikipedia.org/wiki/Internet_forum">website forums</a> for players to list the problems they had encountered and to suggest fixes, which caused speculation that a <a href="https://en.wikipedia.org/wiki/Patch_(computing)">patch</a> was being planned to address the issues in the PlayStation 3 version, such as the frame rate issues, the connection problems in <i>Team Fortress 2</i>, and the slow loading times in <i>Portal</i>. A patch for the PlayStation 3 version was later released in North America on March 19, 2008, and in Europe a short while after that; however, it made no mention of fixing frame rate issues or slow loading times.</p>
+
+<p>Valve deactivated accounts with <a href="https://en.wikipedia.org/wiki/Product_key">CD keys</a> that were purchased outside of the consumer's territory in order to maintain the integrity of <a href="https://en.wikipedia.org/wiki/Regional_lockout">region-specific licensing</a>. This generated complaints from North American customers who had circumvented their Steam <a href="https://en.wikipedia.org/wiki/End-user_license_agreement">end-user license agreement</a> by purchasing <i>The Orange Box</i> through cheaper, Asian retailers. Some customers who then purchased the game a second time from a local vendor experienced difficulty adding the new CD key to their accounts in order to activate their newly purchased games and also had trouble communicating with Steam's customer support team about this problem. Doug Lombardi of Valve stated, "Some of these users have subsequently purchased a legal copy after realizing the issue and were having difficulty removing the illegitimate keys from their Steam accounts. Anyone having this problem should contact Steam Support to have the Thai key removed from their Steam account."</p>
+
+<p>The German version of <i>The Orange Box</i> is set to a low violence mode in order to comply with <a href="https://en.wikipedia.org/wiki/Unterhaltungssoftware_Selbstkontrolle#Ratings">German laws</a> regulating the sale of violent video games. Blood effects are replaced by sparks and bullet wounds are replaced with dents as if the characters were metal robots. Additionally in <i>Team Fortress 2</i>, instead of body parts being scattered after a player's character is blown apart, various items such as hamburgers, coils, <a href="https://en.wikipedia.org/wiki/Rubber_ducks">rubber ducks</a>, and <a href="https://en.wikipedia.org/wiki/Chattery_Teeth">Chattery Teeth</a> appear (known as "sillygibs" by the community). Characters from different classes leave different items and different ratios of these items when killed by explosives. In the <i>Half-Life</i> games, bodies fade away after the death of <a href="https://en.wikipedia.org/wiki/Non-player_character">non-player characters</a> and the blood has been altered to a gray color.</p>
+
+<p>The soundtrack for <i>The Orange Box</i> consists of music that Valve employees composed for <i>Half-Life 2: Episode One</i>, <i>Half-Life 2: Episode Two</i>, <i>Portal</i>, and <i>Team Fortress 2</i>. It also includes the original version and an exclusive remix of "<a href="https://en.wikipedia.org/wiki/Still_Alive">Still Alive</a>", both by <a href="https://en.wikipedia.org/wiki/Jonathan_Coulton">Jonathan Coulton</a>. It was released on December 21, 2007, and is sold by the official Valve Store, <a href="https://en.wikipedia.org/wiki/Amazon.com">Amazon.com</a>, and digital music services such as <a href="https://en.wikipedia.org/wiki/ITunes">iTunes</a>, <a href="https://en.wikipedia.org/wiki/Napster">Napster</a>, and <a href="https://en.wikipedia.org/wiki/EMusic">eMusic</a>. A more-complete version of this soundtrack that also includes music files from <i>Half-Life</i> and <i>Half-Life 2</i> was released on Steam as part of the <i><a href="https://en.wikipedia.org/wiki/Audiosurf">Audiosurf</a></i> package. "Still Alive" was subsequently released as a free downloadable song for the <a href="https://en.wikipedia.org/wiki/Rhythm_game">rhythm game</a> <i><a href="https://en.wikipedia.org/wiki/Rock_Band_(video_game)">Rock Band</a></i> on March 31, 2008.</p>
+
+<p>Pre-purchasing of the Windows version on Steam began on September 11, 2007. Those who pre-purchased via this method received a ten-percent discount and were able to play the <i>Team Fortress 2</i> <a href="https://en.wikipedia.org/wiki/Betaware">beta</a> starting on September 17, 2007. The original PC version of <i>The Orange Box</i> came with <i>Peggle Extreme</i>, a ten-level playable demo of <i><a href="https://en.wikipedia.org/wiki/Peggle">Peggle Deluxe</a></i>, which contained levels with graphical themes of games contained in <i>The Orange Box</i>. However <i>Peggle Extreme</i> was later made free to download for anyone with a <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> account and is not included in the current PC version of the Orange Box on Steam. <i><a href="https://en.wikipedia.org/wiki/Half-Life_2:_Lost_Coast">Half-Life 2: Lost Coast</a></i> is also technically included with the PC version of <i>The Orange Box</i>, as it was offered as a free download to all owners of <i>Half-Life 2.</i> And as of 2024 is listed as a part of the Orange Box after <i>Lost Coast</i> and <i>Half-Life 2 Episodes One,</i> and <i>Two</i> were integrated into <i>Half-Life 2</i> as a part of its 20th anniversary update. The same is true for <i><a href="https://en.wikipedia.org/wiki/Half-Life_2:_Deathmatch">Half-Life 2: Deathmatch</a></i>, which was now included with <i>Half-Life 2</i> following Half-Life 2's 20th anniversary update.</p>
+
+<h2>Reception</h2>
+
+<p><i>The Orange Box</i> was met with universal acclaim from reviewers. The averaging website <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> cites both the Xbox 360 version and the PC version as the highest-rated game of their respective platforms. <a href="https://en.wikipedia.org/wiki/AllGame">AllGame</a> editor Mark Hoogland called <i>The Orange Box</i> "the gold standard for bundled (video) games". <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> described <i>The Orange Box</i> as "the best deal in video game history," and awarded both the Windows and Xbox 360 versions with an Editors' Choice Award. All three versions won <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot's</a> Editors' Choice Award.  Approximately 3 million copies of <i>The Orange Box</i> were sold by the end of November 2008.</p>
+
+<p><i>Portal</i> was singled out for praise by reviewers. <i><a href="https://en.wikipedia.org/wiki/Official_Xbox_Magazine">Official Xbox Magazine</a></i> admired its unique puzzle gameplay mechanics, stating that it was the first major advance in puzzle gaming "since Russians started dropping blocks", referring to <i><a href="https://en.wikipedia.org/wiki/Tetris">Tetris</a></i>. <a href="https://en.wikipedia.org/wiki/The_Escapist_(magazine)">The Escapist</a>'s <a href="https://en.wikipedia.org/wiki/Ben_Croshaw">Ben "Yahtzee" Croshaw</a> stated in his <a href="https://en.wikipedia.org/wiki/Zero_Punctuation">Zero Punctuation</a> review that he could not think of any criticism for <i>Portal</i>, saying that it had "some of the funniest pitch-black humor [he had] ever heard in a game" and concluded that it is "absolutely sublime from start to finish."</p>
+
+<p>The PlayStation 3 version's critical review scores suffered because of the technical issues first uncovered by 1UP.com. While discussing the retail version on a <a href="https://en.wikipedia.org/wiki/Podcast">podcast</a>, 1UP.com staff members agreed that a significant number of the frame rate problems had been resolved, but not all of them. They concluded that the PlayStation 3 version was not quite as smooth as the Xbox 360 version and recommended that "if you own both [consoles], you should do the 360" version. <a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku's</a> Michael McWhertor echoed that recommendation, though stated that those who only have a PlayStation 3 should still consider <i>The Orange Box</i>.</p>
+
+<p>While <a href="https://en.wikipedia.org/wiki/Frame_rate">frame rate</a> issues were the main complaint, the PlayStation 3 version was also criticized for unreliable <a href="https://en.wikipedia.org/wiki/Voice_chat">voice chat</a> and excessive network delay or <a href="https://en.wikipedia.org/wiki/Lag_(video_games)">lag</a> in <i>Team Fortress 2</i>, as well as long load times generally. It was, however, praised for featuring <a href="https://en.wikipedia.org/wiki/Spatial_anti-aliasing">anti-aliasing</a> and a quick-save feature, neither of which were present in the Xbox 360 version (but were present in the PC version). After release, the game received further criticism from fans for the lack of surround sound support when using an optical cable. An open letter to Valve, asking them to put pressure on EA to release a fix was posted to the Steam forum. A response was posted by a Valve employee going by the name of "BurtonJ", directing disappointed customers to a dedicated thread on the subject.</p>
+
+<h3>Awards</h3>
+
+<p><i>The Orange Box</i> won a number of awards for its overall high standard and use of technology. The compilation won "Computer Game of the Year" at the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a>' <a href="https://en.wikipedia.org/wiki/11th_Annual_Interactive_Achievement_Awards">11th Annual Interactive Achievement Awards</a>; it also received nominations in the "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Game_of_the_Year">Overall Game of the Year</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Action_Game_of_the_Year">Action Game of the Year</a>", and "Outstanding Innovation in Gaming" categories. <i>The Orange Box</i> won the "Breakthrough Technology Award" and the "Best PC Game Award"  at the 2007 <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Spike Video Game Awards</a>, and was additionally nominated in the "Game of the Year", "Best Shooter", "Best Xbox 360 Game", and "Best Multiplayer Game" categories. It was also named the second-best video game of 2007 by <i><a href="https://en.wikipedia.org/wiki/Time_Magazine">Time Magazine</a></i>, while the PlayStation 3 version was nominated in the category of Action and Adventure at the <a href="https://en.wikipedia.org/wiki/British_Academy_Video_Games_Awards">BAFTA Video Games Awards</a>. Valve also received developer awards for their work on <i>The Orange Box</i>. <i>The Orange Box</i> received 17 Game of the Year awards and over 100 awards in total. The Orange Box was placed as the 22nd most influential video game in history by the <a href="https://en.wikipedia.org/wiki/Guinness_World_Records_Gamer's_Edition,_2009">Guinness World Records Gamer's Edition, 2009</a>.</p>
+
+<p><i>Portal</i> won "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Game_Design">Outstanding Achievement in Game Design</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Technical_Achievement">Outstanding Achievement in Gameplay Engineering</a>", and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Character">Outstanding Character Performance</a>" for <a href="https://en.wikipedia.org/wiki/Ellen_McLain">Ellen McLain</a>'s vocal portrayal of <a href="https://en.wikipedia.org/wiki/GLaDOS">GLaDOS</a> at the <a href="https://en.wikipedia.org/wiki/11th_Annual_Interactive_Achievement_Awards">11th Annual Interactive Achievement Awards</a>. The game won 76 awards, including 37 Game of the Year awards, and was recognized for innovative design and game mechanics. The dark humor of <i>Portal</i> and the ending music track "Still Alive" were also singled out for awards.</p>
+
+<p><i>Team Fortress 2</i> was nominated in the categories of "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Art_Direction">Outstanding Achievement in Art Direction</a>" and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Animation">Outstanding Achievement in Animation</a>" at the <a href="https://en.wikipedia.org/wiki/11th_Annual_Interactive_Achievement_Awards">11th Annual Interactive Achievement Awards</a>. Although unsuccessful at the IAA, the game did receive 10 awards, including five Game of the Year awards, and other awards for its artistic direction and multiplayer gameplay.</p>
+
+<p><i>Half-Life 2: Episode Two</i> won four awards, including one Game of the Year award, and was recognized for excellent <a href="https://en.wikipedia.org/wiki/Non-player_character">NPC</a> <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_in_video_games">AI</a>, level design, and story.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

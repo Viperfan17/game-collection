@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tony Hawk&#39;s Underground 2: Remix</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('ed2efa27-fbf3-479d-bf23-eee4d4bfd35b/fbe5bee0-9d91-4f6d-aa6f-fb702dd1b6bf.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="ed2efa27-fbf3-479d-bf23-eee4d4bfd35b/0abe1a60-a41a-47ea-8798-77e4dd3e14a4.png"/> Tony Hawk&#39;s Underground 2: Remix</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="ed2efa27-fbf3-479d-bf23-eee4d4bfd35b/e4726247-230a-466e-8078-b274739a388b.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 5:00:18</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:36:57</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation Portable">Sony PlayStation Portable</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-3/24/2005">3/24/2005</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-84">84</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Sports">Sports</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Neversoft">Neversoft</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Shaba Games">Shaba Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Tony_Hawk's_Underground_2:_Remix" target="_blank">Wikipedia</a><br/><a href="https://www.mobygames.com/game/tony-hawks-underground-2-remix" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Tony Hawk's Underground 2: Remix</b></i> is a <a href="https://en.wikipedia.org/wiki/Skateboarding">skateboarding</a> video game in the <i><a href="https://en.wikipedia.org/wiki/Tony_Hawk's">Tony Hawk's</a></i> series. The game, developed by <a href="https://en.wikipedia.org/wiki/Neversoft">Neversoft</a> and <a href="https://en.wikipedia.org/wiki/Shaba_Games">Shaba Games</a> and published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>, was released on March 24, 2005, as a launch title for the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>. Primarily a <a href="https://en.wikipedia.org/wiki/Porting#Porting_of_video_games">port</a> of <a href="https://en.wikipedia.org/wiki/Tony_Hawk's_Underground_2">its console counterpart</a>, the game featured a different progression, with four exclusive levels (Santa Cruz, Atlanta, Kyoto and Las Vegas), exclusive characters, and new cutscenes. "Create-a-Park" was notably absent in the game, with some graphics and other aspects toned-down from the console version.</p>
+
+<h2>Gameplay</h2>
+
+<p>The gameplay in <i>Tony Hawk's Underground 2: Remix</i> is similar to that of previous Tony Hawk games: the player skates around in a <a href="https://en.wikipedia.org/wiki/3D_computer_graphics">3D</a> environment modeled after various cities and attempts to complete various goals. Most goals involve skating on or over various objects or performing combos. Scores are calculated by adding the sum of the point value of each trick strung together in a combo and then multiplying by the number of tricks in the combo.</p>
+
+<p>Many levels return from previous games, including an expanded warehouse (which also serves as the Story Mode's training area), School and Downhill Jam from <i><a href="https://en.wikipedia.org/wiki/Tony_Hawk's_Pro_Skater">Tony Hawk's Pro Skater</a></i>, <a href="https://en.wikipedia.org/wiki/Canada">Canada</a>, <a href="https://en.wikipedia.org/wiki/Los_Angeles">Los Angeles</a> and Airport from <i><a href="https://en.wikipedia.org/wiki/Tony_Hawk's_Pro_Skater_3">Tony Hawk's Pro Skater 3</a></i>, and <a href="https://en.wikipedia.org/wiki/Philadelphia">Philadelphia</a> from <i><a href="https://en.wikipedia.org/wiki/Tony_Hawk's_Pro_Skater_2">Tony Hawk's Pro Skater 2</a></i>. Classic mode, which was featured in <i>Underground 2</i>, was included in <i>Remix</i>. The game features four-player wireless play.</p>
+
+<p>Three of the exclusive levels (Santa Cruz, Kyoto, and Las Vegas) from <i>Tony Hawk's Underground 2: Remix</i> ended up being recycled into the console releases of <i><a href="https://en.wikipedia.org/wiki/Tony_Hawk's_American_Wasteland">Tony Hawk's American Wasteland</a></i>, while <i>Tony Hawk's American Wasteland: Collector's Edition</i> brought back Atlanta.</p>
+
+<h2>Development</h2>
+
+<p>A sequel to <i>Underground</i> was first announced in January 2004. During development, developer <a href="https://en.wikipedia.org/wiki/Neversoft">Neversoft</a> sent its members to locations featured in-game in order to get more acquainted with the areas. <a href="https://en.wikipedia.org/wiki/Shaba_Games">Shaba Games</a>, who had previously developed <i><a href="https://en.wikipedia.org/wiki/Mat_Hoffman's_Pro_BMX">Mat Hoffman's Pro BMX</a></i> and the port of <i><a href="https://en.wikipedia.org/wiki/Tony_Hawk's_Pro_Skater_3">Tony Hawk's Pro Skater 3</a></i> for the <a href="https://en.wikipedia.org/wiki/PlayStation">PlayStation</a>, adapted the game to the handheld.</p>
+
+<h2>Reception</h2>
+
+<p>The game received generally positive reviews upon release. Chris Roper of <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> called <i>Underground 2: Remix</i> "a nearly perfect extended port of the console version", while rating it 8.7/10. <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a>'s <a href="https://en.wikipedia.org/wiki/Jeff_Gerstmann">Jeff Gerstmann</a> commented that "this 'remixed' version of the original delivers almost everything that was great about the console versions, and with the inclusion of four new levels, the single-player experience has gotten even better", giving it an 8.5/10.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

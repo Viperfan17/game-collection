@@ -1,0 +1,382 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>SSX</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('353d9c31-1d45-4332-8810-b9f5bfbd5f9e/e9f4cfc9-c65e-4654-bfcd-9a8f1c180938.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="353d9c31-1d45-4332-8810-b9f5bfbd5f9e/7854dbb8-9fb1-443f-914f-987042b56bf9.png"/> SSX</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="353d9c31-1d45-4332-8810-b9f5bfbd5f9e/7ce24ba7-fd10-44bb-b3fc-8d70f4baeada.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 7:31:29</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-2/28/2012">2/28/2012</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-72">72</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-84">84</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Sports">Sports</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-EA SPORTS">EA SPORTS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/><a href="#quicklink-Split Screen">Split Screen</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/SSX" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/20130228025257/http://www.easports.com/ssx" target="_blank">Official website</a><br/><a href="https://www.mobygames.com/game-group/ssx-series" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>SSX</b></i> (standing for "Snowboard Supercross") is a series of <a href="https://en.wikipedia.org/wiki/Snowboarding_video_games">snowboarding</a> video games <a href="https://en.wikipedia.org/wiki/Video_game_publisher">published</a> by <a href="https://en.wikipedia.org/wiki/EA_Sports">EA Sports</a>, created by Steve Rechtschaffner, who is the inventor of the <a href="https://en.wikipedia.org/wiki/Olympic_Games">Olympic</a> snowboarding event <a href="https://en.wikipedia.org/wiki/Boardercross">boardercross</a>. The <i>SSX</i> series are <a href="https://en.wikipedia.org/wiki/Arcade_game">arcade</a>-style <a href="https://en.wikipedia.org/wiki/Racing_game">racing games</a> with larger-than-life courses, characters, and tricks. The general focus of the series is racing and performing tricks on snowboards. Players earn speed boosts based on tricks they perform. The player generally has to perform tricks in each race in order to gain speed and successfully take the lead. The series introduced <a href="https://en.wikipedia.org/wiki/Skiing">skiing</a> with its fourth installment, <i><a href="https://en.wikipedia.org/wiki/SSX_on_Tour">SSX on Tour</a></i> (2005).</p>
+
+<p>The original <a href="https://en.wikipedia.org/wiki/SSX_(2000_video_game)"><i>SSX</i></a> (2000) was a launch title for both the <a href="https://en.wikipedia.org/wiki/Category:EA_Sports_Big_games">EA Sports Big</a> brand and the original <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>. The franchise has received high critical acclaim, with the first three installments receiving over 90.00% on <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> and <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. The series has won numerous awards and its third installment <i><a href="https://en.wikipedia.org/wiki/SSX_3">SSX 3</a></i> (2003) sold over a million copies. The most recent game in the franchise is <a href="https://en.wikipedia.org/wiki/SSX_(2012_video_game)"><i>SSX</i> (2012)</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p>Starting with the original <i><a href="https://en.wikipedia.org/wiki/SSX_(2000_video_game)">SSX</a></i>, players may choose any one of a number of snowboarders, each with their own statistics and boarding style. A course is selected and the player is given the option of racing down the course or participating in a competition to do tricks. Each course is filled with ramps, rails, and other assorted objects. Performing tricks fills up the player's boost meter, which can then be used for additional acceleration, making tricks important even in a race. Players also have the option of practicing or exploring courses in freeride mode.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/SSX_Tricky">SSX Tricky</a></i> introduced Uber Tricks, absurdly unrealistic and exaggerated tricks, often involving detaching the board from the snowboarder's feet. The player can gain access to Uber Tricks during play after filling the adrenaline bar; performing six Uber Tricks earns the player unlimited boost for the rest of the race. <i>SSX Tricky</i> also introduced a new feature called rivalries, where the player would face consequences from their opponents if they attacked them while on the course, which also fills the player's boost meter.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/SSX_3">SSX 3</a></i> introduced an open mountain concept. Instead of offering individual races on multiple mountains, <i>SSX 3</i> takes place on one open mountain with three peaks. The runs are designated as Race, Slopestyle, Super Pipe, Big Air or Backcountry. The game also introduces new “Mountain effects” such as snow spray, snowstorms and natural disasters.
+<i>SSX 3</i> also introduces a second, intermediate set of Uber Tricks. Each character has an associated Uber Trick. The unlimited boost system was tweaked to where the player simply had to complete nine Uber Tricks to get the boost bonus but has a time limit, and after that expires, the second tier must be completed again to regain unlimited boost. Certain combinations of spins, flips, and Uber Tricks resulted in Monster Tricks, worth even more points than uber tricks. The points for the combinations are only unlocked after completing certain goals in the game, such as staying on a rail for 120 m (390 ft).</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/SSX_on_Tour">SSX on Tour</a></i> added more character customization and introduced the sport of skiing into franchise. All Uber Tricks in <i>SSX on Tour</i> are now known as Monster Tricks and are much simpler to execute than the Monster Tricks of <i>SSX 3</i>. Where previous <i>SSX</i> titles used the main trick buttons and the tweak button for later titles to perform Uber Tricks, the Monster Tricks in <i>SSX on Tour</i> are performed by pushing the right analog stick in different directions.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/SSX_Blur">SSX Blur</a></i> was a <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> exclusive, being one the first games to utilize the full capabilities of the <a href="https://en.wikipedia.org/wiki/Wiimote">Wiimote and the nunchuck</a>. <i>Blur</i> introduced <a href="https://en.wikipedia.org/wiki/Slalom_skiing">slalom</a> events and the groove meter, which made the music intensify every time you stuck a trick, as well as increase your speed and height in the air. Uber Tricks this time around are now called Ubers and required the player to draw special shapes in the air with their Wiimotes.</p>
+
+<p>In the final <i><a href="https://en.wikipedia.org/wiki/SSX_(2012_video_game)">SSX</a></i> installment, its Uber Tricks can be tweaked with the use of additional button to gets more points. Also as an alternative to getting unlimited boost after completing six Uber Tricks, Super Uber Tricks are allowed to be performed, as opposed to Monster Tricks. Super Uber Tricks are even more intense than regular Uber Tricks; if both trigger buttons are held while performing an Uber Trick, a trick unique to the player's character is performed worth the most points out of every possible trick.</p>
+
+<h2>Development</h2>
+
+<p>The development of <i>SSX</i> began with series producer Steven Rechtschaffner, who began his career as a professional <a href="https://en.wikipedia.org/wiki/Skiing">skier</a> from 1978 to 1981. After retiring from skiing, Rechtschaffner became a program director for his former team, aiming to make freestyle skiing an olympic event. Rechtschaffner abandoned this career in 1983, and became a segment producer for an action sports show called Greg Stump’s World of Extremes for <a href="https://en.wikipedia.org/wiki/Fox_TV">Fox TV</a>. Rechtschaffner said he "ran out of ideas" for segments and came up with the idea to combine <a href="https://en.wikipedia.org/wiki/Motocross">motocross</a> with skiing, later deciding <a href="https://en.wikipedia.org/wiki/Snowboarding">snowboarding</a> would be more suitable than skiing. Because of this idea he invented the sport of <a href="https://en.wikipedia.org/wiki/Boardercross">boardercross</a>, which is an Olympic event today.</p>
+
+<p>Rechtschaffner then spent six years building a brand for a wristwatch company called <a href="https://en.wikipedia.org/wiki/Swatch">Swatch</a>, which had a focus at the time to combine <a href="https://en.wikipedia.org/wiki/Hip_hop_music">hip-hop</a> with <a href="https://en.wikipedia.org/wiki/Extreme_sport">action sports</a>, which became later influential in Rechtschaffner's pitch for <i>SSX</i>.</p>
+
+<p>Rechtschaffner became interested in tv and film production at the same time his wife wished to move back to her home of <a href="https://en.wikipedia.org/wiki/Vancouver">Vancouver, Canada</a>, where Rechtschaffner landed a job as a producer at <a href="https://en.wikipedia.org/wiki/EA_Vancouver">Electronic Arts Canada</a> in 1991 after presenting his idea to make games more appealing. Rechtschaffner used his experience as a television director to help develop the cameras for EA's then emerging 3D sports titles.</p>
+
+<p>In this time Rechtschaffner created the <a href="https://en.wikipedia.org/wiki/Triple_Play_(video_game_series)"><i>Triple Play</i></a> series for <a href="https://en.wikipedia.org/wiki/EA">EA</a>. Because the series was successful, EA gave Rechtschaffner the blessing to work on his own side project, which began the development of <a href="https://en.wikipedia.org/wiki/SSX_(2000_video_game)"><i>SSX</i></a>. Rechtschaffner's approach was to "build it at an arcade or <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a>-level quality, and really making it about fun, not about being a simulation. But having great physics and control, things that anybody could pick up and play but it would be hard to really master the game."</p>
+
+<p>In 1999, EA revealed <a href="https://en.wikipedia.org/wiki/SSX_(2000_video_game)"><i>SSX</i></a> was being developed for the <a href="https://en.wikipedia.org/wiki/Dreamcast">Sega Dreamcast</a>, however EA's relationship with <a href="https://en.wikipedia.org/wiki/Sega">Sega</a> was severed after disagreements over the choice of <a href="https://en.wikipedia.org/wiki/Central_processing_unit">CPU</a> Sega designated for the Dreamcast, as well as a new licensing deal that meant less money going to EA for games sold.</p>
+
+<p>EA presented <i>SSX</i> to <a href="https://en.wikipedia.org/wiki/Sony_Interactive_Entertainment">Sony</a> who responded enthusiastically, offering the team help as well as access to their engineers if the team promised to make it a <a href="https://en.wikipedia.org/wiki/Launch_title">launch title</a> for their upcoming <a href="https://en.wikipedia.org/wiki/PlayStation_2">Playstation 2</a> console. Despite Sony's proposal, some at EA were still uncertain of the project, but Rechtschaffner was allowed to continue due to a "silver bullet" concept at EA, which according to Rechtschaffner was "an opportunity to try something, even if you were to fail, as long as you were building on top of a success." Rechtschaffner's <i>Triple Play</i> series was his earned silver bullet.</p>
+
+<p><i>SSX</i> appeared to be shaping up to a higher quality than that seen of the normal <a href="https://en.wikipedia.org/wiki/EA_Sports">EA Sports</a> games of the time, which Rechtschaffner said averaged "about 74" with game ratings at the time. Inspired by this early reception alongside his background in marketing and branding with Swatch, Rechtschaffner proposed a new label within EA Sports called <a href="https://en.wikipedia.org/wiki/Category:EA_Sports_Big_games">EA Sports Big</a> for similar, more experimental titles, and pulled this branding together weeks before the launch of the first <i>SSX</i>.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/SSX_(2000_video_game)"><i>SSX</i></a> was released as a launch title for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">Playstation 2</a> on October 26, 2000 and received a 93 on <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, making it one of the highest rated games in EA's history and the 19th best-reviewed game on PS2. This inspired EA to continue forward with <a href="https://en.wikipedia.org/wiki/Category:EA_Sports_Big_games">EA Sports Big</a>, giving Rechtschaffner influence over the brand. <a href="https://en.wikipedia.org/wiki/Category:EA_Sports_Big_games">EA Sports Big</a> released 21 games, 4 of which were <i>SSX</i> sequels.</p>
+
+<h2>Main series</h2>
+
+<h3><i>SSX</i> (2000) and <i>SSX Tricky</i></h3>
+
+<p><i>SSX</i> was released for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> for its launch in October 2000. <i>SSX</i> was <a href="https://en.wikipedia.org/wiki/Video_game_developer">developed</a> by <a href="https://en.wikipedia.org/wiki/EA_Canada">EA Canada</a>, while <i>SSX Tricky</i> was developed by <a href="https://en.wikipedia.org/wiki/EA_Sports">EA Sports</a>. The game was critically acclaimed. <i>SSX Tricky</i> was released November 5, 2001, for the PlayStation 2, <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a>, <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a>. <i>SSX Tricky</i> was so similar to the original that many considered it an update rather than a <a href="https://en.wikipedia.org/wiki/Sequel">sequel</a>.</p>
+
+<p>In <i>SSX</i> and <i>SSX Tricky</i>, winning medals in a variety of events unlocks new courses, characters, and boards, as well as improved the boarder's abilities. New outfits may be earned by completing a character's trick book, by doing a number of specific tricks during play. Three kinds of boards are available to players: trick-oriented Freestyle boards, all-around BX boards, and racing-oriented Alpine boards, which are not meant to be ridden backwards. The courses in both games are located around the world. Tokyo Megaplex is a course resembling a giant <a href="https://en.wikipedia.org/wiki/Pinball_machine">pinball machine</a>, and Merqury City takes place in the downtown area of a city. The snowboarders are from around the world, and speak in their primary languages.</p>
+
+<p><i>SSX 3</i> was released in October 2003. It was released on all the same platforms that <i>SSX Tricky</i> was released on, as well as the <a href="https://en.wikipedia.org/wiki/Gizmondo">Gizmondo</a>, and was developed by <a href="https://en.wikipedia.org/wiki/EA_Canada">EA Canada</a>. <i>SSX 3</i> makes use of an open mountain concept. In earlier games, individual tracks were located around the world. In <i>SSX 3</i>, the entire game takes place on one mountain, with three peaks and several individual runs. Runs are designated as race, slopestyle, super pipe, big air, or backcountry tracks, and are designed accordingly. Tracks are connected; it is possible to board down the entire mountain without stopping. The game also uses a new graphics engine. The reward system is also revamped. Although some rewards are still tied to what medals the player gets, most rewards are bought using money earned in competition or when finding hidden snowflakes. Outfits, statistic improvements, hidden characters (character models), and game art are all available.</p>
+
+<p>Other changes include the introduction of a second level of Uber tricks, the elimination of Freestyle/BX/Alpine boards in favor of a single board type, and the elimination of statistical differences between characters. In general, the game emphasizes customization much more than in previous games; for example, different boards no longer have different effects on how your board handles, allowing the player to choose whatever board they like the most, instead of the best board statistically. <i>SSX 3</i> also offered online play; once in a lobby, a player could initiate a two-player versus match: <a href="https://en.wikipedia.org/wiki/Slopestyle">slopestyle</a>, <a href="https://en.wikipedia.org/wiki/Halfpipe">halfpipe</a>, or <a href="https://en.wikipedia.org/wiki/Racing">race</a> event; however, <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> (EA) closed this option in early 2006 by terminating all servers designated to EA games released during and prior to 2005.</p>
+
+<p><i>SSX on Tour</i> is the fourth title in the <i>SSX</i> series of video games for the GameCube, PlayStation 2, <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PSP</a>, and Xbox. It was released on October 13, 2005, in North America. Unlike its predecessor, <i>SSX on Tour</i> has no online play as the main focus was improving the gameplay and maps. There are many new characters, new maps, new tricks and <a href="https://en.wikipedia.org/wiki/Skiers">skiers</a>. One main variation from other consoles is the GameCube version since it has Nintendo characters and a special track.</p>
+
+<p><i>SSX on Tour'</i>s main gameplay mode The Tour allows the player to create a character and select one of a number of challenges available at any one point in time. Progressing through challenges, including medal events, earns the player both cash and hype; earning hype advances the player from amateur to pro level and unlocks harder challenges. <i>SSX on Tour</i> is a departure from the previous incarnations of the series in several ways. Courses are no longer closed; the player will frequently encounter other skiers and snowboarders when freeriding or doing minor challenges. Additionally, the presentation of <i>SSX On Tour</i> significantly different from the previous games as well, taking on a sketchy, punk rock aesthetic. For the GameCube version, Mario, Luigi, and Peach from <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> are included.</p>
+
+<p><i>SSX Blur</i> launched February 27, 2007, on the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>. It makes full use of the motion controls for turning and tricks. Uber tricks are performed by drawing shapes on the screen, while flips/spins are performed by simply flicking the Wii remote in certain directions.</p>
+
+<p>Twelve playable characters are in the game (Mac, Elise, Kaori, Zoe, Moby, Psymon, Allegra, Griff, JP, Skye, and newcomers Felix and Maya), all of which can use either skis or snowboard. Only four characters are available at the start of the game (Mac, Elise, Kaori, and Moby), and players unlock additional characters through completing tasks. In common with <i>SSX 3</i>, the game takes place on one mountain with three peaks, and it is possible to travel non-stop from the top of the highest peak to the bottom of the lowest. All the race tracks are taken from previous games (<i>SSX 3</i> and <i>SSX on Tour</i>), put together onto a new mountain. <i>SSX Blur</i> offers fewer customization options for the characters than previous SSX games, and characters do not talk in the game.</p>
+
+<p><i>SSX</i> features real world environments mapped by <a href="https://en.wikipedia.org/wiki/NASA">NASA</a> satellites. The game's slogan was "Defy Reality. Own the Planet". It was released on February 28, 2012. Unlike previous titles, it did not include local multiplayer.</p>
+
+<p>Players have the ability to upload their own music to <i>SSX</i> to create custom playlists for menu and in-game music. <i>SSX</i> also features a new dynamic music remix tool that will automatically remix licensed tracks and custom music based on the player's actions and performance in-game. The objective of the game is to beat Griff, Team SSX's rival, and conquer all nine deadly descents. The story takes the player across the world with nine different characters, one for each descent, and it also features two special add-on characters.</p>
+
+<h2>Other games</h2>
+
+<h3><i>SSX Out of Bounds</i></h3>
+
+<p><i>SSX Out of Bounds</i> was released on the <a href="https://en.wikipedia.org/wiki/N-Gage_(device)">N-Gage</a> in January 2005. It is a port of the console installment <i>SSX 3</i> but downsized for the handheld. The game features multiplayer capability over <a href="https://en.wikipedia.org/wiki/Bluetooth">Bluetooth</a>.</p>
+
+<p><i>SSX by EA Sports</i> was released on the LG SmartWorld app storefront for the <a href="https://en.wikipedia.org/wiki/LG_G2">LG G2</a> on December 21, 2013. The game was also released in the Xperia Lounge store for the <a href="https://en.wikipedia.org/wiki/Sony_Xperia_Z1">Sony Xperia Z1</a> and <a href="https://en.wikipedia.org/wiki/Sony_Xperia_Z_Ultra">Z Ultra</a> few days later. As with the 2012 console installment, the objective of the game is to beat the antagonist Griff by conquering four deadly descents: the Rockies, Siberia, the Alps, and the Himalayas. <i>SSX by EA Sports</i> uses four descents and four characters, and the game supports the <a href="https://en.wikipedia.org/wiki/PlayStation">PlayStation</a>'s <a href="https://en.wikipedia.org/wiki/DualShock_3">DualShock 3</a> controller.</p>
+
+<p><i>SSX Snowboarder</i> was a plug 'n' play game made by RADICA with EA Sports and Play TV which was a full game and controller in one. With AV cables plugged into the TV or VCR unit and 4xAA batteries in the base unit the players were able to play with the snowboard controller to make it like they were actually snowboarding. It included four different game modes: Show off, Time Challenge, Pipedream, and Tokyo Megaplex. The device was made for ages 8 and up with a maximum weight limit of 91 kg/200 lbs/14.5stone on the snowboard controller.</p>
+
+<h2>Cancelled games</h2>
+
+<h3><i>SSX iPhone</i></h3>
+
+<p><i>SSX iPhone</i> was originally given a 2009 release date by EA Mobile, later delayed to 2010, but the game was never released.</p>
+
+<h2>Music</h2>
+
+<p>The series has been universally acclaimed for its unique adaptive music system which remixes tracks in real time to fit multiple gameplay situations. The first three games predominantly featured <a href="https://en.wikipedia.org/wiki/Breakbeat">electronic breaks and beats</a>, which was directed under producer Mackay-Smith and sound artist John Morgan. The first and second games (<i>SSX</i> and <i>SSX Tricky</i>) both feature significant contributions from <a href="https://en.wikipedia.org/wiki/Beastie_Boys">Beastie Boys</a>' DJ <a href="https://en.wikipedia.org/wiki/Mix_Master_Mike">Mix Master Mike</a> and beatboxer <a href="https://en.wikipedia.org/wiki/Rahzel">Rahzel</a> who both appear in the games: Rahzel as the first two games' announcer and Mix Master Mike as a secret character in <i>SSX Tricky</i>. Both also contributed to the intro theme of the original game, "<i>Slayboarder</i>."</p>
+
+<p><i>SSX Tricky</i> is particularly noted for its soundtrack, specifically the inclusion of "<i><a href="https://en.wikipedia.org/wiki/It's_Tricky">It's Tricky</a></i>" by <a href="https://en.wikipedia.org/wiki/Run-DMC">Run DMC</a> which plays <a href="https://en.wikipedia.org/wiki/A_cappella">a cappella</a> over the current track when the player fills their TRICKY meter.</p>
+
+<p>The fourth game in the series, <i>SSX On Tour</i>, was noted for taking a change in direction with its soundtrack. Rather than focusing on <a href="https://en.wikipedia.org/wiki/Breakbeat">breakbeat</a>, <i>On Tour</i> introduced a more <a href="https://en.wikipedia.org/wiki/Rock_music">rock</a>-centric and <a href="https://en.wikipedia.org/wiki/Hip_hop_music">hip hop</a> focus from the previous titles. The change was initially met with mixed reactions internally, but ultimately ended up receiving high acclaim as well.</p>
+
+<p><i>SSX Blur</i> made another change in soundtrack direction by being solely composed by electronic artist <a href="https://en.wikipedia.org/wiki/Tom_Holkenborg">Junkie XL</a>.</p>
+
+<p><i>SSX</i> (2012) attempted to recapture the original fandom by again including "<i>It's Tricky</i>" by Run DMC, this time remixed by artist <a href="https://en.wikipedia.org/wiki/Pretty_Lights">Pretty Lights</a>. The game also introduced a new adaptive music system called Harmony. The soundtrack included more modern popular electronic music genres of the time such as <a href="https://en.wikipedia.org/wiki/Dubstep">dubstep</a> and <a href="https://en.wikipedia.org/wiki/Indie_rock">indie rock</a>, in addition to the electronic styles of the original titles.</p>
+
+<h2>Future</h2>
+
+<p>Steven Rechtschaffner, the producer of <i>SSX Tricky</i>, expressed his interest and the possibility of a revival of the <i>SSX</i> series with a remake of <i>Tricky</i>. He said that overall it is not his decision but of the developers and EA, who own the IP.</p>
+
+<p>However, in 2021, Rechtschaffner said he was working on a spiritual successor of the <i>SSX</i> franchise, revealed to be <i>Project Gravity</i>, a free-to-play live service snowboarding game from Rechtschaffner's team at Supernatural Studios. In 2024, the game was reported to be cancelled. It was set to be published by <a href="https://en.wikipedia.org/wiki/2K_(company)">2K</a>.</p>
+
+<h2>Characters</h2>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

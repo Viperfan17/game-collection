@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Aliens: Colonial Marines</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('f1d83721-6544-4a3e-88c9-79c1c61a49b7/cf09096a-c5df-4963-b3ca-ae4e4ef4a894.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="f1d83721-6544-4a3e-88c9-79c1c61a49b7/c352b3f7-cd29-43dd-8ff1-cfd8ce96598f.ico"/> Aliens: Colonial Marines</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="f1d83721-6544-4a3e-88c9-79c1c61a49b7/457d40df-cddc-47ca-897f-cd925bee4f50.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-12/25/2014">12/25/2014</a> 12:29:08</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 11:32:26</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-2/12/2013">2/12/2013</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-47">47</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-45">45</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-FPS">FPS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Demiurge Studios">Demiurge Studios</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Gearbox Software">Gearbox Software</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nerve Software">Nerve Software</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-TimeGate Studios">TimeGate Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-1C-SoftClub">1C-SoftClub</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-SEGA">SEGA</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Aliens:_Colonial_Marines" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=382" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/aliens-colonial-marines" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/49540/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Aliens:_Colonial_Marines" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/59738" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Aliens:_Colonial_Marines" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/aliens-colonial-marines/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-Horror">Horror</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Sci-fi">Sci-fi</a><br/><a href="#quicklink-Unreal Engine 3">Unreal Engine 3</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Aliens: Colonial Marines</b></i> is a 2013 <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> developed by <a href="https://en.wikipedia.org/wiki/Gearbox_Software">Gearbox Software</a> and published by <a href="https://en.wikipedia.org/wiki/Sega">Sega</a> for <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. Based on the <i><a href="https://en.wikipedia.org/wiki/Alien_(franchise)">Alien</a></i> universe and set shortly after the 1986 film <i><a href="https://en.wikipedia.org/wiki/Aliens_(film)">Aliens</a></i>, the game follows a group of Colonial Marines, a fictional military unit, as they confront the Weyland-Yutani corporation in an effort to rescue survivors from the <i>Sulaco</i> spaceship. It features a <a href="https://en.wikipedia.org/wiki/Campaign_setting">campaign</a> mode that supports both <a href="https://en.wikipedia.org/wiki/Single-player_video_game">single-player</a> and <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperative</a> gameplay, and a <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a> mode in which players compete in different scenarios.</p>
+
+<p><i>Colonial Marines</i> was developed over six years and suffered from a tumultuous development cycle. As Gearbox decided to focus on projects such as <i><a href="https://en.wikipedia.org/wiki/Duke_Nukem_Forever">Duke Nukem Forever</a></i> and <i><a href="https://en.wikipedia.org/wiki/Borderlands_2">Borderlands 2</a></i> and outsourced a significant part of <i>Colonial Marines</i> to other studios. The <i>Aliens</i> concept artist <a href="https://en.wikipedia.org/wiki/Syd_Mead">Syd Mead</a> was hired to design locations. Four <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> packs added multiplayer maps, a new cooperative mode, and a campaign mode that takes place before the campaign of the base game.</p>
+
+<p><i>Colonial Marines</i> sold more than one million copies in the United States and Europe, but received unfavorable reviews from critics, who criticized its technical problems, low-quality graphics, short length, and weak <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_(video_games)">artificial intelligence</a> of enemies. It is considered to be <a href="https://en.wikipedia.org/wiki/List_of_video_games_notable_for_negative_reception">one of the worst video games of the 2010s</a>. The competitive multiplayer mode was highlighted as its strongest aspect. <i>Colonial Marines</i> drew controversy for featuring a lower graphical quality than that of the press <a href="https://en.wikipedia.org/wiki/Game_demo">demos</a>. This led two players to file a <a href="https://en.wikipedia.org/wiki/Lawsuit">lawsuit</a> for <a href="https://en.wikipedia.org/wiki/False_advertising">false advertising</a>, but it lost class-action status by 2015.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Aliens: Colonial Marines</i> is a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> based on the <i><a href="https://en.wikipedia.org/wiki/Alien_(franchise)">Alien</a></i> science fiction horror film series. The <a href="https://en.wikipedia.org/wiki/Campaign_setting">campaign</a> mode, which can be played by a <a href="https://en.wikipedia.org/wiki/Single-player_video_game">single</a> player or <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperatively</a> by up to four players, features 11 missions that involve players moving from one <a href="https://en.wikipedia.org/wiki/Saved_game">checkpoint</a> to another while fighting opponents controlled by the <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_(video_games)">artificial intelligence</a>. Opponents consist of either <a href="https://en.wikipedia.org/wiki/Alien_(creature_in_Alien_franchise)">Alien</a> creatures, also known as Xenomorphs, or hostile human <a href="https://en.wikipedia.org/wiki/Private_military_company">mercenaries</a>. Xenomorphs are fast and primarily attack with their claws or by spitting <a href="https://en.wikipedia.org/wiki/Acid">acid</a>, while mercenaries are slower and use firearms.</p>
+
+<p>As the fictional Colonial Marines military unit depicted in <a href="https://en.wikipedia.org/wiki/James_Cameron">James Cameron</a>'s 1986 film <i><a href="https://en.wikipedia.org/wiki/Aliens_(film)">Aliens</a></i>, players have access to weapons such as <a href="https://en.wikipedia.org/wiki/Pistol">pistols</a>, <a href="https://en.wikipedia.org/wiki/Shotgun">shotguns</a>, <a href="https://en.wikipedia.org/wiki/Grenade">grenades</a>, pulse rifles, <a href="https://en.wikipedia.org/wiki/Flamethrower">flamethrowers</a>, robotic <a href="https://en.wikipedia.org/wiki/Sentry_turret">sentry turrets</a>, and <a href="https://en.wikipedia.org/wiki/Smartgun">smartguns</a>, which automatically track and target opponents. They may also use <a href="https://en.wikipedia.org/wiki/Oxy-fuel_welding_and_cutting">welding</a> torches to seal doors and <a href="https://en.wikipedia.org/wiki/Motion_detector">motion trackers</a> to detect unseen enemies. Ammunition can be found on defeated mercenaries or from certain locations in the mission area. The Colonial Marines are protected by a <a href="https://en.wikipedia.org/wiki/Health_(gaming)">health</a> bar that is divided into segments. If a segment is partially depleted, it will automatically regenerate over time. <a href="https://en.wikipedia.org/wiki/First_aid_kit">Med-Packs</a> throughout the missions may be acquired to restore lost health segments. Players may also collect pieces of armor that protect the health bar with a secondary meter that does not automatically regenerate. Players have a limited time to revive a player whose health has been fully depleted. If they fail, the downed player cannot return until the surviving players reach the next checkpoint.</p>
+
+<p>In addition to the campaign mode, <i>Colonial Marines</i> features a competitive <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a> mode where two teams of up to five players face each other in four different scenarios. Each scenario involves one team playing as Colonial Marines and the other as Aliens. After a time limit has been reached, players switch roles and play once more on the same <a href="https://en.wikipedia.org/wiki/Level_(video_gaming)">map</a>. Scenarios include <a href="https://en.wikipedia.org/wiki/Team_Deathmatch">Team Deathmatch</a>, where both teams must kill as many opposing players as possible; Extermination, where Colonial Marines must detonate bombs in egg-infested areas protected by Aliens; Escape, which involves Colonial Marines completing objectives to reach a destination while being assaulted by Aliens; and Survivor, where Colonial Marines must survive attacks from Aliens with limited health and ammunition resources for as long as possible. Unlike Colonial Marines, Alien players play from a <a href="https://en.wikipedia.org/wiki/Virtual_camera_system">third-person</a> perspective and cannot use firearms, but have the ability to climb walls, run on ceilings, deliver attacks with their claws, and unleash streams of acid.</p>
+
+<p>Players earn <a href="https://en.wikipedia.org/wiki/Experience_point">experience points</a> by overcoming opponents, completing challenges, and finding collectibles—audio logs, <a href="https://en.wikipedia.org/wiki/Dog_tag">dog tags</a>, and legendary weapons, all of which are related to characters who appear in the film series. Challenges range from killing opponents in a particular way to winning multiplayer matches and completing campaign missions under a difficulty setting. Players have two ranks, one for their Colonial Marine <a href="https://en.wikipedia.org/wiki/Player_character">character</a> and another for their Alien character. When a sufficient amount of experience has been obtained, their characters rank up. Colonial Marine ranks unlock weapon upgrades for use in both the campaign and the competitive multiplayer modes. These include alternate fire attachments, <a href="https://en.wikipedia.org/wiki/Telescopic_sight">telescopic sights</a>, and larger capacity <a href="https://en.wikipedia.org/wiki/Magazine_(firearms)">magazines</a>. In contrast, Alien ranks unlock new combat abilities for Alien characters. Completing challenges also unlocks appearance options for both Colonial Marine and Alien characters, and new <a href="https://en.wikipedia.org/wiki/Attribute_(role-playing_games)">attributes</a> that are exclusive to Colonial Marines in the competitive multiplayer mode.</p>
+
+<h2>Plot</h2>
+
+<p>17 weeks after the events of <i>Aliens</i>, the USS <i>Sephora</i> sends a full battalion of Colonial Marines to investigate the USS <i>Sulaco</i>, now in orbit around LV-426 <a href="https://en.wikipedia.org/wiki/Natural_satellite">moon</a>. A massive Xenomorph infestation is discovered inside the <i>Sulaco</i> and several Marines are killed in the initial onslaught. Corporal Christopher Winter, Private Peter O'Neal, and Private Bella Clarison discover that hostile mercenaries working for the Weyland-Yutani corporation are in command of the <i>Sulaco</i> and have been breeding Xenomorphs on board for study. Shortly before both ships are destroyed in the ensuing confrontation, the Marines, along with commander Captain Cruz, <i>Sephora</i> <a href="https://en.wikipedia.org/wiki/Android_(robot)">android</a> Bishop, and pilot lieutenant Lisa Reid, escape aboard her dropship and take shelter in the ruins of the Hadley's Hope colony complex on LV-426.</p>
+
+<p>Although the Marines learn that Clarison has been attacked by a <a href="https://en.wikipedia.org/wiki/Alien_(creature_in_Alien_franchise)#Facehugger">facehugger</a> and needs medical treatment, Cruz orders Winter to travel to a nearby Weyland-Yutani research facility set up near a derelict Xenomorph spacecraft and recover a manifest that identifies an unknown prisoner from the <i>Sulaco</i>. In an attempt to save Clarison, Winter and O'Neal accept the mission and escort her to the facility, where they intend to convince surviving personnel to remove the Xenomorph <a href="https://en.wikipedia.org/wiki/Embryo">embryo</a> from her body. However, upon arrival, an interrogated Weyland-Yutani medical officer explains to them that Clarison's life cannot be saved because the creature's invasive <a href="https://en.wikipedia.org/wiki/Placenta">placenta</a> is <a href="https://en.wikipedia.org/wiki/Cancer">cancerous</a> and will eventually kill her even if the embryo is successfully extracted. Clarison dies when a <a href="https://en.wikipedia.org/wiki/Chestburster">chestburster</a> hatches from her.</p>
+
+<p>Winter and O'Neal recover the manifest they were sent to find and rescue the prisoner, who is revealed to be corporal <a href="https://en.wikipedia.org/wiki/Dwayne_Hicks">Dwayne Hicks</a>. Hicks explains that Weyland-Yutani intercepted and boarded the <i>Sulaco</i> before it arrived at the penal colony of Fiorina 161. A fire in the hypersleep bay subsequently caused the <i>Sulaco</i> survivors <a href="https://en.wikipedia.org/wiki/Ellen_Ripley">Ellen Ripley</a>, Newt, and <a href="https://en.wikipedia.org/wiki/Bishop_(Aliens)">Bishop</a> to be jettisoned from the ship, along with the body of an unidentified man who was mistaken for the corporal. Hicks himself was captured by Weyland-Yutani personnel and subjected to torture during interrogation, overseen by android Michael Weyland in an attempt to learn more about the Xenomorphs' origins and to gain control of the <i>Sulaco</i>'s weapon systems. From Hicks, the Marines also learn that an <a href="https://en.wikipedia.org/wiki/Faster-than-light">FTL</a>-capable ship is docked at the research facility, representing the last chance for the Marines to escape from the moon.</p>
+
+<p>After gathering the remaining <i>Sephora</i> personnel on the colony, Cruz orders an all-out assault on the Weyland-Yutani complex in the hopes of capturing the FTL vessel. Winter and Hicks spearhead the advance, but the ship leaves shortly before they can reach it. In a last desperate attempt, Cruz pilots a dropship up to the escaping vessel and crashes into its hangar. Winter is confronted by a Xenomorph queen in the hangar bay, and attempts to eject her using a cargo launching system, but fails when she climbs back aboard. Cruz sacrifices himself when he launches the crippled dropship directly into the queen, propelling both out of the vessel. Winter, O'Neal, Reid, Bishop, and Hicks confront Weyland, who is ultimately executed by Hicks. In search of useful intelligence, Bishop connects to the destroyed android and states that he has "everything".</p>
+
+<h2>Development</h2>
+
+<h3>Design</h3>
+
+<p><i>Colonial Marines</i> was conceived by <a href="https://en.wikipedia.org/wiki/Gearbox_Software">Gearbox Software</a> after an encounter between the company's creative director, Bryan Martell, and the director of the original <i><a href="https://en.wikipedia.org/wiki/Alien_(film)">Alien</a></i> film, <a href="https://en.wikipedia.org/wiki/Ridley_Scott">Ridley Scott</a>. When <i><a href="https://en.wikipedia.org/wiki/Brothers_in_Arms:_Road_to_Hill_30">Brothers in Arms: Road to Hill 30</a></i> was released in 2005, Gearbox was interested in working with an existing <a href="https://en.wikipedia.org/wiki/Intellectual_property">intellectual property</a> and had previously considered Scott's 1982 film <i><a href="https://en.wikipedia.org/wiki/Blade_Runner">Blade Runner</a></i> and <a href="https://en.wikipedia.org/wiki/Michael_Mann">Michael Mann</a>'s 1995 film <i><a href="https://en.wikipedia.org/wiki/Heat_(1995_film)">Heat</a></i> as candidates. Martell's discussion with Scott on the <i>Alien</i> universe inspired him to approach <a href="https://en.wikipedia.org/wiki/20th_Century_Fox">20th Century Fox</a> about the licensing opportunities. <a href="https://en.wikipedia.org/wiki/Sega">Sega</a>, who bought the rights to publish games based on the franchise in December 2006, gave Gearbox complete freedom to present them with an idea for a game. Because Gearbox had experience with first-person shooters and the development team was composed of people who were fans of <i>Aliens</i>, the company proposed a first-person shooter that would be a direct sequel to it.</p>
+
+<p>Although the final script was written by Gearbox writer <a href="https://en.wikipedia.org/wiki/Mikey_Neumann">Mikey Neumann</a>, <a href="https://en.wikipedia.org/wiki/Bradley_Thompson">Bradley Thompson</a> and <a href="https://en.wikipedia.org/wiki/David_Weddle">David Weddle</a>, writers of the 2004 television series <i><a href="https://en.wikipedia.org/wiki/Battlestar_Galactica_(2004_TV_series)">Battlestar Galactica</a></i>, collaborated with Gearbox during the <a href="https://en.wikipedia.org/wiki/2007–08_Writers_Guild_of_America_strike">2007–08 Writers Guild of America strike</a> to develop the story and characters. The game takes place shortly after the 1992 <i>Aliens</i> sequel <i><a href="https://en.wikipedia.org/wiki/Alien_3">Alien 3</a></i>, but addresses the events that lead to it. As a result, <i>Colonial Marines</i> is considered part of the series' <a href="https://en.wikipedia.org/wiki/Canon_(fiction)">canon</a>. Several locations of <i>Aliens</i> like the <i>Sulaco</i> spaceship and the Hadley's Hope colony were recreated for the game. To keep the same level of authenticity, concept artist <a href="https://en.wikipedia.org/wiki/Syd_Mead">Syd Mead</a>, who collaborated with Cameron on the film to design the <i>Sulaco</i>, was hired to recreate its "mechanical mood" and design areas of the spaceship that did not appear in the film. Entertainment designer <a href="https://lwoodesign.com/development/29/12/2022/development-aliens-colonial-marines">Lorin Wood</a> was hired by Gearbox in late 2007 to take over the principle conceptual design workload after Syd Mead completed his work. Due to his industrial design experience and film industry work he helped the studio maintain a consistent aesthetic that Syd Mead and <a href="https://en.wikipedia.org/wiki/Ron_Cobb">Ron Cobb</a> established for the film. The development team also contacted <a href="https://en.wikipedia.org/wiki/Kodak">Kodak</a> to get color <a href="https://en.wikipedia.org/wiki/Channel_(digital_image)">channel</a> details about the film's <a href="https://en.wikipedia.org/wiki/Film_stock">film stock</a>.</p>
+
+<p>Originally, <i>Colonial Marines</i> was intended to feature squad-based gameplay, allowing the player to issue orders to Colonial Marines controlled by the artificial intelligence using <a href="https://en.wikipedia.org/wiki/Context-sensitive_user_interface">context-sensitive</a> commands. These would include hacking doors, sealing air vents, and setting up sentry turrets. In cooperative mode, players would then be able to directly control these Marines, who would have their own strengths and weaknesses. However, this idea was ultimately dropped to make the gameplay more accessible. Gearbox developed the game for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> and the new <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> consoles, stating that their technology would "do [the film] justice".</p>
+
+<p>Although Gearbox is credited as the primary developer of <i>Colonial Marines</i>, multiple development studios contributed to production. Initial work on <i>Colonial Marines</i>, internally codenamed <i>Pecan</i>, began in 2007 with the creation of a <a href="https://en.wikipedia.org/wiki/Software_prototyping">prototype</a> by <a href="https://en.wikipedia.org/wiki/Demiurge_Studios">Demiurge Studios</a>, who also helped Gearbox with the networking and multiplayer aspects. Between 2007 and 2010, Gearbox did not focus on the development of the game, instead preferring to work on other projects like <i><a href="https://en.wikipedia.org/wiki/Borderlands_(video_game)">Borderlands</a></i> and <i><a href="https://en.wikipedia.org/wiki/Duke_Nukem_Forever">Duke Nukem Forever</a></i>, which took over a decade to develop. <i>Colonial Marines</i> was built using <a href="https://en.wikipedia.org/wiki/Epic_Games">Epic Games</a>' <a href="https://en.wikipedia.org/wiki/Unreal_Engine_3">Unreal Engine 3</a>, but Gearbox spent a considerable amount of preproduction time developing a custom real-time lighting and shadow renderer that is "plugged" into the engine to capture the feel of <i>Aliens</i>. <a href="https://en.wikipedia.org/wiki/Nerve_Software">Nerve Software</a>, a company that handled the multiplayer of the 2001 first-person shooter <i><a href="https://en.wikipedia.org/wiki/Return_to_Castle_Wolfenstein">Return to Castle Wolfenstein</a></i>, built multiplayer maps.</p>
+
+<p><i>Borderlands</i> was released in 2009 and was a critical and commercial success. Gearbox immediately started work on <i><a href="https://en.wikipedia.org/wiki/Borderlands_2">Borderlands 2</a></i>, and outsourced primary development on <i>Colonial Marines</i> to <a href="https://en.wikipedia.org/wiki/TimeGate_Studios">TimeGate Studios</a>, who was developing <i><a href="https://en.wikipedia.org/wiki/Section_8:_Prejudice">Section 8: Prejudice</a></i> at the time. In late 2010, when TimeGate started to focus their work on <i>Colonial Marines</i>, the company realized that very little progress had been made. According to one source, the game was simply a collection of unrelated assets that included a lighting and shadow renderer. Although TimeGate handled primary development on the game until <i>Borderlands 2</i> was almost complete in mid-2012, their work had to constantly be approved by both Gearbox and Sega. Because narrative designers were still writing the script of the campaign mode, entire scenes and missions were discarded due to story changes. One of these involved the player escorting a scientist who would be a secret agent working for the Weyland-Yutani corporation.</p>
+
+<p>There were disagreements on the design. Sega wanted <i>Colonial Marines</i> to be more similar to a <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty">Call of Duty</a></i> game, with fewer Aliens and more Marines to shoot at, a view Gearbox and TimeGate disagreed with. Developers also struggled to <a href="https://en.wikipedia.org/wiki/Program_optimization">optimize</a> the game after spending a significant amount of time increasing its graphical fidelity for a press <a href="https://en.wikipedia.org/wiki/Game_demo">demo</a>, which ran on high-end computers not normally meant for general use. The game's shader and particle fidelity were then decreased significantly before release, and textures had to be reduced in size to fit into the memory restraints of the PlayStation 3 and Xbox 360.</p>
+
+<p>When Gearbox took the project back in mid-2012, the company was not satisfied with TimeGate's work, partially because the game could not run on the PlayStation 3. With a release date set for February 2013, asking Sega for an extension was not an option because the game had already been delayed several times. This resulted in Gearbox only having nine months to revise TimeGate's work and finish the game. How much of the game was actually made by Gearbox was questioned by TimeGate. According to Gearbox CEO <a href="https://en.wikipedia.org/wiki/Randy_Pitchford">Randy Pitchford</a>, TimeGate "contributed 20-25 percent" of the development time. However, without considering Gearbox's preproduction time, Pitchford said that TimeGate's effort was equivalent to theirs. A moderator on the official TimeGate forum revealed that the studio worked on the weapons, characters, Aliens, story, and multiplayer component, while some TimeGate developers estimated that 50 percent of the campaign mode in the released game was made by them.</p>
+
+<p>Several actors from the films were involved. <a href="https://en.wikipedia.org/wiki/Michael_Biehn">Michael Biehn</a> reprised his role as corporal Dwayne Hicks, while <a href="https://en.wikipedia.org/wiki/Lance_Henriksen">Lance Henriksen</a> voiced the androids Bishop and Michael Weyland. Henriksen remarked that it was interesting for him to voice a character that he had not touched in more than 25 years. In contrast, Biehn commented negatively on his experience in voicing his character, stating that there was a lack of passion from the people who were in charge of the project. The soundtrack was composed by <a href="https://en.wikipedia.org/wiki/Kevin_Riepl">Kevin Riepl</a>, who is best known for his work on numerous independent films and the <i><a href="https://en.wikipedia.org/wiki/Gears_of_War">Gears of War</a></i> series. Because the story is canonical, Riepl's score was influenced by <a href="https://en.wikipedia.org/wiki/Jerry_Goldsmith">Jerry Goldsmith</a>'s work on <i>Alien</i> and <a href="https://en.wikipedia.org/wiki/James_Horner">James Horner</a>'s work on <i>Aliens</i>. The soundtrack was recorded at <a href="https://en.wikipedia.org/wiki/Ocean_Way_Recording">Ocean Way</a> in <a href="https://en.wikipedia.org/wiki/Nashville,_Tennessee">Nashville, Tennessee</a>.</p>
+
+<h2>Marketing and release</h2>
+
+<p>A first-person shooter based on the <i>Alien</i> universe was confirmed to be in pre-production shortly after Sega acquired the license in December 2006. <i>Colonial Marines</i> was announced by <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> in its March 2008 issue, where its premise and intended gameplay features were revealed. It shares a title with an unrelated 2002 <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> project by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> and <a href="https://en.wikipedia.org/wiki/Fox_Interactive">Fox Interactive</a> that would feature a similar setting and subject matter. Originally intended to be released in 2009, <i>Colonial Marines</i> was delayed after Gearbox laid off several employees in November 2008. This led some to ask whether the game had been canceled. In the following years, few other announcements were made, although Gearbox did show some screenshots at the 2010 <a href="https://en.wikipedia.org/wiki/Penny_Arcade_Expo">Penny Arcade Expo</a>.</p>
+
+<p>At the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2011">2011</a> <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">Electronic Entertainment Expo</a> in Los Angeles, after confirming that <i>Colonial Marines</i> would be released in spring 2012, Gearbox unveiled a teaser trailer and revealed that a <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> version was in development. A live gameplay demo played by a Gearbox representative was also showcased at the event. In January 2012, Sega announced that the game had been delayed to a fall 2012 release, stating that the company did not want to "sacrifice the creative process just for the sake of following a [deadline]." In May 2012, it was delayed one last time, with Gearbox stating that <i>Colonial Marines</i> would launch for PlayStation 3, Windows, and Xbox 360 on February 12, 2013, while the Wii U version would follow later. In the months leading up to the game's release, more trailers and demos were released.</p>
+
+<p>Prior to its release, <i>Colonial Marines</i> was criticized for not featuring any playable female character. When a petition was formed to change this, Gearbox included them in both the cooperative and multiplayer modes. In addition to the standard edition, a <a href="https://en.wikipedia.org/wiki/Collector's_edition">collector's edition</a> was made available for purchase. The collector's edition included a Powerloader figurine inspired by the film, a Colonial Marines dossier, character customization options, exclusive multiplayer weapons, and a firing range game level. Players who pre-ordered could also receive some of the collector's edition content as a bonus. Shortly after the game's release, Gearbox released a <a href="https://en.wikipedia.org/wiki/Patch_(computing)">patch</a> that fixed numerous campaign and multiplayer <a href="https://en.wikipedia.org/wiki/Software_bug">bugs</a> and offered various visual improvements. The Wii U version, which was being handled by Demiurge, was canceled in April 2013.</p>
+
+<h3>Downloadable content</h3>
+
+<p><i>Colonial Marines</i> supports additional in-game content in the form of <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> packs. Between March and July 2013, four downloadable content packs were released. A <a href="https://en.wikipedia.org/wiki/Season_pass_(video_gaming)">season pass</a> for these packs could be purchased before the game was released. The first, <i>Bug Hunt</i>, was released on March 19, 2013, and adds a new cooperative mode that involves up to four players fighting increasingly larger waves of Xenomorphs and hostile soldiers across three new maps. Players earn in-game money by killing opponents, which can then be spent on different options like buying ammunition or opening up new areas of the map to increase their chances of survival. The second pack, <i>Reconnaissance Pack</i>, was released on May 7, 2013, and extends the game's competitive multiplayer mode with four maps and more customization options for Xenomorph characters, while the third pack, <i>Movie Map Pack</i>, was released on June 11, 2013, and adds four maps set in locations from the first three <i>Alien</i> films.</p>
+
+<p>The fourth and final pack, <i>Stasis Interrupted</i>, was released on July 23, 2013, and adds a new campaign mode that takes place before the campaign of the base game, exploring what happened to Hicks between <i>Aliens</i> and <i>Alien 3</i>. The campaign features four "interlocking" missions where players must play as three different characters. <i>Stasis Interrupted</i> also adds several new <a href="https://en.wikipedia.org/wiki/Achievement_(video_gaming)">achievements</a> for players to unlock, which were initially leaked via a list of PlayStation 3 <a href="https://en.wikipedia.org/wiki/PlayStation_Network">Trophies</a>. According to a report, both Demiurge and Nerve were in charge of developing the downloadable content packs, but it was not confirmed if they contributed to the development of <i>Stasis Interrupted</i>.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical response</h3>
+
+<p><i>Colonial Marines</i> received unfavorable reviews from critics, who criticized its uninspiring gameplay, technical issues, low-quality graphics, and superficial thrills, especially when compared to Cameron's film. Writing for <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>, editor Tristan Ogilvie remarked that, although <i>Colonial Marines</i> looks and sounds like <i>Aliens</i>, it does not feel like it and does not bring anything new to the first-person shooter genre. Kevin VanOrd of <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> described it as "a shallow bit of science-fiction fluff with cheap production values and an indifferent attitude." Also in agreement, Jose Otero of <a href="https://en.wikipedia.org/wiki/1Up.com">1Up.com</a> stated: "The weapons and sounds of ACM feel authentic, but the bland look of the game will make you think it shipped as an unfinished product." <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i>, however, praised the game for its respect to the source material, describing <i>Colonial Marines</i> as "easily the best gaming representation of the franchise to date."</p>
+
+<p><i>Colonial Marines</i> was criticized for having low-<a href="https://en.wikipedia.org/wiki/Image_resolution">resolution</a> textures, low-quality lighting, poor character models and animations, and uncontrolled <a href="https://en.wikipedia.org/wiki/Aliasing">aliasing</a> and <a href="https://en.wikipedia.org/wiki/Screen_tearing">screen tearing</a>. <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> said it reuses graphical assets often, resulting in many levels having "identical corridors and murky exteriors". However, the <i>Aliens</i> aesthetic was praised by some reviewers, with <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> noting that it was reproduced faithfully in the game and that it was still attractive years after the film was released. The game's numerous bugs frustrated critics. These included poor collision detection and <a href="https://en.wikipedia.org/wiki/Glitch">glitchy</a> artificial intelligence, causing enemies to <a href="https://en.wikipedia.org/wiki/Hang_(computing)">freeze</a> or fail to recognize each other. Technically, the PC version was considered more polished than the PlayStation 3 and Xbox 360 versions.</p>
+
+<p>The story drew criticism for its lack of a consistent continuity with the <i>Alien</i> films. <i>Edge</i> remarked that the Colonial Marines are in an inappropriate context because in the film they are depicted as Weyland-Yutani's private army and tasked with fighting Alien creatures. However, in the game, the Colonial Marines fight Weyland-Yutani's other private military armies. <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i> editor <a href="https://en.wikipedia.org/wiki/James_Stephanie_Sterling">James Sterling</a> criticized the story for its archetypal characters and immature dialogue, stating that the game fails to understand the essence of <i>Aliens</i>. Sterling explained that the film "dissected its posturing 'manly man' stereotypes, and showcased how utterly frail a cowboy mentality can be when everything falls apart", while <i>Colonial Marines</i> "revels in its own <a href="https://en.wikipedia.org/wiki/Testosterone">testosterone</a>, submerged gleefully in a pool of dank <a href="https://en.wikipedia.org/wiki/Machismo">ultramasculinity</a>."</p>
+
+<p>Journalists criticized the gameplay for the weak artificial intelligence of enemies. They remarked that Xenomorphs simply rush toward players, making the motion tracker useless. According to <i><a href="https://en.wikipedia.org/wiki/GameTrailers">GameTrailers</a></i>, "there's never really the sense that you're being stalked by an intelligent enemy, and you'll always get a warning ping anyway." The setting and level design were praised by <i>Electronic Gaming Monthly</i>, but <i>GameSpot</i> noted that the levels were clearly not designed for cooperative gameplay. VanOrd explained that additional players do not take the role of companions that are controlled by the artificial intelligence, but are simply added to the game, resulting in crowded matches with players fighting for space and trying to shoot enemies. The Survivor and Escape multiplayer scenarios were highlighted as the strongest aspects of the game. <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i> said that they encourage Colonial Marine players to coordinate their actions with motion trackers as Alien players try to hunt them intelligently. However, the longevity of the multiplayer mode was questioned due to the limited randomization it provides and the lack of computer-controlled <a href="https://en.wikipedia.org/wiki/Video_game_bot">bots</a>.</p>
+
+<p>In the United Kingdom, <i>Colonial Marines</i> topped the all formats charts in its first week of release. On both the Xbox 360 and PlayStation 3 individual charts, it also reached the top position. According to <a href="https://en.wikipedia.org/wiki/Chart-Track">GfK Chart-Track</a>, it was the biggest release of the year in the United Kingdom and held the second highest first-week sales for an <i>Alien</i> game since Sega's 2010 title <i><a href="https://en.wikipedia.org/wiki/Aliens_vs._Predator_(2010_video_game)">Aliens vs. Predator</a></i>. In the United States, <i>Colonial Marines</i> reached No. 6 on the all formats charts for February 2013. As of March 31, 2013, as stated in Sega's end-of-fiscal-year report, <i>Colonial Marines</i> had sold 1.31 million units in the United States and Europe.</p>
+
+<p>Upon release, <i>Colonial Marines</i> drew a significant controversy. According to a report, Gearbox had been moving people and resources off <i>Colonial Marines</i> onto <i>Borderlands</i> and <i>Duke Nukem Forever</i> while still collecting full payments from Sega as if they were working on the game. When Sega discovered this misconduct, they temporarily canceled <i>Colonial Marines</i>, leading to the round of layoffs at Gearbox in late 2008. Gearbox outsourced a significant portion of the development to other developers to compensate for their mismanagement. While Sega initially denied such outsourcing, sources claimed otherwise, suggesting that the game was rushed through redesigns, certification, and shipping, despite being largely unfinished. It drew additional controversy when sequences from press demos were compared to the same sequences in the final game, revealing that the finished game is significantly lower in graphical quality.</p>
+
+<p>In April 2013, two players filed a <a href="https://en.wikipedia.org/wiki/Lawsuit">lawsuit</a>, claiming that Gearbox and Sega had <a href="https://en.wikipedia.org/wiki/False_advertising">falsely advertised</a> the game by showing demos at trade shows that did not resemble the final product. The demos, described as "actual gameplay" by Gearbox CEO Randy Pitchford, were said to feature graphical fidelity, artificial intelligence, and levels not featured in the game. Although Sega suggested settling the lawsuit on their part and agreed to pay US$1.25 million, they denied any illegal behavior. However, Gearbox filed a request to have claims against them dropped, stating that the company, as a software developer, did not have responsibility for marketing decisions. Gearbox officials added that the company supplemented Sega's development budget with its own money to help Sega finish the game and that they had not received any royalty from its sales. The lawsuit lost class-action status and Gearbox was dropped from the case in May 2015. Pitchford said that he lost between US$10 and US$15 million of his own money on <i>Colonial Marines</i> and refuted the accusations against the studio. In 2017, a <a href="https://en.wikipedia.org/wiki/Modder">modder</a> discovered a small typographical error in the code and that fixing this error notably improved the artificial intelligence of enemies.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

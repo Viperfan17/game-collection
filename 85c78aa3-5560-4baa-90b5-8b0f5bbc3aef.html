@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Devil May Cry 5</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('85c78aa3-5560-4baa-90b5-8b0f5bbc3aef/193935ff-b2da-4ed7-a522-37ab508938fa.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="85c78aa3-5560-4baa-90b5-8b0f5bbc3aef/e4486ac9-5de4-43d9-aab9-0363e1fe3c7a.png"/> Devil May Cry 5</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="85c78aa3-5560-4baa-90b5-8b0f5bbc3aef/9f282ba4-b73a-4372-b0ff-ef2a7df3ea6b.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>7h 38m 55s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-2/23/2022">2/23/2022</a> 21:51:01</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 6:00:16</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:41:55</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-PlayStation">PlayStation</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-PlayStation">PlayStation</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 5">Sony PlayStation 5</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-3/8/2019">3/8/2019</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-96">96</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-88">88</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-hack and slash">hack and slash</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Devil_May_Cry_5" target="_blank">Wikipedia</a><br/><a href="http://www.devilmaycry5.com" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[Game Engine] RE Engine">[Game Engine] RE Engine</a><br/><a href="#quicklink-[People] artist: Koki Kinoshita">[People] artist: Koki Kinoshita</a><br/><a href="#quicklink-[People] composer: Hiromitsu Maeba">[People] composer: Hiromitsu Maeba</a><br/><a href="#quicklink-[People] composer: Kota Suzuki">[People] composer: Kota Suzuki</a><br/><a href="#quicklink-[People] composer: Yoshiya Terayama">[People] composer: Yoshiya Terayama</a><br/><a href="#quicklink-[People] designer: Yoichiro Ikeda">[People] designer: Yoichiro Ikeda</a><br/><a href="#quicklink-[People] director: Hideaki Itsuno">[People] director: Hideaki Itsuno</a><br/><a href="#quicklink-[People] producer: Matt Walker">[People] producer: Matt Walker</a><br/><a href="#quicklink-[People] producer: Michiteru Okabe">[People] producer: Michiteru Okabe</a><br/><a href="#quicklink-[People] producer: Peter Fabiano">[People] producer: Peter Fabiano</a><br/><a href="#quicklink-[People] producer: Tsuyoshi Kanda">[People] producer: Tsuyoshi Kanda</a><br/><a href="#quicklink-[People] programmer: Yoshiharu Nakao">[People] programmer: Yoshiharu Nakao</a><br/><a href="#quicklink-[People] writer: Bingo Morihashi">[People] writer: Bingo Morihashi</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Devil May Cry 5</b></i> is a 2019 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a>. The game is the sixth installment overall and the fifth mainline installment in the <i><a href="https://en.wikipedia.org/wiki/Devil_May_Cry">Devil May Cry</a></i> series. The plot follows returning protagonists <a href="https://en.wikipedia.org/wiki/Nero_(Devil_May_Cry)">Nero</a> and <a href="https://en.wikipedia.org/wiki/Dante_(Devil_May_Cry)">Dante</a> as they are hired by a mysterious stranger named <a href="https://en.wikipedia.org/wiki/List_of_Devil_May_Cry_characters#V">V</a> to stop the Demon King <a href="https://en.wikipedia.org/wiki/List_of_Devil_May_Cry_characters#Urizen">Urizen</a>. Players control Nero, Dante and V, who each feature a different playstyle.</p>
+
+<p><i>Devil May Cry 5</i> was directed by <a href="https://en.wikipedia.org/wiki/Hideaki_Itsuno">Hideaki Itsuno</a> whose goal was for this installment to be his best work. He aimed to balance the game for newcomers and returning gamers by providing various difficulties and challenges. Capcom also wanted to bring a more realistic design inspired by the <a href="https://en.wikipedia.org/wiki/RE_Engine">RE Engine</a> used in their previous work, <i><a href="https://en.wikipedia.org/wiki/Resident_Evil_7:_Biohazard">Resident Evil 7: Biohazard</a></i>. As a result, real-life people were used to make the character's faces. The plot was written by returning writer <a href="https://en.wikipedia.org/wiki/Bingo_Morihashi">Bingo Morihashi</a> while the setting was based on various locations in <a href="https://en.wikipedia.org/wiki/London">London</a>. Multiple composers worked together to produce the game's audio, creating three main themes centered around the playable characters.</p>
+
+<p><i>Devil May Cry 5</i> was released for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> on 8 March 2019. The game received positive reviews from critics, who praised the gameplay, specifically the variety of techniques the three characters bring, as well as the handling of the narrative. It won several awards, and sold over two million units in less than two weeks after its release, which increased to 9.9 million units as of December 2024, making it the best-selling game in the franchise. A <a href="https://en.wikipedia.org/wiki/Light_novel">light novel</a> and <a href="https://en.wikipedia.org/wiki/Manga">manga</a> related to the game have also been released. An expanded version called <i><b>Devil May Cry 5: Special Edition</b></i> was released for <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a> in November 2020, featuring the addition of <a href="https://en.wikipedia.org/wiki/Vergil_(Devil_May_Cry)">Vergil</a> as a playable character. For players on PlayStation 4, Windows, and Xbox One, Vergil was released as paid <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a>. An <a href="https://en.wikipedia.org/wiki/Amazon_Luna">Amazon Luna</a> port was released on 9 December 2021.</p>
+
+<h2>Gameplay</h2>
+
+<p>The gameplay features the return of <a href="https://en.wikipedia.org/wiki/Dante_(Devil_May_Cry)">Dante</a> and <a href="https://en.wikipedia.org/wiki/Nero_(Devil_May_Cry)">Nero</a> as playable characters, along with a new character, named <a href="https://en.wikipedia.org/wiki/Characters_of_Devil_May_Cry#V">V</a>. The gameplay is similar to that of the other titles in the <i>Devil May Cry</i> series, focusing on fast-paced "stylish action"; the player fights off hordes of demons with a variety of attacks and weapons. They receive a style rating for combat based on several factors, such as move variety, the length of a combo, and dodging attacks. The game's music changes based on the player's performance in combat. Every time the player interacts with the mechanic Nico or finds a statue, they can buy new abilities for each character. While there are three playable characters, the game forces the player to use only one per mission. Like previous games, this title has a Bloody Palace mode where players can face multiple types of demons in a single area.</p>
+
+<p>The first character is Nero, introduced in <i>Devil May Cry 4</i>. He retains his Red Queen sword for melee combat and the Blue Rose double-barreled revolver. However, he does not have his Devil Bringer from the beginning. Instead, he now has an assortment of new robotic arms called Devil Breakers. These have various functions, such as grabbing enemies from a distance or stopping time to freeze an enemy in place. Nero can also find Devil Breakers during stages. Devil Breakers are powerful but fragile and can be destroyed if misused. Late in the story, Nero regains his Devil Bringer and has access to the Devil Trigger move, which expands his combat skills.</p>
+
+<p>Dante plays like his <i>Devil May Cry 4</i> persona as he can change between four styles to create new techniques or <a href="https://en.wikipedia.org/wiki/Parry_(fencing)">parry</a> enemy attacks. Along with his signature blade "Rebellion" and the Demonic "Devil Sword Sparda", Dante uses three new Devil Arms, a pair of buzzsaw-like weapons that combine into a motorcycle called "Cavaliere", and a set of fiery gauntlets and boots called "Balrog". Dante also wields "King Cerberus", a stronger version of the "Cerberus" <a href="https://en.wikipedia.org/wiki/Nunchaku">nunchaku</a> introduced in <i>Devil May Cry 3</i>. He also wears the "Dr. Faust", a hat that requires red orbs to attack; it is a risk/reward weapon depending on the player's actions. Dante can also use both "Kalina Ann" from <i>Devil May Cry 3</i> and the new enhanced "Kalina Ann 2," or both at once. Besides the Devil Trigger that enhances Dante's abilities and restores his health, the character also possesses a more overpowered form named "Sin Devil Trigger" which produces new means of attacks.</p>
+
+<p>The third playable character is V, who primarily summons his three demon familiars to fight. These include Griffon, an eagle that uses ranged lightning-based attacks; Shadow, a panther that forms blades, spikes, and portals out of its body; and Nightmare, a large and powerful <a href="https://en.wikipedia.org/wiki/Golem">golem</a>. V enters a Devil Trigger-like state, which turns his hair white, to summon Nightmare, which uses a combination of melee attacks and explosive laser beams. V's familiars are incapable of killing enemies; once their health bar turns light purple, V uses his cane to finish them off with a final blow.</p>
+
+<p>Vergil reappears as a playable character in the game's Special Edition, carrying over his playstyle from the fourth game's Special Edition, including the Concentration gauge system and weaponry. However, the Force Edge from previous Special Edition games is replaced with Mirage Edge, an ethereal sword that Vergil usually uses as a projectile summon. He has a new ability, which allows him to turn into V and gather his trio of demonic familiars to deal a wide range of damages to enemies. Instead of transforming into his regular Devil Trigger form, Vergil immediately transforms into his Sin Devil Trigger upgrade. His original Devil Trigger is now replaced with Doppelganger, a summoned spectral copy of his Sin Devil Trigger form which mirrors Vergil's attacks (with the Yamato only), which was a mechanic introduced in <i>Devil May Cry 3</i> as Dante's Doppelganger Style, then reintroduced as the Devil Trigger ability for the reboot Vergil in <i>DmC: Devil May Cry</i>.</p>
+
+<h2>Plot</h2>
+
+<p>Following the events of <i><a href="https://en.wikipedia.org/wiki/Devil_May_Cry_4">Devil May Cry 4</a></i>, Nero works as a demon hunter for Dante's Devil May Cry agency along with his friend, gunsmith Nico Goldstein. One afternoon, Nero is working at the agency when a <a href="https://en.wikipedia.org/wiki/Vergil_(Devil_May_Cry)">hooded man</a> enters. Nero offers the stranger food when he suddenly rips off his demonic Devil Bringer arm, which transforms into the Yamato sword. The stranger uses the sword to open a portal and departs.</p>
+
+<p>Three days later, a mysterious man named V hires Dante and his crew to take down a powerful demon named Urizen. The group travels to Red Grave City, where they find a demonic tree called Qliphoth planted in the city, killing people for their blood. Nero, working on his own, is also pinpointed toward Urizen by V. Dante's crew confronts Urizen but, empowered by the Qliphoth, the new demon king incapacitates them and overpowers Nero when he intervenes. Dante stops Urizen from capturing Nero but is defeated and ejected from the Qliphoth with his sword Rebellion shattered. His allies <a href="https://en.wikipedia.org/wiki/Lady_(Devil_May_Cry)">Lady</a> and <a href="https://en.wikipedia.org/wiki/Trish_(Devil_May_Cry)">Trish</a> are captured to be used as demon-cores while V convinces the weakened Nero to escape.</p>
+
+<p>One month later, Nero returns to Red Grave outfitted with the "Devil Breaker" prosthetic arm, made by Nico. Nero meets up with V, who is seeking Qliphoth for its fruit—born of condensed human blood—which makes whoever consumes it the king of the Underworld. As the pair destroy the Qliphoth's roots while searching for Dante, Nero rescues Lady while V splits off to discover the Devil Sword Sparda—along with a comatose Dante, whose presence was hidden by the sword.</p>
+
+<p>After awakening from his coma, Dante frees Trish and begins fighting his way to Urizen. Trish learns from V that Urizen is the demon-side of Dante's brother <a href="https://en.wikipedia.org/wiki/Vergil_(Devil_May_Cry)">Vergil</a>, who used Yamato's power to separate his demon and human halves - the latter manifesting as V, whose body is rapidly breaking down. Realizing Yamato has the capability of separating humanity and the devil, Dante questions whether his Rebellion also has a hidden potential, believing both legacy weapons have incredible powers on their own. After stabbing himself with his broken Rebellion, Dante unlocks his full demonic power and a new weapon, the "Devil Sword Dante," by absorbing Rebellion and the Devil Sword Sparda into his body. Nero attempts to confront Urizen again and is overpowered once more, but Dante rescues him and gains the upper hand with his new powers. Urizen takes his leave when the Qliphoth bears fruit and consumes it to empower himself further. While Dante arrives first to face Urizen, Nero rescues V from the demon Malphas and learns of Dante's history with Vergil. Nero and V reach Dante just as he defeats Urizen, but a dying V intervenes and merges with Urizen before Dante can finish him, restoring Vergil.</p>
+
+<p>Vergil returns to the top of the Qliphoth, telling Dante to recover his full strength before they battle again. Nero insists on going after Vergil himself, but Dante reveals that Vergil is Nero's father, and refuses to let Nero kill him. Dante then faces V's familiars—revealed as the embodied memories of <a href="https://en.wikipedia.org/wiki/Devil_May_Cry_(video_game)">Vergil's time as Nelo Angelo</a>—and they elect to die by Dante's hand to lessen Vergil's trauma.</p>
+
+<p>Dante and Vergil fight again, where Vergil learns Nero is his unintended son. Nero settles his emotions in a phone call to Kyrie and resolves not to let his father and uncle die, fully awakening his demonic powers and regrowing his arm. Intervening in their fight and forcing Dante out, Nero vows to end the pair's sibling rivalry and defeats Vergil, who gives Nero V's book as a memento. Vergil joins Dante in a one-way trip to the Underworld to cut the Qliphoth down and seal the portal connecting it before it rips Red Grave City apart and merges the Demon World with the Human World, with Nero departing as the Qliphoth falls.</p>
+
+<p>Weeks later, Trish and Lady are hired for a new job by Dante's agent, Morrison, whom Dante left in charge of his office. In the Underworld, Dante and Vergil continue sparring as they fight demons together, now friendly rivals instead of enemies.</p>
+
+<h2>Development</h2>
+
+<p>In 2013, <a href="https://en.wikipedia.org/wiki/Hideaki_Itsuno">Hideaki Itsuno</a>, director of the <i>Devil May Cry</i> games since the <a href="https://en.wikipedia.org/wiki/Devil_May_Cry_2">second game</a>, showed an interest in continuing the original <i>Devil May Cry</i> series by developing a fifth installment. It was originally thought the series might go on hiatus or end for good if <i>Devil May Cry 4: Special Edition</i> was not a commercial success. However, in an interview with <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i>, Itsuno confirmed this was not the case. He alleviated these fears by confirming that Capcom was ultimately satisfied with the final sales figures of <i>Devil May Cry 4: Special Edition</i> and <i><a href="https://en.wikipedia.org/wiki/DmC:_Devil_May_Cry">DmC: Devil May Cry</a></i>. In January 2016, Itsuno <a href="https://en.wikipedia.org/wiki/Twitter">tweeted</a> that he was working on a project well in development which could not yet be announced. In March, <a href="https://en.wikipedia.org/wiki/Reuben_Langdon">Reuben Langdon</a> and <a href="https://en.wikipedia.org/wiki/Johnny_Yong_Bosch">Johnny Yong Bosch</a>, who had done voice acting and motion capture for Dante and Nero respectively in <i>Devil May Cry 4</i>, took pictures of themselves in motion capture gear, leading to speculation that a new <i>Devil May Cry</i> game was in development. In a response on Twitter about these speculations, Capcom Vancouver stated: "It's not a game that we've announced that we're working on at this studio." On 17 May 2018, the domain name "DevilMayCry5.com" was registered by an unknown entity under Capcom's Onamae domain register. <i>Devil May Cry 5</i> was confirmed at <a href="https://en.wikipedia.org/wiki/E3_2018">E3 2018</a> for a release the following year. Capcom confirmed a release date of March 2019 and a demo was playable in August 2018 at <a href="https://en.wikipedia.org/wiki/Gamescom">Gamescom</a>. It was later made available on PlayStation Store and Xbox Live.</p>
+
+<p>The game was originally planned to be announced in 2017. However, the idea to announce it along with the <i><a href="https://en.wikipedia.org/wiki/Resident_Evil_2_(2019_video_game)">Resident Evil 2</a></i> remake led to a change. The game was being developed by Capcom Dev Studio 1 and many staff members worked on the <i><a href="https://en.wikipedia.org/wiki/Dragon's_Dogma">Dragon's Dogma</a></i> and the <i>Devil May Cry</i> series. The team aimed to make it the best action game from the <a href="https://en.wikipedia.org/wiki/Heisei_period">Heisei period</a>. A secret message was left in the first trailer for series' fans. The game was created by a studio from Osaka, Japan. It runs on the <a href="https://en.wikipedia.org/wiki/RE_Engine">RE Engine</a>, first used in <i><a href="https://en.wikipedia.org/wiki/Resident_Evil_7:_Biohazard">Resident Evil 7: Biohazard</a></i>. Most of the team had originally worked on the recently released <i>Resident Evil 7</i> and were experienced with the engine. Itsuno stated that he played a lot of <i><a href="https://en.wikipedia.org/wiki/Monster_Hunter_World">Monster Hunter World</a></i> and was influenced by how the game welcomed new players. He also believed that creating a high skill ceiling would make the game appeal to long-time fans. Other members of the staff previously worked in the reboot game <i><a href="https://en.wikipedia.org/wiki/DmC:_Devil_May_Cry">DmC: Devil May Cry</a></i>, but the Osaka team was more willing to make a sequel to the fourth installment of the main series. The team listened to the fans' opinions of previous games to ensure the game appealed to them. An example is giving the players an "auto" mode that provides easier ways to produce combos.</p>
+
+<p>Itsuno claims the original <i>Devil May Cry 4</i> was unsuitable for consoles of its generation which resulted in certain issues with its design. As a result, he aimed to make this sequel far more enjoyable with a budget that would allow more content and thus appeal to a larger audience, including <i>Devil May Cry 4</i> players. However, because the game's narrative was focused on Dante, Nero and V, Lady and Trish could not appear as playable characters again. The difficulty mode of "Son of Sparda" was retouched from a previous game to provide players with new challenges like the way characters have to <a href="https://en.wikipedia.org/wiki/Parry_(fencing)">parry</a> enemy attacks and then be able to defeat them in one counterattack while also enhancing the boss fights such as Goliath's fight scene. Another of Itsuno's objectives was making more responsive controls to generate better productions while making the characters move like humans. A big influence on Itsuno and the game was a movie where three robots combined into one giant bot and overcame their foe, moving him to tears. He wanted to create similar moments. Itsuno also wanted to give players the style of a Hollywood movie, most notably <a href="https://en.wikipedia.org/wiki/Marvel_Studios">Marvel</a>'s <i><a href="https://en.wikipedia.org/wiki/Avengers_(film_series)">Avengers</a></i> series.</p>
+
+<p>Dante and Nero's respective actors, Reuben Langdon and Johnny Yong Bosch, have expressed pleasure with the game. Their characters were developed to play completely different in a similar fashion to <i>Devil May Cry 4</i> as they employ different mechanics. Itsuno still felt that mastering Dante's skills would be more difficult as a result of the multiple mode and weaponry he executes. It features Cameo System, an <a href="https://en.wikipedia.org/wiki/Online_multiplayer">online multiplayer</a> mode for up to three players, that can be triggered depending on the mission being played. In April 2019, Capcom's Matt Walker claimed Vergil would not be a playable character in the game, leaving "a bitter taste" in fans mouths.</p>
+
+<h3>Scenario and cast</h3>
+
+<p>The story main's theme is "love" which is something Capcom aimed to introduce into <i>Devil May Cry</i> since the first installment. Itsuno explained the development team aimed for a "<a href="https://en.wikipedia.org/wiki/Photo-realistic">photo-realistic</a>" graphics style. The game targets 60 <a href="https://en.wikipedia.org/wiki/Frames_per_second">frames per second</a> on each release platform. The developers scanned various models to give the characters a realistic look, and actual clothes were created in <a href="https://en.wikipedia.org/wiki/London">London</a> and scanned in <a href="https://en.wikipedia.org/wiki/Serbia">Serbia</a>. Using the RE Engine, the Capcom staff aimed for a more realistic story than previous games in the franchise rather than making it look like low-budget plot. The game's main location was modeled after London. The team made multiple research trips to generate better stages. Locations include <a href="https://en.wikipedia.org/wiki/Midhurst">Midhurst</a> in West Sussex, <a href="https://en.wikipedia.org/wiki/Rochester,_Kent">Rochester, Kent</a>, <a href="https://en.wikipedia.org/wiki/Canterbury">Canterbury</a> and <a href="https://en.wikipedia.org/wiki/Leeds_Castle">Leeds Castle</a> in Kent. Art director Koki Kinoshita stated that thanks to the new technology provided by the engine, the character designs of the returning ones involved slight alterations to their <i>Devil May Cry 4</i> appearances in order to fit their personalities. However, while Dante and Nero had few scrapped ideas, V underwent nearly twenty different appearances. The designs were also inspired by Carol Christian Poell as well as <a href="https://en.wikipedia.org/wiki/Daniel_Craig">Daniel Craig</a> and <a href="https://en.wikipedia.org/wiki/Benedict_Cumberbatch">Benedict Cumberbatch</a>.</p>
+
+<p>Itsuno wanted to portray a villain who would not be taken lightly by either Dante or Nero. As a result, the staff found Vergil to be the best candidate for an interesting villain due the power he has developed in the series, and how he is related to the protagonists. The staff wanted to generate a major emotional scene when Vergil reappears in the climax confronting his brother. As a result, the brothers' feud is stopped by Nero who awakens his own demon powers to face his father. Nero's gameplay is designed to emphasize his anger over the way Dante treats him in the beginning. The game's climactic event, where Nero awakens his demonic powers and stops the struggle between Dante and Vergil, is meant to give the story a deeper form. The idea behind making Nero's new powers available near the game's ending is not only to give the title replay value, but to emphasize the power Nero needs to use to face Vergil. This contrasts with the beginning of the game when he can not defeat his alter-ego Urizen. His redesign for <i>Devil May Cry 5</i> is intended to contrast with Dante's older look. Capcom used an older incarnation of Nero, so he would be "at the top of his game in body and mind". Because the game's graphics are meant to be as realistic as possible, each character is modeled after an actor.</p>
+
+<p>According to the company, Dante "hasn't gone wild for no reason". In terms of his moves, Itsuno said he would be more like his <i>Devil May Cry 3</i> persona. Nevertheless, he stated Dante has a more mature personality and still wishes to protect humanity and honor the legacy of his father, Sparda. The new antagonist, Urizen, was meant to remind players of the original Demon King from the 2001 <i>Devil May Cry</i> game. Itsuno said, "Urizen is definitely the strongest enemy of the entire <i>Devil May Cry</i> saga ... the most powerful. You've seen it: every time he appears, he sits on his throne and, maybe sometimes, he moves a little, but that's it.  We want to make people understand how a fight against him can be completely crazy."</p>
+
+<p>Newcomer V was created to be the exact opposite of Nero and Dante. He does not wield weapons, giving him a sense of mystery. Itsuno was pleased he was well-received as a character by fans, despite his traits which he felt would make him divisive. Nico was created to be a contrasting <a href="https://en.wikipedia.org/wiki/Heroine">heroine</a> to Nero's girlfriend, Kyrie; Nico is more used to fighting. In developing Nero's Devil Breaker abilities, Itsuno pointed out that Punch Line, which involves Nero shooting his mechanical arm, was made to attract teenagers.</p>
+
+<p>During localization, Langdon did not like reading the script. Although he enjoyed the story and characters, Langdon claims the dialogue was "horrible," and they had to rewrite some parts. Translator Mike NcNamara reworked the original dialogue much to Langdon's liking alongside Itsuno's. Langdon worked with Daniel Southworth and Bosch to improve the English translation of the dialogue, which they enjoyed. Dante performs a parody of one of <a href="https://en.wikipedia.org/wiki/Michael_Jackson">Michael Jackson</a>'s themes that the staff knew Langdon could not perform in motion capture during one scene. As a result, this scene was performed by a stunt double known as Shibata. The voiceover had to be redone during the making of the game. Although <i>Devil May Cry 5</i> is a sequel, Bosch did three auditions to reprise his roles due to the considerable time the game took to be made.</p>
+
+<p>Kota Suzuki, Yoshiya Terayama, Hiromitsu Maeba, Steven McNair, John R. Graham, Casey Edwards, Cody Matthew Johnson and <a href="https://en.wikipedia.org/wiki/Jeff_Rona">Jeff Rona</a> composed the game's soundtrack. Johnson and Rona had worked together on multiple projects before <i>Devil May Cry 5</i> including the fighting game <i><a href="https://en.wikipedia.org/wiki/Marvel_vs._Capcom:_Infinite">Marvel vs. Capcom: Infinite</a></i> where both worked on a remix of Dante's theme "Devils Never Cry". Their work's success led the duo to be chosen to work on <i>Devil May Cry 5</i>. While not a composer, Johnson played the games, so he knew the series. Edwards has been a fan of the series since the original 2001 game. He took a liking to Nero's theme from <i>Devil May Cry 4</i> which attracted him mostly because of the lyric "I'll endure the exile." According to Johnson, the general idea for the music was "grittier, heavier, and more experimental." The fact the game uses three characters allowed them to use different types of music. Sony Japan released the game's original soundtrack in Japan on 12 April 2019 on five discs.</p>
+
+<p>Nero's battle themes are "Devil Trigger" and its final boss remix, "Silver Bullet," both performed by Ali Edwards. "Devil Trigger" was released on 11 June 2018 as a soundtrack single to promote the game. Edwards was given multiple images of Nero facing his enemies to give him an idea of how his theme song should sound. Edwards met Bosch, who gave him a better understanding of the character. This included his young and reckless traits despite being older when he is introduced. The massive positive response to "Devil Trigger" surprised Edwards. On <a href="https://en.wikipedia.org/wiki/Spotify">Spotify</a>, the song has over 7 million streams. It currently has over 68 million views on <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a>. "Devil Trigger" was also the first song revealed to the audience  because older members of the staff enjoyed the composers' work on that track. The theme "Silver Bullet" used for Nero's final fight with Vergil was considered a "risk" by the composer. It served as an homage to the original <i>Devil May Cry</i> final boss theme and served as a remix of "Devil Trigger." He faced the challenge of putting a more emotional theme than "Devil Trigger" in this remix and was grateful to the Capcom staff for assisting him in making this theme.</p>
+
+<p>In September 2018, Dante's battle theme "Subhuman," composed by Johnson and performed by <a href="https://en.wikipedia.org/wiki/Suicide_Silence">Suicide Silence</a>, was released. It was originally sung by the band's lead vocalist Eddie Hermida, but following sexual misconduct allegations against him, he was replaced by then-former <a href="https://en.wikipedia.org/wiki/Volumes_(band)">Volumes</a> vocalist Michael Barr. The idea for this theme was to explore the dark and goofy sides of Dante's personality through the instruments being played. The staff was careful the song accurately reflected the character.</p>
+
+<p>In December 2018, new franchise character V's original battle theme, "Crimson Cloud," composed by Rona, was released. Because V's real identity was not revealed until later in the story, the composers avoided giving him themes related to his origins. The final trailer presented the game's ending theme "Legacy," composed by Kota Suzuki and sung by Ali Edwards. Edwards worked as both vocalist and lyricist. A theme of this song is "family" as well as the idea of people supporting each other. The Japanese version of the game includes the song "Mad Qualia" by <a href="https://en.wikipedia.org/wiki/Hyde_(musician)">Hyde</a>.</p>
+
+<h2>Release</h2>
+
+<p><i>Devil May Cry 5</i> was released for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> on 8 March 2019. Players who purchased the deluxe edition of the game had access to several pieces of additional content. These included the Cavaliere R weapon for Dante, new <a href="https://en.wikipedia.org/wiki/Cutscenes">cutscenes</a> and announcer options, battle music from the first four <i>Devil May Cry</i> titles, and four Devil Breaker weapons for Nero, including a Mega Buster based on <i><a href="https://en.wikipedia.org/wiki/Mega_Man_11">Mega Man 11</a></i>. They were available for purchase separately as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> within weeks of the game's release. A wave-based survival mode, Bloody Palace, was released as a free update on 1 April 2019. In Japan, there were three limited releases of the game which included a replica of either Dante, Nero, or V's jacket. An <a href="https://en.wikipedia.org/wiki/Amazon_Luna">Amazon Luna</a> version of the game was announced and released during the <a href="https://en.wikipedia.org/wiki/The_Game_Awards_2021">2021 Game Awards</a>.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Bingo_Morihashi">Bingo Morihashi</a>, the game's writer, wrote a prequel novel that leads up to the beginning of the game's story. Titled <i>Devil May Cry 5: Before the Nightmare</i>, it was released in Japan on 1 March 2019, one week before the game's release. A spin-off manga centered around V was also released. Titled <i>Devil May Cry 5: Visions of V</i>, it was written by Tomio Ogata and serialized on <a href="https://en.wikipedia.org/wiki/Line_Manga">Line Manga</a> from 7 March 2019 to 19 March 2022. Its 50 chapters were collected into five physical <a href="https://en.wikipedia.org/wiki/Tankōbon">tankōbon</a> volumes, with the first volume released on 15 November 2019, and the final volume released on 15 July 2022.</p>
+
+<h3><i>Special Edition</i></h3>
+
+<p>During the September 2020 <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a> showcase, <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> announced an expanded version called <i>Devil May Cry 5: Special Edition</i>. It was released as a digital-only launch title for the <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a> and PlayStation 5 in November 2020. A physical version was released the following month. Owing to the more powerful hardware, it features improved visuals and gameplay at up to 120 frames per second. Alongside all previously-released downloadable content, other additions include Vergil as a playable character, ray tracing graphics options, and two additional game modes; Legendary Dark Knight mode, which significantly increases the number of enemies in each level; and Turbo mode, which increases the game speed by 20%. Turbo mode was previously included in <i>Devil May Cry 3: Special Edition</i> and <i>Devil May Cry 4: Special Edition</i>. Players who own the original version of <i>Devil May Cry 5</i> can also purchase Vergil separately as downloadable content.</p>
+
+<p>Including Vergil as a playable character was something the team wanted to do ever since the <i>Special Edition</i> was conceived. Vergil's new battle theme, titled "Bury the Light", was composed by Casey Edwards with vocals performed by Victor Borba. Edwards stated that the song was meant to be a reflection of Nero's battle theme, "Devil Trigger", as he saw Nero as a reflection of Vergil. According to Edwards, "Nero chose to 'embrace the darkness' within and accept his demon side. Vergil has always tried to bury his humanity as it is a great source of personal pain and memory of weakness".</p>
+
+<h2>Reception</h2>
+
+<h3>Pre-release</h3>
+
+<p>Following 2018's <a href="https://en.wikipedia.org/wiki/Tokyo_Game_Show">Tokyo Game Show</a>, <i>Devil May Cry 5</i> won the Future Division award from the <a href="https://en.wikipedia.org/wiki/Japan_Game_Awards">Japan Game Awards</a>. Some concern arose in the gaming community regarding the decision to include optional in-game purchases where the player can purchase red orbs used to upgrade characters. Capcom confirmed this in no way alters the game's designed progression system, and it is similar to that of <i>Devil May Cry 4: Special Edition</i>, which also allowed for similar in-game purchases.</p>
+
+<p><i>Devil May Cry 5</i> received "generally favorable" reviews from critics, according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. The gameplay and characters were praised. <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a> UK</i> referred to it as "one of the best games about hitting demons ever made". The reviewer enjoyed the characters' fightstyles and how performing different techniques rewards the player for their originality in combat. <i><a href="https://en.wikipedia.org/wiki/USgamer">USgamer</a></i> found it one of the series' strongest installments. They noted that while the reboot by Ninja Theory was enjoyable, <i>Devil May Cry 5</i> remained true to the series' core when it came to gameplay mechanics and the handling of the characters. VideoGamer.com praised its gameplay and world building style—particularly its handling of the setting based on London. Similarly, <i><a href="https://en.wikipedia.org/wiki/The_Guardian">The Guardian</a></i> gave it a perfect score. The reviewer liked how newcomers can easily learn how to score the stylish system in a short time, noting they must also understand the enemies' tactics to beat them and the bosses. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> appreciated the depth Capcom offered players, most notably the change in Nero's gameplay to allow different styles of Devil Breaker techniques. <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i> enjoyed the multiple types of enemies and boss fights and noted Capcom had responded to criticism of <i>Devil May Cry 4</i> by providing the player with more stages.</p>
+
+<p>Several critics focused on the increased number of moves available to the three protagonists. <i><a href="https://en.wikipedia.org/wiki/The_Daily_Telegraph">The Daily Telegraph</a></i> praised the characters' mechanics, most notably V's, for how differently he plays compared to Nero and Dante while still entertaining. <i><a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a></i> enjoyed the great variety each of the three playable characters possess in combat while retaining their own style—this, despite Dante playing similarly to his <i>Devil May Cry 4</i> persona. <i>GameSpot</i> noted how engaging Nero is to newcomers thanks to his gameplay. They also felt the techniques V presents and how differently he plays from Dante and Nero is impressive. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> liked Nero's new techniques provided by his mechanical arms—most notably the one he shoots to attack enemies. While IGN felt Dante was similar to his presentation in previous games, they noted the new weapons he presents were much more enjoyable. V was also well-received for his interactions with the demons he commands to fight enemies. Due to some difficulties in handling Nero's Devil Breakers mechanics, <i>Destructoid</i> felt that Dante and V were the most polished characters to play. Despite enjoying the gameplay, the swapping between characters who need to earn new powers was criticized by <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>.</p>
+
+<p>The game's narrative and the concept was also the subject of praise by <i>IGN</i> for its characters and elements of the story, despite the reviewer not finding it very entertaining overall. <i>IGN</i>'s Mitchell Saltzman said "its mysterious story keeps things interesting along the way." <i>GameSpot</i> praised the storyline for concluding the crisis the protagonists have across the game, praising their <a href="https://en.wikipedia.org/wiki/Character_arc">character arcs</a> even though they are not deep. <i>The Guardian</i> liked the plot despite finding it simple and noted it took elements from the reboot that were also well received. Dante's characterization as older than in previous games while retaining his juvenile personality was also praised by <i>The Guardian</i>. <i>PCGamer</i> enjoyed the story for the portrayal of its characters. The reviewer felt let down by some cutscenes and was critical of Nico.  While liking how integral the narrative became in the gameplay mechanics, <i>GamesRadar</i> felt newcomers might not understand the game's full plot and that the ending was rushed. <i>VideoGamer.com</i> was more critical of the plot, believing the narrative and villain were "dull" despite some interesting interactions in the storyline.</p>
+
+<p>At its launch, the PlayStation 4 version of the game released in western countries included the use of a <a href="https://en.wikipedia.org/wiki/Lens_flare">lens flare</a> which reduced the visibility of brief nudity. Several gaming journalists referred to it as an act of censorship and reported the change came about as part of a patch for the game. <i>IGN</i> also noted that another character was similarly censored in all western versions regardless of the platform. In April 2019, <i>Push Square</i> reported the lens flare had been removed in the game's North American version, yet remained in Europe.</p>
+
+<p>In Japan, <i>Devil May Cry 5</i> sold approximately 116,202 physical units, or 75.75% of its initial shipment for the PS4, were sold during its launch week making it the number one selling game of any format, While selling fewer units than the debut of <i>Devil May Cry 4</i>, it still surpassed the reboot <i>DmC</i>. In the United Kingdom, the game debuted atop the all-format sales chart selling 20,872 physical units, becoming Capcom's second number-one in the country in 2019 following <i><a href="https://en.wikipedia.org/wiki/Resident_Evil_2_(2019_video_game)">Resident Evil 2</a></i>. At the 2019 <a href="https://en.wikipedia.org/wiki/Game_Developers_Conference">Game Developers Conference</a>, Itsuno revealed the game had sold over two million units, reaching the figure within two weeks of its release. As of September 2019, the game had sold over 2.7 million units worldwide. By September 2020, 3.9 million units had been sold, making it the best-selling title in the series. By April 2022, 5 million units had been sold, not including the <i>Special Edition</i> version. As of 19 October 2022, 6 million units had been sold. By January 2023, the game had sold 6.5 million units. By December 2024, the original release of the game had sold 8.9 million units, while the <i>Special Edition</i> had sold an additional one million, bringing total sales to 9.9 million units.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

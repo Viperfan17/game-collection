@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Blur</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('7611c36a-3ffc-4794-be94-158b7a598b8b/d524680f-7749-4933-9cb3-84cf6247825d.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="7611c36a-3ffc-4794-be94-158b7a598b8b/9d1ebc1c-6553-48ef-97cc-45b6e93d9288.png"/> Blur</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="7611c36a-3ffc-4794-be94-158b7a598b8b/7721e586-3101-4664-8053-654d13c903c9.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 7:31:29</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-5/25/2010">5/25/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-76">76</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-79">79</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Bizarre Creations">Bizarre Creations</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Licomp Empirical Multimedia">Licomp Empirical Multimedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Blur" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=1213" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/blur" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/42640/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Blur" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/blur" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Blur_(video_game)" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/blur" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Automobile">Automobile</a><br/><a href="#quicklink-Contemporary">Contemporary</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Horizon">Horizon</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Street racing">Street racing</a><br/><a href="#quicklink-Third Person">Third Person</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Blur</b></i> (stylized as <i><b>blur</b></i>) is a 2010 <a href="https://en.wikipedia.org/wiki/Arcade_racing">arcade-style racing</a> <a href="https://en.wikipedia.org/wiki/Vehicular_combat_game">vehicluar combat</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. It was developed by <a href="https://en.wikipedia.org/wiki/Bizarre_Creations">Bizarre Creations</a> and published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>. <i>Blur</i> features a racing style that incorporates real world cars and locales with arcade style handling and <a href="https://en.wikipedia.org/wiki/Vehicular_combat_game">vehicular combat</a>. The game is a spiritual successor to the <i><a href="https://en.wikipedia.org/wiki/Project_Gotham_Racing">Project Gotham Racing</a></i> series. <i>Blur</i> was the penultimate game developed by Bizarre Creations before they were shut down by Activision on February 18, 2011.</p>
+
+<h2>Gameplay</h2>
+
+<p>The gameplay in <i>Blur</i> is centered on vehicular combat. The game tracks present eight different powerups that the cars can pick up. Each car can carry a maximum of three powerups at any given time, that they can then switch and activate at will, or discard. Out of the eight powerups, five of them are weapons, with the remaining ones being a defensive shield, a repair wrench that restores any damage that the car may have sustained, and a nitrous boost. Several of the weapons' behavior can be modified to select whether the player wants them to fire forwards or backwards, and most of them can also be used defensively against attacks from other cars.</p>
+
+<p>In <i>Blur</i>'s career mode, the player will be consulted by Shannon (voiced by Natalie Lander) to encounter numerous characters and many licensed cars such as the <a href="https://en.wikipedia.org/wiki/Dodge_Viper">Dodge Viper</a> and the <a href="https://en.wikipedia.org/wiki/Lotus_Exige">Lotus Exige</a>, as well as tuned cars such as the <a href="https://en.wikipedia.org/wiki/Ford_Supervan">Ford Supervan</a> fitted with an <a href="https://en.wikipedia.org/wiki/Formula_One">F1</a> engine. Each car presents its own unique traits such as Acceleration, Speed, Drift, Grip and Stability. Some special car models have been designed by Bizarre Creations themselves. Albeit simplified, the tracks are also based on real-world environments, such as the <a href="https://en.wikipedia.org/wiki/Los_Angeles">Los Angeles</a> river canals and several parts of <a href="https://en.wikipedia.org/wiki/London">London</a>. Depending on the character(s) the player races against or tags along with in team races, they will have their own racing styles, power-up setups, match types, locales and cars. As the player reaches the podium in races, performs stunts and uses power-ups in certain ways, they will gain 'fan points'. These points help the player progress through the career, purchase more cars and parts and earn more fans for the user base. Also, during the career, players will encounter fan icons along the tracks. Driving through these will trigger short challenges (e.g. shooting another car with a certain weapon, or performing a long drift), which will reward the player with a fan points boost.</p>
+
+<p>During the career mode, each challenge features a final <a href="https://en.wikipedia.org/wiki/Boss_(video_gaming)">boss</a>, which, once defeated will yield access to their specific mods (mods being upgrades that provide enhanced functionality to a standard powerup e.g. Khan's titanium shield), and customized cars. At the final boss challenge, all the bosses meet together for a final race.</p>
+
+<h3>Multiplayer</h3>
+
+<p>The game can be played with up to four players in split screen, and can be taken online for a maximum of 20 players over the internet, or over LAN in the PC, Xbox 360, and PlayStation 3 versions. In a custom game, options can be set before each match that determine the layout of power-ups, car classes, number of laps, and the car  to race. A match type called "World Tour" is essentially a quick play option for players who want to jump into a match. Here, every player is given a random car and thrown into a random series of courses with a standard ruleset. Multiplayer also offers "Team Racing" mode. Two teams (Alpha &amp; Omega) can put themselves head to head either publicly or private. During races, each player accumulates points for their finishing position. While in team racing, powerups will not affect the player's own team members with the exception of Shock. Players can send a racing challenge to an online friend. If the second player beats the time, they can send the updated challenge back. These challenges go back and forth until one person concedes. Players can also use the Share button, and post their achievements to <a href="https://en.wikipedia.org/wiki/Twitter">Twitter</a> and <a href="https://en.wikipedia.org/wiki/Facebook">Facebook</a>.</p>
+
+<h2>Development</h2>
+
+<p>A trailer and tips video for the game on Xbox Live mentioned a feature that never made it to the final game. The feature, called "double tap", was meant to allow a player to combine several powerups of the same type for a more powerful effect, by double tapping the special power use button. The video was removed near the release of the game and little, if any, mention of the feature, seems to have been made again. The "double tap" feature was not present in the free multiplayer demo of the game offered on Xbox Live.</p>
+
+<h2>Reception</h2>
+
+<p>The game received "favorable" reviews on all platforms according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregation</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. In Japan, <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave it a score of 29 out of 40, while <i>Famitsu X360</i> gave the Xbox 360 version a score of three eights and one seven for a total of 31 out of 40.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> gave the Xbox 360 version a score of eight out of ten, saying that it "Provides too little in the way of engaging structure behind its exemplary racing to make it more than a series of thrilling rides." However, <i>GameZone</i> gave the game 7.5 out of 10, saying, "On single-player, <i>Blur</i> is an average racing game with a powered-up twist. Repeating races and receiving beautiful cars that remain untouched due to the lack of customization gets old fast. The outdated rave-vibe, including the music and menus, don't do the presentation any favors either. As a multiplayer title, <i>Blur</i> is absolutely exhilarating."</p>
+
+<h3>Sales</h3>
+
+<p>In the US, <i>Blur</i> sold 31,000 units in its first five days of release according to the <a href="https://en.wikipedia.org/wiki/NPD_Group">NPD</a>. The game ultimately sold 500,000 units.</p>
+
+<p>Despite disappointing sales, Nick Davies of <a href="https://en.wikipedia.org/wiki/Bizarre_Creations">Bizarre Creations</a> had announced in July 2010 that the studio intended to create more games in the series, and wanted to make it the biggest racing franchise. He attributed the sales performance of <i>Blur</i>, to the fact that the game was released at "a very busy time for racing games", and that it "came out at the same time as <i><a href="https://en.wikipedia.org/wiki/ModNation_Racers">ModNation Racers</a></i> and <a href="https://en.wikipedia.org/wiki/Split/Second:_Velocity"><i>Split/Second</i></a>." However, he believed "that the strong multiplayer component would give the game staying power", and "it's going to be a slow-burner".</p>
+
+<p>On February 18, 2011, Activision announced that it was closing Bizarre Creations, stating:</p>
+
+<h2>Sequels</h2>
+
+<p>A sequel was planned for <i>Blur</i>, and work had started on it using an all-new engine, but it was cancelled when Bizarre Creations was shut down by Activision. Work-in-progress videos of the intended sequel were released post-mortem, one of which show a race in <i>Blur</i>'s Brighton track, adding a rainstorm, another that shows an Audi R8 racing in a track set in Dubai, showcasing the ability to temporarily run sideways on the side of a curved building, and another of an Ultima GTR racing down a snow-capped mountain during an avalanche.</p>
+
+<p>On October 25, 2013 a <a href="https://en.wikipedia.org/wiki/Free-to-play">free-to-play</a> spin-off mobile game called <i>Blur Overdrive</i> was released on <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a>, developed by <a href="https://en.wikipedia.org/wiki/Nottingham">Nottingham</a> based App Crowd, and distributed by Marmalade, who licensed the <i>Blur</i> brand from Activision. An <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> version was released on November 1, 2013. <i>Blur: Overdrive</i> uses a <a href="https://en.wikipedia.org/wiki/Top-down_perspective">top-down perspective</a> and features eight different power-ups and six cars, which can be upgraded individually in ten steps. Touchscreen controls allow to choose from a floating steering wheel, a slide bar or a virtual pad. Player mods and Power Up mods are not connected to the car upgrading system and change how power-ups influence the combat.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

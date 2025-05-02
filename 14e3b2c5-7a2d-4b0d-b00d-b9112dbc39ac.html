@@ -1,0 +1,391 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Halo 3: ODST</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('14e3b2c5-7a2d-4b0d-b00d-b9112dbc39ac/a44589f0-ea4e-4cee-bfa5-8c9f45f1bd6f.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="14e3b2c5-7a2d-4b0d-b00d-b9112dbc39ac/e4799539-4687-4fb1-a012-01db721b6afb.png"/> Halo 3: ODST</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="14e3b2c5-7a2d-4b0d-b00d-b9112dbc39ac/8102bfb5-6fc6-4e5e-950a-d6199a4a563e.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-4/30/2015">4/30/2015</a> 15:23:36</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 11:33:02</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-9/22/2009">9/22/2009</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-98">98</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-83">83</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-First-person shooter">First-person shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Bungie">Bungie</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Microsoft Game Studios">Microsoft Game Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Halo_3:_ODST" target="_blank">Wikipedia</a><br/><a href="https://www.halowaypoint.com/en-us/games/halo-3-odst/xbox-360" target="_blank">Halo 3: ODST at Halo Waypoint</a><br/><a href="https://www.imdb.com/title/tt1446689/" target="_blank">IMDb</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] composer: Martin O'Donnell">[People] composer: Martin O'Donnell</a><br/><a href="#quicklink-[People] composer: Michael Salvatori">[People] composer: Michael Salvatori</a><br/><a href="#quicklink-[People] director: Joseph Staten">[People] director: Joseph Staten</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Halo 3: ODST</b></i> is a 2009 <a href="https://en.wikipedia.org/wiki/First_person_shooter_game">first-person shooter</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/Bungie">Bungie</a> and published by <a href="https://en.wikipedia.org/wiki/Xbox_Game_Studios">Microsoft Game Studios</a>. The fifth installment in the <a href="https://en.wikipedia.org/wiki/Halo_(franchise)"><i>Halo</i> franchise</a> as a <a href="https://en.wikipedia.org/wiki/Spin-off_(media)#Sidequels">side game</a>, it was released on the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> in September 2009. Players assume the roles of <a href="https://en.wikipedia.org/wiki/United_Nations_Space_Command">United Nations Space Command</a> Marines, known as "Orbital Drop <a href="https://en.wikipedia.org/wiki/Shock_troops">Shock Troopers</a>" or ODSTs, during and after the events of <i><a href="https://en.wikipedia.org/wiki/Halo_2">Halo 2</a></i>. In the game's <a href="https://en.wikipedia.org/wiki/Campaign_mode">campaign mode</a>, players explore the ruined city of New Mombasa to discover what happened to their missing teammates in the midst of an alien invasion. In the "Firefight" <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> option, players battle increasingly difficult waves of enemies to score points and survive as long as possible; <i><a href="https://en.wikipedia.org/wiki/Halo_3">Halo 3</a></i>'s multiplayer is contained on a separate disc packaged with <i>ODST</i>.</p>
+
+<p>Bungie initially conceived <i>ODST</i> as a small side project to produce in the lull between <i>Halo 3</i>'s completion and <i><a href="https://en.wikipedia.org/wiki/Halo:_Reach">Halo: Reach</a></i>. Instead of featuring recognizable characters such as armored protagonist <a href="https://en.wikipedia.org/wiki/Master_Chief_(Halo)">Master Chief</a>, the developers focused on the ODSTs. Story director <a href="https://en.wikipedia.org/wiki/Joseph_Staten">Joseph Staten</a> penned a detective story utilizing <a href="https://en.wikipedia.org/wiki/Film_noir">film noir</a> designs, settings, and characters. Composer <a href="https://en.wikipedia.org/wiki/Martin_O'Donnell">Martin O'Donnell</a> abandoned his previous <i>Halo</i> themes to create a quieter, jazz-influenced sound. During development, the planned expansion grew in scope to that of a full-sized game. Release marketing for the game included a tie-in comic, live-action trailers, and print and web advertisements.</p>
+
+<p>Upon release, <i>ODST</i> became the top-selling Xbox 360 game worldwide. The title received generally positive reviews from critics, who praised the atmosphere, music, and story approach. Reviewers were divided on whether the relatively short campaign and included extras were enough to justify the game's US$60 price tag. The game was the top-selling title in the United States in September 2009, and sold more than 3 million copies worldwide. <a href="https://en.wikipedia.org/wiki/Softpedia">Softpedia</a>, <i><a href="https://en.wikipedia.org/wiki/Time_(magazine)">Time</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Wired_(magazine)">Wired</a></i> were among publications that declared the game one of the year's best. The single-player campaign was re-released as downloadable content for the <i><a href="https://en.wikipedia.org/wiki/Halo:_The_Master_Chief_Collection">Halo: The Master Chief Collection</a></i> for <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> in May 2015 and was released on <a href="https://en.wikipedia.org/wiki/Personal_computer">PC</a>, also as part of <i>The Master Chief Collection</i>, on September 22, 2020.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Halo 3: ODST</i> is a <a href="https://en.wikipedia.org/wiki/Shooter_game">shooter</a> video game with most gameplay taking place from a <a href="https://en.wikipedia.org/wiki/First_person_(video_games)">first-person perspective</a>. The game features an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> environment in the updated Kenyan city of <a href="https://en.wikipedia.org/wiki/Mombasa">Mombasa</a>, referred to as New Mombasa. Although the gameplay of <i>ODST</i> bears a strong resemblance to that of previous <i>Halo</i> titles, the player does not assume the role of the enhanced human <a href="https://en.wikipedia.org/wiki/Supersoldier">supersoldier</a> <a href="https://en.wikipedia.org/wiki/Master_Chief_(Halo)">Master Chief</a>, protagonist of <i><a href="https://en.wikipedia.org/wiki/Halo_3">Halo 3</a></i>. Instead, the player controls human soldiers known as "Orbital Drop Shock Troopers" or ODSTs. Since ODSTs do not possess the Master Chief's advanced armor and reflexes, they cannot jump as high, move as fast, or survive large falls. Instead of the Master Chief's damage-absorbing energy shield, the game uses a recharging stamina mechanic. After the player sustains damage, the screen flashes red and the stamina score decreases. If the player receives additional damage before the stamina can recover, the player's health is reduced. Loss of all health causes the player character to die and restart at the last saved <a href="https://en.wikipedia.org/wiki/Checkpoint_(video_gaming)">checkpoint</a>. Medical packs scattered around the game environment can restore the player's health. The player's <a href="https://en.wikipedia.org/wiki/HUD_(video_gaming)">head-up display</a> (HUD) includes a "VISR" mode that outlines enemies in red, allies in green, and items of interest in either blue or yellow.</p>
+
+<p>The game's Campaign mode may be played alone or <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperatively</a> with a maximum of three additional players. As a lone human soldier known as "the Rookie," the player's goal is to discover what happened to his missing teammates. After finding a piece of evidence left behind, such as a sniper rifle hanging from a power line, the player will enter a flashback mission, where they assume the role of the missing soldier six hours earlier. After the player has found the first piece of evidence, the choice of where to go next is left open; campaign levels may be played in any order.</p>
+
+<p>In the multiplayer matchmaking, <i>ODST</i> includes <i>Halo 3</i>'s multiplayer game modes contained on a separate disc. The offering contains 21 multiplayer maps released for <i>Halo 3</i> as well as 3 additional maps titled Citadel, Heretic, and Longshore. Along with the <i>Halo 3</i> maps, <i>ODST</i> includes a version of the Forge map editor—a utility that allows player customizations of multiplayer levels.</p>
+
+<p><i>ODST</i> contains a cooperative game mode called Firefight, where players take on increasingly difficult waves of enemies in a timed survival game. Firefight can be played cooperatively with up to three other players via networked consoles (<a href="https://en.wikipedia.org/wiki/System_Link">System Link</a>) or Microsoft multiplayer service <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a>, or up to two players on the same console in splitscreen mode. Players start Firefight with only the Rookie as a playable character; completing the campaign mode unlocks other characters and maps. Players are awarded medals for making special kills, and individual and team scores are tracked throughout the games. Inside Firefight, players have a shared pool of seven lives, which are replenished after completing five rounds. Adding to the difficulty are modifiers called "skulls", which give enemies new abilities or a handicap to the player – the "Catch" skull, for example, causes enemies to throw greater numbers of grenades. Each of the first three rounds in a set activates a different skull. On the fourth set, all skulls are activated and the players must survive 60 seconds.</p>
+
+<h2>Campaign</h2>
+
+<h3>Setting and characters</h3>
+
+<p><i>ODST</i> takes place in the 26th century, when humans under the command of the <a href="https://en.wikipedia.org/wiki/United_Nations_Space_Command">United Nations Space Command</a> (UNSC) are locked in a war with a theocratic alliance of alien races known as the <a href="https://en.wikipedia.org/wiki/Covenant_(Halo)">Covenant</a>. During the events of the 2004 video game <i><a href="https://en.wikipedia.org/wiki/Halo_2">Halo 2</a></i>, the Covenant discover the location of Earth and launch an assault on the city of New Mombasa in Africa. Though the UNSC manages to repel most of the fleet, a large ship hovers over the city, depositing an invasion force. The ship eventually retreats via a <a href="https://en.wikipedia.org/wiki/Slipspace">slipspace</a> jump, creating a massive shockwave. While the rest of <i>Halo 2</i>'s storyline follows the ship to an ancient installation similar to the first <a href="https://en.wikipedia.org/wiki/Halo_(megastructure)">Halo</a>, <i>ODST</i> focuses on the aftermath of the shockwave, while the Covenant still occupy the city.</p>
+
+<p>During the game, the player can unlock audio files to an additional narrative called "Sadie's Story", which tells the story of a civilian girl caught in the initial stages of the Covenant invasion and her quest to find her father. The tale can also provide useful information for the player during the game, such as helping to locate hidden caches of weapons.</p>
+
+<p>The game's protagonist is the unnamed Rookie, a new member of a group of Orbital Drop Shock Troopers. Troopers, known as ODSTs or <i>Helljumpers</i>, often deploy in small, one-man Human Entry Vehicles (HEVs), referred to in-game as Single Occupant Exo-Atmospheric Insertion Vehicles (SOEIV), launched from spaceships in the upper atmosphere. The Rookie is assisted in finding his teammates by Mombasa's city maintenance <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">AI</a>, called the Superintendent or Vergil. The Rookie's teammates are Buck, Dutch, Romeo, Mickey, and Dare. The lattermost is a UNSC Office of Naval Intelligence (ONI) agent in charge of the squad's operation.</p>
+
+<p>The game begins with Dutch (<a href="https://en.wikipedia.org/wiki/Adam_Baldwin">Adam Baldwin</a>), Romeo (<a href="https://en.wikipedia.org/wiki/Nolan_North">Nolan North</a>), and Mickey (<a href="https://en.wikipedia.org/wiki/Alan_Tudyk">Alan Tudyk</a>) discussing the Covenant Supercarrier above New Mombasa, with the Rookie asleep nearby. Buck (<a href="https://en.wikipedia.org/wiki/Nathan_Fillion">Nathan Fillion</a>) arrives and introduces Dare (<a href="https://en.wikipedia.org/wiki/Tricia_Helfer">Tricia Helfer</a>). Romeo wakes the Rookie and the team enter their HEVs and drop through the atmosphere; at the last minute, Dare changes their trajectory to miss the ship due to a classified mission she has for the team. The Covenant ship enters slipspace <a href="https://en.wikipedia.org/wiki/Halo_2">with a UNSC ship that can be seen pulling alongside it</a>, sending a shockwave toward the ODSTs; the Rookie's pod collides with Mickey's and crashes into a building on the ground, knocking him unconscious for six hours. He awakens and proceeds to find clues as to what happened to his squadmates.</p>
+
+<p>Buck makes a rough landing after the drop and fights through Covenant forces to find Dare. However, Dare has vanished without a trace when he arrives at her drop pod, leaving behind only her helmet which is later found by the Rookie. Buck finds Romeo instead and the two resolve to find the others and get out of the city. Dutch drops near a nature preserve and helps Marines fighting there. Mickey commandeers a tank and fights his way along a Mombasa boulevard. Meeting up with Dutch, the two defend an ONI base from the Covenant, destroying the facility to keep it from being captured. They are evacuated by a police <a href="https://en.wikipedia.org/wiki/Dropship_(science_fiction)">dropship</a> and make contact with Buck, arranging a rendezvous at police headquarters, but are shot down. Buck and Romeo rescue Dutch and Mickey, but Romeo is seriously wounded. The squad hijacks a Covenant dropship, but instead of leaving the city, Buck decides to have them turn back and find Dare, having realized that Dare has continued her classified mission on her own.</p>
+
+<p>Back in the city, the Rookie is assisted by the Superintendent Vergil, the city's maintenance AI. The Rookie receives a distress call from Dare and locates her in the city's underground tunnels. The two reach the Superintendent's data core, which possesses information on something the Covenant is looking for underneath the city. Inside the core, they discover a Covenant Engineer that has combined the Superintendent into itself. Dare explains that the Engineers are "biological supercomputers" that have been enslaved by the Covenant, and the one they found wishes to defect to the humans; with the Engineer's information on the Covenant combined with the Superintendent's data, Dare's mission changes from downloading the Superintendent's data to escorting the alien to safety. The Rookie, Dare, and the Engineer reunite with Buck and fight their way out of the city where they reunite with the rest of the squad. As they fly away in the hijacked dropship, the squad watches as Covenant ships destroy New Mombasa and <a href="https://en.wikipedia.org/wiki/Halo_3">excavate a massive alien artifact</a>.</p>
+
+<p>In the epilogue, one month after the events of the campaign, the ODST squad has been keeping guard over the Engineer. Sergeant Major <a href="https://en.wikipedia.org/wiki/Avery_J._Johnson">Avery Johnson</a> arrives, informing the Engineer that he intends to ask it everything it knows about the Covenant—and what they are looking for. Hating the Covenant as much as the humans do, the Engineer lights Johnson's cigar in a sign of agreement. If the campaign is completed on the Legendary difficulty level, a scene shows the <a href="https://en.wikipedia.org/wiki/Prophet_of_Truth">Prophet of Truth</a> overseeing the excavation of the <a href="https://en.wikipedia.org/wiki/Forerunners_(Halo)">Forerunner</a> artifact buried beneath the Superintendent's data core.</p>
+
+<h2>Development</h2>
+
+<h3>Design</h3>
+
+<p>Much of <i>ODST</i>'s development team started work on director <a href="https://en.wikipedia.org/wiki/Peter_Jackson">Peter Jackson</a>'s <i><a href="https://en.wikipedia.org/wiki/Halo_Chronicles">Halo Chronicles</a></i> video game during the production of <i>Halo 3</i>. However, the failure of a <a href="https://en.wikipedia.org/wiki/Halo_(series)#Live-action"><i>Halo</i> film adaptation</a> and the subsequent cancellation of <i>Chronicles</i> meant a sizable team no longer had a project. Around the same time, production for <i><a href="https://en.wikipedia.org/wiki/Halo:_Reach">Halo: Reach</a></i> began, and Bungie realized that there was a window of time for the studio to create a new product, what producer Curtis Creamer described as a two-to-three-hour "mini-campaign". After looking at the proposal and the budget, studio head Harold Ryan gave the go-ahead.</p>
+
+<p>With a game engine already assembled, the team began honing the concept. Bungie was interested in bringing changes to the classical <i>Halo</i> format which had remained essentially unchanged over three games. The developers spent weeks considering which characters they wanted to focus on. Having players control previous protagonists such as the Master Chief or <a href="https://en.wikipedia.org/wiki/Arbiter_(Halo)">Arbiter</a> would have brought with it story baggage and expectations. At one point, they considered making the game a Covenant-themed story about an elite strike force. Instead, the developers looked at human characters; while they considered Avery Johnson, they settled on the ODSTs. "The ODSTs have always been fan favorites," Bungie community director Brian Jarrard explained. "We never really got inside [the ODSTs]," story director <a href="https://en.wikipedia.org/wiki/Joseph_Staten">Joseph Staten</a> said, and he saw that game as an opportunity to flesh out the black-armored soldiers.</p>
+
+<p>Making the player an ODST required gameplay changes to preserve the classic <i>Halo</i> gameplay formula while branching it in new directions. The addition of <a href="https://en.wikipedia.org/wiki/Suppressor">silenced</a> weapons and a revamped pistol were attempts to split the functionality of <i>Halo 2</i> and <i>Halo 3</i>'s "battle rifle" weapon and give the ODSTs unique armaments. The sound designers increased the loudness of the game's <a href="https://en.wikipedia.org/wiki/Submachine_gun">submachine gun</a> to make it feel more powerful. The health mechanism was added to provide a level of tension; "it reminds you that you're vulnerable," Staten said.</p>
+
+<p>With the main characters in place, the development team had to decide on a setting. "The events that unfolded on Earth is something fans still clamor for after being 'short changed' in <i>Halo 2</i>," Jarrard said. "Fans wanted to know what happened back on Earth, how humanity was defending it." New Mombasa's urban environments fit the intended feel of the game, as Bungie felt that the change of protagonists required a change in location: "We know the kinds of problems Master Chief solves," Staten explained. "He goes to ancient, alien ring artifacts, fights galaxy-consuming parasitic alien monsters and destroys alien empires [...] The ODST, they maybe take small parts in that larger struggle. But the kind of fights they usually get into are usually the kind of fights they can tackle in a day."</p>
+
+<p>Returning to a previous setting offered the artists new challenges and opportunities to expand the scope of the city. Having the player walk through the streets at night inspired a <a href="https://en.wikipedia.org/wiki/Film_noir">film noir</a> ambiance. Color shifts and a high degree of contrast pushed the game's look beyond what previous <i>Halo</i> games had offered, but the team had to make sure that even dark portions of the city were playable. The entire core development team looked at commissioned concept paintings to decide how lighting schemes would affect the gameplay. The genre also influenced the character names and archetypes. The <a href="https://en.wikipedia.org/wiki/Player_character">player character</a>, for example, fits the concept of a lone, <a href="https://en.wikipedia.org/wiki/Hardboiled">hardboiled detective</a>. To increase the depth of the surroundings, Bungie added touches such as advertisements, trash collectors, and civilian versions of previously seen military hardware.</p>
+
+<p>Bungie began development of <i>ODST</i> in March 2008. <i>ODST</i> was the first Bungie title completed in less than three years, as production lasted 14 months. Since the team—numbering around 70, plus a five-person core design group—had such a small window for development, they had to prioritize features; for example, rather than completely redesigning the enemies, only a small new subset of artificial intelligence behaviors were added. Because the game featured an open world different from most <i>Halo</i> missions, certain gameplay tweaks, such as the revamped weapons and an overhead map, were necessary. Whereas in a traditional <i>Halo</i> game, the designers would know from what locations players would approach groups of enemies, <i>ODST</i> required a different strategy. "We had to make sure we had groups of Covenant patrolling the city who could react from wherever you attack from and look intelligent doing it," Creamer said. Though the game engine remained unchanged, graphical enhancements such as fullscreen <a href="https://en.wikipedia.org/wiki/Shader">shader</a> system and <a href="https://en.wikipedia.org/wiki/Parallax_mapping">parallax mapping</a> added greater detail and realism.</p>
+
+<p>The Firefight game mode was a late addition to the game. Staffer Tim Williams built a prototype shortly after <i>Halo 3</i> shipped, placing the player in a portion of a <i>Halo 3</i> campaign map and fighting enemies. When development commenced on <i>ODST</i>, William's concept was adopted for the game and refined. Designer Lars Bakken described one advantage of the game mode as providing a more friendly multiplayer environment than hardcore players online. The designers reused the campaign scoring and medal system from <i>Halo 3</i> to add a competitive edge.</p>
+
+<p>Sadie's Story was created by Fourth Wall Studios in partnership with Staten and artist Ashley Wood. Fourth Wall Studios was formed by former members of <a href="https://en.wikipedia.org/wiki/42_Entertainment">42 Entertainment</a>, who produced the highly successful <i><a href="https://en.wikipedia.org/wiki/I_Love_Bees">I Love Bees</a></i> <a href="https://en.wikipedia.org/wiki/Alternate_reality_game">alternate reality game</a> to promote <i>Halo 2</i>. Recalled Staten, "we realized that in <i>Halo</i> we do a pretty good job of describing the clash of these military industrial complexes, but it really is the soldiers' story," and <i>Halo 3: ODST</i> offered a chance to take a look at the unexplored civilian story.</p>
+
+<p>By December 2008, the game was "representational", meaning that players could experience the game from start to finish, albeit in an unfinished state. The entire Bungie staff was pulled from other duties to play through the game and offer feedback. Among the unfinished elements was the lack of finished dialogue delivered by voice actors, in which Staten filled in placeholder audio. The entire game was completed just before its presentation at the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2009">Electronic Entertainment Expo 2009</a>.</p>
+
+<p>Bungie's audio director <a href="https://en.wikipedia.org/wiki/Martin_O'Donnell">Martin O'Donnell</a> and his partner <a href="https://en.wikipedia.org/wiki/Michael_Salvatori">Michael Salvatori</a> composed the music for <i>ODST</i>. In contrast to <i>Halo</i>'s signature <a href="https://en.wikipedia.org/wiki/Gregorian_chant">Gregorian chant</a>, there is no choral music in <i>ODST</i>, and no previous <i>Halo</i> themes make a return appearance. Two out of the game's three hours of music were packaged in a two-disc soundtrack released September 22, 2009. Due to <i>ODST'</i>s shift to a new protagonist, O'Donnell wanted to create new music that was evocative of <i>Halo</i> but branched in a different direction. Because the game tells a "human story, not a cyborg story", O'Donnell said, the score was more "intimate and personal". For the Rookie's rain-slicked investigations, O'Donnell felt that a jazz-influenced approach worked best in echoing the noir atmosphere. Other characters did not have any themes written specifically for them but became paired with motifs that suited them.</p>
+
+<p>O'Donnell began writing the game's music while Bungie was crafting the <i>ODST</i> announcement trailer. O'Donnell based the trailer's music on a small segment from the first <i>ODST</i> piece he wrote, titled "Rain". Salvatori joined the project in February 2009 and helped complete the music chores in two months. Once O'Donnell felt they had enough material, the Chicago-based Salvatori flew to Seattle, Washington, finishing arrangements and recording live musicians. Most of the music was recorded during early 2009. Additional composition chores were handled by Bungie sound designer C. Paul Johnson and orchestrator Stan LePard. The Northwest Sinfonia, which recorded the music for <i>Halo 3</i>, performed orchestral sections at Studio X in Washington.</p>
+
+<p>Members of Bungie were fans of the television series <i><a href="https://en.wikipedia.org/wiki/Firefly_(TV_series)">Firefly</a></i>, and in <i>Halo 3</i>'s development brought in several of the actors to fill Marine voice roles. Three of them voiced the four main characters of the <i>ODST</i> squad: Nathan Fillion (a <i>Halo</i> fan himself), Adam Baldwin, and Alan Tudyk. Tricia Helfer provided the voice for the ONI agent Dare; Helfer and Fillion recorded their cinematic dialog together in the same room, a rarity in voice acting. Staten said that "their performances were stronger having them together at the same time". While Staten wrote much of the cinematic dialogue, combat lines could be improvised by the voice actors. Adding Sadie's Story to the game doubled the amount of voice work in the game. After the voice roles were filled, Bungie licensed Fillion and Helfer's likenesses for their respective characters.</p>
+
+<p>In July 2008, <a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a> head of Xbox business <a href="https://en.wikipedia.org/wiki/Don_Mattrick">Don Mattrick</a> told <a href="https://en.wikipedia.org/wiki/MTV">MTV</a> that Bungie was working on a new <i>Halo</i> game for Microsoft, independent of the franchise spinoffs <i><a href="https://en.wikipedia.org/wiki/Halo_Wars">Halo Wars</a></i> and <i>Chronicles</i>. An announcement of the new <i>Halo</i> project was expected at the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">Electronic Entertainment Expo</a> (E3) 2008 trade fair, with Bungie unveiling a countdown on their web site, but the announcement was shelved by Microsoft. Microsoft stated that it wanted the game to have its own event. On September 25, 2008, a year after the release of <i>Halo 3</i>, Bungie debuted a teaser for the new project on their web site. A full trailer was released during the <a href="https://en.wikipedia.org/wiki/Tokyo_Game_Show">Tokyo Game Show</a> on October 9, 2008, officially unveiling the game's name as <i>Halo 3: Recon</i> and a release date of Autumn 2009. In an unusual approach for Bungie, the trailer used pre-rendered graphics instead of the game engine or existing assets. Staten explained that it was too early in the game's development to spend a large amount of time on the trailer, and it would not have allowed Bungie to add touches for fans to discuss.</p>
+
+<p>In post-trailer interviews, Bungie staff members told gaming press that <i>Recon</i> was the last installment in the <i>Halo</i> trilogy. Though Bungie did not consider <i>Recon</i> a full game, with writer <a href="https://en.wikipedia.org/wiki/Luke_Smith_(writer)">Luke Smith</a> comparing it to <i><a href="https://en.wikipedia.org/wiki/Warcraft_III:_The_Reign_of_Chaos">WarCraft III</a></i> expansion <i><a href="https://en.wikipedia.org/wiki/Warcraft_III:_The_Frozen_Throne">The Frozen Throne</a></i>, the game shipped with all <i>Halo 3</i> multiplayer maps and did not require <i>Halo 3</i> to play. Smith asserted the game would not be a crossover into stealth and squad-based genres, noting, "this isn't <i><a href="https://en.wikipedia.org/wiki/Brothers_in_Arms:_Road_to_Hill_30">Brothers in Arms</a>: Halo</i> or <i><a href="https://en.wikipedia.org/wiki/Tom_Clancy's_Splinter_Cell">Tom Clancy's Splinter Cell</a>: Halo</i>." On November 25, Jarrard announced the game had been retitled to <i>Halo 3: ODST</i> as a "more straightforward" description of the game.</p>
+
+<p>Bungie and Microsoft first showed <i>ODST</i> in a playable form at <a href="https://en.wikipedia.org/wiki/E3_2009">E3 2009</a>, where the game's release date and retail versions were finalized. Bungie initially marketed <i>ODST</i> as a title smaller in scope than previous numbered entries in the series. When the game's retail versions were announced, however, the game received a standard price of US$60, which Bungie and Microsoft attributed to the game growing beyond the planned scope. "Over the course of development it got a lot bigger than we were anticipating," said Bungie's Lars Bakken. "We thought of it more as an expansion and then it grew well beyond that." Creamer explained that since the development platform was stable, "we were able to create quite a bit more content than we originally thought we would". The game's length increased from original estimates of 3–5 hours to 8–10. The discrepancy was not discussed until E3 2009 when Microsoft decided it was a full game. Unlike the post-launch support for <i>Halo 3</i>, <i>ODST</i> does not have <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a>.</p>
+
+<h2>Release</h2>
+
+<p><i>Halo 3: ODST</i> ships as a two-disc set. The first disc contains the campaign mode as well as the Firefight co-op mode, while the second disc contains the multiplayer mode with the complete set of <i>Halo 3</i> maps. Owners of the game received an invitation to participate in the <i><a href="https://en.wikipedia.org/wiki/Halo:_Reach">Halo: Reach</a></i> multiplayer beta, which went live on May 3, 2010. Pre-orders included a token to unlock Avery Johnson as a playable character in the Firefight multiplayer mode. This code was included only by certain retailers. A special edition "Collector's Pack" contained the game and a special <i>ODST</i>-branded wireless <a href="https://en.wikipedia.org/wiki/Xbox_360_controller">Xbox 360 controller</a>. <a href='https://en.wikipedia.org/wiki/Toys_"R"_Us'>Toys "R" Us</a> offered an ODST action figure and a US$20 gift card as a buying incentive.</p>
+
+<p>By April 2009, market research firm OTX reported that <i>ODST</i> was the most highly anticipated video game, a spot it continued to hold in late August. Before its release the title was the top-selling game on <a href="https://en.wikipedia.org/wiki/Amazon.com">Amazon.com</a> based on preorders alone, spending 107 days atop the merchant's top 100 video games and software list. Copies of <i>ODST</i> were sold early in France. Microsoft responded by launching an investigation and threatening to ban any players on Xbox Live playing <i>ODST</i> before its official release; Xbox lead manager <a href="https://en.wikipedia.org/wiki/Stephen_Toulouse">Stephen Toulouse</a> later clarified that they would not ban legitimate buyers.</p>
+
+<p>Microsoft prepared what was described as a "mammoth" advertising campaign for the game, with Entertainment Director Stephen McGill affirming that the game "is absolutely a key title to us ... this is the first time we've ever done anything like this, and <i>Halo 3: ODST</i> is a great way to kick it off." Numerous promotional materials were released through Xbox Live, and many more via online and television advertising. <a href="https://en.wikipedia.org/wiki/Marvel_Comics">Marvel Comics</a> published a limited comic series, <i>Helljumper</i>, featuring <i>ODST</i>'s main characters.</p>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Live-action">live-action</a> trailer titled <i><a href="https://en.wikipedia.org/wiki/The_Life_(advertisement)">The Life</a></i> was posted on the Internet in September and later used in television spots as part of the promotional material released for the game. Filmed at several locations in Budapest, Hungary, <i>The Life</i> follows an ODST named Tarkov from a military funeral where he is inspired to become a soldier, through training and combat and up to the moment he becomes a leader in battle. The short film was created by advertising agency TAG SF with effects by Asylum, and directed by <a href="https://en.wikipedia.org/wiki/Rupert_Sanders">Rupert Sanders</a> from production company MJZ, who also handled the award-winning <i>Halo 3</i> "<a href='https://en.wikipedia.org/wiki/Halo_3_marketing#"Believe"_campaign'>Believe</a>" advertisement. Legacy Effects designed and fabricated props, weapons, armor, and a Covenant Brute costume within two weeks. Bungie supplied <a href="https://en.wikipedia.org/wiki/3D_graphics">3D geometry</a> that allowed the company to quickly create accurate representations of in-game items, and provided input on the UNSC dress uniforms. The initial cemetery scene was filmed inside the cooling tower of an active <a href="https://en.wikipedia.org/wiki/Nuclear_power_plant">nuclear power plant</a> in Budapest, and outside the tower the production team created a mud pit and obstacle course to simulate basic training. Members of the Hungarian special forces served as drill instructors in the training sequence, firing blanks. Finally, filming moved to an abandoned <a href="https://en.wikipedia.org/wiki/Soviet-era">Soviet-era</a> aluminum refinery for the short's final memorial scene. An additional scene was shot there, but did not appear in the final product.</p>
+
+<p><i>ODST</i> launch events were held around the United States. Bungie and Microsoft sponsored an official launch event at the <a href="https://en.wikipedia.org/wiki/Experience_Music_Project_and_Science_Fiction_Museum_and_Hall_of_Fame">Experience Music Project and Science Fiction Museum and Hall of Fame</a> in <a href="https://en.wikipedia.org/wiki/Seattle,_Washington">Seattle, Washington</a>. Featured at the event were discussion panels about the series and advance looks at other <i>Halo</i> content such as the <a href="https://en.wikipedia.org/wiki/Anime">anime</a> collection <i><a href="https://en.wikipedia.org/wiki/Halo_Legends">Halo Legends</a></i>. About 800 fans attended from around 6–11 pm before heading to nearby game stores to get their copy of the game. <a href="https://en.wikipedia.org/wiki/GameStop">GameStop</a> held almost 3,700 launch parties across the United States.</p>
+
+<p>On release <i>Halo 3: ODST</i> became the top-selling Xbox 360 game worldwide. More than 2.5 million copies of the game were sold within two weeks of release, totaling more than US$125 million in sales. <i>ODST</i> claimed the overall top spot in UK game sales, becoming the 12th highest sell-through for a single platform title in the market. <i>ODST</i> took the top spot on Australian game charts on release and, after being outsold by <i><a href="https://en.wikipedia.org/wiki/FIFA_10">FIFA 10</a></i> in early October, reclaimed the best seller position. In Japan, where first-person shooters have generally fared poorly, <i>ODST</i> sold 30,000 copies by September 27. <i>ODST</i> sold 1.5 million units during September in the United States, the best-selling title for that month. In October, the game sold 271,000 units in North America (taking sixth place for game sales); Microsoft reported that <i>ODST</i> sold 3 million units worldwide by November. Overall, it was the ninth bestselling game of the year in the United States, one of only two Xbox 360 games to chart. Expecting sales of the game to increase as players wanted to access the <i>Reach</i> beta, UK retailers slashed its price in April 2010.</p>
+
+<p>The remastered campaign of <i>Halo 3: ODST</i> was released as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> for <i><a href="https://en.wikipedia.org/wiki/Halo:_The_Master_Chief_Collection">Halo: The Master Chief Collection</a></i> on May 30, 2015, and was free to all owners of said game that played from launch to December 19, 2014. It is available to purchase separately to those who are not eligible for a free code for the add-on.</p>
+
+<h2>Reception</h2>
+
+<p><i>Halo 3: ODST</i> garnered generally positive reviews, and holds an average of 83/100 on aggregate web site <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. <i><a href="https://en.wikipedia.org/wiki/Time_(magazine)">Time</a></i>'s <a href="https://en.wikipedia.org/wiki/Lev_Grossman">Lev Grossman</a> wrote <i>ODST</i> was a "milestone" as it proved "Bungie can use the same instrument to play in totally different key," adding to the longevity of the <i>Halo</i> franchise. In contrast, Pete Metzger of the <i><a href="https://en.wikipedia.org/wiki/Los_Angeles_Times">Los Angeles Times</a></i> wrote that although <i>ODST</i> was a good game with a compelling story, action, and graphics, "the same can be said for nearly every first-person shooter that is released these days" and that <i>ODST</i> failed to raise the bar set by previous <i>Halo</i> games. <a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a>'s Jeremy Parish noted that while <i>ODST</i> had its flaws, its greatest success was bringing together players who preferred either the multiplayer or campaign portions with a game that would satisfy both camps.</p>
+
+<p>Critics were split on whether <i>ODST</i> was worth its price. <i><a href="https://en.wikipedia.org/wiki/Official_Xbox_Magazine">Official Xbox Magazine</a></i> critic Ryan McCaffrey confidently wrote that given the campaign, multiplayer mode, and second <i>Halo 3</i> multiplayer disc, "no one should have any qualms about <i>ODST</i>'s value as a [US]$60 offering!" Other critics who judged the title a full game included the staff of <a href="https://en.wikipedia.org/wiki/Edge_(magazine)"><i>Edge</i> Magazine</a>, Parish, and <i><a href="https://en.wikipedia.org/wiki/Computer_and_Video_Games">Computer and Video Games</a></i>' Mike Jackson. Erik Brudvig of <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> did not consider <i>ODST</i> a "true sequel", but more than an expansion, and recommended that those hesitant about buying the game do so. Those who disagreed included <a href="https://en.wikipedia.org/wiki/Ars_Technica">Ars Technica</a>'s Ben Kuchera, <a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a>'s Charlie Barratt, <a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a>'s Tom Bramwell, and IGN Australia's Narayan Pattison. In <i><a href="https://en.wikipedia.org/wiki/The_New_York_Times">The New York Times</a></i>' Seth Schiesel wrote that "Microsoft Game Studios has overreached in trying to charge the typical retail price for a full game, around [US]$60, for a product that either should cost [US]$40 or have a lot more content for the single-player aspect of the product."</p>
+
+<p>Critics also disagreed sharply regarding whether the game was a large step forward for the series. Parish said that less enemy variety was balanced by changes he considered the most experimental things Bungie had done for years. <i>Edge</i> and Bramwell praised the contrast between the Rookie's nighttime segments and the more fast-paced flashback vignettes. <i>Edge</i> added that while the narrative design was not groundbreaking, it served as a structure for exploring every possible weapon choice and strategy in the series. While Parish considered the ODST's abilities much different from those of the Chief, other critics such as Jackson wrote that the <i>Halo</i> feel was barely changed and that this was not detrimental. Brett Molina of <i><a href="https://en.wikipedia.org/wiki/USA_Today">USA Today</a></i> felt that the game disappointed by not spending more time in the Rookie's open environment; "instead," Molina wrote, "roughly two-thirds of <i>ODST</i>'s combat feels very much like a traditional <i>Halo</i> game" instead of exploring new mechanics.</p>
+
+<p><i>ODST</i>'s visuals and atmosphere were praised. McShea wrote that while the <i>Halo 3</i> engine was showing its age, the game could still "wow" because of the art design. Parish wrote that the feel of Mombasa changed dramatically when played cooperatively; <a href="https://en.wikipedia.org/wiki/G4_(U.S._TV_channel)">G4TV</a> found that additional players spoiled much of the solitary feel. Travis Moses of <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> wrote that while the game's graphics were consistently outclassed by other shooters, the game's frame rate remained consistently high as expected from <i>Halo</i> games. Technology company Digital Foundry said that, despite welcome improvements in AI, the main flaws from <i>Halo 3</i>'s graphics engine—namely a sub-<a href="https://en.wikipedia.org/wiki/720p">720p</a> native resolution and lower-quality human faces—remained.</p>
+
+<p>The game's audio and sound were lauded. McCaffrey wrote that while the music of <i>Halo 3</i> was "too familiar", <i>ODST</i> had freed O'Donnell to "craft his best work yet", which the critic considered good enough for a standalone purchase. A significant departure from the consensus was offered by Kuchera, who wrote that the saxophone touches "[sound] like the softcore porn they show on <a href="https://en.wikipedia.org/wiki/Cinemax">Cinemax</a> after midnight", and <a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a>'s Anthony Gallegos, who felt that the music did not mesh when extended into combat segments.</p>
+
+<p>Firefight was praised as "addictive", especially for showcasing the excellent <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">artificial intelligence</a> of enemies. Jeff Marchiafava of <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> credited the enemies with differentiating Firefight from similar game modes in games such as <i><a href="https://en.wikipedia.org/wiki/Gears_of_War_2">Gears of War 2</a></i> or <i><a href="https://en.wikipedia.org/wiki/Left_4_Dead">Left 4 Dead</a></i>, which featured mindless zombies or cannon fodder. The staff of <i>Official Xbox Magazine UK</i> wrote that the gametype's depth and options made <i>Gears of War</i>'s comparable mode look "simple" in comparison, and that Firefight extended the life of the game. In contrast, Bramwell felt that in Firefight "there is both a sense of futility in the knowledge that death is only a matter of time and odds, and fatigue in the realisation that many levels play out just as they did in the campaign, except a bit more so".</p>
+
+<p>Interviewed by <a href="https://en.wikipedia.org/wiki/G4_(U.S._TV_channel)">G4TV</a>, Bungie representatives saw part of the mixed and negative reception as stemming from their own marketing of the title—first as an expansion pack, then a full game. "If you look at the lower scores, they almost all cite an issue in perceived value based on an initial expectation that was set for an 'expansion' and then a feeling that they were overcharged for the final product," Jarrad said, echoing Staten's comment that "if we'd never said the words 'expansion pack' we would have seen an appreciable increase in the review scores". Other elements they wish they had improved had they the time were the pacing and navigation of the nighttime segments and matchmaking for Firefight. <i>Halo</i> manager 343 Industries director Frank O'Connor said that he was glad <i>ODST</i> "didn't take off", in his view, because it allowed people to focus on <i>Reach</i> and its launch and marketing.</p>
+
+<h3>Awards</h3>
+
+<p>Lev Grossman and Peter Ha ranked <i>ODST</i> as the eighth best game of the year for <i><a href="https://en.wikipedia.org/wiki/Time_(magazine)">Time</a></i>, lauding the game as "a dark, slow, jazzy, hard-boiled take on the <i>Halo</i> world". <a href="https://en.wikipedia.org/wiki/Softpedia">Softpedia</a> branded <i>ODST</i> the best first-person shooter of the year; games editor Andrei Dumitrescu wrote that while the game occasionally felt formulaic, it was bolstered by a good plot, great music, and supporting characters that players could care about. Chris Kohler from <i><a href="https://en.wikipedia.org/wiki/Wired_(magazine)">Wired</a></i> ranked <i>ODST</i> as the third best Xbox 360 title of the year, writing that the game "injected a fresh breath into the staid corridors of Bungie's shooter franchise".</p>
+
+<p><i>Halo 3: ODST</i> won "Best Original Score" at the <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">2009 Spike Video Game Awards</a>. "The Life" was awarded "Outstanding Visual Effects in a Video Game Trailer" by the <a href="https://en.wikipedia.org/wiki/Visual_Effects_Society">Visual Effects Society</a> at the group's <a href="https://en.wikipedia.org/wiki/8th_Visual_Effects_Society_Awards">8th annual awards</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

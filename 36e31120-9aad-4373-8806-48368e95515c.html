@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Halo: Combat Evolved Anniversary</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('36e31120-9aad-4373-8806-48368e95515c/572b60f4-f1dd-4ac1-a079-36144b7639ea.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="36e31120-9aad-4373-8806-48368e95515c/dcab2c7d-445f-4ec9-8930-3961c1aca9ac.ico"/> Halo: Combat Evolved Anniversary</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="36e31120-9aad-4373-8806-48368e95515c/1a014ef8-0a5b-4c31-8522-334942ead5c6.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-11/26/2014">11/26/2014</a> 12:56:10</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-3/3/2020">3/3/2020</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-86">86</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-80">80</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-FPS">FPS</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-343 Industries">343 Industries</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Bungie">Bungie</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Ruffian Games">Ruffian Games</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Saber Interactive">Saber Interactive</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Splash Damage">Splash Damage</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Xbox Game Studios">Xbox Game Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Cloud Saves">Cloud Saves</a><br/><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Halo:_Combat_Evolved_Anniversary" target="_blank">PCGamingWiki</a><br/><a href="https://www.halowaypoint.com/en-us/games/halo-the-master-chief-collection/windows" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=4270" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/halo-combat-evolved-anniversary" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/1064221/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Halo:_Combat_Evolved" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/143176" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Halo:_Combat_Evolved_Anniversary" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Automobile">Automobile</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-Flight">Flight</a><br/><a href="#quicklink-Halo Engine">Halo Engine</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Saber3D Engine">Saber3D Engine</a><br/><a href="#quicklink-Sci-fi">Sci-fi</a><br/><a href="#quicklink-Space">Space</a><br/><a href="#quicklink-Unreal Engine 4">Unreal Engine 4</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Halo: Combat Evolved Anniversary</b></i> is a 2011 <a href="https://en.wikipedia.org/wiki/First-person_shooter_game">first-person shooter</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/343_Industries">343 Industries</a>, <a href="https://en.wikipedia.org/wiki/Saber_Interactive">Saber Interactive</a>, and <a href="https://en.wikipedia.org/wiki/Certain_Affinity">Certain Affinity</a>, and published by <a href="https://en.wikipedia.org/wiki/Microsoft_Game_Studios">Microsoft Game Studios</a> for the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> console. It is a <a href="https://en.wikipedia.org/wiki/Video_game_remaster">remaster</a> of the 2001 <a href="https://en.wikipedia.org/wiki/Halo:_Combat_Evolved">video game of the same name</a>, originally developed by <a href="https://en.wikipedia.org/wiki/Bungie">Bungie</a>. Announced at the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">Electronic Entertainment Expo</a> in 2011, it was released on November 15, 2011, the tenth anniversary of <i>Combat Evolved</i> and the original <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a> it released on. <i>Anniversary</i> was later included as part of <i><a href="https://en.wikipedia.org/wiki/Halo:_The_Master_Chief_Collection">Halo: The Master Chief Collection</a></i> for <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> in 2014, and for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> and <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a> in 2020.</p>
+
+<p>343 Industries, an internal studio established by Microsoft in 2007, was given control over the <a href="https://en.wikipedia.org/wiki/Halo_(franchise)"><i>Halo</i> franchise</a> after the release of Bungie's final entry, <i><a href="https://en.wikipedia.org/wiki/Halo:_Reach">Halo: Reach</a></i> in 2010. 343 Industries approached Saber Interactive to develop a remaster of <i>Combat Evolved</i> for the game's tenth anniversary. Saber used its proprietary <a href="https://en.wikipedia.org/wiki/Game_engine">game engine</a> to reproduce the graphics and the original <i>Halo</i> engine for gameplay. A development tool for toggling between the old and new visuals for comparison became a feature in the shipping game. <i>Anniversary</i>'s enhancements include a complete <a href="https://en.wikipedia.org/wiki/High-definition_video">high-definition</a> visual overhaul, support for <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperative</a> and <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a> gameplay via the <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a> online service, new and remastered sound effects and music, and extras such as <a href="https://en.wikipedia.org/wiki/Achievement_(video_games)">achievements</a>, in-game collectibles, and <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> support.</p>
+
+<p>Critical reception to <i>Anniversary</i> was generally positive. The updated graphics, sounds, and ability to toggle between the remastered and original visuals were praised. Complaints included technical glitches, faults with the original game's <a href="https://en.wikipedia.org/wiki/Level_design">level design</a>, and the multiplayer implementation.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Halo: Combat Evolved Anniversary</i> and the original, <i><a href="https://en.wikipedia.org/wiki/Halo:_Combat_Evolved">Halo: Combat Evolved</a></i>, are identical in gameplay and plot. The game is a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> with portions of vehicular combat taking place from a third-person perspective. The story follows <a href="https://en.wikipedia.org/wiki/Player_character">player character</a> and protagonist <a href="https://en.wikipedia.org/wiki/Master_Chief_(Halo)">Master Chief</a> as he fights the alien <a href="https://en.wikipedia.org/wiki/Covenant_(Halo)">Covenant</a> on the mysterious ancient <a href="https://en.wikipedia.org/wiki/Ringworld">ringworld</a> Halo. Players are equipped with a recharging energy shield that absorbs damage; players also have health that can only be replenished by health packs scattered across the game's levels. A variety of human and alien weapons and vehicles can be used.</p>
+
+<p>Players can switch between the "classic" graphics of the original game and the new graphics developed for the remaster by pressing the Back button on the controller. Both classic and new graphics are presented in <a href="https://en.wikipedia.org/wiki/High-definition_video">high-definition</a>, <a href="https://en.wikipedia.org/wiki/16:9">16:9</a> widescreen compared to the original game's <a href="https://en.wikipedia.org/wiki/480i">480i</a> resolution and <a href="https://en.wikipedia.org/wiki/4:3">4:3</a> aspect ratio. The remastered graphics are also available in <a href="https://en.wikipedia.org/wiki/Stereoscopy">stereoscopic 3D</a> for compatible televisions.</p>
+
+<p>Additions to the gameplay include <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a> <a href="https://en.wikipedia.org/wiki/Gamerscore">achievements</a>, online <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperative gameplay</a>, hidden video terminals that provide additional story, and collectible skulls that modify gameplay when activated. Support for <a href="https://en.wikipedia.org/wiki/Xbox_Kinect">Xbox Kinect</a> includes voice commands for video navigation, in-combat directives, and environment-scanning, which adds on-screen items to an in-game encyclopedia called the Library.</p>
+
+<p>The original <i>Combat Evolved</i> did not support online multiplayer, but players could play multiplayer locally via <a href="https://en.wikipedia.org/wiki/Split_screen_(computer_graphics)">split-screen</a> or <a href="https://en.wikipedia.org/wiki/System_Link">System Link</a> <a href="https://en.wikipedia.org/wiki/Local_area_network">LAN</a>. <i>Anniversary</i> adds revamped multiplayer and two-player co-op campaign support available online via Xbox Live and offline locally. The game's multiplayer mode uses <i><a href="https://en.wikipedia.org/wiki/Halo:_Reach">Halo: Reach</a></i>'s engine and features seven remakes of <i>Combat Evolved</i> and <i><a href="https://en.wikipedia.org/wiki/Halo_2">Halo 2</a></i> <a href="https://en.wikipedia.org/wiki/Level_(video_gaming)">maps</a>. <i>Anniversary</i> also includes a new map based on a campaign level for <a href="https://en.wikipedia.org/wiki/Halo:_Reach#Multiplayer">Firefight</a>, a wave-based survival multiplayer game type in which players and their allies fight enemy groups of scaling difficulty. <i>Anniversary</i> introduced <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_(video_games)">artificially intelligent</a> Firefight allies to the series.</p>
+
+<h2>Plot</h2>
+
+<p>After fleeing the Covenant's destruction of the human world Reach, the human ship <i>Pillar of Autumn</i> makes a random <a href="https://en.wikipedia.org/wiki/Slipspace">slipspace</a> jump to avoid leading the Covenant to Earth. Arriving in uncharted space, the <i>Autumn</i> crew discover a massive ringworld orbiting a gas giant. When the Covenant attack, <i>Autumn</i>'s captain, <a href="https://en.wikipedia.org/wiki/Characters_of_Halo#Jacob_Keyes">Jacob Keyes</a>, entrusts the ship's artificial intelligence, <a href="https://en.wikipedia.org/wiki/Cortana_(Halo)">Cortana</a>—and her knowledge of defense deployments and the location of Earth—to the supersoldier known as the Master Chief for safekeeping. Master Chief fights off Covenant boarding parties and leaves the <i>Autumn</i> via a lifeboat for the surface of the ringworld, while Keyes directs the <i>Autumn</i> to "land" on the ring.</p>
+
+<p>On the ringworld, Master Chief rallies human survivors and leads a boarding party to rescue Keyes from the Covenant's clutches. Keyes reveals that the Covenant call the ring "Halo", and believe it is some sort of weapon. Chief and Cortana reach Halo's control room, but Cortana becomes alarmed upon entering the ring's systems and sends Master Chief to find Keyes. Searching for the captain, Master Chief encounters the <a href="https://en.wikipedia.org/wiki/Flood_(Halo)">Flood</a>, a parasitic organism that infects sentient life. The Flood's release prompts Halo's AI caretaker, <a href="https://en.wikipedia.org/wiki/Characters_of_Halo#343_Guilty_Spark">343 Guilty Spark</a>, to enlist Master Chief's help in activating Halo's defenses. Master Chief's activation of the ring from the Control Room is stopped by Cortana, who reveals that Halo's defenses do not kill Flood, but rather their food—meaning that activating the ring would wipe out all sentient life in the galaxy. To stop the Flood from spreading and Spark from activating the ring, Cortana devises a plan to detonate the crashed <i>Autumn</i>'s engines and destroy Halo, but require Keyes's command codes. Master Chief and Cortana attempt a rescue only to find that Keyes has been absorbed by the Flood. Fighting through Flood, Covenant, and Guilty Spark's robotic Sentinels, Master Chief and Cortana manually destabilize <i>Autumn</i>'s reactors and narrowly escape the destruction of the ring on a fighter.</p>
+
+<h2>Development</h2>
+
+<h3>Overview</h3>
+
+<p>After <a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a> acquired <a href="https://en.wikipedia.org/wiki/Bungie">Bungie</a> in 2000, Bungie developed the original <i>Halo: Combat Evolved</i> as a 2001 launch game for the <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a>, Microsoft's first video game console. Following the release of <i><a href="https://en.wikipedia.org/wiki/Halo_3">Halo 3</a></i> in 2007, Bungie separated from Microsoft to become an independent company once again, but the rights to <i>Halo</i> remained with the latter, which formed an internal division to oversee <i>Halo</i> franchise development, although Bungie themselves would produce two more games, <i><a href="https://en.wikipedia.org/wiki/Halo_3:_ODST">Halo 3: ODST</a></i> (2009) and <i><a href="https://en.wikipedia.org/wiki/Halo:_Reach">Halo: Reach</a></i> (2010) as part of their obligations to the publisher. <a href="https://en.wikipedia.org/wiki/343_Industries">343 Industries</a>, the internal division, approached Saber Interactive with a proposal to remaster <i>Combat Evolved</i> for the game's tenth anniversary as the former were developing <i><a href="https://en.wikipedia.org/wiki/Halo_4">Halo 4</a></i> (2012), the series' next main entry. Saber's Chief Operating Officer Andrey Iones recalled that the offer was "an opportunity we [could not] miss", as Saber had never before worked on a major game franchise and many team members were fans of <i>Halo</i>. Saber developed <a href="https://en.wikipedia.org/wiki/Concept_art">concept art</a> to form visual ideas for the remaster and then flew to <a href="https://en.wikipedia.org/wiki/Seattle,_Washington">Seattle, Washington</a>, to meet with 343 Industries.</p>
+
+<p>343 Industries wanted a complete remaster of the original game by the tenth anniversary of <i>Halo</i>'s release, giving Saber just over a year to complete the project. The gameplay was to remain unchanged; while the original game had imbalanced elements, 343 Industries decided to preserve the game experience players remembered while introducing young fans to the game for perhaps the first time. The visuals, meanwhile, would be updated along with added features like campaign skulls. Iones recalled that experimentation with the game was limited—redoing keyframed character animations were off-limits because redoing them could introduce gameplay bugs, and design choices like game balance had already been determined. Likewise, <a href="https://en.wikipedia.org/wiki/Video_game_porting">porting</a> the PC version of the game back to the Xbox to add features would have constrained the amount of visual improvements Saber could make, as well as required significant time training artists to use the same production pipelines that were used for <i>Combat Evolved</i>. Saber decided to use the original engine for the gameplay and its own for the visuals, despite the compatibility problems this solution presented. Development began under the codename <i>Spark</i>. The game was completed and released to manufacturing ("going gold") on October 15, 2011.</p>
+
+<p>To solve the issues of transferring information from the original game's engine to the Saber engine, the developers looked at how they used the third-party <a href="https://en.wikipedia.org/wiki/Havok_(software)">Havok physics engine</a> to handle object positioning, velocities, and collisions. Saber created a proxy of every object in the <i>Halo</i> engine to transfer into the Saber engine, meaning that the game's original programming remained unchanged.  The game's ability to alternate between the legacy and remastered graphics engines in the campaign was made possible by the rendering engine developed by <a href="https://en.wikipedia.org/wiki/Saber_Interactive">Saber Interactive</a>. The technology allowed the developers to update <i>Halo: Combat Evolved</i>'s visuals and preserve the original gameplay. Originally, players would have chosen which graphical presentation to play from the main menu. The in-game toggle feature quickly became a talking point among the developers, who pushed for it to be available to other players. Since the ability to switch between classic version and remastered version was provided to players, both engines work simultaneously to retain the spontaneity of game. This approach caused several problems, including collision issues—because objects and environments in the original game were of a lower resolution with fewer polygons, higher-resolution visuals in the Saber engine could deviate from the original significantly. As the original game's geometry was used as the basis for collisions, in some cases characters could appear to walk through or above terrain, weapons could drop through the ground, and bullets would appear to be deflected by nothing. The sheer number of these issues, combined with the desire to keep the original gameplay intact, forced Saber to use a variety of approaches to fix the problems, including making tools for artists to visualize height differences and creating intermediate geometry. In some cases, the artists developed other ways of keeping to the same collision data while updating the visuals by changing the actual object—turning a blocky, low-polygon rock into an angular <a href="https://en.wikipedia.org/wiki/Factions_of_Halo#Forerunner">Forerunner</a> structure avoided the collision issues.</p>
+
+<p>Where possible, the developers drew on or adapted assets from <i><a href="https://en.wikipedia.org/wiki/Halo_3">Halo 3</a></i> and <i>Reach</i>. For elements that had no analogues, Microsoft sent art director Ben Cammarano to Saber's offices in <a href="https://en.wikipedia.org/wiki/St._Petersburg">St. Petersburg</a>, Russia, to oversee the redesign of the game's visuals. Cammarano established four tenets of Halo—what Iones termed "heroic vistas, iconic imagery and characters, clean and vibrant aesthetics, and visceral action"—to guide Saber's artists. Since the original assets already existed, concept artists took screenshots from the original game and painted new imagery over them to show how environmental effects, improved lighting, and new textures could change the look of the levels. Some of Saber's visual designs were considered too much of a departure from the original game—while the artists had changed the position of the Halo ringworld and nearby planets to make a more pleasing <a href="https://en.wikipedia.org/wiki/Skybox_(video_games)">skybox</a>, Microsoft insisted maintaining continuity with the universe was more important and vetoed the changes. Vocal fans pointed out other inconsistencies with the game's visuals in pre-release trailers and pictures that Saber ultimately changed. Iones pointed to the floor designs of the Forerunner structures, the assault rifle, and the look of the Chief as places fans had an impact. The Chief's armor was redesigned from scratch instead of porting existing assets.</p>
+
+<p>Saber doubted that it would be able to convert <i>Combat Evolved</i>'s split-screen cooperative play to facilitate online play. Greg Hermann, a 343 Industries technical lead who had experience with Bungie technology, assisted Saber in development of a networking solution that would allow online co-op. Since the original game would behave identically when given the same scenario and inputs, only the player inputs needed to be synchronized between players' Xbox consoles.</p>
+
+<p>Because of its previous contributions to the series—<i>Halo 2</i>'s Blastacular and <i>Halo: Reach</i>'s Defiant map pack—<a href="https://en.wikipedia.org/wiki/Certain_Affinity">Certain Affinity</a> was approached by 343 Industries to streamline the multiplayer maps to take <i>Halo: Reach</i>'s gameplay options into account. The multiplayer is powered by the <i>Halo: Reach</i> engine. 343 Industries director Frank O'Connor said that the decision to use <i>Reach</i> for the multiplayer was controversial, even within the studio. "In <i>Halo</i>'s day, there was never a proper networking mode," O'Connor explained. "We couldn't roll back the technology; [recreating <i>Halo</i>'s local area network multiplayer] just wouldn't have worked with things like latency and all other modern Xbox Live-related problems. So we would have had to build it from scratch, and it still wouldn't have been the experience [players] remember." An additional consideration O'Connor mentioned was that producing a full replication of <i>Combat Evolved</i>'s multiplayer would have divided the <i>Halo</i> player base and interrupted <i>Reach</i>'s lifespan.<sup>: 3 </sup> In choosing which seven <i>Halo</i> maps to remake, 343 Industries set a number of rules—the map could not have been previously remade for a 360-era <i>Halo</i> title, it had to work with <i>Reach</i>'s gameplay sandbox, and it had to be a fan favorite.<sup>: 1 </sup> The company retained the same art director between the campaign and multiplayer elements of <i>Anniversary</i> to make sure the two halves of the game looked visually cohesive.</p>
+
+<p>Since 343 Industries developed <i>Halo 4</i> concurrently with the anniversary edition, it decided to use <i>Halo: Combat Evolved Anniversary</i> to link the original trilogy with the upcoming <a href="https://en.wikipedia.org/wiki/Halo_(franchise)#Reclaimer_saga">Reclaimer trilogy</a> by means of in-game collectibles similar to <i>Halo 3</i>'s terminals, <i><a href="https://en.wikipedia.org/wiki/Halo_3:_ODST">Halo 3: ODST</a></i>'s audio logs, and <i>Halo: Reach</i>'s data pads. While the other games' collectibles were aimed at and enjoyed by serious <i>Halo</i> fiction fans, 343 Industries wanted to make <i>Anniversary</i>'s terminals higher-budget, more impressive, and accessible to all players.<sup>: 2 </sup></p>
+
+<p>Though Iones described <i>Anniversary</i>'s one-year development cycle as a "very smooth ride", some production issues that were not discovered until late in development contributed to bugs and other problems. Saber relied on a partially automated tool to render the game's cinematics, but did not do a thorough vetting of the results until after the game had reached the <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha">alpha stage of its release cycle</a>. As a result, the developers realized that their addition of <a href="https://en.wikipedia.org/wiki/Motion_capture">motion capture</a> animation and lip-syncing had caused serious audio syncing issues and animation bugs.</p>
+
+<p>The developers refreshed <i>Combat Evolved</i>'s music and sound effects along with its visuals. While players can toggle the original music from <i>Halo: Combat Evolved</i>, the soundtrack was also re-recorded in partnership with Pyramind Studios, using the 75-piece Skywalker Symphony Orchestra and the <a href="https://en.wikipedia.org/wiki/Chanticleer_(ensemble)">Chanticleer</a> vocal ensemble. Because there were no <a href="https://en.wikipedia.org/wiki/MIDI">MIDI</a> recordings of the original game's music, Paul Lipson, Lennie Moore, Tom Salta, and Brian Trifon transcribed each piece of music.</p>
+
+<p>The soundtrack was released digitally and in two physical formats: a two-disc <a href="https://en.wikipedia.org/wiki/Compact_disc">CD</a> edition and a <a href="https://en.wikipedia.org/wiki/Vinyl_record">vinyl record</a> edition, the latter of which was limited to 2000 units. The vinyl edition contains 16 tracks on two sides and comes with a code to download the rest of the <i>Anniversary</i> soundtrack digitally. The compact disc edition contains thirty-nine tracks and was released on November 15, 2011.</p>
+
+<h2>Release</h2>
+
+<p><i>Halo: Combat Evolved Anniversary</i> was announced to the public with a trailer on June 6, 2011, at Microsoft's annual <a href="https://en.wikipedia.org/wiki/E3_2011">E3</a> global media briefing, which closed with the teaser trailer for <i>Halo 4</i>. Bonuses for preordering the game included a Master Chief <a href="https://en.wikipedia.org/wiki/Avatar_(Xbox_Live)">Xbox 360 avatar</a> costume and an exclusive Grunt Funeral skull, which toggles whether enemy <a href="https://en.wikipedia.org/wiki/Covenant_(Halo)#Grunts_(Unggoy)">Grunts</a> explode upon death. During the Halo Universe panel at the 2011 <a href="https://en.wikipedia.org/wiki/San_Diego_Comic-Con_International">San Diego Comic-Con</a>, a short trailer showcasing the animation used in the terminals with a narration by 343 Guilty Spark was shown to the fans. Microsoft launched the <i>Halo Living Monument</i>, consisting of a <a href="https://en.wikipedia.org/wiki/Live_action">live-action</a> short and a website, to celebrate the launch of <i>Combat Evolved Anniversary</i>.</p>
+
+<p>Thirteen retail <a href="https://en.wikipedia.org/wiki/Microsoft_Store_(retail)">Microsoft Stores</a> hosted <a href="https://en.wikipedia.org/wiki/Dot_com_party">launch events</a> for <i>Anniversary</i>'s November 15, 2011, midnight release; festivities included sixteen-player multiplayer matches, limited-edition <a href="https://en.wikipedia.org/wiki/Promotional_merchandise">giveaways</a>, and appearances by the game developers. In the <a href="https://en.wikipedia.org/wiki/United_Kingdom">United Kingdom</a>, Microsoft and the British video game retailer <a href="https://en.wikipedia.org/wiki/Game_(retailer)">GAME</a> held two pre-release events with the full version of the game and prizes. In another British promotion, those who purchased a special <i>Halo</i>-themed <a href="https://en.wikipedia.org/wiki/Pizza_Hut">Pizza Hut</a> pizza during a two-week promotional period surrounding the release date received two days of Xbox Live premium membership. VideoGamer.com's staff found the pizza to be delicious, but its connection to the <i>Halo</i> franchise tenuous. Microsoft and Pizza Hut would run a similar promotion the next year for <i><a href="https://en.wikipedia.org/wiki/Halo_4">Halo 4</a></i>'s release.</p>
+
+<p>As stated by tracking firm <a href="https://en.wikipedia.org/wiki/Chart-Track">Chart-Track</a>, <i>Anniversary</i> was the sixth best-selling game of the week across all platforms in the UK; it attained the fifteenth spot in Japan according to Media Create, while according to Amazon orders, it was the second best-selling game for the 360 platform in the same period. It was the third best-selling Xbox 360 game in North America during its first week.</p>
+
+<p><i>Halo: Combat Evolved Anniversary</i> was released on the <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> as part of <i><a href="https://en.wikipedia.org/wiki/Halo:_The_Master_Chief_Collection">Halo: The Master Chief Collection</a></i> on November 11, 2014, with support for 1080p60 rendering. A PC version of the game for <i>Master Chief Collection</i> was released on March 3, 2020.</p>
+
+<h2>Reception</h2>
+
+<p><i>Halo: Combat Evolved Anniversary</i> received generally positive reviews. On aggregate review website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, the game has a weighted score of 82 out of 100, based on 73 reviews from critics. On <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a>, the game has an overall score of 81.92% based on reviews from 53 critics. The staff of <i><a href="https://en.wikipedia.org/wiki/Official_Xbox_Magazine">Official Xbox Magazine</a></i> praised the developers for preserving the original gameplay, avoiding "revisionist horrors" and <a href="https://en.wikipedia.org/wiki/List_of_changes_in_Star_Wars_re-releases"><i>Star Wars</i> re-release</a> moments. Brandon Justice of <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> wrote for fans of the series, "[<i>Anniversary</i>] is one of the best pieces of <a href="https://en.wikipedia.org/wiki/Fan_service">fan service</a> our industry has ever produced, and you <i>need</i> to go buy it."</p>
+
+<p>The remastered visuals were positively received; reviewers such as <i><a href="https://en.wikipedia.org/wiki/The_Inquirer">The Inquirer</a></i>'s Chris Martin and <i><a href="https://en.wikipedia.org/wiki/The_Escapist_(magazine)">The Escapist</a></i>'s Russ Pitts singled out the graphics-switch button for praise. <i><a href="https://en.wikipedia.org/wiki/The_Guardian">The Guardian</a></i>'s Steve Boxer called the feature "utterly fascinating—a bit like ... archaeology on your console", and said that the visual overhaul improved areas where the original game engine was weak, such as rendering outdoor environments. While praising most of the game's refinements, Watters singled out the Flood as enemies he thought the original game envisioned better, saying "the simplicity of the classic look feels more sinister and alien". Hamza Aziz of <a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a> appreciated the visual updates, but not some of the resulting audio–animation syncing issues.</p>
+
+<p>Reviewers disagreed on how the core gameplay of <i>Combat Evolved</i>, unaltered in <i>Anniversary</i>, had aged over ten years. Writing for <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a>, editor Chris Watters opined that "the fundamental mechanics of the game have ... endured well", with responsive controls and challenging enemies. <i>PALGN</i> writer Adam Guetti agreed, praising "rock solid" controls and tight gameplay, while Mike Wilcox of <i><a href="https://en.wikipedia.org/wiki/The_Sydney_Morning_Herald">The Sydney Morning Herald</a></i> argued the anniversary edition "[proves] a game with a winning formula doesn't wither with age". <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>'s Steven Hopper felt that the level design was dated, the repetitious environments making it easy for players to lose their bearings, and that vehicles handled poorly. <a href="https://en.wikipedia.org/wiki/Giant_Bomb">Giant Bomb</a>'s Brad Shoemaker wrote that while the best aspects of the game remained, other aspects—such as the level design and fighting the Flood—were no less frustrating after ten years; <a href="https://en.wikipedia.org/wiki/Digital_Spy">Digital Spy</a>'s Matthew Reynolds echoed the sentiment, praising the game for presenting situations unsurpassed in later games while faulting irregular checkpoints.</p>
+
+<p>Critics had split opinions on <i>Anniversary</i>'s additional features. The stereoscopic 3D effect was alternately praised and dismissed: Matt Miller of <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> wrote that the feature "doesn't add anything to the experience", while Aziz described the feature as "fantastic", considering its use in <i>Anniversary</i> to be more subtle and pleasing than in other games. Aziz also applauded the narrative terminals, although he criticized the Kinect voice command support for being slower in combat than pressing buttons. Ben Kuchera of <i><a href="https://en.wikipedia.org/wiki/Ars_Technica">Ars Technica</a></i> enjoyed the improvements of the <i>Halo</i> maps in <i>Anniversary</i>'s multiplayer mode, but criticized the inability to play said mode via four-person local split screen as in the original game. Reynolds agreed with 343 Industries's choice to use <i>Reach</i> for <i>Anniversary</i>'s multiplayer mode, writing that the map pack offered "a smart way of reintroducing players back into the game", as well as commending <i>Halo</i>'s combat for offering an alternative to contemporary military shooters.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

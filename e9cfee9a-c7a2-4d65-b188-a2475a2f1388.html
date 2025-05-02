@@ -1,0 +1,404 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Marvel: Ultimate Alliance</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('e9cfee9a-c7a2-4d65-b188-a2475a2f1388/909d9c40-1a1f-4202-ad7f-fdecb11d59d3.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="e9cfee9a-c7a2-4d65-b188-a2475a2f1388/1941c003-3072-4e6f-8b99-cb0c70dc943e.png"/> Marvel: Ultimate Alliance</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="e9cfee9a-c7a2-4d65-b188-a2475a2f1388/f40d16f5-89c6-490f-98dd-0493c5ca13a2.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/27/2025">4/27/2025</a> 10:06:45</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 9:13:10</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/24/2006">10/24/2006</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-90">90</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-72">72</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-ARPG">ARPG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Beenox Shift">Beenox Shift</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Raven Software">Raven Software</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Marvel:_Ultimate_Alliance" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=5691" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/marvel-ultimate-alliance" target="_blank">IGDB</a><br/><a href="http://strategywiki.org/wiki/Marvel:_Ultimate_Alliance" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/marvel-ultimate-alliance_" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Marvel:_Ultimate_Alliance" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/marvel-ultimate-alliance" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Bird's-eye view">Bird's-eye view</a><br/><a href="#quicklink-Comic Book">Comic Book</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Fantasy">Fantasy</a><br/><a href="#quicklink-Point and select">Point and select</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Sci-fi">Sci-fi</a><br/><a href="#quicklink-Space">Space</a><br/><a href="#quicklink-Supernatural">Supernatural</a><br/><a href="#quicklink-Vicarious Visions Alchemy">Vicarious Visions Alchemy</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Marvel: Ultimate Alliance</b></i> is a 2006 <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a> for various gaming systems. Developed by <a href="https://en.wikipedia.org/wiki/Raven_Software">Raven Software</a>, <i>Ultimate Alliance</i> is set within the fictional <a href="https://en.wikipedia.org/wiki/Marvel_Universe">Marvel Universe</a> and features many of the <a href="https://en.wikipedia.org/wiki/Superhero">superheroes</a>, <a href="https://en.wikipedia.org/wiki/Supervillain">supervillains</a>, and supporting characters that appear in publications by <a href="https://en.wikipedia.org/wiki/Marvel_Comics">Marvel Comics</a>. It shares many similarities with Raven Software's previous Marvel titles, <i><a href="https://en.wikipedia.org/wiki/X-Men_Legends">X-Men Legends</a></i> and <i><a href="https://en.wikipedia.org/wiki/X-Men_Legends_II:_Rise_of_Apocalypse">X-Men Legends II: Rise of Apocalypse</a></i>, in that it allows players to select from its vast cast to create the ultimate superhero team. The game features an original plot in which the heroes of the Marvel Universe must join forces to defeat <a href="https://en.wikipedia.org/wiki/Doctor_Doom">Doctor Doom</a> and his <a href="https://en.wikipedia.org/wiki/Masters_of_Evil">Masters of Evil</a> and foil their plans for global domination.</p>
+
+<p>Raven Software developed and released it on <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> on October 24, 2006, while additionally versions for <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> (<a href="https://en.wikipedia.org/wiki/Ported">ported</a> by <a href="https://en.wikipedia.org/wiki/Vicarious_Visions">Vicarious Visions</a>) and <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> (ported by <a href="https://en.wikipedia.org/wiki/Beenox">Beenox</a>) were also released on the same day, as well as a distinctly different <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> version, developed by <a href="https://en.wikipedia.org/wiki/Barking_Lizards_Technologies">Barking Lizards Technologies</a>. Shortly thereafter, <i>Ultimate Alliance</i> was released as a <a href="https://en.wikipedia.org/wiki/Launch_title">launch title</a> for both the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> consoles in November 2006, the latter ported by Vicarious Visions; the PlayStation 3 version was one of three launch games for the system (along with <i><a href="https://en.wikipedia.org/wiki/NBA_07">NBA 07</a></i> and <i><a href="https://en.wikipedia.org/wiki/Ridge_Racer_7">Ridge Racer 7</a></i>) to run at 1080p resolution.</p>
+
+<p>Upon release, the game was met with largely positive reviews from critics, who praised its simple but entertaining gameplay, and its impressive selection of Marvel characters. A sequel, <i><a href="https://en.wikipedia.org/wiki/Marvel:_Ultimate_Alliance_2">Marvel: Ultimate Alliance 2</a></i>, was developed for multiple platforms by <a href="https://en.wikipedia.org/wiki/Vicarious_Visions">Vicarious Visions</a>, <a href="https://en.wikipedia.org/wiki/N-Space">n-Space</a> and Savage Entertainment and released in 2009. A third game, <i><a href="https://en.wikipedia.org/wiki/Marvel_Ultimate_Alliance_3:_The_Black_Order">Marvel Ultimate Alliance 3: The Black Order</a></i>, was developed by <a href="https://en.wikipedia.org/wiki/Koei_Tecmo">Koei Tecmo</a>'s <a href="https://en.wikipedia.org/wiki/Team_Ninja">Team Ninja</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> in 2019. <i>Marvel: Ultimate Alliance</i> was re-released in 2016, ported by <a href="https://en.wikipedia.org/wiki/Zoë_Mode">Zoë Mode</a>, on Windows, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>.</p>
+
+<h2>Gameplay</h2>
+
+<h3>Consoles, PC and PSP</h3>
+
+<p>Players can select teams of four from a range of more than twenty-two <a href="https://en.wikipedia.org/wiki/Playable_characters">playable characters</a> (although some characters are not initially available and need to be unlocked, or exclusive to specific versions), allowing them to create their own superhero teams or recreate famous teams from the publications. Bonuses are also available if forming certain groups (e.g. the <a href="https://en.wikipedia.org/wiki/Avengers_(comics)">Avengers</a>, <a href="https://en.wikipedia.org/wiki/Defenders_(comics)">Defenders</a>, <a href="https://en.wikipedia.org/wiki/Fantastic_Four">Fantastic Four</a>, <a href="https://en.wikipedia.org/wiki/Marvel_Knights">Marvel Knights</a>, <a href="https://en.wikipedia.org/wiki/X-Men">X-Men</a>). The game has alternative endings, dictated by the number of optional missions the player completes. Included are trivia, artwork, and "simulator discs", which unlock non-story-related missions for characters.</p>
+
+<p>Each character also has a variety set of four alternate costumes that offer different advantages, with the latter three costumes must be unlocked through specific conditions. Some of the costumes change the character's appearance to that of a different Marvel Universe, including Iron Man as <a href="https://en.wikipedia.org/wiki/War_Machine">War Machine</a>, Thor as <a href="https://en.wikipedia.org/wiki/Beta_Ray_Bill">Beta Ray Bill</a>, Spider-Woman as <a href="https://en.wikipedia.org/wiki/Mayday_Parker">Spider-Girl</a> and <a href="https://en.wikipedia.org/wiki/Julia_Carpenter">Julia Carpenter</a> from <i><a href="https://en.wikipedia.org/wiki/Secret_Wars">Secret Wars</a></i>, Ghost Rider as <a href="https://en.wikipedia.org/wiki/Phantom_Rider">Phantom Rider</a>, and Ms. Marvel as <a href="https://en.wikipedia.org/wiki/Sharon_Ventura">Sharon Ventura</a>.</p>
+
+<p>The PlayStation 3 and Xbox 360 versions are virtually identical, with no major differences. Both platforms include <a href="https://en.wikipedia.org/wiki/Colossus_(character)">Colossus</a>, <a href="https://en.wikipedia.org/wiki/Moon_Knight">Moon Knight</a>, and five additional comic book missions. Activision released eight additional downloadable characters on the Xbox 360 via the Xbox Live Marketplace on April 26, 2007 in a set of packs: a <i>Hero Pack</i>, consisting of <a href="https://en.wikipedia.org/wiki/Cyclops_(Marvel_Comics)">Cyclops</a>, <a href="https://en.wikipedia.org/wiki/Nightcrawler_(character)">Nightcrawler</a>, <a href="https://en.wikipedia.org/wiki/Hawkeye_(Clint_Barton)">Hawkeye</a>, and the <a href="https://en.wikipedia.org/wiki/Hulk">Hulk</a>, and a <i>Villain Pack</i>, which includes <a href="https://en.wikipedia.org/wiki/Magneto_(Marvel_Comics)">Magneto</a>, <a href="https://en.wikipedia.org/wiki/Sabretooth_(character)">Sabretooth</a>, <a href="https://en.wikipedia.org/wiki/Eddie_Brock">Venom</a>, and <a href="https://en.wikipedia.org/wiki/Doctor_Doom">Doctor Doom</a>. Both packs are also available in a bundle pack for 800 MSP, which adds 12 new <a href="https://en.wikipedia.org/wiki/Xbox_achievements">achievements</a> to the game. The <i>Gold Edition</i> was released for the Xbox 360 in May 2007 which includes the standard game bundled with all <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a>. The <i>Special Edition</i> version was released in September 2007, and is included in the <i><a href="https://en.wikipedia.org/wiki/Platinum_Hits#Games_in_Platinum_Hits_for_Xbox_360_series">Platinum Hits</a></i> list for the Xbox 360. The set includes all elements of the Gold Edition of the game and a bonus DVD. As of December 2009, the DLC was removed from the <a href="https://en.wikipedia.org/wiki/Xbox_LIVE_Marketplace">Xbox LIVE Marketplace</a> by Activision, meaning the only way to play as the downloadable characters was to purchase the Gold Edition or the Platinum Hits version. The Xbox 360 <a href="https://en.wikipedia.org/wiki/Games_on_Demand">Games on Demand</a> version bundles the game with all previously downloadable content.</p>
+
+<p>The Wii version has several unique features, including <a href="https://en.wikipedia.org/wiki/Motion_controller">motion control</a> for attacks and access to any special move at any time. This version contains no online play but has a local multiplayer mode in which up to four players may play at once. It also features Colossus and Moon Knight, as well as five additional comic book missions.</p>
+
+<p>While the graphics are virtually identical to PlayStation 3 and Xbox 360, the <a href="https://en.wikipedia.org/wiki/Personal_computer">PC</a> version is customizable, and many characters (including those who are exclusive to specific versions) and their modifications can be obtained from community sites for play within the game. The PC version's graphics vary depending on the customization of a user's settings. The PC version also features "intuitive mouse controls" and works with a <a href="https://en.wikipedia.org/wiki/Gamepad">gamepad</a>. A number of custom characters, including <a href="https://en.wikipedia.org/wiki/Jean_Grey">Jean Grey</a>, <a href="https://en.wikipedia.org/wiki/Betsy_Braddock">Psylocke</a>, <a href="https://en.wikipedia.org/wiki/Scarlet_Witch">Scarlet Witch</a>, <a href="https://en.wikipedia.org/wiki/War_Machine">War Machine</a>, <a href="https://en.wikipedia.org/wiki/Vision_(Marvel_Comics)">Vision</a>, <a href="https://en.wikipedia.org/wiki/Dazzler_(Marvel_Comics)">Dazzler</a>, and <a href="https://en.wikipedia.org/wiki/Punisher">Punisher</a>, are available.</p>
+
+<p>The re-release version of the game which came to <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and Microsoft Windows via <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> is solely based on Xbox 360’s Gold Edition. However, the re-release was initially released with the contents which were exclusive to seventh-generation consoles (PlayStation 3, Xbox 360, and Wii), but without the DLC featured originally on Xbox 360. On August 30, 2016, an update was released on these three systems which contained the eight downloadable characters previously featured on the Xbox 360.</p>
+
+<p>The PSP version features simplified graphics, different characters, and extra features including the four exclusive playable Marvel characters <a href="https://en.wikipedia.org/wiki/Black_Widow_(Natasha_Romanova)">Black Widow</a>, <a href="https://en.wikipedia.org/wiki/Genis-Vell">Captain Marvel</a>, <a href="https://en.wikipedia.org/wiki/Hawkeye_(Clint_Barton)">Hawkeye</a>, and <a href="https://en.wikipedia.org/wiki/Ronin_(Marvel_Comics)">Ronin</a>. Other things unique to this version are six exclusive comic book missions including one which contains <a href="https://en.wikipedia.org/wiki/Swordsman_(character)">Swordsman</a>, an exclusive prequel mission, and three exclusive single-player gameplay modes. Added features include online play, microphone support <i>(voice chat)</i>, and online-recordable player statistics. The PlayStation 2 version of the game has the same features as the <a href="https://en.wikipedia.org/wiki/Seventh_generation_of_video_game_consoles">next-gen</a> versions of the game, albeit without Colossus, Moon Knight and the five bonus simulator missions. In August 2007, a <i>Greatest Hits</i> version was released which included a bonus DVD containing a making-of featurette. The Xbox version of the game has no changes from the standard PlayStation 2 edition. However, it is possible to play as Colossus and Moon Knight via a <a href="https://en.wikipedia.org/wiki/Glitch">glitch</a>.</p>
+
+<p>The Game Boy Advance version of <i>Ultimate Alliance</i> features significant differences from the other console versions. Most notably, the basic gameplay takes the form of a 2D side-scrolling beat’em up game with minor RPG elements, such as the ability to alter the player characters' stats. The graphics are simplified for this system and the selection of characters has also been reduced. Some additional gameplay modes were added to this version of the game including a <a href="https://en.wikipedia.org/wiki/S.H.I.E.L.D.">S.H.I.E.L.D.</a> Simulator, Time Challenges, Scavenger Hunts, and a Survival mode. Teams for this port consist of three characters and a non-playable fourth character called a "striker", who can be summoned to perform a powerful attack directed toward on-screen enemies.</p>
+
+<h2>Plot</h2>
+
+<p>The game begins with <a href="https://en.wikipedia.org/wiki/Doctor_Doom">Doctor Doom</a> and the <a href="https://en.wikipedia.org/wiki/Masters_of_Evil">Masters of Evil</a> launching an attack on the S.H.I.E.L.D. <a href="https://en.wikipedia.org/wiki/Helicarrier">Helicarrier</a> U.N.N. <i>Alpha</i>. <a href="https://en.wikipedia.org/wiki/Nick_Fury">Nick Fury</a> sends out a distress call to all available superheroes for assistance. <a href="https://en.wikipedia.org/wiki/Captain_America">Captain America</a>, <a href="https://en.wikipedia.org/wiki/Spider-Man">Spider-Man</a>, <a href="https://en.wikipedia.org/wiki/Thor_(Marvel_Comics)">Thor</a>, and <a href="https://en.wikipedia.org/wiki/Wolverine_(character)">Wolverine</a> respond to the call. Along with the other heroes, they save the Helicarrier from the forces led by <a href="https://en.wikipedia.org/wiki/Mac_Gargan">Scorpion</a>, <a href="https://en.wikipedia.org/wiki/Bullseye_(Marvel_Comics)">Bullseye</a>, <a href="https://en.wikipedia.org/wiki/Bucky_Barnes">Winter Soldier</a>, <a href="https://en.wikipedia.org/wiki/Radioactive_Man_(comics)">Radioactive Man</a>, and <a href="https://en.wikipedia.org/wiki/Fin_Fang_Foom">Fin Fang Foom</a>. In the wake of the attack, Nick Fury is given permission to start a task force to confront the Masters of Evil and <a href="https://en.wikipedia.org/wiki/Iron_Man">Iron Man</a> allows them to use Stark Tower as their headquarters.</p>
+
+<p>Fury asks the heroes to investigate an odd message received from <a href="https://en.wikipedia.org/wiki/Dum_Dum_Dugan">Dum Dum Dugan</a> on the Omega Base, a S.H.I.E.L.D. mobile research facility. The team defeats supervillains <a href="https://en.wikipedia.org/wiki/MODOK">MODOK</a>, <a href="https://en.wikipedia.org/wiki/Crimson_Dynamo">Crimson Dynamo</a>, and <a href="https://en.wikipedia.org/wiki/Mysterio">Mysterio</a> as well as <a href="https://en.wikipedia.org/wiki/Advanced_Idea_Mechanics">A.I.M.</a> agents and failed Super Soldier experiments to prevent the Omega Base from crashing into a dam and launching several gamma bombs.</p>
+
+<p>With their mission successful, the heroes travel to Atlantis, where the inhabitants are being mind-controlled by <a href="https://en.wikipedia.org/wiki/Attuma">Attuma</a>, who has usurped <a href="https://en.wikipedia.org/wiki/Namor">Namor</a> from his throne. With the help of nano-technology that enables them to breathe and move freely underwater, the heroes fight the mind-controlled Atlanteans, destroy the towers which are guarded by <a href="https://en.wikipedia.org/wiki/Krang_(Marvel_Comics)">Warlord Krang</a> and <a href="https://en.wikipedia.org/wiki/Byrrah">Byrrah</a>, rescue Namor, and defeat Attuma and <a href="https://en.wikipedia.org/wiki/Tiger_Shark_(Marvel_Comics)">Tiger Shark</a>. After defeating Attuma, the heroes encounter <a href="https://en.wikipedia.org/wiki/Mandarin_(character)">Mandarin</a>, who unleashes the <a href="https://en.wikipedia.org/wiki/Kraken_(Marvel_Comics)">Kraken</a>, which the team defeats by toppling pillars on it.</p>
+
+<p>They then travel to the Valley of Spirits to confront Mandarin in his palace. After his defeat, he reveals that he attempted to take command of the Masters of Evil and, upon failing, left the group. He suggests that the Mandarin they saw in the catacombs was actually <a href="https://en.wikipedia.org/wiki/Loki_(Marvel_Comics)">Loki</a>, Thor's adoptive brother and the god of mischief.</p>
+
+<p>Upon returning to base, the team learns that <a href="https://en.wikipedia.org/wiki/Nightcrawler_(character)">Nightcrawler</a> and <a href="https://en.wikipedia.org/wiki/Jean_Grey">Jean Grey</a> have been kidnapped. Due to the involvement of mystical forces, Fury has the team relocated to the <a href="https://en.wikipedia.org/wiki/Sanctum_Sanctorum_(Marvel_Comics)">Sanctum Sanctorum</a>, offered as a temporary headquarters by a grateful <a href="https://en.wikipedia.org/wiki/Doctor_Strange">Doctor Strange</a>, who they rescued in the Valley of Spirits. <a href="https://en.wikipedia.org/wiki/Professor_X">Professor X</a> tracks Nightcrawler to Castle Doom, but upon trying to transport the heroes there they are sent to Murderworld by <a href="https://en.wikipedia.org/wiki/Baron_Mordo">Baron Mordo</a>. After defeating a mind-controlled Jean, <a href="https://en.wikipedia.org/wiki/Rhino_(character)">Rhino</a>, and <a href="https://en.wikipedia.org/wiki/Shocker_(character)">Shocker</a>, the heroes battle a large <a href="https://en.wikipedia.org/wiki/Mech">mech</a>, piloted by <a href="https://en.wikipedia.org/wiki/Arcade_(Marvel_Comics)">Arcade</a>.</p>
+
+<p>Victorious, the heroes learn that Doctor Doom has used Nightcrawler to access <a href="https://en.wikipedia.org/wiki/Mephisto_(Marvel_Comics)">Mephisto</a>'s realm, and the team is sent in pursuit. Upon arriving, minions of Mephisto kidnap Jean Grey and Nightcrawler. Mephisto's son <a href="https://en.wikipedia.org/wiki/Blackheart">Blackheart</a> puts them in separate cages above the Infinity Vortex, stating one must be saved and the other sacrificed before the team can defeat Mephisto. During their battle with Mephisto the sacrificed hero returns, resurrected by Mephisto, but now under his control. As a final effort, the resurrected hero sacrifices their life to defeat Mephisto and allow the team to escape.</p>
+
+<p>Meanwhile, in Asgard, a massive army of Super Soldiers attacks and imprisons the <a href="https://en.wikipedia.org/wiki/Asgardians_(comics)">Asgardian</a> gods. The heroes travel to <a href="https://en.wikipedia.org/wiki/Valhalla">Valhalla</a> to liberate it from its invading force and free <a href="https://en.wikipedia.org/wiki/Heimdall_(character)">Heimdall</a> (who is guarded by Rhino and Shocker), <a href="https://en.wikipedia.org/wiki/Tyr_(Marvel_Comics)">Tyr</a> (who is guarded by Scorpion and <a href="https://en.wikipedia.org/wiki/Lizard_(character)">Lizard</a>), and <a href="https://en.wikipedia.org/wiki/Balder_the_Brave">Balder</a> (who is guarded by <a href="https://en.wikipedia.org/wiki/Enchantress_(Marvel_Comics)">Enchantress</a> and <a href="https://en.wikipedia.org/wiki/Executioner_(character)">Executioner</a>). Then they fight the <a href="https://en.wikipedia.org/wiki/Wrecking_Crew_(comics)">Wrecking Crew</a> and undead soldiers unleashed by <a href="https://en.wikipedia.org/wiki/Hela_(character)">Hela</a> to open <a href="https://en.wikipedia.org/wiki/Bifröst">Bifrost Bridge</a> in order for reinforcements to arrive. Looking for <a href="https://en.wikipedia.org/wiki/Odin_(Marvel_Comics)">Odin</a> in <a href="https://en.wikipedia.org/wiki/Niflheim">Niffleheim</a> following a fight with <a href="https://en.wikipedia.org/wiki/Kurse_(comics)">Kurse</a> and <a href="https://en.wikipedia.org/wiki/Ulik">Ulik</a>, they find his shattered Twilight Sword and learn from <a href="https://en.wikipedia.org/wiki/Ymir_(Marvel_Comics)">Ymir</a> that Doctor Doom and Loki have taken Odin to Raven's Spire. After Loki is seemingly defeated at Raven's Spire, the team frees the <a href="https://en.wikipedia.org/wiki/Destroyer_(Thor)">Destroyer Armor</a> to use against Doctor Doom. Loki, disguised as Fury, reveals himself and his plot to have the heroes free the armor for nefarious purposes. As heroes defeat Loki and the armor, Doctor Doom appears and reveals that he has stolen Odin's power. He uses it to attempt to eliminate the heroes, but <a href="https://en.wikipedia.org/wiki/Uatu">Uatu</a> the <a href="https://en.wikipedia.org/wiki/Watcher_(comics)">Watcher</a> saves them and transports them to the <a href="https://en.wikipedia.org/wiki/Inhumans">Inhumans</a>' base on the moon.</p>
+
+<p>Uatu reveals that Doom's unrestricted use of Odin's power will eventually destroy the universe and that the only way to defeat him is to acquire a piece of the <a href="https://en.wikipedia.org/wiki/M'Kraan_Crystal">M'Kraan Crystal</a> and steal the Muonic Inducer from <a href="https://en.wikipedia.org/wiki/Galactus">Galactus</a> (who is currently attacking the <a href="https://en.wikipedia.org/wiki/Skrull">Skrull</a> homeworld).</p>
+
+<p>The team is sent to the Shi'ar Empire where they fight <a href="https://en.wikipedia.org/wiki/Deathbird">Deathbird</a> and the <a href="https://en.wikipedia.org/wiki/Imperial_Guard_(Marvel_Comics)">Imperial Guard</a> to restore <a href="https://en.wikipedia.org/wiki/Lilandra_Neramani">Lilandra Neramani</a> to the throne and gain a portion of the M'Kraan Crystal. After retrieving the crystal, the heroes travel to the Skrull homeworld. With the help of the <a href="https://en.wikipedia.org/wiki/Silver_Surfer">Silver Surfer</a>, the heroes disable Galactus and steal the Muonic Inducer.</p>
+
+<p>Meanwhile, Doctor Doom conquers Earth, killing, corrupting and creating clones of many of the heroes who attempted but failed to stop him, such as <a href="https://en.wikipedia.org/wiki/Colossus_(character)">Colossus</a> and <a href="https://en.wikipedia.org/wiki/Cyclops_(Marvel_Comics)">Cyclops</a>. In a final effort, the team travels to Latveria to confront Doom. The heroes use the M'Kraan Crystal and Muonic Inducer to weaken Doom. As the heroes weaken Doom, he is blasted by a bolt of lightning sent by a rejuvenated Odin, leaving nothing but his mask behind.</p>
+
+<p>As the heroes meet on the repaired Helicarrier, Fury asks Thor to thank Odin for undoing the damages to which Thor states that Odin is currently busy punishing Doctor Doom and Loki. Fury informs the heroes that the team must disband and asks if S.H.I.E.L.D. can count on them when another threat happens. Captain America assures him that all worlds can count on them.</p>
+
+<p>Meanwhile, Galactus vows revenge on the heroes who stole from him and plans to destroy Earth.</p>
+
+<h3>Characters</h3>
+
+<p><i>Marvel: Ultimate Alliance</i> features over 140 Marvel characters, either as playable characters, bosses, or other <a href="https://en.wikipedia.org/wiki/Non-player_character">non-player characters</a>. The primary version of the game developed by Raven Software version features 23 default playable characters, with some systems have additional playable characters not present in other versions. However, the Gameboy Advance version features 10 playable characters and 6 striker characters.</p>
+
+<h4>Playable characters</h4>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Black_Panther_(character)">Black Panther</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Black_Widow_(Natasha_Romanova)">Black Widow</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Blade_(character)">Blade</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Captain_America">Captain America</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Genis-Vell">Captain Marvel</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Colossus_(character)">Colossus</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Cyclops_(Marvel_Comics)">Cyclops</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Daredevil_(Marvel_Comics_character)">Daredevil</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Deadpool">Deadpool</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Doctor_Doom">Doctor Doom</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Doctor_Strange">Doctor Strange</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Elektra_(character)">Elektra</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Ghost_Rider_(Johnny_Blaze)">Ghost Rider</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Hawkeye_(Clint_Barton)">Hawkeye</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Human_Torch">Human Torch</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Hulk">Hulk</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Iceman_(Marvel_Comics)">Iceman</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Invisible_Woman">Invisible Woman</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Iron_Man">Iron Man</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Luke_Cage">Luke Cage</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Magneto_(Marvel_Comics)">Magneto</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Mister_Fantastic">Mister Fantastic</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Moon_Knight">Moon Knight</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Carol_Danvers">Ms. Marvel</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Namor">Namor</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Nick_Fury">Nick Fury</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Nightcrawler_(character)">Nightcrawler</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Jean_Grey">Jean Grey</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Echo_(Marvel_Comics)">Ronin</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Sabretooth_(character)">Sabretooth</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Silver_Surfer">Silver Surfer</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Spider-Man">Spider-Man</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Spider-Woman_(Jessica_Drew)">Spider-Woman</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Storm_(Marvel_Comics)">Storm</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Thing_(comics)">Thing</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Thor_(Marvel_Comics)">Thor</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Eddie_Brock">Venom</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Wolverine_(character)">Wolverine</a></li>
+</ul>
+
+<h2>Development and marketing</h2>
+
+<p>Most versions of <i>Ultimate Alliance</i> were developed using <a href="https://en.wikipedia.org/wiki/Vicarious_Visions">Vicarious Visions</a>' Alchemy engine, which was purchased from the now-defunct Intrinsic Graphics in May 2003. Raven Software developed the primary version of the game on the PS2, PS3, Xbox and Xbox 360. Vicarious Visions simultaneously ported the game to the PSP, and later to the Wii to coincide with its launch, and <a href="https://en.wikipedia.org/wiki/Beenox">Beenox</a> ported the game to Windows. During early development, <i>Ultimate Alliance</i> used <a href="https://en.wikipedia.org/wiki/Cel-shaded_animation">cel-shading</a> technology, similar to Raven's previous Marvel Comics games, <i><a href="https://en.wikipedia.org/wiki/X-Men_Legends">X-Men Legends</a></i> and <i><a href="https://en.wikipedia.org/wiki/X-Men_Legends_II:_Rise_of_Apocalypse">X-Men Legends II: Rise of Apocalypse</a></i>; however, this was dropped at some point during development. <a href="https://en.wikipedia.org/wiki/Barking_Lizards_Technologies">Barking Lizards Technologies</a> used their Whiptail engine to develop the GBA version independently. The game was originally known as <i>Marvel Legends</i>, and had an internal working title of <i>Marvel Comics RPG</i>. At one point, <a href="https://en.wikipedia.org/wiki/Link_(The_Legend_of_Zelda)">Link</a> from <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda">The Legend of Zelda</a></i> series and <a href="https://en.wikipedia.org/wiki/Samus_Aran">Samus Aran</a> from the <i><a href="https://en.wikipedia.org/wiki/Metroid">Metroid</a></i> series were planned to be playable characters for the Wii version; however, both characters were removed prior to release. These also led a <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> port to be cancelled, due to the developers using a modified build running on PlayStation 2 hardware to showcase the characters. The music for the game was composed by <a href="https://en.wikipedia.org/wiki/Mark_Griskey">Mark Griskey</a>, <a href="https://en.wikipedia.org/wiki/Chance_Thomas">Chance Thomas</a> and <a href="https://en.wikipedia.org/wiki/Cris_Velasco">Cris Velasco</a>. Over 50 minutes of music was composed by the trio, including gameplay and cutscene tracks.</p>
+
+<p><i>Marvel: Ultimate Alliance</i> was first released on October 24, 2006 in North America. Regional releases followed throughout 2006 and 2007. The standard edition of <i>Ultimate Alliance</i> was also released as a companion with <i><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_2">Forza Motorsport 2</a></i> in specially marked Xbox 360 consoles in 2007. The Gold Edition of the game was released on May 22, 2007 exclusively for the Xbox 360. This version included the two DLC packs available at the time. A 2016 version was released for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, and Microsoft Windows on July 26, 2016. In July 2018, the remaster of the game, along with the re-released sequel, were removed due to licensing issues from Activision. The game is currently not available to buy and download from either console or PC marketplaces, unless the user already bought the game.</p>
+
+<h2>Reception and awards</h2>
+
+<p>Reviews for Raven and Vicarious Visions' version of <i>Marvel Ultimate Alliance</i> received generally favorable reviews from critics. The PlayStation 3 and Xbox 360 versions received 78% and 82% at <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a>, and 78/100 and 82/100 at <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, respectively. The Windows version received an 83% at GameRankings and 82/100 at Metacritic. GameRankings' scores for the PlayStation 2, PlayStation Portable, Wii and Xbox versions were 82%, 82%, 74%, and 83%, while Metacritic scored those same consoles 81/100, 81/100, 73/100 and 83/100, respectively.</p>
+
+<p>Several reviewers praised the character cast, with <i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i>'s Scott Sharkey stating "even if your favorite character isn't playable, there's a good chance they'll show up at some point through the course of the story as an NPC". <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i>'s Ryan Davis applauded the Xbox 360's graphics, saying that it "features a lot of great lighting, particle, and bump-mapping effects absent from the other versions". He went on to comment: "Even without those advanced graphical effects, the PC and Xbox versions still look pretty sharp". <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> thought the game improved upon the "excellent X-Men Legends games from which it was born", giving the game a 9.25/10.</p>
+
+<p>The Game Boy Advance version received the poorest reception. <i>GameSpot</i> thought poorly of the game, calling "uninteresting and sloppy", and rating the game a 2.5/10 "terrible". <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> also disliked the game, giving it a 2.0/10. Reviewer Chris Adams stated: "Everything is awful. From sprites to backgrounds to effects, it shames the Marvel license". <i>Gamer 2.0</i> gave the game an 8.1/10, however, citing a large number of bonus missions and unlockables as incentive to play.</p>
+
+<h2>Sequel and reboot</h2>
+
+<p>A sequel to <i>Marvel: Ultimate Alliance</i> was announced by Activision on February 8, 2008. It was released in North America on September 15, 2009, and follows closely the events of the <i><a href="https://en.wikipedia.org/wiki/Civil_War_(comics)">Civil War</a></i> storyline: an explosion in <a href="https://en.wikipedia.org/wiki/Stamford,_Connecticut">Stamford, Connecticut</a> caused by <a href="https://en.wikipedia.org/wiki/Nitro_(character)">Nitro</a> prompts a <a href="https://en.wikipedia.org/wiki/Superhuman_Registration_Act">Superhuman Registration Act</a>. In the game, players are able to choose between the Pro-Registration side, headed by Iron Man, or the Anti-Registration side, headed by Captain America up to the point where the heroes end up uniting against a new common enemy called The Fold.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Marvel_Ultimate_Alliance_3:_The_Black_Order">Marvel Ultimate Alliance 3: The Black Order</a></i> was announced at <a href="https://en.wikipedia.org/wiki/The_Game_Awards">The Game Awards</a> on December 6, 2018. The game was developed by <a href="https://en.wikipedia.org/wiki/Koei_Tecmo">Koei Tecmo</a>'s <a href="https://en.wikipedia.org/wiki/Team_Ninja">Team Ninja</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> on July 19, 2019. The game is a <a href="https://en.wikipedia.org/wiki/Reboot_(fiction)">reboot</a> of the series, set in a different continuity from the first two games, and involves a team of heroes uniting to prevent <a href="https://en.wikipedia.org/wiki/Thanos">Thanos</a> and the <a href="https://en.wikipedia.org/wiki/Black_Order_(comics)">Black Order</a> from collecting the <a href="https://en.wikipedia.org/wiki/Infinity_Stones">Infinity Stones</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

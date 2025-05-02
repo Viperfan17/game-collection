@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Midnight Club: Los Angeles</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('69fdb41e-9ef3-4d0e-818e-0b7c93bc336b/78174115-348b-4b93-8f0f-2c57887d469c.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="69fdb41e-9ef3-4d0e-818e-0b7c93bc336b/9483ffdf-1d96-4ee9-ac67-c89f089073ff.png"/> Midnight Club: Los Angeles</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="69fdb41e-9ef3-4d0e-818e-0b7c93bc336b/808a629a-2a9f-42b4-b887-6ff58402da59"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/27/2025">4/27/2025</a> 10:06:45</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 9:15:21</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/21/2008">10/21/2008</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-78">78</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-81">81</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Rockstar London">Rockstar London</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Rockstar San Diego">Rockstar San Diego</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Rockstar Games">Rockstar Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Midnight_Club:_Los_Angeles" target="_blank">Wikipedia</a><br/><a href="http://www.rockstargames.com/midnightclubLA" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[Game Engine] RAGE">[Game Engine] RAGE</a><br/><a href="#quicklink-[People] artist: David Hong">[People] artist: David Hong</a><br/><a href="#quicklink-[People] artist: Scott Stoabs">[People] artist: Scott Stoabs</a><br/><a href="#quicklink-[People] artist: Ted Bradshaw">[People] artist: Ted Bradshaw</a><br/><a href="#quicklink-[People] designer: Jeff Pidasdny">[People] designer: Jeff Pidasdny</a><br/><a href="#quicklink-[People] designer: Kris Roberts">[People] designer: Kris Roberts</a><br/><a href="#quicklink-[People] director: Daren Bader">[People] director: Daren Bader</a><br/><a href="#quicklink-[People] producer: Eric Smith">[People] producer: Eric Smith</a><br/><a href="#quicklink-[People] producer: Glen Hernandez">[People] producer: Glen Hernandez</a><br/><a href="#quicklink-[People] producer: Jay Panek">[People] producer: Jay Panek</a><br/><a href="#quicklink-[People] programmer: Michael Currington">[People] programmer: Michael Currington</a><br/><a href="#quicklink-[People] programmer: Steve Reed">[People] programmer: Steve Reed</a><br/><a href="#quicklink-[People] writer: Anthony Litton">[People] writer: Anthony Litton</a><br/><a href="#quicklink-[People] writer: Dan Houser">[People] writer: Dan Houser</a><br/><a href="#quicklink-[People] writer: Gregory Johnson">[People] writer: Gregory Johnson</a><br/><a href="#quicklink-[People] writer: Hugh Michaels">[People] writer: Hugh Michaels</a><br/><a href="#quicklink-[People] writer: John Zurhellen">[People] writer: John Zurhellen</a><br/><a href="#quicklink-[People] writer: Lazlow Jones">[People] writer: Lazlow Jones</a><br/><a href="#quicklink-[People] writer: Michael Unsworth">[People] writer: Michael Unsworth</a><br/><a href="#quicklink-[People] writer: Sanford Santacroce">[People] writer: Sanford Santacroce</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Midnight Club: Los Angeles</b></i> is a 2008 <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing video game</a> developed by <a href="https://en.wikipedia.org/wiki/Rockstar_San_Diego">Rockstar San Diego</a> and published by <a href="https://en.wikipedia.org/wiki/Rockstar_Games">Rockstar Games</a>. It is the fourth and final installment in the <i><a href="https://en.wikipedia.org/wiki/Midnight_Club">Midnight Club</a></i> series before it was discontinued in January 2010. The game features 43 (58 with DLC) cars and 3 (plus one additional with DLC) motorcycles. The <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> map of <a href="https://en.wikipedia.org/wiki/Los_Angeles">Los Angeles</a> is the size of all three cities from the <a href="https://en.wikipedia.org/wiki/Midnight_Club_3:_DUB_Edition">previous installments</a> combined. After several delays, <i>Midnight Club: Los Angeles</i> was released in October 2008.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Midnight Club: Los Angeles</i> is set in the city of Los Angeles, again providing an option to completely free-roam (in an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> environment larger than all the three cities combined from the previous game, <i><a href="https://en.wikipedia.org/wiki/Midnight_Club_3:_Dub_Edition">Midnight Club 3: Dub Edition</a></i>). New additions are a 24-hour day-to-night cycle, weather effects and traffic with licensed vehicles, adding a realistic aspect to the game. The new dynamic weather system has been reported to alter the gameplay experience, making the vehicle more prone to sliding on slick surfaces. If any damage is inflicted upon a vehicle after races, the player does not necessarily need to drive back to a garage for a full repair, but, instead, can choose the "Quick Fix" option through which old, junkyard-esque parts will be added to the car. To get back that "nice, new car look", the player must actually drive back to repair their vehicle at a garage or gas station.  This also means that totaling a vehicle is only possible within a single race or event. With the RAGE system being used for this game, traffic levels fluctuate throughout the day, with light traffic at night, heavy traffic in the morning and afternoon, and heaviest traffic in the evenings. Motorcycles are again part of the game, including the <a href="https://en.wikipedia.org/wiki/Ducati_999">Ducati 999</a>R and the <a href="https://en.wikipedia.org/wiki/Kawasaki_Ninja_ZX-14">Kawasaki Ninja ZX-14</a>. Convertible cars, customizable interiors, in-game photo mode, and customizable exotics are all new additions. Developers placed great emphasis on the elimination of load screens, stating that the player could literally jump from career mode to an online race in under ten seconds.</p>
+
+<p><i>Los Angeles</i> is said to be the longest of the four <i>Midnight Club</i> games, with more than ten different types of races including series races, tournaments, pink slip races, and <a href="https://en.wikipedia.org/wiki/Freeway">freeway</a> races. For most of these races, players must race an opponent to the start line in order to earn extra <a href="https://en.wikipedia.org/wiki/Reputation">rep</a> (a leveling system used to determine the player's skill in the game) before the actual race begins, although this can be skipped. Races have four difficulties: easiest, medium, hard, and hardest. These difficulties are color-coded with <a href="https://en.wikipedia.org/wiki/Green">green</a> being easiest, <a href="https://en.wikipedia.org/wiki/Yellow">yellow</a> being medium, <a href="https://en.wikipedia.org/wiki/Orange_(colour)">orange</a> being hard, and <a href="https://en.wikipedia.org/wiki/Red">red</a> being hardest. Each successive difficulty of race has greater rewards than the former.</p>
+
+<p>There are a number of special abilities that have been brought into the game (a returning feature from the previous installment). These include an <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse">EMP</a>, which disables the electronics of every vehicle around the player; Agro, which makes the player's vehicle indestructible-giving the ability to plow through traffic without slowing the car; Roar, which sends out a sound wave that will move traffic out of the player's way for a clear and straight path through the streets; and Zone, able to slow time and allow a temporary boost in handling. The previous installment had restricted special abilities to specific cars, but all vehicles in this game can now use any one of these above mentioned abilities, as chosen by the player. These abilities can also be changed at garages whenever necessary.</p>
+
+<p>Police return but are no longer scripted to a specific race; they take notice of simple infractions in the game world (running red lights, speeding, <a href="https://en.wikipedia.org/wiki/Burnout_(vehicle)">burning out</a>, <a href="https://en.wikipedia.org/wiki/Hit_and_run_(vehicular)">hitting their cars or nearby cars</a>, and driving offroad). If caught, players have the choice of pulling over (which will initiate a special cutscene when the police car approaches) or leading the police into a <a href="https://en.wikipedia.org/wiki/Hot_pursuit">pursuit</a>. The game goes into "Pursuit Mode" after a period of time or if the police lose sight of the player; this will also happen if the player decides to start the engine and flee the scene during the "pull over" cutscene. Infractions causing the game to go directly to pursuit mode include speeding and excessively damaging a police car. Police authorities will chase the player no matter where they are, and the longer the player evades capture, the higher the fine the player has to pay for if arrested. If the player's vehicle takes too much damage (totaled) during the pursuit, they are also arrested.</p>
+
+<p>Additionally, there are sixty collectibles that the player can find hidden throughout Los Angeles. These appear as yellow oil barrels with Rockstar's logo printed on them. Every ten collectibles that are found will unlock one of six game modifiers (mentioned in-game as "<a href="https://en.wikipedia.org/wiki/Cheat_code">cheat codes</a>"), while finding half and all of the collectibles will unlock <a href="https://en.wikipedia.org/wiki/Achievement_(video_gaming)">achievements</a>. However, enabling any of these special modifiers (with the exception of a modifier that unlocks an overhead view camera) will prevent the player from earning money, rep, and further career progression.</p>
+
+<h3>Multiplayer</h3>
+
+<p>Online play supports sixteen players at once. A number of new modes were introduced, including Keep Away where the player must hold the flag as long as he can, and Stockpile in which there are numerous flags to be captured. New online power-ups mentioned include Mirror (reflects any power-up fired at the player), Agro (acts the same as the offline special ability, increasing the player's vehicle weight and enabling them to crash through other vehicles without taking damage or slowing down), and Random (gives the player a random power-up). A new aspect entitled "Rate My Ride" was also introduced, where players can go online to view, rate, sell and buy user-modified vehicles. <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a> <a href="https://en.wikipedia.org/wiki/PlayStation_Network#Trophies">trophies</a> are also included, with a total of 46 trophies to be won.</p>
+
+<p>Many of the online features were removed due to the closure of <i>GameSpy</i> in 2014.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Please_clarify">clarification needed</a></i>]</sup></p>
+
+<p>The game includes a Race Editor features that allows the player to make tracks for online play. A fringe benefit of the mode is that it also allows free-roaming of the game map (including picking up collectables and earning various achievements) without traffic, police, damage or other gameplay interference.</p>
+
+<p><i>Midnight Club: Los Angeles</i> is a part of Rockstar's <a href="https://en.wikipedia.org/wiki/Rockstar_Games_Social_Club">Social Club</a> and includes features that track the stats of the player's driving and potentially award them with various in-game content such as hydraulics, TIS rims, and the <a href="https://en.wikipedia.org/wiki/Audi_R8_(road_car)">Audi R8</a>. In order to obtain these rewards, players must fulfill certain requirements to achieve their C-License, their B-License, and A-License. Once each license is acquired, a new reward is obtained. Players can also view their in-game "Rate My Ride" vehicle's rating, rate other player's vehicles, view their statistics and compare them with other players, view online leaderboards, and upload and share in-game photos. The Social Club also hosts online tournaments that award prizes to winning entrants.</p>
+
+<h2>Plot</h2>
+
+<p>A man from the <a href="https://en.wikipedia.org/wiki/East_Coast_of_the_United_States">East Coast</a> moves to <a href="https://en.wikipedia.org/wiki/Los_Angeles">Los Angeles</a>. The character, known only as "Player" (Matthew Metzger), takes a major role in the game. In the intro of the game, he is on the phone with the L.A. City Champ, Booke (Martin Luther McCoy), telling him to meet at the fast-food restaurant <a href="https://en.wikipedia.org/wiki/Carney's">Carney's Express Limited</a>. He gives the protagonist the choice of three cars, one to pick, in the beginning of the game: a 1998 <a href="https://en.wikipedia.org/wiki/Nissan_240SX">Nissan 240SX</a>, 1983 <a href="https://en.wikipedia.org/wiki/Volkswagen_Golf_Mk1">Volkswagen Golf GTI</a>, or 1988 <a href="https://en.wikipedia.org/wiki/Volkswagen_Scirocco">Volkswagen Scirocco</a>.</p>
+
+<p>Once the player has built up enough of a reputation, they gain the ability to become Champ of the city and of each car type. The first one that is offered is becoming City Champ. At a point in the game, Karol (Saul Stein) calls telling the player about Booke being back as City Champ. Booke then tells the player to race regional opponents to see if they can race against him. After the player beats them, Booke calls saying he is impressed, and to meet him at the Standard Hotel for a race which ends up being the City Champ race vs. Booke and one of the final races on Career mode. When the player wins, the player not only becomes City Champ, but other championship races open. Once the player wins 35 races with the vehicle types after unlocking Group 4 vehicles, the Champs of all five vehicle classes in the game challenge the player. The characters are Oswaldo (Motorcycle), Julian (Tuner), Lester (Luxury), Pete (Exotic), and Marcel (Muscle).</p>
+
+<p>After the player becomes City Champ, Karol calls and has a proposition. He asks the player to get $1 million to help co-own his two garages with him for his business. In return, he lets the player have anything in the garages for free. This proposition also affects Doc's South Central garage although the game does not mention it.</p>
+
+<p>After the character has completed 100% in Los Angeles in the PSP Remix version, an unknown man who has somehow reached his cell number calls him, saying that he wants to meet him at the <a href="https://en.wikipedia.org/wiki/Los_Angeles_International_Airport">Los Angeles International Airport</a> on "his flight to <a href="https://en.wikipedia.org/wiki/Tokyo">Tokyo</a>", which causes the character to say, "You talking about the Mid Night Club?" After the call, the Tokyo career and map can be accessed in <i>Midnight Club: L.A. Remix</i>.</p>
+
+<h2>Development and marketing</h2>
+
+<p><i>Midnight Club: Los Angeles</i> was developed using the <a href="https://en.wikipedia.org/wiki/Rockstar_Advanced_Game_Engine">RAGE</a> engine which was developed at <a href="https://en.wikipedia.org/wiki/Rockstar_San_Diego">Rockstar San Diego</a>'s in-house RAGE Technology Group, which would be used for Rockstar's titles on <a href="https://en.wikipedia.org/wiki/Seventh_generation_of_video_game_consoles">seventh generation consoles</a>. According to Rockstar San Diego producer Jay Panek, the development team choose <a href="https://en.wikipedia.org/wiki/Los_Angeles">Los Angeles</a> as the location for the game due to the city's strong ties with the street racing culture. The team would also license several real-life locations in Los Angeles to make the city feel more authentic.</p>
+
+<p><i>Midnight Club: Los Angeles</i> was delayed several times during development; initially set to be released in early 2008 but was delayed to September. In July 2008, Rockstar Games announced that the game would be delayed once again to early October, only for <i>Midnight Club: Los Angeles'</i>s release to pushed back to a few weeks which would eventually to be released in late October.</p>
+
+<h3>Updates and expansions</h3>
+
+<p>Since its release the game has had multiple updates and downloadable content releases. The first update released on December 9, 2008, included improved AI balance to better adjust to player's skill level, the cops are improved, and the Xbox 360 got additional leaderboard support for tournaments on Rockstar Social Club. Also part of the update was an additional online game mode called "Modes", where the user could choose to go to a lobby to play various race and flag modes instead of just one specific mode, aside from cruise mode.</p>
+
+<p>The most recent update is entitled the "South Central Upgrade And Content Pack", and it included a whole new area of the map, <a href="https://en.wikipedia.org/wiki/South_Los_Angeles">South Central Los Angeles</a>, about a third of the size of the current map, for free. Players were also able to purchase the pack which included new character competitions, races, music and cars available in a single complete package. New vehicles included various cars and, for the first time in the game, SUVs. The content was originally scheduled to release on March 12, but was delayed to March 19 with no comment from Rockstar. Problems occurred on this date, when trying to release it on Xbox Live and delayed for a second time. It was also stated that additional car packs will be released in the future, but on March 27 Rockstar accidentally put the vehicle packs on Xbox Live. They were removed from the Xbox Live Marketplace later that day and anybody who was downloading it at that time was asked to stop.</p>
+
+<p>On January 14, 2009, the content pack was accidentally released on the Xbox Live Marketplace during its testing and approval phase by Microsoft. It was then removed and anyone who was able to obtain it was asked to delete it because it may cause unforeseen problems with achievements and save data, according to an Xbox Live Marketplace staff member. On March 23, there was an event posting on Xbox Live Events for <i>Midnight Club: Los Angeles South Central</i> scheduled for March 29, but later that day it was removed from the events section. Rockstar then put a new post up on the <i>Midnight Club: Los Angeles</i> website on March 30 saying that the event was to be on April 4. Four days later, both the South Central Expansion and Premium Pack were released on the Xbox Live Marketplace for download. In April 23, the second vehicle pack was released on Xbox Live and PSN which included four new vehicles: the 2008 <a href="https://en.wikipedia.org/wiki/Cadillac_XLR">Cadillac XLR</a> V, the 2008 <a href="https://en.wikipedia.org/wiki/Mitsubishi_Lancer_Evolution_X">Mitsubishi Lancer Evolution X</a>, the 2007 <a href="https://en.wikipedia.org/wiki/Aston_Martin_DB9">Aston Martin DB9</a>, and an extra motorcycle (the new fastest one available in the game), the 2008 <a href="https://en.wikipedia.org/wiki/Ducati_1098">Ducati 1098</a>R. An area of particular interest is a phone message the player received if all cars, including the downloadable cars, have been acquired. The message says "more high performance cars coming soon". This message can be displayed when a player continually enters and exits any garage.</p>
+
+<p>In October 10, Rockstar released a free "police car pack" on Xbox Live. This gave the player the ability to race using five different types of police vehicles from <a href="https://en.wikipedia.org/wiki/Chevrolet_Impala#Seventh_generation_(Impala_SS,_1994–1996)">Chevrolet</a> and <a href="https://en.wikipedia.org/wiki/Dodge_Charger">Dodge</a>, with paint schemes from the <a href="https://en.wikipedia.org/wiki/Los_Angeles_Police_Department">Los Angeles Police Department</a>, <a href="https://en.wikipedia.org/wiki/California_Highway_Patrol">California Highway Patrol</a>, and <a href="https://en.wikipedia.org/wiki/U.S._Customs_and_Border_Patrol">U.S. Customs and Border Patrol</a>, and gave the player the ability to avoid the police while cruising or racing. The police will pursue the player if they are caught street racing. However, if the player turns on the siren while street racing, the police won't pursue the player, most likely because they believe the player is a fellow officer, hunting down the other street racers. The police car pack was released on the PlayStation Network in October 22.</p>
+
+<p><i><b>Midnight Club: L.A. Remix</b></i> is a portable version of <i>Midnight Club: Los Angeles</i> for <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>. The game was developed by <a href="https://en.wikipedia.org/wiki/Rockstar_London">Rockstar London</a> and released on October 21, 2008, in North America and on October 24 in the <a href="https://en.wikipedia.org/wiki/PAL_region">PAL region</a>. The game features only a portion of <a href="https://en.wikipedia.org/wiki/Los_Angeles">Los Angeles</a>, using a slightly modified version of the L.A. map from <i><a href="https://en.wikipedia.org/wiki/Midnight_Club_II">Midnight Club II</a></i>. Making up for this, the game features another playable city, <a href="https://en.wikipedia.org/wiki/Tokyo">Tokyo</a>, which uses the same map from <i><a href="https://en.wikipedia.org/wiki/Midnight_Club_3:_DUB_Edition#Midnight_Club_3:_DUB_Edition_Remix">Midnight Club 3: DUB Edition Remix</a></i>. Unlike the console version, the police do not chase the player in "Cruise" mode, but the player can get caught after running from the police for a long period of time, and eventually getting boxed in, and getting no fine. Also unlike the console version, <i>Midnight Club: L.A. Remix</i> does not feature cutscenes. The cars in the game have been split up meaning that one half of the cars can be used in Los Angeles while the other half can be used in Tokyo. The bikes aren't split as all three can be used in Los Angeles and Tokyo.</p>
+
+<p>Rockstar Games released <i><b>Midnight Club: Los Angeles – Complete Edition</b></i> as a <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> <a href="https://en.wikipedia.org/wiki/Greatest_Hits_(budget_range)">Greatest Hits</a>/<a href="https://en.wikipedia.org/wiki/Platinum_Range">Platinum Range</a> title and an <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> <a href="https://en.wikipedia.org/wiki/Platinum_Hits">Platinum Hit/Classics</a> title on October 12, 2009. The <i>Complete Edition</i> features all of the map, vehicles, and music from the original <i>Midnight Club: Los Angeles</i> plus all of the previously available downloadable content on the disc to make up for lost progress, thus saving the player from starting all over again, and fixed the bugs &amp; unbalanced difficulty from the original version.</p>
+
+<h2>Reception</h2>
+
+<p><i>Midnight Club: Los Angeles</i> was met with positive reception upon release. <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> and <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> gave it a score of 81.66% and 82 out of 100 for the PlayStation 3 version; 80.64% and 81 out of 100 for the Xbox 360 version; and 78.96% and 79 out of 100 for the PSP version.</p>
+
+<p>Most reviews praised the game's detailed depiction of Los Angeles, great amount of depth and multiplayer options, consistent frame-rate, stylish presentation, and varied soundtrack. The areas that were criticized included the clichéd characters, slow texture loading when players start up the game and unbalanced difficulty.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

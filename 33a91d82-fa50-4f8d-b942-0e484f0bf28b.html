@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mega Man 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('33a91d82-fa50-4f8d-b942-0e484f0bf28b/9ca7eb76-b47d-4c67-9c2a-a3a613332a83.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="33a91d82-fa50-4f8d-b942-0e484f0bf28b/dc6f10b7-0f89-4fef-836b-c45491ec839b.png"/> Mega Man 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="33a91d82-fa50-4f8d-b942-0e484f0bf28b/b0e15b7e-5faa-4d7a-b636-b5a084d2cfac.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:51:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:40:02</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Entertainment System">Nintendo Entertainment System</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-12/24/1988">12/24/1988</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-86">86</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Mega_Man_2" target="_blank">Wikipedia</a><br/><a href="https://www.mobygames.com/game/mega-man-2" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Akira Kitamura">[People] artist: Akira Kitamura</a><br/><a href="#quicklink-[People] artist: Keiji Inafune">[People] artist: Keiji Inafune</a><br/><a href="#quicklink-[People] artist: Naoya Tomita">[People] artist: Naoya Tomita</a><br/><a href="#quicklink-[People] artist: Yasuaki Kishimoto">[People] artist: Yasuaki Kishimoto</a><br/><a href="#quicklink-[People] composer: Takashi Tateishi">[People] composer: Takashi Tateishi</a><br/><a href="#quicklink-[People] director: Akira Kitamura">[People] director: Akira Kitamura</a><br/><a href="#quicklink-[People] producer: Tokuro Fujiwara">[People] producer: Tokuro Fujiwara</a><br/><a href="#quicklink-[People] programmer: Nobuyuki Matsushima">[People] programmer: Nobuyuki Matsushima</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Mega Man 2</b></i>  (stylized as <i><b>Mega Man II</b></i>)  is a 1988 <a href="https://en.wikipedia.org/wiki/Action_game">action</a>-<a href="https://en.wikipedia.org/wiki/Platformer">platform game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a>. It was released in Japan in 1988 and in North America and PAL regions the following years. <i>Mega Man 2</i> continues <a href="https://en.wikipedia.org/wiki/Mega_Man_(character)">Mega Man</a>'s battle against the evil <a href="https://en.wikipedia.org/wiki/Dr._Wily">Dr. Wily</a> and his rogue Robot Masters. It introduced graphical and gameplay changes, many of which became series staples.</p>
+
+<p>Although sales for the original <i><a href="https://en.wikipedia.org/wiki/Mega_Man_(1987_video_game)">Mega Man</a> </i>were unimpressive, Capcom allowed the team to create a sequel. They worked concurrently on other Capcom projects, using their free time to develop the game, using unused content from the first game. Takashi Tateishi composed the soundtrack, with Yoshihiro Sakaguchi serving as a sound programmer.</p>
+
+<p><i>Mega Man 2</i> is the second best-selling <i><a href="https://en.wikipedia.org/wiki/Mega_Man">Mega Man</a></i> game, with more than 1.51 million copies sold (it was previously the best selling <i>Mega Man</i> game until <i><a href="https://en.wikipedia.org/wiki/Mega_Man_11">Mega Man 11</a></i> outsold it). Critics praised its audio, visuals, and gameplay as an improvement over the first game. Many publications rank <i>Mega Man 2</i> as the best game in the series and one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games of all time</a>. The game's soundtrack has also been considered <a href="https://en.wikipedia.org/wiki/List_of_video_game_soundtracks_considered_the_best">one of the greatest video game soundtracks of all time</a>. It has been included in several game compilations such as <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Legacy_Collection">Mega Man Legacy Collection</a></i>, rereleased for <a href="https://en.wikipedia.org/wiki/Mobile_phone">mobile devices</a>, and become a part of console <a href="https://en.wikipedia.org/wiki/Emulator">emulation</a> services. A sequel, <i><a href="https://en.wikipedia.org/wiki/Mega_Man_3">Mega Man 3</a></i>, was released in 1990.</p>
+
+<h2>Plot</h2>
+
+<p>After his initial defeat, series antagonist Dr. Wily creates his own set of <a href="https://en.wikipedia.org/wiki/Robot_Master">Robot Masters</a> in an attempt to counter Mega Man: Metal Man, Air Man, Bubble Man, Quick Man, Crash Man, Flash Man, Heat Man, and Wood Man. He also constructs a new fortress and army of robotic henchmen. Mega Man is then sent by his creator, <a href="https://en.wikipedia.org/wiki/Doctor_Light_(Mega_Man)">Dr. Light</a>, to defeat Dr. Wily and his Robot Masters. Mega Man defeats the eight new Robot Masters and then challenges Wily himself. During the final fight, Dr. Wily flees into the caves beneath his fortress. When Mega Man follows, Dr. Wily attempts to trick Mega Man into believing he was impersonated by an <a href="https://en.wikipedia.org/wiki/Extraterrestrial_life">alien</a>. Mega Man defeats the alien, revealing it to be a <a href="https://en.wikipedia.org/wiki/Holography">holographic</a> projection device with Dr. Wily at the controls of the now malfunctioning device. After the scientist begs for mercy, Mega Man spares Wily and returns home.</p>
+
+<h2>Gameplay</h2>
+
+<p>Like <a href="https://en.wikipedia.org/wiki/Mega_Man_(1987_video_game)">its predecessor</a>, <i>Mega Man 2</i> is a platform and <a href="https://en.wikipedia.org/wiki/Action_game">action game</a>. The player controls Mega Man as he traverses eight stages to defeat the <a href="https://en.wikipedia.org/wiki/Boss_(video_game)">bosses</a>, Dr. Wily's Robot Masters: Metal Man, Air Man, Bubble Man, Quick Man, Crash Man, Flash Man, Heat Man, and Wood Man. Each Robot Master features a unique weapon and a stage related to their weapon's power. For example, Air Man shoots small tornadoes and is fought in a sky-themed level, while Wood Man can use a shield of leaves and is found in a forest-themed stage. After defeating a boss, their signature weapon becomes available to the player. Each Robot Master is weak to the weapons of certain other Robot Masters; therefore, choosing the order in which the levels are played is a vital component of the gameplay. After completing certain stages, Mega Man receives a special item. These items create platforms that allow Mega Man to access areas that he otherwise could not.</p>
+
+<p>After defeating the eight Robot Masters, the player proceeds to Dr. Wily's fortress, which consists of six levels that are played linearly. As in the first game, the player is required to fight each Robot Master a second time in Dr. Wily's fortress. However, these battles take place in a single room rather than a series of linearly connected rooms. The room contains teleportation devices that lead to each Robot Master. The devices can be entered in any order, but are not labeled. Once the bosses are defeated again, the player must fight Dr. Wily.</p>
+
+<p><i>Mega Man 2</i> features a few gameplay changes from the original <i>Mega Man</i>. A new item, the Energy Tank, allows a player to refill Mega Man's health at any time. Also introduced is a password system. A password is displayed after defeating each Robot Master, allowing the player to return to that particular point in the game after restarting the system. The password stores the particular list of completed Robot Masters, as well as the number of accumulated Energy Tanks. Unlike the first game, <i>Mega Man 2</i> does not feature a score counter, and the player is unable to return to Robot Master levels once completed.</p>
+
+<h2>Development</h2>
+
+<p>The first <i>Mega Man</i> game—released in 1987—was not successful enough to justify the immediate development of a sequel. According to <a href="https://en.wikipedia.org/wiki/Roy_Ozaki">Roy Ozaki</a>, director <a href="https://en.wikipedia.org/wiki/Akira_Kitamura">Akira Kitamura</a> had wanted to make a sequel to <i>Mega Man</i>, but producer Tokuro Fujiwara was against it. Kitamura then sought permission from Capcom's vice president at the time to make the game. The development team were given permission to develop a sequel on the condition that they work concurrently on other projects as well. The staff spent their own time on the project to improve upon the original by adding more levels and weapons, as well as improving the graphics. The project supervisor of the first <i>Mega Man</i> invited Inafune to the sequel's development crew; Inafune was working on a separate game at the time. On the previous game, Inafune worked as an artist and character designer but became more involved in the production process of the sequel. "Working on [<i>Mega Man 2</i>] marked my second year at this, and I even got to mentor a 'new kid', which opened up a whole new world of stress for me," Inafune recounted. The development time for the game was only three to four months.</p>
+
+<p>Due to the limited amount of cartridge space available for the first game, elements such as planned enemy characters were omitted from the final product. The unused content was later transferred to <i>Mega Man 2</i>. The team was limited by the graphical capabilities of the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a>, and designed characters as <a href="https://en.wikipedia.org/wiki/Pixel_art">pixel art</a> to maintain consistency between the designs and final product; some design elements, however, were lost in the transition. The gameplay system from the original game was kept for <i>Mega Man 2</i>, but the team included more traps for the player to navigate. The game's three support items were added to aid the player because of complaints from consumers and Capcom's marketing department regarding the original game's high difficulty. Inafune's supervisor was "especially unsure" about the usefulness of the Energy Tanks.</p>
+
+<p>The first game did not have any influence from fans, but for the second game, Kitamura wanted to get ideas from players and put them in. The developers allowed input from the public by including boss designs created by fans. Capcom received 8,370 boss submissions for the game, although even the designs for the final eight Robot Masters were "tweaked".</p>
+
+<p>Inafune intended his artwork for <i>Mega Man 2</i> to be more "<a href="https://en.wikipedia.org/wiki/Anime">anime</a>-ish" than in the first game. A second difficulty setting was added for the North American and European releases. The original version was labeled "difficult", and a "normal" setting was created that made the "arm cannon" and boss weapons more powerful. Veteran video game cover illustrator Marc Ericksen painted the North American box art, which included Mega Man firing a <a href="https://en.wikipedia.org/wiki/Pistol">pistol</a> instead of his trademark Mega Buster. Ericksen explained that he was unfamiliar with the game and was directed by Capcom America to give Mega Man a pistol.</p>
+
+<h3>Soundtrack</h3>
+
+<p>The soundtrack for <i>Mega Man 2</i> was composed by Takashi Tateishi (credited as Ogeretsu Kun), with <i>Mega Man</i> composer <a href="https://en.wikipedia.org/wiki/Manami_Matsumae">Manami Matsumae</a> (credited as Manami Ietel) included for having her work on the credits theme from the first game repurposed for the title screen, and for co-composing a minor part of the melody for Air Man's stage. Matsumae had been moved to the arcade division, considered more prestigious at the time, which necessitated a new composer. Matsumae and Tateishi worked closely during their time at Capcom, with Tateishi assisting Matsumae with <i><a href="https://en.wikipedia.org/wiki/U.N._Squadron">U.N. Squadron</a></i> in a similar manner during the period, albeit uncredited. Tateishi's musical background was unusual compared to his contemporaries at Capcom, in that he had not been <a href="https://en.wikipedia.org/wiki/Classically_trained">classically trained</a> but was instead drawing on his experience performing in a band. He sought to consciously move away from the more classical sounding themes that were common at the time. He was also relatively new to the games industry, having only been hired by Capcom earlier that year for <i>Mad Gear</i> (1988). Tateishi would not remain with the franchise after <i>Mega Man 2</i>, as he and Kitamura both resigned from Capcom soon afterwards to work on <i><a href="https://en.wikipedia.org/wiki/Cocoron">Cocoron</a></i>.</p>
+
+<p>Tateishi's initial compositions for the game were of varying moods, with some of them being considered "too cute" by Kitamura, requesting them to be changed to fit in with the rest of the soundtrack. A single fragment of this declined concept remains in the game as Crash Man's stage theme. Tateishi has indicated that "no one has" the earlier, softer score. Stylistically the score was influenced by <a href="https://en.wikipedia.org/wiki/Mezzoforte_(band)">Mezzoforte</a> and <a href="https://en.wikipedia.org/wiki/Yellow_Magic_Orchestra">Yellow Magic Orchestra</a>.</p>
+
+<p>The widely praised piece used for the first two Wily stages was heavily compromised due to data limitations, with Tateishi being forced to use the first eight measures of the song multiple times throughout it. Tateishi intended to compose a song exclusive to the second stage, but also abandoned this idea for the same reasons.</p>
+
+<p>As with the previous game, the sound programming was handled by Yoshihiro Sakaguchi, credited as Yuukichan's Papa.</p>
+
+<h2>Reception</h2>
+
+<p>Though the first <i>Mega Man</i> game had relatively low sales, <i>Mega Man 2</i> was a huge success. Since its 1988 release, <i>Mega Man 2</i> has sold over 1.5 million copies worldwide. The game is the second highest selling in the <i>Mega Man</i> series and Capcom's 58th highest-selling game.</p>
+
+<p><i>Mega Man 2</i> was critically praised. <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i>'s four reviewers—Steve Harris, Ed Semrad, Donn Nauert, and Jim Allee—rated the game favorably, each scoring it 8 out of 10. They stated that it was better than the first <i>Mega Man</i>, citing the improved audio-visuals, new power-ups, and password system. Nauert and Allee, however, expressed disappointment that the game was less difficult than the first game. Nadia Oxford of <a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a> complimented its aesthetics and gameplay. She further stated that <i>Mega Man 2</i> improved the gameplay of its predecessor by removing excessively difficult elements. <i><a href="https://en.wikipedia.org/wiki/Mean_Machines">Mean Machines</a></i>' two reviewers, Julian Rignall and Matt Regan, praised several aspects of the game. Rignall lauded the gameplay, citing its addictiveness and the puzzles. Regan praised the difficulty and called the gameplay balanced. Both reviewers complimented the graphics, calling them detailed and stunning, and described it as a great platform game. <i><a href="https://en.wikipedia.org/wiki/Retro_Gamer">Retro Gamer</a></i> editor Richard Burton described it as a "must-have" game for the system, comments echoed by two of <i>Electronic Gaming Monthly</i>'s reviewers. Zach Miller writing for <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> attributed the success of the game to the players' option to defeat the stages in the order of their choosing. He praised the simple control scheme and the variety of weapons and items. <a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a> ranked it the second-best NES game ever made, calling it "the pinnacle" of the 8-bit <i>Mega Man</i> games.</p>
+
+<p>The game's soundtrack has been well received by critics. Joey Becht of IGN listed three stage themes from <i>Mega Man 2</i> along with the main title song among the best in the series. In 2008, <i>Game Informer</i> listed <i>Mega Man 2</i>'s introduction sequence as the fifth-best video game opening, citing the build up of excitement that the music and appearance of the character instills. The "Doctor Wily Stage Theme" was ranked second in <a href="https://en.wikipedia.org/wiki/ScrewAttack">ScrewAttack</a>'s "<a href="https://en.wikipedia.org/wiki/ScrewAttack's_Top_10">Top 10 Video Game Themes Ever</a>" video. <i>Nintendo Power</i>' editorial staff praised the music in 2008, stating it is among the best on the platform. In 2009, <a href="https://en.wikipedia.org/wiki/Gamasutra">Gamasutra</a>'s <a href="https://en.wikipedia.org/wiki/Brandon_Sheffield">Brandon Sheffield</a> describe the music as easily recognizable and lamented that contemporary video game music lacked that trait.  The opening riff from the "Crash Man" stage's theme inspired the theme music for the <a href="https://en.wikipedia.org/wiki/YTV_(Canada)">YTV</a> program <i><a href="https://en.wikipedia.org/wiki/Video_&amp;_Arcade_Top_10">Video &amp; Arcade Top 10</a></i>.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p><i>Mega Man 2</i> is a favorite among <i>Mega Man</i> fans, with many calling it the best in the series. Critics have also referred to the game as the series' best. Oxford considered it one of the most memorable game in the series, and Burton and <i>Electronic Gaming Monthly</i> both called the game the best in the series. <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>'s Levi Buchanan listed three of the game's bosses among the "Top 10 <i>Mega Man</i> Robot Masters". Several publications consider the game a critical success and have listed it high on "top game" lists. At the end of 1989, it was the top ranked game on <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i>'s Top 30 list. In 1997 <i>Electronic Gaming Monthly</i> named it the 73rd best console video game of all time, saying it was the most appealing and challenging game in the series. In August 2008, <i>Nintendo Power</i> listed <i>Mega Man 2</i> as the third best Nintendo Entertainment System video game. The editorial staff praised the polished improvements over the previous game. <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> named <i>Mega Man 2</i> as one of "The Greatest Games of All Time". It ranked number 33 in <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i>'s "Top 200 Nintendo Games Ever" list and number 60 in <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i>'s "100 Best Nintendo Games" list. Miller considered it one of the greatest games of all time. In 2007, IGN's three editorial offices—United States, United Kingdom, and Australia—compiled a list of top 100 games. They listed <i>Mega Man 2</i> as number 67, citing the action and strategic elements along with the impact it had on the series. <i>Mega Man 2</i> was placed 4th on IGN's list of the Top 100 NES Games. <i>Mega Man 2</i> was the first game on the cover of <i>Electronic Gaming Monthly</i>. Game Informer placed the game 32nd on their top 100 video games of all time in 2001.</p>
+
+<h2>Legacy</h2>
+
+<p>Kitamura chose to leave Capcom and joined the company Takeru, where he worked on the game <i><a href="https://en.wikipedia.org/wiki/Cocoron">Cocoron</a></i> instead of <i><a href="https://en.wikipedia.org/wiki/Mega_Man_3">Mega Man 3</a></i>.</p>
+
+<p>Keiji Inafune claims the success of <i>Mega Man 2</i> is what made the <i>Mega Man</i> series a hit that continues to spawn sequels. <a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a> commented that the game helped establish the series as a prominent and commercially successful video game franchise. IGN cited <i>Mega Man 2</i> as helping define the platforming genre. <i>Retro Gamer</i> credited it with helping the series obtain the global presence that allowed spin-offs and more sequels to be created. Many of the conventions of the original <i>Mega Man</i> series were defined by the first game, but <i>Mega Man 2</i> added crucial conventions that were retained for the rest of the series. The traditional number of Robot Masters for the series is eight as used in <i>Mega Man 2</i>, rather than the six used in the original. It was the first in the series to include an opening cinematic. <i>Mega Man 2</i> also introduced the Energy Tank item, special movement items, teleporter room, and password system, which became staples in future games. The Energy Tank became the series' iconic health refill item and later served as inspiration for a promotional "Rockman E-Can" drink. In developing <i><a href="https://en.wikipedia.org/wiki/Mega_Man_9">Mega Man 9</a></i>, producer Inafune and Hironobu Takeshita looked to the first two games in the series for inspiration, with <i>Mega Man 2</i> serving as a standard to surpass in order to meet fans' expectations. <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Universe">Mega Man Universe</a></i> was to feature a remake of <i>Mega Man 2</i>'s story campaign, as well as feature customizable characters and levels. However, Capcom has officially announced the game's cancellation due to "various circumstances." In <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._for_Nintendo_3DS_and_Wii_U">Super Smash Bros. for Nintendo 3DS and Wii U</a></i>, Wily Castle, as depicted in Mega Man 2, appears as a selectable stage in both versions of the game. The stage returned in <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Ultimate">Super Smash Bros. Ultimate</a></i>.</p>
+
+<h3>Rereleases and adaptations</h3>
+
+<p>In 1990, <a href="https://en.wikipedia.org/wiki/Tiger_Electronics">Tiger Electronics</a> produced a <a href="https://en.wikipedia.org/wiki/Handheld_electronic_game">handheld electronic version</a> with abridged gameplay. <i>Mega Man 2</i> was <a href="https://en.wikipedia.org/wiki/Video_game_remake">remade</a> in 1994 for the <a href="https://en.wikipedia.org/wiki/Sega_Genesis">Sega Genesis</a> game <i><a href="https://en.wikipedia.org/wiki/Mega_Man:_The_Wily_Wars">Mega Man: The Wily Wars</a></i>, featuring updated graphics and sound. In 1999, <i>Mega Man 2</i> was rereleased for the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> as the second of six <i><a href="https://en.wikipedia.org/wiki/Rockman_Complete_Works">Rockman Complete Works</a></i> discs, though only in Japan and under the original title <i>Rockman 2</i>. It is largely identical to the original NES release, but had a number of bonuses, such as a "navi mode" for beginners that presents the player with a slightly remade version of the game, detailed encyclopedic content, image galleries, and remixed music. <i>Mega Man 2</i> was included with nine other games in the series in <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Anniversary_Collection">Mega Man Anniversary Collection</a></i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a>, released between 2004 and 2005. The game's emulation is identical to the re-release contained in <i>Rockman Complete Works</i>. Also in 2005, <i>Mega Man 2</i> was released alongside other Capcom games as part of a "Plug It In &amp; Play TV Games" peripheral by <a href="https://en.wikipedia.org/wiki/Jakks_Pacific">Jakks Pacific</a>. <i>Mega Man 2</i> made its way to mobile phones in 2007. The game was added as a part of the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>'s <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> service in <a href="https://en.wikipedia.org/wiki/PAL_region">PAL regions</a> on December 14, 2007. In celebration of the ninth game's release in September 2008, Capcom released the game on August 26, 2008 in Japan and a North American release on September 15, 2008. In March 2009, Capcom released the game for <a href="https://en.wikipedia.org/wiki/IPhone_OS">iPhone OS</a>, while in September of the same year the Complete Works version of <i>Mega Man 2</i> was released on the Japanese <a href="https://en.wikipedia.org/wiki/PlayStation_Store">PlayStation Store</a>, making it available for download on the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>. Inafune expressed a desire to remake <i>Mega Man 2</i>, similar to <a href="https://en.wikipedia.org/wiki/Mega_Man_(video_game)#Remakes_and_re-releases"><i>Mega Man Powered Up</i></a>, but stated that such a project was dependent on the commercial success of the latter. A tech demo for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> called <i>Classic Games</i> was shown at <a href="https://en.wikipedia.org/wiki/E3_2010">E3 2010</a>, displaying more than a dozen classic games, including <i>Mega Man 2</i>, using 3D effects. <a href="https://en.wikipedia.org/wiki/Reggie_Fils-Aimé">Reggie Fils-Aimé</a> announced that the games were slated for release on the 3DS and would possibly use the 3DS' features, such as 3D effects, analog control, or camera support. The game was released on the 3DS via the Virtual Console in Japan on August 8, 2012 and was released in Europe and North America on February 7, 2013.</p>
+
+<p><i>Mega Man 2</i> was novelized in the <i><a href="https://en.wikipedia.org/wiki/Worlds_of_Power">Worlds of Power</a></i> series published by <a href="https://en.wikipedia.org/wiki/Scholastic_Corporation">Scholastic</a> in 1990. The novel mostly follows the game, even offering game hints at the end of some chapters. Besides the added dialogue, the one major variation in the novel is that Dr. Light fears Mega Man's chances against Dr. Wily's more powerful new robots and while attempting to duplicate him, accidentally turns him into a human being, a difficulty Mega Man must endure throughout the story. The book's cover also lacks the gun depicted on the North American box art of the game, due to a "no weapons" policy that <i>Worlds of Power</i> writers had to abide by.</p>
+
+<p>The game was also adapted into the third story arc for the <a href="https://en.wikipedia.org/wiki/Archie_Comics">Archie Comics</a> <a href="https://en.wikipedia.org/wiki/Mega_Man_(Archie_Comics)"><i>Mega Man</i> comic</a>, "The Return of Dr. Wily." In the arc, the Robot Masters are intended to either defeat Mega Man or infect him with a virus bit by bit as he absorbs their Special Weapons. All the Robot Masters are defeated but Mega Man ends up under Dr. Wily's control until the <a href="https://en.wikipedia.org/wiki/Mega_Man_Powered_Up">Mega Man Powered Up</a> Robot Masters come to his rescue. Dr. Wily escapes and sets his course for the Lanfront Ruins in South America, foreshadowing an adaptation of <i><a href="https://en.wikipedia.org/wiki/Super_Adventure_Rockman">Super Adventure Rockman</a>.</i></p>
+
+<p>The <i>Mega Man 2</i> soundtrack is one of the most widely remixed soundtracks in gaming, and a great many covers were produced in the 2000s by various artists. <i>Mixdown</i> magazine described the soundtrack as one that would be "rehashed and reimagined at conventions and festivals until the end of time" and further that covering it had been a rite of passage in the early period of the <a href="https://en.wikipedia.org/wiki/Nerd_rock">nerd rock</a> scene. Numerous artists and bands performed all or part of the soundtrack on studio albums in the 2000s, including The NESkimos on <i>Battle Perfect Selection</i> (2002), <a href="https://en.wikipedia.org/wiki/Chromelodeon">Chromelodeon</a> on <i>Year 20XX</i> (2003), <a href="https://en.wikipedia.org/wiki/The_Minibosses">The Minibosses</a> on <i>Brass</i> (2005), <a href="https://en.wikipedia.org/wiki/Mega_Ran">Mega Ran</a> on his self titled album (2007), and <a href="https://en.wikipedia.org/wiki/The_Megas_(band)">The Megas</a> on <i>Get Equipped</i> (2008). Many bands of the era additionally drew their stage names from the series, such as <a href="https://en.wikipedia.org/wiki/Danimal_Cannon">Armcannon</a>, <a href="https://en.wikipedia.org/wiki/The_Protomen">The Protomen</a> and <a href="https://en.wikipedia.org/wiki/DJ_Cutman">DJ Cutman</a>.</p>
+
+<p>Capcom endorsed some of these groups, officially licensing Mega Ran's 2007 cover album and bringing him to <a href="https://en.wikipedia.org/wiki/San_Diego_Comic-Con">San Diego Comic-Con</a> that year. In 2010, The Megas were hired by Capcom to produce music for a <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Universe">Mega Man Universe</a></i> trailer. All of these groups performed at the gaming music event <a href="https://en.wikipedia.org/wiki/MAGFest">MAGFest</a> through the 2000s and 2010s. Tateishi himself appeared at Super MAGfest 2019 and gave an interview on the development of the game. He also introduced <a href="https://en.wikipedia.org/wiki/Bit_Brigade">Bit Brigade</a>'s performance of the score and performed on stage with Mega Ran. In a 2023 interview, Tateishi stated that his favourite rendition of the <i>Mega Man 2</i> score was <a href="https://en.wikipedia.org/wiki/JAM_Project">JAM Project</a>'s version. Many covers of <i>Mega Man 2</i> tracks appeared on <a href="https://en.wikipedia.org/wiki/Brave_Wave">Brave Wave</a>'s <i>Giants</i> album in 2024, which included contributions from Tateishi himself.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

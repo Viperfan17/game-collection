@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>DJ Hero 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('3f6976b4-a521-41a7-b46b-38ac505ca125/c3ebd939-c04f-4cf7-8f45-1721a7c14d09.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="3f6976b4-a521-41a7-b46b-38ac505ca125/9b2be7b9-99d3-4dca-b9bf-836efe0aba0b.ico"/> DJ Hero 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="3f6976b4-a521-41a7-b46b-38ac505ca125/04283c9b-1c5c-4737-abad-0eb4effacb87.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:54:57</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 9:23:37</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/19/2010">10/19/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-86">86</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Rhythm">Rhythm</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-FreeStyleGames">FreeStyleGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/DJ_Hero_2" target="_blank">Wikipedia</a><br/><a href="http://www.guitarhero.com/" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>DJ Hero 2</b></i> is a 2010 <a href="https://en.wikipedia.org/wiki/Rhythm_game">rhythm game</a> developed by <a href="https://en.wikipedia.org/wiki/FreeStyleGames">FreeStyleGames</a> and published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>. It is the sequel to <i><a href="https://en.wikipedia.org/wiki/DJ_Hero">DJ Hero</a></i> (2009), a <a href="https://en.wikipedia.org/wiki/Spin-off_(media)">spin-off</a> of the <i><a href="https://en.wikipedia.org/wiki/Guitar_Hero">Guitar Hero</a></i> series. The game was released worldwide in October 2010 for <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. <i>DJ Hero 2</i> uses a special turntable-controller, the same as introduced in <i>DJ Hero</i>, to simulate <a href="https://en.wikipedia.org/wiki/Turntablism">turntablism</a>, the act of creating a new musical work from one or more previously recorded songs using <a href="https://en.wikipedia.org/wiki/Record_player">record players</a> and sound effect generators.</p>
+
+<p>Similar to <i>DJ Hero</i>, players in <i>DJ Hero 2</i> follow specific actions on the turntable controller in time to marked scrolling indicators on the game's screen, earning points for correctly performing actions in time. The game includes a new freestyle mode, giving the player the chance to freely <a href="https://en.wikipedia.org/wiki/Fade_(audio_engineering)">crossfade</a> between tracks, <a href="https://en.wikipedia.org/wiki/Scratching">scratch</a> a section of a mix, or add sample effects during marked sections.  The game features 83 <a href="https://en.wikipedia.org/wiki/Remix">remixes</a> of two different songs across numerous genres, with further mixes available as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a>. Most mixes have been assembled by FreeStyleGames, but other professional DJs, including <a href="https://en.wikipedia.org/wiki/David_Guetta">David Guetta</a>, <a href="https://en.wikipedia.org/wiki/Deadmau5">deadmau5</a>, <a href="https://en.wikipedia.org/wiki/DJ_Qbert">DJ Qbert</a>, <a href="https://en.wikipedia.org/wiki/Tiësto">Tiësto</a> and <a href="https://en.wikipedia.org/wiki/RZA">RZA</a>, have provided both their mixing skills and character <a href="https://en.wikipedia.org/wiki/Avatar_(computing)">avatar</a> for the game. Players can challenge these mixes at any time in a Quickplay mode, progress through them in the single-player Empire mode, or play cooperatively or competitively with a second user in offline and online game modes. A third player can also participate through singing the mix' vocals.</p>
+
+<p><i>DJ Hero 2</i> was well received by critics, receiving praise for maintaining and improving upon the core elements of the first game, and for a soundtrack featuring a wide selection of genres. However, sales for the title were low, failing to reach similar numbers as <i>DJ Hero</i> from the previous year. In conjunction with poor sales from the <i><a href="https://en.wikipedia.org/wiki/Guitar_Hero">Guitar Hero</a></i> franchise, Activision announced the cancellation of further development in February 2011, leaving <i>DJ Hero 2</i> as the final multi-platform iteration of the <i>DJ Hero</i> franchise.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>DJ Hero 2</i> follows from its predecessor in simulating the performance of a <a href="https://en.wikipedia.org/wiki/Disc_jockey">disc jockey</a> mixing one or two songs using a special turntable controller. The controller, the same unit as shipped previously with <i>DJ Hero</i>, includes a rotatable turntable to use for recording scratching, three "stream" buttons to match notes from the two music tracks and an effects track, and a slider to control the <a href="https://en.wikipedia.org/wiki/Crossfade_(audio_engineering)">crossfade</a> between tracks. These actions are presented to the players through on-screen notation that scrolls in time with the music. Players score points by performing the actions correctly, but are not penalized otherwise. By successfully completing a consecutive set of actions, the player can increase their scoring multiplier up to 4x; the multiplier returns to 1x should they miss any actions. Certain marked sections, when played correctly, fill a "Euphoria" (the "Star Power" for this game) meter which can be unleashed using another button on the controller and will temporarily double the scoring. The player can also earn the ability to rewind a song by a few seconds by playing a long string of consecutive notes. They can rewind the song by quickly spinning the turntable in reverse; the rewind effect can be used to either correct a mistake or further boost one's scoring.</p>
+
+<p>Small changes have been made in the turntable playback within <i>DJ Hero 2</i>: freestyle effects samples, previously based on game-wide preselected "effect packs", are mix-specific, and the game does not penalize the player for small variations in fast scratching sections as long as it follows the general beat of the song. Specially marked freestyle sections, previously limited to only added sample effects over the track, allow the player to freely mix between the two tracks, use their own scratch effects, or add effects hits while within these sections. The display for these freestyle sections shows marks where switching between the tracks would achieve a strong audio effect, and the player is graded on how well they hit these markers after the end of each mix.</p>
+
+<p>In addition to using a turntable, players have the option to sing or rap to the mixes' lyrics, similar to vocal parts in current <i><a href="https://en.wikipedia.org/wiki/Guitar_Hero">Guitar Hero</a></i> or <i><a href="https://en.wikipedia.org/wiki/Rock_Band">Rock Band</a></i> games using a compatible microphone controller from most previous rhythm games. The game will score vocals based on the matching of pitch, beat and rhythm.</p>
+
+<p><i>DJ Hero 2</i>' features an improved single-player career mode called "Empire". Empire provides more structure for the player to proceed through the game than the simple set lists used in <i>DJ Hero</i>. Through Empire mode, the player works though a number of pre-determined setlists and boss battles (as described below) with the celebrity avatars and fictional DJ's at one of six different venues, earning stars that unlock additional venues to play at. Completing certain setlists or battles unlock new characters, outfits for those characters, and virtual turntable decks for the player. Five of these decks are "power decks" that slightly change the scoring mechanism or play style of the game; one increases the maximum multiple to 5x, while another one increases the rate that notes are displayed but increases the base scoring system.</p>
+
+<p>The primary focus of <i>DJ Hero 2</i> has been the social aspects, according to FreeStyleGames' creative director Jamie Jackson; as such, many of the games' new modes feature multiplayer considerations. The game supports the "Party Play" mode introduced in <i><a href="https://en.wikipedia.org/wiki/Guitar_Hero_5">Guitar Hero 5</a></i>, allowing players to jump into a song, alter the difficulty during gameplay, change between turntable and vocals, and leave at any time, while the game continues to run in a jukebox mode. Several new competitive modes engage two DJ players against each other; some modes have both DJs performing alongside each other but with competitive edges such as a "Checkpoint" race where each DJ attempts to earn the best score within a section of a song. DJ Battles see two DJ's performing call-and-response style along with open freestyle sections. The online mode includes a simple <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing video game</a> mechanic whereby participating and winning battles with other players earns the player DJ Points that lead to level increases and additional perks.</p>
+
+<p>The game does not include "DJ vs Guitar" mode that was featured in <i>DJ Hero</i>, where a second player could use a compatible guitar controller to play alongside the DJ player.</p>
+
+<h2>Development</h2>
+
+<p><i>DJ Hero 2</i> was officially announced in June 2010 for release in the last quarter of 2010. Prior to the game's announcement, Activision revealed a month before the game's release that it is actively seeking artists for downloadable content and a sequel to the game. <a href="https://en.wikipedia.org/wiki/David_Guetta">David Guetta</a> has stated that he was set to work on the game's sequel, to arrive late in 2010. Activision CEO Bobby Kotick stated that despite low sales of <i>DJ Hero</i>, they are committed to continuing the series, with the sequel due in 2010. The sequel, <i>DJ Hero 2</i>, was further confirmed during an Activision investors report for 2009, citing it as one of only 2 major <i>Guitar Hero</i> titles to be expected from Activision in 2010, with an expected late-2010 release date.</p>
+
+<p>Work on <i>DJ Hero 2</i> started some months after the first game was completed, as the development team had endured heavy working hours to meet the release deadline.  FreeStyleGames' creative director Jamie Jackson said that <i>DJ Hero 2</i> took about seven months to complete. While they were able to easily build on the existing framework for <i>DJ Hero</i>, FreeStyleGames wanted to do more than just include new mixes, and sought to include additional features such as the Battle Mixes into the game.  Many of the game's new features are a result of feedback from players, including the game's social modes and improvements in the game's interface to provide a cleaner look and instantaneous visual feedback to the player. The team also worked at improving the game's graphics; the appearance of <i>DJ Hero</i>'s graffiti-based menus gave the impression of being a hip-hop game, but FreeStyleGames wanted to distance <i>DJ Hero 2</i> from that. They also wanted to clean up the gameplay's interface, providing better feedback to the player and making it easily to tell when they were winning or losing.  While <i>DJ Hero 2</i> does not use <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> or <a href="https://en.wikipedia.org/wiki/PlayStation_Move">PlayStation Move</a> motion-sensing technology, Jackson had not ruled them out for a future iteration of the game.</p>
+
+<p>Another step to move the game from the apparent hip-hop nature was through its song selection. Jackson felt the first game was weighted too heavily to the genre, with about 60% of the songs being hip-hop. The songs in <i>DJ Hero 2</i> represent a wider variety of music, including dance, drum and bass, and techno, along with some contributions from hip-hop. Jackson noted that they were able to work better with artists and publishers for <i>DJ Hero 2</i>, after the successful launch of the first game; with artists and publishers now knowing what to expect, "there is more understanding, so it has opened the doors to us in terms of getting more popular music", according to Jackson.  However, licensing for such music remained a difficult barrier. Mixes for <i>DJ Hero 2</i> are made first through computer-aided mixing of the two song tracks combined with effects noises, with simultaneous authoring of the gameplay markers. Noise for the scratching sections are filled in by recording the sounds of the tracks actually scratched on a DJ deck.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Usher_(entertainer)">Usher</a> contributed his song "<a href="https://en.wikipedia.org/wiki/OMG_(Usher_song)">OMG</a>" featuring <a href="https://en.wikipedia.org/wiki/Will.i.am">will.i.am</a> for <i>DJ Hero 2</i>, which he and will.i.am performed live at the <a href="https://en.wikipedia.org/wiki/2010_Electronic_Entertainment_Expo">2010 Electronic Entertainment Expo</a>. Usher had previously been approached by Kotick before the release of <i>DJ Hero</i> for future projects for Activision. Usher found, after following the success of <i>DJ Hero</i>, that the game was "very interesting" as a means of connecting younger gamers to music such as his that they would not be able to experience live at a club, leading to his desire to be a part of the sequel.</p>
+
+<p>FreeStyleGames found that by selecting mix artists such as <a href="https://en.wikipedia.org/wiki/Deadmau5">Deadmau5</a> and <a href="https://en.wikipedia.org/wiki/Tiësto">Tiësto</a> who are more widely known than some artists in the first game, they were able to give <i>DJ Hero 2</i> a different feel, embracing the theatrics of these artists. FreeStyleGames had tried to include Tiësto within the first game, but could not do it within the deadline, but instead was used as part of the first game's promotion, and later would be used as Activision's "ambassador" for the game to Europe. Furthermore, the game's soundtrack has been selected to include more dance and pop tracks taken from European artists to make the game more Euro-friendly.</p>
+
+<h2>Promotion</h2>
+
+<p>A demo for <i>DJ Hero 2</i> was released to the PlayStation network and the Xbox Live on September 7, 2010. The demo contains four mixes, two of which were playable: <a href="https://en.wikipedia.org/wiki/Pussycat_Dolls">Pussycat Dolls</a> featuring <a href="https://en.wikipedia.org/wiki/Busta_Rhymes">Busta Rhymes</a> - "<a href="https://en.wikipedia.org/wiki/Don’t_Cha">Don’t Cha</a>" vs. <a href="https://en.wikipedia.org/wiki/Pitbull_(rapper)">Pitbull</a> - "<a href="https://en.wikipedia.org/wiki/I_Know_You_Want_Me_(Calle_Ocho)">I Know You Want Me (Calle Ocho)</a>" and <a href="https://en.wikipedia.org/wiki/Lady_Gaga">Lady Gaga</a> featuring <a href="https://en.wikipedia.org/wiki/Colby_O'Donis">Colby O'Donis</a> - "<a href="https://en.wikipedia.org/wiki/Just_Dance_(song)">Just Dance</a>" vs. <a href="https://en.wikipedia.org/wiki/Deadmau5">deadmau5</a> - "<a href="https://en.wikipedia.org/wiki/Ghosts_N_Stuff">Ghosts N Stuff</a>". The mix <a href="https://en.wikipedia.org/wiki/Estelle_(musician)">Estelle</a> featuring <a href="https://en.wikipedia.org/wiki/Kanye_West">Kanye West</a> - "<a href="https://en.wikipedia.org/wiki/American_Boy_(Estelle_song)">American Boy</a>" vs. <a href="https://en.wikipedia.org/wiki/Chic_(band)">Chic</a> - "<a href="https://en.wikipedia.org/wiki/Good_Times_(Chic_song)">Good Times</a>" was used as a tutorial and the mix <a href="https://en.wikipedia.org/wiki/MSTRKRFT">MSTRKRFT</a> featuring <a href="https://en.wikipedia.org/wiki/N.O.R.E.">N.O.R.E.</a> - "Bounce" (Beat Juggle) could be heard in the menu background.</p>
+
+<p>A viral <a href="https://en.wikipedia.org/wiki/Browser_game">browser game</a>, <i>DJ Hero 2 Mix 2Gether</i>, was released on October 17, 2010. The viral game was made by digital agency <a href="https://en.wikipedia.org/wiki/Fish_in_a_bottle">fish in a bottle</a> and features a cut down version of the full game product. Three mixes are included in the viral and are all playable: <a href="https://en.wikipedia.org/wiki/Lady_Gaga">Lady Gaga</a> featuring <a href="https://en.wikipedia.org/wiki/Colby_O'Donis">Colby O'Donis</a> - "<a href="https://en.wikipedia.org/wiki/Just_Dance_(song)">Just Dance</a>" vs. <a href="https://en.wikipedia.org/wiki/Deadmau5">Deadmau5</a> - "<a href="https://en.wikipedia.org/wiki/Ghosts_N_Stuff">Ghosts N Stuff</a>", <a href="https://en.wikipedia.org/wiki/Blakroc">Blakroc</a> featuring <a href="https://en.wikipedia.org/wiki/Pharoahe_Monch">Pharoahe Monch</a> and <a href="https://en.wikipedia.org/wiki/RZA">RZA</a> - "Dollaz and Sense"  and <a href="https://en.wikipedia.org/wiki/Tiësto">Tiësto</a> and <a href="https://en.wikipedia.org/wiki/Sneaky_Sound_System">Sneaky Sound System</a> - "<a href="https://en.wikipedia.org/wiki/I_Will_Be_Here">I Will Be Here</a>" vs. <a href="https://en.wikipedia.org/wiki/Tiësto">Tiësto</a> - "<a href="https://en.wikipedia.org/wiki/Speed_Rail_(composition)">Speed Rail</a>". Unique to the viral game is a "Create A Mix" mode which allows players to create their own mixes, share them and challenge friends through <a href="https://en.wikipedia.org/wiki/Email">email</a>, <a href="https://en.wikipedia.org/wiki/Twitter">Twitter</a>, <a href="https://en.wikipedia.org/wiki/Facebook">facebook</a> and <a href="https://en.wikipedia.org/wiki/Myspace">Myspace</a>.</p>
+
+<p><i>DJ Hero 2</i> was sold with various promotional items. Within Europe and select stores in North America, players that purchased the game in one of two bundle packages (either with one or two turntable controllers) received the predecessor <i>DJ Hero</i> free. Other North American stores offered carrying cases for the turntables, <a href="https://en.wikipedia.org/wiki/MP3">MP3</a> versions of selected mixes, or redemption codes for in-game customization options.</p>
+
+<h2>Post-release</h2>
+
+<p>A glitch was observed by players on Xbox 360 where, if they were playing while online and had exactly 100 friends attached to their account, the game would freeze and/or they would be unable to play online. Activision issued a patch to correct this a few days after release.</p>
+
+<p>The music video for Tiësto's "Speed Rail" is composed only of footage from <i>DJ Hero 2</i> including the Tiësto avatar.</p>
+
+<h2>Soundtrack</h2>
+
+<p><i>DJ Hero 2</i>'s setlist includes 83 mashups from nearly 100 songs from about 85 different artists. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> stated that the game's soundtrack still strongly represents the genre of hip-hop, but adds more elements from electronica, pop, and dance. <a href="https://en.wikipedia.org/wiki/David_Guetta">David Guetta</a>, <a href="https://en.wikipedia.org/wiki/Deadmau5">Deadmau5</a>, <a href="https://en.wikipedia.org/wiki/DJ_Qbert">DJ Qbert</a>, <a href="https://en.wikipedia.org/wiki/Tiësto">Tiësto</a> and <a href="https://en.wikipedia.org/wiki/RZA">RZA</a> are playable avatars within the game and they will help create mixes for the game.  Most of the in-game scratching was performed by former World DMC Champion DJ Blakey, and some by Joe Lenzie of <a href="https://en.wikipedia.org/wiki/Sigma_(duo)">Sigma</a>.</p>
+
+<p><i>DJ Hero 2</i> supports <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> in the form of new mixes that can be purchased from the consoles' respective online stores. In addition, through an additional free add-on released in November 2010, players will be able to purchase existing downloadable content from the first game to use within <i>DJ Hero 2</i>. Activision's February 2011 decision to shutter their <i>Guitar Hero</i> development initially stated that no further downloadable content will be forthcoming for the title, but due to "continued support" from their fanbase, Activision has since decided it will continue to release downloadable content for the game through at least March and April 2011 with packs that were in the works prior to the closure of <i>Guitar Hero</i>.</p>
+
+<h2>Reception</h2>
+
+<p><i>DJ Hero 2</i> was well received by critics, who felt the game was a significant improvement in both gameplay, presentation, and song selection from its predecessor. Michael Brown of <i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i> noted while there was very little overall change to the gameplay, "it's the minor tweaks that make it a definite improvement over the original". Keza MacDonald of <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> believed that <i>DJ Hero 2</i> was "much slicker, clearer and more tasteful" with changes in presentation and interface that quickly allows the players to jump into the game. Ben Kuchera of <i><a href="https://en.wikipedia.org/wiki/Ars_Technica">Ars Technica</a></i> called the title "the best kind of sequel" as it retained the best features of <i>DJ Hero</i> and added further improvements atop of those. Matt Wales of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> noted that the early difficulty levels of the game were much more suited to beginners "to make for a more convincing DJing experience, without sacrificing that all-important accessibility".</p>
+
+<p>Critics praised the new freestyle features into gameplay, citing the overuse of the <a href="https://en.wikipedia.org/wiki/Flavor_Flav">Flavor Flav</a> default sample in the first game. MacDonald favored how FreeStyleGames transformed the limited freestyle sections of the first game into "an integral part" of the sequel. Matt Helgeson of <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> stated that the nature of <i>DJ Hero 2</i>'s freestyling made him feel that he was "helping craft the mix, not just hitting buttons in time". While the addition of new multiplayer modes was well-received, many felt the vocal track addition did not work out well.  Chris Watters of <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> noted that "the singing evaluation doesn't feel as slick as in other games", and unless the player knows the music from both tracks of a mix, singing the back-and-forth mix "isn't all that fun". Helgeson commented that attempting to sing lyrics from two separate songs "feels like playing karaoke game in the grips of a seizure".</p>
+
+<p>Reviewers found the soundtrack to provide a wider range of genres, moving away from <a href="https://en.wikipedia.org/wiki/Hip-hop">hip-hop</a> and into <a href="https://en.wikipedia.org/wiki/House_(genre)">house</a> and <a href="https://en.wikipedia.org/wiki/Electronic_dance_music">dance</a> genres, to appeal to more players. Helgeson considered that the mixes were "uniformly great", and balanced popular artists with skilled DJ mixers. MacDonald stated the soundtrack was "faultless" and that while featuring a large number of songs from the club scene, the soundtrack is  "still a powerful draw if you don't know or even like the music". <i><a href="https://en.wikipedia.org/wiki/Official_Xbox_Magazine">Official Xbox Magazine</a> UK</i>'s Mike Channell believed the "mashups also feel even more playful this time around", creating new interpretations of the lyrics of songs through the mixing.  Cian Hassett of <i>PALGN</i> called the setlist "the most incredible fusion of contrasting genres known to man". Some critics commented that they felt the first game's track list was better; Damien Hatfield of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> felt there was "more variety" in the original game's mix and better representation within certain genres, while Brown favored <i>DJ Hero</i>'s set for "how it mixed together frequently disparate tracks" and that many mixes in the sequel favored too much of one song in the mix.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/NPD_Group">NPD Group</a>'s North American sales estimates for <i>DJ Hero 2</i> during its launch month were 59,000 units. Combined sales in North America of <i>DJ Hero 2</i> and <i><a href="https://en.wikipedia.org/wiki/Guitar_Hero:_Warriors_of_Rock">Guitar Hero: Warriors of Rock</a></i> were below one million in 2010, 63% below the total sales of <i><a href="https://en.wikipedia.org/wiki/Guitar_Hero_5">Guitar Hero 5</a></i>, <i><a href="https://en.wikipedia.org/wiki/DJ_Hero">DJ Hero</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Band_Hero">Band Hero</a></i> from 2009. As a result of faltering sales for its <i>Guitar Hero</i> series, Activision shuttered its <i>Guitar Hero</i> division, cancelling at least one planned game for 2011. The closure also affects the <i>DJ Hero</i> series, as Activision has stated that they do not expect to publish a music game during 2011.</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/14th_Annual_Interactive_Achievement_Awards">14th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>DJ Hero 2</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Original_Music_Composition">Outstanding Achievement in Soundtrack</a>".</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

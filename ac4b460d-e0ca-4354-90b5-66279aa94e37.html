@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Call of Duty: Advanced Warfare</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('ac4b460d-e0ca-4354-90b5-66279aa94e37/ed551603-11d5-4329-9625-c551a16a345d.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="ac4b460d-e0ca-4354-90b5-66279aa94e37/bca1b7e7-ca54-427d-9439-20caccbc63b7.png"/> Call of Duty: Advanced Warfare</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="ac4b460d-e0ca-4354-90b5-66279aa94e37/3569a6ca-4133-4b55-85a7-e7ccefc0d747.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-3/9/2016">3/9/2016</a> 15:33:23</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/4/2014">11/4/2014</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-36">36</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-81">81</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-FPS">FPS</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-High Moon Studios">High Moon Studios</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Raven Software">Raven Software</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sledgehammer Games">Sledgehammer Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Call_of_Duty:_Advanced_Warfare" target="_blank">PCGamingWiki</a><br/><a href="https://www.callofduty.com/advancedwarfare" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=18220" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/call-of-duty-advanced-warfare" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/209650/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Call_of_Duty:_Advanced_Warfare" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/70133" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Call_of_Duty:_Advanced_Warfare" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/call-duty-advanced-warfare/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-IW engine">IW engine</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Sci-fi">Sci-fi</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Call of Duty: Advanced Warfare</b></i> is a 2014 <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter game</a> published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>.  The eleventh major installment in the <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty">Call of Duty</a></i> series, the game was developed by <a href="https://en.wikipedia.org/wiki/Sledgehammer_Games">Sledgehammer Games</a> for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, while <a href="https://en.wikipedia.org/wiki/High_Moon_Studios">High Moon Studios</a> developed the versions released on <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, and <a href="https://en.wikipedia.org/wiki/Raven_Software">Raven Software</a> developed the game's multiplayer and the Exo-Zombies mode.</p>
+
+<p><i>Advanced Warfare</i> was the first <i>Call of Duty</i> title to be developed primarily by Sledgehammer, following the supporting work the studio did on <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Modern_Warfare_3">Call of Duty: Modern Warfare 3</a></i> alongside <a href="https://en.wikipedia.org/wiki/Infinity_Ward">Infinity Ward</a> in 2011. Though the game was released on November 4, 2014, a special edition entitled the <i>Day Zero Edition</i>, which came with bonus in-game content, was released on November 3 for people who pre-ordered the game.</p>
+
+<p>Before the development of <i>Advanced Warfare</i>, Sledgehammer were originally working on a game set during the events of the <a href="https://en.wikipedia.org/wiki/Vietnam_War">Vietnam War</a>. Development for <i>Advanced Warfare</i> began in late 2011, shortly before the release of <i>Modern Warfare 3</i>. The game became the first entry in the <i>Call of Duty</i> series since <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty_2">Call of Duty 2</a></i> to feature a game engine that has had its majority re-written and built from scratch. For the game's <a href="https://en.wikipedia.org/wiki/Single-player_video_game">single-player</a> campaign mode, Sledgehammer employed veteran actors <a href="https://en.wikipedia.org/wiki/Troy_Baker">Troy Baker</a> and <a href="https://en.wikipedia.org/wiki/Kevin_Spacey">Kevin Spacey</a> in lead roles. The game's story features a futuristic setting, set between 2054 and 2061, and follows Jack Mitchell of the <a href="https://en.wikipedia.org/wiki/United_States_Marine_Corps">United States Marine Corps</a> and his involvement with Atlas, a private military corporation that sells its services to the highest bidder.</p>
+
+<p><i>Call of Duty: Advanced Warfare</i> was released to a positive critical reception and was declared an improvement over its predecessor, <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Ghosts">Call of Duty: Ghosts</a></i>. Many critics praised the visuals, voice acting, single-player campaign, and the fast-paced gameplay, but some criticized the predictable plot in the single player campaign. The game won several awards and was considered a commercial success.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Advanced Warfare</i>, like the other <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty">Call of Duty</a></i> titles, is presented in a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> perspective. The game features several significant changes; unlike other installments, <i>Advanced Warfare</i> does not use a traditional <a href="https://en.wikipedia.org/wiki/HUD_(video_gaming)">heads-up display</a> (HUD); instead, all information is relayed to the player via <a href="https://en.wikipedia.org/wiki/Holography">holographic projections</a> from the weapon equipped. The general gunplay remains unchanged, apart from new mechanics, such as 'Exo' movements. These Exo movements are performed from the Exoskeleton, which allow the player to boost, dash, and sky jump. The game is the first in the <i>Call of Duty</i> series that allows the player to choose differing types of conventional weaponry; for example, the game features regular conventional firearms, but the player can choose to use laser or directed energy weaponry, both of which have differing attributes. In addition to Exo movements, the game features different Exo abilities, such as Exo Cloak, which allows players to turn transparent for stealth for a period of time.</p>
+
+<h3>Campaign</h3>
+
+<p>The single-player campaign features one playable character, Jack Mitchell, as opposed to multiple characters in most previous <i>Call of Duty</i> games. It uses pre-rendered cinematic cut scenes, similar to <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Black_Ops_II">Call of Duty: Black Ops II</a></i>, to assist in the story aspect of the campaign. After each mission, the player is given a certain number of upgrade points that can be used to upgrade the Exo suit or weapons. The player can upgrade detection, armor, resistance, tactical, lethal grenade, sprint, recoil, flinch, reload, quick aim, and battery. The number of points that are given is determined by the players performance in the missions. The player may earn additional points by completing specific side objectives, one of which is collecting the game's collectable 'Intel'. The player can switch between different grenades, all of which possess distinctly different abilities.</p>
+
+<p>Apart from the Exo movement, <i>Advanced Warfare</i>'s multiplayer retains certain similarities to previous <i>Call of Duty</i> titles. The Pick 10 system in <i>Black Ops II</i> returns as Pick 13, allowing players to pick weapons, attachments, perks and score-streaks within a total of 13 allocation points. Score-streaks are also upgradable with different modules, allowing for additional abilities/effects, at an extra score cost. <i>Advanced Warfare</i> introduces weapon variants, which contain various different stats compared to the base weapons. This allows the game to contain over 350 weapons, both variants and base versions. Supply drops allow players to earn new gears through playing the game. The content of each supply drop is randomized, and can range from weapon variants to player customization items, as well as bonus <a href="https://en.wikipedia.org/wiki/Experience_point">experience points</a> (XPs) time. Players can complete daily challenges to earn supply drops.</p>
+
+<p>Exo Survival was first introduced as <i>Advanced Warfare</i>'s <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperative game mode</a>. Considered to be a new version of the Survival Mode from <i>Modern Warfare 3</i>, Exo Survival allows up to four players to engage in a wave-based match against <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">A.I</a>.-controlled enemies. Players can choose from four different classes of Exo, which grant different abilities and score-streaks. Weapons and score-streaks can be upgraded throughout each match. After a certain number of rounds, players are given objectives to perform, such as defending a location, or collecting intel from fallen enemies. Completing the objectives grant players bonus upgrade points; not completing them result in the players being punished, such as having their Exo suits temporarily disabled or activating hostile security turrets. Exo Survival is played on the game's multiplayer maps, with a total of 13 maps divived into four tiers. Each tier can be unlocked by playing the previous tier and survive a specific number of rounds.</p>
+
+<p>Exo Zombies was first teased at the end of the Exo Survival map "Riot", and was officially announced with the <i>Havoc</i> <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC) pack. The game features zombies that utilize exo suits, giving them more maneuverability. The game mode stars five brand new characters.</p>
+
+<p>Exo Zombies plays similarly to the original Zombies game mode that has been featured in <a href="https://en.wikipedia.org/wiki/Treyarch">Treyarch</a>'s <i>Call of Duty</i> games since <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_World_at_War">Call of Duty: World at War</a></i>: up to four players must survive against endless waves of undead enemies, with an optional story quest that can be completed at any time during a match. Players earn points by injuring and/or killing zombies, and use those points to open doors/clear obstacles, or buy new weapons and perks to strengthen their chance of survival. Players can also acquire exo suits in the game mode, allowing them to utilize new movements. Different types of zombies are present in the game, including Charger zombies that have increased movement speed, and Electro-magnetic zombies (EMZs) that can disable the players' Exo suit in close proximity.</p>
+
+<p>The first Exo Zombies map, "Outbreak", was released as part of the <i>Havoc</i> DLC map pack. The second map, "Infection", was released as part of the <i>Ascendance</i> DLC pack. The third map, "Carrier", was released as part of the <i>Supremacy</i> DLC pack. The final map, "Descent", was released as part of the <i>Reckoning</i> DLC pack.</p>
+
+<h2>Plot</h2>
+
+<h3>Campaign</h3>
+
+<p>In 2054, <a href="https://en.wikipedia.org/wiki/United_States_Marine_Corps">United States Marines</a> <a href="https://en.wikipedia.org/wiki/Private_first_class">Private First Class</a> Jack Mitchell (<a href="https://en.wikipedia.org/wiki/Troy_Baker">Troy Baker</a>) and <a href="https://en.wikipedia.org/wiki/Private_(rank)">Private</a> Will Irons (<a href="https://en.wikipedia.org/wiki/Paul_Telfer_(actor)">Paul Telfer</a>) help repel a <a href="https://en.wikipedia.org/wiki/Korean_People's_Army">North Korean</a> invasion of <a href="https://en.wikipedia.org/wiki/Seoul">Seoul</a>, under the command of <a href="https://en.wikipedia.org/wiki/Sergeant">Sergeant</a> Cormack (Russell Richardson). During the fight, Will is <a href="https://en.wikipedia.org/wiki/Killed_in_action">killed in action</a> and Mitchell loses his arm, resulting in him being <a href="https://en.wikipedia.org/wiki/Discharge_(military)">medically discharged</a>. Following Will's funeral, Mitchell accepts a position at the Atlas Corporation, a <a href="https://en.wikipedia.org/wiki/Private_military_company">private military corporation</a>, by its <a href="https://en.wikipedia.org/wiki/CEO">CEO</a> Jonathan Irons (<a href="https://en.wikipedia.org/wiki/Kevin_Spacey">Kevin Spacey</a>), Will's father, and is given a <a href="https://en.wikipedia.org/wiki/Prosthesis">prosthetic arm</a>.</p>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Terrorism">terrorist</a> group called the KVA, composed of former <a href="https://en.wikipedia.org/wiki/Chechnya">Chechen</a> <a href="https://en.wikipedia.org/wiki/Separatism">separatists</a> led by Joseph "Hades" Chkheidze (Sharif Ibrahim), begins staging attacks. In 2055, Mitchell, Gideon (<a href="https://en.wikipedia.org/wiki/Gideon_Emery">Gideon Emery</a>), and other Atlas operatives rescue the <a href="https://en.wikipedia.org/wiki/Prime_Minister_of_Nigeria">Nigerian Prime Minister</a> and capture a KVA technologist in <a href="https://en.wikipedia.org/wiki/Lagos">Lagos</a> during an international summit. However, Mitchell and his team are later unable to prevent a more sophisticated KVA from forcing a <a href="https://en.wikipedia.org/wiki/Nuclear_meltdown">nuclear reactor meltdown</a> on <a href="https://en.wikipedia.org/wiki/Bainbridge_Island,_Washington">Bainbridge Island, Washington</a>, near <a href="https://en.wikipedia.org/wiki/Seattle">Seattle</a>. The KVA launch simultaneous attacks against nuclear power plants worldwide, irradiating numerous cities and killing 50,000 people. Atlas emerges as the world's dominant military force over the next four years by aiding displaced civilians and repelling the KVA.</p>
+
+<p>In 2059, Mitchell and Gideon are dispatched to <a href="https://en.wikipedia.org/wiki/Detroit">Detroit</a> to find and capture Dr. Pierre Danois (Erik Passoja), the KVA's second-in-command. Danois reveals that Hades is at <a href="https://en.wikipedia.org/wiki/Santorini">Santorini</a>, <a href="https://en.wikipedia.org/wiki/Greece">Greece</a>, where the KVA is holding a conference. In Greece, Mitchell finds and kills Hades; before dying, Hades warns them of Irons and gives Mitchell a data chip. Atlas operative Ilona (<a href="https://en.wikipedia.org/wiki/Angela_Gots">Angela Gots</a>) analyzes the chip, which reveals that Irons executed the technologist after learning of the planned global attacks, and deliberately allowed them to happen to improve Atlas' power and profit. Irons attempts to have Mitchell and Ilona arrested by Atlas <a href="https://en.wikipedia.org/wiki/Military_police">military police</a>, but they escape Atlas' headquarters in <a href="https://en.wikipedia.org/wiki/Baghdad">New Baghdad</a>, guided by an unidentified soldier, while Gideon stays with Irons for further investigation. The soldier reveals himself to be Cormack, now a member of the Sentinel Task Force, a <a href="https://en.wikipedia.org/wiki/Special_mission_unit">Tier One</a> global US-led task force created to investigate the KVA, but now re-purposed to prevent Atlas' rise to power.</p>
+
+<p>In 2060, Mitchell, Cormack, Ilona, and Knox (<a href="https://en.wikipedia.org/wiki/Khary_Payton">Khary Payton</a>) infiltrate Irons' private residence in <a href="https://en.wikipedia.org/wiki/Bangkok">Bangkok</a>. The team discovers that Danois is collaborating with Irons to produce a <a href="https://en.wikipedia.org/wiki/Biological_agent">bio-weapon</a> called "Manticore". They track and intercept a plane carrying Manticore bound for <a href="https://en.wikipedia.org/wiki/Argentina">Argentina</a>, which crashes in <a href="https://en.wikipedia.org/wiki/Antarctica">Antarctica</a>. Gideon helps the Sentinels defeat the Atlas soldiers, allowing them to retrieve a sample of Manticore. They discover that the weapon is designed to attack the specific <a href="https://en.wikipedia.org/wiki/DNA">DNA</a> of an individual and kill them; the only exceptions are Atlas members. The Sentinels and Gideon infiltrate and destroy an Atlas bio-weapons laboratory in <a href="https://en.wikipedia.org/wiki/Bulgaria">Bulgaria</a>, destroying many Manticore samples. With his plan revealed, Irons declares war on the <a href="https://en.wikipedia.org/wiki/United_Nations_General_Assembly">United Nations General Assembly</a>, believing that the world would be better off without wars if Atlas were in control. The team discovers that, despite destroying the laboratory, Irons is planning a <a href="https://en.wikipedia.org/wiki/Preemptive_strike">preemptive strike</a> on the United States via an Atlas attack in <a href="https://en.wikipedia.org/wiki/San_Francisco">San Francisco</a>. Atlas destroys the <a href="https://en.wikipedia.org/wiki/Golden_Gate_Bridge">Golden Gate Bridge</a>, trapping the United States Navy's <a href="https://en.wikipedia.org/wiki/United_States_Third_Fleet">Third Fleet</a> in the <a href="https://en.wikipedia.org/wiki/San_Francisco_Bay_Area">Bay Area</a> in an attempt to destroy them, but are stopped by Sentinel forces. The United States and the rest of the world declare war on Atlas, forcing Irons to retreat to his headquarters in New Baghdad.</p>
+
+<p>In 2061, the Sentinels and the <a href="https://en.wikipedia.org/wiki/United_States_Army">United States Army</a> attack New Baghdad to capture Irons. However, Atlas deploys Manticore, killing Knox and most of the troops. Being former Atlas soldiers, Mitchell, Ilona, and Gideon are spared. They and Cormack are captured and brought to an Atlas <a href="https://en.wikipedia.org/wiki/Prisoner-of-war_camp">prison camp</a>, which runs Manticore <a href="https://en.wikipedia.org/wiki/Human_subject_research">experiments on its inmates</a>. The team escape the facility, but not before Irons shoots Cormack and severely damages Mitchell's prosthetic arm. After Cormack dies, the others discover that Irons is preparing to launch <a href="https://en.wikipedia.org/wiki/Intercontinental_ballistic_missiles">intercontinental ballistic missiles</a> loaded with Manticore against every military base in the world. Using armored battlesuits, Mitchell and Gideon launch a two-man assault on Atlas' headquarters and destroy the missiles. They find Irons as the other Sentinels prepare to bombard the building, but Irons disables their <a href="https://en.wikipedia.org/wiki/Exosuit">exoskeletons</a>. Mitchell chases and tackles Irons at the edge of the building; Irons hangs onto Mitchell's prosthetic arm, but Mitchell severs it, sending Irons falling to his death. Gideon pulls Mitchell from the ledge, and Mitchell notes that the war against Atlas is far from over.</p>
+
+<p>Following a failed attempt to contain a riot at a prison in New Baghdad, Atlas releases the Manticore bioweapon in order to quell the uprising. However, instead of killing the rioters, the Manticore bomb reanimates them as zombies. 3 Atlas platoons are sent in to cage the undead forces, but only one survives, and the others are brought back to an Atlas research facility for further studies. The research is carried out in secret, without the knowledge of the employees, in a hidden area known as Sublevel 6. One night, the captured zombies break out of their containment and overrun the facility. Amidst the chaos, four Atlas employees – ex-Sentinel Task Force operative and Atlas janitor Oz (<a href="https://en.wikipedia.org/wiki/John_Malkovich">John Malkovich</a>), Atlas IT specialist Lilith (<a href="https://en.wikipedia.org/wiki/Rose_McGowan">Rose McGowan</a>), Atlas security officer Decker (<a href="https://en.wikipedia.org/wiki/Jon_Bernthal">Jon Bernthal</a>), and Atlas executive Kahn (<a href="https://en.wikipedia.org/wiki/Bill_Paxton">Bill Paxton</a>) – attempt to evacuate, but both of their rescue helicopters are destroyed. The four survivors mount a last stand against the zombie horde, but are eventually overwhelmed. However, they are rescued by Atlas forces, who then take them to an urban facility, for medical treatment. When the four survivors recover, they are thrown into another battle against the infected, ensuring the survival of not only themselves but also innocent citizens trapped in the vicinity.</p>
+
+<p>Eventually, the group is rescued by Sentinel Task Force operatives, but their leader, Captain Lennox (<a href="https://en.wikipedia.org/wiki/Bruce_Campbell">Bruce Campbell</a>), claims that Oz is the source of the zombie infection. Lennox executes Oz and has Lilith, Decker and Kahn injected with anesthetic. However, Atlas forces ambush them and reclaim the ex-Atlas employees. Sentinel tracks them down, leading them to an Atlas aircraft carrier in the middle of the ocean. Oz, however, begins to reanimate while being transported on one of the Sentinel's transports. Upon arrival within the carrier, Lennox locates the three Atlas survivors and leads them in battle against the combined forces of the zombies and Atlas soldiers. Lennox reveals to the other three that Oz was once part of Sentinel, and that he was present at the prison when Atlas released the Manticore bomb, making him one of the first people infected. He also claims that Oz was planted in Kahn's facility by Atlas in order to start the zombie outbreak. The group decides to sink the carrier to the bottom of the ocean, in order to prevent the infection from spreading. They set the ship to self-destruct, but before they can extract in an emergency pod, they briefly encounter Oz, now fully zombified while retaining his intelligence.</p>
+
+<p>The group escapes and decides that Oz must be eliminated, and head to a nearby Atlas underwater survival facility, the Trident Retreat. Oz, however, has already arrived at the facility and murdered all Atlas employees within the base. The group bands together for one final battle against the undead horde, including Oz himself. After undertaking various challenges set by Oz, they are teleported into a digital representation of Oz's memory, where Kahn, Lilith and Decker learn the truth: while they are immune to the Manticore virus' effect, they can be used as a cure for the infection, unlike Oz. Having finished all of Oz's challenges, the group finally confronts him and discovers he has mutated into a monstrous figure. After a long fight, Oz is finally killed, and the group proceeds to burn his mutated corpse, vowing vengeance against Atlas. In the aftermath of the incident, Lennox is promoted to Lieutenant Colonel, and he helps Decker enlist in Sentinel as a full-fledged soldier; Kahn files a lawsuit against Atlas, with the help of Lilith, who now works as a hacktivist. Unbeknownst to the group, Atlas has already created clones of Oz, all kept hidden under the Trident facility.</p>
+
+<h2>Development</h2>
+
+<p>Before being switched to become the co-developers of <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Modern_Warfare_3">Call of Duty: Modern Warfare 3</a></i>, Sledgehammer Games was already working on a <i>Call of Duty</i> game called <i>Call of Duty: Fog of War</i>. <i>Fog of War</i> was announced before <i>Modern Warfare 3</i> and after <i>Black Ops</i>. It was to be set during the events of the <a href="https://en.wikipedia.org/wiki/Vietnam_War">Vietnam War</a> and was said to be an action-adventure <a href="https://en.wikipedia.org/wiki/Third-person_perspective">third-person</a> shooter video game. A <i>Call of Duty</i> <a href="https://en.wikipedia.org/wiki/Massively_multiplayer_online_game">massively multiplayer online game</a> was also in development. Activision Publishing CEO Eric Hirshberg later stated that <i>Modern Warfare 3</i> was not the same title as Sledgehammer Games' action-adventure <i>Call of Duty</i> game. When asked if the action-adventure game was also in development, Hirshberg then stated that the Sledgehammer team was fully focused on <i>Modern Warfare 3</i> and that their own title had been put on hold.</p>
+
+<p>A new game in the <i>Call of Duty</i> series was announced to be released in November 2014.</p>
+
+<p>Director Michael Condrey said that the majority of the engine has been built from scratch. He stated that although there are lines of the old code left, there are new rendering, animation, physics and audio systems. With the improved engine, the audio has been built from the ground up. According to Don Veca, who worked on <i>Advanced Warfare</i>, the audio in the game is very advanced which gives the game a genuine and great feel. Saying that audio doesn't come last as it did in previous titles, Glen Schofield says "We make sure that audio is just as important as anything else and Don's in there from the start with us."</p>
+
+<p>Another objective that Sledgehammer accomplished with <i>Advanced Warfare</i> were the animations. The facial animating system and set is the same as James Cameron's <i><a href="https://en.wikipedia.org/wiki/Avatar:_The_Way_of_Water">Avatar: The Way of Water</a></i>. According to Activision, the new three-year <i>Call of Duty</i> development cycle meant that <i>Advanced Warfare</i> developer Sledgehammer Games was able to create a 'near photorealistic' world unlike any <i>Call of Duty</i> before. Michael Condrey confirmed in a tweet that <i>Advanced Warfare</i> would be featuring female soldiers in multiplayer, as well.</p>
+
+<p>On June 6, 2014, in an issue of <i>MCVOnline Magazine</i>, it was confirmed that <a href="https://en.wikipedia.org/wiki/High_Moon_Studios">High Moon Studios</a>, the team behind the <i><a href="https://en.wikipedia.org/wiki/Deadpool_(video_game)">Deadpool</a></i> video game and <i><a href="https://en.wikipedia.org/wiki/Transformers">Transformers</a></i> games, was working on the PlayStation 3 and Xbox 360 versions of <i>Advanced Warfare</i>, while Sledgehammer Games was focusing on the PlayStation 4, Windows and Xbox One versions of the title. Activision also confirmed that the game would not be released on the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>, making <i>Advanced Warfare</i> the first main <i>Call of Duty</i> game to not see a release on a <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> platform since <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Modern_Warfare_2">Call of Duty: Modern Warfare 2</a></i> in 2009.</p>
+
+<h3>Music</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Harry_Gregson-Williams">Harry Gregson-Williams</a>, who composed the main title theme for <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty_4:_Modern_Warfare">Call of Duty 4: Modern Warfare</a></i>, returned for <i>Advanced Warfare</i> while <a href="https://en.wikipedia.org/wiki/Audiomachine">audiomachine</a> composed the overall score of the game.</p>
+
+<p>The score for the Exo Zombies downloadable content pack was composed by <a href="https://en.wikipedia.org/wiki/Chris_Vrenna">Chris Vrenna</a>.</p>
+
+<h2>Marketing and release</h2>
+
+<p><i>Advanced Warfare</i> was released one day earlier to customers who purchased the <i>Day Zero Edition</i>. This version featured double <a href="https://en.wikipedia.org/wiki/Experience_point">XP</a> for the first day and two exclusive guns, as well as access to exclusive weapons and an Exo Skeleton suit.</p>
+
+<p>A 1-terabyte Xbox One console bundle with a Sentinel Task Force-inspired hardware design, and a digital copy of the <i>Day Zero Edition</i>, was also released by Microsoft as a tie-in.</p>
+
+<h3>Reveal</h3>
+
+<p>In May 2014, the official <i>Call of Duty</i> website was updated with a scrambled image that was due to be revealed on May 4, 2014, but the trailer was leaked ahead of schedule on May 1 and then officially released soon after. The trailer revealed actor Kevin Spacey as portraying a character in the game who resents democracy. The trailer contained a variety of futuristic technologies, including <a href="https://en.wikipedia.org/wiki/Cloaking_device">cloaking</a> aircraft, twin-rotor drones, hover bikes, "spider" tanks, specialized weapons, <a href="https://en.wikipedia.org/wiki/Powered_exoskeleton">powered exoskeletons</a>, threat-detection grenades and gloves that allow their wearer to climb up walls.</p>
+
+<p>On June 9, 2014, <a href="https://en.wikipedia.org/wiki/E3_2014">E3 2014</a> was opened with a new gameplay trailer for <i>Advanced Warfare</i> that showcased features such as swarms of drones resembling birds and infrared enemy identifiers. During the presentation, Xbox head Phil Spencer said that downloadable content for <i>Advanced Warfare</i> will be released first on Xbox Live in the same fashion as the previous games in the series.</p>
+
+<p>On July 29, 2014, Sledgehammer Games released a trailer showing a more in depth look into the main back story of the campaign side of the game. Within the last five seconds of the trailer a brief view of the multiplayer was shown, the first time multiplayer had been shown. Within it "score streaks" were visible which are returning from <i>Black Ops II</i>. Also shown was the new HUD which usually changes from each title. The trailer also stated that there would be a worldwide full multiplayer reveal on August 11, 2014, during <a href="https://en.wikipedia.org/wiki/Gamescom">Gamescom 2014</a>.</p>
+
+<p>On October 30, <a href="https://en.wikipedia.org/wiki/Taylor_Kitsch">Taylor Kitsch</a> and <a href="https://en.wikipedia.org/wiki/Emily_Ratajkowski">Emily Ratajkowski</a> co-starred in the live action trailer in advance of the game's November 4 release directed by <a href="https://en.wikipedia.org/wiki/Peter_Berg">Peter Berg</a> who previously worked with Kitsch in the films <i><a href="https://en.wikipedia.org/wiki/Battleship_(film)">Battleship</a></i> and <i><a href="https://en.wikipedia.org/wiki/Lone_Survivor_(film)">Lone Survivor</a></i>.</p>
+
+<p>A pre-order bonus was announced entitled 'Advanced Arsenal' which consists of a Custom Exoskeleton along with an EM1 Quantum &amp; AK-12G weapon usable in multiplayer. An advertisement revealed that the collector's editions will include a bonus multiplayer map, "Atlas Gorge", which is a remake of the map "Pipeline" from <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty_4:_Modern_Warfare">Call of Duty 4: Modern Warfare</a></i>; an Atlas Digital Content Pack, which includes two bonus weapons, a custom character helmet, a player card, five in-game "supply drops" and a single-player upgrade token. Also included is a season pass, granting players access to four post-release map packs. Additionally, all pre-orders would be upgraded to the "Day Zero Edition", which includes 24 hours early access to the game with double XP, additional weapons and in-game items.</p>
+
+<p>On November 3, 2014, Activision revealed 4 DLCs for <i>Advanced Warfare</i>, namely <i>Havoc</i>, <i>Ascendance</i>, <i>Supremacy</i>, and <i>Reckoning</i>. A new co-op mode, Exo Zombies, was announced on November 27, 2014, and was released alongside the <i>Havoc</i> DLC on January 27, 2015, for the Xbox consoles, February 26, 2015, for the PlayStation consoles, and March 3, 2015, for Windows. The <i>Ascendance</i> DLC was released on March 31, 2015, for the Xbox consoles and April 30, 2015, for the PlayStation consoles and Windows. The DLC includes 4 new maps, the second Exo Zombies map and a new grappling hook feature playlist. The third DLC of the game, <i>Supremacy</i>, was released on June 2, 2015, for the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>. The DLC includes four new maps and act as a continuation to the Exo Zombies campaign. It was released for PlayStation 3, PlayStation 4 and Windows on July 2, 2015. The last DLC, <i>Reckoning</i>, was released for the Xbox 360 and Xbox One on August 4, 2015. It was released for the remaining platforms on September 3, 2015. The release of <i>Reckoning</i> on these platforms marked the end of the exclusivity deal between Activision and Microsoft.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical reception</h3>
+
+<p><i>Call of Duty: Advanced Warfare</i> received "generally favorable reviews", according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. Josh Harmon from <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> gave the game a 9/10. He praised the engaging combat mechanics, coherent story (which he described as "a welcome shift for <i>Call of Duty</i>"), new mobility options, as well as in-depth specialization and the multiplayer, which he described as "The deepest, most enjoyable and the most skill-based <i>Call of Duty</i> multiplayer to date". He also praised the futuristic gadgetry which he described as "a feature that breathes new life into the franchise". However, he criticized the single-mission level design for being similar to the previous installments, as well as a predictable, disappointing plot twist, unimpressive co-operative mode and clumsy vehicle-involved single-player mission.</p>
+
+<p>Brian Albert from <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> gave the game 9.1/10. He praised the iteration of the game set in the mid 21st century, calling it the biggest and most successful departure from what's expected in the <i>Call of Duty</i> series since the Modern Warfare trilogy brought the series into the 21st century. Albert gave praise to the campaign, singling out the performances of <a href="https://en.wikipedia.org/wiki/Troy_Baker">Troy Baker</a> and <a href="https://en.wikipedia.org/wiki/Kevin_Spacey">Kevin Spacey</a> in their roles as Mitchell and Jonathan Irons respectively, but criticized the campaign's hindrance of its characters' relationships and the exposition dialogue. He praised the creativity of the campaign levels, singling out certain missions that allow freedom to complete objectives. Albert gave praise to the Exo suit, while despite not having full use during the campaign, was a welcome addition for multiplayer which made it more intuitive and fun. He also mentions that the Exo suit allows him to have advantages in multiplayer that weren't possible in earlier <i>Call of Duty</i> titles, and mentioning that certain modes like Capture the Flag felt more intense than expected. He also praised the accelerated pace of rewards given to players who level up during multiplayer, citing supply drops of cosmetic items, new weapons and temporary perks like double experience points as examples. Albert also praised the Pick 13 System, an expansion of the Pick 10 System introduced in <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Black_Ops_II">Call of Duty: Black Ops II</a></i>, which allowed him more options and flexibility on which weapons, attachments, and score-streaks he wanted in his loadout. He also praised the addition of a firing range in the multiplayer lobby, which allowed him to test the strengths and weaknesses of his loadout.</p>
+
+<p>Daniel Tack from <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> gave the game a 9/10, praising the unprecedented amount of fast movement, extensive multiplayer weapon customization, excellent visuals, well-executed single-player, varied multiplayer modes and distinct and interesting single-player levels, but criticizing the predictable plot conclusion and non-impactful weapon upgrades. He summarized the game as "a own special surge forward while maintaining the gunplay that makes the series fantastic."</p>
+
+<p>PlayStation Lifestyle handed the game a 9/10 stating "Sledgehammer Games has given players a greater feeling of customization that goes beyond the cosmetic of an emblem and given way to random unlocks and a great number of modifications."</p>
+
+<p>Ludwig Kietzmann from <i><a href="https://en.wikipedia.org/wiki/Joystiq">Joystiq</a></i> gave the game a 4/5. He praised the strong selection of dense, vertically challenging multiplayer maps, three-dimensional and liberating movement, coherent and fast-paced campaign, smart storytelling, exciting and dynamic gameplay, lifelike characters and movie-like presentation, but criticised the game for being a bit similar to the previous instalments as he stated that "<i>Call of Duty: Advanced Warfare</i> just doesn't have the power to break through the expectations of the brand".</p>
+
+<p>Miguel Concepcion from <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> gave the game an 8/10, praising its content-rich multiplayer, futuristic combat system, entertaining Uplink mode (a new mode introduced in <i>Advanced Warfare</i>), but criticising the inconsistent narrative, which he stated that "has prevented the campaign from being fully engaging", as well as shallow difficulty curve, making the co-operative mode "tedious".</p>
+
+<p>The game garnered mixed reception from <i><a href="https://en.wikipedia.org/wiki/USgamer">USgamer</a></i>, awarding it with a 3.5/5 and stating "<i>Advanced Warfare</i> executes the formula competently while adding a handful of bells and whistles like mechs, laser cannons, and double jumps; but Sledgehammer Games seems reluctant to really cut loose and push the setting to its fullest potential, making <i>Advanced Warfare</i> a solid but ultimately unexciting entry in the series."</p>
+
+<p>One particular moment of the game that was singled out by reviewers and players alike was Will Irons' funeral service, where the player is prompted to press or hold a button to approach the coffin; on the PC version, this particular prompt read "Press .mw-parser-output .keyboard-key{border:1px solid #aaa;border-radius:0.2em;box-shadow:0.1em 0.1em 0.2em rgba(0,0,0,0.1);background-color:var(--background-color-neutral-subtle,#f8f9fa);background-image:linear-gradient(to bottom,var(--background-color-neutral,#eaecf0),var(--background-color-neutral-subtle,#f8f9fa),var(--background-color-neutral,#eaecf0));color:var(--color-base,#202122);padding:0.1em 0.3em;font-family:inherit;font-size:0.85em}F to Pay Respects" ("Hold <a href="https://en.wikipedia.org/wiki/File:Xbox_button_X.svg"></a> to Pay Respects" in Xbox versions and "Hold <a href="https://en.wikipedia.org/wiki/File:PlayStationSquare.svg"></a> to Pay Respects" in PlayStation versions). The mechanic was criticized for both being arbitrary and unnecessary, as well as being inappropriate to the tone of the funeral the game intended to convey. The phrase has since become detached from its source, becoming an <a href="https://en.wikipedia.org/wiki/Internet_meme">Internet meme</a> in its own right, sometimes used unironically: during the tribute stream for the <a href="https://en.wikipedia.org/wiki/Jacksonville_Landing_shooting">Jacksonville Landing shooting</a>, viewers posted a single letter "F" in the chat.</p>
+
+<p>Activision claimed that <i>Call of Duty: Advanced Warfare</i> generated more revenue than any other media launch in 2014. It was reported in November 2014 that US retail sales of <i>Advanced Warfare</i> were 27% down on 2013's <i>Call of Duty: Ghosts</i>. Despite the decline, <i>Advanced Warfare</i> was still the top-selling game at US retail for 2014.</p>
+
+<p>The PlayStation 3 version sold 79,586 copies within its first week on sale in Japan, making it the bestselling game of the week in the country. In the same week, the PlayStation 4 version sold 64,060 copies, and the Xbox One version sold 3,370 copies.</p>
+
+<p><i>Advanced Warfare</i> won the award for "Best Graphics – Technology", in <i>IGN</i>'s Best of 2014 awards. At the 2014 NAVGTR Awards the game won two awards: <i>Performance in a Drama, Lead</i> (<a href="https://en.wikipedia.org/wiki/Kevin_Spacey">Kevin Spacey</a> as <i>Jonathan Irons</i>) and <i>Original Dramatic Score, Franchise</i>, and received eight nominations: <i>Writing in a Drama</i> (<a href="https://en.wikipedia.org/wiki/Mark_Boal">Mark Boal</a>), <i>Use of Sound(Franchise)</i>, <i>Graphics(Technical)</i>, <i>Game(Franchise Action)</i> (Glen Schofield, Michael Condrey), <i>Direction in a Game Cinema</i>, <i>Character Design</i>, <i>Art Direction(Contemporary)</i> and <i>Animation, Technical</i>. It also won the award for "Outstanding Realtime Visuals in a videogame at the 2015 <a href="https://en.wikipedia.org/wiki/Visual_Effects_Society_Awards">Visual Effects Society Awards</a>. It received multiple nominations from awards ceremonies such as <a href="https://en.wikipedia.org/wiki/The_Game_Awards_2014">The Game Awards 2014</a>, the <a href="https://en.wikipedia.org/wiki/11th_British_Academy_Games_Awards">11th British Academy Games Awards</a>, the <a href="https://en.wikipedia.org/wiki/18th_Annual_D.I.C.E._Awards">18th Annual D.I.C.E. Awards</a>, and the 2015 <a href="https://en.wikipedia.org/wiki/Golden_Joystick_Awards">Golden Joystick Awards</a>. It was nominated for the eSports Game of the Year award at <a href="https://en.wikipedia.org/wiki/The_Game_Awards_2015">The Game Awards 2015</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

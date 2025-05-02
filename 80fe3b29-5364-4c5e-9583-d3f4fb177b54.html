@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sonic Adventure 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('80fe3b29-5364-4c5e-9583-d3f4fb177b54/9a497dc0-d702-46b8-9fad-7b490e84390c.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="80fe3b29-5364-4c5e-9583-d3f4fb177b54/bc771c33-9bbe-431f-a4e0-93800f568b95.ico"/> Sonic Adventure 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="80fe3b29-5364-4c5e-9583-d3f4fb177b54/e11175b3-55f6-42d7-88f9-d288c50cdb48.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:59:17</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:32:17</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo GameCube">Nintendo GameCube</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/19/2012">11/19/2012</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-90">90</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-81">81</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sega of China">Sega of China</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sonic Team USA">Sonic Team USA</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-SEGA">SEGA</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Sonic_Adventure_2_Battle" target="_blank">PCGamingWiki</a><br/><a href="https://web.archive.org/web/20220531011249/https://www.sega.com/games/sonic-adventure-2/" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=8749" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/sonic-adventure-2--1" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/213610/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Sonic_Adventure_2" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/4455" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Sonic_Adventure_2" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/sonic-adventure-2/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Automobile">Automobile</a><br/><a href="#quicklink-Cartoon">Cartoon</a><br/><a href="#quicklink-Contemporary">Contemporary</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Third Person">Third Person</a><br/><a href="#quicklink-Track racing">Track racing</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Sonic Adventure 2</b></i> is a 2001 <a href="https://en.wikipedia.org/wiki/Platform_game">platform game</a> developed by <a href="https://en.wikipedia.org/wiki/Sonic_Team_USA">Sonic Team USA</a> and published by <a href="https://en.wikipedia.org/wiki/Sega">Sega</a> for the <a href="https://en.wikipedia.org/wiki/Dreamcast">Dreamcast</a>. It features two <a href="https://en.wikipedia.org/wiki/Conflict_between_good_and_evil">good-vs-evil</a> stories: <a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(character)">Sonic the Hedgehog</a>, <a href='https://en.wikipedia.org/wiki/Miles_"Tails"_Prower'>Miles "Tails" Prower</a>, and <a href="https://en.wikipedia.org/wiki/Knuckles_the_Echidna">Knuckles the Echidna</a> attempt to save the world, while <a href="https://en.wikipedia.org/wiki/Shadow_the_Hedgehog">Shadow the Hedgehog</a>, <a href="https://en.wikipedia.org/wiki/Doctor_Eggman">Doctor Eggman</a>, and <a href="https://en.wikipedia.org/wiki/Rouge_the_Bat">Rouge the Bat</a> attempt to conquer it. The stories are divided into three gameplay styles: fast-paced platforming for Sonic and Shadow, <a href="https://en.wikipedia.org/wiki/Third-person_shooter">third-person shooting</a> for Tails and Eggman, and <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> exploration for Knuckles and Rouge. Like previous <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog">Sonic the Hedgehog</a></i> games, the player completes <a href="https://en.wikipedia.org/wiki/Level_(video_games)">levels</a> while collecting <a href="https://en.wikipedia.org/wiki/Rings_(Sonic_the_Hedgehog)">rings</a> and defeating enemies. Outside the main gameplay, they can interact with <a href="https://en.wikipedia.org/wiki/Chao_(Sonic_the_Hedgehog)">Chao</a>, a <a href="https://en.wikipedia.org/wiki/Virtual_pet">virtual pet</a>, and compete in <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> battles.</p>
+
+<p>After the release of <i><a href="https://en.wikipedia.org/wiki/Sonic_Adventure">Sonic Adventure</a></i> (1998), <a href="https://en.wikipedia.org/wiki/Sonic_Team">Sonic Team</a> was downsized and a portion of the staff moved to San Francisco to establish Sonic Team USA. They worked on <i>Adventure 2</i> for a year and a half, with <a href="https://en.wikipedia.org/wiki/Takashi_Iizuka_(game_designer)">Takashi Iizuka</a> directing and <a href="https://en.wikipedia.org/wiki/Yuji_Naka">Yuji Naka</a> producing. Developed during a tumultuous period in <a href="https://en.wikipedia.org/wiki/History_of_Sega">Sega's history</a>, <i>Adventure 2</i> had a significantly smaller development team than the first game. Sonic Team USA streamlined the design to emphasize faster, more <a href="https://en.wikipedia.org/wiki/Action_game">action</a>-oriented gameplay, giving each character roughly equal gameplay time. The levels were influenced by American locations such as San Francisco and <a href="https://en.wikipedia.org/wiki/Yosemite_National_Park">Yosemite National Park</a>. The soundtrack—composed by <a href="https://en.wikipedia.org/wiki/Jun_Senoue">Jun Senoue</a>, Fumie Kumatani, <a href="https://en.wikipedia.org/wiki/Tomoya_Ohtani">Tomoya Ohtani</a>, and Kenichi Tokoi—spans genres including <a href="https://en.wikipedia.org/wiki/Pop-punk">pop-punk</a>, <a href="https://en.wikipedia.org/wiki/Glam_metal">glam metal</a>, <a href="https://en.wikipedia.org/wiki/Hip-hop">hip-hop</a>, <a href="https://en.wikipedia.org/wiki/Jazz">jazz</a> and orchestral arrangements, and features several metal singers.</p>
+
+<p><i>Sonic Adventure 2</i> was released in June 2001, coinciding with the franchise's tenth anniversary. It was the final <i>Sonic</i> game for a Sega console, released in the months after Sega discontinued the Dreamcast and transitioned to <a href="https://en.wikipedia.org/wiki/Third-party_developer">third-party development</a>. Later in 2001, it was <a href="https://en.wikipedia.org/wiki/Porting">ported</a> to the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> as <i><b>Sonic Adventure 2 Battle</b></i>, the first <i>Sonic</i> game for a <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> console. <i>Adventure 2</i> received positive reviews, with praise for its gameplay variety, visuals, and music but criticism for its <a href="https://en.wikipedia.org/wiki/Virtual_camera_system">camera</a>, voice acting, and plot. Although reviews of <i>Battle</i> were more mixed, it sold 1.7 million copies worldwide, becoming one of the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_GameCube_video_games">bestselling GameCube games</a> and the bestselling third-party GameCube game. Following <i>Adventure 2</i>, <i>Sonic</i> became a <a href="https://en.wikipedia.org/wiki/Multiplatform">multiplatform</a> franchise, beginning with <i><a href="https://en.wikipedia.org/wiki/Sonic_Heroes">Sonic Heroes</a></i> (2003).</p>
+
+<p><i>Sonic Adventure 2</i> introduced <i>Sonic</i> to a wider audience with its GameCube port. It originated characters and elements used in later games; Shadow became one of the most popular <i>Sonic</i> characters and featured in the spin-offs <i><a href="https://en.wikipedia.org/wiki/Shadow_the_Hedgehog_(video_game)">Shadow the Hedgehog</a></i> (2005) and <i><a href="https://en.wikipedia.org/wiki/Shadow_Generations">Shadow Generations</a></i> (2024). <i>Adventure 2</i> remains popular among <i>Sonic</i> fans and was rereleased for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, and <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> in 2012. Its first level, City Escape, is considered one of the greatest opening stages in a video game. <i>Adventure 2</i> has been ranked among the best <i>Sonic</i> games, although it has been characterized as divisive, particularly for its emphasis on multiple characters. Its story has been adapted in media including in the <a href="https://en.wikipedia.org/wiki/Anime">anime</a> series <i><a href="https://en.wikipedia.org/wiki/Sonic_X">Sonic X</a></i> (2003–2006) and the live-action film <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_3_(film)">Sonic the Hedgehog 3</a></i> (2024).</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Sonic Adventure 2</i> is a 3D <a href="https://en.wikipedia.org/wiki/Platform_game">platform game</a> divided into two campaigns: Hero and Dark. In the Hero campaign, players control Sonic, Tails, and Knuckles, who fight to save the world; in the Dark campaign, players control Shadow the Hedgehog, Doctor Eggman and Rouge the Bat, fighting to conquer it. Each campaign cycles through <a href="https://en.wikipedia.org/wiki/Level_(video_gaming)">levels</a> of its three characters, telling different sides of the story. Levels have a variety of themes (such as cities, jungles, desert pyramids and outer space), with some followed by <a href="https://en.wikipedia.org/wiki/Boss_(video_gaming)">boss</a> fights. The two campaigns' stories occur in parallel; completing both campaigns unlocks a final story with all six characters, culminating in a final boss fight.</p>
+
+<p>Sonic and Shadow play fast-paced levels, emphasizing platforming. Their homing attack can lock on to robots created by Eggman and GUN, and they can <a href="https://en.wikipedia.org/wiki/Grind_(sport)">grind</a> on rails. Tails's and Eggman's levels are slower and oriented towards <a href="https://en.wikipedia.org/wiki/Shoot_'em_up#Multidirectional_shooters">multidirectional shooting</a>; they are confined to <a href="https://en.wikipedia.org/wiki/Mecha">mechs</a> in which they can jump short heights, hover and shoot enemies. Knuckles's and Rouge's levels are open and feature <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> gameplay with treasure hunting; in each level, they must find three shards of the <a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog#Chaos_Emeralds">Master Emerald</a>. Their search is guided by radar and <a href="https://en.wikipedia.org/wiki/Puzzle_video_game">puzzle</a>-based clues from harmless robots. Knuckles and Rouge can glide, defeat enemies with punches and kicks, and scale walls, digging into them to find <a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a>.</p>
+
+<p><i>Adventure 2</i> has the <a href="https://en.wikipedia.org/wiki/Health_(gaming)">health</a> system found in many other <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog">Sonic</a></i> games. The player collects <a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog#Rings_(Sonic_the_Hedgehog)">rings</a> scattered throughout the levels; being hit by an enemy while holding rings causes the player to drop them all, while being hit without rings causes them to lose a <a href="https://en.wikipedia.org/wiki/Life_(video_games)">life</a>. Tails and Eggman have health bars, which are slowly refilled by collecting rings. Dying with no lives results in a <a href="https://en.wikipedia.org/wiki/Game_over">game over</a> screen. The characters can obtain permanent upgrades that grant them new abilities; for example, one upgrade allows Sonic and Shadow to dash along a sequential trail of rings to reach distant platforms, one gives Tails and Eggman hover jets that slows their descent to cross large gaps, while another lets Knuckles and Rouge dig into the ground to uncover treasure and Master Emerald pieces.</p>
+
+<p>Separate from the main campaigns, the player can raise Chao as <a href="https://en.wikipedia.org/wiki/Digital_pet">virtual pets</a>. They have five attributes (Swim, Fly, Run, Power and Stamina) and a moral continuum from Hero to Dark. From the moment they hatch, their stats can be increased with Chaos Drives or small animals, found in the main stages, which empower them to compete in karate and racing <a href="https://en.wikipedia.org/wiki/Minigame">minigames</a>. Their alignment gradually changes based on their affection for the characters; for example, a Chao which likes Tails will gradually become more heroic. Playing with Chao increases affection, and when a Chao becomes fully Hero or Dark, it assumes that form permanently. Although Chao eventually die, if they receive enough affection during their lives they reincarnate.</p>
+
+<p><i>Adventure 2</i> has 180 emblems, earned for a variety of tasks. Each level has five missions; only the first is required to continue the campaign, and other missions include completing a <a href="https://en.wikipedia.org/wiki/Balance_(game_design)#Difficulty_level">harder</a> version of a level and collecting 100 rings. The player earns emblems by completing missions and other tasks, many related to Chao raising. Collecting all the emblems unlocks a 3D version of the <a href="https://en.wikipedia.org/wiki/Green_Hill_Zone">Green Hill Zone</a> stage from the original <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(1991_video_game)">Sonic the Hedgehog</a></i>.</p>
+
+<p>The game has several two-player modes. Players may race on foot through new (or altered) levels, have shoot-'em-up battles in mechs, hunt for Master Emerald shards or race in <a href="https://en.wikipedia.org/wiki/Go-kart">go-karts</a>. A few characters are playable in these modes, but not in the main game; <a href="https://en.wikipedia.org/wiki/Sonic_Adventure#Plot">Tikal</a> and <a href="https://en.wikipedia.org/wiki/List_of_Sonic_the_Hedgehog_characters#Chaos">Chaos</a> from the original <i><a href="https://en.wikipedia.org/wiki/Sonic_Adventure">Sonic Adventure</a></i> are playable in the treasure-hunting game, as are <a href="https://en.wikipedia.org/wiki/Amy_Rose">Amy Rose</a> and <a href="https://en.wikipedia.org/wiki/Metal_Sonic">Metal Sonic</a> in the foot-racing levels and mechs piloted by Chao and <a href="https://en.wikipedia.org/wiki/Big_the_Cat">Big the Cat</a> (replaced by a Dark Chao in <i>Battle</i>) in the shooting levels.</p>
+
+<h2>Plot</h2>
+
+<p>Doctor Eggman learns of a secret weapon from the diary of his deceased grandfather, <a href="https://en.wikipedia.org/wiki/Professor_Gerald_Robotnik">Professor Gerald Robotnik</a>, and infiltrates a high-security <a href="https://en.wikipedia.org/wiki/Guardian_Units_of_Nations">Guardian Units of Nations</a> (GUN) facility to revive it with a <a href="https://en.wikipedia.org/wiki/Chaos_Emerald">Chaos Emerald</a>. The weapon—Shadow, a black hedgehog who proclaims himself the "Ultimate Lifeform"—offers to help Eggman conquer the world, telling him to rendezvous at an abandoned space colony, the ARK, with more Chaos Emeralds. Shadow has vowed to fulfill a promise he made to his friend, Eggman's cousin <a href="https://en.wikipedia.org/wiki/List_of_Sonic_the_Hedgehog_characters#Maria_Robotnik">Maria</a>, before she died; the <a href="https://en.wikipedia.org/wiki/Amnesia">amnesiac</a> Shadow interprets the promise as one of revenge. Shadow steals a Chaos Emerald, and GUN arrests Sonic after mistaking him for Shadow.</p>
+
+<p>Knuckles encounters Eggman and Rouge, a government spy, attempting to steal the <a href="https://en.wikipedia.org/wiki/Master_Emerald">Master Emerald</a>. He stops them by shattering it and searches for the scattered shards to repair it. Rouge follows Eggman to the ARK, where Shadow shows Eggman the Eclipse Cannon, another weapon created by Gerald. Shadow plans to charge the cannon with the seven Chaos Emeralds and use it to take over the world. Rouge offers her services and gives Shadow and Eggman another Chaos Emerald to gain their trust. Tails and Amy infiltrate GUN's base and rescue Sonic, while Rouge retrieves three emeralds from the base before Eggman destroys it. Eggman makes a global broadcast in which he threatens to destroy the planet if he is not accepted as Earth's ruler in a day. He demonstrates the cannon's power by destroying half of the Moon. Sonic, Tails, and Amy meet up with Knuckles and use a Chaos Emerald to track the others to the ARK.</p>
+
+<p>Knuckles separates from the group and finishes repairing the Master Emerald. On the ARK, Tails gives Sonic a counterfeit Chaos Emerald to destroy the Eclipse Cannon. As Sonic is about to use it, Eggman captures Tails and Amy, forcing Sonic to return and rescue them. Sonic tries to trick Eggman with the fake emerald, but Eggman deduces the plan and jettisons him in an escape pod rigged with explosives. Sonic uses the power of the fake emerald to escape; Eggman sneaks away with the last emerald and arms the Eclipse Cannon. The ARK suddenly starts falling, and a prerecorded message from Gerald is broadcast globally: he programmed the ARK to collide with Earth if the emeralds were used, a retaliation against the government for condemning his research and killing his colleagues, including Maria. Everyone but Shadow works together to access the cannon's core and neutralize the ARK using the Master Emerald.</p>
+
+<p>Amy pleads for Shadow's help, and he remembers that he promised Maria to help mankind, not destroy it. Shadow joins Sonic and Knuckles in the core as they encounter the Biolizard, a colossal lizard and prototype Ultimate Lifeform. Knuckles deactivates the Chaos Emeralds with the Master Emerald, but the Biolizard fuses with the cannon to continue the ARK's collision course. Sonic and Shadow use the emeralds to transform into their <a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog#Gameplay">super forms</a>, destroy the Biolizard, and put the ARK back into a stable orbit. This depletes Shadow's energy and he plummets to Earth, content in fulfilling his promise to Maria. The people on Earth celebrate as the group returns, and Sonic bids Shadow farewell.</p>
+
+<h2>Development</h2>
+
+<h3>Conception</h3>
+
+<p><i>Sonic Adventure</i>, the first <a href="https://en.wikipedia.org/wiki/3D_platformer">3D platformer</a> in Sega's <i>Sonic the Hedgehog</i> franchise, was developed by <a href="https://en.wikipedia.org/wiki/Sonic_Team">Sonic Team</a> and released for the <a href="https://en.wikipedia.org/wiki/Dreamcast">Dreamcast</a> in Japan in 1998. Although the game was a critical and commercial success, Dreamcast sales struggled to meet Sega's expectations. The <i>Adventure</i> team was downsized, and Sega assigned <i>Adventure</i>'s director, <a href="https://en.wikipedia.org/wiki/Takashi_Iizuka_(game_designer)">Takashi Iizuka</a>, to relocate to San Francisco, California, to establish <a href="https://en.wikipedia.org/wiki/Sonic_Team_USA">Sonic Team USA</a>. Sega wanted to repeat the pattern of developing a game in Japan and its sequel in the US as it had done with the original <i>Sonic</i> and <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_2">Sonic the Hedgehog 2</a></i> (1992). Only 11 staff members—significantly smaller than <i>Adventure</i>'s team of 120—joined Iizuka, and they began working on <i>Sonic Adventure 2</i> after they spent six months <a href="https://en.wikipedia.org/wiki/Video_game_localization">localizing</a> <i>Adventure</i> for the West.</p>
+
+<p>Shiro Maekawa, who wrote portions of Sega's <i><a href="https://en.wikipedia.org/wiki/Panzer_Dragoon_Saga">Panzer Dragoon Saga</a></i> (1998) and joined Sonic Team during <i>Adventure</i>'s production, conceived and wrote <i>Adventure 2</i>'s story. Maekawa accepted the role after he learned did not need to be an artist to create a story or <a href="https://en.wikipedia.org/wiki/Storyboard">storyboards</a>. Because <i>Adventure 2</i> would be the first <i>Sonic</i> game released during the 21st century, Maekawa wanted a substantial portion of the story to take place in space. The rest of Sonic Team was apprehensive, but Maekawa convinced them. Maekawa drew influence from the manga and anime he had enjoyed since childhood, including <i><a href="https://en.wikipedia.org/wiki/Please_Save_My_Earth">Please Save My Earth</a></i> (1986–1994). As Maekawa disliked Sonic as a character, he used <i>Adventure 2</i> as an opportunity to revise him to suit his tastes.</p>
+
+<p>Among Sonic Team's unimplemented <i>Adventure</i> concepts was a black hedgehog who rivaled Sonic's <a href="https://en.wikipedia.org/wiki/Cool_(aesthetic)">coolness</a>. The idea was revived during <i>Adventure 2</i>'s brainstorming sessions. The rival was initially villainous, but Iizuka decided to appeal to American audiences with an <a href="https://en.wikipedia.org/wiki/Antihero">antihero</a>, a popular archetype in the US. He cited the <a href="https://en.wikipedia.org/wiki/Image_Comics">Image Comics</a> character <a href="https://en.wikipedia.org/wiki/Spawn_(character)">Spawn</a> as an influence. Maekawa struggled to develop the concept until writing lines for a scene in which Sonic confronts the hedgehog for impersonating him. Maekawa settled on a delicate, pure character who would refer to himself using the more humble <a href="https://en.wikipedia.org/wiki/Japanese_pronoun">Japanese pronoun</a> <i>boku</i> (僕). He was originally named Terios the Prisoner, but was renamed Shadow after another new character, a bat, who became Rouge. Sonic Team saw Shadow as a one-off character who would not appear in subsequent <i>Sonic</i> games.</p>
+
+<p>As with the first <i>Adventure</i>, Iizuka directed <i>Adventure 2</i> while <a href="https://en.wikipedia.org/wiki/Yuji_Naka">Yuji Naka</a>, the <i>Sonic</i> franchise's co-creator, produced it. <i>Adventure 2</i>'s development lasted around a year and a half, and a total of 15 or 16 people worked on it. Three or four staff were recruited from Sega's <a href="https://en.wikipedia.org/wiki/Arcade_game">arcade game</a> division. Iizuka said that the team had to change their work ethic and prioritize efficiency to adapt to the reduced manpower. He recalled: "Each member of the staff had to be as efficient as possible, using the smallest amount of time and money they could!"</p>
+
+<p>Iizuka summarized <i>Sonic Adventure 2</i>'s development as "trying to make the impossible possible", as Sonic Team USA had to overcome the challenge of creating a game comparable in scope to the first <i>Adventure</i> with less than a tenth of the staff. Despite this, he considered <i>Adventure 2</i> the most fun <i>Sonic</i> game to develop, as the small team meant "we were able to condense all the good elements from the previous game, and deliver a story and game that was satisfying to players everywhere". Due to the smaller staff, Sonic Team USA split <i>Adventure 2</i> into two campaigns featuring character teams instead of <i>Adventure</i>'s format of six starring individual characters. <i>Adventure 2</i> uses the same <a href="https://en.wikipedia.org/wiki/Game_engine">game engine</a>, with improved <a href="https://en.wikipedia.org/wiki/Texture_mapping">texture</a> quality and <a href="https://en.wikipedia.org/wiki/Collision_detection">collision detection</a>.</p>
+
+<p>Sonic Team designed <i>Adventure 2</i> as faster and more <a href="https://en.wikipedia.org/wiki/Action_game">action</a>-oriented compared to the slower, more story-focused <i>Adventure</i>. Whereas Sonic Team had tried to include as much content as possible in <i>Adventure</i>, for <i>Adventure 2</i> they concentrated on the elements they deemed necessary. Iizuka noted that players who prioritized action found much of <i>Adventure</i>'s content pointless, so Sonic Team USA sought to streamline the experience while retaining <i>Adventure</i>'s "bulkiness". They removed the <a href="https://en.wikipedia.org/wiki/Overworld">hub worlds</a> in favor of linear level progression more in line with the older <i>Sonic</i> games, and divided action and exploration sequences among the characters rather than mixing them. Each level was tailored for its character, and unlike <i>Adventure</i>, in which some playable characters had short campaigns, all six <i>Adventure 2</i> characters have roughly equal gameplay time.</p>
+
+<p>Iizuka said <i>Adventure 2</i> was designed to have "more of an American flavor" than <i>Adventure</i>, since it was developed in the US. The art director, <a href="https://en.wikipedia.org/wiki/Kazuyuki_Hoshino">Kazuyuki Hoshino</a>, noted Sonic was a character designed to appeal to Western sensibilities, and working in the US allowed Sonic Team USA to capture an American atmosphere more successfully. The levels, drawn from Maekawa's story and setting, were inspired by American locations such as  <a href="https://en.wikipedia.org/wiki/Yosemite_National_Park">Yosemite National Park</a> (where the team vacationed) and the <a href="https://en.wikipedia.org/wiki/San_Francisco_Bay_Area">San Francisco Bay Area</a>. Iizuka said they did not intend to "create a simulation of San Francisco" but rather to reflect the influence of their surroundings. The staff frequently received <a href="https://en.wikipedia.org/wiki/Parking_ticket">parking tickets</a> from authorities; as a joke, they included the authorities' cars in a level where Sonic could destroy them. The month <i>Adventure 2</i> was to be <a href="https://en.wikipedia.org/wiki/Released_to_manufacturing">released to manufacturing</a>, one artist suggested adding Green Hill Zone, the original <i>Sonic the Hedgehog</i>'s first stage. Iizuka liked the idea but expected the rest of the team to object, so he, the artist, and a programmer spent a week working on it separately.</p>
+
+<p>Among Sonic Team USA's goals were a <a href="https://en.wikipedia.org/wiki/Frame_rate">frame rate</a> of 60 frames per second (FPS) to make the gameplay feel faster and a multiplayer mode. Achieving 60 FPS required some design tweaks, but Naka said Sonic Team's experience with the Dreamcast hardware made it possible. He felt that by then, Sonic Team had "gotten to the point where we can tap the full power of the console and deliver a much better experience to users". Sonic Team USA gave Sonic more abilities, such as grinding on rails, to add rhythm to ensure the gameplay was not only about speed. Sega collaborated with <a href="https://en.wikipedia.org/wiki/Soap_(shoes)">Soap</a>, a company that produced shoes with plastic concavities in the sole for rail grinding, to have Sonic wear a pair of Soap shoes rather than his traditional boots. Soap <a href="https://en.wikipedia.org/wiki/Product_placement">product placement</a> appears throughout the game as well. Like <i>Adventure</i>, Sonic Team USA included Chao to add <a href="https://en.wikipedia.org/wiki/Replay_value">replay value</a>. Iizuka described the Chao as a "relatively neutral entity" in <i>Adventure</i>, so in <i>Adventure 2</i>, Sonic Team USA added the ability to raise "Hero" and "Dark" Chao to reflect the conflict between good and evil. Sonic Team USA gave Chao the ability to socialize and interact, which Naka felt "took [them] a step closer to a real <a href="https://en.wikipedia.org/wiki/Artificial_life_form">artificial life form</a>".</p>
+
+<p><i>Sonic Adventure 2</i>'s soundtrack was composed by <a href="https://en.wikipedia.org/wiki/Jun_Senoue">Jun Senoue</a>, Fumie Kumatani, <a href="https://en.wikipedia.org/wiki/Tomoya_Ohtani">Tomoya Ohtani</a>, and Kenichi Tokoi, with Senoue as the lead composer and sound director. Senoue, Kumatani and Tokoi returned from <i>Adventure</i>, while Ohtani made his first contributions to a <i>Sonic</i> game. Senoue began writing in April 2000; he worked closely with Sonic Team USA regarding <i>Adventure 2</i>'s structure, design, and characters. Half the music was produced in the US, while the other half was produced in Japan. Like Iizuka, Senoue considered <i>Adventure 2</i> his favorite <i>Sonic</i> game to work on, as he found working with a small team in a new environment invigorating.</p>
+
+<p>Senoue wanted the soundtrack to stand out rather than merely serve as background music. He was not entirely satisfied with the first <i>Adventure</i> soundtrack, feeling some tracks did not fit, and sought to compose music that suited the atmosphere of each area. He said the music team made a pact "to write songs that promoted the game's speed and situations while keeping the best tempo of the stage". They decided to compose each character's level themes in a different genre and divided the work by which genre each composer was most interested in. For instance, Knuckles' stages feature <a href="https://en.wikipedia.org/wiki/Rap_music">rap music</a> composed by Ohtani, who wanted to focus on a new musical element. Tokoi said the soundtrack explores more genres than the first game's, and other genres include <a href="https://en.wikipedia.org/wiki/Pop-punk">pop-punk</a>, <a href="https://en.wikipedia.org/wiki/Glam_metal">glam metal</a>, and orchestral arrangements.</p>
+
+<p>Singers featured in the soundtrack include <a href="https://en.wikipedia.org/wiki/Johnny_Gioeli">Johnny Gioeli</a> of <a href="https://en.wikipedia.org/wiki/Hardline_(band)">Hardline</a>, <a href="https://en.wikipedia.org/wiki/Ted_Poley">Ted Poley</a> of <a href="https://en.wikipedia.org/wiki/Danger_Danger">Danger Danger</a>, <a href="https://en.wikipedia.org/wiki/Tony_Harnell">Tony Harnell</a> of <a href="https://en.wikipedia.org/wiki/TNT_(Norwegian_band)">TNT</a>, and <a href="https://en.wikipedia.org/wiki/Paul_Shortino">Paul Shortino</a> of <a href="https://en.wikipedia.org/wiki/Rough_Cutt">Rough Cutt</a>. The soundtrack is divided into level-specific tracks and character themes, with <a href="https://en.wikipedia.org/wiki/Leitmotif">leitmotifs</a> similar to <a href="https://en.wikipedia.org/wiki/Music_in_professional_wrestling">professional wrestler entrance music</a>. Senoue reused most of the character theme lyrics from the first <i>Adventure</i>, but wrote new music. As <a href="https://en.wikipedia.org/wiki/Crush_40">Crush 40</a>, he and Gioeli produced the main theme, "Live &amp; Learn". Senoue recorded the introduction for the <a href="https://en.wikipedia.org/wiki/Sonic_Adventure_2#Sonic_Adventure_2:_The_Trial"><i>Adventure 2</i> demo</a>; he worked on the rest later and completed it within a day, while Gioeli wrote the lyrics. Senoue then sent a <a href="https://en.wikipedia.org/wiki/Demo_(music)">demo</a> to Gioeli to record his vocals. Gioeli, who was paid US$3,000 for his work, said that he managed the recording and composition based on Senoue's demos. <a href="https://en.wikipedia.org/wiki/Takeshi_Taneda?action=edit&amp;redlink=1">Takeshi Taneda</a> [<a href="https://ja.wikipedia.org/wiki/種子田健">ja</a>] played bass and Katsuji Kirita of <a href="https://en.wikipedia.org/wiki/Gargoyle_(band)">Gargoyle</a> and <a href="https://en.wikipedia.org/wiki/The_Cro-Magnons">the Cro-Magnons</a> played drums. Poley wrote and performed "Escape from the City", the first level's theme. He found writing <a href="https://en.wikipedia.org/wiki/Video_game_music">video game music</a> different, as "you have to have a lot of action and alliteration. It creates a whole mood and there's no time for breath—the song is over in a minute and a half, and it's intense." The rapper Hunnid-P performed Knuckles' level themes.</p>
+
+<p>Senoue made a demo for each track using an <a href="https://en.wikipedia.org/wiki/ADAT">ADAT</a> system to track guitars or vocals and a <a href="https://en.wikipedia.org/wiki/Yamaha_Corporation">Yamaha</a> digital console or <a href="https://en.wikipedia.org/wiki/Mackie_(company)">Mackie</a> analog mixer for <a href="https://en.wikipedia.org/wiki/Audio_mixing_(recorded_music)">mixing</a>. He edited tracks with his <a href="https://en.wikipedia.org/wiki/Macintosh">Macintosh</a> before testing them in-game. Once Senoue was satisfied and received Sonic Team USA's approval, he finished <a href="https://en.wikipedia.org/wiki/Music_sequencer">sequencing</a> and sent demos to prepare for the <a href="https://en.wikipedia.org/wiki/Recording_session">recording sessions</a>. The soundtrack was recorded across five sessions in Los Angeles, New York City and Tokyo. While he enjoyed studio work, Senoue described the last three months as chaotic, as he had to travel between Tokyo, San Francisco and Los Angeles within weeks to write and record music. Senoue finished the soundtrack in February 2001, after which he worked on the sound effects.</p>
+
+<h2>Release</h2>
+
+<h3>Marketing</h3>
+
+<p>Sega announced <i>Sonic Adventure 2</i> at <a href="https://en.wikipedia.org/wiki/E3">E3</a> in May 2000 with a trailer premiere behind closed doors and a press release. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> reported that it was 40% complete at that time. Sega released the trailer online when it launched Sonic Team's website on June 30, and allowed journalists to play a <a href="https://en.wikipedia.org/wiki/Game_demo">demo</a> version in December. Early copies of Sonic Team's <i><a href="https://en.wikipedia.org/wiki/Phantasy_Star_Online">Phantasy Star Online</a></i>, released in Japan in December and worldwide in January 2001, were bundled with the demo. It features the opening cutscene and level, ending with a trailer showcasing later levels. Sega showcased <i>Adventure 2</i> again at E3 2001.</p>
+
+<p>On June 13, <a href="https://en.wikipedia.org/wiki/Archie_Comics">Archie Comics</a> published a brief adaptation in its <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(Archie_Comics)">Sonic the Hedgehog</a></i> comic book, written by Karl Bollers and penciled by <a href="https://en.wikipedia.org/wiki/Patrick_Spaziante">Patrick Spaziante</a>. According to <a href="https://en.wikipedia.org/wiki/Ken_Penders">Ken Penders</a>, one of the series' writers, the creative team was unable to adapt the story in full due to Sonic Team's desire for secrecy; they were only able to work from the demo and a few screenshots. Penders said they considered adapting the story in a separate <i><a href="https://en.wikipedia.org/wiki/List_of_Archie_Comics'_Sonic_the_Hedgehog_publications#Comics">Super Special</a></i> issue, but Archie had ceased publishing <a href="https://en.wikipedia.org/wiki/One-shot_(comics)">one-shots</a> at the time.</p>
+
+<p><i>Adventure 2</i> was initially set to be released in February 2001, but was delayed to June 19 in North America and June 23 in other countries. The worldwide release coincided with <i>Sonic</i>'s tenth anniversary, and Sega marked the occasion in its marketing. In Japan, Sega offered a limited edition "Birthday Pack" for two days that included the game, a gold disc containing <a href="https://en.wikipedia.org/wiki/Music_of_Sonic_the_Hedgehog"><i>Sonic</i> music</a>, a commemorative gold coin, and a 17-page booklet detailing the series' history. On June 30, Sega held a celebration at a <a href="https://en.wikipedia.org/wiki/Software_Etc.">Software Etc.</a> in <a href="https://en.wikipedia.org/wiki/San_Jose,_California">San Jose, California</a>, where attendees could have birthday cake, partake in giveaways, and receive Naka's autograph.</p>
+
+<p><i>Sonic Adventure 2</i> was released during a tumultuous period in <a href="https://en.wikipedia.org/wiki/History_of_Sega">Sega's history</a>. Amidst competition from <a href="https://en.wikipedia.org/wiki/Sony_Computer_Entertainment">Sony Computer Entertainment</a>'s <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, a lack of support from important <a href="https://en.wikipedia.org/wiki/Third-party_developer">third-party developers</a>, and conflict within Sega, Dreamcast sales failed to meet Sega's expectations. <a href="https://en.wikipedia.org/wiki/Peter_Moore_(businessman)">Peter Moore</a>, the president and chief operating officer of Sega of America, said the Dreamcast would need to sell five million units in the US by the end of 2000 to remain a viable platform, but Sega fell short of this goal with three million units sold. Moreover, Sega's attempts to spur sales through lower prices and cash rebates caused escalating financial losses. On January 31, 2001, Sega announced it was discontinuing the Dreamcast to become a third-party developer, although it remained committed to releasing <a href="https://en.wikipedia.org/wiki/Video_game_developer#First-party_developer">first-party</a> Dreamcast software through 2001. The third-party transition made <i>Adventure 2</i> one of the last major Dreamcast <a href="https://en.wikipedia.org/wiki/Platform_exclusivity">exclusives</a> and the final <i>Sonic</i> game for a Sega console. Much of Sonic Team's staff, including Naka, opposed the move as they had already entered pre-production on <i><a href="https://en.wikipedia.org/wiki/Sonic_Adventure_3">Sonic Adventure 3</a></i>, but were unable to fight it.</p>
+
+<p>In April 2001, Sega announced Sonic Team was working on a game for <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a>'s <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a>. Sonic Team kept the project a secret until its reveal at <a href="https://en.wikipedia.org/wiki/Nintendo_Space_World">Nintendo Space World</a> in August. Naka liked the GameCube hardware, and advised Sonic Team fans to purchase GameCubes. Shortly before Space World, Sega confirmed rumors that the project was a <a href="https://en.wikipedia.org/wiki/Porting">port</a> of <i>Sonic Adventure 2</i>, subtitled <i>Battle</i>. This marked <i>Sonic</i>'s first appearance on a Nintendo console, which <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> called "an unbelievable milestone of epic proportions". Sonic Team left the single-player gameplay mostly unchanged, but added multiplayer options such as new maps and characters. <i>Battle</i> replaces the VMU's implementation with connectivity with the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> (GBA) game <i><a href="https://en.wikipedia.org/wiki/Sonic_Advance">Sonic Advance</a></i> (2001), facilitated through the <a href="https://en.wikipedia.org/wiki/GameCube_–_Game_Boy_Advance_link_cable">GameCube – GBA link cable</a>. Visually, <i>Battle</i> features <a href="https://en.wikipedia.org/wiki/Texture_mapping">texture</a> resolution increases, though some textures are blurrier, while colors are brighter. <i>Battle</i> was released in Japan on December 20, 2001, in North America on February 11, 2002, in Europe on May 3, 2002, and in Australia on May 17, 2002.</p>
+
+<p>The Dreamcast version of <i>Sonic Adventure 2</i> sold more than 84,000 copies during its first week in Japan (a franchise record), and a total of around 500,000 copies worldwide. <i><a href="https://en.wikipedia.org/wiki/The_Escapist_(magazine)">The Escapist</a></i> wrote that these numbers were impressive given that the Dreamcast had already been discontinued. The GameCube version was significantly more successful. In Japan, it sold almost 50,000 copies during its first month, and had sold 192,186 by December 23, 2002. In North America, it was the bestselling GameCube game between January and August 2002, selling 465,000 copies. By August 2002, it had sold more than a million copies worldwide. Cumulative sales reached 1.7 million, and by July 2006, it had earned $44 million in the US. According to <i><a href="https://en.wikipedia.org/wiki/Next_Generation_(magazine)">Next Generation</a>,</i> it was the 42nd-bestselling game for the GameCube, PlayStation 2, or <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a> between January 2000 and July 2006 in the US. It is one of the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_GameCube_video_games">bestselling GameCube games</a> and the bestselling third-party GameCube game.</p>
+
+<h2>Reception</h2>
+
+<p><i>Sonic Adventure 2</i> received "generally favorable" reviews. Critics appreciated its multiple playing styles. According to <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> and Four-Eyed Dragon of <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i>, the three styles and bonus features such as Chao gardens were engaging. Johnny Liu of <i><a href="https://en.wikipedia.org/wiki/GameRevolution">GameRevolution</a></i> praised its <a href="https://en.wikipedia.org/wiki/Replay_value">replay value</a> of multiple playing styles and 180 different goals. Anthony Chau of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> called it one of the best <i>Sonic</i> games: "If this is the last <i>Sonic</i> game in these declining Dreamcast years, it's satisfying to know that the DC didn't go out with a bang, but with a sonic boom." In 2022, <i>IGN</i> named it one of the best Dreamcast games.</p>
+
+<p>The camera was panned. Shahed Ahmed of <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> criticized the "cardinal sin" of 3D platform games: forcing players to jump to an out-of-frame platform. Although players can re-orient the camera with the trigger buttons, it reverts when the character moves. According to Chau and Liu, this made searching cramped sections of Knuckles' and Rouge's levels frustrating. <i>Edge</i> found camera problems permeating the game, with no significant improvement from <i>Adventure</i>.</p>
+
+<p>The visuals received positive reviews. Liu called them "sweet, sweet eye-crack". Four-Eyed Dragon wrote that the game "is simply jaw-dropping beautiful," citing its detailed backgrounds and scenery and the characters' extensive color palettes. According to Chau, the game had "some of the best textures ever seen" and was one of the most beautiful Dreamcast games. <i>Edge</i> was impressed by the texture detail and <a href="https://en.wikipedia.org/wiki/Draw_distance">draw distance</a>, and Chau, Liu and Ahmed praised its 60-frame-per-second <a href="https://en.wikipedia.org/wiki/Rendering_(computer_graphics)">rendering</a> speed.</p>
+
+<p>Senoue's soundtrack also received positive reviews. According to Ahmed, the music was an improvement over <i>Adventure</i>'s "campy <a href="https://en.wikipedia.org/wiki/Glam-rock">glam-rock</a> and <a href="https://en.wikipedia.org/wiki/J-pop">J-pop</a> soundtrack", with less emphasis on lyrics, while Liu appreciated its more "understated" approach. Four-Eyed Dragon called the music "an eclectic mix of orchestrated masterpieces, guitar tunes, and melodic <a href="https://en.wikipedia.org/wiki/Hip_hop_music">hip-hop</a> voices" that "gracefully fill the game's ambiance to a perfect pitch." Reactions to the voice acting were divided; according to Ahmed, "the voice acting, and the lip-synching in particular, is executed quite well," and Liu and Chau found the English voices inferior to the Japanese ones.</p>
+
+<p>The plot was derided, although its presentation was well received. Ahmed wrote, "Throughout the game the plot becomes more and more scattered and lackluster," not focusing long enough on one element to execute it meaningfully. Although Liu agreed that despite the game's ambitious scope and themes it failed to advance the series' core plot beyond the <a href="https://en.wikipedia.org/wiki/Sega_Genesis">Sega Genesis</a> <i>Sonic</i> games, <i>Edge</i> appreciated the story's presentation from both perspectives: hero and villain.</p>
+
+<p>Despite high review scores for the Dreamcast version, the GameCube version released six months later received mixed reviews: respective Metacritic and <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> scores of 73 percent and 72.33 percent. Critics generally felt that it was not significantly improved from the Dreamcast original. However, Shane Bettenhausen of <i><a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a></i> saw <i>Adventure 2 Battle</i> as noticeably superior; in addition to its upgrades, its action was better suited to the GameCube's controller than the Dreamcast's.</p>
+
+<h3>Accolades</h3>
+
+<p><i>Sonic Adventure 2</i> received several accolades, including the 2001 <i>IGN</i>'s Editors' Choice Award. <i><a href="https://en.wikipedia.org/wiki/ScrewAttack">ScrewAttack</a></i> called it the <a href="https://en.wikipedia.org/wiki/ScrewAttack's_Top_10">fifth-best Dreamcast game</a>, and <i><a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a></i> rated it the tenth-greatest Dreamcast game out of 25: "Despite trailing off significantly in recent years, the 3D side of the <i>Sonic the Hedgehog</i> franchise had a surprisingly stellar start with the <i>Sonic Adventure</i> entries, and the 2001 sequel really amped up the action." In February 2014, <i>IGN'</i>s Luke Karmali called <i>Battle</i> his tenth-favorite game of all time. In a video interview with <a href="https://en.wikipedia.org/wiki/Sonic_Team">Sonic Team</a> studio head Takashi Iizuka, he says <i>Sonic Adventure 2</i> is his favourite game in the series.</p>
+
+<h2>Post-release</h2>
+
+<p>Development on the next game, <i><a href="https://en.wikipedia.org/wiki/Sonic_Heroes">Sonic Heroes</a></i> (2003), began at Sonic Team USA shortly after <i>Adventure 2</i>'s completion. Iizuka chose to develop it as a standalone game rather than a sequel to appeal to a broader audience. <i>Heroes</i> became the first <a href="https://en.wikipedia.org/wiki/Cross-platform">multiplatform</a> <i>Sonic</i> game when it was released for the GameCube, PlayStation 2, and Xbox in late 2003. Another 2003 Sonic Team game, <i><a href="https://en.wikipedia.org/wiki/Billy_Hatcher_and_the_Giant_Egg">Billy Hatcher and the Giant Egg</a></i>, uses an updated version of the <i>Adventure 2</i> engine, and Ohtani, who first composed <i>Sonic</i> music for <i>Adventure 2</i>, became the series' sound director with <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(2006_video_game)">Sonic the Hedgehog</a></i> (2006).</p>
+
+<p>Sega's discontinuation of the Dreamcast made <i>Sonic Adventure 2</i> the last <i>Sonic</i> game that Sonic Team—which had worked with Sega hardware teams to take advantage of their consoles—produced with the benefits of first-party development. Whereas <i>Adventure 2</i> had been made using <a href="https://en.wikipedia.org/wiki/Proprietary_software">proprietary software</a>, Sonic Team USA partnered with <a href="https://en.wikipedia.org/wiki/Criterion_Software">Criterion Software</a> to use <a href="https://en.wikipedia.org/wiki/RenderWare">RenderWare</a> so <i>Heroes</i> could be programmed and ported across platforms. Iizuka described the loss of first-party development benefits as the greatest challenge of the third-party transition, as his team "no longer [had] the ability to control what we need[ed] to make our games". Naka said he had mixed feelings about <i>Sonic</i> as a multiplatform franchise, and departed to form his own studio, <a href="https://en.wikipedia.org/wiki/Prope">Prope</a>, in 2006.</p>
+
+<p>Shadow quickly proved popular among fans, so Sonic Team USA <a href="https://en.wikipedia.org/wiki/Retcon">retconned</a> his apparent death in <i>Adventure 2</i>'s finale to include him in subsequent <i>Sonic</i> games, beginning with <i>Heroes</i>. After <i>Heroes</i>, Sonic Team USA was renamed Sega Studios USA. Their next project was <i><a href="https://en.wikipedia.org/wiki/Shadow_the_Hedgehog_(video_game)">Shadow the Hedgehog</a></i> (2005), a spin-off starring Shadow that continues <a href="https://en.wikipedia.org/wiki/Plot_thread">plot threads</a> established in <i>Adventure 2</i>. The division developed <i><a href="https://en.wikipedia.org/wiki/Nights:_Journey_of_Dreams">Nights: Journey of Dreams</a></i> (2007) before it was merged back into the Japanese Sonic Team in 2008. Iizuka became the head of Sonic Team following the merger.</p>
+
+<h3>Soundtracks</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Marvelous_Entertainment">Marvelous Entertainment</a> released a collection of <i>Sonic Adventure 2</i> songs, <i>Cuts Unleashed Sonic Adventure 2 Vocal Collection</i>, on August 18, 2001, before releasing the full two-disc <a href="https://en.wikipedia.org/wiki/Soundtrack_album">soundtrack album</a>, <i>Multi-dimensional Sonic Adventure 2 Original Sound Track</i>, on September 5. <a href="https://en.wikipedia.org/wiki/Tokyopop">Tokyopop</a> released a soundtrack in the US on February 5, 2002, ahead of the GameCube version's release, featuring 26 tracks selected by Senoue and US-exclusive remixes. On November 30, 2011, Sega released the soundtrack on <a href="https://en.wikipedia.org/wiki/ITunes">iTunes</a> via its <a href="https://en.wikipedia.org/wiki/Wave_Master">Wave Master</a> label to coincide with the franchise's 20th anniversary. <a href="https://en.wikipedia.org/wiki/Brave_Wave_Productions">Brave Wave Productions</a> released a <a href="https://en.wikipedia.org/wiki/Vinyl_LP">vinyl</a> version of the soundtrack including interviews with Senoue and Iizuka in 2018.</p>
+
+<p>Sega released a port of <i>Sonic Adventure 2</i> as a downloadable game for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> (via <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a>) and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> (via <a href="https://en.wikipedia.org/wiki/Xbox_Live_Arcade">Xbox Live Arcade</a>) on October 2, 2012, and for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> (via <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a>) on November 20. The port followed a similar reissue of the first <i>Adventure</i> in 2010 and was branded as part of Sega Heritage, a 2012 initiative in which Sega rereleased popular games from its back catalog on modern consoles. The rerelease features <a href="https://en.wikipedia.org/wiki/High-definition_video">high-definition</a> graphics and <a href="https://en.wikipedia.org/wiki/Widescreen">widescreen</a> support, though some cutscenes are still presented in <a href="https://en.wikipedia.org/wiki/4:3">4:3</a>. Otherwise, it is mostly identical to the original versions; it lacks the Dreamcast version's online features and the GameCube additions are paywalled as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC). In 2017, the PlayStation 3 version was made playable on the <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and Windows via the <a href="https://en.wikipedia.org/wiki/Cloud_gaming">cloud gaming</a> service <a href="https://en.wikipedia.org/wiki/PlayStation_Now">PlayStation Now</a>, and the Xbox 360 version was made <a href="https://en.wikipedia.org/wiki/List_of_backward-compatible_games_for_Xbox_One_and_Series_X/S">backward compatible</a> with the <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>.</p>
+
+<h2>Legacy</h2>
+
+<h3>Retrospective assessments</h3>
+
+<p><i>Sonic Adventure 2</i> is frequently ranked among the best <i>Sonic</i> games. <i>GameSpot</i> and <i>Kotaku</i> deemed it a satisfying conclusion to <i>Sonic</i>'s run on Sega hardware, and <i>Game Informer</i> considered it a worthy sequel to <i>Adventure</i>. However, journalists have characterized <i>Adventure 2</i> as divisive, and the 2012 rerelease received "mixed or average reviews" according to Metacritic. Some fans regard <i>Adventure 2</i> as the franchise's pinnacle, but others find it unfocused—"a jack of all trades, master of none", as <i><a href="https://en.wikipedia.org/wiki/The_Escapist_(magazine)">The Escapist</a></i> wrote. According to <i>The Escapist</i>, "depending on who you ask, [it] represent[s] the franchise at its best and at its worst."</p>
+
+<p>Common elements of retrospective praise include Sonic and Shadow's levels, the Chao Garden, and the soundtrack. <i>GamesRadar+</i> felt <i>Adventure 2</i>'s increased speed and emphasis on spectacle positively influenced the series. Conversely, its focus on multiple characters with different gameplay styles has been divisive. While <i>IGN</i> praised the gameplay variety, <i>Kotaku</i> noted that many only like the Sonic and Shadow levels; retrospective reviewers have criticized the other characters as frustrating and cumbersome. <i>Game Informer</i> found Tails and Eggman's levels fine, but Knuckles and Rouge's annoying. <i>Nintendo Life</i> disagreed, writing Knuckles and Rouge were "entertaining enough" while Tails and Eggman were "rubbish". To <i>TechRadar</i>, the gameplay variety meant the quality of levels fluctuated more than it did in <i>Adventure</i>, though Sonic and Shadow's levels were a significant improvement. <i>Kotaku</i> appreciated the other characters' levels for their immersion, despite their poor quality.</p>
+
+<p>Additional criticism has been directed at the camera for obscuring enemies and platforms, poor voice acting and <a href="https://en.wikipedia.org/wiki/Audio_mixing">audio mixing</a>, and the story. The audio mixing, in which characters' dialogue in cutscenes frequently overlaps, has been described as infamous. <i>The Escapist</i> and <i><a href="https://en.wikipedia.org/wiki/VentureBeat">VentureBeat</a></i> called the story nonsensical, <i>Destructoid</i> said it "almost feels like work to get through", and <i>Vice</i> jokingly compared it to a <a href="https://en.wikipedia.org/wiki/Bob_Books">Bob Books</a> take on <i><a href="https://en.wikipedia.org/wiki/Armageddon_(1998_film)">Armageddon</a></i>. <i>Nintendo Life</i> felt the plot would have been interesting were it not for the <a href="https://en.wikipedia.org/wiki/Plot_hole">plot holes</a> caused by events playing out differently across campaigns. However, <i>VentureBeat</i> praised the good-vs.-evil presentation as clever and adding unexpected nuance to the villains' motivations, and <i><a href="https://en.wikipedia.org/wiki/Rock_Paper_Shotgun">Rock Paper Shotgun</a></i> said the story was one of <i>Sonic</i>'s best despite some melodramatic moments. They highlighted the scene in which Eggman destroys the Moon as considerably more impactful than his schemes in later games.</p>
+
+<p><i>VentureBeat</i> wrote that <i>Adventure 2</i> did not hold up to modern standards, finding its camera and reliance on trial-and-error design outdated, and <i>Destructoid</i> said it was only redeemed by how engaging the Chao Garden was. A <i>Vice</i> writer, while playing <i>Adventure 2</i> for the first time in a decade, said that "[I've] been forced to reconcile my nostalgia with the harsh reality that it is not a terrific game". <i>VentureBeat</i> wrote that it was more worth remembering for its historical significance as the last <i>Sonic</i> game for a Sega console than it was worth replaying. Others conceded that <i>Adventure 2</i> is flawed, but argued this was negated by its merits. <i><a href="https://en.wikipedia.org/wiki/Nintendo_Life">Nintendo Life</a></i> said <i>Adventure 2</i>'s many "bizarre design choices" made it endearing, and <i>Kotaku</i> said it "felt equal parts triumphant and bittersweet... <i>Adventure 2</i> has plenty of flaws, but you can tell Sonic Team was working hard to build off the best parts of its previous <i>Adventure</i> and play out Sega’s home console era with style."</p>
+
+<p>Following <i>Adventure 2</i>, <i>Sonic</i>'s critical standing began to decline, which <i>VentureBeat</i> attributed to Sega "depending on stupid gimmicks to sell their most iconic property" following the third-party transition. <i>The Escapist</i> wrote that subsequent <i>Sonic</i> games, such as <i>Sonic the Hedgehog</i>, <i><a href="https://en.wikipedia.org/wiki/Sonic_Unleashed">Sonic Unleashed</a></i> (2008), and <i><a href="https://en.wikipedia.org/wiki/Sonic_Forces">Sonic Forces</a></i> (2017), attempted to replicate the <i>Adventure 2</i> format of varied gameplay styles, but failed because they did not develop each style fully. <i>VentureBeat</i> said <i>Adventure 2</i>'s alternate gameplay styles were natural additions to <i>Sonic</i> whereas those in subsequent games, such as <i>Unleashed</i>'s <a href="https://en.wikipedia.org/wiki/Werewolf">Werehog</a> segments and <i><a href="https://en.wikipedia.org/wiki/Sonic_and_the_Black_Knight">Sonic and the Black Knight</a></i>'s (2009) swordplay, were not.</p>
+
+<p><i>Sonic Adventure 2</i>'s first level, City Escape, has been described as one of the best opening stages in a video game. The level, which serves as a tutorial, depicts Sonic as he escapes GUN and features sequences in which he snowboards through streets and outruns a murderous truck. <i><a href="https://en.wikipedia.org/wiki/Red_Bull">Red Bull</a></i> said it was "unquestionably <i>Sonic</i>'s finest hour since the [Genesis] days", and <i>Destructoid</i> called it a perfect introduction to modern <i>Sonic</i> gameplay that encapsulates the strengths of the <i>Adventure</i> games. <i>USgamer</i> wrote that <i>Adventure 2</i> is remembered more for City Escape than anything else, and <i>Polygon</i> said that it "represents the epitome of <i>Sonic the Hedgehog</i>. It's fast-paced, full of secret pathways, and more than a little absurd."</p>
+
+<p><i>Polygon</i> considered "Escape from the City", the City Escape theme song, the peak of the <i>Sonic</i> franchise, with an energetic composition and hopeful lyrics that encapsulate Sonic's character. The song was remixed in <i><a href="https://en.wikipedia.org/wiki/Sonic_Generations">Sonic Generations</a></i> (2011) and featured in the <i><a href="https://en.wikipedia.org/wiki/Mario_&amp;_Sonic_at_the_Olympic_Games">Mario &amp; Sonic at the Olympic Games</a></i> and <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros.">Super Smash Bros.</a></i> series of <a href="https://en.wikipedia.org/wiki/Crossover_(fiction)">crossover</a> games. Senoue and the band Hyper Potions produced an <a href="https://en.wikipedia.org/wiki/Music_of_Ireland">Irish-themed</a> remix for a collaboration between <a href="https://en.wikipedia.org/wiki/Jacksepticeye">Jacksepticeye</a> and the <i>Sonic</i> social media team on <a href="https://en.wikipedia.org/wiki/St._Patrick's_Day">St. Patrick's Day</a> 2020. Sega produced two remixes in 2021: a <a href="https://en.wikipedia.org/wiki/Sonic_30th_Anniversary_Symphony">Sonic 30th Anniversary Symphony</a> remix in June and a <a href="https://en.wikipedia.org/wiki/Funk_music">funk</a> remix in December. The original is a selectable song in Sega's <i><a href="https://en.wikipedia.org/wiki/Samba_de_Amigo:_Party_Central">Samba de Amigo: Party Central</a></i> (2023), a <a href="https://en.wikipedia.org/wiki/Rhythm_game">rhythm game</a> which includes a City Escape-based stage. Poley described "Escape from the City" as his biggest hit, though he does not receive any <a href="https://en.wikipedia.org/wiki/Royalties">royalties</a>.</p>
+
+<p><i>Generations</i>, which commemorates the franchise's 20th anniversary, features reimagined versions of levels from past <i>Sonic</i> games, including 2D and 3D reimaginings of City Escape. The 2D version features the "Classic" iteration of Sonic racing the truck as it moves between the background and foreground, while the 3D version features shortcuts that take advantage of <i>Generations</i>'s mechanics. <i>Kotaku</i> regarded <i>Generations</i>'s City Escape as one of the most impactful moments of 2011, and <i><a href="https://en.wikipedia.org/wiki/PCMag">PCMag</a></i> considered it a highlight, a "prime example" of Sonic Team drawing inspiration from the franchise's history.</p>
+
+<p><i>Sonic Adventure 2</i>'s GameCube port introduced <i>Sonic</i> to a new audience of <a href="https://en.wikipedia.org/wiki/Millennials">Millennials</a> and, alongside the compilation <i><a href="https://en.wikipedia.org/wiki/Sonic_Mega_Collection">Sonic Mega Collection</a></i> (2002), built a new fanbase following Sega's third-party transition. For this reason, <i>The Escapist</i> regarded it as possibly the most important <i>Sonic</i> game and said that while some later <i>Sonic</i> games were better, "[they] didn’t do nearly as much to energize or even create a new fanbase". Additionally, the GameCube port paved the way for a closer relationship between Sega and Nintendo after a decade of <a href="https://en.wikipedia.org/wiki/Console_war">console war</a> hostility. Several subsequent <i>Sonic</i> games were exclusive to Nintendo platforms and Sonic appeared alongside Nintendo's mascot <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> in the <i>Mario &amp; Sonic</i> and <i>Super Smash Bros.</i> games.</p>
+
+<p>Sonic Team continued the gameplay style established by the <i>Adventure</i> games in <i>Heroes</i> and <i>Sonic the Hedgehog</i> before going in a new direction with <i>Unleashed</i>, which was conceived as a sequel to <i>Adventure 2</i> before becoming a standalone game. <i>Adventure 2</i>'s emphasis on spectacle influenced subsequent <i>Sonic</i> games. It was the first <i>Sonic</i> game to feature rail grinding, a mechanic used in nearly every subsequent <i>Sonic</i> game. <i><a href="https://en.wikipedia.org/wiki/Sonic_Frontiers">Sonic Frontiers</a></i> (2022) features levels that recreate the layouts of the <i>Adventure 2</i> stages Metal Harbor, Green Forest, and Sky Rail, and Sonic's Soap shoes are available as DLC. <i>Sonic</i> fans have requested <i>Adventure 3</i>, but Iizuka said this would not advance the series' design.</p>
+
+<p>According to <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i>, Shadow is the most famous modern <i>Sonic</i> character. He returned as a playable character in <i>Heroes</i>, <i>Sonic the Hedgehog</i>, <i>Sonic and the Black Knight</i>, and <i>Forces</i>. In 2005, Naka said Sonic Team had determined Shadow was the most popular <i>Sonic</i> character excluding Sonic himself, a finding reaffirmed in a 2009 Sega poll. <i>Sonic Generations</i> includes Shadow as a boss, and the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> version includes the Biolizard boss. A 2024 <i>Generations</i> rerelease was bundled with <i><a href="https://en.wikipedia.org/wiki/Shadow_Generations">Shadow Generations</a></i>, a Shadow game that features recreations of <i>Adventure 2</i> levels and bosses. Rouge also became a recurring character; a 2006 Sega poll found her the tenth-most-popular <i>Sonic</i> character.</p>
+
+<p>"Live &amp; Learn" remains a popular <i>Sonic</i> song. It has appeared in at least 25 games since <i>Adventure 2</i>, including non-<i>Sonic</i> games such as the <i><a href="https://en.wikipedia.org/wiki/Maimai_(video_game_series)">Maimai</a></i>, <i><a href="https://en.wikipedia.org/wiki/Phantasy_Star">Phantasy Star</a></i>, <i>Super Smash Bros.</i>, and <i><a href="https://en.wikipedia.org/wiki/Yakuza_(franchise)">Yakuza</a></i> series. Crush 40 performed a remix featuring the <a href="https://en.wikipedia.org/wiki/Prague_Philharmonic_Orchestra">Prague Philharmonic Orchestra</a> as the finale of the Sonic 30th Anniversary Symphony. In 2024, Gioeli filed a lawsuit against Sega for <a href="https://en.wikipedia.org/wiki/Breach_of_contract">breach of contract</a> regarding the ownership of "Live &amp; Learn"; he said that he was unaware that Sega kept reusing the song, to which he holds the copyright. He sought US$500,000 in damages and another US$500,000 in unpaid royalties for its use outside of <i>Adventure 2</i>.</p>
+
+<p><i>Sonic Adventure 2</i> was adapted in the second season of the <a href="https://en.wikipedia.org/wiki/Anime">anime</a> series <i><a href="https://en.wikipedia.org/wiki/Sonic_X">Sonic X</a></i> (2003–2006). The Japanese voice cast reprised their roles for the adaptation, while the licensing corporation <a href="https://en.wikipedia.org/wiki/4Kids_Entertainment">4Kids Entertainment</a>, which handled the <a href="https://en.wikipedia.org/wiki/Editing_of_anime_in_distribution">American localization</a>, hired a new voice cast for the English dub. Although Archie Comics did not adapt <i>Adventure 2</i> in full in its <i>Sonic</i> comic, it did so in the second issue of the spin-off publication <i><a href="https://en.wikipedia.org/wiki/Sonic_Universe">Sonic Universe</a></i> in March 2009; the adaptation was written by <a href="https://en.wikipedia.org/wiki/Ian_Flynn">Ian Flynn</a> and penciled by <a href="https://en.wikipedia.org/wiki/Tracy_Yardley">Tracy Yardley</a> and <a href="https://en.wikipedia.org/wiki/Steven_Butler">Steven Butler</a>.</p>
+
+<p>The live-action feature film <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_3_(film)">Sonic the Hedgehog 3</a></i> (2024) is an adaptation of <i>Adventure 2</i>. It features several scenes that reference <i>Adventure 2</i>, such as Shadow's captivity in a GUN facility, Sonic leaping out of a helicopter, and Sonic and Shadow collaborating to stop the Eclipse Cannon. "Live &amp; Learn" is featured throughout as a <a href="https://en.wikipedia.org/wiki/Leitmotif">leitmotif</a> before the song itself plays during the climax. Although it mostly follows <i>Adventure 2</i>'s story, it features some differences, such as the absence of City Escape and Gerald Robotnik appearing alive in the present rather than being limited to <a href="https://en.wikipedia.org/wiki/Flashback_(narrative)">flashbacks</a>. The writers, <a href="https://en.wikipedia.org/wiki/Patrick_Casey_(writer)">Pat Casey</a> and <a href="https://en.wikipedia.org/wiki/Josh_Miller_(filmmaker)">Josh Miller</a>, did not have time to replay <i>Adventure 2</i> while writing and based the adaptation on what they remembered most.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

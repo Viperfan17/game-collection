@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Clubhouse Games: 51 Worldwide Classics</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('739b512e-eee8-4965-8773-8e5cb5d35d21/2cebcce5-85e1-4c07-a3cb-ed8f83be9e49.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="739b512e-eee8-4965-8773-8e5cb5d35d21/980fdfa7-41ac-4fc5-937d-8b9da5afacfd.png"/> Clubhouse Games: 51 Worldwide Classics</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="739b512e-eee8-4965-8773-8e5cb5d35d21/8ead6e94-64f5-4add-897c-28e555ecad1b.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:52:38</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:27:58</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Switch">Nintendo Switch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-6/5/2020">6/5/2020</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-82">82</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Party">Party</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-tabletop game">tabletop game</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-NDcube">NDcube</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Clubhouse_Games:_51_Worldwide_Classics" target="_blank">Wikipedia</a><br/><a href="https://www.nintendo.com/games/detail/clubhouse-games-51-worldwide-classics-switch/" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Takahiro Karino">[People] artist: Takahiro Karino</a><br/><a href="#quicklink-[People] composer: Toshiki Aida">[People] composer: Toshiki Aida</a><br/><a href="#quicklink-[People] designer: Hiroyuki Seki">[People] designer: Hiroyuki Seki</a><br/><a href="#quicklink-[People] designer: Makoto Eguchi">[People] designer: Makoto Eguchi</a><br/><a href="#quicklink-[People] designer: Ryou Yokomizo">[People] designer: Ryou Yokomizo</a><br/><a href="#quicklink-[People] designer: Yuya Rokuyama">[People] designer: Yuya Rokuyama</a><br/><a href="#quicklink-[People] director: Atsushi Nakao">[People] director: Atsushi Nakao</a><br/><a href="#quicklink-[People] producer: Katsuya Eguchi">[People] producer: Katsuya Eguchi</a><br/><a href="#quicklink-[People] producer: Takashi Tezuka">[People] producer: Takashi Tezuka</a><br/><a href="#quicklink-[People] producer: Toshiaki Suzuki">[People] producer: Toshiaki Suzuki</a><br/><a href="#quicklink-[People] producer: Toyokazu Nonaka">[People] producer: Toyokazu Nonaka</a><br/><a href="#quicklink-[People] programmer: Tadao Shoyama">[People] programmer: Tadao Shoyama</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Clubhouse Games: 51 Worldwide Classics</b></i>, known as <i><b>51 Worldwide Games</b></i> in Europe and Australia, is a 2020 <a href="https://en.wikipedia.org/wiki/Party_video_game">party video game</a> developed by <a href="https://en.wikipedia.org/wiki/NDcube">NDcube</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>. The game is a successor to <i><a href="https://en.wikipedia.org/wiki/Clubhouse_Games">Clubhouse Games</a></i> for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> and is a compilation of <a href="https://en.wikipedia.org/wiki/Board_game">board</a>, <a href="https://en.wikipedia.org/wiki/Card_game">card</a>, <a href="https://en.wikipedia.org/wiki/Tabletop_game">tabletop</a>, and toy sports games from around the world. The game sold more than four million copies by April 2022.</p>
+
+<h2>Gameplay</h2>
+
+<p>Upon starting the game, the player chooses a <a href="https://en.wikipedia.org/wiki/Toy_figurine">toy figurine</a> as an <a href="https://en.wikipedia.org/wiki/Avatar_(computing)">avatar</a> and assigns a favorite game to it. This allows other players to see a globe where they can pick that game. These figurines act as guides for the games and offer trivia on the game, such as its history.</p>
+
+<p>The compilation of 51 games includes a variety of board, card, tabletop, and toy sports games such as <a href="https://en.wikipedia.org/wiki/Yacht_(dice_game)">Yacht Dice</a>, <a href="https://en.wikipedia.org/wiki/Connect_Four">Four-in-a-Row</a>, <a href="https://en.wikipedia.org/wiki/Backgammon">Backgammon</a>, <a href="https://en.wikipedia.org/wiki/Reversi">Renegade</a>, <a href="https://en.wikipedia.org/wiki/Draughts">Checkers</a>, <a href="https://en.wikipedia.org/wiki/Chess">Chess</a>, <a href="https://en.wikipedia.org/wiki/Dominoes">Dominoes</a>, <a href="https://en.wikipedia.org/wiki/Koi-Koi">Hanafuda</a>, <a href="https://en.wikipedia.org/wiki/President_(card_game)">President</a>, <a href="https://en.wikipedia.org/wiki/Golf">Golf</a>, <a href="https://en.wikipedia.org/wiki/Fishing">Fishing</a>, <a href="https://en.wikipedia.org/wiki/Bowling">Bowling</a>, <a href="https://en.wikipedia.org/wiki/Darts">Darts</a>, and Toy <a href="https://en.wikipedia.org/wiki/Baseball">Baseball</a>. Additionally, there is a bonus <a href="https://en.wikipedia.org/wiki/Piano">Piano</a> game included. Various games allow for motion control through the use of the <a href="https://en.wikipedia.org/wiki/Joy-Con">Joy-Con</a> controllers. In solo play, the player plays against CPU opponents if required and can change the difficulty accordingly. An unlockable <i><a href="https://en.wikipedia.org/wiki/Mario_(franchise)">Mario</a></i>-themed card deck can be used for certain card games.</p>
+
+<p>Multiple games allow for motion control with the use of the Joy-Con. In solo play, the player plays against CPU opponents (if the game requires them) and can change the difficulty accordingly. Multiplayer games can be played locally in single-system play (with some exceptions) or via local wireless depending on the game. A multiplayer mode called "Mosaic Mode" allows for multiple Nintendo Switch consoles to link together to display one larger <a href="https://en.wikipedia.org/wiki/Multi-monitor">multi-monitor</a> picture in games like Slot Cars, where one track is displayed over four screens. Most of the games included can be played online, either with matchmaking modes or lobbies with friends.</p>
+
+<p>"Clubhouse Games Guest Pass", known as "Local Multiplayer Guest Edition" in <a href="https://en.wikipedia.org/wiki/PAL_region">PAL regions</a> and "Pocket Edition" in Japan, is a free application on the <a href="https://en.wikipedia.org/wiki/Nintendo_eShop">Nintendo eShop</a> which includes all 52 games but with only Dominoes, Four-in-a-Row, President, and Slot Cars available in single player mode. It allows players to create lobbies with others who own the free application, and it allows them to join lobbies hosted by players who own the full game and play any of the multiplayer games available.</p>
+
+<h2>Development</h2>
+
+<p><i>Clubhouse Games: 51 Worldwide Classics</i> was developed by <a href="https://en.wikipedia.org/wiki/NDcube">NDcube</a>, who had previously developed <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Party">Super Mario Party</a></i> for the Nintendo Switch. The game was revealed in <a href="https://en.wikipedia.org/wiki/Nintendo_Direct">Nintendo Direct Mini</a> presentation held in March 2020, with a trailer revealing the complete list of games featured in the compilation. A follow-up overview trailer was released in Japan and North America in the same year. Certain game elements resemble those seen in the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>'s <a href="https://en.wikipedia.org/wiki/E3_2011">E3 2011</a> reveal trailer, in which Renegade, Checkers, and Chess were shown on the <a href="https://en.wikipedia.org/wiki/Wii_U_GamePad">Wii U GamePad</a>. The courses in Golf are recreations of the nine holes from <i><a href="https://en.wikipedia.org/wiki/Wii_Sports">Wii Sports</a></i>, which themselves were inspired by the courses from <i><a href="https://en.wikipedia.org/wiki/Golf_(1984_video_game)">Golf</a></i> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">NES</a>.</p>
+
+<h2>Reception</h2>
+
+<p>In July 2020, Nintendo published the global popularity statistics of each game, with 1.5 million players of <a href="https://en.wikipedia.org/wiki/Dots_and_boxes">dots and boxes</a>.</p>
+
+<p>The game received generally positive reviews, mostly attributed to the presentation, the selection of games available, the large focus on single player content, online features, and matchmaking. The <a href="https://en.wikipedia.org/wiki/Video_game_bot">AI</a> for the game was also praised as surprisingly tough. Ben Kuchera of <i><a href="https://en.wikipedia.org/wiki/Polygon_(website)">Polygon</a></i> praised the game selection in a simple package and the tutorials. Christian Donlan of <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> praised the presentation, polish, and atmosphere. Chris Scullion of <i><a href="https://en.wikipedia.org/wiki/Nintendo_Life">Nintendo Life</a></i> commended the online matchmaking's attempt to not keep players waiting by cuing other players in on what games they selected. Common complaints included a lack of 3-to-4 player multiplayer game options, omissions of certain games, and a lack of support for all Nintendo Switch play styles.</p>
+
+<h3>Sales</h3>
+
+<p>The game reached the top 10 of sales charts for the week of June 1–7, 2020 in Japan with 64,443 copies sold, placing second behind <i><a href="https://en.wikipedia.org/wiki/Animal_Crossing:_New_Horizons">Animal Crossing: New Horizons</a></i>. Worldwide sales had reached 4.22 million copies as of March 2022, making it the 21st <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_Switch_video_games">best-selling game on the Nintendo Switch</a>. As of December 2022, the game has sold 4.64 million copies.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mega Man 3</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('5b9e1638-fa2e-4d4d-b809-fd3ea6743bba/18522a6c-5496-4b33-ab9e-0a497db34536.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="5b9e1638-fa2e-4d4d-b809-fd3ea6743bba/b55ed152-1b1a-4e6e-8057-ce0857b88741.png"/> Mega Man 3</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="5b9e1638-fa2e-4d4d-b809-fd3ea6743bba/50b37367-0db6-41b6-8bb7-3da2a6dcbbec.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:51:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:40:07</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Entertainment System">Nintendo Entertainment System</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-9/28/1990">9/28/1990</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-80">80</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Hi Tech Expressions">Hi Tech Expressions</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Mega_Man_3" target="_blank">PCGamingWiki</a><br/><a href="http://strategywiki.org/wiki/Mega_Man_3_(DOS)" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/13431" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Side view">Side view</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Mega Man 3</b></i> (stylized as <i><b>Mega Man III</b></i>)  is a 1990 <a href="https://en.wikipedia.org/wiki/Action_game">action</a>-<a href="https://en.wikipedia.org/wiki/Platformer">platform game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a>. It is the third installment of the <a href="https://en.wikipedia.org/wiki/Mega_Man">original <i>Mega Man</i> series</a> and was originally released in Japan on September 28, 1990. The game was released in North America later in 1990 and in European regions by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> in 1992. Taking place after the events of <i><a href="https://en.wikipedia.org/wiki/Mega_Man_2">Mega Man 2</a></i>, the plot follows the <a href="https://en.wikipedia.org/wiki/Mega_Man_(character)">titular hero</a> as he helps his creator, <a href="https://en.wikipedia.org/wiki/List_of_Mega_Man_characters#Dr._Light">Dr. Light</a>, and a supposedly former enemy, <a href="https://en.wikipedia.org/wiki/Dr._Wily">Dr. Wily</a>, collect parts for a peace-keeping robot by defeating several <a href="https://en.wikipedia.org/wiki/List_of_Mega_Man_characters#Robot_Masters">Robot Masters</a> that have gone haywire.</p>
+
+<p>An <a href="https://en.wikipedia.org/wiki/Action_game">action</a>-<a href="https://en.wikipedia.org/wiki/Platformer">platform</a> game, <i>Mega Man 3</i> follows the same format set forth by its two predecessors. The player, as Mega Man, must complete a series of stages in any order. Defeating a stage's boss will earn the player its special weapon, which can be selected and used at will throughout the rest of the game. <i>Mega Man 3</i> introduces new gameplay elements such as Mega Man's canine sidekick <a href="https://en.wikipedia.org/wiki/List_of_Mega_Man_characters">Rush</a> and the ability to slide along the ground. Unlike the first two installments of the series, artist and designer <a href="https://en.wikipedia.org/wiki/Keiji_Inafune">Keiji Inafune</a> has considered the creation of <i>Mega Man 3</i> to be very stressful due to time constraints and his own increased responsibilities during its development.</p>
+
+<p>Following the success of <i>Mega Man 2</i> released two years earlier, <i>Mega Man 3</i> has sold 1.17 million copies and has been positively received in critical reviews. Its presentation and gameplay have been especially praised, although many sources found the game to be too <a href="https://en.wikipedia.org/wiki/Difficulty_level">difficult</a>. Like other titles in the series, <i>Mega Man 3</i> has been re-released several times on other gaming platforms, on <a href="https://en.wikipedia.org/wiki/Mobile_phone">mobile phones</a>, and as part of various <i>Mega Man</i> franchise compilations. A sequel, <i><a href="https://en.wikipedia.org/wiki/Mega_Man_4">Mega Man 4</a></i>, was released in 1991.</p>
+
+<h2>Plot</h2>
+
+<p><i>Mega Man 3</i> takes place during an unspecified year during the 21st century (20XX). 2-3 months after <a href="https://en.wikipedia.org/wiki/Mega_Man_2"><i>Mega Man 2</i></a>, the mad scientist <a href="https://en.wikipedia.org/wiki/Doctor_Wily">Dr. Wily</a>, having twice had plans for world domination dashed, claims to have reformed and begins work with <a href="https://en.wikipedia.org/wiki/List_of_Mega_Man_characters#Dr._Light">Dr. Light</a> on a project to build a peace-keeping robot named "Gamma" whose design is based on Guts Man. <a href="https://en.wikipedia.org/wiki/List_of_Mega_Man_characters#Robot_Masters">Robot Masters</a> – Top Man, Shadow Man, Spark Man, Magnet Man, Hard Man, Snake Man, Gemini Man, and Needle Man – in charge of a set of "mining worlds", however, go berserk and make off with Gamma's eight power crystals. Mega Man is called into action, this time with a canine companion named Rush, to retrieve the crystals from the sites. Throughout his mission, the protagonist continuously encounters and spars with Break Man, a masked foe who has abilities comparable to Mega Man's own. After Mega Man destroys the eight Robot Masters, he then revisits four of the mining sites to face off against eight "Doc Robots", who possess the abilities of the Robot Masters from Mega Man's <a href="https://en.wikipedia.org/wiki/Mega_Man_2">previous mission</a>. Once the crystals are retrieved, Wily reverts to his evil ways, steals Gamma, and retreats to his new fortress. To stop Wily's newest plan to conquer the world, Mega Man turns Gamma into scrap metal and defeats Wily in a final confrontation. As the fortress begins to crumble, Break Man appears in enough time to save Mega Man but is too late to save Wily, who is seen being crushed under the rubble. When Mega Man regains consciousness in Dr. Light's lab, his creator informs him that Break Man is actually his older brother <a href="https://en.wikipedia.org/wiki/Proto_Man">Proto Man</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Mega Man 3</i> retains the <a href="https://en.wikipedia.org/wiki/Platform_game">platforming</a> and <a href="https://en.wikipedia.org/wiki/Action_game">action game</a> elements established by the two <i>Mega Man</i> games released before it. The player controls the protagonist Mega Man as he traverses eight selectable stages. The player's primary blaster weapon is used to fend off the game's numerous enemies. Several <a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a> can be picked up in each stage, including life energy, special weapon ammunition, extra lives, and "E-Tanks", which are stored and can be selected to refill the player's life energy completely. At the end of every stage the player must defeat a Robot Master <a href="https://en.wikipedia.org/wiki/Boss_(video_gaming)">boss</a>: Magnet Man, Hard Man, Top Man, Shadow Man, Spark Man, Snake Man, Gemini Man, or Needle Man. Each Robot Master features a unique weapon and stage related to the weapon's power. After defeating a boss, their signature weapon is added to Mega Man's arsenal. The Robot Masters are weak to the weapons of certain other Robot Masters, allowing the player to ease the boss battles by clearing some stages before others.</p>
+
+<p><i>Mega Man 3</i> is the first <i>Mega Man</i> game to feature the slide maneuver, which lets the player slip under enemy attacks and low-level barriers. After completing certain stages, Mega Man can access new abilities in his robot dog companion Rush. Rush's transformations include the "Rush Coil" for jumping higher, the "Rush Jet" for flying around the screen, and the "Rush Marine" for traveling underwater. Throughout the various stages the player encounters Proto Man (as Break Man), a mini-boss who, once defeated, will open passageways for the player to advance. <i>Mega Man 3</i> also expands upon the two preceding games by having additional stages set between the initial eight Robot Masters and the linear stages of Dr. Wily's fortress. A <a href="https://en.wikipedia.org/wiki/Password_(video_games)">password</a> system can be used to return to the game with most of the stages completed. The "Doc Robots" are fought after defeating all 8 Robot Masters. The Doc Robots are faced in the Spark Man stage, Needle Man stage, Gemini Man stage, and Shadow Man stage.</p>
+
+<h2>Development</h2>
+
+<p>Development on <i>Mega Man 3</i> began at <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> over a year after the release of <i>Mega Man 2</i>. <a href="https://en.wikipedia.org/wiki/Akira_Kitamura">Akira Kitamura</a>, the lead supervisor for the first two games quit his job at the company during that gap of time. Artist <a href="https://en.wikipedia.org/wiki/Keiji_Inafune">Keiji Inafune</a>, credited as "Inafking", considered <i>Mega Man 3</i> as one of his least favorite entries in the series due to "[...] what went into the game and what was behind the release of the game." He had "preset notions" about successful development because of the team's good experience with <i>Mega Man 2</i> and found that his new superior "didn't really understand <i>Mega Man</i> the way his predecessor did". During the game's production, the developers lost the main planner, so Inafune had to take over that job for its completion. Inafune recalled the final two months of development as particularly turbulent, when he had to take responsibility for assessing and dividing up tasks among the team members who were not meeting deadlines. The team was forced to put <i>Mega Man 3</i> on the market before they thought it was ready, releasing it in September instead of the series' usual arrivals in December. Inafune concluded, "I knew that if we had more time to polish it, we could do a lot of things better, make it a better game, but the company said that we needed to release it. The whole environment behind what went into the production of the game is what I least favored. Numbers one and two – I really wanted to make the games; I was so excited about them. Number three – it just turned very different."</p>
+
+<p><i>Mega Man 3</i> brought new characters and gameplay mechanics to the franchise. Though Inafune considers the gameplay to have lost some of its simplicity, he felt Mega Man's slide ability was successfully implemented to enhance the player's control while battling enemies. Mega Man's sidekick dog Rush was designed by combining the functionality of three support tools from <i>Mega Man 2</i>, which would ease the player's navigation of stages. In addition to the Marine and Coil modes, Rush was originally intended to have a "drill" mode that would allow Mega Man to tunnel underground. Another new character, Proto Man, was introduced in a way that the player would be unable to tell if he was an ally or an enemy to Mega Man. His design was influenced by <a href="https://en.wikipedia.org/wiki/Anime">anime</a>, and he was given both a scarf and shield to make him appear "tougher" than Mega Man. The design team wanted Proto Man to sport uncovered hair, but they instead opted for an open-faced helmet illustration for both the television commercials and instruction manual. Proto Man's original Japanese name, Blues, was changed by Capcom's North American division despite Inafune's protests. Capcom did this not only to be consistent with Rockman's English name, but because they thought that the name Blues made no sense. Inafune attempted to defend it due to the name's <a href="https://en.wikipedia.org/wiki/Blues">musical connotation</a> to character names in the series. Though Rush and Proto Man were created solely by the developer, Capcom sought ideas from fans for the creation of the game's Robot Masters as they had done with <i>Mega Man 2</i>. The team received around 50,000 design submissions for <i>Mega Man 3</i>, only eight of which were used in the game. Harumi Fujita, credited as "Mrs. Tarumi", was the initial composer of the game, but she only completed a few songs before giving birth and having to drop off the project. She composed the songs ‘Needle Man’, ‘Gemini Man’ and ‘Staff Roll’. Capcom composer <a href="https://en.wikipedia.org/wiki/Yasuaki_Fujita">Yasuaki Fujita</a>, also known as "Bun Bun" was then assigned to complete the soundtrack and created the majority of the score.</p>
+
+<h2>Reception</h2>
+
+<p><i>Mega Man 3</i> has enjoyed a positive reception from print and online sources. Lucas M. Thomas of <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>, Christian Nutt and Justin Speer of <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a>, Hartley, Patricia, and Kirk Lesser ("The Lessers") of <i><a href="https://en.wikipedia.org/wiki/Dragon_(magazine)">Dragon</a></i>, Dan Whitehead of <a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a>, Edward J. Semrad of <i><a href="https://en.wikipedia.org/wiki/Milwaukee_Journal_Sentinel">The Milwaukee Journal</a></i> and <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> (<i>EGM</i>), and the staff of <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i> all mutually found the game to have impressive graphics, enjoyable music, and challenging gameplay. Nutt and Speer summarized <i>Mega Man 3</i> as a "top-notch game" and Capcom's "pinnacle of NES effort". IGN's Colin Moriarty argued the game as a major improvement over the original <i><a href="https://en.wikipedia.org/wiki/Mega_Man_(1987_video_game)">Mega Man</a></i> and that it even surpasses the critically acclaimed <i>Mega Man 2</i> in quality. Moriarty justified this claim with the third installment's attempt at better storytelling, its longer length than any other classic <i>Mega Man</i> game, and its inclusion of all eight <i>Mega Man 2</i> Robot Masters in addition to its own. Brett Alan Weiss (<a href="https://en.wikipedia.org/wiki/AllGame">AllGame</a>) described it as doing what "a great sequel is supposed to do by recapturing the fun, spirit and excitement of its predecessors while adding new levels, characters and challenges."</p>
+
+<p>Some critics found <i>Mega Man 3</i> to be <a href="https://en.wikipedia.org/wiki/Nintendo_hard">excessively difficult</a>. <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> contributor McKinley Noble comically stated that actions such as "pulling teeth, lifting a car over your head or performing open-heart surgery" are all significantly easier than beating <i>Mega Man 3</i>. Whitehead noted, "Leaps must be precise, enemies must be dispatched rapidly and accurately, and there's a constant state of delicious near-panic as you wait to see what vicious demands the next room will place on your platforming skills." The Lessers additionally saw considerable <a href="https://en.wikipedia.org/wiki/Flicker_(screen)">flicker</a> when too many sprites appear onscreen at once. The writers mentioned that it detracted from the normally crisp graphics the few times it was noticed.</p>
+
+<p>Since its 1990 release, <i>Mega Man 3</i> has sold over one million copies worldwide, making it the 48th best-selling Capcom game. <i>EGM</i> listed <i>Mega Man 3</i> as "The Best Sequel to an Existing Game" in its 1991 Video Game Buyer's Guide. The readers of <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i> voted it the third-best game of 1990 in the magazine's "Nintendo Power Awards" for that year. The publication listed <i>Mega Man 3</i> as the 11th best NES video game in their 20th anniversary issue in 2008. IGN included it at number 16 on its "Top 100 NES Games of All Time". Finally, <i>GamePro</i> ranked <i>Mega Man 3</i> as the third-greatest 8-bit video game of all time.</p>
+
+<h2>Legacy</h2>
+
+<p><i>Mega Man 3</i> has seen releases on many consoles and other devices since its 1990 debut on the NES. In the United States, it was made into a stripped-down, handheld <a href="https://en.wikipedia.org/wiki/Liquid_crystal_display">LCD</a> game by <a href="https://en.wikipedia.org/wiki/Tiger_Electronics">Tiger Electronics</a>. It is the only <i>Mega Man</i> game in Nintendo's <a href="https://en.wikipedia.org/wiki/PlayChoice-10">PlayChoice-10</a> <a href="https://en.wikipedia.org/wiki/Arcade_game">arcade</a> library. <i>Mega Man 3</i> was <a href="https://en.wikipedia.org/wiki/Video_game_remake">remade</a> in 1994 for the <a href="https://en.wikipedia.org/wiki/Sega_Genesis">Sega Genesis</a> game <i><a href="https://en.wikipedia.org/wiki/Mega_Man:_The_Wily_Wars">Mega Man: The Wily Wars</a></i>, featuring updated graphics and sound. <i>Mega Man 3</i> was released on the <a href="https://en.wikipedia.org/wiki/Sony_Computer_Entertainment">Sony</a> <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> in the <i><a href="https://en.wikipedia.org/wiki/Rockman_Complete_Works">Rockman Complete Works</a></i> line in Japan in 1999. This version has arranged music, artwork galleries, and a "navi" mode for beginner players. The NES edition of the game was also part of a North American compilation of ten titles in the series called <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Anniversary_Collection">Mega Man Anniversary Collection</a></i>, which was released for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> and <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> in 2004, and the <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a> in 2005. Also in 2005, <i>Mega Man 3</i> was bundled alongside other Capcom games as part of a <a href="https://en.wikipedia.org/wiki/Jakks_Pacific#Plug_It_In_&amp;_Play_TV_Games">Plug It In &amp; Play TV Games</a> peripheral by <a href="https://en.wikipedia.org/wiki/Jakks_Pacific">Jakks Pacific</a>. <i>Mega Man 3</i> was released by Capcom on <a href="https://en.wikipedia.org/wiki/Mobile_phone">mobile phones</a> in Japan in 2005 and in North America in 2008. The NES version made its way to the Nintendo <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>'s <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> service worldwide in 2008. The <i>Complete Works</i> version was released on the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a> (downloadable on <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>) in Japan in 2010 and in North America in 2011. <i>Mega Man 3</i> was made available for download on the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> Virtual Console in Japan on September 26, 2012. <i>Mega Man 3</i> and its prequel <i><a href="https://en.wikipedia.org/wiki/Mega_Man_2">Mega Man 2</a></i> are included on the Super Retro-Cade collection, a dedicated console released in 2018 that comes with 90 arcade, NES and Super NES video games.</p>
+
+<p>Many of the features introduced in <i>Mega Man 3</i> have been carried on by the series. These include the characters Proto Man and Rush, the player's ability to slide, and extra stages set between the initial eight Robot Masters and Dr. Wily's fortress. With the release of <i><a href="https://en.wikipedia.org/wiki/Mega_Man_9">Mega Man 9</a></i> in 2008, however, some of these elements and others implemented in the third through eighth installments were forgone in favor of the more basic aspects of <i>Mega Man</i> and <i>Mega Man 2</i>. The producers of <i>Mega Man 9</i> have referred to the ninth game as "the new <i>Mega Man 3</i>" because they wanted to surpass what they accomplished in <i>Mega Man 2</i>.</p>
+
+<p>The game was adapted into the <a href="https://en.wikipedia.org/wiki/Archie_Comics">Archie Comics</a> <a href="https://en.wikipedia.org/wiki/Mega_Man_(Archie_Comics)">Mega Man series</a> over an extended period, with Gamma being introduced and having its power source stolen in the "Redemption" arc while the full adaptation takes place in "Legends of the Blue Bomber" and "The Ultimate Betrayal". One of the biggest differences was that <i><a href="https://en.wikipedia.org/wiki/Super_Adventure_Rockman">Super Adventure Rockman</a></i> was adapted into the continuity prior to this game; as such, the <i>Mega Man 3</i> Robot Masters debut in that adaptation. This also results in Shadow Man's ruins of origin being made the Lanfront Ruins of <i>Super Adventure Rockman</i> and connecting his history to that of Ra Moon; a flashback featured in the "Legends of the Blue Bomber" arc reveals that his history is also connected with the mysterious robot who fights Duo in the beginning of <i><a href="https://en.wikipedia.org/wiki/Mega_Man_8">Mega Man 8</a></i>. Additionally, there is but a single "DOC Robot" featured in the game, equipped with the weapons and personality data of the <i>Mega Man 2</i> Robot Masters.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

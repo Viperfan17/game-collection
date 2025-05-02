@@ -1,0 +1,391 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Spider-Man: Shattered Dimensions</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('2db757e5-caa3-49cb-9ff3-732f0e8ae520/a94bdeff-15dd-4d70-9180-bfc6509711c8.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="2db757e5-caa3-49cb-9ff3-732f0e8ae520/53f7a612-f861-4046-97fd-63b41bf7dc1b.ico"/> Spider-Man: Shattered Dimensions</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="2db757e5-caa3-49cb-9ff3-732f0e8ae520/050e515a-1f7b-41e9-b028-5eb6b1bc1c20.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:54:57</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:55:25</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/25/2010">11/25/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-72">72</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-74">74</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Metroidvania (DS)">Metroidvania (DS)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Beenox">Beenox</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-1C-SoftClub">1C-SoftClub</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Spider-Man:_Shattered_Dimensions" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=8949" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/spider-man-shattered-dimensions" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/231990/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Spider-Man:_Shattered_Dimensions" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/48519" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Spider-Man:_Shattered_Dimensions" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Goliath Engine">Goliath Engine</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Spider-Man: Shattered Dimensions</b></i> is a 2010 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> based on the <a href="https://en.wikipedia.org/wiki/Marvel_Comics">Marvel Comics</a> <a href="https://en.wikipedia.org/wiki/Superhero">superhero</a> <a href="https://en.wikipedia.org/wiki/Spider-Man">Spider-Man</a>, developed by <a href="https://en.wikipedia.org/wiki/Beenox">Beenox</a> and published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>. Players control four different versions of Spider-Man, each originating from a different <a href="https://en.wikipedia.org/wiki/Multiverse_(Marvel_Comics)">universe</a> in the <a href="https://en.wikipedia.org/wiki/Multiverse_(Marvel_Comics)">Marvel Comics multiverse</a>. Previous Spider-Man voice actors <a href="https://en.wikipedia.org/wiki/Neil_Patrick_Harris">Neil Patrick Harris</a>, <a href="https://en.wikipedia.org/wiki/Christopher_Daniel_Barnes">Christopher Daniel Barnes</a>, <a href="https://en.wikipedia.org/wiki/Dan_Gilvezan">Dan Gilvezan</a>, and <a href="https://en.wikipedia.org/wiki/Josh_Keaton">Josh Keaton</a> each voice one of the four Spider-Men. The <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> version of the game was developed by <a href="https://en.wikipedia.org/wiki/Griptonite_Games">Griptonite Games</a> and features only three Spider-Man variants.</p>
+
+<p>The game revolves around an artifact known as the Tablet of Order and Chaos. When it is shattered into pieces during a fight between the <a href="https://en.wikipedia.org/wiki/Spider-Man">Amazing Spider-Man</a><!--THE GAME REFERS TO HIM AS THE AMAZING SPIDER&#x2D;MAN--> and <a href="https://en.wikipedia.org/wiki/Mysterio">Mysterio</a>, it causes problems with multiple realities across the <a href="https://en.wikipedia.org/wiki/Multiverse_(Marvel_Comics)">Marvel Multiverse</a>. <a href="https://en.wikipedia.org/wiki/Madame_Web">Madame Web</a> recruits the Amazing Spider-Man and three alternate versions of the hero—<a href="https://en.wikipedia.org/wiki/Spider-Man_Noir">Spider-Man Noir</a>, <a href="https://en.wikipedia.org/wiki/Spider-Man_2099">Spider-Man 2099</a>, and <a href="https://en.wikipedia.org/wiki/Spider-Man_(Ultimate_Marvel_character)">Ultimate Spider-Man</a>—to restore balance by retrieving the tablet fragments from villains within their respective dimensions. Gameplay alternates between the four Spider-Men, who control similarly but present a different gameplay style and/or abilities. For example, the Spider-Man Noir levels encourage a <a href="https://en.wikipedia.org/wiki/Stealth_game">stealth</a> approach, while the Ultimate Spider-Man levels place emphasis on large scale combat encounters.</p>
+
+<p><i>Shattered Dimensions</i> is the first Spider-Man game developed by Beenox after being given the license by Activision, replacing previous developer <a href="https://en.wikipedia.org/wiki/Treyarch">Treyarch</a>. It received generally positive reviews from critics, who praised the concept of bringing four Marvel universes together, and lauded the voice acting, combat, presentation, humor, and score. However, criticism was aimed at the game's simplistic story, choice of villains, and the overall design of the cutscenes as well as its technical difficulties.</p>
+
+<p>A sequel, <i><a href="https://en.wikipedia.org/wiki/Spider-Man:_Edge_of_Time">Spider-Man: Edge of Time</a></i>, was released in October 2011, featuring only the Amazing Spider-Man and Spider-Man 2099. Both the game and its sequel were de-listed from the PlayStation Network and Xbox Live marketplaces in 2014 following the expiration of Activision's existing licensing deal with Marvel. <i>Shattered Dimensions</i> was re-released via Steam on October 24, 2015, but was later removed on April 1, 2017.</p>
+
+<p>One of the writers of the game, Mark Hoffmeier, also worked on the well-received <i><a href="https://en.wikipedia.org/wiki/Spider-Man_(1994_TV_series)">Spider-Man: The Animated Series</a></i> on <a href="https://en.wikipedia.org/wiki/Fox_Kids">Fox Kids</a> before working on the game. Some of the concepts from the TV show influenced the game, including the use of multiple versions of Spider-Man (as seen on the show) and the concept of the Tablet of Order and Chaos. Another writer for <i>Shattered Dimensions</i>, <a href="https://en.wikipedia.org/wiki/Dan_Slott">Dan Slott</a>, later worked on the 2014 comic book storyline, "<a href="https://en.wikipedia.org/wiki/Spider-Verse">Spider-Verse</a>", which was influenced by the game and, in turn, inspired the animated <i><a href="https://en.wikipedia.org/wiki/Spider-Verse_(franchise)">Spider-Verse</a></i> film franchise.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Spider-Man: Shattered Dimensions</i> is a <a href="https://en.wikipedia.org/wiki/Level_(video_games)">level</a>-based <a href="https://en.wikipedia.org/wiki/Third-person_(video_games)">third-person</a> action-adventure video game, where the player assumes the role of four different versions of Spider-Man, spanning across the <a href="https://en.wikipedia.org/wiki/Earth-616">Amazing</a>, <a href="https://en.wikipedia.org/wiki/Marvel_Noir">Noir</a>, <a href="https://en.wikipedia.org/wiki/Marvel_2099">2099</a>, and <a href="https://en.wikipedia.org/wiki/Ultimate_Marvel">Ultimate</a> universes. Gameplay revolves around each Spider-Man's unique superhuman abilities; players are able to web swing, web zip, crawl walls, and use the 'spider-sense' to identify enemies or objects of interest. The combat of the game offers a large variety of fighting moves, and each Spider-Man has his own fighting style. The points necessary for buying upgrades and new fighting moves are earned from defeating enemies or completing various challenges in the "Web of Destiny." The points earned can also be used to purchase 16 alternate costumes (four for each Spider-Man), which do not provide any gameplay advantages and are purely cosmetic.</p>
+
+<p>The game features numerous supervillains from classic Spider-Man comics as <a href="https://en.wikipedia.org/wiki/Boss_(video_games)">bosses</a>; some of the villains are created exclusively for the game, such as the 2099 versions of <a href="https://en.wikipedia.org/wiki/Hobgoblin_(comics)">Hobgoblin</a> and <a href="https://en.wikipedia.org/wiki/Lady_Octopus">Doctor Octopus</a>, and the Noir version of <a href="https://en.wikipedia.org/wiki/Hammerhead_(comics)">Hammerhead</a>. All bosses are usually fought twice in a level, and during the second battle, they possess a new series of powers, granted to them by the Tablet of Order and Chaos, requiring players to change their strategy. During specific parts of the boss battles, <i>Shattered Dimensions</i> switches to a <a href="https://en.wikipedia.org/wiki/First_person_(video_games)">first-person</a> perspective, where the player can use the analog sticks (or the <a href="https://en.wikipedia.org/wiki/Wii_Remote">Wii Remote and Nunchuk</a> in the Wii version) to control Spider-Man's arms, punching their opponent and dodging their attacks. Three different types of punches are available.</p>
+
+<p>While all four Spider-Men control identically, they each feature a different gameplay style. For example, the Spider-Man Noir levels require players to hide in the shadows and take down enemies stealthily, while Spider-Man 2099 features unique free falling segments. Some of the Spider-Men also feature unique abilities, such as Spider-Man 2099 being able to slow down time to dodge incoming attacks, and Ultimate Spider-Man being able to use his <a href="https://en.wikipedia.org/wiki/Symbiote_(comics)">symbiote</a> tendrils to take on large groups of enemies at once.</p>
+
+<h3>Nintendo DS version</h3>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> version of <i>Shattered Dimensions</i> is a side-scrolling <a href="https://en.wikipedia.org/wiki/Beat_'em_up">brawler</a> with little gameplay difference between the multiple iterations of Spider-Man. This version also omits Ultimate Spider-Man, and features fewer villains: <a href="https://en.wikipedia.org/wiki/Electro_(Marvel_Comics)">Electro</a> and the <a href="https://en.wikipedia.org/wiki/Tinkerer_(Marvel_Comics)">Tinkerer</a> for the Amazing Spider-Man; <a href="https://en.wikipedia.org/wiki/Boomerang_(comics)">Boomerang</a> and <a href="https://en.wikipedia.org/wiki/Calypso_(comics)">Calypso</a> for Spider-Man Noir; and <a href="https://en.wikipedia.org/wiki/Vulture_(Marvel_Comics)#Marvel_2099">Vulture</a> and <a href="https://en.wikipedia.org/wiki/Silvermane">Silvermane</a> for Spider-Man 2099. Not all the moves are available at the beginning, and can be unlocked as players progress through the game. While most of the action is played with pad and button controls, the <a href="https://en.wikipedia.org/wiki/Touchscreen">touchscreen</a> is used to play a mini-game in between levels to help Spider-Man use the Tablet to travel between dimensions.</p>
+
+<h2>Plot</h2>
+
+<p>On <a href="https://en.wikipedia.org/wiki/Earth-616">Earth-616</a>, the <a href="https://en.wikipedia.org/wiki/Spider-Man">Amazing Spider-Man</a><!--THE GAME REFERS TO HIM AS THE AMAZING SPIDER&#x2D;MAN--> accidentally shatters an artifact called the Tablet of Order and Chaos while trying to prevent <a href="https://en.wikipedia.org/wiki/Mysterio">Mysterio</a> from stealing it. While Mysterio escapes with one Tablet fragment, Spider-Man is approached by <a href="https://en.wikipedia.org/wiki/Madame_Web">Madame Web</a>, who reveals that the others have been scattered across this and three other realities across the <a href="https://en.wikipedia.org/wiki/Multiverse_(Marvel_Comics)">multiverse</a>. To restore balance, Madame Web recruits him, <a href="https://en.wikipedia.org/wiki/Spider-Man_Noir">Spider-Man Noir</a>, <a href="https://en.wikipedia.org/wiki/Spider-Man_2099">Spider-Man 2099</a>, and the <a href="https://en.wikipedia.org/wiki/Venom_(character)">Venom</a> <a href="https://en.wikipedia.org/wiki/Symbiote_(comics)">symbiote</a>-empowered <a href="https://en.wikipedia.org/wiki/Spider-Man_(Ultimate_Marvel_character)">Ultimate Spider-Man</a> to retrieve the fragments from their native dimensions. After the Spider-Men each collect their first fragment with no difficulty, Madame Web warns them that the fragments can grant incredible powers and must not be allowed to fall into the wrong hands.</p>
+
+<p>While searching for their second fragment, the Spider-Men discover that they have already been found by supervillains. The Amazing Spider-Man is captured by <a href="https://en.wikipedia.org/wiki/Kraven_the_Hunter">Kraven the Hunter</a> and taken to a jungle, where he is forced to overcome a series of trials for a fragment. However, Kraven reneges on their deal and uses it to gain superpowers. Spider-Man Noir pursues <a href="https://en.wikipedia.org/wiki/Hammerhead_(comics)">Hammerhead</a>, who is driven mad with power after using a fragment he had found to fuse his arms with his guns and plots to overthrow his boss, <a href="https://en.wikipedia.org/wiki/Norman_Osborn#Marvel_Noir">Norman "The Goblin" Osborn</a>. Spider-Man 2099 is attacked by the <a href="https://en.wikipedia.org/wiki/Hobgoblin_(comics)">Hobgoblin</a>, a <a href="https://en.wikipedia.org/wiki/Cyborg">cyborg</a> mercenary who uses his fragment to increase his psy-powers and create illusions to torment the hero. The Ultimate Spider-Man battles <a href="https://en.wikipedia.org/wiki/Electro_(Marvel_Comics)#Ultimate_Marvel">Electro</a> to prevent him from destroying a hydro-electric <a href="https://en.wikipedia.org/wiki/Dam">dam</a>, where the latter uses his fragment to grow larger and more powerful as he absorbs more energy. Eventually, the Spider-Men are able to defeat the villains and claim their fragments before heading off to find more.</p>
+
+<p>The Amazing Spider-Man finds another fragment at an abandoned <a href="https://en.wikipedia.org/wiki/Roxxon_Energy_Corporation">Roxxon Industries</a> quarry, but it is stolen by <a href="https://en.wikipedia.org/wiki/Sandman_(Marvel_Comics)">Sandman</a>, who uses it to increase his powers and take over the quarry. Spider-Man Noir pursues the <a href="https://en.wikipedia.org/wiki/Vulture_(Marvel_Comics)#Marvel_Noir">Vulture</a>, Osborn's right-hand man and his <a href="https://en.wikipedia.org/wiki/Uncle_Ben#Marvel_Noir">Uncle Ben</a>'s killer, for a fragment, which granted the villain teleportation powers. Spider-Man 2099 faces his half-brother <a href="https://en.wikipedia.org/wiki/Kron_Stone">Kron Stone / Scorpion</a>, who has stolen a fragment for a contractor in exchange for reversing his mutation, gaining the ability to create numerous offspring in the process. The Ultimate Spider-Man competes in <a href="https://en.wikipedia.org/wiki/Deadpool#Ultimate_Marvel">Deadpool</a>'s reality TV show, <i>Pain Factor</i>, for a fragment, which the latter eventually uses to clone himself. Meanwhile, Mysterio discovers his fragment granted him magic powers and seeks out the rest. When the Spider-Men return to Madame Web with the fragments they collected, Mysterio attacks, threatening to kill Madame Web if they do not deliver the remaining fragments to him.</p>
+
+<p>The Amazing Spider-Man finds his final fragment at a construction yard, but is forced to intervene in <a href="https://en.wikipedia.org/wiki/Silver_Sable">Silver Sable</a> and the <a href="https://en.wikipedia.org/wiki/Wild_Pack">Wild Pack</a>'s chase of the <a href="https://en.wikipedia.org/wiki/Juggernaut_(character)">Juggernaut</a> after the latter unknowingly picks it up. Spider-Man Noir faces Osborn for his final fragment, which the latter used to mutate himself into a <a href="https://en.wikipedia.org/wiki/Green_Goblin">goblin</a>-like creature and take over a <a href="https://en.wikipedia.org/wiki/Fair">carnival</a>. Spider-Man 2099 breaks into <a href="https://en.wikipedia.org/wiki/Alchemax">Alchemax</a>, where he finds his final fragment in the hands of <a href="https://en.wikipedia.org/wiki/Lady_Octopus">Dr. Serena Patel</a> / <a href="https://en.wikipedia.org/wiki/Doctor_Octopus">Doctor Octopus</a>, Hobgoblin's creator and Scorpion's contractor. The Ultimate Spider-Man finds his final fragment at the Triskelion, where <a href="https://en.wikipedia.org/wiki/S.H.I.E.L.D.#Ultimate_Marvel">S.H.I.E.L.D.</a> unwittingly combined it with <a href="https://en.wikipedia.org/wiki/Carnage_(character)#Ultimate_Marvel">Carnage</a>, giving the creature the ability to resurrect its victims into <a href="https://en.wikipedia.org/wiki/Zombie">zombie</a>-like minions and allowing it to break free and take over the base.</p>
+
+<p>After retrieving the final set of fragments, the Spider-Men return to Mysterio, who absorbs the complete Tablet after a brief struggle and becomes a <a href="https://en.wikipedia.org/wiki/Deity">god</a>. He shatters the borders between realities, seeking to create a new one under his rule. However, this allows Madame Web to summon the four Spider-Men to fight Mysterio together. After defeating Mysterio and separating him from the Tablet, the multiverse is restored and the multiversal Spider-Men return to their native realities while the Amazing Spider-Man takes Mysterio to prison.</p>
+
+<p>In a <a href="https://en.wikipedia.org/wiki/Post-credits_scene">post-credits scene</a>, Madame Web is visited by <a href="https://en.wikipedia.org/wiki/Spider-Ham">Spider-Ham</a>, who had also hoped to help save the multiverse, but arrived too late.</p>
+
+<h2>Cast</h2>
+
+<p>Each of the different Spider-Men is portrayed by an actor who voiced Spider-Man in a prior animated series:</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Neil_Patrick_Harris">Neil Patrick Harris</a> as <a href="https://en.wikipedia.org/wiki/Spider-Man">Peter Parker / The Amazing Spider-Man</a></li>
+</ul>
+
+<p>The primary, present day <a href="https://en.wikipedia.org/wiki/Earth-616">traditional version</a> of Spider-Man. After a battle with <a href="https://en.wikipedia.org/wiki/Mysterio_(comics)">Mysterio</a> in his home universe, the Tablet of Order and Chaos is fragmented, with the pieces scattered across this and three other dimensions. Over the course of his journey to recover the tablet fragments located in his universe, this version of Spider-Man has to contend with the likes of <a href="https://en.wikipedia.org/wiki/Kraven_the_Hunter">Kraven the Hunter</a>, the <a href="https://en.wikipedia.org/wiki/Sandman_(Marvel_Comics)">Sandman</a>, and <a href="https://en.wikipedia.org/wiki/Juggernaut_(character)">Juggernaut</a> before teaming up with his counterparts to take on Mysterio during the final battle. Harris previously played <a href="https://en.wikipedia.org/wiki/Peter_Parker_(2002_film_series_character)">Spider-Man</a> in 2003's short-lived <i><a href="https://en.wikipedia.org/wiki/Spider-Man:_The_New_Animated_Series">Spider-Man: The New Animated Series</a></i> that spun out of <a href="https://en.wikipedia.org/wiki/Spider-Man_(2002_film)">the 2002 film</a>.</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Christopher_Daniel_Barnes">Christopher Daniel Barnes</a> as <a href="https://en.wikipedia.org/wiki/Spider-Man_Noir">Peter Parker / Spider-Man Noir</a></li>
+</ul>
+
+<p>An alternate version of Peter Parker from a dimension referred to as the "<a href="https://en.wikipedia.org/wiki/Marvel_Noir">Noir Universe</a>", set in the 1930s. This version of Spider-Man has a darker personality and a more brutal fighting style, with a greater emphasis on stealth. At this time, Spider-Man Noir did not use web-lines in his comic book stories, but <a href="https://en.wikipedia.org/wiki/Madame_Web">Madame Web</a> increases his web control so he can use web-lines in this game. Over the course of his involvement in the story, he is forced to face off against Noir versions of <a href="https://en.wikipedia.org/wiki/Hammerhead_(comics)">Hammerhead</a>, <a href="https://en.wikipedia.org/wiki/Vulture_(Marvel_Comics)#Marvel_Noir">Vulture</a>, and <a href="https://en.wikipedia.org/wiki/Norman_Osborn#Marvel_Noir">Norman "The Goblin" Osborn</a> before joining the other Spider-Men to battle Mysterio. Barnes previously acted as Spider-Man in 1994's animated <i><a href="https://en.wikipedia.org/wiki/Spider-Man_(1994_TV_series)">Spider-Man</a></i> TV series. He would go on to play Spider-Man 2099 in the <i>Shattered Dimensions</i> sequel <i><a href="https://en.wikipedia.org/wiki/Spider-Man:_Edge_of_Time">Spider-Man: Edge of Time</a></i>.</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Dan_Gilvezan">Dan Gilvezan</a> as <a href="https://en.wikipedia.org/wiki/Spider-Man_2099">Miguel O'Hara / Spider-Man 2099</a></li>
+</ul>
+
+<p>A different character who took up the Spider-Man mantle in the <a href="https://en.wikipedia.org/wiki/Marvel_2099">future</a>, Miguel O'Hara is forced to contend with the machinations of the evil <a href="https://en.wikipedia.org/wiki/Alchemax">Alchemax</a> corporation in addition to facing off against future versions of Spider-Man enemies: <a href="https://en.wikipedia.org/wiki/Hobgoblin_(comics)">Hobgoblin</a>, <a href="https://en.wikipedia.org/wiki/Kron_Stone">Scorpion</a>, and <a href="https://en.wikipedia.org/wiki/Lady_Octopus">Doctor Octopus</a>. Though he does not normally have a spider-sense like Peter Parker, <a href="https://en.wikipedia.org/wiki/Madame_Web">Madame Web</a> temporarily gives him a form of it so he can track down the tablet fragments. Gilvezan previously voiced Peter Parker in the 1981 animated series <i><a href="https://en.wikipedia.org/wiki/Spider-Man_and_His_Amazing_Friends">Spider-Man and His Amazing Friends</a></i>.</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Josh_Keaton">Josh Keaton</a> as <a href="https://en.wikipedia.org/wiki/Spider-Man_(Ultimate_Marvel_character)">Peter Parker / Ultimate Spider-Man</a></li>
+</ul>
+
+<p>A younger, only slightly altered variation of Peter Parker from a dimension known as the "<a href="https://en.wikipedia.org/wiki/Ultimate_Marvel">Ultimate Universe</a>", this version of Spider-Man is fitted with his universe's version of the <a href="https://en.wikipedia.org/wiki/Venom_(Marvel_Comics_character)">black symbiote</a> suit that enhances his aggression and pre-existing super strength. <a href="https://en.wikipedia.org/wiki/Madame_Web">Madame Web</a> uses her psychic abilities to keep the suit from overwhelming and corrupting young Peter. In his universe, Ultimate Spider-Man is forced to face off against <a href="https://en.wikipedia.org/wiki/Electro_(Marvel_Comics)#Ultimate_Marvel">Electro</a>, <a href="https://en.wikipedia.org/wiki/Deadpool#Ultimate_Marvel">Deadpool</a>, and <a href="https://en.wikipedia.org/wiki/Carnage_(character)#Ultimate_Marvel">Carnage</a> before joining the final battle against Mysterio. Keaton previously portrayed Spider-Man in the 2008 animated series <i><a href="https://en.wikipedia.org/wiki/The_Spectacular_Spider-Man_(TV_series)">The Spectacular Spider-Man</a></i>, as well as other video games like <i><a href="https://en.wikipedia.org/wiki/Marvel_Super_Hero_Squad_(video_game)">Marvel Super Hero Squad</a></i> and <i><a href="https://en.wikipedia.org/wiki/Marvel_vs._Capcom_3:_Fate_of_Two_Worlds">Marvel vs. Capcom 3: Fate of Two Worlds</a></i>/<i><a href="https://en.wikipedia.org/wiki/Ultimate_Marvel_vs._Capcom_3">Ultimate Marvel vs. Capcom 3</a></i>. He also went on to play the character's <a href="https://en.wikipedia.org/wiki/Spider-Man">traditional version</a> in the <i>Shattered Dimensions</i> sequel <i>Edge of Time</i>. Prior to playing Spider-Man himself, Keaton also voiced Peter's best friend <a href="https://en.wikipedia.org/wiki/Harry_Osborn">Harry Osborn</a> in various video games (<i><a href="https://en.wikipedia.org/wiki/Spider-Man_(2002_video_game)">Spider-Man</a></i>, <i><a href="https://en.wikipedia.org/wiki/Spider-Man_2_(2004_video_game)">Spider-Man 2</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Spider-Man:_Friend_or_Foe">Spider-Man: Friend or Foe</a></i>), and would later play Electro in <a href="https://en.wikipedia.org/wiki/Insomniac_Games">Insomniac</a>'s <i><a href="https://en.wikipedia.org/wiki/Spider-Man_(2018_video_game)">Spider-Man</a></i>, as well as Norman Osborn, <a href="https://en.wikipedia.org/wiki/John_Jameson_(character)">John Jameson</a> and <a href="https://en.wikipedia.org/wiki/Steel_Spider">Steel Spider</a> in <i><a href="https://en.wikipedia.org/wiki/Spider-Man_(2017_TV_series)">Marvel's Spider-Man</a></i>.</p>
+
+<p>Several actors return to reprise roles from elsewhere in Spider-Man and Marvel Comics media:</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/John_DiMaggio">John DiMaggio</a> (who has also voiced <a href="https://en.wikipedia.org/wiki/Rhino_(character)">The Rhino</a> multiple times) reprises his role as Hammerhead from <i>The Spectacular Spider-Man</i>.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Steve_Blum">Steve Blum</a> (several characters in <i>The Spectacular Spider-Man</i> as well as <a href="https://en.wikipedia.org/wiki/Wolverine_(character)">Wolverine</a> in various media outlets) voices Hobgoblin 2099, Silvermane 2099, Noir Vulture, and Vulture 2099.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Jim_Cummings">Jim Cummings</a> (<a href="https://en.wikipedia.org/wiki/Shocker_(character)">Shocker</a> in <i>Spider-Man: The Animated Series</i>) voices Kraven the Hunter, Noir Goblin, Noir Boomerang, and <a href="https://en.wikipedia.org/wiki/Tinkerer">Tinkerer</a>.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Thomas_F._Wilson">Thomas F. Wilson</a> (<a href="https://en.wikipedia.org/wiki/Sin-Eater_(character)">Sergeant Stan Carter</a> on <i>The Spectacular Spider-Man</i>) voices Electro and Ultimate Electro.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Nolan_North">Nolan North</a> reprises his role as Deadpool from <i><a href="https://en.wikipedia.org/wiki/Hulk_Vs">Hulk Vs</a></i>.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Fred_Tatasciore">Fred Tatasciore</a> reprises his role as Carnage from <i><a href="https://en.wikipedia.org/wiki/Spider-Man:_Friend_or_Foe">Spider-Man: Friend or Foe</a></i> and <i><a href="https://en.wikipedia.org/wiki/Marvel:_Ultimate_Alliance_2">Marvel: Ultimate Alliance 2</a></i>.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Jennifer_Hale">Jennifer Hale</a> reprises her role as Silver Sable from the <i><a href="https://en.wikipedia.org/wiki/Ultimate_Spider-Man_(video_game)">Ultimate Spider-Man</a></i> video game and <i>Spider-Man: Friend or Foe</i> while also voicing Noir Calypso.</li>
+  <li><a href="https://en.wikipedia.org/wiki/John_Kassir">John Kassir</a> (Deadpool in <i><a href="https://en.wikipedia.org/wiki/X-Men_Legends_II:_Rise_of_Apocalypse">X-Men Legends II: Rise of Apocalypse</a></i>, <i><a href="https://en.wikipedia.org/wiki/Marvel:_Ultimate_Alliance">Marvel: Ultimate Alliance</a></i> and <i><a href="https://en.wikipedia.org/wiki/Marvel:_Ultimate_Alliance_2">Marvel: Ultimate Alliance 2</a></i>) voices Scorpion 2099 and a couple of Deadpool's fanboys.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Tara_Strong">Tara Strong</a> (Christina in <i>Spider-Man: The New Animated Series</i>) voices Doctor Octopus 2099.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Gregg_Berger">Gregg Berger</a> (Kraven the Hunter and Mysterio in <i>Spider-Man: The Animated Series</i>, <a href="https://en.wikipedia.org/wiki/Kingpin_(character)">Kingpin</a> in <i><a href="https://en.wikipedia.org/wiki/Spider-Man:_Web_of_Shadows">Spider-Man: Web of Shadows</a></i>), <a href="https://en.wikipedia.org/wiki/Rodger_Bumpass">Rodger Bumpass</a> (Doctor Octopus in <i><a href="https://en.wikipedia.org/wiki/The_Amazing_Adventures_of_Spider-Man">The Amazing Adventures of Spider-Man</a></i>), <a href="https://en.wikipedia.org/wiki/Chris_Edgerly">Chris Edgerly</a> (Spider-Man in <i>The Amazing Adventures of Spider-Man</i>), <a href="https://en.wikipedia.org/wiki/Nick_Jameson">Nick Jameson</a> (<a href="https://en.wikipedia.org/wiki/Morbius,_the_Living_Vampire">Morbius, the Living Vampire</a> and <a href="https://en.wikipedia.org/wiki/Richard_Fisk">Richard Fisk</a> in <i>Spider-Man: The Animated Series</i>), <a href="https://en.wikipedia.org/wiki/Keith_Szarabajka">Keith Szarabajka</a> (<a href="https://en.wikipedia.org/wiki/Wolverine_(Ultimate_Marvel_character)">Wolverine</a> in <i>Ultimate Spider-Man</i>, <a href="https://en.wikipedia.org/wiki/Eddie_Brock">Venom</a> in <i>Spider-Man: Web of Shadows</i>, and a Kingpin henchman in <i>Spider-Man: The New Animated Series</i>), <a href="https://en.wikipedia.org/wiki/James_Arnold_Taylor">James Arnold Taylor</a> (Spider-Man in <i>Spider-Man: Friend or Foe</i> and <i><a href="https://en.wikipedia.org/wiki/Spider-Man:_Battle_for_New_York">Spider-Man: Battle for New York</a></i>, Mysterio in <i><a href="https://en.wikipedia.org/wiki/Spider-Man_2_(2004_video_game)">Spider-Man 2</a></i>, Electro in <i>Ultimate Spider-Man</i>, and Harry Osborn and <a href="https://en.wikipedia.org/wiki/Frederick_Foswell">Frederick Foswell</a> in <i>The Spectacular Spider-Man</i>), and <a href="https://en.wikipedia.org/wiki/Dave_Wittenberg">Dave Wittenberg</a> (additional voices in <i>Ultimate Spider-Man</i>) voice different characters throughout the game.</li>
+</ul>
+
+<p>Other cast members include <a href="https://en.wikipedia.org/wiki/David_Kaye_(voice_actor)">David Kaye</a> as Mysterio, <a href="https://en.wikipedia.org/wiki/Susanne_Blakeslee">Susanne Blakeslee</a> as Madame Web, <a href="https://en.wikipedia.org/wiki/Dimitri_Diatchenko">Dimitri Diatchenko</a> as Sandman, and <a href="https://en.wikipedia.org/wiki/Matt_Willig">Matt Willig</a> as Juggernaut. <a href="https://en.wikipedia.org/wiki/Spider-Ham">Peter Porker / Spider-Ham</a>, an alternate <a href="https://en.wikipedia.org/wiki/Talking_animals_in_fiction">talking animal</a> version of Spider-Man, also makes a brief appearance at the end of the game, voiced by Kevin Umbricht, who was uncredited for the role; this marks the first time Spider-Ham was seen outside of comics. Spider-Man co-creator <a href="https://en.wikipedia.org/wiki/Stan_Lee">Stan Lee</a> narrates the game's story.</p>
+
+<p>Jamie Thomson served as voice director, having previously directed <i>The Spectacular Spider-Man</i>. <a href="https://en.wikipedia.org/wiki/James_Dooley_(composer)">Jim Dooley</a> composed the game's orchestral score.</p>
+
+<h2>Development and marketing</h2>
+
+<p><i>Spider-Man: Shattered Dimensions</i> was unveiled on March 30, 2010, where two of the universes, Amazing and Noir, were revealed. The third universe, 2099, was revealed on June 8. The final universe, Ultimate, was first shown to players at <a href="https://en.wikipedia.org/wiki/San_Diego_Comic-Con">San Diego Comic-Con</a> in 2010. Developer <a href="https://en.wikipedia.org/wiki/Beenox">Beenox</a> sought to make each universe feel unique by creating an individual art style for each universe and giving each Spider-Man different gameplay mechanics. For example, the Amazing and Ultimate universes are rendered with bright colors and tones of <a href="https://en.wikipedia.org/wiki/Cel-shaded_animation">cel shading</a>, with the Amazing universe given a traditional comic feel based on those of 1960s classic comic book art styles, while the Ultimate universe was meant to evoke more modern comics from the early 2000s. In contrast, the Noir and 2099 universes are rendered with realistic graphics, with the 2099 universe given a futuristic feel while the Noir universe was given a "very dark, very gritty" appearance. The developers also worked closely with <a href="https://en.wikipedia.org/wiki/Marvel_Comics">Marvel Comics</a> to create new versions of characters not seen before in a particular universe, such as <a href="https://en.wikipedia.org/wiki/Hobgoblin_(comics)">Hobgoblin</a> 2099, <a href="https://en.wikipedia.org/wiki/Hammerhead_(comics)">Hammerhead</a> Noir, and <a href="https://en.wikipedia.org/wiki/Lady_Octopus">Doctor Octopus</a> 2099. The story for the game was written by <i>Amazing Spider-Man</i> writer <a href="https://en.wikipedia.org/wiki/Dan_Slott">Dan Slott</a> and later provided him with an inspiration for the <a href="https://en.wikipedia.org/wiki/Spider-Verse">Spider-Verse</a> comic book crossover event, which saw dozens of Spider-Men from alternate realities teaming up.</p>
+
+<p>Several pre-order bonuses were offered for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> versions prior to release. Players who pre-ordered at <a href="https://en.wikipedia.org/wiki/GameStop">GameStop</a> received a Cosmic Spider-Man pack, which provided a Cosmic Spider-Man outfit for each Spider-Man. It was later included as a free bonus on the PC version, along with some minor fixes, which were not patched on the console versions. The Cosmic Spider-Man pack was later publicly released as downloadable content for the Xbox 360 on October 28, and for the PlayStation 3 on November 2, 2010.
+Pre-orders via <a href="https://en.wikipedia.org/wiki/Amazon.com">Amazon.com</a> included early access to Spider-Man 2099's Iron Spider costume and a book containing concept art for the game. <a href="https://en.wikipedia.org/wiki/Kmart_(United_States)">Kmart</a> pre-orders offered early access to Amazing Spider-Man's <a href="https://en.wikipedia.org/wiki/Scarlet_Spider">Scarlet Spider</a> costume, while <a href="https://en.wikipedia.org/wiki/Best_Buy">Best Buy</a> included early access to the <a href="https://en.wikipedia.org/wiki/Negative_Zone">Negative Zone</a> costume for Spider-Man Noir. <a href="https://en.wikipedia.org/wiki/Wal-Mart">Wal-Mart</a> offered a 20-page comic book for online pre-orders of the game. All the three costumes can otherwise be unlocked with <a href="https://en.wikipedia.org/wiki/Cheat_code">cheat codes</a> on copies of the non-DS versions of the game.</p>
+
+<p><i>Shattered Dimensions</i> was de-listed from the PlayStation Network and Xbox Live marketplaces in 2014 following the expiration of Activision's existing licensing deal with Marvel. The game was re-released via Steam on October 24, 2015, but was later removed on April 1, 2017.</p>
+
+<h2>Reception</h2>
+
+<p>The game received mostly positive reviews from critics. <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> gave it a score of 73 out of 100 for the DS version; 74 out of 100 for the PlayStation 3 version; 76 out of 100 for the Xbox 360 version; 75 out of 100 for the Wii version; and 68 out of 100 for the PC version.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> gave the PlayStation 3 and Xbox 360 versions eight out of ten and said, "Spider-Man: Shattered Dimensions has a lot of great things going for it", but scored the Wii version half a point lower despite being nearly identical to these two versions due to that version lacking a button to center the <a href="https://en.wikipedia.org/wiki/Camera_system">camera</a>. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> awarded it 8.5 out of 10 and said it "delivers a non-stop action ride with something new around every corner". <i><a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a></i> gave it three-and-a-half stars out of five and said "Shattered Dimensions is a good game, but it fell short of an Ultimate Marvel Team-Up". <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> gave the Xbox 360 version four and a half out of five stars and said, "thankfully, [Spider-Man's] latest adventure, Shattered Dimensions, is one of his best yet, offering four unique worlds, classic Spidey action, and an engaging story that puts it near the top of the franchise both in terms of quality and impact". <i><a href="https://en.wikipedia.org/wiki/X-Play">X-Play</a></i> gave the game four stars out of five and said it "streamlines the usual trappings of the genre to focus on combat and personality. It's true that the linear gameplay and old-school combat sensibilities don't put it on par with Arkham Asylum, but the game succeeds regardless. It's fun, fast-paced, and long enough to make it well worth checking out". <i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i> gave it a B and stated, "the change in combat options is a welcome addition, I just wish that the story had delivered on the comic legacy of one of Marvel's more enduring heroes".</p>
+
+<p>Non-video-game publications gave some strong praise for the game. <i><a href="https://en.wikipedia.org/wiki/The_A.V._Club">The A.V. Club</a></i> gave the Xbox 360 version a B+ and stated: "Filled with countless remember-when moments—as in Remember when you outran that wave of sand?— Shattered Dimensions is less literary and artful than <a href="https://en.wikipedia.org/wiki/Batman:_Arkham_Asylum">Batman: Arkham Asylum</a>, but it's far more fun". <i><a href="https://en.wikipedia.org/wiki/The_Daily_Telegraph">The Daily Telegraph</a></i> gave it seven out of ten and stated, "the combat, and it's worth noting that this makes up the majority of the game, is superb. It's not particularly deep nor clever, but it's immensely rewarding, as too are the scripted first person sections which exist purely to, yes, let you punch things in the face". However, <i><a href="https://en.wikipedia.org/wiki/The_Escapist_(magazine)">The Escapist</a></i> gave the Xbox 360 version three stars out of five and said, "creative set-pieces and an awesome concept can only hide a repetitious game structure for so long - and the stealth sections that mix it up are just frustrating".</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> version of the game drew mixed reviews. <i>IGN</i> and <i>Digital Chumps</i> praised the visuals. <i>IGN</i> felt the visuals stayed true to the comics, while <i>Digital Chumps</i> praised the smooth and detailed animations. Reviewers felt that overall the <a href="https://en.wikipedia.org/wiki/2.5D">2.5D</a> <i><a href="https://en.wikipedia.org/wiki/Metroid">Metroid</a></i>-style gameplay was enjoyable, and fit the DS well. Sounds and voice acting were also praised. Some reviewers felt the game was too short, and that not enough emphasis was put on exploring the open world.</p>
+
+<h2>Legacy</h2>
+
+<p>The premise of a crossover between different versions of Spider-Man that was used in <i>Shattered Dimensions</i> became the inspiration for the 2014 comic book storyline <i><a href="https://en.wikipedia.org/wiki/Spider-Verse">Spider-Verse</a></i> (the main story of which was also scripted by Dan Slott), which would go on to become one of the most popular and media adapted Spider-Man story arcs, including a 2018 <a href="https://en.wikipedia.org/wiki/Animated_film">animated</a> <a href="https://en.wikipedia.org/wiki/Spider-Man_in_film">film</a> titled <i><a href="https://en.wikipedia.org/wiki/Spider-Man:_Into_the_Spider-Verse">Spider-Man: Into the Spider-Verse</a></i>, which was later used as the starting point for the <i><a href="https://en.wikipedia.org/wiki/Spider-Verse_(franchise)">Spider-Verse</a></i> animated franchise. Despite the film borrowing no inspiration from <i>Shattered Dimensions</i> itself, all four playable Spider-Men from the game appear in <i>Into the Spider-Verse</i>, in varying capacities.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>The Legend of Zelda: Tears of the Kingdom</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('f31b40f6-19ea-4451-a6e0-4004fed1248b/68264eb7-efba-4104-a54f-c03eed71f272.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="f31b40f6-19ea-4451-a6e0-4004fed1248b/c86537de-3458-4ceb-899f-2b68d0c1a63c"/> The Legend of Zelda: Tears of the Kingdom</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="f31b40f6-19ea-4451-a6e0-4004fed1248b/4f77e4f2-e69d-4c6c-951b-cfff20fb64aa.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:52:38</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:30:29</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Switch">Nintendo Switch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-5/12/2023">5/12/2023</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-96">96</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo EPD">Nintendo EPD</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Tears_of_the_Kingdom" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Satoru Takizawa">[People] artist: Satoru Takizawa</a><br/><a href="#quicklink-[People] composer: Hajime Wakai">[People] composer: Hajime Wakai</a><br/><a href="#quicklink-[People] composer: Maasa Miyoshi">[People] composer: Maasa Miyoshi</a><br/><a href="#quicklink-[People] composer: Manaka Kataoka">[People] composer: Manaka Kataoka</a><br/><a href="#quicklink-[People] composer: Masato Ohashi">[People] composer: Masato Ohashi</a><br/><a href="#quicklink-[People] composer: Tsukasa Usui">[People] composer: Tsukasa Usui</a><br/><a href="#quicklink-[People] designer: Mari Shirakawa">[People] designer: Mari Shirakawa</a><br/><a href="#quicklink-[People] designer: Yasutaka Takeuchi">[People] designer: Yasutaka Takeuchi</a><br/><a href="#quicklink-[People] designer: Yohei Fujino">[People] designer: Yohei Fujino</a><br/><a href="#quicklink-[People] director: Hidemaro Fujibayashi">[People] director: Hidemaro Fujibayashi</a><br/><a href="#quicklink-[People] producer: Eiji Aonuma">[People] producer: Eiji Aonuma</a><br/><a href="#quicklink-[People] programmer: Takahiro Okuda">[People] programmer: Takahiro Okuda</a><br/><a href="#quicklink-[People] programmer: Takuhiro Dohta">[People] programmer: Takuhiro Dohta</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>The Legend of Zelda: Tears of the Kingdom</b></i> is a 2023 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>. The player controls <a href="https://en.wikipedia.org/wiki/Link_(The_Legend_of_Zelda)">Link</a> as he searches for <a href="https://en.wikipedia.org/wiki/Princess_Zelda">Princess Zelda</a> and fights to prevent <a href="https://en.wikipedia.org/wiki/Ganondorf">Ganondorf</a> from destroying <a href="https://en.wikipedia.org/wiki/Hyrule">Hyrule</a>. <i>Tears of the Kingdom</i> retains the <a href="https://en.wikipedia.org/wiki/Open-world">open-world</a> gameplay and setting of its predecessor, <i><a href="https://en.wikipedia.org/wiki/Breath_of_the_Wild">Breath of the Wild</a></i> (2017), and features new environments, including an area composed of floating islands in the sky and an underground area beneath Hyrule known as the Depths. The player has access to various devices that aid in combat or exploration and can be used to construct vehicles.</p>
+
+<p><i>Tears of the Kingdom</i> was conceived after ideas for <i>Breath of the Wild</i> <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> had exceeded its scope. Development was led by Nintendo's <a href="https://en.wikipedia.org/wiki/Entertainment_Planning_&amp;_Development">Entertainment Planning &amp; Development</a> division, with <i>Breath of the Wild</i> director <a href="https://en.wikipedia.org/wiki/Hidemaro_Fujibayashi">Hidemaro Fujibayashi</a> and producer <a href="https://en.wikipedia.org/wiki/Eiji_Aonuma">Eiji Aonuma</a> reprising their roles. The developers were inspired by social media posts to create gameplay mechanics that encouraged experimentation and sometimes struggled to differentiate the sequel from its predecessor. A teaser was shown at <a href="https://en.wikipedia.org/wiki/E3_2019">E3 2019</a>, while a full reveal featuring gameplay was shown at <a href="https://en.wikipedia.org/wiki/E3_2021">E3 2021</a>. <i>Tears of the Kingdom</i> was originally planned for release in 2022, but was delayed until May 2023 to allow the developers to refine it.</p>
+
+<p>Like its predecessor, <i>Tears of the Kingdom</i> received critical acclaim. It was praised by critics for its expanded world, new powers, scale, and story, with minor criticism for its technical performance. It sold more than 10 million copies in its first three days of release and over 21.55 million copies by December 2024, making it the Switch's <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_Switch_video_games">eighth-best-selling game</a>. An enhanced edition of <i>Tears of the Kingdom</i> and a <a href="https://en.wikipedia.org/wiki/Spin-off_(media)">spin-off</a> called <i><a href="https://en.wikipedia.org/wiki/Hyrule_Warriors:_Age_of_Imprisonment">Hyrule Warriors: Age of Imprisonment</a></i> are planned for release on the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch_2">Nintendo Switch 2</a> in 2025.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Tears of the Kingdom</i> retains the <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> <a href="https://en.wikipedia.org/wiki/Action-adventure">action-adventure</a> gameplay of <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild">The Legend of Zelda: Breath of the Wild</a></i> (2017). As <a href="https://en.wikipedia.org/wiki/Link_(The_Legend_of_Zelda)">Link</a>, the player explores the main setting of <a href="https://en.wikipedia.org/wiki/Hyrule">Hyrule</a> and two new areas: the sky, which has several floating islands, and the Depths, a vast underground area beneath Hyrule. Link can climb, ride horses, or use a paraglider to soar through the air. Characters and locations from <i>Breath of the Wild</i> were kept and modified to fit the game's story.</p>
+
+<p>The sky is an area composed of several floating islands that contain puzzles, treasure, enemies, and bosses. The Depths is a dark region that requires items to illuminate and contains treasures as well as hazards such as lava and gloom, a harmful substance that reduces Link's maximum <a href="https://en.wikipedia.org/wiki/Health_(game_terminology)">hearts</a>. The player removes this effect by returning to the surface of Hyrule. <i>Tears of the Kingdom</i> features several dungeons that contain puzzles and bosses, similar to previous entries in the <i>Zelda</i> franchise. The four main dungeons, the Water Temple, Wind Temple, Fire Temple, and Lightning Temple must be completed to advance the game's story.</p>
+
+<p><i>Tears of the Kingdom</i> introduces Zonai devices, which can be used for combat, exploration, or solving puzzles as well as to construct vehicles, such as rockets, sleds, and fans. <i>Breath of the Wild</i>'s Sheikah Slate-based abilities have been replaced with five new powers: Ultrahand, Fuse, Ascend, Recall, and Autobuild. Ultrahand allows the player to pick up and move different objects or attach them together, which can be used with Zonai devices to create vehicles and constructs. Fuse allows the player to combine materials, equipment, or other objects in the world to a shield or weapon. For example, fusing a rocket to Link's shield allows him to fly through the air. Recall can be used on an object to rewind its movement, such as by rewinding a falling rock in an upwards direction. Ascend allows the player to move upwards through solid surfaces, granting them access to previously inaccessible areas. Autobuild instantly recreates a device crafted with Ultrahand, automatically using nearby devices and objects if available, or if parts are missing, creating replacements at the cost of a material called zonaite.</p>
+
+<p>Shrines and Korok seeds return from <i>Breath of the Wild</i>. Shrines are located across Hyrule and grant Lights of Blessing when cleared. Once the player obtains four Lights of Blessing, they can spend them at a Goddess Statue to increase Link's maximum hearts or stamina. Korok seeds can be traded to increase his inventory capacity, allowing him to hold more melee weapons, shields, or bows. The new recipe system allows the player to keep track of ingredients needed to make meals or elixirs.</p>
+
+<h2>Plot</h2>
+
+<p><i>Tears of the Kingdom</i> takes place a number of years after <i>Breath of the Wild</i>, at the end of the <a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda#Fictional_chronology"><i>Zelda</i> timeline</a>. Link and <a href="https://en.wikipedia.org/wiki/Princess_Zelda">Zelda</a> set out to explore a cavern beneath Hyrule Castle, from which a poisonous substance called "gloom" has been seeping out and causing people to fall ill. There, they find murals depicting the founding of Hyrule and a subsequent conflict known as the Imprisoning War—an ancient battle against a being only referred to as the "Demon King"—which Zelda believes to be related to the mysterious Zonai race. Upon venturing deeper, they discover a mummy being restrained by a disembodied arm. The mummy awakens and attacks Link and Zelda; in the aftermath, Link's right arm is wounded and the <a href="https://en.wikipedia.org/wiki/Master_Sword">Master Sword</a> is shattered. Hyrule Castle is raised into the sky, and Zelda falls into the depths below; as Link tries to catch her, she vanishes along with a mysterious artifact. Link is rescued by the arm, awakening later on the Great Sky Island to find that it has replaced his damaged limb. He meets the spirit of Rauru, a Zonai and the source of his new arm, who helps him traverse the Great Sky Island. Once Link reaches his destination, the shattered Master Sword vanishes and he returns to the surface below.</p>
+
+<p>There, he learns that the event in the cavern, known as the Upheaval, has wrought chaos upon Hyrule, and he sets out to investigate reports of strange phenomena throughout the kingdom. Link ventures into ancient Zonai temples after reuniting with his allies; <a href="https://en.wikipedia.org/wiki/Prince_Sidon">Sidon</a>, the prince and, later, king of the Zora; Tulin, a young Rito archer and son of Teba, a past ally of Link's; Yunobo, a Goron, now the president of the YunoboCo mining company; and Riju, the young chief of the <a href="https://en.wikipedia.org/wiki/Gerudo">Gerudo</a>. After defeating the monsters that have taken over the temples, they find artifacts called secret stones and meet the spirits of ancient sages, who appoint Link's allies as their successors and pass down their secret stones. After numerous sightings of Zelda throughout Hyrule, Link finds her at Hyrule Castle, where she reveals herself to be an illusion created by Phantom Ganon, a servant of the Demon King, <a href="https://en.wikipedia.org/wiki/Ganondorf">Ganondorf</a>, the mummy who Link previously encountered. After defeating Phantom Ganon, Link sets out to find Mineru, the last of the ancient sages, who remains in the physical world via <a href="https://en.wikipedia.org/wiki/Spiritual_projection">spiritual projection</a>. He assembles a mechanical body for her spirit to inhabit.</p>
+
+<p>Through Mineru, the ancient sages, and items called Dragon's Tears scattered across Hyrule, Link learns of Zelda's fate. The artifact she encountered was a secret stone that transported her to the distant past, where she met Rauru, Hyrule's first king, and Sonia, its first queen. After Ganondorf killed Sonia and used her secret stone to become the Demon King, Rauru appointed his older sister Mineru, Zelda, and the leaders of the Zora, Rito, Gorons, and Gerudo as sages. With their help, Rauru fought Ganondorf and sacrificed himself to seal him away. Later, Zelda received the shattered Master Sword from the future and tasked the sages with aiding Link once Ganondorf reawakened. In order to repair the Master Sword and bring it to Link in the present, she swallowed her secret stone and underwent "draconification", becoming the immortal Light Dragon and losing her sense of self.</p>
+
+<p>In the present, after ridding the Great Deku Tree from gloom in Korok Forest, Link retrieves the Master Sword from the Light Dragon and heads below Hyrule Castle to confront Ganondorf. With aid from Sidon, Tulin, Yunobo, Riju, and Mineru, Link battles an army of monsters before engaging in combat with Ganondorf himself. Nearing defeat, Ganondorf swallows his secret stone, becoming the Demon Dragon in a final attempt to kill Link. With help from the Light Dragon, Link uses the Master Sword to shatter the Demon Dragon's secret stone, killing it. The spirits of Rauru and Sonia help Link return Zelda to normal and restore his right arm before fading away; he and Zelda fall to the surface, where they reunite. Some time later, on the Great Sky Island, Mineru bids farewell to Zelda and Link before fading away, while the new sages vow to protect Hyrule.</p>
+
+<h2>Development</h2>
+
+<p>Development of <i>Tears of the Kingdom</i> began after the completion of <i>Breath of the Wild</i>. The developers had thought of several features to include as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC) for <i>Breath of the Wild</i>, but the sheer number of ideas inspired them to create a new game instead. As with its predecessor, <i>Tears of the Kingdom</i> was developed by Nintendo's <a href="https://en.wikipedia.org/wiki/Entertainment_Planning_&amp;_Development">Entertainment Planning &amp; Development</a> (EPD) division, Production Group Number 3, and was directed by <a href="https://en.wikipedia.org/wiki/Hidemaro_Fujibayashi">Hidemaro Fujibayashi</a> and produced by <a href="https://en.wikipedia.org/wiki/Eiji_Aonuma">Eiji Aonuma</a>. While he was shown early demos, the role of <i>Zelda</i> creator <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> was minimized due to scheduling conflicts as he was producing <i><a href="https://en.wikipedia.org/wiki/The_Super_Mario_Bros._Movie">The Super Mario Bros. Movie</a></i> (2023). He was credited as "general producer", the same position he had held in the series since the late 2000s.</p>
+
+<p>Aonuma stated that the development team sought to create something new while retaining the overall concept, but realized that some aspects were "already as they should be". Technical director Takuhiro Dohta cited <i><a href="https://en.wikipedia.org/wiki/Wii_Sports_Resort">Wii Sports Resort</a></i> as an inspiration when adding new mechanics, also noting that using familiar locations is useful for players when skydiving. Aonuma also cited the <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> games <i><a href="https://en.wikipedia.org/wiki/Red_Dead_Redemption_2">Red Dead Redemption 2</a></i> and <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_V:_Skyrim">The Elder Scrolls V: Skyrim</a></i>. The team also expanded the world to include the sky and underground. Aonuma referred to <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Skyward_Sword">The Legend of Zelda: Skyward Sword</a></i>, noting that its hardware limitations prevented a seamless descent from the sky to the surface; instead, Link was limited to diving from specific points. With the capabilities of the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <i>Tears of the Kingdom</i> allowed players to traverse a world connected both horizontally and vertically.</p>
+
+<p>Due to its similarity to <i>Breath of the Wild</i>, the developers experienced "strong <i><a href="https://en.wikipedia.org/wiki/Déjà_vu">déjà vu</a></i>". Aonuma reiterated that the development team wanted to create something original while also being similar to the previous game, realizing some aspects "were already as they should be". Fujibayashi added the team would occasionally struggle to differentiate between the games. <i>Tears of the Kingdom</i> reintroduced dungeons to the series, which are connected to Hyrule's surface and can be tackled in any order the player chooses. According to Dohta, the dungeons were designed with regional characteristics to make them unique to their respective environments, similar to previous games in <i>The Legend of Zelda</i> franchise<i>.</i> The dungeons were primarily created to maximize the gameplay by showcasing the range of Link's powers and gadgets. Additionally, they were designed to be accessed seamlessly rather than being closed off, allowing the player to descend from the sky into the dungeon and conveniently enter and exit.</p>
+
+<p>One of the core concepts of gameplay is the ability to build new items. As such, the development team created more tools in <i>Tears of the Kingdom</i> to give players a unique gameplay experience, inspired by videos of their accomplishments and activities posted on social media after the release of <i>Breath of the Wild</i>. Zonai devices were introduced to inspire additional creativity, but this required a balance between the player's creativity and setting limits to prevent them from exploiting the game.</p>
+
+<p>A theme of hands was introduced as a way to express the concept of connecting, which is present in the mechanics, story, visuals, and sound; Aonuma stated that the theme was present in the story, which involves connecting to Hyrule's history. Dohta explained that joining hands and cooperating with other characters is a major element, along with Link's ability to create items with his hands, with his right arm being a way to distinguish him from previous iterations of the character. The Ascend ability was developed from a debug feature that Aonuma and Fujibayashi used to exit the Depths, which they implemented as a feature because they wanted a quick way to get to the surface. Its implementation presented several challenges, such as ensuring that a player would not land on an empty space due to loading issues.</p>
+
+<p><i>Tears of the Kingdom</i> was first announced at <a href="https://en.wikipedia.org/wiki/E3_2019">E3 2019</a> as an untitled sequel to <i>Breath of the Wild</i>. Nintendo debuted a trailer revealing gameplay, story elements, and a 2022 release window at <a href="https://en.wikipedia.org/wiki/E3_2021">E3 2021</a>. By March 2022, <i>Tears of the Kingdom</i> was completed, but Nintendo delayed the release for a year to refine it. Nintendo later changed the release window to Q2 2023. More information was revealed in the <a href="https://en.wikipedia.org/wiki/Nintendo_Direct">Nintendo Direct</a> presentation held in September 2022, including the title <i>Tears of the Kingdom</i> and a release date of May 12, 2023. A later Nintendo Direct in February 2023 teased more gameplay elements. Two weeks before release, a playable version of the game leaked online as a <a href="https://en.wikipedia.org/wiki/Disk_image">disk image</a>. An upcoming enhanced edition of <i>Tears of the Kingdom</i> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch_2">Nintendo Switch 2</a> will feature improved resolution, framerate, and <a href="https://en.wikipedia.org/wiki/High-dynamic-range_rendering">HDR</a> support. A <a href="https://en.wikipedia.org/wiki/Spin-off_(media)">spin-off</a>, <i><a href="https://en.wikipedia.org/wiki/Hyrule_Warriors:_Age_of_Imprisonment">Hyrule Warriors: Age of Imprisonment</a></i>, will be released for the Switch 2 in 2025.</p>
+
+<h2>Reception</h2>
+
+<p>According to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> platform <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, <i>Tears of the Kingdom</i> received "universal acclaim". Numerous critics found it to be of similar quality to or an improvement upon <i>Breath of the Wild</i>. Reviewers praised the additions of the sky islands, Depths, and caves, saying that the areas expanded the open world introduced in its predecessor.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> said that <i>Tears of the Kingdom</i> was better than <i>Breath of the Wild</i> for its story and mechanics, while <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> lauded it for building upon its predecessor. Furthermore, <i>IGN</i> also praised the Depths and said that the areas fit well alongside the surface of Hyrule. <i><a href="https://en.wikipedia.org/wiki/VG247">VG247</a></i> said it was separate experience from <i>Breath of the Wild</i>, calling its scale immense and its mechanics creative. While feeling that it did not replicate the experience of playing through its predecessor, <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> wrote that <i>Tears of the Kingdom</i> evoked a compelling response by how it revisited previous locations. <i>Nintendo Life</i> wrote that the three settings were well-connected to each other despite their different mechanics and themes. <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> felt that the player could spend their entire time exploring the Depths, but would need to return to the surface for useful tools, helping create a compelling <a href="https://en.wikipedia.org/wiki/Gameplay_loop">gameplay loop</a>. The reviewer contended that the skies were more fun to explore than the Depths, praising their designs and comparing them to environs from <i>Skyward Sword</i> and <i><a href="https://en.wikipedia.org/wiki/The_Wind_Waker">The Wind Waker</a></i>.  On the other hand, <i><a href="https://en.wikipedia.org/wiki/Video_Games_Chronicle">Video Games Chronicle</a></i> considered the Depths more interesting than the sky sections, finding them to be difficult and fun in contrast to the sky's focus on the story.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/GamesRadar+">GamesRadar+</a></i> called these abilities well-designed, saying that they offered creative solutions to problems and highlighting Ultrahand in particular. The reviewer mentioned that some of the abilities felt like gaming the system, and would make the game less enticing when the player could use them to break its rules. <i><a href="https://en.wikipedia.org/wiki/Polygon_(website)">Polygon</a></i> said that learning how to use the powers was one of the main appeals of the experience, and likened Ascend to a <a href="https://en.wikipedia.org/wiki/Noclip_mode">noclip mode</a> and the rest to <a href="https://en.wikipedia.org/wiki/Cheating_in_video_games">cheat codes</a>. <i><a href="https://en.wikipedia.org/wiki/The_Guardian">The Guardian</a></i> felt that the powers allowed for the player to circumvent every object in multiple potential ways, writing that this freedom to progress was novel and fun. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> described the powers as superior to those featured in <i>Breath of the Wild</i>, and contributed to an experience that the reviewer considered creative and distinct.</p>
+
+<p><i>GameSpot</i> praised the story as one of the best in the series, calling it a standout element. <i>Nintendo Life</i> said that the narrative was more compelling than that of its predecessor, adding that the characters featured in the story and related side quests were more engaging. <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i> found the story to be overall better to its predecessor's, calling its pacing faster and more enticing despite criticizing some of its components. In contrast, <i><a href="https://en.wikipedia.org/wiki/VG247">VG247</a></i> found the narrative less important compared to the gameplay and that it contained some repetition due to the open-ended nature. <i>Polygon</i> felt that the dungeons featured alongside the story were among the weaknesses, feeling these areas infringed upon player freedom and that Link's allies were too verbose. Some reviewers criticized the voice acting. <i>GamesRadar+</i> said that the characters sounded disconnected from their roles and depleted the quality of the cutscenes. <i>VG247</i> echoed this opinion, but said that the cutscenes made up for this with their music and atmosphere.</p>
+
+<p>Criticism focused on the performance. <i>Nintendo Life</i> wrote that <i>Tears of the Kingdom</i> highlighted the Switch's limited capabilities, mentioning the falling <a href="https://en.wikipedia.org/wiki/Frame_rate">frame rate</a> while saying that it was only a minor problem. <i>Polygon</i> agreed, writing of a poor frame rate and load times in some areas similar to <i>Breath of the Wild.</i> <i>IGN</i> noted the lack of improved performance, but found it irrelevant after comparing its quality to the rest of the game. <i>GameSpot</i> found the frame rate satisfactory and performance problems rare, noting that the art obscured the loss of quality. It applauded the developers for having the game work effectively on an old console.</p>
+
+<h3>Sales</h3>
+
+<p><i>Tears of the Kingdom</i> was the first Nintendo-developed game to be priced at <a href="https://en.wikipedia.org/wiki/United_States_dollar">US$</a>70. More than 10 million copies of <i>Tears of the Kingdom</i> were sold in its first three days of release, making it the fastest-selling game in <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda">The Legend of Zelda</a></i> franchise, as well as the fastest selling Nintendo game in the Americas with over four million copies sold in the US alone. <i>Tears of the Kingdom</i> sold over 2.24 million copies within its first three days of release in Japan, 1.1 million being physical copies. In August 2023, it was reported that the sales of <i>Tears of the Kingdom</i> may have boosted the <a href="https://en.wikipedia.org/wiki/Gross_domestic_product">gross domestic product</a> of Japan, with a 2.8% increase in consumer spending in the semi-durable goods sector during April to August 2023, which included video games. By December 2024, it had sold 21.55 million copies worldwide.</p>
+
+<p><i>The Legend of Zelda: Tears of the Kingdom</i> was selected by <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i>, <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>, <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i>, <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>, <i><a href="https://en.wikipedia.org/wiki/Giant_Bomb">Giant Bomb</a></i>, <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i>, <i><a href="https://en.wikipedia.org/wiki/ComicBook.com">ComicBook.com</a></i>, <i><a href="https://en.wikipedia.org/wiki/Polygon_(website)">Polygon</a></i>, <i><a href="https://en.wikipedia.org/wiki/Shacknews">Shacknews</a></i>,  <i>The Guardian</i>, and <i>Siliconera</i> as their <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

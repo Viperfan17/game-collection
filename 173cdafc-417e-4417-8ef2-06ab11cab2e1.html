@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Forza Horizon 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('173cdafc-417e-4417-8ef2-06ab11cab2e1/37b5464a-668e-44ae-be21-ae214c77ee61.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="173cdafc-417e-4417-8ef2-06ab11cab2e1/fd09ecb8-9759-420d-9fe8-0bfa387a9d87.ico"/> Forza Horizon 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="173cdafc-417e-4417-8ef2-06ab11cab2e1/4ed70444-2d7e-4d99-aacb-6e9808da18cd.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 7:31:29</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-9/30/2014">9/30/2014</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-83">83</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-86">86</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Playground Games">Playground Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Microsoft Studios">Microsoft Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Forza_Horizon_2" target="_blank">Wikipedia</a><br/><a href="http://www.forzamotorsport.net/en-us/games/fh2" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Benjamin Penrose">[People] artist: Benjamin Penrose</a><br/><a href="#quicklink-[People] designer: Lee Niven">[People] designer: Lee Niven</a><br/><a href="#quicklink-[People] designer: Martin Connor">[People] designer: Martin Connor</a><br/><a href="#quicklink-[People] director: Ralph Fulton">[People] director: Ralph Fulton</a><br/><a href="#quicklink-[People] producer: Adam Askew">[People] producer: Adam Askew</a><br/><a href="#quicklink-[People] programmer: Alan Roberts">[People] programmer: Alan Roberts</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Forza Horizon 2</b></i> is a 2014 <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing video game</a> developed for <a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a>'s <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> consoles. It is the sequel to 2012's <i><a href="https://en.wikipedia.org/wiki/Forza_Horizon">Forza Horizon</a></i>, the seventh instalment in the <i><a href="https://en.wikipedia.org/wiki/Forza">Forza</a></i> series, and the series' first multi-console instalment. The Xbox One version of the game was developed by <a href="https://en.wikipedia.org/wiki/Playground_Games">Playground Games</a>, the team behind the original <i>Forza Horizon</i>, while <a href="https://en.wikipedia.org/wiki/Sumo_Digital">Sumo Digital</a> developed the version for Xbox 360, with <i>Forza</i> series developer <a href="https://en.wikipedia.org/wiki/Turn_10_Studios">Turn 10 Studios</a> supporting both builds. The Xbox 360 version is also the final <i>Forza</i> game released for the platform. The game received positive reviews from critics and a sequel, <i><a href="https://en.wikipedia.org/wiki/Forza_Horizon_3">Forza Horizon 3</a></i>, was released on 27 September 2016.</p>
+
+<p>The game was delisted from sale on 1 October 2018, following the expiration of its car branding licenses. The game's online servers, along with those for <i>Forza Horizon</i>, were shut down on 22 August 2023.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Forza Horizon 2</i> is a <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing video game</a>, featuring an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> environment. The player participates in the Horizon Festival, a fictional racing competition set within <a href="https://en.wikipedia.org/wiki/Southern_France">Southern France</a> and <a href="https://en.wikipedia.org/wiki/Northern_Italy">Northern Italy</a>. The game has approximately three times more drivable area than that of its predecessor <i>Forza Horizon</i>, with events set in <a href="https://en.wikipedia.org/wiki/Provence">Provence</a>, <a href="https://en.wikipedia.org/wiki/Liguria">Liguria</a> and <a href="https://en.wikipedia.org/wiki/Côte_d'Azur">Côte d'Azur</a> (<a href="https://en.wikipedia.org/wiki/Nice">Nice</a>) along with scaled down towns of <a href="https://en.wikipedia.org/wiki/Sisteron">Sisteron</a> and <a href="https://en.wikipedia.org/wiki/Saint-Martin-du-Var">Saint-Martin-du-Var</a>. There is a small part of the map that includes parts of the <a href="https://en.wikipedia.org/wiki/Amalfi_Coast">Amalfi Coast</a> and a fictional town called <i>Castelletto</i> which consists of features from the town of <a href="https://en.wikipedia.org/wiki/Amalfi">Amalfi</a>. There is also some small features in the map like the golf course, the docks (which are only accessible in the <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> version of the game except if the <a href="https://en.wikipedia.org/wiki/Fast_&amp;_Furious">Fast &amp; Furious</a> expansion is owned for the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>  version) and aerodrome. Players can explore the expansive map, taking part in races and special events in order to advance through the game. Events can take place at day or night, and a dynamic weather system was added for the first time in a <i>Forza</i>-series game.</p>
+
+<p>Among new features in the game are "Bucket Lists", three groups of timed challenges for the player to complete, similar to the 1000 Club in <i>Forza Horizon</i>. They can be completed in solo or co-op mode (when a player goes to the online version of the map, they can be completed with a random person or invited friend). These challenges are continuously updated to provide new challenges throughout the map. <i>Car Meets</i> are an online mode where players can meet up online and compare their cars, similar to "Forzavista" mode in <i><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_5">Forza Motorsport 5</a></i>. Players are also able to interact with each other in Car Meets, including sharing tuning setups and liveries. In the online version of the game, races such as circuits, sprints, and cross country are playable against other players, along with other game types such as Infected and King.</p>
+
+<p>The standalone expansion of the game based on <i><a href="https://en.wikipedia.org/wiki/The_Fast_and_the_Furious">The Fast and the Furious</a></i> franchise, <i>Forza Horizon 2 Presents Fast &amp; Furious</i>, added <a href="https://en.wikipedia.org/wiki/Nitrous_oxide">nitrous oxide</a> boosts to the <i>Forza</i> series. Unlike other racing games however, nitrous can only be used during most of the game's events, and only replenishes at the very start of said events. On the Xbox 360, it's only used in drag races.</p>
+
+<h2>Development</h2>
+
+<p><i>Forza Horizon 2</i> is the second game in the series to be developed principally by a studio other than <i>Forza Motorsport</i> developer Turn 10 Studios. Playground Games, the lead developer for <i>Forza Horizon</i>, focused on the Xbox One version, using the graphics engine from <i>Forza Motorsport 5</i> as their starting point. While the engine is capable of displaying content 1080p and 60 frames-per-second, the game was locked at 1080p and 30 frames-per-second, which was deemed necessary because of the game's open-world nature. According to creative director Ralph Fulton, "one of the big technical challenges that we had to face was making sure that we could stream in a world that is next-gen beautiful, but fast enough to keep up with the fastest car."</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Sumo_Digital">Sumo Digital</a> took the lead for the Xbox 360 version, starting from the original <i>Forza Horizon</i> graphics engine. As with the original game, Turn 10 Studios provided support to the primary developers. The Xbox 360 version does not include the weather system such as rain or "drivatar" <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">A.I.</a> found in the more-powerful Xbox One version, and also omits tuning and the free-roam open-world (as very few barriers can be broken through and crossed), with Playground Games calling the two versions "different games".</p>
+
+<p>On 22 July 2014, <a href="https://en.wikipedia.org/wiki/Turn_10_Studios">Turn 10 Studios</a> revealed the first 100 of over 200 cars to be featured in the open world game, from exotics, rally cars, trucks, hot hatches, among others. Many cars from the <i>Forza</i> series return, including many cars from the original <i>Horizon</i> game. The list includes the 2014 <a href="https://en.wikipedia.org/wiki/Lamborghini_Huracán">Lamborghini Huracán</a> LP610-4 and <a href="https://en.wikipedia.org/wiki/Lamborghini_Veneno">Veneno</a>, the <a href="https://en.wikipedia.org/wiki/McLaren_P1">McLaren P1</a>, the <a href="https://en.wikipedia.org/wiki/LaFerrari">LaFerrari</a>, the <a href="https://en.wikipedia.org/wiki/Koenigsegg_Agera">Agera</a>, and the <a href="https://en.wikipedia.org/wiki/Bugatti_Veyron_Super_Sport">Bugatti Veyron Super Sport</a>. Another new car that they had released was the <a href="https://en.wikipedia.org/wiki/Ford_Capri">Ford Capri</a> RS3100 which is a barn find. All ten barn finds can be found off-road, usually in hidden places.</p>
+
+<p>When choosing the locale for <i>Forza Horizon 2</i>, the developers investigated over 30 locations around the world, including <a href="https://en.wikipedia.org/wiki/California">California</a> and <a href="https://en.wikipedia.org/wiki/Australia">Australia</a>, ultimately choosing Southern Europe. Creative director Ralph Fulton cited Europe's "fantastic driving roads, amazing environmental diversity, and just stunning vistas that you really want to explore" as some of the major points in selecting it for <i>Horizon 2</i>. Fulton also noted that most of the recent open-world driving games were set in North America and that Southern Europe "just felt fresh, it felt different, it felt new, and it was a gimme for us".</p>
+
+<p>The Playground Games audio team recorded exhaust, intake, supercharger, and turbocharger sounds on real cars, and each sound is independent and modelled separately. To create loops through the rev range, they paired the sounds to each rotation of the engine. The mix of intake or exhaust notes depends on the camera position inside or outside the car. The team used the increased power of the Xbox One to playback assets of higher quality and loop length. They recorded environmental sounds like raindrops hitting the car, skidding on wet and dry surfaces, and debris kick-up.</p>
+
+<h2>Release</h2>
+
+<p>On 27 August 2014, Microsoft announced that a demo version of the game would be made available on Xbox One on 16 September 2014. On the day of the demo release, Microsoft confirmed that the game had been declared <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Release_to_manufacturing_(RTM)">gold</a>, indicating it was being prepared for duplication and release. The standard "10th Anniversary Edition" of the Xbox One version (consisting of the base game and the 10th Anniversary Car Pack) was given to Xbox Live Gold members for free throughout August 2018 as part of Microsoft's <a href="https://en.wikipedia.org/wiki/Games_with_Gold">Games with Gold</a> program. <i>Forza Horizon 2</i> and its downloadable content were delisted on 1 October 2018. Those who already own it can still download and play the game and its DLC. On 23 June 2023, it was announced by Turn 10 Studios that they would be shutting down the online servers for <i>Forza Horizon</i> and all versions of <i>Forza Horizon 2</i> (including the <i>Fast &amp; Furious</i> standalone expansion) on 22 August 2023, thereby removing access to game features including leaderboards, matchmaking, and access to user-generated content, with support for offline play still being available past that date.</p>
+
+<h3>Expansions</h3>
+
+<p>On 16 December 2014, Microsoft launched <i>Storm Island</i>, an expansion pack for the Xbox One edition of the game. Storm Island adds, along with the new setting and associated tracks, five new event types, an expansion of the game engine's weather system, five new vehicles and an additional barn-find car. On 25 February 2015, Microsoft announced <i>Forza Horizon 2 Presents Fast &amp; Furious</i>, a <a href="https://en.wikipedia.org/wiki/Standalone_expansion">standalone expansion</a> to promote the release of <i><a href="https://en.wikipedia.org/wiki/Furious_7">Furious 7</a></i>. It was released on 27 March 2015 for free until 10 April 2015. The expansion added music from <i>Furious 7</i>, composed by <a href="https://en.wikipedia.org/wiki/Brian_Tyler">Brian Tyler</a>, exclusively for the Showcase events. Actor <a href="https://en.wikipedia.org/wiki/Ludacris">Chris "Ludacris" Bridges</a> who played Tej in the <i><a href="https://en.wikipedia.org/wiki/Fast_&amp;_Furious">Fast &amp; Furious</a></i> series was also featured in the game with his voiceover. In June 2015, Microsoft announced a new <a href="https://en.wikipedia.org/wiki/Porsche">Porsche</a> expansion pack for the game that was released on 9 June 2015. The expansion, which was authorized by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a>, the then-license-holder for Porsche vehicles in video games, adds ten vehicles, such as the <a href="https://en.wikipedia.org/wiki/Porsche_944">944</a>, <a href="https://en.wikipedia.org/wiki/Porsche_911#997_GT3_RS">911 GT3 RS</a>, the <a href="https://en.wikipedia.org/wiki/Porsche_Macan">Macan Turbo</a> and the <a href="https://en.wikipedia.org/wiki/Porsche_Cayman">Cayman GTS</a>. The expansion also adds new Bucket List items, new Rivals events and 15 new <a href="https://en.wikipedia.org/wiki/Achievements_(Xbox_360)">achievements</a> based around the Porsche models. All the DLCs contents are only exclusive to the Xbox One edition of the game.</p>
+
+<h2>Reception</h2>
+
+<p>The Xbox One version of <i>Forza Horizon 2</i> received highly positive reviews. It received an aggregated score of 86.25% on <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> based on 53 reviews and 86/100 on <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> based on 82 reviews. Writing for IGN, Luke Reilly said that the game had "comprehensively updated" the standards for open-world racing games and that it was "<i><a href="https://en.wikipedia.org/wiki/Test_Drive_Unlimited">Test Drive Unlimited</a></i>, <i><a href="https://en.wikipedia.org/wiki/Project_Gotham_Racing">PGR</a></i>, <i><a href="https://en.wikipedia.org/wiki/Smuggler's_Run">Smuggler’s Run</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_(2005_video_game)">Forza Motorsport</a></i> all crammed into a T-shirt cannon and fired into your face". Conversely, Polygon's Arthur Gies, while giving the game a positive review, said that the track design in <i>Forza Horizon 2</i> "can't compete" with the licensed tracks used in <i>Forza Motorsport 5</i>. Jonathan Leack of CraveOnline called the game "racing paradise" and "a highly enjoyable destination for anyone willing to buckle up behind a wheel". Leack also compared the two separate versions of the game and discovered a number of differences. As an example, when players are given the option to choose their first car at the start of the game, the Xbox 360 version uses a graphic interface, while the Xbox One version lets the players choose the cars in-world. Calling the Xbox One version a "system-seller" and "a good time to invest in next-gen", Leack said that Sumo Digital "has done a fantastic job" with the Xbox 360 version and that it was "one of the best-looking racing games on the platform".</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/18th_Annual_D.I.C.E._Awards">18th Annual D.I.C.E. Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>Forza Horizon 2</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Racing_Game_of_the_Year">Racing Game of the Year</a>".</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

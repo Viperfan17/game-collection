@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mario Kart 7</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('d53d29b3-d997-42c5-947b-d566820f5587/22d5bf61-81c6-4b10-a5ff-be094410c7e4.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="d53d29b3-d997-42c5-947b-d566820f5587/fea246c8-e10d-4e80-b87f-6633cf5b24e3.png"/> Mario Kart 7</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="d53d29b3-d997-42c5-947b-d566820f5587/4966e5a9-f024-484b-bf24-92895b207802.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:45:40</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:43:25</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo 3DS">Nintendo 3DS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-12/1/2011">12/1/2011</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-85">85</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Kart racing">Kart racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo EAD">Nintendo EAD</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Retro Studios">Retro Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Mario_Kart_7" target="_blank">Wikipedia</a><br/><a href="https://www.nintendo.co.jp/3ds/amkj/" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Masaaki Ishikawa">[People] artist: Masaaki Ishikawa</a><br/><a href="#quicklink-[People] artist: Ryan Powell">[People] artist: Ryan Powell</a><br/><a href="#quicklink-[People] composer: Kenta Nagata">[People] composer: Kenta Nagata</a><br/><a href="#quicklink-[People] composer: Satomi Terui">[People] composer: Satomi Terui</a><br/><a href="#quicklink-[People] designer: Tom Ivey">[People] designer: Tom Ivey</a><br/><a href="#quicklink-[People] designer: Yoshihisa Morimoto">[People] designer: Yoshihisa Morimoto</a><br/><a href="#quicklink-[People] director: Kosuke Yabuki">[People] director: Kosuke Yabuki</a><br/><a href="#quicklink-[People] producer: Hideki Konno">[People] producer: Hideki Konno</a><br/><a href="#quicklink-[People] producer: Yasuyuki Oyagi">[People] producer: Yasuyuki Oyagi</a><br/><a href="#quicklink-[People] programmer: Tim Little">[People] programmer: Tim Little</a><br/><a href="#quicklink-[People] programmer: Yusuke Shiraiwa">[People] programmer: Yusuke Shiraiwa</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Mario Kart 7</b></i> is a 2011 <a href="https://en.wikipedia.org/wiki/Kart_racing_video_game">kart racing video game</a> developed by <a href="https://en.wikipedia.org/wiki/Nintendo_EAD">Nintendo EAD</a> in cooperation with <a href="https://en.wikipedia.org/wiki/Retro_Studios">Retro Studios</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>. As with the previous games in the <a href="https://en.wikipedia.org/wiki/Mario_Kart"><i>Mario Kart</i> series</a>, players participate in racing on various <i><a href="https://en.wikipedia.org/wiki/Mario_(franchise)">Mario</a></i>-themed <a href="https://en.wikipedia.org/wiki/Kart_circuit">tracks</a>, playing as one of seventeen different <a href="https://en.wikipedia.org/wiki/List_of_Mario_characters"><i>Mario</i> characters</a>. While racing, the players make use of <a href="https://en.wikipedia.org/wiki/Power-up">power-up</a> <a href="https://en.wikipedia.org/wiki/Item_(gaming)">items</a> that either assist their character or hinder opposing characters. New additions to the game include <a href="https://en.wikipedia.org/wiki/Hangglider">hang-gliding</a> attachments for karts, the ability to drive underwater, the ability to drive in first person, and the ability to fully customize the vehicles' builds. The game supports both local and <a href="https://en.wikipedia.org/wiki/Online_game">online</a> <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> for up to eight players. The game was a critical and commercial success, becoming the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_3DS_video_games">best-selling game on the Nintendo 3DS</a> with over 18.99 million copies sold worldwide.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Mario Kart 7</i> carries on traditional <i><a href="https://en.wikipedia.org/wiki/Mario_Kart">Mario Kart</a></i> gameplay in which players race against each other in <a href="https://en.wikipedia.org/wiki/Go-kart">go-karts</a> across 32 courses (new and retro). Most are based on various locations in the <a href="https://en.wikipedia.org/wiki/Mario_(franchise)"><i>Mario</i> series</a>, but two new courses are set on <a href="https://en.wikipedia.org/wiki/Wuhu_Island">Wuhu Island</a> location from the <i><a href="https://en.wikipedia.org/wiki/Wii_Fit">Wii Fit</a></i> and <i><a href="https://en.wikipedia.org/wiki/Wii_Sports_Resort">Wii Sports Resort</a></i> games. In addition to traditional button controls, <i>Mario Kart 7</i> can be played using the Nintendo 3DS <a href="https://en.wikipedia.org/wiki/Gyroscope">gyroscope</a>, in which the action is viewed in <a href="https://en.wikipedia.org/wiki/First_person_(video_games)">first person</a> and the player steers the kart simply by tilting the entire game system. While most gameplay occurs on the top screen of the 3DS hardware, the bottom screen shows an overhead map of the race course. While driving, the players may use <a href="https://en.wikipedia.org/wiki/Power-up">power-up</a> items, obtained from running into item boxes located at specific points on the track, that are used to hinder the progression of opponents or to help the player in the race. Some of these power-ups include the series staple items <a href="https://en.wikipedia.org/wiki/Koopa_Troopa">Koopa</a> Shells, <a href="https://en.wikipedia.org/wiki/Banana">Banana</a> Peels, and <a href="https://en.wikipedia.org/wiki/Super_Mushroom">Super Mushrooms</a>. Three new items were added: <a href="https://en.wikipedia.org/wiki/Fire_Flower">Fire Flower</a>, which allows the player to shoot up to ten fireballs, the Super Leaf, which gives the player a tail that allows them to flip over nearby players, collect nearby Coins, and deflect items, and the Lucky Seven, which bestows seven items at once. Coins are also scattered about the tracks; collecting them increases the kart's top speed. Up to ten coins can be collected in each race, but some will be lost if the player comes into contact with hazards or goes out of bounds. Jump actions let players obtain a brief burst of speed when hitting a button prior to driving off ramps, <a href="https://en.wikipedia.org/wiki/Hang_glider">hang glider</a> attachments sometimes allow for controllable gliding segments as well. In the previous installments, driving the kart into a body of water has been considered going out of bounds and would penalize the player by delaying them or being picked up by <a href="https://en.wikipedia.org/wiki/Lakitu">Lakitu</a>. In <i>Mario Kart 7</i>, however, the karts are fully <a href="https://en.wikipedia.org/wiki/Submersible">submersible</a>, thus adding fully underwater track segments.</p>
+
+<p>The game features sixteen playable <i>Mario</i> characters, including Wiggler, Honey Queen, <a href="https://en.wikipedia.org/wiki/Lakitu">Lakitu</a>, and Metal Mario, who are new to the series, as well as <a href="https://en.wikipedia.org/wiki/Mii">Mii</a> characters saved in the Nintendo 3DS Mii Maker, bringing the total to seventeen. Like in the previous installments, characters are divided into three different weight classes, which impact their driving styles. <i>Mario Kart 7</i> introduced the ability to customize vehicles prior to races. Vehicle bodies, tires, and hang gliders can be customized with differing control attributes. <i>Mario Kart 7</i> offers 32 different race tracks, which consist of 16 new tracks and 16 tracks from prior <i>Mario Kart</i> games.</p>
+
+<p><i>Mario Kart 7</i> features four <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> <a href="https://en.wikipedia.org/wiki/Game_mechanics#Game_modes">game modes</a>: <a href="https://en.wikipedia.org/wiki/Grand_Prix_motor_racing">Grand Prix</a>, <a href="https://en.wikipedia.org/wiki/Time_trial#Video_games">Time Trial</a>, Balloon Battle, and Coin Runners. Some modes feature <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> options. In Grand Prix, the player races against seven <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_(video_games)">computer-controlled</a> opponents in one of eight different cups, each featuring four tracks. The player receives points based on their finishing position in each race ranging from one to ten. After all four races, there will be an <a href="https://en.wikipedia.org/wiki/Award_ceremony">award ceremony</a> and the player receives a trophy if they place in the top three of the final standings. Players will also receive a star rank for their performance ranging from one to three stars. In Time Trial, the player races alone to finish the course in the fastest time possible using a Triple Mushroom that can be used at any time during the run. The best time for each track is <a href="https://en.wikipedia.org/wiki/Saved_game">saved</a> and recorded as a <a href="https://en.wikipedia.org/wiki/Ghost_(video_gaming)">ghost</a>, which the player can compete against in later trials. If the player has <a href="https://en.wikipedia.org/wiki/SpotPass">SpotPass</a> enabled on their Nintendo 3DS, they will be able to download ghosts from other players and can race against up to seven other ghosts simultaneously. In the Balloon Battle and Coin Runners battle games, the players drive around one of six arenas (three for this game and three from the previous installments) to collect items and attack their opponents to score points within the time limit of two minutes. The player could play <a href="https://en.wikipedia.org/wiki/Online_game">online</a> via <a href="https://en.wikipedia.org/wiki/Nintendo_Network">Nintendo Network</a> until April 2024, participating in races or battles with up to seven other players.</p>
+
+<h2>Development</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Nintendo_EAD">Nintendo EAD</a> began development on <i>Mario Kart 7</i> in early 2010. The idea to have <a href="https://en.wikipedia.org/wiki/Hang_gliding">hang gliding</a> and <a href="https://en.wikipedia.org/wiki/Submersible">submersible</a> karts came during the development of the previous <i>Mario Kart</i> game, <i>Mario Kart Wii</i>, and was one of the first gameplay mechanics implemented. The ability to customize the player's kart was added in order to make gameplay more strategic and to boost the <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> experience. The game was first publicly announced at <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2010">E3 2010</a> under the tentative title <i>Mario Kart 3DS</i> and then shown again at <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2011">E3 2011</a>, where it was announced for a late 2011 release.</p>
+
+<p>Because <i><a href="https://en.wikipedia.org/wiki/Nintendogs_+_Cats">Nintendogs + Cats</a></i> was scheduled to be released first, <i>Mario Kart 7</i> was given lower priority and only eight staff members were assigned to begin work on it. When it was time to focus on the game, producer <a href="https://en.wikipedia.org/wiki/Hideki_Konno">Hideki Konno</a> realized that there was not enough staff available due to many other titles being developed at the same time, including <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Skyward_Sword">The Legend of Zelda: Skyward Sword</a></i> which had its production extended into 2011. In order to finish the game in time for the 2011 <a href="https://en.wikipedia.org/wiki/Christmas_season">Christmas season</a>, Nintendo consulted with <a href="https://en.wikipedia.org/wiki/Retro_Studios">Retro Studios</a>, which had just finished making <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country_Returns">Donkey Kong Country Returns</a></i>, to co-develop the game. Retro started work on <i>Mario Kart 7</i> in December 2010. The team focused on producing the classic racing courses, remakes of courses from the earlier <i>Mario Kart</i> titles, in order to learn both "lessons about the development process [for <i>Mario Kart</i> games]" and "about what makes a good course from a <a href="https://en.wikipedia.org/wiki/Level_design">design</a> perspective."</p>
+
+<p>The game's <a href="https://en.wikipedia.org/wiki/Video_game_music">soundtrack</a> was composed by both Kenta Nagata, who worked on the previous <i>Mario Kart</i> titles <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_64">Mario Kart 64</a></i> and <i><a href="https://en.wikipedia.org/wiki/Mario_Kart:_Double_Dash">Mario Kart: Double Dash</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Star_Fox_64_3D">Star Fox 64 3D</a></i> composer Satomi Terui.</p>
+
+<p>Shortly after its release, it was discovered that three  race tracks (Wuhu Island, Maka Wuhu and GBA Bowser Castle 1) had contained <a href="https://en.wikipedia.org/wiki/Glitch">glitches</a> that allowed players to skip over a significant portion of the track, often exploited as a <a href="https://en.wikipedia.org/wiki/Cheating_in_video_games">cheat</a> during online play. An update to fix it in online play was released in May 2012.</p>
+
+<h2>Reception</h2>
+
+<p><i>Mario Kart 7</i> has received generally favorable reviews. It holds an 85/100 rating on <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> based on 60 critic reviews and an 85.17% rating on <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> based on 45 reviews. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> scored it a 9/10, praising "a handful of incredible innovations" and the game's multiplayer, particularly community features and customizable racing rules, but criticizing the small roster of only 17 characters, compared to that of <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_Wii">Mario Kart Wii</a></i>'s 25 characters. <i><a href="https://en.wikipedia.org/wiki/Computer_and_Video_Games">Computer and Video Games</a></i> gave the game a 9.4/10 and <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> gave it an 8/10. <i>Nintendo World Report</i> gave the game an 8.5, stating that it is more of the same and the gliding mechanics feel underutilized.</p>
+
+<p>On the more negative side, <a href="https://en.wikipedia.org/wiki/James_Stephanie_Sterling">James Stephanie Sterling</a> of <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i> gave the game a 5/10, stating that "sticking to tradition has not worked in Nintendo's favor" and saying the new glider and underwater sections "exist to provide the illusion of variety rather than actually altering the core experience". <i><a href="https://en.wikipedia.org/wiki/Giant_Bomb">Giant Bomb</a></i> scored the game a 3/5, noting "your enjoyment of <i>Mario Kart 7</i> will likely hinge on your continued appreciation of [the series'] formula".</p>
+
+<h3>Accolades</h3>
+
+<p><i>IGN</i> awarded <i>Mario Kart 7</i> the <i>IGN</i>'s Editors' Choice. <i>Mario Kart 7</i> was nominated for "Best 3DS Game" and "Best Driving Game" at <i><a href="https://en.wikipedia.org/wiki/GameTrailers">GameTrailers</a></i>' 2011 Game of the Year Awards, but lost both respectively to <i><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_Land">Super Mario 3D Land</a></i> and <i><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_4">Forza Motorsport 4</a></i>. Digital Spy awarded <i>Mario Kart 7</i> the "Best Game of 2011" for the Digital Spy readers' awards of 2011.
+<i>Edge</i> awarded <i>Mario Kart 7</i> as the best portable game of 2011. During the <a href="https://en.wikipedia.org/wiki/15th_Annual_Interactive_Achievement_Awards">15th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>Mario Kart 7</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Racing_Game_of_the_Year">Racing Game of the Year</a>" and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Mobile_Game_of_the_Year">Handheld Game of the Year</a>".</p>
+
+<p><i>Mario Kart 7</i> sold 3.48 million units in the U.S. as of August 2014. In Japan, the game has sold over 1.5 million units as of January 25, 2012. By March 31, 2023, the game had sold 18.99 million units globally. The game has been nominated for "Favorite Video Game" twice in the <a href="https://en.wikipedia.org/wiki/Kids_Choice_Awards">Kids Choice Awards</a>, but lost to <i><a href="https://en.wikipedia.org/wiki/Just_Dance_3">Just Dance 3</a></i> in the 2012 edition and <i><a href="https://en.wikipedia.org/wiki/Just_Dance_4">Just Dance 4</a></i> in the 2013 edition.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

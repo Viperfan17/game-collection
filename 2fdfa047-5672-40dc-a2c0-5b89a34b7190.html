@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Crysis&#174; 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('2fdfa047-5672-40dc-a2c0-5b89a34b7190/5e7e2621-3847-483d-80ca-c2168c06935b.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="2fdfa047-5672-40dc-a2c0-5b89a34b7190/33d6b352-7956-411f-b7d1-88ea3fe4c8a1.ico"/> Crysis&#174; 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="2fdfa047-5672-40dc-a2c0-5b89a34b7190/5537ac34-7b6f-4caf-9665-b89b798a0fe9.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 4:58:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 6:47:58</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-3/22/2011">3/22/2011</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-82">82</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-87">87</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-FPS">FPS</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Crytek">Crytek</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Crytek UK">Crytek UK</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Crysis_2" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=2069" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/crysis-2" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/108800/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Crysis_2" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/51477" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Crysis_2" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/crysis-2/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-3D Vision">3D Vision</a><br/><a href="#quicklink-Action">Action</a><br/><a href="#quicklink-Adventure">Adventure</a><br/><a href="#quicklink-Aliens">Aliens</a><br/><a href="#quicklink-Atmospheric">Atmospheric</a><br/><a href="#quicklink-Benchmark">Benchmark</a><br/><a href="#quicklink-CryEngine 3">CryEngine 3</a><br/><a href="#quicklink-Cyberpunk">Cyberpunk</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-FPS">FPS</a><br/><a href="#quicklink-Futuristic">Futuristic</a><br/><a href="#quicklink-Great Soundtrack">Great Soundtrack</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-North America">North America</a><br/><a href="#quicklink-Open World">Open World</a><br/><a href="#quicklink-Post-apocalyptic">Post-apocalyptic</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-RPG">RPG</a><br/><a href="#quicklink-Sci-fi">Sci-fi</a><br/><a href="#quicklink-Shooter">Shooter</a><br/><a href="#quicklink-Singleplayer">Singleplayer</a><br/><a href="#quicklink-Stealth">Stealth</a><br/><a href="#quicklink-Story Rich">Story Rich</a><br/><a href="#quicklink-Survival">Survival</a><br/><a href="#quicklink-Tank">Tank</a><br/><a href="#quicklink-Transport">Transport</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Crysis 2</b></i> is a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/Crytek">Crytek</a>, published by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> and released in North America, Australia and Europe in March 2011 for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. Officially announced on June 1, 2009, the game is the second main installment of the <a href="https://en.wikipedia.org/wiki/Crysis"><i>Crysis</i> series</a>, and a sequel to the 2007 video game <i><a href="https://en.wikipedia.org/wiki/Crysis_(video_game)">Crysis</a></i>, and its expansion <i><a href="https://en.wikipedia.org/wiki/Crysis_Warhead">Crysis Warhead</a></i>. The story was written by <a href="https://en.wikipedia.org/wiki/Richard_K._Morgan">Richard Morgan</a>, while <a href="https://en.wikipedia.org/wiki/Peter_Watts_(author)">Peter Watts</a> was consulted and wrote a novel adaptation of the game. It was the first game to showcase the <a href="https://en.wikipedia.org/wiki/CryEngine_3">CryEngine 3</a> game engine and the first game using the engine to be released on consoles. A sequel, <i><a href="https://en.wikipedia.org/wiki/Crysis_3">Crysis 3</a></i>, was released in 2013. A remastered version, titled <i><b>Crysis 2 Remastered</b></i> and following in the steps of <i><a href="https://en.wikipedia.org/wiki/Crysis_(video_game)#Crysis_Remastered">Crysis Remastered</a></i>, was released in 2021 for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, also bundled as part of the <i>Crysis Remastered Trilogy</i> <a href="https://en.wikipedia.org/wiki/Video_game_compilation">compilation</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Crysis 2</i> is a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a>. The player assumes the role of a Force Recon Marine called Alcatraz. Similar to its predecessor, it provides freedom to customize weaponry and abilities. Crytek wanted to avoid making another game set in a true jungle environment (as were <i><a href="https://en.wikipedia.org/wiki/Far_Cry_(video_game)">Far Cry</a></i> and <i><a href="https://en.wikipedia.org/wiki/Crysis_(video_game)">Crysis</a></i>); New York City has been dubbed an "urban jungle". The urban atmosphere offers new options with relation to progressing and planning attacks. Players are able to navigate between floors and buildings, as well as a destroyed cityscape.</p>
+
+<h3>Campaign</h3>
+
+<p>The player assumes the control of a Force Recon Marine named "Alcatraz", who gains ownership of the Nanosuit 2.0 from Army Delta Force officer Laurence "Prophet" Barnes, who returns from the original <i><a href="https://en.wikipedia.org/wiki/Crysis_(video_game)">Crysis</a></i>. CryNet Systems has been hunting Prophet to retrieve the suit, inadvertently pursuing Alcatraz, believing he is Prophet. The aliens seen in the original game have undergone a major redesigning, abandoning the ancient, tentacled exosuits seen in the first game for high-tech humanoid armored war machines that stalk Alcatraz through the ravaged New York City. Crytek stated prior to release that their intention was to surpass the original game graphically and gameplay-wise while also having lower system requirements and also supporting true <a href="https://en.wikipedia.org/wiki/Stereoscopy">stereoscopic 3D</a>.</p>
+
+<p>The new Nanosuit supports new and upgraded features. Suit functionality has been streamlined; multiple modes can easily be used simultaneously whenever the user wishes. The first suit's Strength and Speed Modes have been combined into the new Power Mode, the suit binoculars function has been upgraded with an advanced Tactical mode, the Cloaking Device has been modified to allow increased sensory input and silent melee stealth kills and has been renamed to Stealth Mode, while the Armor Mode has been left more or less as is, with the exception of slightly restricted agility and an ever-decreasing energy level.</p>
+
+<h2>Synopsis</h2>
+
+<h3>Characters and setting</h3>
+
+<p><i>Crysis 2</i> takes place in 2023, three years after the events of the first game, in a war-torn <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a> which has since been evacuated due to alien infestation. The game begins with news footage of a large outbreak of the "Manhattan" virus, a gruesome disease that causes complete cellular breakdown; civil unrest; and panic about an alien invasion by the Ceph, the tentacled, squid-like alien race behind the incident of the previous game, <i>Crysis</i>. Due to the breakdown in social order within <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a>, <a href="https://en.wikipedia.org/wiki/Manhattan">Manhattan</a> is placed under <a href="https://en.wikipedia.org/wiki/Martial_law">martial law</a>, and under contract from the <a href="https://en.wikipedia.org/wiki/US_Department_of_Defense">US Department of Defense</a>, soldiers from Crynet Enforcement &amp; Local Logistics (or simply "CELL"), a <a href="https://en.wikipedia.org/wiki/Private_military_contractor">private military contractor</a> run by the Crynet Corporation, police the chaos.</p>
+
+<p>On August 23, 2023, a <a href="https://en.wikipedia.org/wiki/United_States_Marine_Corps">United States Marine Corps</a> <a href="https://en.wikipedia.org/wiki/Force_Recon">Force Recon</a> unit is deployed into New York City to extract former Crynet employee Doctor Nathan Gould, who may have vital information on combating the Ceph, the alien race that is trying to destroy humanity. However, the Ceph sink the submarine transporting the unit, killing everyone but Force Recon Marine "Alcatraz", who is left mortally wounded. <a href="https://en.wikipedia.org/wiki/Delta_Force">Delta Force</a> Major Laurence "Prophet" Barnes saves Alcatraz and kills himself to allow his Nanosuit to assimilate and revive Alcatraz. In a recording, Prophet reveals that he had been infected by the Manhattan virus, and asks Alcatraz to continue his work against the Ceph. Believing Alcatraz is Prophet, Gould contacts Alcatraz and asks him to meet up at Gould's lab. CELL forces, led by Commander Dominic Lockhart, attack Alcatraz, believing him to be Prophet.</p>
+
+<p>On his way to Gould's laboratory, Alcatraz collects tissue samples from the Ceph, which cause strange reactions within his Nanosuit. Alcatraz meets with Gould, who becomes aware of Prophet's death, and explains that the suit has been rewriting its own code after absorbing the Ceph's tissue. He speculates that the suit is creating an antibody for the Manhattan virus, and they decide to scan more samples at a Crynet base on <a href="https://en.wikipedia.org/wiki/Wall_Street">Wall Street</a>. The scans are cut short when CELL forces led by Lockhart and Lieutenant Tara Strickland ambush them.</p>
+
+<p>As they attempt to transfer Alcatraz to their headquarters, the Ceph attack the CELL personnel. Additionally, a massive alien spire rises from the underground, releasing a spore-based <a href="https://en.wikipedia.org/wiki/Bioweapon">bioweapon</a> that kills most CELL troops in the area. Alcatraz's nanosuit further adapts the spores, but malfunctions, and is rebooted remotely by Crynet director and Hargreave-Rasch Biotechnologies co-founder Jacob Hargreave. Hargreave contacts Alcatraz, claiming to have knowledge of the Ceph, and to have designed the Nanosuit based on stolen Ceph technology to be used as a defense against the aliens. Hargreave directs Alcatraz to another Ceph spire to conduct an experiment for him.</p>
+
+<p>On the way, Hargreave reveals to Alcatraz that the Manhattan virus had been spread by the Ceph, to clear out the entire human population from Earth. The Manhattan virus would cause all infected humans to melt down into a liquidated mass, which could then be stored and disposed of. Upon reaching the alien spire, Alcatraz attempts to interface the Nanosuit's systems with the aliens' technology, but fails. Meanwhile, the <a href="https://en.wikipedia.org/wiki/US_Department_of_Defense">US Department of Defense</a> rescinds CELL's authority over Manhattan and deploys Marines in their place under the command of Colonel Sherman Barclay. The American forces order an <a href="https://en.wikipedia.org/wiki/Air_strike">air strike</a> on the city's <a href="https://en.wikipedia.org/wiki/Flood_barrier">flood barrier</a>, in an attempt to drown the aliens out of lower Manhattan. Washed away by the resulting wave of water, Alcatraz is found in <a href="https://en.wikipedia.org/wiki/Madison_Square_Park">Madison Square Park</a> by a squad led by Alcatraz's squadmate Chino, who survived the submarine's destruction. The Marines enlist his aid in evacuating civilians to <a href="https://en.wikipedia.org/wiki/Grand_Central_Terminal">Grand Central Terminal</a>, the city's primary evacuation point.</p>
+
+<p>Hargreave asks Alcatraz to take a detour to the Hargreave-Rasch building, to find a stabilizing agent to facilitate the Nanosuit's analyzing process. Ceph interference causes this to fail, with Hargreave telling Alcatraz to help evacuation efforts at Grand Central. At the terminal, Alcatraz is reunited with Gould, who had somehow escaped Strickland. Grand Central is overrun by Ceph forces, but Alcatraz holds them off long enough for the evacuation to succeed, and he escapes the building.</p>
+
+<p>Alcatraz is tasked with defending another evacuation point at <a href="https://en.wikipedia.org/wiki/Times_Square">Times Square</a>, and this time manages to repurpose the alien spores to be lethal to the Ceph, destroying all Ceph in the area. With the evacuation complete, Gould instructs Alcatraz to head to <a href="https://en.wikipedia.org/wiki/Roosevelt_Island">Roosevelt Island</a>, to infiltrate a Crynet complex named "The Prism", where Hargreave resides. Alcatraz foils Lockhart's attempts to ambush him, and kills him in the process. However, he is then betrayed and captured by Hargreave, who wants the Nanosuit for himself, to continue the mission in person. Hargreave attempts to remove the Nanosuit from Alcatraz's body, but the Nanosuit resists its removal, having assimilated with Alcatraz. Alcatraz is then rescued by Strickland, who reveals herself to be an undercover <a href="https://en.wikipedia.org/wiki/CIA">CIA</a> operative responsible for Alcatraz's deployment. Strickland instructs Alcatraz to capture Hargreave.</p>
+
+<p>In Hargreave's private office, Alcatraz discovers Hargreave's body in a vegetative state stored in a <a href="https://en.wikipedia.org/wiki/Cryonics">cryonic</a> chamber. Hargreave reveals to Alcatraz that he had been communicating with him through an advanced computer system, having been injured in an <a href="https://en.wikipedia.org/wiki/Tunguska_Event">encounter with the Ceph at Tunguska</a>. Hargreave gives Alcatraz a Nanosuit upgrade, allowing it to fully interface with the Ceph, as the Ceph invade the island. Hargreave triggers the self-destruct system of the complex, and orders the remaining CELL forces to aid Alcatraz's exfiltration. Alcatraz escapes the complex, and reunites with Gould, Strickland and Chino on the shores of Manhattan.</p>
+
+<p>Alcatraz is notified by Barclay that <a href="https://en.wikipedia.org/wiki/United_States_Strategic_Command">STRATCOM</a> has just authorized a <a href="https://en.wikipedia.org/wiki/Tactical_nuclear_weapon">tactical nuclear strike</a> on Manhattan Island. Thus, Alcatraz has a short period of time to end the conflict with the Ceph before the missile is launched. Alcatraz and his comrades make their way toward the center of the alien infestation, and spot a massive alien "litho-ship" rising out of the ground beneath <a href="https://en.wikipedia.org/wiki/Central_Park">Central Park</a>. Alcatraz assaults the floating section of Central Park, and makes his way to the alien spire at its center, which serves as a dispersal point for the alien spores. Alcatraz successfully turns the spire's bio-weapon against the Ceph, causing the death of all the Ceph in the city.</p>
+
+<p>After some days, the city begins to recover with the help of Gould, Strickland, and the US military. Alcatraz, while unconscious, communicates with Prophet, whose memories, experiences, and personality had been stored in the suit. Prophet tells Alcatraz that, while the mission in New York is a success, the Ceph, who had been present on Earth since prehistoric times, had built constructs globally. The Nanosuit then assimilates Prophet's memories into Alcatraz. The Nanosuit then receives a broadcast from Karl Rasch, the other founder of Hargreave-Rasch Biotechnologies, asking for his name. Alcatraz replies: "They call me Prophet.".</p>
+
+<h2>Development</h2>
+
+<p><i>Crysis 2</i> was announced at <a href="https://en.wikipedia.org/wiki/E3_2009">E3 2009</a> on June 1, 2009, and was in development from 2007. <i>Crysis 2</i> is the sequel to 2007's <i><a href="https://en.wikipedia.org/wiki/Crysis_(video_game)">Crysis</a></i> which was lauded for its impressive visuals. German-based studio <a href="https://en.wikipedia.org/wiki/Crytek">Crytek</a>, which developed the first game, is the lead developer of the sequel, along with help from <a href="https://en.wikipedia.org/wiki/Crytek_UK">Crytek UK</a>, formerly Free Radical. It is the first game using the new engine <a href="https://en.wikipedia.org/wiki/CryEngine_3">CryEngine 3</a>. The Microsoft Windows version is built on DirectX 9, with an optional DirectX 11 add-on. Crytek looked to surpass the original <i>Crysis</i>, which was still a benchmark of PC graphical performance in 2011.</p>
+
+<p><i>Crysis 2</i> did not use EA's <a href="https://en.wikipedia.org/wiki/Online_pass">online pass</a> system. On April 14, 2014, Crytek announced that the multiplayer mode for Microsoft Windows will be unplayable after <a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a> switches off its servers on May 30, 2014.</p>
+
+<h3>Leaked beta</h3>
+
+<p>A beta version of the game dated from January was leaked on multiple <a href="https://en.wikipedia.org/wiki/Torrent_file">torrent sites</a> on February 11, 2011. Online reports indicated that the leaked beta is a partially functioning developer's build compiled on January 13, 2011. The leaked version included the entire single-player campaign and multiplayer component, but contained numerous bugs, was plagued by frequent crashes, and was only partially completed with many placeholders and textures missing and was limited to DirectX 9, rather than the DirectX 11 which was expected in the retail game.
+Crytek released a statement saying they were "deeply disappointed" in piracy, which "continues to damage the PC packaged goods market." Some reviewers remarked that Crytek's statement was strange, considering that no PC demo of the game had been released yet, and moreover, the source of the leaked beta was almost certainly an internal employee (rather than pirates). On February 14, 2011, Crytek released a statement by Cevat Yerli that stated that despite their disappointment caused by the leak incident, Crytek is overwhelmed with the support they have received and they can assure the community that PC gaming is very important to them now and in the future.</p>
+
+<p>Crytek producer Nathan Camarillo called the <i>Crysis 2</i> game leak a "really ugly version" that the studio did not want people to see:</p>
+
+<p>In the beginning of 2012, <i>PC Gamer</i> reported that <i>Crysis 2</i> was the most pirated PC game of 2011 with 3.9 million downloads.</p>
+
+<h2>Marketing and release</h2>
+
+<h3>Retail versions</h3>
+
+<p>On August 17, 2010, EA announced that there would be two special editions of the game. The Limited Edition of <i>Crysis 2</i> is available at the same price as the regular game, but in limited quantities. It comes with bonus experience points to "immediately boost the player up to Rank 5, giving access to all the preset class loadouts", a digital camo weapon skin for the SCAR, the "Hologram Decoy" attachment for the SCAR, and unique in-game platinum dog tags.
+The Indian Version, on pre-order, also includes the Threat Tracer Suit Module (Early Access), and, on buying from the EA store, a gold dog tag and desert camo for SCAR. The Nano Edition of <i>Crysis 2</i>, which was only available through pre-order, includes the Limited Edition copy of the game in a Steelbook case, an 11" statue of Alcatraz posed on top of a New York City taxi, an art book, and a Nanosuit backpack "modeled after the in-game super suit." The Nanosuit backpack is large enough to accommodate a 17" laptop. As of September 26, 2010, the Nano Edition was made available for pre-order on the EA website for a $149.95 price tag but was sold out before March 2011. After the game's launch, those who preordered the Nano Edition had their shipment delayed. EA gave the affected customers a 75% off coupon and later a free digital copy of Crysis 2 Limited Edition as compensation.</p>
+
+<p>In May 2012, <i>Crysis 2: Maximum Edition</i> was released for Microsoft Windows. It included the game and previously released DLC, including nine additional multiplayer maps and new game modes for them, two new weapons (FY71 Assault Rifle and M18 Smoke Grenades), the Scar weapon skin, a Scar hologram decoy to attach to the player's weapon, platinum dog tags, and access to bonus XP through custom and preset classes. Also included is the high resolution texture pack.</p>
+
+<p>EA and <a href="https://en.wikipedia.org/wiki/Crytek">Crytek</a> launched a multiplayer demo of <i>Crysis 2</i> on January 25, 2011. Crytek announced that the demo would only be available until February 4, 2011. The demo was on the Xbox 360, for Gold members to download, although on January 27, Crytek confirmed that there would be a multiplayer demo for Microsoft Windows. The demo featured the maps  Skyline and Pier 17, as well as two multiplayer game modes to play: Team Instant Action and Crash Site. Team Instant Action puts two teams against one another in a team deathmatch style, while Crash Site has players defending alien drop pods like control points. Within hours of its release, thousands of complaints were reported after numbers of players were met with disconnects from games, crashing during loading and, oddly, a temperamental incompatibility with the Xbox Wireless WiFi adaptor. Crytek issued a statement telling players it was aware of "technical issues" with the Xbox multiplayer demo of <i>Crysis 2</i>, and managed to fix most of the issues in time for the PC demo. Some bugs still exist as of the current trial build but are mostly if not entirely visual and do not noticeably affect game play.</p>
+
+<p>Speaking at an EA event to PlayStation Universe, <i>Crysis 2</i> producer Nathan Camarillo said that a PlayStation 3 version was possible, also stating there would be no difference in quality between the PlayStation 3 version of <i>Crysis 2</i> and the Xbox 360 one, which had seen a pre-release demo. Crytek released the first footage of <i>Crysis 2</i> running on PlayStation 3 on February 24, 2011.</p>
+
+<p>The second <i>Crysis 2</i> multiplayer demo was released on March 1, 2011, on both Microsoft Windows and Xbox 360. Among bug fixes from the first beta, the map 'Pier 17' was added to the Xbox version and extended to the PC version. PC gamers have commented on Xbox 360 remnants in the PC demo version, such as the prompt to "press start to begin" or to "adjust your TV settings" when configuring the game brightness. It has also been reported that the PC version would not be released with support for <a href="https://en.wikipedia.org/wiki/DirectX_11">DirectX 11</a>, which will instead be implemented with a patch "later on". On April 8, 2011, Crytek announced – still without marking delivery date – that a DirectX 11 patch was being worked on.</p>
+
+<p>On March 15, 2011, a multiplayer demo was released on the PlayStation Network, featuring both of the maps featured on the Xbox 360 version of the demo, being 'Pier 17' and 'Skyline'. On March 18, it was removed from the Store and the servers were shut down due to server connection delays.</p>
+
+<p>A remastered version, following in the steps of <i><a href="https://en.wikipedia.org/wiki/Crysis_Remastered">Crysis Remastered</a></i>, was announced on May 21, 2021. It was released for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> and <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> on October 15, 2021, both as a bundle with <i>Crysis Remastered</i> and <i><a href="https://en.wikipedia.org/wiki/Crysis_3">Crysis 3 Remastered</a></i>, titled <i>Crysis Remastered Trilogy</i>, and separately. This version of the game was co-developed with <a href="https://en.wikipedia.org/wiki/Saber_Interactive">Saber Interactive</a> and is self-published by Crytek.</p>
+
+<h2>Downloadable content</h2>
+
+<p>The first post-launch <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC) package, titled <i>Crysis 2: Retaliation</i>, was announced on May 10, 2011. <i>Retaliation</i> features four new multiplayer maps - Park Avenue, Transit, Shipyard, and Compound. It was released on May 18, 2011, for the PC, PlayStation 3 and Xbox 360. On June 14, 2011, a second map pack entitled <i>Decimation</i> was released for the Xbox 360 and PC. It included five new maps (5th Avenue, Chasm, Plaza, Prism, and Apartments) as well as two new weapons (FY71 Assault Rifle and the Smoke Grenade). <i>Decimation</i> was released onto the PlayStation 3 platform on June 28 in North America and June 29 in Europe.</p>
+
+<h2>Soundtrack</h2>
+
+<p>The <i>Crysis 2 Original Soundtrack</i>  was composed by Borislav Slavov and Tilman Sillescu with the help of <a href="https://en.wikipedia.org/wiki/Hans_Zimmer">Hans Zimmer</a> and <a href="https://en.wikipedia.org/wiki/Lorne_Balfe">Lorne Balfe</a>. A new rendition of the song entitled "<a href="https://en.wikipedia.org/wiki/Theme_from_New_York,_New_York">New York, New York</a>" by <a href="https://en.wikipedia.org/wiki/B.o.B">B.o.B</a> was used in the launch trailer.</p>
+
+<p>There have been four official releases of the soundtrack. Three albums are available in digital form (via <a href="https://en.wikipedia.org/wiki/ITunes_Store">iTunes</a> and <a href="https://en.wikipedia.org/wiki/Amazon.com">Amazon</a>): The <i>Original Videogame Soundtrack</i>, released on the game's launch date, with 15 tracks; <i>Be Fast!</i>, released on April 26, 2011, with 16 tracks; and <i>Be the Weapon!</i>, released on June 7, 2011, with 17 tracks. The most complete version, consisting of two <a href="https://en.wikipedia.org/wiki/Compact_Disc">CDs</a> and 46 tracks, was released on April 26, 2011, under La-La Land Records.</p>
+
+<h2>Reception</h2>
+
+<p><i>Crysis 2</i> received positive reviews from critics. The reviewers praised various graphical attributes as well as the empowering Nanosuit, but criticized the <a href="https://en.wikipedia.org/wiki/Linear_gameplay">linearity of the gameplay</a> in contrast to its <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> predecessors, <i><a href="https://en.wikipedia.org/wiki/Crysis_(video_game)">Crysis</a></i> and <i><a href="https://en.wikipedia.org/wiki/Crysis_Warhead">Crysis Warhead</a></i>, as well as <a href="https://en.wikipedia.org/wiki/Crytek">Crytek</a>'s acclaimed debut title <i><a href="https://en.wikipedia.org/wiki/Far_Cry_(video_game)">Far Cry</a></i>. <a href="https://en.wikipedia.org/wiki/Review_aggregator">Review aggregator</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> rated the PC version 86/100, the Xbox 360 version 84/100, and the PlayStation 3 version 85/100.</p>
+
+<p>One early review of <i>Crysis 2</i> was published by <i><a href="https://en.wikipedia.org/wiki/Official_Xbox_Magazine">Official Xbox Magazine</a></i>, which gave the game a 9/10. According to the magazine, it was the multiplayer that tipped the balance. It describes the online experience as "some of the most exciting, angry and satisfying action you'll ever have". The sheer spectacle of the single player campaign also left <i>OXM</i> impressed, and the magazine said the game's Nanosuit "is both massively empowering and intelligently balanced by the need to manage its energy levels".</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Gamereactor">Gamereactor</a> reviewed all versions simultaneously and awarded the game a 9/10, noting that "its design is an exciting contrast to the jungles of the original, and New York is filled with destroyed landmarks, ruined neighbourhoods and the beauty of disaster that Cevat talked about. The amount of detail is insane, and the effects are incredible." On the other hand, the reviewers criticized the story, noting "the dialogue often feels over the top and the characters feel flat and uninteresting. Crytek have clearly been inspired by <i><a href="https://en.wikipedia.org/wiki/Half-Life_2">Half-Life 2</a></i>, but they never even come close to Valve's league despite their high ambitions." They concluded that "it would simply be a shame not to call this the best action game so far this year."</p>
+
+<p>A review for the PlayStation 3 version only was published by <i><a href="https://en.wikipedia.org/wiki/PlayStation_Official_Magazine_(UK)">Official PlayStation Magazine</a></i>, which gave the game an 8/10. <i>OPM</i> calls <i>Crysis 2</i> "excellent - technically strong, visually outstanding and full of welcome fresh ideas." <i>OPM</i>'s main gripes are with the shooter's "bungled" opening section, and their view that it takes several hours of "persisting" through "a thorny, poorly signposted and indifferent shooter" until <i>Crysis 2</i> really kicks off. "Developer Crytek has a deserved reputation for pushing gaming hardware to the brink, and its debut work on PS3 is first-rate," it says. "It doesn't just look good, it looks different. The Manhattan mix of crooked concrete spires and green urban spaces is refreshing after the relentless dark khaki backgrounds of <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty">Call of Duty</a></i> and <i><a href="https://en.wikipedia.org/wiki/Medal_of_Honor_(2010_video_game)">Medal of Honor</a></i>."</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/The_Daily_Telegraph">The Telegraph</a></i> considered that the game heavily borrowed from the <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty">Call of Duty</a></i> shooters, being much more scripted and linear than <i><a href="https://en.wikipedia.org/wiki/Crysis_(video_game)">Crysis</a></i>, calling the game a "walled in" experience. <i>The Telegraph</i> also criticized the enemies' "utterly atrocious" <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_(video_games)">AI</a>, "problematic" sound, and "uninspiring" multiplayer.</p>
+
+<p>GameZone gave the game an 8.5/10, stating "With plenty of in-game collectibles in both the multiplayer and single-player modes, as well as solid multiplayer gameplay options, players will find plenty of bang for their buck, and the stunning power of the CryEngine needs to be seen to be believed."</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/15th_Annual_Interactive_Achievement_Awards">15th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>Crysis 2</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Technical_Achievement">Outstanding Achievement in Visual Engineering</a>".</p>
+
+<p>Unlike the original <i>Crysis</i>, which allowed the user to extensively change various graphical settings, <i>Crysis 2</i> at launch provided fewer options. However, advanced settings and DirectX 11 features were added in patch 1.8 along with high resolution textures. The high-res texture upgrade can be used in either DX9 mode or DX11 mode (the graphics card must have 768 MB or more video memory), but can only be enabled on 64-bit operating systems. Due to an unresolved bug in <i>Crysis 2</i>, DirectX 11 mode does not function properly on <a href="https://en.wikipedia.org/wiki/Windows_8">Windows 8</a>.</p>
+
+<p>As of June 30, 2011, over 3 million copies of the game have been sold across all platforms, which is less than <i><a href="https://en.wikipedia.org/wiki/Crysis_(video_game)">Crysis</a></i> on PC only.</p>
+
+<p>In April 2012 it was awarded with the <a href="https://en.wikipedia.org/wiki/Deutscher_Computerspielpreis">Deutscher Computerspielpreis</a> in the category <i>Best German Game</i>.</p>
+
+<h3>Criticism</h3>
+
+<p>The game was heavily criticized for its misuse of <a href="https://en.wikipedia.org/wiki/Tessellation_(computer_graphics)">tesselation</a> that resulted in the game unjustifiably favoring <a href="https://en.wikipedia.org/wiki/Nvidia">NVIDIA</a> GPUs.</p>
+
+<h2>Sequel</h2>
+
+<p>A sequel titled <i><a href="https://en.wikipedia.org/wiki/Crysis_3">Crysis 3</a></i> was released on February 19, 2013, for Microsoft Windows, PlayStation 3, and Xbox 360.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

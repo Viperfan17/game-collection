@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dr. Mario</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('5d1b33cb-2440-436a-9321-11cb4c31f27e/caa9e1f3-8545-4ed5-84fb-39aabbf25b5e.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="5d1b33cb-2440-436a-9321-11cb4c31f27e/0e5cfd3d-9ed8-464f-81a0-8b0cd51dc628.png"/> Dr. Mario</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="5d1b33cb-2440-436a-9321-11cb4c31f27e/51b7123c-0145-4ccd-ac07-a2a9d7062ad2.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:51:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:39:20</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Entertainment System">Nintendo Entertainment System</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-7/27/1990">7/27/1990</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-72">72</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Puzzle">Puzzle</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo R&D1">Nintendo R&D1</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Dr._Mario" target="_blank">Wikipedia</a><br/><a href="https://patents.google.com/patent/US5265888" target="_blank">U.S. patent 5,265,888</a><br/><a href="https://www.nintendo.com/jp/famicom/software/hvc-vu/index.html" target="_blank">Dr. Mario</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[Arcade System] Nintendo VS. System">[Arcade System] Nintendo VS. System</a><br/><a href="#quicklink-[Arcade System] PlayChoice-10">[Arcade System] PlayChoice-10</a><br/><a href="#quicklink-[People] composer: Hirokazu Tanaka">[People] composer: Hirokazu Tanaka</a><br/><a href="#quicklink-[People] designer: Takahiro Harada">[People] designer: Takahiro Harada</a><br/><a href="#quicklink-[People] producer: Gunpei Yokoi">[People] producer: Gunpei Yokoi</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Dr. Mario</b></i> is a 1990 <a href="https://en.wikipedia.org/wiki/Puzzle_video_game">puzzle video game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a> and <a href="https://en.wikipedia.org/wiki/Game_Boy">Game Boy</a>. It was produced by <a href="https://en.wikipedia.org/wiki/Gunpei_Yokoi">Gunpei Yokoi</a> and designed by Takahiro Harada. The soundtrack was composed by <a href="https://en.wikipedia.org/wiki/Hirokazu_Tanaka">Hirokazu Tanaka</a>.</p>
+
+<p>It is a <a href="https://en.wikipedia.org/wiki/List_of_puzzle_video_games#Falling_block_puzzles">falling block puzzle game</a>, in which the player's objective is to destroy the <a href="https://en.wikipedia.org/wiki/Virus">viruses</a> populating the on-screen playing field by using colored vitamin <a href="https://en.wikipedia.org/wiki/Capsule_(pharmacy)">capsules</a> that are automatically tossed into the field by Dr. <a href="https://en.wikipedia.org/wiki/Mario">Mario</a>. The player manipulates the falling capsules, to align the same colors, which destroys viruses. The player progresses through the game by eliminating all the viruses on the screen in each <a href="https://en.wikipedia.org/wiki/Level_(video_gaming)">level</a>.</p>
+
+<p><i>Dr. Mario</i> was a commercial success, with more than 10 million copies sold worldwide across all platforms. It received generally positive reviews, appearing on several lists of "Best Nintendo Games of All Time". It has been <a href="https://en.wikipedia.org/wiki/Porting">ported</a>, <a href="https://en.wikipedia.org/wiki/Video_game_remake">remade</a>, or had a sequel on every <a href="https://en.wikipedia.org/wiki/Nintendo_video_game_console#Home_consoles">Nintendo home console</a> since the NES, and on most <a href="https://en.wikipedia.org/wiki/Nintendo_video_game_console#Portable_consoles">portable consoles</a>, including a re-release in 2004 on the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> in the <i><a href="https://en.wikipedia.org/wiki/Classic_NES_Series">Classic NES Series</a></i>. It was modified into <a href="https://en.wikipedia.org/wiki/Minigame">minigames</a> in <i><a href="https://en.wikipedia.org/wiki/WarioWare,_Inc.:_Mega_Microgames!">WarioWare, Inc.: Mega Microgames!</a></i>, <i><a href="https://en.wikipedia.org/wiki/Brain_Age_2:_More_Training_in_Minutes_a_Day!">Brain Age 2: More Training in Minutes a Day!</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Brain_Age:_Concentration_Training">Brain Age: Concentration Training</a></i>. <i><a href="https://en.wikipedia.org/wiki/Dr._Luigi">Dr. Luigi</a></i> is a spin-off for <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>, released on December 31, 2013, as part of the <a href="https://en.wikipedia.org/wiki/Year_of_Luigi">Year of Luigi</a> celebration.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Dr. Mario</i> is a <a href="https://en.wikipedia.org/wiki/Falling_block_puzzle">falling block</a> <a href="https://en.wikipedia.org/wiki/Tile-matching_video_game">tile-matching video game</a>. <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> assumes the role of a <a href="https://en.wikipedia.org/wiki/Physician">doctor</a>, tossing two-colored medical <a href="https://en.wikipedia.org/wiki/Capsule_(pharmacy)">capsules</a> into a medicine bottle representing the playing field. This area is populated by viruses of three colors — red, yellow, and blue — which stay in their starting positions until removed. In a style similar to <i><a href="https://en.wikipedia.org/wiki/Tetris">Tetris</a></i>, the player manipulates each capsule as it vertically falls, able to move it left or right and rotate it 90 degrees clockwise or counter-clockwise. When matching colors of capsule halves and viruses touch sequentially 4-in-a-row, they disappear. Any remaining half or whole capsules which are not supported will fall to the bottom of the playing field or until hitting another supported object, and any new 4-in-a-row alignments also disappear. The main objective is to eliminate all viruses from the playing field, finishing each <a href="https://en.wikipedia.org/wiki/Level_(video_gaming)">level</a>. A <a href="https://en.wikipedia.org/wiki/Game_over">game over</a> occurs if capsules fill the playing field in a way that obstructs the bottle's narrow neck. After each 5th level is completed on Medium or High difficulty, up to level 20, a <a href="https://en.wikipedia.org/wiki/Cutscene">cutscene</a> shows the virus trio sitting on a tree as music plays and an object flies across the screen.</p>
+
+<p>The options screen configures the starting <a href="https://en.wikipedia.org/wiki/Difficulty_level">level</a>, game speed, and music. The player chooses a starting level between 0 and 20 that determines the number of viruses to clear, and one of three speeds of the falling capsules. The player's <a href="https://en.wikipedia.org/wiki/Score_(game)">score</a> is based on the elimination of viruses and the chosen game speed, with bonus points for clearing more than 1 in a single line. <i>Dr. Mario</i> offers a <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a> <a href="https://en.wikipedia.org/wiki/Game_mode">gaming mode</a> in which two players compete in separate playing fields. Each player's goal is to clear the private playing field of viruses first. Eliminating multiple viruses or initiating chain reactions can add capsules to the opponent's playing field. A player wins a single game upon eliminating all the viruses or upon the other player's bottle filling. The first player to win three games wins overall.</p>
+
+<p>The NES and Game Boy versions of the games have slight differences. The Game Boy version has a slightly smaller playfield than the NES one and the games features slightly different cutscenes showcasing the viruses in different locations. If the player manages a chain of four or more in the Game Boy version, then the Invicinble Music from <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.">Super Mario Bros.</a></i> (1985) will play briefly.</p>
+
+<h2>Development</h2>
+
+<p><i>Dr. Mario</i> was produced by <a href="https://en.wikipedia.org/wiki/Gunpei_Yokoi">Gunpei Yokoi</a>, creator of the <a href="https://en.wikipedia.org/wiki/Game_Boy">Game Boy</a> and <a href="https://en.wikipedia.org/wiki/Game_&amp;_Watch">Game &amp; Watch</a> handheld systems. Takahiro Harada, producer of the <i><a href="https://en.wikipedia.org/wiki/Metroid">Metroid</a></i> series, was its designer. Its music was composed by <a href="https://en.wikipedia.org/wiki/Hirokazu_Tanaka">Hirokazu Tanaka</a>, and has been re-used and <a href="https://en.wikipedia.org/wiki/Arrangement">arranged</a> such as in the <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros.">Super Smash Bros.</a></i> series.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<h3>Re-releases</h3>
+
+<p><i>Dr. Mario</i> spawned several <a href="https://en.wikipedia.org/wiki/Video_game_remake">remakes</a> and <a href="https://en.wikipedia.org/wiki/Porting">ports</a> that were released on various Nintendo consoles. The original version's multiplayer portion was ported to two Nintendo arcade systems: the <a href="https://en.wikipedia.org/wiki/Nintendo_VS._System">Nintendo VS. System</a> (as <i>Vs. Dr. Mario</i>) and the <a href="https://en.wikipedia.org/wiki/PlayChoice-10">PlayChoice-10</a>. <i>Vs. Dr. Mario</i> was first shown at Nintendo's Seventh Annual Distributor Meeting in San Diego, and both versions were released simultaneously in August 1990. An <a href="https://en.wikipedia.org/wiki/Video_game_remake">enhanced remake</a> of <i>Dr. Mario</i> was paired with <i><a href="https://en.wikipedia.org/wiki/Tetris">Tetris</a></i> in the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Nintendo Entertainment System</a> compilation game <i><a href="https://en.wikipedia.org/wiki/Tetris_&amp;_Dr._Mario">Tetris &amp; Dr. Mario</a></i>, released on 30 December 1994. This was re-released in Japan on 30 March 1997, as a downloadable game for the Super Famicom's <a href="https://en.wikipedia.org/wiki/Satellaview">Satellaview</a> peripheral, with the name <i>Dr. Mario BS Version.</i> It was re-released again in Japan for the Super Famicom's and Game Boy's downloadable <a href="https://en.wikipedia.org/wiki/Nintendo_Power_(cartridge)">Nintendo Power cartridges</a>.</p>
+
+<p>The NES version was ported twice to the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a>: first in 2004 as one of thirty games in the <i><a href="https://en.wikipedia.org/wiki/Classic_NES_Series">Classic NES Series</a></i> (<i>Famicom Mini Series</i> in Japan), then bundled with a version of the <i><a href="https://en.wikipedia.org/wiki/Puzzle_League_(series)">Puzzle League</a></i> series in 2005 as <i>Dr. Mario &amp; Puzzle League</i>, with updated graphics and new music. <i><a href="https://en.wikipedia.org/wiki/Nintendo_Puzzle_Collection">Nintendo Puzzle Collection</a></i> and the <i>Nintendo GameCube Preview Disc</i>, both released in 2003 for the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a>, can copy the NES version of <i>Dr. Mario</i> to the Game Boy Advance using the <a href="https://en.wikipedia.org/wiki/Nintendo_GameCube_–_Game_Boy_Advance_link_cable">Nintendo GameCube – Game Boy Advance link cable</a>. The NES version was released on the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> Virtual Console in 2014 and was one of the <a href="https://en.wikipedia.org/wiki/Launch_game">launch games</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Classics">Nintendo Classics</a> service on September 19, 2018. The original Game Boy version was re-released on the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> Virtual Console in 2011 and 2012, and on the Nintendo Classics service on March 12, 2024.</p>
+
+<h2>Reception</h2>
+
+<p><i>Dr. Mario</i> received generally positive reviews, although some parents were critical of the premise of medicine in a children's game. The Game Boy version received positive reviews from <i>Joystick</i> and <i><a href="https://en.wikipedia.org/wiki/Zero_(video_game_magazine)">Zero</a></i> magazines, the latter comparing it favorably with <i>Tetris</i> and <a href="https://en.wikipedia.org/wiki/Connect_Four">Connect Four</a> while stating it is "easy to play and impossible to master". <i><a href="https://en.wikipedia.org/wiki/ACE_(magazine)">ACE</a></i> criticized the uninspiring graphics, repetitive play, and "plagiarism" while comparing it unfavorably with <i>Tetris</i> and <i>Connect Four</i>. 
+In the Japanese magazine <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famicom Tsūshin</a></i>, the four reviewers said that while the game is similar to <i>Tetris</i>, they still found it fun with one reviewer saying it was more fun to play as a two-player game. The same four reviewers also complimented the Game Boy version of the game, with one reviewer feeling that the game was slightly worse due to the lack of color on the Game Boy making it harder to decipher some gameplay elements.</p>
+
+<p>In Japan, 2.08 million copies were sold for the <a href="https://en.wikipedia.org/wiki/Game_Boy">Game Boy</a>, 1.53 million for the <a href="https://en.wikipedia.org/wiki/Famicom">Famicom</a>, and 248,045 for the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a>, for a total of 3,858,045 cartridges sold in Japan. In North America, 2.5 million copies were sold within six weeks of release. Worldwide, 5.34 million copies were sold for the Game Boy and 4.85 million for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a>, for a total of 10,438,045 cartridges sold worldwide across all platforms.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<h3>Retrospective reception</h3>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Allgame">Allgame</a></i> praised the NES version, stating that on its release, "when puzzle games were flooding the market, <i>Dr. Mario</i> stands out as one of the best, combining a smooth learning curve, playful graphics and memorable tunes" and "fundamental concepts may be simple, but the addictive gameplay becomes progressively more complex as the speed increases and additional viruses are added."</p>
+
+<p><i>Dr. Mario</i> was rated the 134th best game on a Nintendo system in <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i>'s Top 200 Games list, the 7th best <i><a href="https://en.wikipedia.org/wiki/Mario">Mario</a></i> game of all time on <i><a href="https://en.wikipedia.org/wiki/ScrewAttack's_Top_10">ScrewAttack's Top 10</a></i>, and the 51st best NES game of all time by <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>. <i>IGN</i> also rated the <a href="https://en.wikipedia.org/wiki/Video_game_music">soundtrack</a>, composed by <a href="https://en.wikipedia.org/wiki/Hirokazu_Tanaka">Hirokazu Tanaka</a>, as seventh in its list of the top ten greatest <a href="https://en.wikipedia.org/wiki/Chiptune">8-bit</a> soundtracks. <i><a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a></i> ranked it the 13th best NES game ever made, calling it "one of the most celebrated of the [puzzle] genre". <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>'s Ben Reeves called it the seventh best Game Boy game. In 2019, <i><a href="https://en.wikipedia.org/wiki/PCMag">PC Magazine</a></i> included Dr. Mario on their "The 10 Best Game Boy Games".</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> re-release in the <i><a href="https://en.wikipedia.org/wiki/Classic_NES_series">Classic NES series</a></i> is rated 66/100 on <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> based on 10 reviews. Most reviews pointed out the game's addictiveness and praise the addition of <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance_Wireless_Adapter">wireless</a> multiplayer, but some questioned the relevance of the standalone re-release. <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> said the game was "still as playable, addictive, and maddening as it was back in 1990" but criticized Nintendo for re-releasing classic games as standalone games in the <i>Classic NES Series</i> instead of as a <a href="https://en.wikipedia.org/wiki/Video_game_compilation">compilation</a>, like <a href="https://en.wikipedia.org/wiki/Atari">Atari</a>'s <i><a href="https://en.wikipedia.org/wiki/Atari_Anthology">Atari Anthology</a></i> or <a href="https://en.wikipedia.org/wiki/Midway_Games">Midway</a>'s <i><a href="https://en.wikipedia.org/wiki/Midway_Arcade_Treasures">Midway Arcade Treasures</a></i>.</p>
+
+<p>Craig Harris of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> sarcastically expressed unease over the game's use of medicine. He enjoyed the addictive gameplay, but criticized the <a href="https://en.wikipedia.org/wiki/Black-and-white">black-and-white</a> <a href="https://en.wikipedia.org/wiki/Instruction_manual_(gaming)">manual</a> which made it difficult to understand the colored gameplay mechanics. <i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i> noted that the game's "color-matching action is more engrossing than <i>Mario Bros.'</i> turtle-punching platform hopping", but strongly questioned whether this re-release is worth its sale price by itself when a version of <i>Dr. Mario</i> was included in another Game Boy Advance game, <i><a href="https://en.wikipedia.org/wiki/WarioWare,_Inc.:_Mega_Microgames!">WarioWare, Inc.: Mega Microgames!</a></i>.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Henk_Rogers">Henk Rogers</a> of the <a href="https://en.wikipedia.org/wiki/Tetris_Company">Tetris Company</a> spoke negatively about the game in an interview published in 2018, saying he "was pissed off about that game, <i>Dr. Mario</i> was a blatant attempt to come up with a <i><a href="https://en.wikipedia.org/wiki/Tetris">Tetris</a></i> replacement and I thought they did it in a cheesy way."</p>
+
+<p>After the commercial success of <i>Dr. Mario</i>, Nintendo released several follow-up games. <i><a href="https://en.wikipedia.org/wiki/Dr._Mario_64">Dr. Mario 64</a></i>, released in 2001 for the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a>, features <a href="https://en.wikipedia.org/wiki/Wario">Wario</a> and several <i><a href="https://en.wikipedia.org/wiki/Wario_Land_3">Wario Land 3</a></i> characters, and offers numerous <a href="https://en.wikipedia.org/wiki/Game_mode">game modes</a>, including a story-focused <a href="https://en.wikipedia.org/wiki/Single-player_video_game">single-player</a> mode. The game supports simultaneous <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> for up to four players. <i>Dr. Mario 64</i> was subsequently released in Japan in <i><a href="https://en.wikipedia.org/wiki/Nintendo_Puzzle_Collection">Nintendo Puzzle Collection</a></i> for the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a>. <i><a href="https://en.wikipedia.org/wiki/Dr._Mario_Online_Rx">Dr. Mario Online Rx</a></i>, released in 2008 on <a href="https://en.wikipedia.org/wiki/WiiWare">WiiWare</a>, offers <a href="https://en.wikipedia.org/wiki/Online_multiplayer_game">online multiplayer</a> via <a href="https://en.wikipedia.org/wiki/Nintendo_Wi-Fi_Connection">Nintendo Wi-Fi Connection</a>. <i><a href="https://en.wikipedia.org/wiki/Dr._Mario_Express">Dr. Mario Express</a></i>, released in 2009 for the <a href="https://en.wikipedia.org/wiki/Nintendo_DSi">Nintendo DSi</a>, does not support multiplayer gameplay. <i><a href="https://en.wikipedia.org/wiki/Dr._Luigi">Dr. Luigi</a></i> was released in 2013 with Luigi as a playable character, all the modes in <i>Dr. Mario Online Rx</i>, and a new mode with L-shaped capsules. The latest installment, <i><a href="https://en.wikipedia.org/wiki/Dr._Mario:_Miracle_Cure">Dr. Mario: Miracle Cure</a></i>, was released in 2015 and introduced power-ups to the series. <i><a href="https://en.wikipedia.org/wiki/Dr._Mario_World">Dr. Mario World</a></i> is a <a href="https://en.wikipedia.org/wiki/Mobile_game">mobile game</a>. Various games in the <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros.">Super Smash Bros.</a></i> series have remixed musical tracks from <i>Dr. Mario</i>, or Dr. Mario as an <a href="https://en.wikipedia.org/wiki/Secret_character_(video_games)">unlockable playable character</a>. <i>Dr. Wario</i> replaces Mario with Wario, as an <a href="https://en.wikipedia.org/wiki/Unlockable_game">unlockable minigame</a> in <i><a href="https://en.wikipedia.org/wiki/WarioWare,_Inc.:_Mega_Microgames!">WarioWare, Inc.: Mega Microgames!</a></i>. A simplified version of <i>Dr. Mario</i> is in <i><a href="https://en.wikipedia.org/wiki/Brain_Age_2:_More_Training_in_Minutes_a_Day!">Brain Age 2: More Training in Minutes a Day!</a></i> as the "Virus Buster" <a href="https://en.wikipedia.org/wiki/Minigame">minigame</a>, using the touch screen to drag the capsules around the playing field. The viruses are enemies in <i><a href="https://en.wikipedia.org/wiki/Mario_&amp;_Luigi:_Superstar_Saga">Mario &amp; Luigi: Superstar Saga</a></i> and <i><a href="https://en.wikipedia.org/wiki/Mario_&amp;_Luigi:_Dream_Team">Mario &amp; Luigi: Dream Team</a></i>. They change colors when attacked, and are all defeated when they are all the same color. In 2018 the <a href="https://en.wikipedia.org/wiki/Classic_Tetris_World_Championship">Classic Tetris World Championship</a> featured a Dr. Mario championship as a 'side event.'<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Independent_sources">independent source needed</a></i>]</sup></p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

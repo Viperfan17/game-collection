@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Saw</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('224977e4-e108-456a-9db0-b7f6c12a2fba/ed3d1e73-8812-424e-b482-6f1332d05aab.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="224977e4-e108-456a-9db0-b7f6c12a2fba/e1d7390e-3aa6-477f-b47c-ecb590533abb.ico"/> Saw</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="224977e4-e108-456a-9db0-b7f6c12a2fba/5af3c3a1-ffa0-4f05-ae92-ba17a640410b.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/27/2025">4/27/2025</a> 10:06:45</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:58:42</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/22/2009">10/22/2009</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-71">71</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-40">40</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Survival horror">Survival horror</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Zombie Studios">Zombie Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Konami">Konami</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Noviy Disk">Noviy Disk</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Saw" target="_blank">PCGamingWiki</a><br/><a href="https://web.archive.org/web/20100327075637/http://www.zombie.com/saw.html" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=8162" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/saw" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/27300/" target="_blank">SteamDB</a><br/><a href="https://www.mobygames.com/game/saw" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Saw_(video_game)" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/saw/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Unreal Engine 3">Unreal Engine 3</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Saw</b></i>, also known as <i><b>Saw: The Video Game</b></i>, is a <a href="https://en.wikipedia.org/wiki/Survival_horror">survival horror</a> video game that was developed by <a href="https://en.wikipedia.org/wiki/Zombie_Studios">Zombie Studios</a> and published by <a href="https://en.wikipedia.org/wiki/Konami">Konami</a> for <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> and <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>. The game was released on October 6, 2009, in North America and later that year in other regions. The Microsoft Windows version was released on October 22, 2009. Part of the <a href="https://en.wikipedia.org/wiki/Saw_(franchise)"><i>Saw</i> film franchise</a>, the game is set between the <a href="https://en.wikipedia.org/wiki/Saw_(2004_film)">first</a> and <a href="https://en.wikipedia.org/wiki/Saw_II">second</a> films.</p>
+
+<p>In <i>Saw</i>, the <a href="https://en.wikipedia.org/wiki/Jigsaw_(Saw_character)">Jigsaw Killer</a> has healed Detective <a href="https://en.wikipedia.org/wiki/David_Tapp">David Tapp</a> from his gunshot wound, and places him in an abandoned <a href="https://en.wikipedia.org/wiki/Insane_asylum">insane asylum</a> to teach him a lesson in life appreciation. Obsessed, Tapp traverses the asylum and gathers clues along the way in hopes of apprehending Jigsaw. As he progresses through the asylum, he encounters several people with connections to him, whom he must save. The asylum also has inhabitants who are in games of their own, ordered to kill Tapp. Along the way, Tapp uncovers the origins of Jigsaw and the motives behind his tests. The development team brought in the <i>Saw</i> creators <a href="https://en.wikipedia.org/wiki/James_Wan">James Wan</a> and <a href="https://en.wikipedia.org/wiki/Leigh_Whannell">Leigh Whannell</a> to help with the storyline and create new trap designs for the game.</p>
+
+<p>Upon release, <i>Saw</i> received mixed reviews. It was praised for the storyline and multiple endings, as well as the immersive environment that is true to the <i>Saw</i> film series. The controls and combat system, however, were panned by critics. Since Konami purchased the publishing rights after former publisher <a href="https://en.wikipedia.org/wiki/Brash_Entertainment">Brash Entertainment</a> went bankrupt, Konami had a significant input on the games' outcome. They stated that they had plans to make <i>Saw</i> their next big franchise as well as a <a href="https://en.wikipedia.org/wiki/Spiritual_successor">spiritual successor</a> to their other survival horror series, <i><a href="https://en.wikipedia.org/wiki/Silent_Hill">Silent Hill</a></i>. A sequel, <i><a href="https://en.wikipedia.org/wiki/Saw_II:_Flesh_&amp;_Blood">Saw II: Flesh &amp; Blood</a></i>, was released on multiple platforms on October 19, 2010.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Saw</i> is primarily a <a href="https://en.wikipedia.org/wiki/Virtual_camera_system">third-person</a> <a href="https://en.wikipedia.org/wiki/Survival_horror">survival horror</a> game with elements of the <a href="https://en.wikipedia.org/wiki/Action_game">action genre</a>.  The player controls <a href="https://en.wikipedia.org/wiki/David_Tapp">David Tapp</a>, a former detective trapped in an abandoned <a href="https://en.wikipedia.org/wiki/Sanitorium">asylum</a> filled with <a href="https://en.wikipedia.org/wiki/Jigsaw_(Saw_character)">Jigsaw</a> traps. The primary goal of the game is to traverse the asylum and survive traps in order to escape. Tapp has several abilities in the game, such as the ability to search things like toilets and corpses to find items such as weapons, health, or clues he can use to fulfill his objectives. Items such as case files and cassette tapes are found hidden around the asylum, and provide additional information about the asylum's past and give background information about certain victims.</p>
+
+<p>The game's combat system allows the character to block, counter-attack, and perform attacks to fend off enemies. There are over eighteen different weapons available to players, including lead pipes, mop handles, firearms, and explosives. Certain weapons may also be used for other purposes, such as cutting open a body to search inside, or breaking down a molding wall to reveal hidden paths. Weapons in the game deplete upon use in real time until they are rendered unusable. As a way to avoid combat, Tapp has the ability to rearm or place certain traps after activating them. For example, he can electrify water puddles or create and place explosive mines on one of "Jigsaw's Worktables". Tapp's health bar, once depleted, can only be restored by bandages or <a href="https://en.wikipedia.org/wiki/Hypodermic_needle">hypodermic needles</a>, which can be stored in an inventory of items. When Tapp is losing health, the environment slowly fades to black-and-white until Tapp heals himself or dies.</p>
+
+<p>At certain points in the game, the player will be joined by <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">AI</a> teammates that help Tapp. There are many points in the game where multiple paths are available that can be taken to avoid certain areas or uncover hidden items. Lighting plays a dynamic role in the game. While Tapp begins with a lighter, other light sources such as flashlights or camera flashes can be found later in the game. <a href="https://en.wikipedia.org/wiki/Minigame">Minigames</a> are a major part of the game. These include a searching game in which an <a href="https://en.wikipedia.org/wiki/X-ray">X-ray</a> view is used to avoid dangers like razors or syringes, and a game that involves grabbing a key before a "Pain meter" fills and wounds Tapp. Other puzzle minigames include powering fuse boxes, placing rotating gears in a box, and aligning steam valves. Doors rigged with shotguns attached to pulleys are in place all around the asylum. When the player encounters one of these doors, they must press a <a href="https://en.wikipedia.org/wiki/Quick_time_event">randomly assigned button</a> before the pulley falls too far, or the gun will discharge. There are puzzles called "environmental traps", in which Tapp must use different elements in the environment, use the in-game camera, or go to certain locations to accomplish a task.</p>
+
+<h2>Synopsis</h2>
+
+<h3>Setting</h3>
+
+<p><i>Saw</i>, like its film predecessors, is set in the fictional <i><a href="https://en.wikipedia.org/wiki/Saw_(franchise)">Saw</a></i> universe in an unnamed city in the United States. The overlying storyline follows that of a man named <a href="https://en.wikipedia.org/wiki/Jigsaw_(Saw_character)">John Kramer</a>. According to the backstory in the film <i><a href="https://en.wikipedia.org/wiki/Saw_IV">Saw IV</a></i>, John encountered a series of events, including the loss of his unborn child, his diagnosis of an inoperable frontal lobe tumor, his divorce from his wife, and a suicide attempt that caused him to begin testing other people's will to live. These tests, which ironically killed many of his victims, and the fact that he symbolically carved a puzzle piece out of the flesh of his victims, soon earned him the alias "The Jigsaw Killer" from newspaper reporter <a href="https://en.wikipedia.org/wiki/List_of_Saw_characters#Oswald_McGillicutty">Oswald McGullicuty</a>. Due to the chronology of <i>Saw</i>, Jigsaw is still alive and his apprentice Amanda is still assumed to be a victim rather than an accomplice.</p>
+
+<p>In <i>Saw</i>, Jigsaw has just concluded the bathroom trap of <a href="https://en.wikipedia.org/wiki/List_of_Saw_characters#Lawrence_Gordon">Lawrence Gordon</a> and <a href="https://en.wikipedia.org/wiki/List_of_Saw_characters#Adam_Faulkner-Stanheight">Adam Stanheight</a>, an incident that occurred at the end of the first film. <a href="https://en.wikipedia.org/wiki/David_Tapp">David Tapp</a>, a police officer who had his throat damaged by Jigsaw's knife and was later shot in the chest by a suspect named <a href="https://en.wikipedia.org/wiki/List_of_Saw_characters#Zep_Hindle">Zep Hindle</a>, has been healed and is brought to Whitehurst insane asylum, an abandoned sanitarium with a reputation for medieval tactics and frequent <a href="https://en.wikipedia.org/wiki/Patient_abuse">patient abuse</a>. The asylum has many areas, most of which contain a key trap scene for Tapp to solve. A large part of the asylum consists of cells that were at one time used to hold the criminally insane. Jigsaw placed traps all around the asylum to continue his tests of will for Detective Tapp and his apprentice, <a href="https://en.wikipedia.org/wiki/Amanda_Young">Amanda Young</a>, who monitors Tapp as the story progresses.</p>
+
+<p><i>Saw</i> revolves around the Jigsaw Killer and his test subject Detective David Tapp, the games' <a href="https://en.wikipedia.org/wiki/Protagonist">protagonist</a>. Jigsaw, a serial killer who is determined to spend the remainder of his life making people appreciate their lives, gives clues to Tapp as he progresses through the game. Clues are usually delivered by Jigsaw's puppet <a href="https://en.wikipedia.org/wiki/Billy_the_Puppet">Billy</a>. Tapp is a veteran detective for the local police force who was recently discharged for mental instability after the loss of his partner, <a href="https://en.wikipedia.org/wiki/List_of_Saw_characters#Steven_Sing">Steven Sing</a>, an event which led him to develop an obsession with catching Jigsaw. Throughout the game, Jigsaw attempts to teach Tapp to let go of his obsession and focus on survival.</p>
+
+<p>In addition to Tapp and Jigsaw, there are six main characters who Tapp must save throughout the game. Amanda Young is a drug user who is secretly Jigsaw's apprentice. <a href="https://en.wikipedia.org/wiki/List_of_Saw_characters#Jennings_Foster">Jennings Foster</a> is a corrupt <a href="https://en.wikipedia.org/wiki/Forensic_science">CSI</a> who framed an innocent citizen for a hit and run he committed. <a href="https://en.wikipedia.org/wiki/List_of_Saw_characters#Melissa_Sing">Melissa Sing</a> is the wife of Tapp's former partner, Detective Steven Sing. She blames Tapp for her husband's death and has since become a neglectful parent to her son. Oswald McGullicuty is a newspaper reporter who coined the name "Jigsaw Killer" and accused Tapp of being Jigsaw. <a href="https://en.wikipedia.org/wiki/List_of_Saw_characters#Obi">Obi</a> is an arsonist who seeks a test from Jigsaw to give his life a purpose. <a href="https://en.wikipedia.org/wiki/List_of_Saw_characters#Jeff_Ridenhour">Jeff Ridenhour</a> is the second survivor of Jigsaw's games, and has become suicidal after Tapp interrogated him relentlessly about Jigsaw.</p>
+
+<p>There are also minor characters spread around the asylum. Most of these people have instructions to kill Tapp and obtain a key placed inside his chest by Jigsaw to free themselves. Some of the attackers have a "reverse bear trap", and some have a "Venus flytrap". Others are equipped with new, unique traps, and some have no traps at all. While not an attacker, a masked figure called "<a href="https://en.wikipedia.org/wiki/List_of_Saw_characters#Pighead">Pighead</a>" is the <a href="https://en.wikipedia.org/wiki/Antagonist">antagonist</a>. Pighead pursues Tapp around the asylum and watches over Tapp's game as per Jigsaw's instructions. At the end of the game, Pighead becomes the only <a href="https://en.wikipedia.org/wiki/Boss_(video_gaming)">boss battle</a>.</p>
+
+<p>The story centers on the kidnapping of <a href="https://en.wikipedia.org/wiki/David_Tapp">David Tapp</a> by the Jigsaw Killer. During the first <i><a href="https://en.wikipedia.org/wiki/Saw_(2004_film)">Saw</a></i> film, Tapp witnessed his longtime friend and partner, Detective Steven Sing, fall victim to one of Jigsaw's traps. This left Tapp mentally unstable and he was soon discharged from the police force. Later, Tapp was shot in the chest by <a href="https://en.wikipedia.org/wiki/List_of_Saw_characters#Zep_Hindle">Zep Hindle</a> after chasing him in pursuit of Jigsaw. Jigsaw had Tapp healed and concealed a key in his chest. Tapp was then placed in an abandoned insane asylum. Tapp wakes up in a bathroom with the reverse bear trap on him. He quickly pulls it off and ventures into the rest of the asylum. He is led to a medical wing by another victim of Jigsaw, only to be betrayed by the man. Tapp learns that he is being hunted by other victims in the asylum who need the key inside his chest to escape their own games. In the medical wing, Jigsaw informs Tapp that there is a woman trapped in the area who needs Tapp's help to survive. He quickly deciphers that it is Amanda Young, whom Tapp interviewed after she survived her first test. He saves Amanda, and she follows Tapp until a mysterious figure called Pighead captures her to fake her escape; she is actually Jigsaw's secret apprentice.</p>
+
+<p>Tapp is forced to move further into the asylum, where he is captured by Pighead and is placed in the shotgun collar, which is later used in <i><a href="https://en.wikipedia.org/wiki/Saw_III">Saw III</a></i>. Still in the trap, Tapp finds a second victim who is being held by Jigsaw. The victim, Jennings Foster, blames Tapp for being in his trap and thus harbors hatred for him. Tapp finds Jennings in a <a href="https://en.wikipedia.org/wiki/Pendulum">pendulum</a> trap similar to the one used in <i><a href="https://en.wikipedia.org/wiki/Saw_V">Saw V</a></i>. Tapp releases Jennings, who quickly runs away, believing that Tapp would get him killed if he stayed with him. Tapp moves on to find the next victim left behind by Jigsaw. He traverses the asylum and is led to the grave of his former partner Detective Sing. It is there that Tapp discovers that Jigsaw has captured Melissa Sing, Detective Sing's widow. She has become a neglectful parent and is convinced that it is Tapp's fault that her husband was killed. Melissa is found in an <a href="https://en.wikipedia.org/wiki/Iron_maiden_(torture)">iron maiden</a>-esque trap with spinning blades that will mangle her body should the device close on her. Jigsaw informs her that Tapp did not call for backup when searching Jigsaw's lair and that every one of the traps there could have been easily avoided by using standard police procedure, which makes Tapp responsible for his partner's death. After Tapp saves Melissa, she tells him Jigsaw gave her the option to leave Tapp, so she quickly runs away.</p>
+
+<p>Tapp is beginning to learn that these people all have a dark connection to him. He proceeds to the offices of the building and finds Oswald McGullicuty in the next Jigsaw trap. Jigsaw felt that Oswald was perverting his message, and so he was placed into a folding table trap, which will snap his body in half if Tapp fails to save him. Tapp saves Oswald, but he is swiftly killed by a compacting metal slab before either have a chance to react.</p>
+
+<p>Jigsaw then leads Tapp to the asylum's crematorium, where he informs Tapp that some people actually desire his tests, much to Tapp's surprise. At the crematorium is Obi, an arsonist who had put advertisements in the newspaper seeking for Jigsaw to test him. Tapp saves him from a burning furnace, but Obi is still frustrated because he wanted to survive his own test. Feeling that Tapp is throwing away a gift from Jigsaw, Obi runs away. Tapp then ventures through a theater, where he finds evidence that a former Jigsaw victim is being held there. He soon finds that it is Jeff Ridenhour, the man who was saved by Sing while he and Tapp were in Jigsaw's lair. Jeff has since become suicidal from Tapp's incessant questioning, and has been re-captured by Jigsaw. Tapp saves Jeff from a wall of spikes. Jeff is still frustrated, so he runs away, wounded. As this was the last victim in the asylum, Tapp is free to pursue Jigsaw, but encounters Pighead again. Jigsaw informs Tapp that Pighead wishes to surpass Jigsaw and sabotage Tapp's game, so he must be stopped. Tapp confronts and kills Pighead in order to get a key to proceed, to which Jigsaw rhetorically asks Tapp if he is a murderer.</p>
+
+<h2>Development</h2>
+
+<p>Prior to the release of <i><a href="https://en.wikipedia.org/wiki/Saw_III">Saw III</a></i>, <a href="https://en.wikipedia.org/wiki/Twisted_Pictures">Twisted Pictures</a> and <a href="https://en.wikipedia.org/wiki/Brash_Entertainment">Brash Entertainment</a> announced they were planning to create a game based on the <i><a href="https://en.wikipedia.org/wiki/Saw_(franchise)">Saw</a></i> property. Although no release was confirmed, they stated that the game would most likely release alongside <i><a href="https://en.wikipedia.org/wiki/Saw_IV">Saw IV</a></i>. Originally, Brash Entertainment was going to develop the game and co-publish it with Twisted Pictures, the producers of all of the <i>Saw</i> films. The game's plot was originally to follow that of the first <i><a href="https://en.wikipedia.org/wiki/Saw_(2004_film)">Saw</a></i> film, with the player assuming control of various characters in Jigsaw's traps, but this was later changed as development progressed.</p>
+
+<p>After the initial announcement, there were no updates from Brash Entertainment. The only form of news came from a teaser site for the game, which was removed as the game moved further into production. The game resurfaced at the <a href="https://en.wikipedia.org/wiki/Game_Developers_Conference">Game Developers Conference 2008</a>, on January 22, where a <a href="https://en.wikipedia.org/wiki/Teaser_campaign">teaser trailer</a> was played. The trailer showed franchise staple <a href="https://en.wikipedia.org/wiki/Billy_the_Puppet">Billy the Puppet</a> preaching to reporters about their wasted lives. Brash Entertainment confirmed that <a href="https://en.wikipedia.org/wiki/Zombie_Studios">Zombie Studios</a> had taken over development of the game, and Brash Entertainment would publish. The trailer briefly showed some gameplay elements from one of the traps featured in the game. After the trailer, Brash Entertainment confirmed that the game would utilize the Unreal Engine 3 and be released for the Xbox 360, PlayStation 3, PlayStation 2, and Microsoft Windows platforms. A poster for the game which depicted an amorphous <a href="https://en.wikipedia.org/wiki/Gamepad">gamepad</a> in a pool of blood was released soon after at the 2008 <a href="https://en.wikipedia.org/wiki/San_Diego_Comic-Con_International">Comic Con</a> convention. The tagline "Dying To Play?" was coined by Brash Entertainment for the poster. The development team brought in <a href="https://en.wikipedia.org/wiki/James_Wan">James Wan</a> and <a href="https://en.wikipedia.org/wiki/Leigh_Whannell">Leigh Whannell</a>, the creators of the first <i>Saw</i> film, to design new traps and help with the storyline for the game.</p>
+
+<p>On November 14, 2008, Brash Entertainment held a press conference announcing that they would be ceasing operations due to financial difficulties. Since Brash Entertainment was publishing the game with Twisted Pictures, the game itself may have been left in "<a href="https://en.wikipedia.org/wiki/Development_hell">possible state of limbo</a>". Considering that the game was far into production, the owners of the <i>Saw</i> brand, <a href="https://en.wikipedia.org/wiki/Lions_Gate_Entertainment">Lionsgate</a> considered publishing the game themselves. The idea was soon rejected, as Lionsgate is primarily a film company and has no experience in the video game industry.  <a href="https://en.wikipedia.org/wiki/Konami">Konami</a> picked the game up for distribution/development on February 6, 2009, after almost four months of uncertainty regarding the game's fate. The game, now under control of Konami, was redesigned to be a <a href="https://en.wikipedia.org/wiki/Spiritual_successor">spiritual successor</a> to Konami's other survival horror franchise, <i><a href="https://en.wikipedia.org/wiki/Silent_Hill">Silent Hill</a></i>. While key elements were retained, Konami did have a large influence in the development of the game. The only cast member to reprise their role from the films was <a href="https://en.wikipedia.org/wiki/Tobin_Bell">Tobin Bell</a> as the <a href="https://en.wikipedia.org/wiki/Jigsaw_(Saw_character)">Jigsaw Killer</a>. Other cast members were replaced with other actors prominent in the video game voice-over industry. Earl Alexander replaced <a href="https://en.wikipedia.org/wiki/Danny_Glover">Danny Glover</a> as the voice of protagonist <a href="https://en.wikipedia.org/wiki/David_Tapp">David Tapp</a>. Instead of actress <a href="https://en.wikipedia.org/wiki/Shawnee_Smith">Shawnee Smith</a>, <a href="https://en.wikipedia.org/wiki/Jen_Taylor">Jen Taylor</a> voiced <a href="https://en.wikipedia.org/wiki/Amanda_Young">Amanda Young</a>. Other cast members include David Scully as Oswald McGullicuty and Kahn Doan as new character Melissa Sing. Konami plans to use <i>Saw</i> for its visual intensity rather than traditional psychological terror.</p>
+
+<h3>Mod support</h3>
+
+<p>The PC version of <i>Saw</i> includes the Unreal Editor, which allows a user to create additional levels and modifications for the game. In order to launch it, SawGame.exe must be run with "editor" command-line parameter. There is only one released mod, <b>Truth</b>, where the player controls Melissa Sing. The mod continues the game's story after the Truth ending.</p>
+
+<h2>Marketing and release</h2>
+
+<p>To advertise the game, Konami released a series of screenshots and <a href="https://en.wikipedia.org/wiki/Viral_video">viral videos</a> prior to release. The screenshots depicted different areas of the asylum and victims in their traps. The videos demonstrated the first hour or so of the game and included certain gameplay elements. While a few of the videos are inaccurate due to the developer making dramatic changes to the environment and gameplay, they still maintained the general roots of the game and the storyline.</p>
+
+<p>On August 8, 2009, the Konami website had lost the entire section on <i>Saw</i>, including screenshots and information. The site was soon restored within a few days with updated information, including the official ESRB rating of Mature 17+ for blood and gore, drug reference, intense violence, and strong language. Other ratings were released later from the <a href="https://en.wikipedia.org/wiki/British_Board_of_Film_Classification">BBFC</a> and the <a href="https://en.wikipedia.org/wiki/Australian_Classification_Board">ACB</a>, which gave <i>Saw</i> an <a href="https://en.wikipedia.org/wiki/18_(British_Board_of_Film_Classification)">18</a> and a MA15+ rating respectively. The game has a <a href="https://en.wikipedia.org/wiki/PEGI">PEGI</a> rating of 18, citing violence and bad language.</p>
+
+<p>The game was originally intended to include an online multi-player offering, but that was later canceled. Since the game was in early development stages at the time, no further details were released. On September 17, 2009, Konami released the full list of Xbox Live achievements for the Xbox 360 version of the game. The game was released in North America on October 6, 2009, for the Xbox 360 and PlayStation 3, with other countries and the Microsoft Windows platforms being released at later times in 2009. The Microsoft Windows version, which was released on October 22, 2009, was originally intended to be released exclusively through <a href="https://en.wikipedia.org/wiki/Valve_Corporation">Valve</a>'s <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> <a href="https://en.wikipedia.org/wiki/Digital_distribution">digital distribution</a> service; this was later corrected when Konami announced that <i>Saw</i> would also be available through another online distributor, <a href="https://en.wikipedia.org/wiki/Direct2Drive">Direct2Drive</a>.</p>
+
+<h2>Soundtrack</h2>
+
+<p>The soundtrack for the game is an original score composed by Alex Guilbert. The theme for <i>Saw</i>, a series of plunking piano keys joined by a bass drum and violins, can be heard during the menu screen and the end credits. At some points during the game, a quick tempo score similar to the opening piano track is used to increase suspense during trap and puzzle sequences. A high-pitched tune can be heard during slower parts of the game, which was used to make these parts more ominous. Variations or mixes of these tracks occur throughout the game. The game utilizes a minimalist approach to music, with most of the ambient sound being provided by other victims, screaming or taunting protagonist <a href="https://en.wikipedia.org/wiki/David_Tapp">David Tapp</a>. Because the tracks were meant for a video game, there are no vocals; the tracks are much shorter than typical songs and are more abundant.</p>
+
+<p>The game is the first piece of digital <i>Saw</i> media not to feature the series' staple "<a href="https://en.wikipedia.org/wiki/Hello_Zepp">Hello Zepp</a>" theme, a piece composed by <a href="https://en.wikipedia.org/wiki/Charlie_Clouser">Charlie Clouser</a> and traditionally used in every <i>Saw</i> film. Because of this, the music for the game is often miscredited to Clouser, even though it was clarified as early as 2008 that Guilbert would be composing, with no mention of Clouser.</p>
+
+<p>The soundtrack includes three bonus tracks, which extend the total length from 1:08:04 to 1:08:43. These appear on the bonus features of the game, which include the <i><a href="https://en.wikipedia.org/wiki/Saw_VI">Saw VI</a></i> <a href="https://en.wikipedia.org/wiki/Computer-generated_imagery">CGI</a> trailer and the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2009">E3 2009</a> demo.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical reception</h3>
+
+<p><i>Saw</i> received mixed reviews. The Xbox 360 version of the game currently holds an average score of 59 percent on the game aggregator <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, based on 35 reviews; the PlayStation 3 version has 59 percent from 36 reviews. On another aggregator site, <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a>, the Xbox 360 version has a 60.89 percent score based on 27 reviews, while the PlayStation 3 has 58.57 percent from 23 reviews. The PC version holds a lower score of 44.33 percent, based solely on three reviews. Although the game was nearly universally praised for the storyline and the two endings the game presented and critics consistently mentioned the immersive atmosphere and environment as being true to the <i>Saw</i> series, the quality level of puzzles were mixed, depending on the reviewer. The controls in general were not well received by many, and worse the combat system was panned by nearly every reviewer.</p>
+
+<p><i>Official Xbox Magazine</i> gave the game a 4.5 out of a possible 10, stating, "Whether you're swinging a pipe or a scalpel, the controls never feel responsive, and rotten collision detection will drive you mad before Jigsaw's twisted games even have the chance." Writing for <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>, David Clayman gave <i>Saw</i> a 7.5 out of a possible ten, earning it a rating of "Good". Clayman praised the unique take on the survival horror franchise and the omnipresence of Jigsaw, but criticized the repetitive puzzles and the flawed combat system. Clayman even called the combat the <a href="https://en.wikipedia.org/wiki/Achilles'_heel">Achilles' heel</a> of the game. He went on to say:</p>
+
+<p>While reviewing the game, many critics pointed out the quality of Guilbert's soundtrack. Eric Qualls praised the soundtrack, calling it a high point of the game. He stated that "The same sound effects and similar music and everything just sounds right". Qualls went on to compliment <a href="https://en.wikipedia.org/wiki/Tobin_Bell">Tobin Bell</a>'s voice as a good addition to the music and the environment. Reviewer Kadath Bird noted the absence of the <i>Hello Zepp</i> theme, though the review did not comment on the soundtrack itself.</p>
+
+<p>While <i>Saw</i> received mixed reviews, a general consensus among reviewers was that fans of the film series would enjoy it. Reviewer for <i>Xbox 360 Achievements</i> Alan Pettit wrote that while he enjoyed the game, it was not an outstanding title. Pettit commented that the game suffered due to the choice of Zombie Studios as the developer and that the franchise could be successful if a sequel was made with changes in developer and budget. Although he claimed it was repetitive, Pettit mentioned that "If there was only one thing the game did well, I'd say the puzzles that are put before you are excellently constructed, well thought out and best of all, difficult enough that you may not get it on your first attempt." The resulting score from Pettit's review was a 74 out of 100.</p>
+
+<p>Akin to the films, the <i>Saw</i> video game has been the subject of much controversy, often being classified as "<a href="https://en.wikipedia.org/wiki/Splatter_film">torture porn</a>" by its critics. Its violence and visual intensity sparked many allegations that the main goal of the game is to mutilate characters simply for the sake of doing so. It was compared to games such as <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_IV">Grand Theft Auto IV</a></i>, <i><a href="https://en.wikipedia.org/wiki/MadWorld">MadWorld</a></i>, and <i>Manhunt</i>, but contrasted for the claim that the aforementioned games' violence served a somewhat humorous purpose or had some type of moral reprieve. William Usher of Cinema Blend wrote that <i>Saw</i> pushed controversial boundaries and called it a "tutorial for sadists to get pleasure from". Usher said that the lack of a moral message makes it even more controversial.</p>
+
+<p>The game contains one scene that allows players to cut open bodies and sift through their insides to retrieve a key. This area was a particular focus for critics, chief among them being Cinema Blend. It was stated that this scenario was "sick" and "tasteless". Konami had already received indefinite BBFC and ESRB ratings, so the game was released in all regions without any censorship. Robert Workman of <i>Game Daily</i> agreed with the sentiment that moral messages presented an issue to the game and included it in the "top ten controversial games of 2009." <i>Mac World</i> writer Chris Holt showed surprise that Konami would choose to release <i>Saw</i> but refuse to publish <i><a href="https://en.wikipedia.org/wiki/Six_Days_in_Fallujah">Six Days in Fallujah</a></i> due to controversial factors. Konami later stated that this was because the events that took place in Fallujah were real events that could cause offense to some while <i>Saw</i> was entirely fictional.</p>
+
+<p>Despite the controversy surrounding the game, it was approved for release in Germany and Australia, countries that are known to ban explicit video games. Producer John Williamson stated in an interview, "I thought, just based on everything I always read online, that it would never get through, but it went through on the first pass." Williamson attempted to justify the release of the game by noting the intellectual elements of both the game and the film franchise. He pointed out:</p>
+
+<p>He went on to comment that the <i>Saw</i> films would not continue to appeal to fans if they were stereotypical torture porn.</p>
+
+<h2>Sequel</h2>
+
+<p>On April 9, 2010, Konami announced <i>Saw II: Flesh &amp; Blood</i> and released a teaser trailer. The sequel is set between the first game and <a href="https://en.wikipedia.org/wiki/Saw_II">second</a> film. The protagonist is David Tapp's estranged son Michael, who seeks the cause of his father's death, which leads him into conflict with the Jigsaw Killer and the second Pighead. It was released in October 2010 to coincide with the release of <i><a href="https://en.wikipedia.org/wiki/Saw_3D">Saw 3D</a></i>, the seventh film in the series.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

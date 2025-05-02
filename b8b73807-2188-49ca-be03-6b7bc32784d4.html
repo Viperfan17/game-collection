@@ -1,0 +1,393 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>League of Legends</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('b8b73807-2188-49ca-be03-6b7bc32784d4/b6d43abf-75dd-4899-90d4-d2b29b96cf55.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="b8b73807-2188-49ca-be03-6b7bc32784d4/ad95cac1-b5d6-4fdc-ad8c-036342afc9f6.png"/> League of Legends</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="b8b73807-2188-49ca-be03-6b7bc32784d4/a04c9e20-6c97-42a6-89d9-d14561b705d9.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 5:22:43</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 23:26:54</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Unknown">Unknown</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Riot Games">Riot Games</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/27/2009">10/27/2009</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-78">78</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Strategy">Strategy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Riot Games">Riot Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Riot Games">Riot Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/League_of_Legends" target="_blank">PCGamingWiki</a><br/><a href="https://www.leagueoflegends.com/" target="_blank">Official site</a><br/><a href="https://www.igdb.com/games/league-of-legends" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/20590/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/League_of_Legends" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/43647" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/League_of_Legends" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/league-legends" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Hextech Engine">Hextech Engine</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>League of Legends</b></i> (<i><b>LoL</b></i>), commonly referred to as <i><b>League</b></i>, is a 2009 <a href="https://en.wikipedia.org/wiki/Multiplayer_online_battle_arena">multiplayer online battle arena</a> video game developed and published by <a href="https://en.wikipedia.org/wiki/Riot_Games">Riot Games</a>. Inspired by <i><a href="https://en.wikipedia.org/wiki/Defense_of_the_Ancients">Defense of the Ancients</a></i>, a <a href="https://en.wikipedia.org/wiki/Mod_(video_games)">custom map</a> for <a href="https://en.wikipedia.org/wiki/Warcraft_III:_Reign_of_Chaos"><i>Warcraft III</i></a>, Riot's founders sought to develop a stand-alone game in the same genre. Since its release in October 2009, <i>League</i> has been <a href="https://en.wikipedia.org/wiki/Free-to-play">free-to-play</a> and is monetized through <a href="https://en.wikipedia.org/wiki/Freemium">purchasable</a> character customization. The game is available for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> and <a href="https://en.wikipedia.org/wiki/MacOS">macOS</a>.</p>
+
+<p>In the game, two teams of five players battle in <a href="https://en.wikipedia.org/wiki/Player-versus-player">player-versus-player</a> combat, each team occupying and defending their half of the map. Each of the ten players controls a character, known as a "champion", with unique abilities and differing styles of play. During a match, champions become more powerful by collecting <a href="https://en.wikipedia.org/wiki/Experience_point">experience points</a>, earning gold, and purchasing <a href="https://en.wikipedia.org/wiki/Item_(game_terminology)">items</a> to defeat the opposing team. In <i>League</i>'s main mode, Summoner's Rift, a team wins by pushing through to the enemy base and destroying their "Nexus", a large structure located within.</p>
+
+<p><i>League of Legends</i> has received generally positive reviews, which have highlighted its accessibility, character designs, and production value. The game's long lifespan has resulted in a critical reappraisal, with reviews trending positively; it is widely considered one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games ever made</a>. However, negative and abusive in-game player behavior, criticized since the game's early days, persists despite Riot's attempts to fix the problem. In 2019, <i>League</i> regularly peaked at eight million concurrent players, and its popularity has led to tie-ins such as music, comic books, short stories, and the animated series <i><a href="https://en.wikipedia.org/wiki/Arcane_(TV_series)">Arcane</a></i>. Its success has spawned several <a href="https://en.wikipedia.org/wiki/Spin-off_(media)">spin-off</a> video games, including a <a href="https://en.wikipedia.org/wiki/League_of_Legends:_Wild_Rift">mobile version</a>, a <a href="https://en.wikipedia.org/wiki/Legends_of_Runeterra">digital collectible card game</a>, and a <a href="https://en.wikipedia.org/wiki/Ruined_King">turn-based role-playing game</a>, among <a href="https://en.wikipedia.org/wiki/Riot_Games#Games">others</a>. A <a href="https://en.wikipedia.org/wiki/Massively_multiplayer_online_role-playing_game">massively multiplayer online role-playing game</a> based on the property is in development.</p>
+
+<p><i>League of Legends</i> is the world's largest <a href="https://en.wikipedia.org/wiki/Esports">esport</a>, with an international <a href="https://en.wikipedia.org/wiki/League_of_Legends_in_esports">competitive scene</a> consisting of multiple regional leagues that culminate in an annual <a href="https://en.wikipedia.org/wiki/League_of_Legends_World_Championship"><i>League of Legends</i> World Championship</a>. The <a href="https://en.wikipedia.org/wiki/2019_League_of_Legends_World_Championship">2019 event</a> registered over 100 million unique viewers, peaking at a concurrent viewership of 44 million during the <a href="https://en.wikipedia.org/wiki/2019_League_of_Legends_World_Championship_final">finals</a>. Domestic and international events have been broadcast on <a href="https://en.wikipedia.org/wiki/Livestreaming">livestreaming</a> websites such as <a href="https://en.wikipedia.org/wiki/Twitch_(service)">Twitch</a>, <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a>, <a href="https://en.wikipedia.org/wiki/Bilibili">Bilibili</a>, and the <a href="https://en.wikipedia.org/wiki/Cable_television_in_the_United_States">cable television</a> sports channel <a href="https://en.wikipedia.org/wiki/ESPN">ESPN</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>League of Legends</i> is a <a href="https://en.wikipedia.org/wiki/Multiplayer_online_battle_arena">multiplayer online battle arena</a> (MOBA) game in which the player controls a character ("champion") with a set of unique abilities from an <a href="https://en.wikipedia.org/wiki/Isometric_video_game_graphics">isometric</a> perspective. As of 2025, there are 170 champions available to play. Over the course of a match, champions gain levels by accruing <a href="https://en.wikipedia.org/wiki/Experience_point">experience points</a> (XP) through killing enemies. Items can be acquired to increase champions' strength, and are bought with gold, which players accrue passively over time and earn actively by defeating the opposing team's minions, champions, or defensive structures. In the main game mode, Summoner's Rift, items are purchased through a shop menu available to players only when their champion is in the team's base. Each match is discrete; levels and items do not transfer from one match to another.</p>
+
+<h3>Summoner's Rift</h3>
+
+<p>Summoner's Rift is the flagship game mode of <i>League of Legends</i> and the most prominent in <a href="https://en.wikipedia.org/wiki/League_of_Legends_in_esports">professional-level play</a>. The mode has a ranked competitive ladder; a matchmaking system determines a player's skill level and generates a starting rank from which they can climb. There are ten tiers; the least skilled are Iron, Bronze, and Silver, and the highest are Master, Grandmaster, and Challenger.</p>
+
+<p>Two teams of five players compete to destroy the opposing team's "Nexus", which is guarded by the enemy champions and defensive structures known as "turrets". Each team's Nexus is located in their base, where players start the game and reappear after death. <a href="https://en.wikipedia.org/wiki/Non-player_character">Non-player characters</a> known as minions are generated from each team's Nexus and advance towards the enemy base along three lanes guarded by turrets: top, middle, and bottom. Each team's base contains three "inhibitors", one behind the third tower from the center of each lane. Destroying one of the enemy team's inhibitors causes stronger allied minions to <a href="https://en.wikipedia.org/wiki/Spawning_(video_games)">spawn</a> in that lane, and allows the attacking team to damage the enemy Nexus and the two turrets guarding it. The regions in between the lanes are collectively known as the "jungle", which is inhabited by "monsters" that, like minions, respawn at regular intervals. Like minions, monsters provide gold and XP when killed. Another, more powerful class of monster resides within the river that separates each team's jungle. These monsters require multiple players to defeat and grant special abilities to their slayers' team. For example, teams can gain a powerful allied unit after killing the Rift Herald, permanent strength boosts by killing dragons, and stronger, more durable minions by killing Baron Nashor.</p>
+
+<p>Summoner's Rift matches can last from as little as 15 minutes to over an hour. Although the game does not enforce where players may go, conventions have arisen over the game's lifetime: typically one player goes in the top lane, one in the middle lane, one in the jungle, and two in the bottom lane. Players in a lane kill minions to accumulate gold and XP (termed "farming") and try to prevent their opponent from doing the same. A fifth champion, known as a "jungler", farms the jungle monsters and, when powerful enough, assists their teammates in a lane.</p>
+
+<p>Besides Summoner's Rift, <i>League of Legends</i> has two other permanent game modes. ARAM ("All Random, All Mid") is a five-versus-five mode like Summoner's Rift, but on a map called Howling Abyss with only one long lane, no jungle area, and with champions randomly chosen for players. Given the small size of the map, players must be vigilant in avoiding enemy abilities.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Teamfight_Tactics">Teamfight Tactics</a></i> is an <a href="https://en.wikipedia.org/wiki/Auto_battler">auto battler</a> released in June 2019 and made a permanent game mode the following month. As with others in its genre, players build a team and battle to be the last one standing. Players do not directly affect combat but position their units on a board for them to fight automatically against opponents each round. <i>Teamfight Tactics</i> is available for <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> and <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a> and has <a href="https://en.wikipedia.org/wiki/Cross-platform_play">cross-platform play</a> with the Windows and macOS clients.</p>
+
+<p>Other game modes have been made available temporarily, typically aligning with in-game events. Ultra Rapid Fire (URF) mode was available for two weeks as a 2014 <a href="https://en.wikipedia.org/wiki/April_Fools_Day">April Fools Day</a> prank. In the mode, champion abilities have no resource cost, significantly reduced cooldown timers, increased movement speed, reduced healing, and faster attacks. A year later, in April 2015, Riot disclosed that they had not brought the mode back because its unbalanced design resulted in player "burnout". The developer also said the costs associated with maintaining and balancing URF were too high. Other temporary modes include One for All and Nexus Blitz. One for All has players pick a champion for all members of their team to play. In Nexus Blitz, players participate in a series of <a href="https://en.wikipedia.org/wiki/Mini-games">mini-games</a> on a compressed map.</p>
+
+<h2>Development</h2>
+
+<h3>Pre-release</h3>
+
+<p>Riot Games' founders Brandon Beck and Marc Merill had an idea for a spiritual successor to <i><a href="https://en.wikipedia.org/wiki/Defense_of_the_Ancients">Defense of the Ancients</a></i>, known as <i>DotA</i>. A <a href="https://en.wikipedia.org/wiki/Mod_(video_games)">mod</a> for <i><a href="https://en.wikipedia.org/wiki/Warcraft_III:_Reign_of_Chaos">Warcraft III: Reign of Chaos</a></i>, <i>DotA</i> required players to buy <i>Warcraft III</i> and install custom software; <i><a href="https://en.wikipedia.org/wiki/The_Washington_Post">The Washington Post</a></i>'s Brian Crecente said the mod "lacked a level of polish and was often hard to find and set up". Phillip Kollar of <i>Polygon</i> noted that <a href="https://en.wikipedia.org/wiki/Blizzard_Entertainment">Blizzard Entertainment</a> supported <i>Warcraft III</i> with an <a href="https://en.wikipedia.org/wiki/Expansion_pack">expansion pack</a>, then shifted their focus to other projects while the game still had players. Beck and Merill sought to create a game that would be supported over a significantly longer period.</p>
+
+<p>Beck and Merill held a <i>DotA</i> tournament for students at the <a href="https://en.wikipedia.org/wiki/University_of_Southern_California">University of Southern California</a>, with an ulterior goal of recruitment. There they met Jeff Jew, later a producer on <i>League of Legends</i>. Jew was very familiar with <i>DotA</i> and spent much of the tournament teaching others how to play. Beck and Merill invited him to an interview, and he joined Riot Games as an intern. Beck and Merill recruited two figures involved with <i>DotA:</i> Steve Feak, one of its designers,<i><sup><a href="https://en.wikipedia.org/wiki/League_of_Legends#cite_note-:3-40">[39]</a></sup></i> and Steve Mescon, who ran a support website to assist players. Feak said early development was highly iterative, comparing it to designing <i>DotA</i>.</p>
+
+<p>A demonstration of <i>League of Legends</i> built in the <i>Warcraft III</i> game engine was completed in four months and then shown at the 2007 <a href="https://en.wikipedia.org/wiki/Game_Developers_Conference">Game Developers Conference</a>. There, Beck and Merill had little success with potential investors. Publishers were confused by the game's free-to-play business model and lack of a single-player mode. The free-to-play model was untested outside of Asian markets, so publishers were primarily interested in a retail release, and the game's capacity for a <a href="https://en.wikipedia.org/wiki/Sequel">sequel</a>. In 2008, Riot reached an agreement with holding company <a href="https://en.wikipedia.org/wiki/Tencent">Tencent</a> to oversee the game's launch in China.</p>
+
+<p><i>League of Legends</i> was announced October 7, 2008, for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>. <a href="https://en.wikipedia.org/wiki/Closed_beta">Closed beta-testing</a> began in April 2009. Upon the launch of the beta, seventeen champions were available. Riot initially aimed to ship the game with 20 champions but doubled the number before the game's full release in North America on October 27, 2009. The game's full name was announced as <i>League of Legends: Clash of Fates</i>. Riot planned to use the subtitle to signal when future content was available, but decided they were silly and dropped it before launch.<i><sup><a href="https://en.wikipedia.org/wiki/League_of_Legends#cite_note-:7-41">[40]</a></sup></i></p>
+
+<p><i>League of Legends</i> receives regular updates in the form of <a href="https://en.wikipedia.org/wiki/Patch_(computing)">patches</a>. Although previous games had utilized patches to ensure no one strategy dominated, <i>League of Legends</i>' patches made keeping pace with the developer's changes a core part of the game. In 2014, Riot standardized their patch cadence to once approximately every two or three weeks.</p>
+
+<p>The development team includes hundreds of game designers and artists. In 2016, the music team had four full-time composers and a team of producers creating audio for the game and its promotional materials. As of 2025, the game has 170 champions, and Riot Games periodically overhauls the visuals and gameplay of the oldest in the roster. Although only available for Microsoft Windows at launch, a <a href="https://en.wikipedia.org/wiki/MacOS">Mac</a> version of the game was made available in March 2013.</p>
+
+<p>Since May 2023, the game uses Riot's custom always-online anti-cheat software, <a href="https://en.wikipedia.org/wiki/Riot_Vanguard">Vanguard</a>, on Microsoft Windows devices. Originally developed by Riot for their tactical shooter <i><a href="https://en.wikipedia.org/wiki/Valorant">Valorant</a></i> (2020), Vanguard requires access to the device's <a href="https://en.wikipedia.org/wiki/Kernel_(operating_system)">kernel</a>, which some users saw as unnecessarily intrusive. Vanguard does not collect user data or send it to Riot Games. Following the anti-cheat's deployment, some players said Vanguard <a href="https://en.wikipedia.org/wiki/Brick_(electronics)">bricked</a> their devices. The developer said this was caused by other problems, with only 0.03% of players reporting issues.</p>
+
+<p><i>League of Legends</i> uses a <a href="https://en.wikipedia.org/wiki/Free-to-play">free-to-play</a> business model. Revenue is generated by selling cosmetic goods with no impact to gameplay. Several of these cosmetics—for example, "skins" that change the appearance of champions—can be redeemed after purchasing an <a href="https://en.wikipedia.org/wiki/Virtual_economy">in-game currency</a> called Riot Points (RP). Skins have five basic tiers, ranging in cost from $4 to $25. As virtual goods, they have high <a href="https://en.wikipedia.org/wiki/Profit_margin">profit margins</a>. An <a href="https://en.wikipedia.org/wiki/Ubisoft">Ubisoft</a> analyst estimated in 2014 that only 4% of players were paying customers, significantly lower than the industry standard, and added that optimizing revenue was likely not a high priority to Riot because of the game's large player base. At the 2024 <a href="https://en.wikipedia.org/wiki/Summer_Game_Fest">Summer Game Fest</a>, game director Pu Liu said that revenue is primarily generated by a "single-digit percentage" of players, colloquially known as whales.</p>
+
+<p>Riot Games added an additional skin tier to <i>League of Legends</i> in 2024, describing them as a <a href="https://en.wikipedia.org/wiki/Luxury_goods">luxury good</a>. These skins cannot be purchased outright: instead, players buy attempts to win the skin via in-game <a href="https://en.wikipedia.org/wiki/Slot_machine">slot machine</a> mechanic. This was widely identified as a <a href="https://en.wikipedia.org/wiki/Gacha_game">gacha game</a> mechanic, used by the company in <i><a href="https://en.wikipedia.org/wiki/Teamfight_Tactics">Teamfight Tactics</a></i> since the previous year.  Players are guaranteed to acquire the skin after a predefined number of failed attempts. The cost can range from $200 to $430. Responses to early iterations of the new skin tier divided players. The first to be revealed, with an upper cost $200, was criticized for being a recolored variants of an existing skin, known as a "chroma". A content creator known for showcasing upcoming skins said the tier was poor value and described them as a "<a href="https://en.wikipedia.org/wiki/Scam">scam</a>".</p>
+
+<p>One day after revealing a $430 "Hall of Fame" skin to honor the career of professional gamer <a href="https://en.wikipedia.org/wiki/Faker_(gamer)">Faker</a>, Riot announced layoffs at the company, impacting Ben Rosado—the cosmetic's designer—and eliciting further negative responses from players. In early 2025, Riot announced a new skin in the tier that had been long requested by players. <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i>'s Rick Lane described the strategy as "whale chasing" and "psychological manipulation". He said that the skins had been selected to "subtly" entice players into "rolling the dice", at which point the <a href="https://en.wikipedia.org/wiki/Sunk_cost">sunk-cost</a> fallacy takes over. Lane described it as the latest in a series of monetization controversies for the developer.</p>
+
+<p>In November 2024, the studio said they would streamline player rewards in an upcoming patch, describing the game's various progression tracks and currencies as "needlessly complex". The announcement caused widespread outrage. A viral <a href="https://en.wikipedia.org/wiki/Reddit">Reddit</a> post estimated that free-to-play players must play the game for over 800 hours to unlock a single champion. It was described by <i><a href="https://en.wikipedia.org/wiki/GamesRadar+">GamesRadar+</a></i> as the studio's "worst PR disaster in years". In mid-January 2025, game director Andrei van Room said they had "screwed up", explaining that a designer forgot to include the "first win of the day" experience bonus in their calculations, causing unintended consequences. The developer partially reverted some of the changes, including halving the cost of purchasing a champion, and the return of "hextech chests"—a <a href="https://en.wikipedia.org/wiki/Loot_box">loot box</a> system introduced in 2016. These are purchasable virtual "chests" that provide random cosmetics, a practice that has been criticized as a form of gambling.</p>
+
+<p>Before 2014, players existed in-universe as political leaders, or "Summoners", commanding champions to fight on the Fields of Justice—for example, Summoner's Rift—to avert a catastrophic war. Sociologist Matt Watson said the plot and setting were bereft of the political themes found in other <a href="https://en.wikipedia.org/wiki/Role-playing_game">role-playing games</a>, and presented in reductive "good versus evil" terms. In the game's early development, Riot did not hire writers, and designers wrote character biographies only a paragraph long.</p>
+
+<p>In September 2014, Riot Games rebooted the game's <a href="https://en.wikipedia.org/wiki/Fictional_universe">fictional setting</a>, removing summoners from the game's lore to avoid "creative stagnation". Luke Plunkett wrote for <i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i> that, although the change would upset long-term fans, it was necessary as the game's player base grew in size. Shortly after the reboot, Riot hired <i><a href="https://en.wikipedia.org/wiki/Warhammer_Fantasy_(setting)">Warhammer</a></i> writer <a href="https://en.wikipedia.org/wiki/Graham_McNeill">Graham McNeill</a>. Riot's storytellers and artists create <a href="https://en.wikipedia.org/wiki/Flavor_text">flavor text</a>, adding "richness" to the game, but very little of this is seen as a part of normal gameplay. Instead, that work supplies a foundation for the franchise's expansion into other media, such as comic books and spin-off video games. The Fields of Justice were replaced by a new fictional setting—a planet called Runeterra. The setting has elements from several genres—from <a href="https://en.wikipedia.org/wiki/Lovecraftian_horror">Lovecraftian horror</a> to traditional <a href="https://en.wikipedia.org/wiki/Sword_and_sorcery">sword and sorcery</a> fantasy.</p>
+
+<h2>Reception</h2>
+
+<p><i>League of Legends</i> received generally favorable reviews on its initial release, according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. Many publications noted the game's high <a href="https://en.wikipedia.org/wiki/Replay_value">replay value</a>. <i>Kotaku</i> reviewer Brian Crecente admired how items altered champion play styles. Quintin Smith of <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> concurred, praising the amount of experimentation offered by champions. Comparing it to <i>Defense of the Ancients</i>, Rick McCormick of <i><a href="https://en.wikipedia.org/wiki/GamesRadar+">GamesRadar+</a></i> said that playing <i>League of Legends</i> was "a vote for choice over refinement".</p>
+
+<p>Given the game's origins, other reviewers frequently compared aspects of it to <i>DotA.</i> According to <i>GamesRadar+</i> and <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i>, <i>League of Legends</i> would feel familiar to those who had already played <i>DotA</i>. The game's inventive character design and lively colors distinguished the game from its competitors. Smith concluded his review by noting that, although there was not "much room for negativity", Riot's goal of refining <i>DotA</i> had not yet been realized.</p>
+
+<p>Although Crecente praised the game's free-to-play model, <i><a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a></i>'s Ryan Scott was critical of the <a href="https://en.wikipedia.org/wiki/Grinding_(video_games)">grind</a> required for non-paying players to unlock key gameplay elements, calling it unacceptable in a competitive game. Many outlets said the game was underdeveloped. A physical version of the game was available for purchase from retailers; <i>GameSpot</i>'s Kevin VanOrd said it was an inadvisable purchase because the value included $10 of store credit for an unavailable store. German site <i>GameStar</i> noted that none of the bonuses in that version were available until the launch period had ended and refused to carry out a full review. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>'s Steve Butts compared the launch to the poor state of <i><a href="https://en.wikipedia.org/wiki/CrimeCraft">CrimeCraft</a></i>'s release earlier in 2009; he indicated that features available during <i>League of Legends</i>'s beta were removed for the release, even for those who purchased the retail version. Matches took unnecessarily long to find for players, with long <a href="https://en.wikipedia.org/wiki/Matchmaking_(video_games)">queue times</a>, and <i>GameRevolution</i> mentioned frustrating bugs.</p>
+
+<p>Some reviewers addressed toxicity in the game's early history. Crecente wrote that the community was "insular" and "whiney" when losing. Butts speculated that <i>League of Legends</i> inherited many of <i>DotA</i>'s players, who had developed a reputation for being "notoriously hostile" to newcomers.</p>
+
+<h3>Reassessment</h3>
+
+<p>Regular updates to the game have resulted in a reappraisal by some outlets; <i>IGN</i>'s second reviewer, Leah B. Jackson, explained that the website's original review had become "obsolete". Two publications increased their original scores: <i>GameSpot</i> from 6 to 9, and <i>IGN</i> from 8 to 9.2. The variety offered by the champion roster was described by Steven Strom of <i>PC Gamer</i> as "fascinating"; Jackson pointed to "memorable" characters and abilities. Although the items had originally been praised at release by other outlets such as <i>Kotaku</i>, Jackson's reassessment criticized the lack of item diversity and viability, noting that the items recommended to the player by the in-game shop were essentially required because of their strength.</p>
+
+<p>While reviewers were pleased with the diverse array of play styles offered by champions and their abilities, Strom thought that the female characters still resembled those in "horny <i><a href="https://en.wikipedia.org/wiki/Clash_of_Clans">Clash of Clans</a></i> clones" in 2018. Two years before Strom's review, a champion designer responded to criticism by players that a young, female champion was not conventionally attractive. He argued that limiting female champions to one body type was constraining, and said progress had been made in Riot's recent releases.</p>
+
+<p>Comparisons persisted between the game and others in the genre. <i>GameSpot</i>'s Tyler Hicks wrote that new players would pick up <i>League of Legends</i> quicker than <i>DotA</i> and that the removal of randomness-based skills made the game more competitive. Jackson described <i>League of Legends'</i> rate of unlock for champions as "a model of generosity", but less than <i>DotA</i>'s sequel, <i><a href="https://en.wikipedia.org/wiki/Dota_2">Dota 2</a></i> (2013), produced by <a href="https://en.wikipedia.org/wiki/Valve_Corporation">Valve</a>, wherein characters are unlocked by default. Strom said the game was fast-paced compared to <i>Dota 2</i>'s "yawning" matches, but slower than those of Blizzard Entertainment's "intentionally accessible" MOBA <i><a href="https://en.wikipedia.org/wiki/Heroes_of_the_Storm">Heroes of the Storm</a></i> (2015).</p>
+
+<p>At the first <a href="https://en.wikipedia.org/wiki/Game_Developers_Choice_Awards">Game Developers Choice Awards</a> in 2010, the game won four major awards: Best Online Technology, Game Design, New Online Game, and Visual Arts. At the 2011 <a href="https://en.wikipedia.org/wiki/Golden_Joystick_Awards">Golden Joystick Awards</a>, it won Best Free-to-Play Game. Music produced for the game won a <a href="https://en.wikipedia.org/wiki/Shorty_Awards">Shorty Award</a>, and was nominated at the <a href="https://en.wikipedia.org/wiki/Hollywood_Music_in_Media_Awards">Hollywood Music in Media Awards</a>.</p>
+
+<p><i>League of Legends</i> has received awards for its contribution to <a href="https://en.wikipedia.org/wiki/Esports">esports</a>. It was nominated for Best Esports Game at <a href="https://en.wikipedia.org/wiki/The_Game_Awards">The Game Awards</a> in <a href="https://en.wikipedia.org/wiki/The_Game_Awards_2017">2017</a> and <a href="https://en.wikipedia.org/wiki/The_Game_Awards_2018">2018</a>, then won in <a href="https://en.wikipedia.org/wiki/The_Game_Awards_2019">2019</a>, <a href="https://en.wikipedia.org/wiki/The_Game_Awards_2020">2020</a>, and <a href="https://en.wikipedia.org/wiki/The_Game_Awards_2021">2021</a>. Specific events organized by Riot for esports tournaments have been recognized by awards ceremonies. Also at The Game Awards, the Riot won Best Esports Event for the <a href="https://en.wikipedia.org/wiki/2019_League_of_Legends_World_Championship">2019</a>, <a href="https://en.wikipedia.org/wiki/2020_League_of_Legends_World_Championship">2020</a> and <a href="https://en.wikipedia.org/wiki/2021_League_of_Legends_World_Championship">2021 <i>League</i> World Championships</a>. At the 39th <a href="https://en.wikipedia.org/wiki/Sports_Emmy_Award">Sports Emmy Awards</a> in 2018, <i>League of Legends</i> won Outstanding Live Graphic Design for the <a href="https://en.wikipedia.org/wiki/2017_League_of_Legends_World_Championship">2017 world championship</a>; as part of the pre-competition proceedings, Riot used <a href="https://en.wikipedia.org/wiki/Augmented_reality">augmented reality</a> technology to have a <a href="https://en.wikipedia.org/wiki/Computer-generated_imagery">computer-generated</a> dragon fly across the stage.</p>
+
+<h2>Player behavior</h2>
+
+<p><i>League of Legends'</i> player base has a longstanding reputation for "toxicity"—negative and abusive in-game behavior, with a survey by the <a href="https://en.wikipedia.org/wiki/Anti-Defamation_League">Anti-Defamation League</a> indicating that 76% of players have experienced in-game harassment. Riot Games has acknowledged the problem and responded that only a small portion of the game's players are consistently toxic. According to Jeffrey Lin, the lead designer of social systems at Riot Games, the majority of negative behavior is committed by players "occasionally acting out". Several major systems have been implemented to tackle the issue. One such measure is basic report functionality; players can report teammates or opponents who violate the game's code of ethics. The in-game chat is also monitored by algorithms that detect several types of abuse. An early system was the "Tribunal"—players who met certain requirements were able to review reports sent to Riot. If enough players determined that the messages were a violation, an automated system would punish them. Lin said that eliminating toxicity was an unrealistic goal, and the focus should be on rewarding good player behavior. To that effect, Riot reworked the "Honor system" in 2017, allowing players to award teammates with virtual medals following games, for one of three positive attributes. Acquiring these medals increases a player's "Honor level", rewarding them with free loot boxes over time.</p>
+
+<h2>In esports</h2>
+
+<p><i>League of Legends</i> is one of the world's largest esports, described by <i><a href="https://en.wikipedia.org/wiki/The_New_York_Times">The New York Times</a></i> as its "main attraction". Online viewership and in-person attendance for the game's esports events outperformed those of the <a href="https://en.wikipedia.org/wiki/National_Basketball_Association">National Basketball Association</a>, the <a href="https://en.wikipedia.org/wiki/World_Series">World Series</a>, and the <a href="https://en.wikipedia.org/wiki/Stanley_Cup">Stanley Cup</a> in 2016. For the 2019 and 2020 <i>League of Legends</i> World Championship finals, Riot Games reported 44 and 45 peak million concurrent viewers respectively. <i><a href="https://en.wikipedia.org/wiki/Harvard_Business_Review">Harvard Business Review</a></i> said that <i>League of Legends</i> epitomized the birth of the esports industry.</p>
+
+<p>As of April 2021, Riot Games operates 12 regional leagues internationally, four of which—<a href="https://en.wikipedia.org/wiki/League_of_Legends_Pro_League">China</a>, <a href="https://en.wikipedia.org/wiki/League_of_Legends_European_Championship">Europe</a>, <a href="https://en.wikipedia.org/wiki/League_of_Legends_Champions_Korea">Korea</a>, and <a href="https://en.wikipedia.org/wiki/League_of_Legends_Championship_Series">North America</a>—have <a href="https://en.wikipedia.org/wiki/Professional_sports_league_organization#Structure_of_North_American_leagues_(Franchise_and_minor_league_system)">franchised systems</a>. In 2017, this system comprised 109 teams and 545 players. League games are typically <a href="https://en.wikipedia.org/wiki/Livestreaming">livestreamed</a> on platforms such as <a href="https://en.wikipedia.org/wiki/Twitch_(service)">Twitch</a> and <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a>. The company sells streaming rights to the game; the North American league playoff is broadcast on <a href="https://en.wikipedia.org/wiki/Cable_television_in_the_United_States">cable television</a> by sports network <a href="https://en.wikipedia.org/wiki/ESPN">ESPN</a>. In China, the rights to stream international events such as the <a href="https://en.wikipedia.org/wiki/League_of_Legends_World_Championship">World Championships</a> and the <a href="https://en.wikipedia.org/wiki/Mid-Season_Invitational">Mid-Season Invitational</a> were sold to <a href="https://en.wikipedia.org/wiki/Bilibili">Bilibili</a> in Fall 2020 for a three-year deal reportedly worth US$113 million, while exclusive streaming rights for the domestic and other regional leagues are owned by <a href="https://en.wikipedia.org/wiki/Huya_Live">Huya Live</a>. The game's highest-paid professional players have commanded salaries of above $1 million—over three times the highest-paid players of <a href="https://en.wikipedia.org/wiki/Overwatch_(video_game)"><i>Overwatch</i></a>. The scene has attracted investment from businesspeople otherwise unassociated with esports, such as retired basketball player <a href="https://en.wikipedia.org/wiki/Rick_Fox">Rick Fox</a>, who founded <a href="https://en.wikipedia.org/wiki/Echo_Fox">his own team</a>. In 2020, his team's slot in the North American league was sold to the <a href="https://en.wikipedia.org/wiki/Evil_Geniuses">Evil Geniuses</a> organization for $33 million.</p>
+
+<h2>Spin-offs and other media</h2>
+
+<h3>Games</h3>
+
+<p>For the 10th anniversary of <i>League of Legends</i> in 2019, Riot Games announced several games at various stages of production that were directly related to the <i>League of Legends</i> <a href="https://en.wikipedia.org/wiki/Intellectual_property">intellectual property</a> (IP). A stand-alone version of <i>Teamfight Tactics</i> was announced for mobile operating systems iOS and Android at the event and released in March 2020. The game has cross-platform play with the Windows and macOS clients. <i>Legends of Runeterra,</i> a free-to-play <a href="https://en.wikipedia.org/wiki/Digital_collectible_card_game">digital collectible card game</a>, launched in April 2020 for Microsoft Windows; the game features characters from <i>League of Legends</i>. <i><a href="https://en.wikipedia.org/wiki/League_of_Legends:_Wild_Rift">League of Legends: Wild Rift</a></i> is a version of the game for mobile operating systems Android and iOS. Instead of <a href="https://en.wikipedia.org/wiki/Porting">porting</a> the game from <i>League of Legends</i>, <i>Wild Rift</i>'s character models and environments were entirely rebuilt. A single-player, <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">turn-based role-playing game</a>, <i><a href="https://en.wikipedia.org/wiki/Ruined_King:_A_League_of_Legends_Story">Ruined King: A League of Legends Story</a></i>, was released in 2021 for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a>, <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a>, <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, and Windows. It was the first title released under Riot Games' publishing arm, <a href="https://en.wikipedia.org/wiki/Riot_Forge">Riot Forge</a>, wherein non-Riot studios develop games using <i>League of Legends</i> characters. In December 2020, Greg Street, vice-president of IP and Entertainment at Riot Games, announced that a <a href="https://en.wikipedia.org/wiki/Massively_multiplayer_online_role-playing_game">massively multiplayer online role-playing game</a> based on the game is in development. <a href="https://en.wikipedia.org/wiki/Song_of_Nunu"><i>Song of Nunu: A League of Legends Story</i></a>, a third-person adventure game revolving around the champion Nunu's search for his mother, with the help of the yeti Willump, was announced for a planned release in 2022. It is being developed by <a href="https://en.wikipedia.org/wiki/Tequila_Works">Tequila Works</a>, the creators of <i><a href="https://en.wikipedia.org/wiki/Rime_(video_game)">Rime</a></i>. It was released on Windows and the Nintendo Switch on November 1, 2023.</p>
+
+<p>Riot Games' first venture into music was in 2014 with the virtual <a href="https://en.wikipedia.org/wiki/Heavy_metal_music">heavy metal</a> band <a href="https://en.wikipedia.org/wiki/Pentakill">Pentakill</a>, promoting a skin line of the same name. Initially, Pentakill consisted of six champions: Kayle, Karthus, Mordekaiser, Olaf, Sona, and Yorick. In 2021, Viego was introduced to the group. Their music was primarily made by Riot Games' in-house music team but featured cameos by <a href="https://en.wikipedia.org/wiki/Mötley_Crüe">Mötley Crüe</a> drummer <a href="https://en.wikipedia.org/wiki/Tommy_Lee">Tommy Lee</a> and <a href="https://en.wikipedia.org/wiki/Danny_Lohner">Danny Lohner</a>, a former member of industrial rock band <a href="https://en.wikipedia.org/wiki/Nine_Inch_Nails">Nine Inch Nails</a>. Their second album, <i>Grasp of the Undying</i>, reached number one on the <a href="https://en.wikipedia.org/wiki/ITunes">iTunes</a> metal charts in 2017.</p>
+
+<p>Pentakill was followed by <a href="https://en.wikipedia.org/wiki/K/DA">K/DA</a>, a <a href="https://en.wikipedia.org/wiki/Virtual_band">virtual</a> K-pop <a href="https://en.wikipedia.org/wiki/Girl_group">girl group</a> composed of four champions, Ahri, Akali, Evelynn, and Kai'sa. As with Pentakill, K/DA is promotional material for a skin line by the same name. The group's debut single, "<a href="https://en.wikipedia.org/wiki/Pop/Stars">Pop/Stars</a>", which premiered at the <a href="https://en.wikipedia.org/wiki/2018_League_of_Legends_World_Championship">2018 <i>League of Legends</i> World Championship</a>, garnered over 400 million views on YouTube and sparked widespread interest from people unfamiliar with <i>League of Legends</i>. After a two-year hiatus, in August 2020, Riot Games released "<a href="https://en.wikipedia.org/wiki/The_Baddest_(K/DA_song)">The Baddest</a>", the pre-release single for <i><a href="https://en.wikipedia.org/wiki/All_Out_(EP)">All Out</a></i>, the five-track debut <a href="https://en.wikipedia.org/wiki/Extended_play">EP</a> from K/DA which followed in November that year.</p>
+
+<p>In 2019, Riot created a virtual <a href="https://en.wikipedia.org/wiki/Hip_hop">hip hop</a> group called True Damage, featuring the champions Akali, Yasuo, Qiyana, Senna, and Ekko. The vocalists—<a href="https://en.wikipedia.org/wiki/Keke_Palmer">Keke Palmer</a>, <a href="https://en.wikipedia.org/wiki/Thutmose_(musician)">Thutmose</a>, <a href="https://en.wikipedia.org/wiki/Becky_G">Becky G</a>, <a href="https://en.wikipedia.org/wiki/Duckwrth">Duckwrth</a>, and <a href="https://en.wikipedia.org/wiki/Jeon_So-yeon">Soyeon</a>—performed a live version of the group's debut song, "Giants", during the opening ceremony of the <a href="https://en.wikipedia.org/wiki/2019_League_of_Legends_World_Championship">2019 <i>League of Legends</i> World Championship</a>, alongside holographic versions of their characters. The in-game cosmetics promoted by the music video featured a collaboration with fashion house <a href="https://en.wikipedia.org/wiki/Louis_Vuitton">Louis Vuitton</a>.</p>
+
+<p>In 2023, Riot formed Heartsteel, a virtual <a href="https://en.wikipedia.org/wiki/Boy_band">boy band</a>, comprising the champions Aphelios, Ezreal, Kayn, K'Sante, Sett, and Yone. The vocalists are <a href="https://en.wikipedia.org/wiki/Baekhyun">Baekhyun</a> from the K-pop groups <a href="https://en.wikipedia.org/wiki/Exo">Exo</a> and <a href="https://en.wikipedia.org/wiki/SuperM">SuperM</a>, Cal Scruby, <a href="https://en.wikipedia.org/wiki/ØZI">ØZI</a>, and <a href="https://en.wikipedia.org/wiki/Tobi_Lou">Tobi Lou</a>. Heartsteel's debut single "Paranoia" was released in October of that year.</p>
+
+<p>Riot announced a collaboration with <a href="https://en.wikipedia.org/wiki/Marvel_Comics">Marvel Comics</a> in 2018. Riot had previously experimented with releasing comics through its website. Shannon Liao of <i><a href="https://en.wikipedia.org/wiki/The_Verge">The Verge</a></i> noted that the comic books were "a rare opportunity for Riot to showcase its years of lore that has often appeared as an afterthought". The first comic was <i>League of Legends: Ashe—Warmother</i>, which debuted in 2018, followed by <i>League of Legends: Lux</i> that same year. A print version of the latter was released in 2019.</p>
+
+<p>While celebrating <i>League of Legends</i>'s tenth anniversary, Riot announced an animated television series, <i><a href="https://en.wikipedia.org/wiki/Arcane_(TV_series)">Arcane</a>.</i> It was the company's first production for television, and a collaboration between Riot Games and animation studio <a href="https://en.wikipedia.org/wiki/Fortiche_Production">Fortiche Production</a>. The series is set in the technologically advanced city of Piltover and its oppressed, underground sister city of Zaun. <i>Arcane</i> explores adult themes and is not intended for children. It features multiple playable characters from <i>League of Legends</i>. <a href="https://en.wikipedia.org/wiki/Hailee_Steinfeld">Hailee Steinfeld</a> stars as <a href="https://en.wikipedia.org/wiki/Vi_(League_of_Legends)">Vi</a>, <a href="https://en.wikipedia.org/wiki/Ella_Purnell">Ella Purnell</a> as <a href="https://en.wikipedia.org/wiki/Jinx_(League_of_Legends)">Jinx</a>, <a href="https://en.wikipedia.org/wiki/Kevin_Alejandro">Kevin Alejandro</a> as Jayce, and <a href="https://en.wikipedia.org/wiki/Katie_Leung">Katie Leung</a> as Caitlyn.</p>
+
+<p>Following a delay caused by the <a href="https://en.wikipedia.org/wiki/COVID-19_pandemic">COVID-19 pandemic</a>, the series premiered in November 2021 on <a href="https://en.wikipedia.org/wiki/Netflix">Netflix</a> internationally and through <a href="https://en.wikipedia.org/wiki/Tencent_Video">Tencent Video</a> in China. The first season received critical acclaim, winning four <a href="https://en.wikipedia.org/wiki/Emmy_Awards">Emmy Awards</a> and nine <a href="https://en.wikipedia.org/wiki/Annie_Awards">Annie Awards</a>. Following the success of the first season, Riot hired former executives from <a href="https://en.wikipedia.org/wiki/Netflix">Netflix</a>, HBO Max and <a href="https://en.wikipedia.org/wiki/Paramount_Television_Studios">Paramount Television Studios</a> to expand its entertainment division, with CEO Nicolo Laurent pledging to create an "entertainment company for the 21st century". Ahead of the premiere of the second and final season, <a href="https://en.wikipedia.org/wiki/Variety_(magazine)"><i>Variety</i></a> reported that production and marketing costs for <i>Arcane</i>'s 18 episodes exceeded $250 million, making it the most expensive animated series ever made. <a href="https://en.wikipedia.org/wiki/Bloomberg_News"><i>Bloomberg News</i></a> reported that Riot paid around $3 million per episode to Netflix for each episode aired and that the studio failed to convert the series' success into in-game revenue. Riot did not form a plan to recoup the show's costs but said the second season was "on track to break-even". The second season premiered in November 2024 to similar acclaim, winning seven Annie Awards in all nominated categories. <a href="https://en.wikipedia.org/wiki/GKIDS">GKIDS</a> produced home media releases of the first season in 2024, including a collector's edition DVD, a 4K UHD steelbook, and <a href="https://en.wikipedia.org/wiki/Blu-ray">Blu-ray</a> variants. As of early 2025, home media releases for the second season is forthcoming.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

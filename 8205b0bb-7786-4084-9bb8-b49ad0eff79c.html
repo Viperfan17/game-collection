@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Super Mario Kart</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('8205b0bb-7786-4084-9bb8-b49ad0eff79c/86285ae6-3650-45e6-9d21-b99793069141.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="8205b0bb-7786-4084-9bb8-b49ad0eff79c/41f6cb15-259c-45df-903e-84e0cd6667d9.png"/> Super Mario Kart</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="8205b0bb-7786-4084-9bb8-b49ad0eff79c/c4ca855d-d021-40a0-958b-3ba54e7508a0.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:52:10</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:30:22</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo SNES">Nintendo SNES</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-8/27/1992">8/27/1992</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-94">94</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Kart racing">Kart racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo EAD">Nintendo EAD</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Super_Mario_Kart" target="_blank">Wikipedia</a><br/><a href="https://www.nintendo.co.jp/n02/shvc/mk/index.html" target="_blank">Official website</a><br/><a href="https://www.mobygames.com/game/super-mario-kart" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Mie Yoshimura">[People] artist: Mie Yoshimura</a><br/><a href="#quicklink-[People] artist: Yōichi Kotabe">[People] artist: Yōichi Kotabe</a><br/><a href="#quicklink-[People] artist: Yoshiaki Koizumi">[People] artist: Yoshiaki Koizumi</a><br/><a href="#quicklink-[People] composer: Soyo Oka">[People] composer: Soyo Oka</a><br/><a href="#quicklink-[People] director: Hideki Konno">[People] director: Hideki Konno</a><br/><a href="#quicklink-[People] director: Tadashi Sugiyama">[People] director: Tadashi Sugiyama</a><br/><a href="#quicklink-[People] producer: Shigeru Miyamoto">[People] producer: Shigeru Miyamoto</a><br/><a href="#quicklink-[People] programmer: Masato Kimura">[People] programmer: Masato Kimura</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Super Mario Kart</b></i> is a 1992 <a href="https://en.wikipedia.org/wiki/Kart_racing_game">kart racing game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Nintendo Entertainment System</a> (SNES). The first game in the <a href="https://en.wikipedia.org/wiki/Mario_Kart"><i>Mario Kart</i> series</a>, it was released in Japan and North America in 1992, and in Europe the following year in 1993. Selling 8.76 million copies worldwide, the game went on to become the fourth <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Super_Nintendo_Entertainment_System_video_games#Video_games">best-selling SNES game</a> of all time. <i>Super Mario Kart</i> was re-released on the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>'s <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> in 2009, on the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>'s Virtual Console in 2013, and on the <a href="https://en.wikipedia.org/wiki/New_Nintendo_3DS">New Nintendo 3DS</a>'s Virtual Console in 2016. Nintendo re-released <i>Super Mario Kart</i> in 2017 as part of the company's <a href="https://en.wikipedia.org/wiki/Super_NES_Classic_Edition">Super NES Classic Edition</a>.</p>
+
+<p>In <i>Super Mario Kart</i>, the player takes control of one of eight <a href="https://en.wikipedia.org/wiki/Mario_(franchise)"><i>Mario</i> series</a> characters, each with differing capabilities. In single player mode players can race against <a href="https://en.wikipedia.org/wiki/Non-player_character">computer-controlled</a> characters in 4 multi-race cups consisting of 20 tracks (5 in each cup) over three difficulty levels (50cc, 100cc and 150cc). During the races, offensive and speed boosting <a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a> can be used to gain an advantage. Alternatively players can race against the clock in a <a href="https://en.wikipedia.org/wiki/Time_trial">Time Trial</a> mode. In multiplayer mode two players can simultaneously take part in the cups or can race against each other one-on-one in Match Race mode. In a third multiplayer mode – Battle Mode – the aim is to defeat the other players by attacking them with power-ups, destroying balloons which surround each kart.</p>
+
+<p><i>Super Mario Kart</i> received positive reviews and was praised for its presentation, innovation and use of <a href="https://en.wikipedia.org/wiki/Mode_7">Mode 7</a> graphics. It has been ranked among the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games of all time</a> by several magazines and organizations. It is often credited with creating the <a href="https://en.wikipedia.org/wiki/Kart_racing_game">kart-racing subgenre</a> of video games, leading other developers to try to duplicate its success. The game is seen as having been key to expanding the <i>Mario</i> series into non-<a href="https://en.wikipedia.org/wiki/Platform_game">platforming games</a>; this diversity has led to it becoming the best-selling game franchise of all time. Several sequels to <i>Super Mario Kart</i> have been released, for <a href="https://en.wikipedia.org/wiki/Video_game_console">consoles</a>, <a href="https://en.wikipedia.org/wiki/Handheld_game_console">handhelds</a> and in <a href="https://en.wikipedia.org/wiki/Amusement_arcade">arcades</a>, each enjoying critical and commercial success. While some elements have developed throughout the series, the core experience from <i>Super Mario Kart</i> has remained intact.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Super Mario Kart</i> is a <a href="https://en.wikipedia.org/wiki/Kart_racing_game">kart racing game</a> featuring several single and multiplayer modes. During the game, players take control of one of eight <a href="https://en.wikipedia.org/wiki/Characters_in_the_Mario_franchise"><i>Mario</i> franchise characters</a>, each with differing capabilities, and drive <a href="https://en.wikipedia.org/wiki/Go-kart">karts</a> around <a href="https://en.wikipedia.org/wiki/Kart_circuit">tracks</a> with a <i>Mario</i> franchise theme. In order for them to begin driving, <a href="https://en.wikipedia.org/wiki/Lakitu">Lakitu</a> appears with a traffic light hanging on his fishing pole at the starting line, which starts the countdown. When the light turns green, the race or battle begins. During a race, the player's viewpoint is from behind their kart. The goal of the game is to either finish a race ahead of other racers, who are <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_(video_games)">controlled by the computer</a> and other players, or complete a circuit in the fastest time. There is a battle mode in which the aim is to attack the karts of the other human players.</p>
+
+<p>Some tracks feature <a href="https://en.wikipedia.org/wiki/Chevron_(insignia)">chevron</a>-shaped boost panels to increase speed for a brief moment. In addition, there are also short ramps that racers can use to launch themselves in the air. A combination of the two makes the player jump higher at a high speed.</p>
+
+<p>Boxes marked with question marks are arrayed on the race tracks; they give special abilities (<a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a>) to a player's kart if the vehicle passes over them. Certain power-ups, such as the ability to throw shells and bananas, allow racers to hit other racers with objects, causing them to spin and lose control. A kart that obtains the star power-up is temporarily invincible. Computer players have specific special powers associated with each character that they are able to use throughout the race. Lines of coins are found on the tracks in competitive race modes. By running over these coins, a kart collects them to increase its top speed. Having coins helps players when their kart is hit by another: instead of spinning and losing control, they lose a coin. Coins are lost when karts are struck by power-ups or fall off the tracks.</p>
+
+<p>The game features advanced maneuvers such as <a href="https://en.wikipedia.org/wiki/Drifting_(motorsport)">power sliding</a> and <a href="https://en.wikipedia.org/wiki/Jumping">hopping</a>. Power sliding allows a kart to maintain its speed while turning, although executing the maneuver for too long causes the kart to spin. Hopping helps a kart execute tighter turns: the kart makes a short hop and turns in the air, speeding off in the new direction when it lands. Reviewers praised <i>Super Mario Kart</i>'s gameplay, describing the battle mode as "addictive" and the single player gameplay as "incredible". <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> stated that the gameplay mechanics defined the genre.</p>
+
+<h3>Modes</h3>
+
+<p><i>Super Mario Kart</i> has two <a href="https://en.wikipedia.org/wiki/Single-player_mode">single-player modes</a>: Mario Kart GP (which stands for <a href="https://en.wikipedia.org/wiki/Grand_Prix_motor_racing">Grand Prix</a>) and <a href="https://en.wikipedia.org/wiki/Time_trial#Video_games">Time Trial</a>. In Mario Kart GP, one player is required to race against seven computer-controlled characters in a series of five races which are called cups. Initially, there are three cups available – the Mushroom Cup, Flower Cup, and Star Cup – at two <a href="https://en.wikipedia.org/wiki/Difficulty_level">difficulty levels</a>, 50<a href="https://en.wikipedia.org/wiki/Cubic_centimeter">cc</a> and 100cc. By winning all three of the cups at the 100cc level, a fourth cup – the Special Cup – is unlocked. Winning all four cups at 100cc unlocks a new difficulty level, 150cc. Each cup consists of five five-lap races, each taking place on a distinct track. In order to continue through a cup, a position of fourth or higher must be achieved in each race. If a player finishes in the fifth to eighth position, they are "ranked out" and the race must be replayed – at the cost of one of a limited number of lives – until a placing of fourth or above is achieved. If the player has no lives when they rank out, the game is over. Points are accrued by finishing in the top four positions in a race; first to fourth place receive nine, six, three and one points. If a player finishes in the same position three times in a row, then an <a href="https://en.wikipedia.org/wiki/Extra_life">extra life</a> is awarded. The finishing order for that race will then become the starting grid for the next race; for example, if a player finishes in first place, then that player will start the next race in the same position. The racer with the highest number of points after all five races have been completed wins the cup. In time trial mode, players race against the clock through the same tracks that are present in Mario Kart GP mode, attempting to set the fastest time possible.</p>
+
+<p><i>Super Mario Kart</i> has three multiplayer modes; Mario Kart GP, Match Race, and Battle Mode. The multiplayer modes support two players and the second player uses the bottom half of the screen which is used as a map in the single-player modes. Mario Kart GP is the same as in single-player, the only difference being that there are two human-controlled and six computer-controlled drivers. Match Race involves the two players going head to head on a track of their choice without any opponents. In Battle Mode, the two players again go head to head, but this time in one of four dedicated Battle Mode courses. Each player starts with three balloons around their kart which can be popped by power-ups fired by the other player. The first player to have all three of their balloons popped loses.</p>
+
+<p><i>Super Mario Kart</i> features eight playable characters from the <i>Mario</i> series – <a href="https://en.wikipedia.org/wiki/Mario">Mario</a>, <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a>, <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Peach</a>, <a href="https://en.wikipedia.org/wiki/Yoshi">Yoshi</a>, <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a>, <a href="https://en.wikipedia.org/wiki/Donkey_Kong_Jr._(character)">Donkey Kong Jr.</a>, <a href="https://en.wikipedia.org/wiki/Koopa_Troopa">Koopa Troopa</a> and <a href="https://en.wikipedia.org/wiki/Toad_(Nintendo)">Toad</a>. Each character's kart has different capabilities with differing levels of top speed, acceleration and handling. During races, computer-controlled characters have special items, or superpowers, which they are able to use. These powers are specific to each character; for example, Yoshi drops eggs which cause players who hit them to lose coins and spin, while Donkey Kong Jr. throws bananas.</p>
+
+<p>The characters are rendered as <a href="https://en.wikipedia.org/wiki/Sprite_(computer_graphics)">sprites</a> portrayed from sixteen different angles. In 2005, Nintendojo called the sprites "not-so-pretty" when they are rendered at a distance, and <i>IGN</i> has commented on the dated look of the game. <i>Super Mario Kart</i> was the first game to feature playable characters from the <i>Mario</i> series other than Mario or Luigi in a non-platforming game and the selection and different attributes of the characters is regarded as one of the game's strengths, <i>IGN</i> describing a well-balanced "all-star cast". All of the characters present in <i>Super Mario Kart</i> have gone on to appear in later games in the <a href="https://en.wikipedia.org/wiki/Mario_Kart">series</a>, except for Donkey Kong Jr. and Koopa Troopa, who have only appeared intermittently after being replaced by <a href="https://en.wikipedia.org/wiki/Donkey_Kong_(character)">Donkey Kong</a> and <a href="https://en.wikipedia.org/wiki/Wario">Wario</a> respectively in <i>Mario Kart 64</i>.</p>
+
+<p>The tracks in <i>Super Mario Kart</i> are based on locations in <i><a href="https://en.wikipedia.org/wiki/Super_Mario_World">Super Mario World</a></i> such as Donut Plains. Each of the four cups contains five different tracks for a total of twenty unique tracks, additionally there are four unique Battle Mode courses. The course outlines are marked out by impassable barriers and feature a variety of bends ranging from sharp hairpins to wide curves which players can power slide around. Numerous obstacles themed from the <i>Mario</i> series appear, such as Thwomps in the <a href="https://en.wikipedia.org/wiki/Bowser's_Castle">Bowser's Castle</a> tracks, the Cheep-Cheeps from <i>Super Mario World</i> in Koopa Beach and pipe barriers which are found in the Mario Circuit tracks. Other features include off-road sections which slow down the karts such as the mud bogs in the Choco Island tracks. Each cup track is littered with coins and power-up tiles, as well as turbo tiles which give the karts a boost of speed and jumps which launch the karts into the air.</p>
+
+<p>The tracks have received positive commentary, with <a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a> describing them as wonderfully designed and <i>IGN</i> calling them perfect. When naming its top five <i>Mario Kart</i> tracks of all time in 2008, <i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i> named Battle Mode Course 4 at number three and <a href="https://en.wikipedia.org/wiki/Rainbow_Road_(Mario_Kart)">Rainbow Road</a> – along with its subsequent versions in the series – at number one. The track themes in <i>Super Mario Kart</i> influenced later games in the series; recurring themes that first appeared in <i>Super Mario Kart</i> include haunted tracks, Bowser's Castle and Rainbow Road. Some of the tracks from <i>Super Mario Kart</i> have been duplicated in later games. All twenty of the original tracks are unlockable as an extra feature in the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> title <i><a href="https://en.wikipedia.org/wiki/Mario_Kart:_Super_Circuit">Mario Kart: Super Circuit</a></i>. Remakes of Mario Circuit 1, Donut Plains 1, Koopa Beach 2 and Choco Island 2 appear as part of the Retro Grand Prix series in <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_DS">Mario Kart DS</a></i>, remakes of Ghost Valley 2, Mario Circuit 3, and Battle Course 4 appear as part of the Retro Grand Prix and battles in <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_Wii">Mario Kart Wii</a></i>, remakes of Mario Circuit 2 and Rainbow Road appear as part of the Retro Grand Prix in <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_7">Mario Kart 7</a></i>, a remake of Donut Plains 3 appears as part of the Retro Grand Prix and battles in <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8">Mario Kart 8</a></i>, a second remake of Rainbow Road appears in <i>Mario Kart 8</i>'s first downloadable content pack, a remake of Battle Course 1 appears as a Retro Battle Course in <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8_Deluxe">Mario Kart 8 Deluxe</a></i>, and remakes of Mario Circuit 3 and Bowser Castle 3 appear in the second and sixth waves respectively of <i>Mario Kart 8 Deluxe</i>'s <a href="https://en.wikipedia.org/wiki/Mario_Kart_8_Deluxe_–_Booster_Course_Pass">Booster Course Pass</a>.</p>
+
+<h2>Development</h2>
+
+<p><i>Super Mario Kart</i> was produced by <i>Mario</i> creator <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> and directed by <a href="https://en.wikipedia.org/wiki/Tadashi_Sugiyama">Tadashi Sugiyama</a> and <a href="https://en.wikipedia.org/wiki/Hideki_Konno">Hideki Konno</a>. The development team set out to produce a racing game capable of displaying two players on the same game screen simultaneously, in contrast to the <a href="https://en.wikipedia.org/wiki/Single-player_video_game">single-player</a> <a href="https://en.wikipedia.org/wiki/Gameplay">gameplay</a> <i><a href="https://en.wikipedia.org/wiki/F-Zero_(video_game)">F-Zero</a></i>. This led to simpler tracks than those of <i>F-Zero</i>. <i><a href="https://en.wikipedia.org/wiki/Computer_and_Video_Games">Computer and Video Games</a></i> suggest that this initial emphasis on creating a two player experience is the reason for the game's horizontal split-screen during single-player. Battle Mode was developed from the desire to create a one-on-one mode where victory was not determined simply by competing for rank. Masato Kimura, who worked on <i>F-Zero</i>, served as the lead programmer for <i>Super Mario Kart</i>.</p>
+
+<p>The game did not start out as a <i>Mario</i> series game and the first prototype featured a generic kart racer character; the team decided that characters three heads tall would best suit the design of the karts. They did not decide to incorporate <i>Mario</i> characters until a few months into development. The choice was made after the development team observed how one kart looked to another driving past it, decided to see what it would look like with Mario in the kart. Thinking that having Mario in the kart looked better than previous designs, the idea of a Mario themed racing game was born.</p>
+
+<p>Notable in the development of <i>Super Mario Kart</i> was its use of <a href="https://en.wikipedia.org/wiki/Mode_7">Mode 7</a> graphics. First seen in <i>F-Zero</i>, Mode 7 is a form of texture mapping available on the SNES which allows a plane to be rotated and scaled freely, achieving a pseudo-three-dimensional appearance. <i>1UP.com</i> have credited the use of Mode 7 with giving the game graphics which at the time of release were considered to be "breathtaking". Retrospective reflection on the Mode 7 visuals was mixed, with <i>IGN</i> stating that the once revolutionary technology now looks "crude and flickery". <i>Super Mario Kart</i> featured a DSP (Digital Signal Processor) chip; DSPs were used in SNES games as they provided a better handling of <a href="https://en.wikipedia.org/wiki/Floating_point">floating point</a> calculations to assist with three-dimensional maths. The <a href="https://en.wikipedia.org/wiki/DSP_(Nintendo)#DSP-1">DSP-1</a> chip that was used in <i>Super Mario Kart</i> went on to be the most popular DSP chip to be used in SNES games. The music for the game was created by composer Soyo Oka, who previously composed games for Nintendo such as <i><a href="https://en.wikipedia.org/wiki/Pilotwings_(video_game)">Pilotwings</a></i> and <i><a href="https://en.wikipedia.org/wiki/Ice_Hockey_(1988_video_game)">Ice Hockey</a></i>.</p>
+
+<h2>Reception</h2>
+
+<p><i>Super Mario Kart</i> received critical acclaim and proved to be a commercial success; it received a <a href="https://en.wikipedia.org/wiki/Nintendo_Selects">Player's Choice</a> release after selling one million copies and went on to sell 8.76 million copies worldwide, becoming the fourth <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Super_Nintendo_Entertainment_System_video_games">best-selling game ever for the SNES</a>. In Japan, it was the top-selling game in September 1992 and became a multi-million seller in 1992, eventually selling a total of 3.82 million in Japan. In Europe, it was the top-selling game during the first quarter of 1993, above the <a href="https://en.wikipedia.org/wiki/Sega_Mega_Drive">Sega Mega Drive</a> titles <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_2">Sonic the Hedgehog 2</a></i> and <i><a href="https://en.wikipedia.org/wiki/Streets_of_Rage_2">Streets of Rage 2</a></i> during the same period. In the United Kingdom, <i>Super Mario Kart</i> was the top-selling Super NES game in February 1993, and it went on to be the seventh best-selling game of 1993 with more than 250,000 sales in the country.</p>
+
+<p>Aggregate scoring sites <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> and <a href="https://en.wikipedia.org/wiki/MobyGames">MobyGames</a> both give an average of more than 90 percent. Critics praised the game's Mode 7 graphics. Another aspect of the game to have been praised is its gameplay, which <i>Thunderbolt</i> has described as the "deepest [and] most addictive... to be found on the SNES console". Retrospective reviews of the game have been positive with perfect scores given by review sites including <i>Thunderbolt</i> and <i>HonestGamers</i>. The use of the style and characters from the <i>Mario</i> franchise was also praised as well as the individual characteristics of each racer. <i><a href="https://en.wikipedia.org/wiki/Mean_Machines">Mean Machines</a></i> described the game as having "struck gold" in a way that no other – not even its sequels – has matched and <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> named the game as one of the greatest games of all time for its innovation, gameplay and visual style. <i><a href="https://en.wikipedia.org/wiki/Entertainment_Weekly">Entertainment Weekly</a></i> wrote that although the game might appear to be a "cynical attempt by Nintendo to cash in on its <i>Super Mario</i> franchise" the review concluded that "plunking the familiar characters down in souped-up go-carts actually makes for a delightful racing game." <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> said the game "does an excellent job of capturing the thrill of Go-cart racing, and wraps it up in the familiar, fun, <i>Mario</i>-land atmosphere." The reviewer also praised the use of Mode 7 and challenging CPU-controlled opponents.</p>
+
+<p><i>Super Mario Kart</i> has been listed among the best games ever made several times. In 1995, <i><a href="https://en.wikipedia.org/wiki/Total!">Total!</a></i> rated the game 16th on its "Top 100 SNES Games." In 1996, <i><a href="https://en.wikipedia.org/wiki/Next_Generation_(magazine)">Next Generation</a></i> listed it as number 37 on their "Top 100 Games of All Time", commenting that the controls are elegantly designed to offer "supreme fun". In 1996, <i><a href="https://en.wikipedia.org/wiki/GamesMaster_(magazine)">GamesMaster</a></i> ranked the game 16th on their "Top 100 Games of All Time". In 1999, <i><a href="https://en.wikipedia.org/wiki/Next_Generation_(magazine)">Next Generation</a></i> listed <i>Super Mario Kart</i> as number 7 on their "Top 50 Games of All Time", commenting that, "Imitated a thousand times, but never, ever, equalled, <i>Mario Kart</i> changed the rules for the driving game and gave the world one of the most engrossing and addictive two-player experiences ever". <i>Electronic Gaming Monthly</i> ranked it as the 15th best console video game of all time, attributing its higher ranking than <i>Mario Kart 64</i> (which came in 49th) to its superior track design and powerups. <i>IGN</i> ranked it as the 15th best game ever in 2005, describing it as "the original karting masterpiece" and as the 23rd best game ever in 2007, discussing its originality at time of release. <i><a href="https://en.wikipedia.org/wiki/The_Age">The Age</a></i> placed it at number 19 on their list of the 50 best games in 2005 and in 2007 <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> ranked <i>Super Mario Kart</i> at number 14 on a list of their 100 best games, noting its continued influence on <a href="https://en.wikipedia.org/wiki/Video_game_design">video game design</a>. The game is included in <a href="https://en.wikipedia.org/wiki/Yahoo!_Games">Yahoo! Games</a> UK's list of the hundred greatest games of all time which praises the appealing characters and power ups and <i>1UP.com</i>'s "Essential 50", a list of the fifty most important games ever made. The game placed 13th in <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i>'s 100 greatest Nintendo games of all time. <i>Guinness World Records</i> ranked it at number 1 on a list of the top 50 console games of all time based on initial impact and lasting legacy. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> ranked the game at 35 on their top 100 games of all time in 2001 praising how the game's Mode 7 revolutionized racing games. In 2018, <i><a href="https://en.wikipedia.org/wiki/Complex_Networks">Complex</a></i> listed <i>Super Mario Kart</i> seventh on its "The Best Super Nintendo Games of All Time". In 2019, <a href="https://en.wikipedia.org/wiki/The_Strong_National_Museum_of_Play">The Strong National Museum of Play</a> inducted <i>Super Mario Kart</i> to its <a href="https://en.wikipedia.org/wiki/World_Video_Game_Hall_of_Fame">World Video Game Hall of Fame</a>.</p>
+
+<h2>Legacy</h2>
+
+<p><i>Super Mario Kart</i> has been credited with inventing the "kart racing" subgenre of video gaming; after its release, several other developers attempted to duplicate its success. In 1994, less than two years after the release of <i>Super Mario Kart</i>, <a href="https://en.wikipedia.org/wiki/Sega">Sega</a> released <i><a href="https://en.wikipedia.org/wiki/Sonic_Drift">Sonic Drift</a></i>; a kart racing game featuring characters from the <a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog"><i>Sonic the Hedgehog</i> series</a>. Also in 1994, <a href="https://en.wikipedia.org/wiki/Ubisoft">Ubisoft</a> released <i><a href="https://en.wikipedia.org/wiki/Street_Racer_(1994_video_game)">Street Racer</a></i>, a kart racing game for the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">SNES</a> and <a href="https://en.wikipedia.org/wiki/Sega_Genesis">Mega Drive/Genesis</a> which included a four player mode not present in <i>Super Mario Kart</i>. <a href="https://en.wikipedia.org/wiki/Apogee_Software">Apogee Software</a> released <i><a href="https://en.wikipedia.org/wiki/Wacky_Wheels">Wacky Wheels</a></i> for PC and <a href="https://en.wikipedia.org/wiki/Atari_Corporation">Atari Corporation</a> released <i><a href="https://en.wikipedia.org/wiki/Atari_Karts">Atari Karts</a></i> for the <a href="https://en.wikipedia.org/wiki/Atari_Jaguar">Atari Jaguar</a> in 1995. Future games that followed in the mould of <i>Super Mario Kart</i> include <i><a href="https://en.wikipedia.org/wiki/South_Park_Rally">South Park Rally</a></i>, <i><a href="https://en.wikipedia.org/wiki/Konami_Krazy_Racers">Konami Krazy Racers</a></i>, <i><a href="https://en.wikipedia.org/wiki/Diddy_Kong_Racing">Diddy Kong Racing</a></i>, <i><a href="https://en.wikipedia.org/wiki/Sonic_&amp;_Sega_All-Stars_Racing">Sonic &amp; Sega All-Stars Racing</a></i> and several racing games in the <i><a href="https://en.wikipedia.org/wiki/Crash_Bandicoot">Crash Bandicoot</a></i> series. Response to the karting games released since <i>Super Mario Kart</i> has been mixed, with <i>GameSpot</i> describing them as tending to be bad while <i>1UP.com</i> notes that countless developers have tried to improve upon the <i>Mario Kart</i> formula without success.</p>
+
+<p><i>Super Mario Kart</i> is credited as being the first non-platforming game to feature multiple playable characters from the <i>Mario</i> franchise. As well as <a href="https://en.wikipedia.org/wiki/Super_Mario_Kart#Sequels">several sequels</a> Nintendo has released numerous other sporting and non-sporting Mario spin-offs since <i>Super Mario Kart</i>; a trend in part accredited to the commercial and critical success of the game. The <i>Mario</i> characters have appeared in many sports games including those relating to basketball, baseball, golf, tennis, and association football (soccer). Non-sporting franchises using the <i>Mario</i> characters have been created, including the <a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._(series)"><i>Super Smash Bros.</i> series</a> of fighting games and the <a href="https://en.wikipedia.org/wiki/Mario_Party"><i>Mario Party</i> series</a> of board game-based party games. <i>Mario</i> series characters have made cameos in games from other series such as <i><a href="https://en.wikipedia.org/wiki/SSX_on_Tour">SSX on Tour</a></i> and <i><a href="https://en.wikipedia.org/wiki/NBA_Street_V3">NBA Street V3</a></i>, both published by <a href="https://en.wikipedia.org/wiki/EA_Sports">EA Sports</a>. The genre-spanning nature of the <i>Mario</i> series that was sparked off by the success of <i>Super Mario Kart</i> has been described as key to the success and longevity of the franchise; keeping people interested despite the infrequency of traditional <a href="https://en.wikipedia.org/wiki/Mario_(franchise)"><i>Mario</i> platforming games</a>. Following this model the <i>Mario</i> series has gone on to become the best selling video game franchise of all time with 193 million units sold as of January 2007, almost 40 million units ahead of second-ranked franchise <i><a href="https://en.wikipedia.org/wiki/Pokémon">Pokémon</a></i>, also by Nintendo.</p>
+
+<p><i>Super Mario Kart</i> was re-released on the <a href="https://en.wikipedia.org/wiki/List_of_Virtual_Console_games_for_Wii_(Japan)">Japanese Virtual Console</a> on June 9, 2009, and later in North America on November 23, 2009. Previously, when naming it as one of the most wanted games for the platform in November 2008, <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> stated that problems emulating the Mode 7 graphics were responsible for its absence.</p>
+
+<p>The game was released for the Wii U <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> in Japan during June 2013, and in Europe on March 27, 2014. In addition, North American users were able to get the game starting from August 6, 2014 to celebrate the 22nd anniversary of the game, which included the new game update of <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8">Mario Kart 8</a></i> on August 27, 2014.</p>
+
+<p>In 2016, the game was re-released for the <a href="https://en.wikipedia.org/wiki/New_Nintendo_3DS">New Nintendo 3DS</a>.</p>
+
+<p>Nintendo re-released <i>Super Mario Kart</i> in 2017 as part of the company's <a href="https://en.wikipedia.org/wiki/Super_NES_Classic_Edition">Super NES Classic Edition</a>.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_World">Super Mario 3D World</a></i> has a stage with a look based on the Mario Circuit racetracks from <i>Super Mario Kart</i>. A remixed version of the music can be heard. <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Odyssey">Super Mario Odyssey</a></i> has a remix, when racing an RC car around a track in New Donk City in the Metro Kingdom.</p>
+
+<p>Several future <i>Mario Kart</i> games contain re-imaginings of courses from <i>Super Mario Kart</i>. <i><a href="https://en.wikipedia.org/wiki/Mario_Kart:_Super_Circuit">Mario Kart: Super Circuit</a></i> contains all of them, though they need to be unlocked. <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_DS">Mario Kart DS</a></i> contains remakes of the Mario Circuit 1, Donut Plains 1, Koopa Beach 2, and Choco Island 2 courses. <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_Wii">Mario Kart Wii</a></i> has remakes of the Ghost Valley 2 and Mario Circuit 3 courses. <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_7">Mario Kart 7</a></i> has remakes of the Mario Circuit 2 and Rainbow Road courses. The most recent entry, <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8">Mario Kart 8</a></i>, has remakes of the Donut Plains 3 and Rainbow Road courses, though the latter is only available as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> in the original release. The enhanced <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> port of <i>Mario Kart 8</i>, <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8_Deluxe">Mario Kart 8 Deluxe</a></i>, later added remakes of the Mario Circuit 3 and Bowser Castle 3 courses as downloadable content.</p>
+
+<h3>Sequels</h3>
+
+<p>Several sequels to <i>Super Mario Kart</i> have been released for successive generations of Nintendo consoles, each receiving commercial success and critical acclaim. While some elements have developed throughout the series, the core experience from <i>Super Mario Kart</i> has remained intact. The first sequel, <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_64">Mario Kart 64</a></i>, was released in 1996 for the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a> and was the first <i>Mario Kart</i> game to feature fully 3D graphics. Although reviewers including <i>IGN</i> and <i>GameSpot</i> felt that the single-player gameplay was lacking compared to its predecessor, the simultaneous four-person multiplayer modes – a first for the Nintendo 64 – were praised. The second sequel, <i><a href="https://en.wikipedia.org/wiki/Mario_Kart:_Super_Circuit">Mario Kart: Super Circuit</a></i>, was released for the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> in 2001. It was described by <i>GameSpot</i> as more of a remake of <i>Super Mario Kart</i> than a sequel to <i>Mario Kart 64</i> and featured a return to the graphical style of the original. As well as featuring new tracks, players are able to unlock the original SNES tracks if certain achievements are completed. <i><a href="https://en.wikipedia.org/wiki/Mario_Kart:_Double_Dash">Mario Kart: Double Dash</a></i> was released for the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> in 2003. Unlike any other <i>Mario Kart</i> game before or since, it features two riders in each kart, allowing for a new form of <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperative multiplayer</a> where one player controls the kart's movement and the other fires weapons. <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_DS">Mario Kart DS</a></i>, released for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> in 2005, was the first <i>Mario Kart</i> game to include online play via the <a href="https://en.wikipedia.org/wiki/Nintendo_Wi-Fi_Connection">Nintendo Wi-Fi Connection</a>. It went on to become the best selling <a href="https://en.wikipedia.org/wiki/Handheld_game_console">handheld</a> racing game of all time, selling 7.83 million units. The game marks the debut of tracks appearing in previous games. <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_Wii">Mario Kart Wii</a></i> was released for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> in 2008 and incorporates motion controls and 12-player racing. Like <i>Mario Kart DS</i>, it includes online play; it allows racers to play as user-created <a href="https://en.wikipedia.org/wiki/Mii">Miis</a> (after unlocking the Mii character) as well as <i>Mario</i> series characters and comes packaged with the <a href="https://en.wikipedia.org/wiki/Wii_Wheel">Wii Wheel</a> peripheral, which can act as the game's primary control mechanism when coupled with a <a href="https://en.wikipedia.org/wiki/Wii_Remote">Wii Remote</a>. <i>Mario Kart Wii</i> went on to be the worldwide best-selling game of 2008. <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_7">Mario Kart 7</a></i> for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> was released in 2011, which features racing on land, sea, and air. <i>Mario Kart 7</i> added the ability to customize the kart and to race in <a href="https://en.wikipedia.org/wiki/First-person_(video_games)">first-person</a> mode. Three <i>Mario Kart</i> arcade games have been released, <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_Arcade_GP">Mario Kart Arcade GP</a></i> in 2005, <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_Arcade_GP_2">Mario Kart Arcade GP 2</a></i> in 2007, and <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_Arcade_GP_DX">Mario Kart Arcade GP DX</a></i> in 2013. All of them were developed jointly by Nintendo and <a href="https://en.wikipedia.org/wiki/Namco">Namco</a> and feature Namco characters including <a href="https://en.wikipedia.org/wiki/Pac-Man_(character)">Pac-Man</a> and Blinky. The most recent entry in the series is <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8">Mario Kart 8</a></i> for the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>, which was released at the end of May 2014, which brings back gliders and propellers from <i>Mario Kart 7</i> as well as 12-player racing in <i>Mario Kart Wii</i>. <i>Mario Kart 8</i> includes a new feature called Mario Kart TV, where players can watch highlights of previous races and uploading them to <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a>. Another new feature is <a href="https://en.wikipedia.org/wiki/Anti-gravity">anti-gravity</a> racing, where players can race on walls and ceilings. An enhanced port, <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8#Mario_Kart_8_Deluxe">Mario Kart 8 Deluxe</a></i>, was released on the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> on April 28, 2017. The game keeps most elements from the Wii U version, while adding more characters, kart parts, battle modes, and battle stages. The port received universal critical acclaim, and has sold over 61 million copies as of March 2024, becoming the best selling game for the console. Furthermore, the number of copies sold exceeded that of <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.">Super Mario Bros.</a></i>, released on the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a>, making it the first <i>Mario</i> title to outsell a previous instalment.</p>
+
+<p>As the series has progressed, many aspects included in <i>Super Mario Kart</i> have been developed and altered. The power-up boxes which are flat against the track in <i>Super Mario Kart</i> due to the technical limitations of the SNES became floating boxes in later games. The roster of racers has expanded in recent games to include a greater selection of Nintendo characters including some which had not been created at the time of <i>Super Mario Kart</i>'s release – such as <a href="https://en.wikipedia.org/wiki/List_of_Mario_franchise_characters#Petey_Piranha">Petey Piranha</a> from <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Sunshine">Super Mario Sunshine</a></i> who appeared in <i>Mario Kart: Double Dash!!</i>. Multiplayer has remained a key feature of the series and has expanded from the two-player modes available in <i>Super Mario Kart</i>: first to allow up to four simultaneous players in split-screen in <i>Mario Kart 64</i>; then leveraging the <a href="https://en.wikipedia.org/wiki/Nintendo_GameCube_Broadband_Adapter_and_Modem_Adapter">GameCube's LAN Adapter</a> for up to sixteen players in <i>Mario Kart Double Dash!!</i>; and eventually supporting up to twelve simultaneous online players in <i>Mario Kart Wii</i>. Many of the track themes have been retained throughout the series, including <a href="https://en.wikipedia.org/wiki/Rainbow_Road_(Mario_Kart)">Rainbow Road</a> – the final track of the Special Cup – which has appeared in every <i>Mario Kart</i> console game. Other features present in <i>Super Mario Kart</i> have disappeared from the series. These include the "superpowers" of the computer characters, the feather power-up which allows players to jump high into the air and having a restricted number of lives. The only other <i>Mario Kart</i> games to feature the coin collecting of the original are <i>Mario Kart: Super Circuit</i>, <i>Mario Kart 7</i>, and <i>Mario Kart 8</i>.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup><!-- cite needed for MK7 --> The aspects of style and gameplay from <i>Super Mario Kart</i> that have been retained throughout the series have led Nintendo to face criticism for a lack of originality but the franchise is still considered to be a beloved household name by many, known for its familiar core gameplay.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

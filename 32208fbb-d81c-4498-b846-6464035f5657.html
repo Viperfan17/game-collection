@@ -1,0 +1,354 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Kingdom Hearts 358/2 Days</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('32208fbb-d81c-4498-b846-6464035f5657/756353b7-f857-41ad-a8c3-80a2a021a51f.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="32208fbb-d81c-4498-b846-6464035f5657/7040a22a-5a0f-43da-9f4d-731b2467a0e0.png"/> Kingdom Hearts 358/2 Days</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="32208fbb-d81c-4498-b846-6464035f5657/a5358b7b-4565-4287-877a-ccd94a4a9021.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-1/28/2016">1/28/2016</a> 4:16:15</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 6:00:16</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 9:18:53</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-PlayStation">PlayStation</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-PlayStation">PlayStation</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-5/30/2009">5/30/2009</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-73">73</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-75">75</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action role-playing">Action role-playing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-h.a.n.d.">h.a.n.d.</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Square Enix">Square Enix</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_358/2_Days" target="_blank">Wikipedia</a><br/><a href="http://www.square-enix.co.jp/kingdom/days/" target="_blank">Kingdom Hearts 358/2 Days Japan official website</a><br/><a href="https://www.imdb.com/title/tt1302571/" target="_blank">IMDb</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Tetsuya Nomura">[People] artist: Tetsuya Nomura</a><br/><a href="#quicklink-[People] composer: Yoko Shimomura">[People] composer: Yoko Shimomura</a><br/><a href="#quicklink-[People] designer: Hiroyuki Itou">[People] designer: Hiroyuki Itou</a><br/><a href="#quicklink-[People] designer: Yasuhiro Sato">[People] designer: Yasuhiro Sato</a><br/><a href="#quicklink-[People] director: Tetsuya Nomura">[People] director: Tetsuya Nomura</a><br/><a href="#quicklink-[People] producer: Patrick Chen">[People] producer: Patrick Chen</a><br/><a href="#quicklink-[People] programmer: Yoshikazu Hosoda">[People] programmer: Yoshikazu Hosoda</a><br/><a href="#quicklink-[People] writer: Tetsuya Nomura">[People] writer: Tetsuya Nomura</a><br/><a href="#quicklink-[People] writer: Tomoco Kanemaki">[People] writer: Tomoco Kanemaki</a><br/><a href="#quicklink-[People] writer: Yukari Ishida">[People] writer: Yukari Ishida</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Kingdom Hearts 358/2 Days</b></i> (subtitle read as "<i><b>Three-Five-Eight Days over Two</b></i>") is an <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/H.a.n.d.">h.a.n.d.</a> and <a href="https://en.wikipedia.org/wiki/Square_Enix">Square Enix</a> in collaboration with <a href="https://en.wikipedia.org/wiki/Disney_Interactive_Studios">Disney Interactive Studios</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>. It is the fifth installment in the <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts">Kingdom Hearts</a></i> series, and takes place near the end of the <a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_(video_game)">first game</a> in parallel to <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts:_Chain_of_Memories">Kingdom Hearts: Chain of Memories</a></i>, leading directly into the events of <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_II">Kingdom Hearts II</a></i>. The game was released worldwide in 2009. The story is told from the perspective of <a href="https://en.wikipedia.org/wiki/Roxas_(Kingdom_Hearts)">Roxas</a>, and follows his daily life within <a href="https://en.wikipedia.org/wiki/Organization_XIII">Organization XIII</a> and his relationship with fellow Organization member <a href="https://en.wikipedia.org/wiki/Axel_(Kingdom_Hearts)">Axel</a>; it also introduces a fourteenth member, <a href="https://en.wikipedia.org/wiki/Xion_(Kingdom_Hearts)">Xion</a>, who befriends them.</p>
+
+<p><i>Kingdom Hearts 358/2 Days</i> was directed by <a href="https://en.wikipedia.org/wiki/Tetsuya_Nomura">Tetsuya Nomura</a> and Tomohiro Hasegawa. Nomura decided to develop a game for the Nintendo DS, and once a system had been chosen, decided upon Roxas as the protagonist. The development team wanted to use gameplay similar to previous <i>Kingdom Hearts</i> games, but could not due to the DS's insufficient number of buttons. <i>Kingdom Hearts 358/2 Days</i> received generally positive reception, with praise for the gameplay and graphics but criticism for its storyline and controls. A <a href="https://en.wikipedia.org/wiki/Soundtrack">soundtrack</a>, various <a href="https://en.wikipedia.org/wiki/Light_novel">light novels</a>, and a <a href="https://en.wikipedia.org/wiki/Manga">manga</a> series based on the game were released in Japan.</p>
+
+<p>The game was dedicated to <a href="https://en.wikipedia.org/wiki/Wayne_Allwine">Wayne Allwine</a>, the longtime English voice of <a href="https://en.wikipedia.org/wiki/Mickey_Mouse">Mickey Mouse</a>, who died on May 18, 2009, 12 days before the game's release in Japan. <i>358/2 Days</i> was the final game to feature his performance as Mickey, though his performance was archived and reused in remastered ports of older games released after his death.</p>
+
+<h2>Gameplay</h2>
+
+<p>Like other games in the series<i>, 358/2 Days</i> combines elements of an <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing game</a> with that of <a href="https://en.wikipedia.org/wiki/Hack_and_slash">hack and slash</a>. To accomplish this, the game makes minimal use of the system's touch screen functionality, and it is possible to play and complete the game without using it. The game includes both single player and multiplayer modes of play. In the single player mode, the player controls Roxas, who is accompanied by other <a href="https://en.wikipedia.org/wiki/Organization_XIII">Organization XIII</a> members on daily missions to Disney worlds from previous games. The two modes are linked in that character growth is shared between them.</p>
+
+<p><i>358/2 Days</i> features a new gameplay mechanic known as the panel system, which involves the customization of the character's levels, items, equipment, and abilities. For example, certain magic spells cannot be used if their corresponding panels are not equipped, but can be used consecutively if multiple are attached. Some panels also occupy multiple slots, but can be combined with other panels to form new or stronger abilities.</p>
+
+<p>Limit Breaks, which were also featured in Square's <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy">Final Fantasy</a></i> series, can be activated during a battle once the character's health drops below a certain level, indicated by a yellow health bar. Each character has their own unique abilities during Limit Breaks, which allow a temporary boost to their normal abilities, whether it be increasing attack strength or allowing multiple enemies to be attacked at once. The second stage of a Limit Break, known as Final Limit, is normally a different or powered-up version of the first. It begins at the point where the white line, starting at the high end of the yellow portion of the HP bar, meets top dead center.</p>
+
+<h3>Multiplayer</h3>
+
+<p><i>358/2 Days</i> is the first <i>Kingdom Hearts</i> game to feature cooperative multiplayer, which is separate from single player and is mission-based, including cooperative and competitive player battles. Up to four players can play as one of the fourteen members of Organization XIII, with each one having different weapons, skills, and stats. Sora, Donald, Goofy, Mickey Mouse, and Riku are featured as secret characters and are unlockable by playing through the main story. <i>358/2 Days</i>' multiplayer also features a chat system for communication between players, but differs from <i><a href="https://en.wikipedia.org/wiki/PictoChat">PictoChat</a></i> in that everyone can draw on the same screen. To prevent players from missing out on multiplayer content, the games were developed so that the missions could be completed without connecting with other players, instead utilizing <a href="https://en.wikipedia.org/wiki/Game_artificial_intelligence">AI</a>-controlled partners.</p>
+
+<h2>Plot</h2>
+
+<h3>Setting</h3>
+
+<p><i>Kingdom Hearts 358/2 Days</i> takes place concurrently with the events of the <a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_(video_game)">original game</a> and <i><a href="https://en.wikipedia.org/wiki/Chain_of_Memories">Chain of Memories</a></i>. Like other games in the series, the player progresses through a collection of various worlds, based on various locales from the <a href="https://en.wikipedia.org/wiki/List_of_Disney_theatrical_animated_features">Disney animated features canon</a>: Agrabah from <i><a href="https://en.wikipedia.org/wiki/Aladdin_(1992_Disney_film)">Aladdin</a></i>; the Beast's Castle from <i><a href="https://en.wikipedia.org/wiki/Beauty_and_the_Beast_(1991_film)">Beauty and the Beast</a></i>; Olympus Coliseum from <i><a href="https://en.wikipedia.org/wiki/Hercules_(1997_film)">Hercules</a></i>; Halloween Town from <i><a href="https://en.wikipedia.org/wiki/The_Nightmare_Before_Christmas">The Nightmare Before Christmas</a></i>; Wonderland from <i><a href="https://en.wikipedia.org/wiki/Alice_in_Wonderland_(1951_film)">Alice in Wonderland</a></i>; and Never Land from <i><a href="https://en.wikipedia.org/wiki/Peter_Pan_(1953_film)">Peter Pan</a></i>, which features a string of islands rather than <a href="https://en.wikipedia.org/wiki/Captain_Hook">Captain Hook</a>'s <a href="https://en.wikipedia.org/wiki/Pirate_ship">pirate ship</a> and <a href="https://en.wikipedia.org/wiki/Big_Ben">Big Ben</a>, which were featured in the <a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_(video_game)">first game</a>. The game also features several worlds created specifically for the series by <a href="https://en.wikipedia.org/wiki/Square_Enix">Square Enix</a>. The most prominent world is The World That Never Was, which first appeared in the secret ending of <i>Kingdom Hearts</i> and serves as the game's main hub, as well as Twilight Town, a frequently-explored locale. Castle Oblivion and Destiny Islands also appear in cutscenes.</p>
+
+<p>The game revolves around <a href="https://en.wikipedia.org/wiki/Roxas_(Kingdom_Hearts)">Roxas</a>, who was first featured at the beginning of <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_II">Kingdom Hearts II</a></i>. Roxas is the <a href="https://en.wikipedia.org/wiki/Universe_of_Kingdom_Hearts#Nobody">Nobody</a> of <a href="https://en.wikipedia.org/wiki/Sora_(Kingdom_Hearts)">Sora</a>, the series' protagonist, and was born when Sora's body vanished as he briefly lost his heart and became a <a href="https://en.wikipedia.org/wiki/Universe_of_Kingdom_Hearts#Heartless">Heartless</a>. Like Sora, Roxas has the power to wield the <a href="https://en.wikipedia.org/wiki/Universe_of_Kingdom_Hearts#Keyblade">Keyblade</a>, a weapon used to battle darkness. At the start of the game, Roxas joins <a href="https://en.wikipedia.org/wiki/Organization_XIII">Organization XIII</a>, a group of powerful Nobodies who serve as the antagonists of <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts:_Chain_of_Memories">Kingdom Hearts: Chain of Memories</a></i> and <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_II">Kingdom Hearts II</a></i>. The other members of Organization XIII play a prominent role, particularly <a href="https://en.wikipedia.org/wiki/Axel_(Kingdom_Hearts)">Axel</a>, Roxas's best friend who debuted in <i>Chain of Memories</i>. The game also introduces a new member: Xion, a girl resembling <a href="https://en.wikipedia.org/wiki/Kairi_(Kingdom_Hearts)">Kairi</a> who, like Roxas, can wield the Keyblade.</p>
+
+<p>Other characters include <a href="https://en.wikipedia.org/wiki/Characters_of_Kingdom_Hearts#Naminé">Naminé</a>, a girl with the power to manipulate memories; <a href="https://en.wikipedia.org/wiki/Characters_of_Kingdom_Hearts#Ansem_the_Wise">DiZ</a>, an enigmatic man wrapped in bandages; <a href="https://en.wikipedia.org/wiki/Riku_(Kingdom_Hearts)">Riku</a>, Sora's best friend; and <a href="https://en.wikipedia.org/wiki/Mickey_Mouse">King Mickey</a>, Riku's ally and the ruler of Disney Castle. Sora is featured prominently in the plot, along with his allies <a href="https://en.wikipedia.org/wiki/Donald_Duck">Donald Duck</a> and <a href="https://en.wikipedia.org/wiki/Goofy">Goofy</a>, though they appear infrequently in several flashbacks and memory-induced scenarios. Also appearing are <a href="https://en.wikipedia.org/wiki/Pete_(Disney)">Pete</a>, a persistent villain who first appears in <i>Kingdom Hearts II</i>, and <a href="https://en.wikipedia.org/wiki/Characters_of_Kingdom_Hearts#Other_characters">Hayner, Pence, and Olette</a>, a trio of friends living in Twilight Town who also appeared in <i>Kingdom Hearts II</i>. As with other games in the series, each Disney world features several characters who appear in the films their worlds are based on; on the other hand, no <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy">Final Fantasy</a></i> characters are featured aside from a <a href="https://en.wikipedia.org/wiki/Moogle">Moogle</a> managing a shop for the Organization.</p>
+
+<p>The newly born Roxas is discovered in Twilight Town by <a href="https://en.wikipedia.org/wiki/Xemnas">Xemnas</a>, the leader of Organization XIII, who recruits him as their thirteenth member. Unlike other Nobodies, Roxas lacks memories of his original self, Sora, and develops his own personality over time. Under the tutelage of Axel, whom he befriends, Roxas is sent on daily missions to other worlds to destroy Heartless and release stolen hearts with his Keyblade, which furthers the Organization's goal of creating Kingdom Hearts and becoming complete beings. After Axel and several other members are reassigned to Castle Oblivion, Roxas partners with Xion, a fourteenth member who was inducted shortly after him. Roxas and Xion bond over their similarities, including Xion's ability to wield a Keyblade and inability to recall her human life. Some time later, Roxas falls into a <a href="https://en.wikipedia.org/wiki/Coma">coma</a> caused by the alteration of Sora's memories, and does not revive until several weeks later, when Axel returns from Castle Oblivion as the group's only survivor.</p>
+
+<p>Over time, Xion befriends Roxas and Axel, who routinely eat sea-salt ice cream together after missions at the Twilight Town clock tower. Xion soon falls into a coma after failing to eliminate Riku; like Roxas, she has visions of Sora after waking. In time, Xion questions her own existence and distances herself from Roxas and Axel to learn more about herself. She eventually discovers that she is a Replica—an artificial human—created as a fail-safe for Roxas, and that she has been inadvertently absorbing Sora's memories, preventing them from being completely restored. Xion is torn between staying with her friends and merging with Sora as per Riku's advice, but ultimately chooses to escape from the Organization after she begins siphoning Roxas' strength. Axel allows Xion to escape, but loses Roxas' trust. Upon learning Xion's identity from Xemnas, Roxas begins to question his own identity and defects from the Organization in search of answers, leaving Axel dejected.</p>
+
+<p>At Twilight Town, Xion attacks Roxas, having been altered by Xemnas to perform her initial purpose of absorbing Roxas and becoming a perfect copy of Sora. Upon being defeated, Xion's body dissipates and her heart merges with Sora's, causing all memory of her existence to gradually vanish. Upon returning to the World That Never Was to stop Xemnas' plan as per Xion's last request, Roxas encounters Riku, who attempts to capture him for DiZ and resume Sora's memory restoration process, which has halted. When Roxas overpowers him, Riku releases the darkness suppressed within his own heart, giving him the power to subdue Roxas, but also giving him the physical form of Xehanort's Heartless, Ansem, who resides in his heart. DiZ inserts Roxas into a virtual simulation of Twilight Town without any of his memories of the Organization so that he may eventually merge with Sora.</p>
+
+<h2>Development</h2>
+
+<p><i>358/2 Days</i> was developed by <a href="https://en.wikipedia.org/wiki/H.a.n.d.">h.a.n.d.</a>, with Square Enix employees overseeing the process. The game was directed by <a href="https://en.wikipedia.org/wiki/Tetsuya_Nomura">Tetsuya Nomura</a> and co-directed by Tomohiro Hasegawa. In 2007, Nomura mentioned he wanted to do a spin-off <i>Kingdom Hearts</i> game on a mobile platform and wanted the game to play slightly different from the other titles already in the series. <i>358/2 Days</i> was announced alongside <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_Birth_by_Sleep">Kingdom Hearts Birth by Sleep</a></i> and <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_Coded">Kingdom Hearts Coded</a></i> at the <a href="https://en.wikipedia.org/wiki/Tokyo_Game_Show">Tokyo Game Show</a> on September 20, 2007, where a trailer was shown in a photo-prohibited theater. New trailers were shown and a playable demo was available at the 2008 <a href="https://en.wikipedia.org/wiki/Jump_Festa">Jump Festa</a> in December 2007 and the DKΣ3713 Private party in August 2008. Both single player and multiplayer demos were featured. Xion was also shown in the new trailer and in the multiplayer demo.</p>
+
+<p>The Nintendo DS was chosen as the system before design work on the game had begun. Roxas was chosen as the game's protagonist as the staff thought that having a main character besides Sora would help to introduce gamers to the series' first Nintendo DS title. The staff thought that Roxas' role as a member of Organization XIII would be a suitable theme for the plot. This idea was furthered during the development of <i>Kingdom Hearts II</i>, where the staff wanted to focus on what influenced Roxas to leave the Organization, which resulted in the creation of Xion's character who was connected with Roxas' origins. The development team wanted to have gameplay similar to previous <i>Kingdom Hearts</i> titles, but stated the number of buttons on the Nintendo DS was a problem. Some of the DS's functions, like the stylus, are not used in order to retain the similar gameplay from previous titles. Roxas seeing Sora's memories is incorporated throughout the game and has different types of gameplay for each world. The game's logo uses warm colors as a reference to the sunset in Twilight Town. The meaning behind the title, "358/2 Days" was left unexplained by Nomura during the promotion of the game. Upon completion, the player discerns that it references the story of Xion and Roxas, and their 358 days as members of Organization XIII.</p>
+
+<p>Though <i>Birth by Sleep</i> was the first of the three new games to begin development, <i>358/2 Days</i> was released before it. The game was slated for a release at the end of 2008, but Square Enix pushed the date to February 2009. Once again the game was delayed for Japanese release until May 30, 2009. A release in North American territories was announced on December 2, 2008. The official English trailer for the title was shown at Nintendo's press conference at <a href="https://en.wikipedia.org/wiki/E3_2009">E3 2009</a>, confirming a release date of September 29, 2009 for North America and October 9, 2009 for Europe.</p>
+
+<p><i>358/2 Days</i> was originally to have featured a world based on <i>Pinocchio</i>, as evidenced by unused character portraits for Honest John, Gideon, Gepetto, and the eponymous character as a real boy, but this was cut due to space restrictions.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Wayne_Allwine">Wayne Allwine</a>, the voice of Mickey Mouse at the time of the game's development, died of complications from diabetes in 2009. The game was dedicated to his memory, and starting with <i>Kingdom Hearts: Birth by Sleep</i>, <a href="https://en.wikipedia.org/wiki/Bret_Iwan">Bret Iwan</a>, Allwine's successor, voiced Mickey.</p>
+
+<h2>Reception</h2>
+
+<p>The game received a "generally favorable" score of 75 out of 100 on <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. Prior to the game's release, <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i>'s Chris Hoffman and Steve Thomason referred to the game as highly anticipated, and considered it one of the better titles displayed at the 2008 Tokyo Game Show. The game was met with a range of reviews, ranging from mediocre to positive, where most of the focus was on the game's graphics and storyline.</p>
+
+<p>The graphics of the game were heavily praised by many reviewers, with Hoffman and Thomason going as far as to call them among the best on the system, and complimented the familiar feel of the gameplay and its transition between the PlayStation home consoles and the portable Nintendo ones. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> gave the game an 8 out of 10, praising the graphics for excellent production values and the journey of the camera controls from the PlayStation Analog Stick to the DS shoulder buttons. The Japanese gaming magazine <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave the game 9/9/9/9 (36/40) and praised the graphical quality of the game saying they were at a level which had not been seen on a DS before, further complimenting the gameplay mechanics and missions. They were also particularly impressed with the new panel system which allows the player to customize their fighting techniques as well as the ability to customize the characters from the Organization. Unlike many other reviewers, they praised the story as "strongly captivating." Alice Liang of <a href="https://en.wikipedia.org/wiki/1Up.com">1Up.com</a> gave the game a B, praising the game's story and concluded that "<i>Days</i> has ensured that I can't wait for Kingdom Hearts 3 to finally come out." The Australian video game talk show <i><a href="https://en.wikipedia.org/wiki/Good_Game_(TV_program)">Good Game</a></i>'s two reviewers gave the game a 7/10 and 7.5/10, grateful that the game didn't force the use of the stylus, especially when it came to battle.</p>
+
+<p>The RPGFan reviewer gave the game an 81 out of 100, praising the visual and aural quality, however they expressed disappointment at the recycling of most of the music from <i>Kingdom Hearts</i> and <i>Kingdom Hearts II</i>.
+Kevin VanOrd of <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> was complimentary of the single-player mode, commenting specifically that the <a href="https://en.wikipedia.org/wiki/Game_artificial_intelligence">artificial intelligence</a>-controlled Organization XIII members were helpful and competent. He also praised the multiplayer mode's gameplay, calling it "fun" and citing the ease of using magic spells and items.</p>
+
+<p>The controls and overall story were of particular criticism by the reviewers, with VanOrd stating that the on-screen character ended up in one of the game field's corners often. RPGamer was highly critical of these facts, as it handed the game a 2.5/5 score and reviewer Alex Reimer concluded, "...many fans of the series may be turned off by the lackluster controls and odd story directions taken with this portable spin-off." The <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i> gave the game a mediocre score of 69% praising the graphics and gameplay, they were critical however of the constant backtracking and confusing plot. <i>Good Game</i>'s reviewers stated that while the plot was confusing, and made little sense for players new to the series, it still drew the player in and filled in the gaps of the storyline for continuing players of the series. They surmised that the repetition of worlds and missions, and overall lack of variety, combined with lengthy storytelling really hurt the gaming experience.</p>
+
+<p><i>Kingdom Hearts 358/2 Days</i> was the top-selling game during May 2009 in Japan at 291,000 copies, even though it was released during the final week of the month. The following week, it was again the top-selling game in the region at 106,000 copies. By August 2009, the game sold 490,000 copies in the region. It was also one of the most reserved games for the DS. By the end of 2009, the game sold a total of 571,981 copies in Japan alone making it the twelfth best-selling game in Japan of 2009. <a href="https://en.wikipedia.org/wiki/NPD_Group">NPD Group</a> sales data shows the game has sold over 360,000 copies in North America as of October 2009. In November 2009, Square Enix announced the game had sold 1.22 million units worldwide. The game was nominated for 7 awards in the Nintendo 2009 Power awards: Nintendo DS Game of the Year, Best Sound/Voice Acting, Best Adventure Game, Best Nintendo DS Graphics, Best New Character (Xion), Best Story/Writing, and Overall Game of the Year. On February 16, 2010, it was announced that <i>358/2 Days</i> won all seven of the awards that it was nominated for in the reader's vote.</p>
+
+<h2>Versions and merchandise</h2>
+
+<p>A special <i>Kingdom Hearts 358/2 Days</i>-themed edition of the <a href="https://en.wikipedia.org/wiki/Nintendo_DSi">Nintendo DSi</a> was released alongside the game when it launched in Japan.  An <a href="https://en.wikipedia.org/wiki/Ultimania">Ultimania</a> guidebook of the game was released by Square on June 25, 2009. <i>Kingdom Hearts 358/2 Days</i> was re-released as part of the "Kingdom Hearts 10th Anniversary Box" package made in commemoration of the franchise's 10th anniversary on March 29, 2012 alongside <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_coded">Kingdom Hearts Re:coded</a></i> and the debuting <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_3D:_Dream_Drop_Distance">Kingdom Hearts 3D: Dream Drop Distance</a></i>. The musical themes introduced in <i>Kingdom Hearts 358/2 Days</i> were included in a CD that collected tracks from <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_Birth_by_Sleep">Kingdom Hearts Birth by Sleep</a></i>, <i>Kingdom Hearts Re:coded</i> and <i>358/2 Days</i> released on February 2, 2012.</p>
+
+<h3>Manga and light novels</h3>
+
+<p>Square Enix published a series of <a href="https://en.wikipedia.org/wiki/Light_novel">light novels</a> based on the title written by Tomoko Kanemaki and illustrated by <a href="https://en.wikipedia.org/wiki/Shiro_Amano">Shiro Amano</a>. The first volume, <i>The 14th</i>, was released on July 30, 2009 and the second, <i>Go to the Sea</i>, on January 28, 2010, and the third and last volume, <i>Xion-Seven Days</i>, in May 2010. A <a href="https://en.wikipedia.org/wiki/Manga">manga</a> adaptation by Amano was serialized in Square's <i><a href="https://en.wikipedia.org/wiki/Monthly_Shōnen_Gangan">Monthly Shōnen Gangan</a></i> from August 2009 to August 2012. A total of five <i><a href="https://en.wikipedia.org/wiki/Tankōbon">tankōbon</a></i> volumes were released between June 22, 2010, and April 21, 2012.</p>
+
+<p>In September 2012, Square Enix announced <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_HD_1.5_Remix">Kingdom Hearts HD 1.5 Remix</a></i> a compilation for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> to include both <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_(video_game)#Final_Mix">Kingdom Hearts Final Mix</a></i> and <i><a href="https://en.wikipedia.org/wiki/Kingdom_Hearts:_Chain_of_Memories#Re:Chain_of_Memories">Re:Chain of Memories</a></i> in high definition and trophy support. Additionally, the collection includes HD cinematic scenes from <i>Kingdom Hearts 358/2 Days</i>. The idea of a full remake, like <i>Kingdom Hearts Re:Chain of Memories</i>, was considered for <i>Kingdom Hearts 358/2 Days</i>. However, it was later scrapped in favor of an almost 3 hour long cinematic retelling of the game. New voice work was done for <i>358/2 Days</i> and the HD collection has "70% of the main plot." It was released in Japan on March 14, 2013, in North America on September 10, 2013, in Australia on September 12, 2013 and on September 13, 2013 in Europe. For subsequent ports, <i>1.5 Remix</i> was merged with its <a href="https://en.wikipedia.org/wiki/Kingdom_Hearts_HD_2.5_Remix">sequel</a> into a single <i>1.5 + 2.5 Remix</i> compilation, first released for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> on March 9, 2017, in Japan, March 28, 2017, in North America, and March 31, 2017, in Europe. A piece of <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> for the PlayStation 4 version adds an additional scene to the cinematic, depicting the battle between Roxas and Xion. The additional scene has been included by default in all subsequent ports of the collection.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

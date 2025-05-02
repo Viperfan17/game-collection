@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Kinect Sports: Season Two</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('46a08a93-58fa-4786-8006-a8b573bc2ce5/7ff6ce84-a7b4-4c95-9732-5a3063404caf.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="46a08a93-58fa-4786-8006-a8b573bc2ce5/3ed4bbca-d74e-47b1-9bed-3bdbc6cd6425.jpg"/> Kinect Sports: Season Two</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="46a08a93-58fa-4786-8006-a8b573bc2ce5/656c750f-5b6d-49da-a5fc-0795e0d0ec9b.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-4/25/2014">4/25/2014</a> 17:14:21</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 7:54:05</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/25/2011">10/25/2011</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-60">60</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-66">66</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Sports">Sports</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-BigPark">BigPark</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Rare">Rare</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Microsoft Studios">Microsoft Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Kinect_Sports:_Season_Two" target="_blank">Wikipedia</a><br/><a href="https://marketplace.xbox.com/en-GB/Product/Kinect-Sports-Season-Two/66acd000-77fe-1000-9115-d8024d5309d6" target="_blank">Kinect Sports: Season Two at Xbox.com</a><br/><a href="https://web.archive.org/web/20110814015357/http://rare.co.uk/games/kinect-sports-season-two" target="_blank">Kinect Sports: Season Two at Rare</a><br/><a href="https://www.mobygames.com/game/67913/kinect-sports-season-two/" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Kinect Sports: Season Two</b></i> is a sequel to <i><a href="https://en.wikipedia.org/wiki/Kinect_Sports">Kinect Sports</a></i> co-developed by <a href="https://en.wikipedia.org/wiki/Rare_(company)">Rare</a> and <a href="https://en.wikipedia.org/wiki/BigPark">BigPark</a>, and published by <a href="https://en.wikipedia.org/wiki/Microsoft_Studios_(game_studio)">Microsoft Studios</a>. It was unveiled at <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2011">E3 2011</a>'s Microsoft Conference for <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> and released in October 2011. The game adds six new sports and voice control. As with the previous game, it requires the <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> sensor. Along with its predecessor <i>Kinect Sports</i>, it has been released in the <i>Kinect Sports Ultimate Collection</i> bundle on 18 September 2012 with additional bonus content and extra sports in <i>Season Two</i> added, <a href="https://en.wikipedia.org/wiki/Basketball">basketball</a>, <a href="https://en.wikipedia.org/wiki/Golf">golf</a> and <a href="https://en.wikipedia.org/wiki/Skiing">skiing</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Kinect Sports: Season Two</i> consists of six sports which can be accessed from the main menu, which can be played in single or multiplayer: <a href="https://en.wikipedia.org/wiki/Golf">golf</a>, <a href="https://en.wikipedia.org/wiki/Darts">darts</a>, <a href="https://en.wikipedia.org/wiki/Baseball">baseball</a>, <a href="https://en.wikipedia.org/wiki/Skiing">skiing</a>, <a href="https://en.wikipedia.org/wiki/Tennis">tennis</a>, and <a href="https://en.wikipedia.org/wiki/American_football">American football</a>. The games are controlled through Microsoft's <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> device, which allows players to control the game through gestures and <a href="https://en.wikipedia.org/wiki/Speech_recognition">speech recognition</a> without the need of any physical <a href="https://en.wikipedia.org/wiki/Game_controller">game controller</a>. The player controls the sports by mimicking how the sports are played in real life without the equipment that usually is associated with them; for example, swinging one's arms as if they were holding a <a href="https://en.wikipedia.org/wiki/Golf_club">golf club</a> or kicking to score a <a href="https://en.wikipedia.org/wiki/Field_goal_(American_and_Canadian_football)">field goal</a> in American football. The Kinect's voice command technology is utilized more frequently than in the game's predecessor, <i><a href="https://en.wikipedia.org/wiki/Kinect_Sports">Kinect Sports</a></i>, with the game containing over 300 voice commands.</p>
+
+<p>Rare has shown the American football game's <a href="https://en.wikipedia.org/wiki/Multiplayer">two-player</a> gameplay, where one user controls the <a href="https://en.wikipedia.org/wiki/Quarterback">quarterback</a> and another the <a href="https://en.wikipedia.org/wiki/Wide_receiver">receiver</a> during a game. The player mimes throwing a <a href="https://en.wikipedia.org/wiki/Football_(ball)">football</a> towards the receiver, where the other person mimics catching it. A field goal trial was demonstrated during the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">Electronic Entertainment Expo</a> (E3), which allowed the user to attempt to kick a field goal by completing a kicking motion. In golf, the player can use voice commands to switch clubs without having to move to a menu, and swing their hands as if holding a club. The game features <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a> competition, and allows players to challenge each other in <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> modes.</p>
+
+<h2>Music</h2>
+
+<p><i>Kinect Sports: Season 2</i> includes 74 songs in its soundtrack including popular songs licensed from record labels as well as its own unique theme "Take it Back" composed by British composer <a href="https://en.wikipedia.org/wiki/Robin_Beanland">Robin Beanland</a>. The main theme, "Take it Back", is played on the main menu as well as in many different remixed forms for each sport's menu.</p>
+
+<h2>Reception</h2>
+
+<p>Microsoft demonstrated golf and American football at <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2011">E3 2011</a>. Reaction from demos for golf were positive; Tom Hoggins of <i><a href="https://en.wikipedia.org/wiki/The_Daily_Telegraph">The Daily Telegraph</a></i> called the golf game "excellent fun" and stated that the game overall felt like "a highly refined, more complete version of the first game". The American football demonstration was subject to more mixed reaction. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>'s Peter Eykemans complimented the Kinect's sensitivity toward his missed field goal kick, noting that as he accidentally kicked the floor in real life, his avatar likewise failed to hit the football properly in the game. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i>'s Tom McShea voiced concerns from the E3 demonstration of American football, noticing how the demonstrator's attempts to throw to the receiver in the multiplayer game for the most part failed to work properly.</p>
+
+<p>Upon release, the game received "average" reviews according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregation</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Common_Sense_Media">Common Sense Media</a></i> gave the game four stars out of five, saying, "Perhaps most importantly, <i>Kinect Sports: Season Two</i> is just as much of a workout as the original. Play for two hours and you'll burn off a couple hundred calories and wake up with stiff muscles in the morning. It should act as a fun and healthy way for families to spend active days indoors when the weather isn't cooperating." However, <i><a href="https://en.wikipedia.org/wiki/Digital_Spy">Digital Spy</a></i> gave it three stars out of five, calling it "a case of one step forward and one step back. Games such as darts, golf, baseball and skiing are intuitive [and] responsive and make wonderful motion-controlled mini-games, while American football and tennis are poorly executed and offer little in the way of enjoyment." <i><a href="https://en.wikipedia.org/wiki/Metro_(British_newspaper)">Metro</a></i> similarly gave it a score of six out of ten, saying that it was "Still the best party game on Kinect but the new sports are a mixed bag and the motion controls remain as inconsistent as always."</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

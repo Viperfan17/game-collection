@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Burnout Paradise</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('039df678-f519-4d61-8296-99808e4899b7/82ffc397-05f9-45ac-8029-cb108fadc64a.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="039df678-f519-4d61-8296-99808e4899b7/870314c7-5648-4e6c-a04d-c446858cf26d.ico"/> Burnout Paradise</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="039df678-f519-4d61-8296-99808e4899b7/b5e97c0f-6a9e-42c3-b9c5-b5acf3573473.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-2/3/2016">2/3/2016</a> 15:36:22</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-2/5/2009">2/5/2009</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-80">80</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-85">85</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Open world">Open world</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Criterion Games">Criterion Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Burnout_Paradise" target="_blank">PCGamingWiki</a><br/><a href="https://www.ea.com/games/burnout/burnout-paradise" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=1409" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/burnout-paradise-the-ultimate-box" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/24740/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Burnout_Paradise" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/39119" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Burnout_Paradise" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/burnout-paradise" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Automobile">Automobile</a><br/><a href="#quicklink-Contemporary">Contemporary</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-Motorcycle">Motorcycle</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-RenderWare">RenderWare</a><br/><a href="#quicklink-Third Person">Third Person</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Burnout Paradise</b></i> is a 2008 <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing video game</a> developed by <a href="https://en.wikipedia.org/wiki/Criterion_Games">Criterion Games</a> and published by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> for <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> and <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>. It was also released on the <a href="https://en.wikipedia.org/wiki/PlayStation_Store">PlayStation Store</a> and via <a href="https://en.wikipedia.org/wiki/Xbox_Live_Marketplace">Xbox Live Marketplace</a>'s <a href="https://en.wikipedia.org/wiki/Games_on_Demand">Games on Demand</a>. It was later added to the libraries of <a href="https://en.wikipedia.org/wiki/Greatest_Hits_(budget_range)#PlayStation_3">Greatest Hits</a> and <a href="https://en.wikipedia.org/wiki/Platinum_Hits#Games_in_Platinum_Hits_for_Xbox_360_series">Platinum Hits</a> titles and was made <a href="https://en.wikipedia.org/wiki/List_of_backward-compatible_games_for_Xbox_One_and_Series_X">backward compatible</a> with the <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> in November 2016. It is the first game in the <a href="https://en.wikipedia.org/wiki/Burnout_(series)"><i>Burnout</i> series</a> to be released on Microsoft Windows.</p>
+
+<p><i>Paradise</i>'s gameplay is set in the fictional "Paradise City", an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> in which players can compete in several types of races. Players can also compete online, which includes additional game modes, such as "Cops and Robbers". Several free game updates introduce new features such as a time-of-day cycle and motorcycles. The game also features paid <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> in the form of new cars and the fictional "Big Surf Island".</p>
+
+<p>The game received overwhelmingly positive reviews upon release, with aggregate score sites <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> reporting an average score of 88% and <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> reporting an average score of 88 out of 100. The game won several awards in 2008, with <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Spike TV</a>, <i><a href="https://en.wikipedia.org/wiki/GameTrailers">GameTrailers</a></i> and <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> all awarding it Best Driving Game. Reviewers felt the game had an excellent sense of speed, and praised the <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> gameplay, a first for the <i>Burnout</i> series. <i>Burnout Paradise</i> is considered by some to be one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games ever made</a>.</p>
+
+<p>A remastered version, titled <i><b>Burnout Paradise Remastered</b></i>, which includes all downloadable content (except the Time Savers Pack) and support for higher-resolution displays, was released on 16 March 2018 for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, and on 21 August for Windows via EA's <a href="https://en.wikipedia.org/wiki/Origin_(service)">Origin</a> platform and has since been released on <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a>. The online service for the original version of the game was permanently discontinued in August 2019. The remastered version for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> with refreshed online servers was released on 19 June 2020.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Burnout Paradise</i> is set in an <a href="https://en.wikipedia.org/wiki/Open_world">open-world environment</a>. Players have the opportunity to progress at their own pace and level; the game, unlike others, is not actually set to a rigid gameplay framework. According to Alex Ward, <a href="https://en.wikipedia.org/wiki/Creative_director">creative director</a> of the game at developer <a href="https://en.wikipedia.org/wiki/Criterion_Games">Criterion Games</a>, this game is a "complete reinvention" of the <i>Burnout</i> series. He also said that "to create truly next-generation gameplay, they needed to create a truly next-generation game from the ground up". Initially day and night cycles were not included in the game but a software update entitled "Davis" added this element to the game. For the first time in the series, records are now kept on a player's drivers license, including statistics such as fastest time and biggest crash for every street in the game. Completing events raises the driver rank, which unlocks access to new cars.</p>
+
+<p>In previous <i>Burnout</i> games, "Crash Mode" was a dedicated mode in which players were given multiple scenarios in which to cause the biggest crash. In <i>Burnout Paradise</i>, "Crash Mode", now called "Showtime", can be initiated at any time and place in the game. Showtime does differ from the previous incarnation of Crash Mode being that instead of crashing into a busy intersection and watching a crash play out, Showtime has bouncing the vehicle around for as long as possible to gain points. During a race players may now take any route to get to the destination. Races and other events are started by simply stopping at any of the traffic lights and applying the accelerator and brake at the same time. The game features the ability to customize race settings, such as traffic, race routes, and including/excluding cars based on their boost types.</p>
+
+<p><i>Paradise</i>'s damage system has also been reworked. There are now two different types of crashes based on the car's condition after the crash. If the player's car manages to retain all four wheels and does not break its chassis, the player can drive out of the crash and continue playing; this is called a "driveaway". If a player's car loses any wheels, the engine is damaged too much from an impact, the car lands on its side or roof or lands outside of the game's map, the car is in a "wrecked" state and the player will have to wait until their car is reset. Cars dynamically compress and deform around objects they crash into.</p>
+
+<p>Cars now have manufacturer and model names, which are loosely based on real-world cars. Cars may not be "tuned up" or customized apart from color changes, which may be done in real-time by driving through the <a href="https://en.wikipedia.org/wiki/Courtyard">forecourt</a> of a paint shop, or by selecting the color during vehicle selection. Other real-time changes include driving through the forecourt of a gas station to automatically refill the vehicle's boost meter, and driving through the forecourt of a repair shop to automatically repair the vehicle.</p>
+
+<h3>Multiplayer</h3>
+
+<p>The online lobby system used by most video games has been replaced by a streamlined system known as "Easy Drive". While driving, players simply hit right on the <a href="https://en.wikipedia.org/wiki/D-pad">D-pad</a> and the 'Easy Drive' menu appears in the corner of their screen. From there, players are able to invite other players from their friends list. Once friends have joined the game, the host can select the event to play. A "Mugshots" camera feature is available for the PC via <a href="https://en.wikipedia.org/wiki/Webcam">webcam</a>, PlayStation 3 via a PS3-compatible webcam, Xbox 360 via <a href="https://en.wikipedia.org/wiki/Xbox_Live_Vision">Xbox Live Vision</a>, PlayStation 4 via <a href="https://en.wikipedia.org/wiki/PlayStation_Camera">PlayStation Camera</a>, and Xbox One via <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a>. When a player is taken down, their photo, or 'Mugshot', is shown to the aggressor, and vice versa. These photos can then be saved to the PC or console's storage device.</p>
+
+<h2>Development</h2>
+
+<p>The concept of <i>Burnout Paradise</i> came from director Alex Ward's experience playing <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> games, specifically <i><a href="https://en.wikipedia.org/wiki/Crackdown_(video_game)">Crackdown</a></i>, <i><a href="https://en.wikipedia.org/wiki/Test_Drive_Unlimited">Test Drive Unlimited</a></i> and <i><a href="https://en.wikipedia.org/wiki/Mercenaries:_Playground_of_Destruction">Mercenaries: Playground of Destruction</a></i>. Ward found that with a title like <i>Mercenaries</i> the game's world provided more entertainment than the developers likely planned and gave him a sense of freedom in playing around with inconsequential elements of the game. He wanted to take this idea into <i>Burnout Paradise</i>: "My philosophy was that if me and you both played it for three hours, we'd both do different things". By focusing on discovery and exploration, the game ended up being a racing game without any defined tracks, a novel element at the time, which has since influenced several other racing game developers in their approaches. Ward also wanted to develop the game as a social platform, leading to some of its design choices for multiplayer formats.</p>
+
+<p>Ward, in an interview in 2018, noted the difficulty he had in convincing <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> to follow his vision. The <i>Burnout</i> series at the time was already seen as a less lucrative property compared to the <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed">Need for Speed</a></i> series by EA, and further, Ward found that EA was not amendable to the open world idea he presented. Ward took steps that he could to make <i>Burnout Paradise</i> a desirable game prior to its release to show his superiors that his ideas were sound, which proved out when the game sold more than one million copies within the first three months of release.</p>
+
+<h3>Updates</h3>
+
+<p><i>Burnout Paradise</i> has undergone significant changes since its initial release. These have been implemented through several free patches and downloadable packs. In 2008, the first major update, codenamed "Bogart", fixed several glitches and was scheduled to be released on 24 April. It was made available to Xbox 360 users on 18 April and to PlayStation 3 users on the originally scheduled date of 24 April, but this prevented store exclusive cars from being obtainable.</p>
+
+<p>The "Cagney" update was released on schedule on 10 July for PlayStation 3 and on 4 August for the Xbox 360. The update introduced three new Freeburn multiplayer modes: <i>Online Stunt Run</i>, <i>Marked Man</i> and <i>Road Rage</i>. Online Stunt Run involves up to 8 players who simultaneously compete for the highest stunt score within 2 minutes. Road Rage features two teams; one must race to a checkpoint while the other tries to stop them through takedowns. Marked Man is like a game of tag, with one player as the Marked Man who cannot see the other players and has no boost. In addition there are 70 new online challenges. These new challenges are different from Free Burn challenges, being timed. Timed challenges start once all players gather at a point of interest. The players then must all complete an objective within a certain time, such as jumping a ramp. "Cagney" also brought custom soundtracks and <a href="https://en.wikipedia.org/wiki/1080i">1080i</a> support to the PlayStation 3 version.</p>
+
+<p>An update in which involved motorbikes and night-day cycles appear in the Bikes Pack (originally codenamed the "Davis" update), along with tailored locations, challenges and game modes. The update featured a new dynamic weather system, two starter bikes in the player's junkyard, 70 new bike-only challenges, and special "Midnight Rides" challenges that appear only at night. The Bikes pack was released on 18 September on both the PlayStation 3 and Xbox 360.</p>
+
+<p>On 25 September another update was made available which introduced support for the <a href="https://en.wikipedia.org/wiki/PlayStation_3_Trophies">PlayStation 3 trophies system</a>. Criterion Games originally stated that the trophies could be awarded retroactively to players who had already made certain achievements, but when the update was released they said that this had proved to be impossible and that users would have to start a new game in order to achieve some of the goals. Later on February 5, 2009, Criterion released the free 1.6 update, which included the addition of an in-game <a href="https://en.wikipedia.org/wiki/Web_browser">browser</a> for the PC and PlayStation 3 versions, which gave users access to the <i>Criterion Games Network</i>. An in-game store was also added to all versions which allowed users to purchase content from within the game. Tweaks were also made to the vehicles (not including the freeburn exclusives) to steer the game more toward beginners and casual players. The stats of all of the cars were lowered, and the beginning cars were changed specifically to make them control better, and harder to crash. Events were also made easier to compensate for the vehicle changes.</p>
+
+<p><i>Burnout Paradise</i> is the first game in the series to be released for the PC. Criterion made use of existing graphics technology and introduced enhanced visuals and the ability to play the game across multiple monitors to enhance widescreen playing. Players can link three 4:3 monitors to play in a <a href="https://en.wikipedia.org/wiki/Polyvision">Polyvision</a> aspect ratio. PC users are also able to download a trial version of the game for free. It includes the entire map and three cars but will expire after thirty minutes. All saved data will be carried over if the user decides to purchase the full game.</p>
+
+<h2>Marketing and release</h2>
+
+<p>A demo was made available in December 2007 for both PlayStation 3 via <a href="https://en.wikipedia.org/wiki/PlayStation_Store">PlayStation Store</a> and Xbox 360 via <a href="https://en.wikipedia.org/wiki/Xbox_Live_Marketplace">Xbox Live Marketplace</a>. From January 4 through 14, Criterion raised the maximum number of players for the online Freeburn in the <i>Paradise</i> demo to 8 players (online play for the demo has since been shut down completely). With it, a total of 13 new Freeburn challenges were made available for players to play. In 2008, <i>Paradise</i> was made available for download on the <a href="https://en.wikipedia.org/wiki/PlayStation_Store">PlayStation Store</a>. Upon installation and first execution, all updates are downloaded and installed, which allows the player to have the latest version of <i>Burnout Paradise</i>.</p>
+
+<p><i>Burnout Paradise</i> features <a href="https://en.wikipedia.org/wiki/In-game_advertisement">in-game advertisements</a> for a number of brands, including <a href="https://en.wikipedia.org/wiki/Burger_King">Burger King</a>, <a href="https://en.wikipedia.org/wiki/JL_Audio">JL Audio</a>, <a href="https://en.wikipedia.org/wiki/Nvidia">Nvidia</a>, <a href="https://en.wikipedia.org/wiki/Gillette_(brand)">Gillette</a>, <a href="https://en.wikipedia.org/wiki/Vizio">Vizio</a>, <a href="https://en.wikipedia.org/wiki/CompUSA">CompUSA</a> and <a href="https://en.wikipedia.org/wiki/EVGA_Corporation">EVGA</a>. From 6 October 2008, in-game billboards featured ads for the then-<a href="https://en.wikipedia.org/wiki/United_States">United States</a> Democratic presidential candidate <a href="https://en.wikipedia.org/wiki/Barack_Obama">Barack Obama</a>. <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> confirmed that the Obama campaign paid for the advertisements, marking the first time that a United States presidential candidate has bought <a href="https://en.wikipedia.org/wiki/In-game_advertising">in-game advertising</a>. The Obama campaign ran only on the Xbox 360 version of the game.</p>
+
+<p>The Xbox 360 version of <i>Burnout Paradise</i> was made available for <a href="https://en.wikipedia.org/wiki/List_of_Xbox_360_games_compatible_with_Xbox_One">backward compatibility</a> with the Xbox One in November 2016. On 16 December, it was made available to <a href="https://en.wikipedia.org/wiki/Xbox_Live_Gold">Xbox Live Gold</a> members for free until 31 December.</p>
+
+<p>Criterion has disabled the optional online features for the original releases in August 2019.</p>
+
+<h3><i>Burnout Paradise Remastered</i></h3>
+
+<p>A remastered version of <i>Burnout Paradise</i> was released for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> consoles on 16 March 2018; a version for Windows was released for <a href="https://en.wikipedia.org/wiki/Origin_Access">Origin Access</a> subscribers on 16 August and was fully released on 21 August via <a href="https://en.wikipedia.org/wiki/Origin_(service)">Origin</a> platform.</p>
+
+<p>The remaster contains all the previously released downloadable content, except for the Time Savers Pack (a DLC pack that unlocks all vehicles in the game without the need to progress through single-player), and support for higher-resolution monitors (up to <a href="https://en.wikipedia.org/wiki/4K_resolution">4K</a> resolutions) with 60 <a href="https://en.wikipedia.org/wiki/Frames_per_second">frames per second</a> support. A version for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> was released on 19 June 2020. Unlike the original, the Remastered version does not have real life in-game advertisements and are instead replaced by fictional ones.</p>
+
+<h2>Downloadable content</h2>
+
+<p>In addition to the free updates, Criterion has released several optional, premium packs that add content like new cars, areas and modes. The first update was the "Burnout Party Pack" and launched on 5 February 2009 in North America and the United Kingdom. It focuses on <a href="https://en.wikipedia.org/wiki/Hotseat_(multiplayer_mode)">hotseat</a> multiplayer gameplay, which offers a Freeburn Challenge-like setting but for players on the same console, who pass a single controller between players to complete challenges. The challenges are split into 'Speed', 'Stunt' and 'Skill' with up to 8 rounds and up to 8 players can play at once. Criterion also announced the combo pack <i>Burnout Paradise: The Ultimate Box</i> that launched around the same time which contains the original game, plus the Cagney, Bikes, Party pack and Update pack all in the same package which contained "a mountain of new refinements".</p>
+
+<p>The first premium content pack called "Legendary Cars" featured four cars inspired by famous vehicles from film and television: the Jansen P12 88 Special (based on the <a href="https://en.wikipedia.org/wiki/DeLorean_time_machine">DeLorean time machine</a> from the <i><a href="https://en.wikipedia.org/wiki/Back_to_the_Future_(series)">Back to the Future</a></i> films), the Hunter Manhattan Spirit (based on the <a href="https://en.wikipedia.org/wiki/Ectomobile">Ecto-1</a> from the <i><a href="https://en.wikipedia.org/wiki/Ghostbusters_(franchise)">Ghostbusters</a></i> films), the Carson GT Nighthawk (based on <a href="https://en.wikipedia.org/wiki/KITT">KITT</a> from the television series, <i><a href="https://en.wikipedia.org/wiki/Knight_Rider_(1982_TV_series)">Knight Rider</a></i>), and the Hunter Cavalry Bootlegger (based on the <a href="https://en.wikipedia.org/wiki/General_Lee_(car)">General Lee</a> from the TV series <i><a href="https://en.wikipedia.org/wiki/The_Dukes_of_Hazzard">The Dukes of Hazzard</a></i>). The Legendary Cars pack was released on 19 February 2009 for the PlayStation 3 and the Xbox 360, and later in 2009 for the PC.</p>
+
+<p>The second one is "Toy Cars" pack. It features a collection of new vehicles designed with a "toy car" aesthetic, although modelled as full-size cars. The Toy Cars pack has been released in three packs. The full pack offers all toy cars along with the Nakamura Firehawk, a toy motorcycle, while the others split the content into two parts, minus the Firehawk.</p>
+
+<p>On 12 March 2009, the "Boost Specials" pack was released. It featured two cars: the Carson Extreme Hotrod and the Montgomery Hawker Mech. The Carson was described as the fastest car in the game and featured a 'locked' boost; the car continues to boost until it is brought to a stop in any manner. The vehicle dynamics system were rewired so that the Carson performs more realistically than any other car in the game. The Montgomery Hawker Mech also featured a unique boost system, which allows the player to willingly switch between the three different boost types at the touch of a button.</p>
+
+<p>In 2009, Criterion released "Cops &amp; Robbers" on 30 April for PlayStation 3 and Xbox 360. The content does not involve AI Police patrol cars but instead borrows from the Pursuit modes of older <i>Burnout</i> games, notably <i><a href="https://en.wikipedia.org/wiki/Burnout_2:_Point_of_Impact">Burnout 2: Point of Impact</a></i>. Players are split into teams, the Cops and the Robbers. Teams attempt to return gold bars to their respective bases to score points. Every Paradise car (except Carbon and Premium DLC cars) receives a Police livery with the content.</p>
+
+<p>Originally announced as the "<i>Eastwood</i> pack coming in Fall 2008", the expansion known as "Big Surf Island" was released on 11 June 2009. Design for the island was guided by the principle of "if you can see it, you can drive it". The island puts emphasis on the playground aspect of <i>Burnout</i>. The developers mentioned that in their telemetry they noticed that players congregate in areas of Paradise City that lend themselves to stunt-driving, and so the idea was to create an entire island to accommodate player desire. Big Surf Island also features new vehicles, which includes the Carson Dust Storm buggy, a car tailor-made for stunts. In addition to the Dust Storm buggy two specially featured cars, the Hunter Olympus "Governor" and the Carson Annihilator Street Rod are also included. The unlockable cars also include toy versions of all four "Legendary Cars" pack vehicles and a special Jansen P12 Diamond awarded once all 500 freeburn challenges were completed. It features several new events, billboards, smash gates, and mega jumps. New Trophies and Achievements were also added along with a new 'Big Surf Island License' to obtain.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical reception</h3>
+
+<p>Upon release, <i>Burnout Paradise</i> was met with very positive reviews, according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>.</p>
+
+<p>Reviewers praised the game's open world, stating "<i>Burnout Paradise</i> is an amazing open-world racing game that stays true to the <i>Burnout</i> legacy", but that the large world may "feel a little daunting at first". New gameplay mechanics such as gas stations and body repair shops were also praised which "mitigate potential frustration when the heat is on". <i><a href="https://en.wikipedia.org/wiki/Hyper_(magazine)">Hyper</a></i>'s Daniel Wilks commends the game for its "great sense of speed and things that go boom". <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>'s Chris Roper praised the vehicle unlock system, which gives the player a new vehicle with each license, and also gives the player the opportunity to "take down" certain vehicles, which earns the player a reward if completed. He further lauded the game as "controlled chaos". <i><a href="https://en.wikipedia.org/wiki/The_Guardian">The Guardian</a></i>'s Keith Stuart added that the game "feels incredibly good to drive".</p>
+
+<p>Some reviewers were disappointed that there was no option to restart a race or event. Instead the player had to either fail the event, or cancel the race by bringing the vehicle to a stop for a few seconds, and then return to the specific place on the map to try that particular race or event again. Criterion responded to this criticism by stating that they don't feel that this is a problem and that adding a "retry" option would introduce loading screens, which they "hate with a passion". Despite this, the option to restart an event was later added to the game via a free software update. <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> found DJ Atomika, the game's guide, to be "instantly dislikeable".</p>
+
+<p>The <i>Remastered</i> release was met with similarly positive reviews, albeit slightly less than the original release. Metacritic gave the PlayStation 4 version a score of 82 out of 100, and the Xbox One version a score of 79 out of 100.</p>
+
+<p><i>Paradise</i> won several awards in 2008, with <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Spike TV</a>, <i><a href="https://en.wikipedia.org/wiki/GameTrailers">GameTrailers</a></i> and <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> all awarding it Best Driving Game. Additionally, <i>Paradise</i> won GameSpot's award for Best Downloadable Content in 2008. During the <a href="https://en.wikipedia.org/wiki/12th_Annual_Interactive_Achievement_Awards">12th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> awarded <i>Burnout Paradise</i> with "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Racing_Game_of_the_Year">Racing Game of the Year</a>".</p>
+
+<h2>Use in academia</h2>
+
+<p><i>Burnout Paradise</i> has been the subject of several academic papers investigating a range of fields, often connected to the title's intensity and need for fast reaction time. These include studies on gamer <a href="https://en.wikipedia.org/wiki/Cardiology">cardiology</a>, <a href="https://en.wikipedia.org/wiki/Phenomenology_(philosophy)">phenomenological</a> correspondence and control <a href="https://en.wikipedia.org/wiki/Abstraction">abstraction</a> and computer game <a href="https://en.wikipedia.org/wiki/Pedagogy">pedagogy</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

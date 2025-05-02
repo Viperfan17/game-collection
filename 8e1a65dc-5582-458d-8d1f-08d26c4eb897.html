@@ -1,0 +1,354 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Forza Motorsport 4</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('8e1a65dc-5582-458d-8d1f-08d26c4eb897/c17f0a8b-87f6-4473-8852-b5c2ed528bb1.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="8e1a65dc-5582-458d-8d1f-08d26c4eb897/e4ae0d9f-d5ea-42bb-a6b3-310bcdf3b070.ico"/> Forza Motorsport 4</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="8e1a65dc-5582-458d-8d1f-08d26c4eb897/85a76bc3-f673-4bb1-8e8d-db06bab58403.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-10/5/2013">10/5/2013</a> 13:37:35</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/11/2011">10/11/2011</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-83">83</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-91">91</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Turn 10 Studios">Turn 10 Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Microsoft Studios">Microsoft Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_4" target="_blank">Wikipedia</a><br/><a href="https://www.mobygames.com/game/xbox360/forza-motorsport-4" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Derrick Aynaga">[People] artist: Derrick Aynaga</a><br/><a href="#quicklink-[People] artist: Jon Knoles">[People] artist: Jon Knoles</a><br/><a href="#quicklink-[People] artist: Rory Reich">[People] artist: Rory Reich</a><br/><a href="#quicklink-[People] composer: Lance Hayes">[People] composer: Lance Hayes</a><br/><a href="#quicklink-[People] designer: Scott Catlin">[People] designer: Scott Catlin</a><br/><a href="#quicklink-[People] designer: William Giese">[People] designer: William Giese</a><br/><a href="#quicklink-[People] director: Dan Greenawalt">[People] director: Dan Greenawalt</a><br/><a href="#quicklink-[People] producer: Drew Angeloff">[People] producer: Drew Angeloff</a><br/><a href="#quicklink-[People] programmer: Chris Tector">[People] programmer: Chris Tector</a><br/><a href="#quicklink-[People] programmer: Daniel Adent">[People] programmer: Daniel Adent</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Forza Motorsport 4</b></i> is a 2011 <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing video game</a> developed by <a href="https://en.wikipedia.org/wiki/Turn_10_Studios">Turn 10 Studios</a> and published by <a href="https://en.wikipedia.org/wiki/Microsoft_Studios">Microsoft Studios</a> for the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. It is the fourth installment in the <i><a href="https://en.wikipedia.org/wiki/Forza">Forza</a></i> series. It is the first title in the series to support the <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> sensor alongside the traditional <a href="https://en.wikipedia.org/wiki/Xbox_360_Controller">controller-based</a> gameplay. It is the last <i>Forza Motorsport</i> released for Xbox 360; 2012's <i><a href="https://en.wikipedia.org/wiki/Forza_Horizon">Forza Horizon</a></i> and <a href="https://en.wikipedia.org/wiki/Forza_Horizon_2">its 2014 sequel</a> were the last two <i>Forza</i> games for the platform, while 2013's <i><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_5">Forza Motorsport 5</a></i> was released as an <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> exclusive.</p>
+
+<p>A new feature in the series is Autovista, a game mode in which players can view precise details such as engine parts and interior gauges on a select number of cars. It features a partnership with <a href="https://en.wikipedia.org/wiki/Top_Gear_(2002_TV_series)">BBC's <i>Top Gear</i></a> as well as its <a href="https://en.wikipedia.org/wiki/Top_Gear_(U.S._TV_series)">American counterpart</a>. <a href="https://en.wikipedia.org/wiki/Jeremy_Clarkson">Jeremy Clarkson</a>, then-presenter for <i>Top Gear</i>, provided commentary in the game's Autovista mode. Other partnerships include a two-year agreement with the <a href="https://en.wikipedia.org/wiki/American_Le_Mans_Series">American Le Mans Series</a> (ALMS). Over 500 cars and 26 tracks are included.</p>
+
+<p>The game received universal acclaim from critics, who praised the enhanced vehicle physics, updated visuals, and strong sound design. Several reviewers also gave high marks for the game's Autovista mode. Some critics expressed frustration with Kinect features, and others also felt that the game was not enough of an innovation from its predecessor, <i><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_3">Forza Motorsport 3</a></i>. These critics did, however, concede that the game was a vast improvement over <i>Forza Motorsport 3</i>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Forza Motorsport 4</i> is a <a href="https://en.wikipedia.org/wiki/Racing_game">racing video game</a>, and the fourth in the <i><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_(2005_video_game)">Forza Motorsport</a></i> series. Like Sony's <i><a href="https://en.wikipedia.org/wiki/Gran_Turismo_(series)">Gran Turismo</a></i> franchise, <i>Forza</i> games are <a href="https://en.wikipedia.org/wiki/Racing_simulation">racing simulations</a>; heavy emphasis is placed on making the cars drive and look as realistic as possible. Races are conducted on closed circuit tracks. 500 cars are featured in the core game experience, ranging from city cars to race cars.</p>
+
+<p>Players can utilize <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> to look into a corner using a new <a href="https://en.wikipedia.org/wiki/Head_tracking">head tracking</a> feature. This allows them to look toward the apex of a corner or at nearby cars. The controller or steering wheel is used to control the car while Kinect is used independently for viewing around the driver. Players can also use Kinect as a game controller. In this setting the game automatically accelerates and decelerates the player's vehicle utilizing a modified version of the feature known as Auto Brake in <i><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_3">Forza Motorsport 3</a></i>. The steering is controlled by placing the players arms out as if controlling an invisible steering wheel. Kinect will allow the player to use voice commands to start races and navigate menus.</p>
+
+<p>New to the <i>Forza</i> series is a feature known as Autovista. It is designed to allow players to walk around and explore inside cars. This feature allows players to view minute details such as brake pads, transmission, tyres, engine components, and interior details. The player can point at certain features, such as headlights, wheels and the engine for further information about them via audio recording. It can be controlled via Kinect or a game controller. Only 24 cars in the game support the Autovista feature, as it is primarily for sports cars, classic cars, and dream cars. The graphics used to create these cars are formed using <a href="https://en.wikipedia.org/wiki/Image-based_lighting">image-based lighting</a> which allowed the developers to create perfect reflections, and would better immerse the car in the environment both when racing on a track or in the garage or <i>Top Gear</i> studio when viewing a car.</p>
+
+<p>As in <i>Forza Motorsport 3</i>, there is a career mode for players to complete, which sees players racing at multiple locations around the world. This is known as World Tour Mode in <i>Forza Motorsport 4</i>, previously known as Season Play in <i>Forza Motorsport 3</i>. However, one new feature that appears in <i>Forza Motorsport 4</i> is the game's ability to adapt the difficulty as the player progresses through the career, and collect a trend of data to see how well they perform. This allows AI drivers to change and upgrade their cars automatically to suit the player's driving abilities. There are several types of races besides the standard format. <i>Forza Motorsport 4</i> includes the original bumper-to-bumper races, but also has <a href="https://en.wikipedia.org/wiki/Drifting_(motorsport)">drift</a>, <a href="https://en.wikipedia.org/wiki/Autocross">autocross</a>, and multiple-heat races. Unlike in <i>Forza Motorsport 3</i> where players had no choice over which car they received after leveling up, in <i>Forza Motorsport 4</i> players are now able to choose one out of several cars as a prize, which are automatically upgraded to the high end of their class. Players are able to import their <i>Forza Motorsport 3</i> profiles into <i>Forza Motorsport 4</i>. This gives them the ability to transfer a certain number of in-game credits and gifted cars into their new garage. The allowed number transferred is based on how long they have played the game and how many cars and credits they have. Players have the option to create car clubs and share cars in their garages within that club. Previous games in the series were limited to eight cars on the track, however <i>Forza Motorsport 4</i> supports 16 player racing online, and two players offline.</p>
+
+<p><i>Forza Motorsport 4</i> features 26 courses to compete on. These race courses are mix between circuits courses and point-to-point courses. 17 real-world tracks and nine fictional locations are included. Each course features as reverse configuration, and many have multiple other configurations. Three additional real world race tracks and one fictional track have been added to the <i>Forza</i> franchise, <a href="https://en.wikipedia.org/wiki/Hockenheimring">Hockenheimring</a>, <a href="https://en.wikipedia.org/wiki/Indianapolis_Motor_Speedway">Indianapolis Motor Speedway</a>, <a href="https://en.wikipedia.org/wiki/Infineon_Raceway">Infineon Raceway</a> and the fictional Bernese Alps.</p>
+
+<h2>Development, marketing and release</h2>
+
+<p>A technology demo for <i>Forza Motorsport 4</i> was first revealed at Microsoft's <a href="https://en.wikipedia.org/wiki/E3_2010">E3 2010</a> press conference. The live demonstration showcased a <a href="https://en.wikipedia.org/wiki/Overtaking">passing challenge</a> while driving the 2010 <a href="https://en.wikipedia.org/wiki/Ferrari_458_Italia">Ferrari 458 Italia</a>. Using the Microsoft Kinect sensor the player steered the car to pass opponents. <i>Forza Motorsport 4</i> was formally unveiled at the 2010 <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Spike Video Game Awards</a>. Turn 10 announced that the game would feature over 500 cars from 80 manufacturers, and confirmed that it will support Kinect as well as standard Xbox 360 controllers and racing wheels. Turn 10 officially partnered with the <a href="https://en.wikipedia.org/wiki/American_Le_Mans_Series">American Le Mans Series</a> (ALMS) for two years from August 8, 2011. The partnership provides several in-game ALMS themed events to complement the cars and tracks raced in the ALMS present in previous entries in the <i>Forza Motorsport</i> series. Unlike past games in the series, vehicles from the <a href="https://en.wikipedia.org/wiki/SCCA_Pro_Racing_World_Challenge">SCCA Pro Racing World Challenge</a> were not present initially in <i>Forza Motorsport 4</i> aside from a <a href="https://en.wikipedia.org/wiki/Mopar">Mopar</a> sponsored <a href="https://en.wikipedia.org/wiki/Dodge_Viper">Dodge Viper</a>. The Porsche download content pack added one World Challenge Porsche GT3. More known content was leaked during IGN's visit to <a href="https://en.wikipedia.org/wiki/E3_2011">E3 2011</a>, which revealed that there will be the option to create car clubs and share garages within that club, and that the game will support 16 player online racing. <a href="https://en.wikipedia.org/wiki/Hockenheimring">Hockenheimring</a>, <a href="https://en.wikipedia.org/wiki/Indianapolis_Motor_Speedway">Indianapolis Motor Speedway</a> and <a href="https://en.wikipedia.org/wiki/Sonoma_Raceway">Infineon Raceway</a> were added as three more real world tracks to the <i>Forza</i> series.</p>
+
+<p>On August 26, 2011, at <a href="https://en.wikipedia.org/wiki/Penny_Arcade_Expo">PAX</a> Prime it was announced that Turn 10 would include the UNSC Warthog from <a href="https://en.wikipedia.org/wiki/Microsoft_Studios">Microsoft Studios</a>' <i><a href="https://en.wikipedia.org/wiki/Halo_(series)">Halo</a></i> series in <i>Forza Motorsport 4</i>'s Autovista mode. The model of Warthog used in <i>Forza Motorsport 4</i> is identical to the version in the then-upcoming <i><a href="https://en.wikipedia.org/wiki/Halo_4">Halo 4</a></i>, although the vehicle is not drivable. Turn 10 has cited the vehicle's exaggerated four wheel steering system, fictional futuristic technology and excessive height as reasons for its exclusion, stating "One, it's got some technology that's built into <i>Halo</i> that would have been a big investment for us to then build into the game only to support one vehicle. [...] Technically we don't support that because no real world cars in our game do."</p>
+
+<h3>Sound design</h3>
+
+<p>Turn 10 identified sound as a cornerstone of the <i>Forza</i> experience, and that accuracy and excitement are key to that. The <a href="https://en.wikipedia.org/wiki/Sound_design">sound design</a> team for <i>Forza Motorsport 4</i> set out to make car audio "more visceral" than prior entries in the series. Sounds from over 500 cars were captured on a <a href="https://en.wikipedia.org/wiki/Chassis_dynamometer">dyno</a> in a <a href="https://en.wikipedia.org/wiki/Redmond,_Washington">Redmond, WA</a> garage, using the same recording setup first used with the <a href="https://en.wikipedia.org/wiki/Bizarre_Creations">Bizarre Creations</a>' <i><a href="https://en.wikipedia.org/wiki/Project_Gotham_Racing">PGR</a></i> games beginning in 2001. Fans of the game were also solicited to bring their own cars for recording. An 8 to 10 channel recording device captured sound from microphones at the engine, intake, and exhaust. High <a href="https://en.wikipedia.org/wiki/Sound_pressure_level">SPL</a> mics were used on the loudest of cars, notably the <a href="https://en.wikipedia.org/wiki/Mazda_787B">Mazda 787B</a>, to reduce <a href="https://en.wikipedia.org/wiki/Audio_Distortion">distortion</a>.</p>
+
+<p>The audio channels were mixed, sliced, and recombined to span rev range. The sounds are then applied to the car physics model, applying <a href="https://en.wikipedia.org/wiki/Digital_signal_processing">DSP</a> and filters based on how the car is driven. The team licensed a distortion effect, <a href="https://en.wikipedia.org/wiki/IZotope">iZotope</a>'s Trash plugin on <a href="https://en.wikipedia.org/wiki/FMOD">FMOD</a>, to achieve the "on the limit" feeling of sound distorting in your head. The sounds are then mixed with transmission and tire sounds, and finally the distance and environmental model to form the final soundtrack heard by the player. DSP also changes the sound of the car after engine upgrades, rather than swapping samples as was done in prior games.</p>
+
+<p>Along with the physics team making a new tire physics model with data from <a href="https://en.wikipedia.org/wiki/Pirelli">Pirelli</a>, the sound team added more granular tire sounds to differentiate skidding from braking, steering, or wheel spin. A <a href="https://en.wikipedia.org/wiki/Tesla_Roadster_(2008)">Tesla Roadster</a> was used to record the game's tire sounds, due to its near-silent electric motor which allowed them to record the sounds cleanly without engine or exhaust noise. Two microphones were mounted to the car and pointed at the tire for recording. The tire model contains hundreds of sounds for each surface and varies dynamically depending on lateral and vertical load. This detailed tire feedback improved lap times among hardcore <i>Forza</i> drivers within Turn 10.</p>
+
+<p>In Autovista mode, engine startups were recorded in 5.1 from the perspective of the driver's head plus mics near the engine and exhaust.</p>
+
+<p>Lance Hayes, also known as <i>Dr Drunken Master</i>, the award-winning composer for <i>Forza Motorsport 3</i>, returned to score <i>Forza Motorsport 4</i> with the Microsoft Studios Music label, which features a combination of his music and other licensed artists. 15 songs were provided by Hayes for the <a href="https://en.wikipedia.org/wiki/User_interface">user interface</a> and some in-race music. In speaking of the tone of the soundtrack, Hayes stated "The score has an increased cinematic feel as well as incorporating many of the styles (downtempo, electronic, ambient) that made the <i>Forza Motorsport 3</i> <a href="https://en.wikipedia.org/wiki/Original_soundtrack">OST</a> a fan favorite."</p>
+
+<p>Turn 10 has entered a multiple year partnership with the BBC's <i><a href="https://en.wikipedia.org/wiki/Top_Gear_(2002_TV_series)">Top Gear</a></i>. The content provided by the BBC's <a href="https://en.wikipedia.org/wiki/BAFTA">BAFTA</a> award-winning television show <i>Top Gear</i>, also includes narration from presenter <a href="https://en.wikipedia.org/wiki/Jeremy_Clarkson">Jeremy Clarkson</a> during the virtual showroom (Autovista) navigation. The game features the <a href="https://en.wikipedia.org/wiki/Top_Gear_test_track"><i>Top Gear</i> test track</a> at Dunsfold Aerodrome, near the village of Cranleigh, UK. The first in-game demo in Autovista was revealed at E3 2011. An extra piece of content for <i>Top Gear</i> fans is the addition of two of the show's three reasonably priced cars, the <a href="https://en.wikipedia.org/wiki/Kia_Cee'd">Kia Cee'd</a>, and the <a href="https://en.wikipedia.org/wiki/Suzuki_Liana">Suzuki Liana</a>, while the TV show's third such car, the <a href="https://en.wikipedia.org/wiki/Chevrolet_Lacetti">Chevrolet Lacetti</a> is not present. At E3, players were able to complete laps of the <i>Top Gear</i> Test Track and record their own times. The <i>Top Gear</i> test track in <i>Forza Motorsport 4</i> also features authentic camera angles during replays. The game features <i>Top Gear</i> "Car Football" (only available online with Xbox Live) and a <i>Top Gear</i> bowling mini game, both set on the official <i>Top Gear</i> test track.</p>
+
+<p>The BBC <i>Top Gear</i> studio is part of the Home Space when viewing a car. The studio has the original TV series cars on plinths, such as the destroyed <a href="https://en.wikipedia.org/wiki/Toyota_Hilux">Toyota Hilux</a> and Clarkson's <a href="https://en.wikipedia.org/wiki/Fiat_Coupé">Fiat Coupé</a> police car as seen in Series 11, Episode 1, and all of the original <i>Top Gear</i> logos, Stig posters, and lighting arrangements, that reflect off the paintwork of the car the player is viewing, similar to how they would on the real <i>Top Gear</i> show. A live action commercial was produced and contained a voice over track by Jeremy Clarkson. The commercial is set in a busy city in which a man merely wants to drive fast. As the man speeds through the city streets with police in pursuit Clarkson speaks of lovers of speed as an endangered species. He notes that places for these people to truly enjoy their cars are being taken away, then pitches the video game. The commercial was well received by the media. <a href="https://en.wikipedia.org/wiki/Jalopnik">Jalopnik</a>'s Ray Wert called the advert "epic". The driving was performed by professional stunt driver Martin Ivanov.</p>
+
+<p><i>Forza Motorsport 4</i> was featured in the <a href="https://en.wikipedia.org/wiki/Top_Gear_(U.S._TV_series)">U.S. version</a> of <i>Top Gear</i>. At the 2010 <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Spike Video Game Awards</a> professional stunt driver and show co-host <a href="https://en.wikipedia.org/wiki/Tanner_Foust">Tanner Foust</a> and <a href="https://en.wikipedia.org/wiki/Rutledge_Wood">Rutledge Wood</a>, car expert and co-host were featured in the unveiling of the game. Foust drove a 2010 <a href="https://en.wikipedia.org/wiki/Dodge_Challenger">Dodge Challenger</a> while Wood rode as a passenger. The advertisement showed Foust drifting around the environment and ended with a top-down shot of the pad. On the pavement the word <i>Forza</i> was spelled out in tire marks.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> Additionally in the final episode of the show's second season Wood and co-host <a href="https://en.wikipedia.org/wiki/Adam_Ferrara">Adam Ferrara</a> challenged Foust to a timed race at <a href="https://en.wikipedia.org/wiki/Infineon_Raceway">Infineon Raceway</a>, otherwise known as Sears Point; Foust drove the <a href="https://en.wikipedia.org/wiki/Lexus_LF-A">Lexus LF-A</a> around the real course while Wood and Ferrara drove the course in <i>Forza Motorsport 4</i>.</p>
+
+<p>Players who bought the Limited Collector's Edition got a polished Steelbook case, with the 2012 <a href="https://en.wikipedia.org/wiki/BMW_M5">BMW M5</a> as the cover car. They received a V.I.P. car pack, including the <a href="https://en.wikipedia.org/wiki/Bugatti_Veyron_Super_Sport">Bugatti Veyron Super Sport</a> and <a href="https://en.wikipedia.org/wiki/Noble_M600">Noble M600</a>; a 10-car <i>American Muscle Car Pack</i>, including the <a href="https://en.wikipedia.org/wiki/Plymouth_GTX">Plymouth GTX</a> 426 HEMI and <a href="https://en.wikipedia.org/wiki/Chevrolet_Chevy_II_/_Nova#Nova_SS">Chevrolet Nova SS</a>, (also available on <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a> on launch day); a pre-order exclusive <i>Ship Bonus Car Pack</i>, including the <a href="https://en.wikipedia.org/wiki/Koenigsegg_Agera">Koenigsegg Agera</a> and <a href="https://en.wikipedia.org/wiki/Tesla_Roadster_(2008)">Tesla Roadster</a> Sport; a five-car <i>BMW Designer Car Pack</i> featuring five BMWs with unique exterior designs, including a <a href="https://en.wikipedia.org/wiki/BMW_M6">BMW M6</a> designed by an entrant into an M6 design competition. This pack was available on launch day, along with a free download of the 2012 BMW M5 and a BMW theme for the Xbox 360 dashboard. In addition to this, Collector's Edition owners were given a 96-page volume entitled 'Cars of <i>Forza Motorsport 4</i> Presented By <i>Top Gear</i>', written by the editors from <i><a href="https://en.wikipedia.org/wiki/Top_Gear_(magazine)">Top Gear</a></i> magazine. This volume gives detailed information about many of the exotic cars found within the game, as well as photos (both in game and real life) of them. The description of the cars is exactly the same that Jeremy Clarkson narrates while using the <i>Top Gear</i> section found within the Autovista feature.</p>
+
+<p><i>Forza Motorsport 4</i> had received monthly <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC) packs since its release. Each month a number of new cars would be bundled into a pack available for purchase. Players could also opt to purchase individual cars from a given pack should they not want all the vehicles presented that month.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> Players can purchase a Season Pass which entitles them to free downloads of the first six packs. The <i>Top Gear</i> Car Pack DLC was the first of the monthly packs to not be covered by the Season Pass. Unlike previous <i>Forza</i> titles which included <a href="https://en.wikipedia.org/wiki/Porsche">Porsche</a> cars through a sublicense from <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a>, <i>Forza Motorsport 4</i> did not initially include the Porsche marque. Instead, cars from <a href="https://en.wikipedia.org/wiki/Ruf_Automobile">Ruf Automobile</a>, a German car manufacturer which builds their own models from <a href="https://en.wikipedia.org/wiki/Body_in_white">bodies in white</a> received from Porsche, were included. EA's release of <i><a href="https://en.wikipedia.org/wiki/Shift_2:_Unleashed">Shift 2: Unleashed</a></i> earlier in 2011 was regarded as an expansion into the simulation-racing genre, and brought the <i>Forza</i> series into more direct competition with EA Games. On March 5, 2012 it was announced there would be a downloadable car pack on May 22 that will feature 30 Porsche cars. The new 2013 <a href="https://en.wikipedia.org/wiki/Dodge_Viper#Fifth_generation/SRT_Viper_(2012–)">SRT Viper</a> GTS was included in <i>Forza Motorsport 4</i> as free downloadable content on June 22, 2012. As a part of the June DLC pack, a <a href="https://en.wikipedia.org/wiki/1937_Ford">1940 Ford</a> was added. This pack also includes an <a href="https://en.wikipedia.org/wiki/MG_MGA">MG MGA</a>, a <a href="https://en.wikipedia.org/wiki/Volkswagen_Beetle">Volkswagen Beetle</a>, a <a href="https://en.wikipedia.org/wiki/BMW_507">BMW 507</a>, and a <a href="https://en.wikipedia.org/wiki/Maserati_Ghibli">Maserati Ghibli</a>. In September 2015, all downloadable content was removed.</p>
+
+<p>The download content featured a few unique themes not previously seen in the series. Some cars were carried over into subsequent games.</p>
+
+<ul>
+  <li>Novelty Cars: <a href="https://en.wikipedia.org/wiki/Ford_Pinto">Ford Pinto</a>, <a href="https://en.wikipedia.org/wiki/AMC_Gremlin">AMC Gremlin</a>, <a href="https://en.wikipedia.org/wiki/AMC_Pacer">AMC Pacer</a>, <a href="https://en.wikipedia.org/wiki/Chevrolet_Corvair">Chevrolet Corvair Monza</a>, <a href="https://en.wikipedia.org/wiki/DMC_DeLorean">DMC DeLorean</a></li>
+  <li>Classic British: *<a href="https://en.wikipedia.org/wiki/Austin-Healey_3000">Austin-Healey 3000</a>, *<a href="https://en.wikipedia.org/wiki/Austin-Healey_Sprite">Austin-Healey Sprite</a>, <a href="https://en.wikipedia.org/wiki/MG_MGA">MGA Twin-Cam</a>, <a href="https://en.wikipedia.org/wiki/MGB_GT">MGB GT</a>, <a href="https://en.wikipedia.org/wiki/Triumph_TR3">Triumph TR3</a></li>
+</ul>
+
+<p><i>Forza Motorsport 4</i> features an original score by <a href="https://en.wikipedia.org/wiki/Lance_Hayes?action=edit&amp;redlink=1">Lance Hayes</a>, also known as DJ Drunken Master. Like <i><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_3">Forza Motorsport 3</a></i>, the score consists mainly of <a href="https://en.wikipedia.org/wiki/Ambient_music">ambient electronica</a> music, although orchestral elements are incorporated into the music. Alongside the score, <i>Forza Motorsport 4</i> contains a wide selection of licensed music from various artists. Although the game was released in 2011, the score was not officially released until October 30, 2013 on <a href="https://en.wikipedia.org/wiki/ITunes">iTunes</a>.</p>
+
+<p>Initially, there were 25 cars that were explorable in the Autovista mode, with 23 of them being drivable in the game. A further 3 cars were added later as DLC content.</p>
+
+<h2>Reception</h2>
+
+<p><i>Forza Motorsport 4</i> received "universal acclaim" like the first three games before it according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregation</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. It also won the award for Most Anticipated E3 2011 game from <i><a href="https://en.wikipedia.org/wiki/Computer_and_Video_Games">Computer and Video Games</a></i>. During the <a href="https://en.wikipedia.org/wiki/15th_Annual_Interactive_Achievement_Awards">15th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> awarded <i>Forza Motorsport 4</i> with "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Racing_Game_of_the_Year">Racing Game of the Year</a>". It ranked first in sales in the United Kingdom during the week of its release. As of April 30, 2012 it ranked 23rd in sales in the UK.</p>
+
+<p>Luke Reilly of <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> called the game "this generation's premier racing simulator". He praised the game's Autovista mode, specifically mentioning the attention to detail given to even the smaller parts of the vehicles. He gave high marks for the commentary given by Jeremy Clarkson of the BBC's <i>Top Gear</i>. He called Clarkson's remarks "refreshingly candid". Reilly did state, however that he wished the game offered evening races. Editor Martin Robinson of <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> felt that the game was "easy to fall in love with." Robinson noted that several cars benefit from the improved handling system, including the <a href="https://en.wikipedia.org/wiki/Ferrari_250_Testa_Rossa">Ferrari 250 Testa Rossa</a>. He contrasted the game to <i><a href="https://en.wikipedia.org/wiki/Gran_Turismo_5">Gran Turismo 5</a></i> (<i>GT5</i>). He explained that <i>GT5</i> emitted a "crazy love" from its developers and noted that <i>Forza Motorsport 4</i> "often failed to embrace the emotion its subjects can inspire." <i><a href="https://en.wikipedia.org/wiki/Official_Xbox_Magazine">Official Xbox Magazine</a></i>'s Ryan McCaffrey lauded the game's 60 <a href="https://en.wikipedia.org/wiki/Frames_per_second">fps</a> framerate and breathtaking views. He stated that this, along with excellent sound design, kept him "playing from the cockpit view the entire time." He did note, however, that the game's soundtrack felt out of place, and that he muted it during gameplay.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Jeff_Gerstmann">Jeff Gerstmann</a>, co-founder of <i><a href="https://en.wikipedia.org/wiki/Giant_Bomb">Giant Bomb</a></i>, felt that while <i>Forza Motorsport 4</i> was a "fantastic driving game" it merely felt like an incremental improvement on its predecessor. "I found myself getting a very 'annual sports game update' vibe off of it," stated Gerstmann. Justin Calvert of <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> agreed; he said that <i>Forza Motorsport 4</i> refines upon its predecessor, "but also feels just a little too familiar". <i><a href="https://en.wikipedia.org/wiki/X-Play">X-Play</a></i>'s Jason D'Aprile also felt that <i>Forza Motorsport 4</i> an improvement over <i>Forza Motorsport 3</i>, "making it the absolute king of the road." He cited the game's audio and visuals, the number of cars and tracks, the online play and variable skill level all as high points. However, D'Aprile felt that the Kinect implementation was "a gimmick" and expressed disappointment that there was not more content involving <i>Top Gear</i>. Matthew Kato, reviewer for <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>, was unimpressed by <i>Forza</i>'s Kinect integration as well. He felt that Kinect-based racing "isn't satisfying since your arms get tired and the game controls the gas and brake for you."</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i> Associate Editor Jose Otero called <i>Forza Motorsport 4</i> "the most accessible racer around." He cited the new World Tour mode as a major improvement over <i>Forza 3</i>' Season Play. He noted that should a car in the player's garage not be tuned correctly for an event the game can suggest the proper upgrades. For seasoned players this feature can be turned off. He felt that features like this, along with the returning Rewind feature which allows players to replay a poor section of their race, cater to all skill levels. The reviewer from <a href="https://en.wikipedia.org/wiki/Edge_(magazine)"><i>Edge</i></a> magazine compared <i>Forza Motorsport 4</i> to its closest competitor, <i>Gran Turismo 5</i> (<i>GT5</i>). He stated that though the <i>Forza</i> series "might be getting familiar, but it's still a more exciting drive than [<i>GT5</i>]." The review stated that the improved handling dynamics, focus on the player and the game's community, and strong accessibility made the game a "supercharged package." In Japan, <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave it a score of two nines and two tens for a total of 38 out of 40.</p>
+
+<p><i>The Digital Fix</i> gave the game a perfect ten and called it "the best racing simulator on any platform." <i><a href="https://en.wikipedia.org/wiki/Digital_Spy">Digital Spy</a></i> similarly gave it all five stars and said it was "authentic yet accessible, educating, entertaining, occasionally silly, always spectacular, but most importantly, faster and more thrilling than riding a V12-powered rollercoaster with no restraints." <i><a href="https://en.wikipedia.org/wiki/The_Daily_Telegraph">The Daily Telegraph</a></i> gave it four-and-a-half stars out of five, saying it was "welcoming, slick and meticulously built in order to give its audience what it most desires. Because whether it's the feel of the road, the fury of competition or good old fashioned wish fulfilment, <i>Forza 4</i> really does have you covered."</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

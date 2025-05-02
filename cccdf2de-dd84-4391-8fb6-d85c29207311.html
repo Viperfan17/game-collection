@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Five Nights at Freddy&#39;s 4: Halloween Edition</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('cccdf2de-dd84-4391-8fb6-d85c29207311/31fcdb89-ea6c-4254-8963-4d8adeb5c2b2.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="cccdf2de-dd84-4391-8fb6-d85c29207311/b8024b47-4fa4-4cdc-b259-24bab18d144d.webp"/> Five Nights at Freddy&#39;s 4: Halloween Edition</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="cccdf2de-dd84-4391-8fb6-d85c29207311/52e17767-7f8c-4f0e-a393-b3e84cddf244.webp"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>15m 5s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 8:10:41</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 2:51:33</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 10:07:34</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-7/23/2015">7/23/2015</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-51">51</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Point-and-click">Point-and-click</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Survival horror">Survival horror</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Scott Cawthon">Scott Cawthon</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy's_4" target="_blank">Wikipedia</a><br/><a href="https://www.indiedb.com/games/five-nights-at-freddys-4" target="_blank">Five Nights at Freddy's 4</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Five Nights at Freddy's 4</b></i> (<i><b>FNaF 4</b></i>) is a 2015 <a href="https://en.wikipedia.org/wiki/Adventure_game#Point-and-click_adventure_games">point-and-click</a> <a href="https://en.wikipedia.org/wiki/Survival_horror">survival horror</a> video game made and published by <a href="https://en.wikipedia.org/wiki/Scott_Cawthon">Scott Cawthon</a>. It is the fourth installment of the <i><a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy's">Five Nights at Freddy's</a></i> series. The game takes place in the bedroom of a child, where the player must avoid attack by nightmarish animatronics that stalk them. Unlike previous games in the series, the player does not have access to a network of security cameras to monitor animatronic progression, and instead must rely on audio cues. In-between nights, the player is able to play <a href="https://en.wikipedia.org/wiki/Atari_2600">Atari</a>-styled <a href="https://en.wikipedia.org/wiki/Minigame">minigames</a> that tell the story of a young boy that is consistently tormented by his older brother.</p>
+
+<p><i>Five Nights at Freddy's 4</i> was first announced in April 2015, advertised as "<i>The Final Chapter</i>". Though initially planned to release on October 31, 2015, the game was pushed forward numerous times and eventually released on July 23, 2015. In the following days, versions for <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a> and <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> devices released. <i>Five Nights at Freddy's 4</i> received mixed reviews from critics, who praised its unsettling atmosphere but were polarized over the game's mechanics and sound design. A sequel, <i><a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy's:_Sister_Location">Five Nights at Freddy's: Sister Location</a></i>, released on October 7, 2016. Versions for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> were released on November 29, 2019 alongside the first three games in the series.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Five Nights at Freddy's 4</i> is a point-and-click survival horror game. Like previous games in the series, the player is tasked with surviving from midnight to 6:00 a.m. against homicidal animatronics. Unlike previous installments which are set in restaurants, the player takes control of a young child alone in his bedroom, with the animatronics wandering around their house and targeting the bedroom. The animatronics in this game are known as the "nightmare" animatronics.</p>
+
+<p>Unlike previous games in the series, the player does not have access to a network of security cameras, and must take advantage of audio cues in order to track the movement of the animatronics. The player is able to run around the bedroom, going between the closet, bed, and two doors. The player's only means of delaying animatronic advancement is a flashlight, which can be flashed down the halls to scare them away. The player can also temporarily hold one of the doors shut at a time. If an animatronic enters the room or if the player encounters it directly at the doors, the player will be <a href="https://en.wikipedia.org/wiki/Jump_scare">jumpscared</a> and killed. On the fifth night, the enemies are replaced by a single animatronic known as Nightmare Fredbear, which is immune to being flashed with the flashlight, instead becoming more aggressive.</p>
+
+<p>In-between nights, the player can attempt a <a href="https://en.wikipedia.org/wiki/Minigame">minigame</a> similar to <a href="https://en.wikipedia.org/wiki/Red_light,_green_light">red light, green light</a> against a character named Plushtrap. If the player is successful, two hours are removed from the next night. Additionally, <a href="https://en.wikipedia.org/wiki/Atari_2600">Atari</a>-styled minigames are also playable, which provide insight on the lore of the series and is the source of the game's plot. These minigames are absent from mobile versions of the game.</p>
+
+<h2>Plot</h2>
+
+<p>Playable minigames in between nights tell the story of a young boy in 1983, presumed to be the player character. In the first minigame, he is locked in a bedroom with <a href="https://en.wikipedia.org/wiki/Plush_toys">plush toys</a> that he considers to be his "friends". Throughout the minigame, a plush based on the animatronic Fredbear talks to him, strengthening his fear of the animatronics from a family restaurant near his home. Throughout the next minigames, the boy is terrorized by his older brother, being deliberately scared, bullied, abandoned at the restaurant, and unwillingly locked in its parts and services room. Throughout the game in the boy's bedroom, a bottle of pills, an <a href="https://en.wikipedia.org/wiki/Intravenous_therapy">IV</a> drip, and a vase of flowers can be spotted at different moments.</p>
+
+<p>In the sixth minigame, the boy is tormented once more by his older brother and several other bullies that take advantage of his fear, eventually leading them to put the boy head-first into Fredbear's mouth, labeling it as a "kiss". Suddenly, the latter bites down on the boy and crushes him as the bullies watch in horror. On the seventh minigame, the boy is shown in a dark area surrounded by his toys and is told by an unknown voice that they will "put [him] back together". The toys slowly fade out, and soon the boy weeps and does as well, while the faint sound of a <a href="https://en.wikipedia.org/wiki/Heart_rate_monitor">heartrate monitor</a> plays, implying the boy has died after being bitten by Fredbear. After completing the main game, the player gains access to a higher difficulty setting, known as "Nightmare". If the player beats the game on this mode, a metal box is shown to the player that cannot be opened, with the game stating, "Perhaps some things are best left forgotten, for now" if the player tries to open it. The contents of the box or its meaning is never explained or elaborated on.</p>
+
+<h2>Release and reception</h2>
+
+<p><i>Five Nights at Freddy's 4</i> was announced on April 27, 2015, through a teaser image that was uploaded onto <a href="https://en.wikipedia.org/wiki/Scott_Cawthon">Scott Cawthon</a>'s website. It was advertised as "The Final Chapter", and had a release date slated for Halloween of that year. In July, a trailer for the game was released, and its release date was pushed forward to August 8, which marked one year since the release date of the <a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy's_(video_game)">first game</a>. On July 23, Scott Cawthon announced that the game was finished, and released it early on <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a>. It was later released for <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a> on July 25, and <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> on August 4. An update for the game released on Halloween of that year, adding additional content for those who had completed the game such as a <a href="https://en.wikipedia.org/wiki/Cheat_code">cheat menu</a>. On November 29, 2019, the game released for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> alongside the first, second, and third games in the series. Despite <i>Five Nights at Freddy's 4</i> being advertised as the final entry in the series, the fifth game in the series, <i><a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy's:_Sister_Location">Five Nights at Freddy's: Sister Location</a></i>, was announced in April 2016 and released on October 7.</p>
+
+<p><i>Five Nights at Freddy's 4</i> received "mixed or average" reviews according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, assigning the Windows version a score of 51 out of 100, based on six critic reviews.</p>
+
+<p>The gameplay of <i>Five Nights at Freddy's 4</i> received a mixed response. Some reviewers felt that the franchise and its gameplay were becoming stale, such as Nic Rowen of <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i> and Omri Petitte of <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i>. The former described the game as a "bone dry" repeat of <i><a href="https://en.wikipedia.org/wiki/Five_Nights_at_Freddy's">Five Nights at Freddy's</a></i>, recommending people not play the game, and the latter wrote that the gameplay had little variety or strategy, and that it was too much of a chore to interest him. Contrarily, Angelo M. D'Argenio of <i><a href="https://en.wikipedia.org/wiki/The_Escapist_(magazine)">The Escapist</a></i> praised the reworked game mechanics and story, describing it as "perfect" for fans of the series, though criticized the glitches present within the game. The removal of the story based minigames from mobile version of the game was criticized by Shaun Musgrave of <i><a href="https://en.wikipedia.org/wiki/TouchArcade">TouchArcade</a></i>, who wrote that the removal of the story was detrimental to a game advertised as the final chapter.</p>
+
+<p>Response towards the atmosphere and sound design of <i>Five Nights at Freddy's 4</i> was positive, though some aspects were criticized. The game was described as being the most frightening in the series by Mitch Vogel of <i><a href="https://en.wikipedia.org/wiki/Nintendo_Life">Nintendo Life</a></i>, though he also described the game's jumpscares as being jarring, and that it made the horror elements feel "unearned". Nadia Oxford of <i><a href="https://en.wikipedia.org/wiki/Gamezebo">Gamezebo</a></i> praised the game's sound design, though criticized its gameplay for being too reliant on sound, theorizing that those in loud spaces would've had difficulty playing the game. Matt Purslow of <i><a href="https://en.wikipedia.org/wiki/PCGamesN">PCGamesN</a></i> praised the game's atmosphere design, but commented that the reliance on audio cues made him feel a lack of control, and that it was difficult to tell which sounds indicated the animatronics were approaching, and which were just for atmosphere.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

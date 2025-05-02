@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Forza Motorsport 7</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('be0f7f10-eaec-47c8-96df-9fd3a54e8160/e69c6929-6aaa-42cb-84f4-6a7efc0c763b.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="be0f7f10-eaec-47c8-96df-9fd3a54e8160/ecf99d7a-50a0-475c-81b7-0b0c5f7346d9.png"/> Forza Motorsport 7</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="be0f7f10-eaec-47c8-96df-9fd3a54e8160/50703f65-01e0-4711-9020-f4fac4277ded.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 23:17:59</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 23:20:07</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/3/2017">10/3/2017</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-85">85</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Turn 10 Studios">Turn 10 Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Microsoft Studios">Microsoft Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-HDR">HDR</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Forza_Motorsport_7" target="_blank">PCGamingWiki</a><br/><a href="https://www.igdb.com/games/forza-motorsport-7" target="_blank">IGDB</a><br/><a href="https://www.mobygames.com/game/forza-motorsport-7" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Forza_Motorsport_7" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-ForzaTech">ForzaTech</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Forza Motorsport 7</b></i> is a 2017 <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing video game</a> developed by <a href="https://en.wikipedia.org/wiki/Turn_10_Studios">Turn 10 Studios</a> and published by <a href="https://en.wikipedia.org/wiki/Microsoft_Studios">Microsoft Studios</a>, serving as the tenth installment in the <i><a href="https://en.wikipedia.org/wiki/Forza">Forza</a></i> series. It was released on <a href="https://en.wikipedia.org/wiki/Windows_10">Windows 10</a> and the <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> family of consoles on October 3, 2017, with early access to players who pre-ordered the game's Ultimate and Deluxe editions. It was succeeded by <i><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_(2023_video_game)">Forza Motorsport</a></i>, the eighth in the <i>Motorsport</i> series, on October 10, 2023.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Forza Motorsport 7</i> is a racing video game featuring over 700 cars—including new <i>Forza Edition</i> cars, most of which have been brought over from <i><a href="https://en.wikipedia.org/wiki/Forza_Horizon_3">Forza Horizon 3</a></i> and more than 200 different configurations to race on across 32 locations at launch, including all from <i><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_6">Forza Motorsport 6</a></i>; a fictional street circuit in <a href="https://en.wikipedia.org/wiki/Dubai">Dubai</a> is one of the new circuits and several tracks returning from <i><a href="https://en.wikipedia.org/wiki/Forza_Motorsport_4">Forza Motorsport 4</a></i> including Maple Valley Raceway, <a href="https://en.wikipedia.org/wiki/Mugello_Circuit">Mugello Circuit</a> and <a href="https://en.wikipedia.org/wiki/Suzuka_Circuit">Suzuka Circuit</a>. Two features that are new to the <i>Motorsport</i> title include dynamic weather (previously seen in <i>Horizon</i> titles) and customizable drivers.</p>
+
+<h2>Development and release</h2>
+
+<p><i>Forza Motorsport 7</i> was developed by <a href="https://en.wikipedia.org/wiki/Turn_10_Studios">Turn 10 Studios</a> alongside the <a href="https://en.wikipedia.org/wiki/Xbox_One_X">Xbox One X</a> console, with Turn 10 providing the Xbox hardware team with feedback. In mid-January 2017, the Xbox hardware team supplied Turn 10 with a prototype Xbox One X system. Turn 10 was able to get their ForzaTech demo running on the system within two days after receiving the prototype console. The game runs at <a href="https://en.wikipedia.org/wiki/4K_resolution">4K resolution</a> and 60 <a href="https://en.wikipedia.org/wiki/Frames_per_second">frames per second</a>, while running at 1080p at similar frame rate on the base Xbox One models.</p>
+
+<p>The game does not feature any <a href="https://en.wikipedia.org/wiki/Toyota">Toyota</a> and <a href="https://en.wikipedia.org/wiki/Lexus">Lexus</a> production road vehicles due to licensing issues between the manufacturer and most non-Japanese video game developers that started in 2017. Only the company's selected race and pre customized vehicles, including the <a href="https://en.wikipedia.org/wiki/Camry">Camry</a>'s <a href="https://en.wikipedia.org/wiki/NASCAR">NASCAR</a> configurations, <a href="https://en.wikipedia.org/wiki/Eagle_MkIII">Eagle MkIII</a>, the <a href="https://en.wikipedia.org/wiki/Arctic_Trucks">Arctic Trucks</a> <a href="https://en.wikipedia.org/wiki/Hilux">Hilux AT38</a>, <a href="https://en.wikipedia.org/wiki/Toyota_T100">Toyota T100 SR5 Trophy Trucks</a> and the <a href="https://en.wikipedia.org/wiki/Toyota_86">Subaru BRZ</a> are featured, then <a href="https://en.wikipedia.org/wiki/Toyota_Land_Cruiser_Prado">Land Cruiser Prado AT37</a> Arctic Trucks featured via <a href="https://en.wikipedia.org/wiki/Downloadable_content">DLC</a>. However, <a href="https://en.wikipedia.org/wiki/Volkswagen">Volkswagen</a> returns after being absent in <i><a href="https://en.wikipedia.org/wiki/Forza_Horizon_3">Horizon 3</a></i>, with some cars being brought over from <i>Horizon 2</i> and <i>Motorsport 6</i>, as well as some new inclusions.</p>
+
+<p><i>Forza Motorsport 7</i> was announced at <a href="https://en.wikipedia.org/wiki/E3_2017#Microsoft">Microsoft's press conference during E3 2017</a> on June 11. The 2018 <a href="https://en.wikipedia.org/wiki/Porsche_911_GT2#991_generation_.28GT2_RS.29">Porsche 911 GT2 RS</a> was revealed alongside the game as part of a six-year licensing deal between Microsoft and car manufacturer <a href="https://en.wikipedia.org/wiki/Porsche">Porsche</a>. The game launched simultaneously on <a href="https://en.wikipedia.org/wiki/Windows_10">Windows 10</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, and is slated to be available at launch for the Xbox One X. However, the <a href="https://en.wikipedia.org/wiki/OneDrive">OneDrive</a> music support will be announced 'at a later date'. The first monthly car pack called the "Samsung QLED TV Forza Motorsport 7 Car Pack", was released on November 7, 2017. That DLC includes one more Toyota vehicle, the Arctic Trucks Land Cruiser.</p>
+
+<p>The game was delisted from purchase and <a href="https://en.wikipedia.org/wiki/Xbox_Game_Pass">Xbox Game Pass</a> on September 15, 2021, due to expiring licenses.</p>
+
+<h2>Reception</h2>
+
+<p><i>Forza Motorsport 7</i> received "generally favorable" reviews, according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. In <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>'s Reader's Choice Best of 2017 Awards, the game took the lead for "Best Racing Game", while it tied in third place with <i><a href="https://en.wikipedia.org/wiki/Slime_Rancher">Slime Rancher</a></i> for "Best Microsoft Game". It won the award for "Best Racing Game" in <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>'s Best of 2017 Awards, whereas its other nominations were for "Best Xbox One Game" and "Best Graphics".</p>
+
+<p>"Slightly above average or simply inoffensive. Fans of the genre should enjoy it a bit, but a fair few will be left unfulfilled," was Peter Glagowski's conclusion on <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i> with a score of 7/10. 7.5/10 was Ray Carsillo's score on <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i>; he said, "<i>Forza Motorsport 7</i> is a really great racing game—it’s just a shame that changes to the game’s currency system undermine a fair amount of what it does right. It’s made racing feel more like a grind than in years past and no amount of new tracks or cars will change that." Justin Towell from <a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a> gave the game a score of 5 out of 5 stars saying that "<i>Forza Motorsport 7</i> addresses every issue of its predecessor, turns the visual flair up to 11 and handles like a dream. An essential purchase."</p>
+
+<p>Luke Reilly said on <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> "<i>Forza Motorsport 7</i> is Turn 10's finest love letter to speed and style this generation". James Davenport of <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i> stated, "Light performance problems and a poor <a href="https://en.wikipedia.org/wiki/Loot_box">loot box</a> system can't quite distract from <i>Forza Motorsport 7</i>'s accommodating difficulty, stunning beauty, and lavish racing options." Colin Campbell of <i><a href="https://en.wikipedia.org/wiki/Polygon_(website)">Polygon</a></i> said that "This is a game for everyone who loves racing. It offers every helping hand to those who want to just throw themselves around bends, while allowing die-hards to tinker with their rides, and really feel like they are there."</p>
+
+<h3>Accolades</h3>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

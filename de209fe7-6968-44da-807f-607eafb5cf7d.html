@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Super Mario Bros. 3</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('de209fe7-6968-44da-807f-607eafb5cf7d/afcb090d-6a0d-448b-9f46-0c86b64a5159.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="de209fe7-6968-44da-807f-607eafb5cf7d/8832e2ca-a1a1-402b-838f-d7f6e80db7d0.png"/> Super Mario Bros. 3</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="de209fe7-6968-44da-807f-607eafb5cf7d/7b89b320-f980-44ce-96e6-8a206c0067b2.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:51:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:40:35</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Entertainment System">Nintendo Entertainment System</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/23/1988">10/23/1988</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-89">89</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-98">98</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo R&D4">Nintendo R&D4</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._3" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/20080501175809/http://www.nintendo.com/wii/virtualconsole/games/detail/kJyITQolhiZ0m1WXkKlNJJ6ZlYqnyC8U" target="_blank">Super Mario Bros. 3</a><br/><a href="https://web.archive.org/web/20100626035218/http://www.nindb.net/game/super-mario-bros-3.html" target="_blank">Super Mario Bros. 3</a><br/><a href="https://www.mobygames.com/game/super-mario-bros-3" target="_blank">MobyGames</a><br/><a href="https://www.nintendo.com/jp/famicom/software/smb3/index.html" target="_blank">Super Mario Bros. 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Hideki Konno">[People] artist: Hideki Konno</a><br/><a href="#quicklink-[People] artist: Hiroyuki Kimura">[People] artist: Hiroyuki Kimura</a><br/><a href="#quicklink-[People] artist: Takashi Tezuka">[People] artist: Takashi Tezuka</a><br/><a href="#quicklink-[People] artist: Yōichi Kotabe">[People] artist: Yōichi Kotabe</a><br/><a href="#quicklink-[People] composer: Koji Kondo">[People] composer: Koji Kondo</a><br/><a href="#quicklink-[People] designer: Hideki Konno">[People] designer: Hideki Konno</a><br/><a href="#quicklink-[People] designer: Katsuya Eguchi">[People] designer: Katsuya Eguchi</a><br/><a href="#quicklink-[People] designer: Kensuke Tanabe">[People] designer: Kensuke Tanabe</a><br/><a href="#quicklink-[People] designer: Shigeru Miyamoto">[People] designer: Shigeru Miyamoto</a><br/><a href="#quicklink-[People] designer: Takashi Tezuka">[People] designer: Takashi Tezuka</a><br/><a href="#quicklink-[People] director: Shigeru Miyamoto">[People] director: Shigeru Miyamoto</a><br/><a href="#quicklink-[People] director: Takashi Tezuka">[People] director: Takashi Tezuka</a><br/><a href="#quicklink-[People] producer: Shigeru Miyamoto">[People] producer: Shigeru Miyamoto</a><br/><a href="#quicklink-[People] programmer: Toshihiko Nakago">[People] programmer: Toshihiko Nakago</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Super Mario Bros. 3</b></i> is a 1988 <a href="https://en.wikipedia.org/wiki/Platformer">platform game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a> (NES). It was released for home consoles in Japan on October 23, 1988, in North America on February 12, 1990, and in Europe on August 29, 1991. It was developed by <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_Analysis_&amp;_Development">Nintendo Entertainment Analysis and Development</a>, led by <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> and <a href="https://en.wikipedia.org/wiki/Takashi_Tezuka">Takashi Tezuka</a>.</p>
+
+<p>Players control brothers <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> or <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a>, who must save <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Toadstool</a> and the rulers of seven different kingdoms from the antagonist <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a>. As in previous Mario games, they defeat enemies by stomping on them or using <a href="https://en.wikipedia.org/wiki/Item_(gaming)">items</a> that bestow magical powers; they also have new abilities, including flight and sliding down slopes. <i>Super Mario Bros. 3</i> introduced many elements that became <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> staples, such as Bowser's children (the <a href="https://en.wikipedia.org/wiki/Koopalings">Koopalings</a>) and a <a href="https://en.wikipedia.org/wiki/Overworld">world map</a> to transition between <a href="https://en.wikipedia.org/wiki/Level_(video_gaming)">levels</a>.</p>
+
+<p><i>Super Mario Bros. 3</i> was praised by critics for its challenging gameplay and is widely regarded as the greatest game released for the NES, and one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games of all time</a>. It is the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_Entertainment_System_video_games">third-best-selling NES game</a>, with more than 17 million copies sold worldwide. It also inspired <a href="https://en.wikipedia.org/wiki/The_Adventures_of_Super_Mario_Bros._3">an animated television series</a>, produced by <a href="https://en.wikipedia.org/wiki/DIC_Entertainment">DIC Entertainment</a>.</p>
+
+<p><i>Super Mario Bros. 3</i> was <a href="https://en.wikipedia.org/wiki/Video_game_remake">remade</a> for the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super NES</a> as a part of <i><a href="https://en.wikipedia.org/wiki/Super_Mario_All-Stars">Super Mario All-Stars</a></i> in 1993 and for the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> as <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Advance_4:_Super_Mario_Bros._3">Super Mario Advance 4: Super Mario Bros. 3</a></i> in 2003. It was rereleased on the <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> service on the Wii U and 3DS, and was included on the <a href="https://en.wikipedia.org/wiki/NES_Classic_Mini">NES Classic Mini</a>. On September 19, 2018, it was rereleased on the <a href="https://en.wikipedia.org/wiki/Nintendo_Classics">Nintendo Classics</a> service with added netplay.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Super Mario Bros. 3</i> is a <a href="https://en.wikipedia.org/wiki/2D_computer_graphics">two-dimensional</a>, <a href="https://en.wikipedia.org/wiki/Side-scrolling_video_game">side-scrolling</a> platform game in which the player controls either <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> or <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a>. The game shares similar gameplay mechanics with previous games in the series — <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.">Super Mario Bros.</a></i>, <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.:_The_Lost_Levels">Super Mario Bros.: The Lost Levels</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._2">Super Mario Bros. 2</a></i> — while introducing several new elements. In addition to the running and jumping found in previous games, the player character can slide down slopes, pick up and throw certain items, and freely climb vines. New <a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a> are introduced, including the Super Leaf and the Tanooki Suit, which allow Mario to fly and float. The game world consists of eight kingdoms, each subdivided into multiple <a href="https://en.wikipedia.org/wiki/Level_(video_gaming)">levels</a>. The eight worlds feature distinct visual themes: the first world is grass and the second world, "Desert Land" (or "Desert Hill" in Japanese and North American PRG0 versions), contains sand-covered levels with pyramids, while the levels in the fourth world, "Giant Land" ("Big Island"), contain obstacles and enemies twice their normal height and width.</p>
+
+<p>The player navigates through the game via two game screens: an <a href="https://en.wikipedia.org/wiki/Overworld">overworld</a> map and a course. The overworld map displays an overhead representation of the current kingdom and has several paths leading from the world's entrance to a castle. Paths connect to action panels, fortresses, and other map icons, and allow players to take different routes to reach the kingdom's goal. Moving the on-screen character to an action panel or fortress will allow access to that course, a linear stage populated with obstacles and enemies. The majority of the game takes place in these levels, with the player traversing the stage by dashing, jumping, flying, swimming, and dodging or defeating enemies. Players start with a certain number of <a href="https://en.wikipedia.org/wiki/Life_(video_games)">lives</a> and may gain additional lives by picking up green spotted <a href="https://en.wikipedia.org/wiki/1-Up">1-Up</a> mushrooms hidden in bricks, or by collecting 100 coins, among other methods. Mario and Luigi lose a life if they take damage while small, fall into lava or a bottomless pit, or run out of time. The game <a href="https://en.wikipedia.org/wiki/Game_over">ends prematurely</a> when all lives are lost, although the player can continue from the beginning of the world they lost their last life in by selecting "<a href="https://en.wikipedia.org/wiki/Continue_(video_gaming)">Continue</a>". If the player chooses to continue, all fortresses and enemy courses, as well as the tank and ship levels from the eighth world that the player previously completed will remain completed and any locked doors that were unlocked will also remain unlocked. This allows the player to continue from the last fortress level they completed in most cases. The player will also be able to keep all of their items in their inventory.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p>Completing stages allows the player to progress through the overworld map and to succeeding worlds. Each world features a final stage with a <a href="https://en.wikipedia.org/wiki/Boss_(video_gaming)">boss</a> to defeat. The first seven worlds feature an airship controlled by one of the Koopalings, while the player battles Bowser in his castle in the eighth world as the Final Boss. Other map icons include large boulders and locked doors that impede paths. Mini-games and bonus screens on the map provide the player a chance to obtain special power-ups and additional lives. Power-ups obtained in these mini-games are stored in a reserve, and can be activated by the player from the map screen.</p>
+
+<p>In addition to special items from previous games like the <a href="https://en.wikipedia.org/wiki/Super_Mario#Mushrooms">Super Mushroom</a>, Super Star, and the Fire Flower, new power-ups are introduced that provide the player with new options. The Super Leaf and <a href="https://en.wikipedia.org/wiki/Japanese_raccoon_dog">Tanooki</a> Suit give Mario raccoon and tanooki appearances respectively, allowing him to fly for a short period of time. The Tanooki Suit also enables him to turn into Statue Mario to avoid enemies for a short period of time. Changing into a Tanooki statue while jumping results in Mario pounding the ground and killing whatever enemies are directly under him; this is the first appearance of the now standard "ground pound" move in the <i>Mario</i> series. The new "Frog Suit" highly increases the character's underwater speed and agility, and boosts jumping height on land. Another new suit, the Hammer Suit, gives Mario the appearance of the <a href="https://en.wikipedia.org/wiki/Hammer_Bro.">Hammer Bro.</a> enemy and allows him to throw hammers at enemies and resist fire attacks when crouching.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p><i>Super Mario Bros. 3</i> includes a <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a> option which allows two players to play the game by taking turns at navigating the overworld map and accessing stage levels. The first player controls Mario, while the other controls Luigi (a <a href="https://en.wikipedia.org/wiki/Palette_swap">palette swap</a> of Mario). Through this mode, players can access several mini-games, including a remake of the original <i><a href="https://en.wikipedia.org/wiki/Mario_Bros.">Mario Bros.</a></i> arcade game, in which one player has the opportunity to steal the cards of another, but may lose their turn if they lose the mini-game.</p>
+
+<h2>Plot and characters</h2>
+
+<p>The plot of <i>Super Mario Bros. 3</i> is described in the instruction booklet. In the <a href="https://en.wikipedia.org/wiki/Mushroom_World">Mushroom World</a>, <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a> has his seven children, the <a href="https://en.wikipedia.org/wiki/Koopalings">Koopalings</a>, conquer each of the seven kingdoms by stealing its king's magical <a href="https://en.wikipedia.org/wiki/Wand">wand</a> and using it to transform him into an animal. <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Toadstool</a> receives news of Bowser's actions and dispatches <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> and <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a> to travel to each kingdom, retrieve the stolen wand, and restore its king to normal.</p>
+
+<p>Mario and Luigi receive notes and special items from Toadstool after rescuing each of the first six kings. When they rescue the seventh king, they instead receive a note from Bowser, boasting that he has kidnapped Toadstool and imprisoned her within the castle of his own realm, Dark Land. The brothers travel through Dark Land, enter his castle, and defeat Bowser in a battle. The game ends with Princess Toadstool being freed from the castle.</p>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a>, <i>Super Mario Bros. 3</i> was conceived as a <a href="https://en.wikipedia.org/wiki/Stage_play">stage play</a>. The title screen features a <a href="https://en.wikipedia.org/wiki/Stage_curtain">stage curtain</a> being drawn open, and in the original NES version, in-game objects hang from off-screen catwalks, are bolted to the background, or cast shadows on the skyline. When Mario finishes a level, he walks off the stage.</p>
+
+<h2>Development and release</h2>
+
+<p>Beginning development shortly after the 1986 release of the <a href="https://en.wikipedia.org/wiki/Famicom_Disk_System">Famicom Disk System</a>'s <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.:_The_Lost_Levels">Super Mario Bros. 2</a></i>, <i>Super Mario Bros. 3</i> was developed by <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_Analysis_&amp;_Development">Nintendo Entertainment Analysis and Development</a>, a team that consisted of more than ten people. The game took more than two years to complete. The development budget, when converted to <a href="https://en.wikipedia.org/wiki/US_dollars">US dollars</a>, amounts to about $800,000 to $1.3 million ($2.1–3.5 million adjusted for inflation). Developer <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> served as director. He worked closely with the designers and programmers during the conceptual and final stages, encouraging a free interchange of ideas. Miyamoto considered intriguing and original ideas to be key to creating a successful game. Originally, the team intended for the game to be played from an isometric point of view, but the developers found that this made it too difficult to position jumps, so the game was changed to the 2D side view used in previous games. Some isometric elements remain, such as the checkered floor present in the title screen. All pixel art for the game was drawn using Fujitsu FM R-50 HD business computers while <a href="https://en.wikipedia.org/wiki/HP_64000">HP 64000</a> mainframe computers with a 6502 processor card were used to write and test code.</p>
+
+<p>The game was designed to appeal to players of varying skill levels. To assist less-to no skill players, bonus coins and <a href="https://en.wikipedia.org/wiki/Life_(video_games)#Extra_lives">1-ups</a> are more abundant in earlier worlds, while later worlds present more complex challenges for experienced players. In the two-player mode, the players alternate turns to balance play time. The development team introduced new power-ups and concepts that would give Mario the appearance of different creatures as a means of providing him with new abilities. An early idea changed Mario into a <a href="https://en.wikipedia.org/wiki/Centaur">centaur</a>, but was dropped in favor of a raccoon tail with limited flying ability. Other costumes with different abilities were added to his repertoire, and levels were designed to take advantage of these abilities. New enemies were included to add diversity to the game, along with variants of previous enemies, such as <a href="https://en.wikipedia.org/wiki/Goomba">Goombas</a>, Hammer Bros., and <a href="https://en.wikipedia.org/wiki/Koopa_Troopa">Koopa Troopas</a>.</p>
+
+<p>Some of the enemies designed for <i>Super Mario Bros. 3</i> were inspired by the team's personal experiences. For example, the <a href="https://en.wikipedia.org/wiki/Chain_Chomp">Chain Chomp</a> enemy, a barking tethered <a href="https://en.wikipedia.org/wiki/Ball_and_chain">ball and chain</a> creature with eyes and teeth that lunges at the player when in close proximity, was drawn from Miyamoto's early life, in which a dog lunged at him, but was pulled away from him. Bowser's children, the <a href="https://en.wikipedia.org/wiki/Koopalings">Koopalings</a>, were designed to be unique in appearance and personality; Miyamoto based the characters on seven of his programmers as a tribute to their work and efforts. Nintendo of America named the Koopalings after well-known musicians: for example, the characters "Ludwig von Koopa" and "Roy Koopa" are named after <a href="https://en.wikipedia.org/wiki/Ludwig_van_Beethoven">Ludwig van Beethoven</a> and <a href="https://en.wikipedia.org/wiki/Roy_Orbison">Roy Orbison</a> respectively.</p>
+
+<p>The character graphics were created with a special graphics machine ("Character Generator Computer Aided Design") that generated a collection of the graphical shapes used in the game. Shapes in the collection were assigned numbers that the game's <a href="https://en.wikipedia.org/wiki/Source_code">code</a> used to access and combine to form complete images on the screen in real time. The <i>Super Mario Bros. 3</i> <a href="https://en.wikipedia.org/wiki/ROM_cartridge">cartridge</a> uses Nintendo's custom <a href="https://en.wikipedia.org/wiki/Memory_management_controller#MMC3">MMC3</a> ASIC to enhance the NES capabilities. The MMC3 chip allows for animated tiles, extra RAM for diagonal scrolling, and a scan line timer to <a href="https://en.wikipedia.org/wiki/Split_screen_(computer_graphics)">split the screen</a>. The game uses these functions to split the game screen into two portions, a playfield on the top and a status bar on the bottom. On the overworld map, the status bar doubles as an inventory for items and power-ups. This allows the top portion to scroll as the character navigates the stage while the bottom portion remains static to display text and other information.</p>
+
+<p>Like its predecessors, the music in <i>Super Mario Bros. 3</i> was composed by <a href="https://en.wikipedia.org/wiki/Koji_Kondo">Koji Kondo</a>, who composed several new songs as well as returning melodies from <i>Super Mario Bros.</i> According to Kondo, who had composed the music in <i>Super Mario Bros.</i> based on what he believed fit the levels rather than focusing on composing a specific genre of music, the game was the most difficult game for him to compose. Kondo experimented with several different genres of music, unsure of how to follow up the music from the first game after hearing from several people that it sounded a lot like <a href="https://en.wikipedia.org/wiki/Latin_music">Latin</a> or <a href="https://en.wikipedia.org/wiki/Fusion_music">fusion music</a>, and came up with several different melodies throughout its development before settling on what ultimately made it into the game. The development team decided that music on the title screen was unnecessary.</p>
+
+<p>During 1988, a shortage of ROM chips, along with Nintendo's preparation of <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._2">Super Mario Bros. 2</a></i>, prevented Nintendo from performing various North American game releases according to their original schedules. The delayed products included <i>Super Mario Bros. 3</i> and, according to <i>Nintendo Power</i>, <i><a href="https://en.wikipedia.org/wiki/Zelda_II:_The_Adventure_of_Link">Zelda II: The Adventure of Link</a></i>. The delay, however, presented Nintendo with an opportunity to promote the game in a feature film. In 1989, Tom Pollack of <a href="https://en.wikipedia.org/wiki/Universal_Pictures">Universal Studios</a> approached Nintendo of America's marketing department about a video game movie; inspired by Nintendo <a href="https://en.wikipedia.org/wiki/Electronic_sports">video game competitions</a>, Pollack envisioned a video game version of <i><a href="https://en.wikipedia.org/wiki/Tommy_(1975_film)">Tommy</a></i> for younger audiences. Nintendo licensed its products for inclusion in what would become the film <i><a href="https://en.wikipedia.org/wiki/The_Wizard_(1989_film)">The Wizard</a></i>. During the movie's production, the filmmakers requested and were granted approval from Nintendo regarding the script and the portrayal of the company's games. <i>Super Mario Bros. 3</i> was one of the products shown in the film and was used in a final scene involving a video game competition. The film was released in December 1989, between the home console releases of the game in Japan and North America.</p>
+
+<p>The marketing budget for <i>Super Mario Bros. 3</i> was $25 million, bringing the game's total development and marketing budget to $25.8 million ($69 million adjusted for inflation).</p>
+
+<h2>Reception</h2>
+
+<p><i>Super Mario Bros. 3</i> was lauded by the <a href="https://en.wikipedia.org/wiki/Video_game_journalism">video game press</a>. It is frequently considered the best game released on the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">NES</a>. <i><a href="https://en.wikipedia.org/wiki/Computer_and_Video_Games">Computer and Video Games</a></i> editors Paul Rand, Tim Boone and Frank O'Connor awarded the game a 98% score, praising it for its gameplay, replayability, sound, and graphics. Boone commented that the game is nearly flawless in its utterly "stupendous incredibility and absolutely impossible to put down for anything less than a fire alarm and even then you find yourself weighing down the odds." Rand called <i>Super Mario Bros. 3</i> the best video game ever, labeling it "the <i><a href="https://en.wikipedia.org/wiki/Mona_Lisa">Mona Lisa</a></i> of gaming" and stating that it is "astoundingly brilliant in every way, shape, and form." O'Connor stated that the game "makes <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(1991_video_game)">Sonic the Hedgehog</a></i> look like a wet Sunday morning and even gives the Super Famicom's <i><a href="https://en.wikipedia.org/wiki/Super_Mario_World">Super Mario World</a></i> a run for its money."</p>
+
+<p>The Japanese publication <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave it a 35 out of 40. <a href="https://en.wikipedia.org/wiki/Julian_Rignall">Julian Rignall</a> of <i><a href="https://en.wikipedia.org/wiki/Mean_Machines">Mean Machines</a></i> referred to <i>Super Mario Bros. 3</i> as the "finest video game" he had ever played, citing its addictiveness, depth, and challenge. A second <i>Mean Machines</i> reviewer, Matt Regan, anticipated the game would be a bestseller in the United Kingdom, and echoed Rignall's praise, calling it a "truly brilliant game". Regan further stated that the game offered elements which tested the player's "brains and reflexes", and that though the graphics were simple, they were "incredibly varied". In a preview of the game, <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i> gave it high marks in graphics, audio, challenge, gameplay, and enjoyability. The items hidden in the game's levels, such as the <a href="https://en.wikipedia.org/wiki/Warp_(gaming)">warp whistles</a>, were well-received: Rignall regarded them as part of the game's addictiveness, and Sheff stated that finding them provided a sense of satisfaction.</p>
+
+<p>Criticism focused on particular aspects of the game. Rignall described the audio and visuals as being outdated in comparison to games on the <a href="https://en.wikipedia.org/wiki/Sega_Genesis">Mega Drive/Genesis</a> and <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super NES</a> (the latter platform having already been launched in other regions by the time <i>Super Mario Bros. 3</i> was released in Europe).</p>
+
+<h3>Sales</h3>
+
+<p><i>Super Mario Bros. 3</i> became a <a href="https://en.wikipedia.org/wiki/List_of_best-selling_video_games">best-selling game</a>. In Japan, it appeared at the top of the <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> sales charts in December 1988 and January 1989, and became the second best-selling game of 1988 after <i><a href="https://en.wikipedia.org/wiki/Dragon_Quest_III">Dragon Quest III</a></i>. By mid-1989, <i>Super Mario Bros. 3</i> had become the second best-selling game in Japan (non-bundled) up until then, after <i>Dragon Quest III</i>. <i>Super Mario Bros. 3</i> went on to become the overall best-selling game of 1989 in Japan, just above <i><a href="https://en.wikipedia.org/wiki/Tetris">Tetris</a></i> in second place. It also topped the Japanese sales chart in January 1990. By 1993, it had sold 4 million cartridges in Japan.</p>
+
+<p>In North America, the inclusion of <i>Super Mario Bros. 3</i> in <i><a href="https://en.wikipedia.org/wiki/The_Wizard_(1989_film)">The Wizard</a></i> served as a preview which generated a high level of anticipation in the United States prior to its release. Levi Buchanan of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> considered the game's appearance in the film as a show-stealing element, referring to the movie as a "90-minute commercial" for the game. The game sold 250,000 copies in its first two days of release, according to a spokeswoman for Nintendo. It remained the top-selling game in the United States through April and June to September 1990. In 1990, the game sold more than 8 million units. By 1993, author <a href="https://en.wikipedia.org/wiki/David_Sheff">David Sheff</a> said the game had sold 11 million unbundled units in Japan and the United States, commenting that, in <a href="https://en.wikipedia.org/wiki/Music_industry">music industry</a> terms, the game <a href="https://en.wikipedia.org/wiki/Music_recording_sales_certification">went platinum</a> 11 times. In the United States alone, the game had generated $595,000,000 (equivalent to $1,430,000,000 in 2024) in revenue for Nintendo by early 1992, exceeding the gross revenue of the films <i><a href="https://en.wikipedia.org/wiki/E.T.">E.T.</a></i> (1982), <i><a href="https://en.wikipedia.org/wiki/Batman_(1989_film)">Batman</a></i> (1989) and <i><a href="https://en.wikipedia.org/wiki/Jurassic_Park_(film)">Jurassic Park</a></i> (1993). The game was also a hit in other regions such as <a href="https://en.wikipedia.org/wiki/Europe">Europe</a> and <a href="https://en.wikipedia.org/wiki/Singapore">Singapore</a>.</p>
+
+<p>The game had sold 14 million copies by 1995, and 15 million copies by 1998. By 2000, the game had sold more than 17 million copies worldwide, and held the record for the best-selling non-bundled video game for a long time. As of 2011, <i>Super Mario Bros. 3</i> was the highest-grossing non-bundled home video game up until then, with a 2011 inflation-adjusted revenue of $1,700,000,000 (equivalent to $2,400,000,000 in 2024). In 2013, <i><a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a></i> reported that the game had sold more than 18 million copies for the NES. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> also reported in their October 2009 issue that the <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> version had sold one million copies.</p>
+
+<p>In <i><a href="https://en.wikipedia.org/wiki/Famicom_Tsūshin">Famicom Tsūshin</a></i> (<i>Famitsu</i>) magazine's 1988 <a href="https://en.wikipedia.org/wiki/Famitsu_Awards">Best Hit Game Awards</a>, <i>Super Mario Bros. 3</i> won the Best Action Game award. In 1989, <i>Famitsu</i> gave it the award for best <a href="https://en.wikipedia.org/wiki/Action_game">action game</a> released since 1983.</p>
+
+<p><i>Super Mario Bros. 3</i> has received universal acclaim from modern critics who consider it one of the best games of all time, and has appeared on many top games lists. The game debuted on <i>Nintendo Power</i>'s Top 30 best games ever list at number 20 in September 1989. It entered the list's top 10 a few months later and reached number one in May 1990. <i>Super Mario Bros. 3</i> remained within the top 20 for more than five years. More than a decade later, the magazine ranked the game number six on their list of 200 Greatest Nintendo Games. In August 2008, <i>Nintendo Power</i> listed <i>Super Mario Bros. 3</i> as the second best NES video game, praising it for making the series more complex and introducing new abilities that have since become signature abilities in the series. The game placed 11th, behind <i>Super Mario Bros.</i>, in <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i>'s "100 greatest Nintendo games of all time". <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> considered <i>Super Mario Bros. 3</i> Nintendo's standout game of 1989, and commented that its success outshone the first <i>Super Mario Bros.</i>'s sales milestone; the first game sold 40 million copies, but was <a href="https://en.wikipedia.org/wiki/Pack-in_game">bundled</a> with the NES. They lauded the overworld map as an elegant alternative to a menu to select levels. In 2007, <i><a href="https://en.wikipedia.org/wiki/ScrewAttack">ScrewAttack</a></i> called <i>Super Mario Bros. 3</i> the best <i>Mario</i> game in the series as well as the best game on the NES, citing the graphics, power-ups, secrets, and popularity, summing it up as "just incredible" and stating, "If you haven't experienced this greatness, we pity you". In a poll conducted by <i><a href="https://en.wikipedia.org/wiki/Dengeki">Dengeki</a></i>, the game tied with <i><a href="https://en.wikipedia.org/wiki/Super_Mario_World">Super Mario World</a></i> as the number three video game their readers first played. GamesRadar also called it the best NES game, saying that while <i>Super Mario Bros.</i> defined its genre, <i>Super Mario Bros. 3</i> perfected it. In 1996, <i><a href="https://en.wikipedia.org/wiki/GamesMaster_(magazine)">GamesMaster</a></i> rated the NES version 99th on their "Top 100 Games of All Time."</p>
+
+<p>In 1997, <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> ranked the All-Stars edition the 2nd best console game of all time (behind only <i><a href="https://en.wikipedia.org/wiki/List_of_Tetris_variants">Tetris</a></i>), saying it "took the series back to its roots, but expanded upon the original game in every way imaginable. No other game since has been able to recapture the spirit of adventure and enchantment found in Mario 3." The game has been ranked on several of <i>IGN'</i>s lists of "top games". In 2005, they rated it 23rd among their Top 100 Games, and praised the precise and intuitive controls. <i>IGN</i> editors from the United States, United Kingdom, and Australia ranked <i>Super Mario Bros. 3</i> number 39 in their 2007 Top 100 Games, citing Miyamoto's "ingenious" designs. They further commented that the game improved on the "already-brilliant concepts" of the previous games with new power-ups and enemies. Users and readers of the website placed the game high on similar lists: 32nd in 2005 and 21st in 2006. In 2009, <i>Game Informer</i> put <i>Super Mario Bros. 3</i> 9th on their list of "The Top 200 Games of All Time", saying that it is "a game with incredible lasting power that we won't soon forget". This is down one place from <i>Game Informer</i>'s previous ranking in 2001. <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> ranked the game #20 on its list of "The 100 Best Games To Play Today", calling it "the one 8-bit game that still shines today, no caveats required." <i><a href="https://en.wikipedia.org/wiki/UGO_Networks">UGO</a></i> listed <i>Super Mario Bros. 3</i> on their list of the "Top 50 Games That Belong On the 3DS", calling it "Arguably the greatest Mario game ever made." <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> placed the game on their list of the greatest games of all time. <i>USgamer</i> ranked the game as the third best <i>Mario</i> platformer ever. <i>Super Mario Bros. 3</i> ranked 34th on Warp Zoned's "Scientifically Proven Best Video Games of All Time" list, a statistical meta-analysis of 44 "top games" lists published between 1995 and 2016.</p>
+
+<h2>Rereleases and remakes</h2>
+
+<p>The NES version of the game has been <a href="https://en.wikipedia.org/wiki/Porting">ported</a> to several other Nintendo consoles. It was rereleased via <a href="https://en.wikipedia.org/wiki/Video_game_console_emulator">emulation</a> as a <a href="https://en.wikipedia.org/wiki/Digital_distribution">downloadable</a> <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> game in 2007 for the Wii and in 2014 for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> and <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> consoles. It is one of thirty pre-installed games in the <a href="https://en.wikipedia.org/wiki/NES_Classic_Edition">NES Classic Edition</a> console, and is on the Nintendo Classics service.</p>
+
+<p><i>Super Mario Bros. 3</i> was included in the 1993 SNES game <i><a href="https://en.wikipedia.org/wiki/Super_Mario_All-Stars">Super Mario All-Stars</a></i>, a compilation of remakes of NES <i>Super Mario</i> games featuring updated graphics and sound, which was also later released on the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> in 2010 and the <a href="https://en.wikipedia.org/wiki/Nintendo_Classics">Nintendo Classics</a> service in 2020.</p>
+
+<p><i>Super Mario 3 Special</i>, an unofficial <a href="https://en.wikipedia.org/wiki/Bootleg_recording">bootleg</a> port for the <a href="https://en.wikipedia.org/wiki/Game_Boy_Color">Game Boy Color</a>, was released in 2000. This version was developed in <a href="https://en.wikipedia.org/wiki/Hong_Kong">Hong Kong</a> and is truncated to only five levels. Former <i><a href="https://en.wikipedia.org/wiki/1Up.com">1Up.com</a></i> journalist Ray Barnholt panned <i>Super Mario 3 Special</i> as a "horrible, awful, rank piece of software." Barnholt criticized its extremely short length, "atrocious" controls leading him to liken Mario's movement to "a <a href="https://en.wikipedia.org/wiki/Drunken">drunken</a> <a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(character)">Sonic</a>," poor level design, coloring, and music, and lack of a proper ending.</p>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> version, <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Advance_4:_Super_Mario_Bros._3">Super Mario Advance 4: Super Mario Bros. 3</a></i>, was released in 2003. In addition to the visual and sound changes from <i>Super Mario All-Stars</i>, this version also includes support for the <a href="https://en.wikipedia.org/wiki/Nintendo_e-Reader">Nintendo e-Reader</a> peripheral, which allows the player to access new levels and power-ups stored on <a href="https://en.wikipedia.org/wiki/Nintendo_e-Reader#e-Reader_cards">e-Reader cards</a>.</p>
+
+<h2>Legacy</h2>
+
+<p><i>Super Mario Bros. 3</i> introduced several elements carried over to subsequent <i>Mario</i> games. A similar overworld map is used in <i>Super Mario World</i>, <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._DX">Super Mario Bros. DX</a></i>  and <i><a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros.">New Super Mario Bros.</a></i>, and Mario's ability to fly has been a feature in games such as <i><a href="https://en.wikipedia.org/wiki/Super_Mario_World">Super Mario World</a></i>, <i><a href="https://en.wikipedia.org/wiki/Super_Mario_64">Super Mario 64</a></i> and <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Galaxy">Super Mario Galaxy</a></i>. The game's "Super Leaf" item has returned in more recent <i>Mario</i> games for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>, like <i><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_Land">Super Mario 3D Land</a></i>, <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_7">Mario Kart 7</a></i> and  <i><a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros._2">New Super Mario Bros. 2</a></i>. Bowser's red hair was introduced in <i>Super Mario Bros. 3</i> and has since become a part of his standard appearance.</p>
+
+<p>Through a collaboration between <a href="https://en.wikipedia.org/wiki/NBC">NBC</a> and Nintendo of America, an animated television series, <i><a href="https://en.wikipedia.org/wiki/The_Adventures_of_Super_Mario_Bros._3">The Adventures of Super Mario Bros. 3</a>,</i> was created from September to December 1990 by <a href="https://en.wikipedia.org/wiki/DIC_Entertainment">DIC Entertainment</a>. The show aired weekly on Saturday mornings on NBC alongside the second season of <i><a href="https://en.wikipedia.org/wiki/Captain_N:_The_Game_Master">Captain N: The Game Master</a></i> as part of the hour-long <i>Captain N &amp; The Adventures of Super Mario Bros. 3</i> programming block with 26 episodes and featured numerous characters, enemies, and settings from the video game; the original seven Koopalings are given different names based on their given personalities and are also given a new age order. Other Nintendo products have included various elements of the game as well. Music from <i>Super Mario Bros. 3</i> appears as a track on <i>Nintendo Sound Selection Koopa</i>, a collection of songs from Nintendo games. The game's stages and graphics comprise a background theme in the 2006 <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> game <i><a href="https://en.wikipedia.org/wiki/Tetris_DS">Tetris DS</a></i>. The Koopalings are also world bosses in <i>Super Mario World</i>, <i><a href="https://en.wikipedia.org/wiki/Mario_Is_Missing!">Mario Is Missing!</a></i>, <i><a href="https://en.wikipedia.org/wiki/Yoshi's_Safari">Yoshi's Safari</a></i>, <i><a href="https://en.wikipedia.org/wiki/Hotel_Mario">Hotel Mario</a></i> and all <i>New Super Mario Bros.</i> games except <i><a href="https://en.wikipedia.org/wiki/New_Super_Mario_Bros.">New Super Mario Bros.</a></i> Boom Boom, another boss from this game, additionally reappears in <i>Super Mario 3D Land</i> and <i><a href="https://en.wikipedia.org/wiki/Super_Mario_3D_World">Super Mario 3D World</a></i>, alongside a boomerang-wielding female counterpart named Pom Pom. <i>Super Mario Bros. 3</i> is one of the games represented as themes in both <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Maker">Super Mario Maker</a></i> and <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Maker_2">Super Mario Maker 2</a></i>.</p>
+
+<p>In the early 1990s, the American game developers <a href="https://en.wikipedia.org/wiki/John_Carmack">John Carmack</a> and <a href="https://en.wikipedia.org/wiki/Tom_Hall">Tom Hall</a> developed an <a href="https://en.wikipedia.org/wiki/IBM_PC">IBM PC</a> clone of <i>Super Mario Bros. 3</i> based on their innovative <a href="https://en.wikipedia.org/wiki/Adaptive_tile_refresh">adaptive tile refresh</a> software, which performed smooth side-scrolling graphics on <a href="https://en.wikipedia.org/wiki/Enhanced_Graphics_Adapter">EGA</a> cards. They demonstrated it to Nintendo leaders, who were impressed but rejected cloning in favor of exclusivity. Carmack and Hall went on to found <a href="https://en.wikipedia.org/wiki/Id_Software">id Software</a> and develop <i><a href="https://en.wikipedia.org/wiki/Commander_Keen">Commander Keen</a></i>, a series of platform games inspired by <i>Super Mario Bros. 3.</i> The <i>Super Mario Bros. 3</i> demo had not been readily shared, but a working copy was discovered and preserved in the <a href="https://en.wikipedia.org/wiki/Museum_of_Play">Museum of Play</a> in July 2021.</p>
+
+<p>In April 1993, <i><a href="https://en.wikipedia.org/wiki/Famicom_Tsūshin">Famicom Tsūshin</a></i> (<i>Famitsu</i>) awarded <i>Super Mario Bros. 3</i> a world record for having the most <a href="https://en.wikipedia.org/wiki/Strategy_guide">strategy guide</a> books published, with 20 strategy books published for the game up until then. At the 2007 <a href="https://en.wikipedia.org/wiki/Game_Developers_Conference">Game Developers Conference</a>, <a href="https://en.wikipedia.org/wiki/Stanford_University">Stanford University</a> curator Henry Lowood, along with game designers <a href="https://en.wikipedia.org/wiki/Warren_Spector">Warren Spector</a> and <a href="https://en.wikipedia.org/wiki/Steve_Meretzky">Steve Meretzky</a>, academic researcher Matteo Bittanti and game journalist <a href="https://en.wikipedia.org/wiki/Christopher_Grant_(editor)">Christopher Grant</a> named <i>Super Mario Bros. 3</i> one of the 10 most important video games of all time, being a member of a "<a href="https://en.wikipedia.org/wiki/Game_canon">game canon</a>" whose inductees were submitted to the <a href="https://en.wikipedia.org/wiki/Library_of_Congress">Library of Congress</a> for having "cultural significance or a historical significance". <i><a href="https://en.wikipedia.org/wiki/The_New_York_Times">The New York Times</a></i> reported Grant said its inclusion was due to the game's <a href="https://en.wikipedia.org/wiki/Nonlinear_gameplay">nonlinear play</a> being a "mainstay of contemporary games", and how it allows the player to move backward and forward in levels. On November 20, 2020, a sealed copy with rare alternate cover art featuring "Bros." on the left instead of the center was sold for $156,000, the most money ever paid for a video game at the time.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

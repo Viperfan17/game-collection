@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Grand Theft Auto IV</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('fe817f9b-193f-4465-96a2-e54e075dddff/452ec5f9-89c6-4a9a-95b0-b35a39ff1172.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="fe817f9b-193f-4465-96a2-e54e075dddff/1ec30e89-1787-412e-b4d9-0ec5cb61f604.ico"/> Grand Theft Auto IV</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="fe817f9b-193f-4465-96a2-e54e075dddff/1b12f020-a9c3-435a-8b88-e4d0a34d757c.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-5/20/2015">5/20/2015</a> 18:18:07</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-12/2/2008">12/2/2008</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-88">88</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-88">88</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Open world">Open world</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Rockstar North">Rockstar North</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Rockstar Toronto">Rockstar Toronto</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-1C-SoftClub">1C-SoftClub</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Rockstar Games">Rockstar Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/GTA_IV" target="_blank">PCGamingWiki</a><br/><a href="https://www.rockstargames.com/IV" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=4062" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/grand-theft-auto-iv" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/12210/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Grand_Theft_Auto_IV" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/33867" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Grand_Theft_Auto_IV" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/grand-theft-auto-iv" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Automobile">Automobile</a><br/><a href="#quicklink-Bus">Bus</a><br/><a href="#quicklink-Contemporary">Contemporary</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Helicopter">Helicopter</a><br/><a href="#quicklink-Motorcycle">Motorcycle</a><br/><a href="#quicklink-Naval/watercraft">Naval/watercraft</a><br/><a href="#quicklink-RAGE">RAGE</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Third Person">Third Person</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Grand Theft Auto IV</b></i><!-- Please don't add the abbreviation "GTA IV" here as it isn't used throughout the article and therefore isn't needed. --> is a 2008 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> developed by <a href="https://en.wikipedia.org/wiki/Rockstar_North">Rockstar North</a> and published by <a href="https://en.wikipedia.org/wiki/Rockstar_Games">Rockstar Games</a>. It is the sixth main entry in the <a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto"><i>Grand Theft Auto</i> series</a>, following 2004's <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_San_Andreas">Grand Theft Auto: San Andreas</a></i>, and the eleventh entry overall. Set in the fictional Liberty City, based on <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a>, the <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> story follows <a href="https://en.wikipedia.org/wiki/Eastern_Europe">Eastern European</a> war veteran <a href="https://en.wikipedia.org/wiki/Niko_Bellic">Niko Bellic</a> and his attempts to escape his past while under pressure from high-profile criminals. The <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> design lets players <a href="https://en.wikipedia.org/wiki/Nonlinear_gameplay">freely roam</a> Liberty City, consisting of three main islands, and the neighbouring state of Alderney, which is based on <a href="https://en.wikipedia.org/wiki/New_Jersey">New Jersey</a>.</p>
+
+<p>The game is played from a <a href="https://en.wikipedia.org/wiki/Third-person_view">third-person perspective</a> and its world is navigated on foot and by vehicle. Throughout the single-player mode, players control Niko Bellic. An <a href="https://en.wikipedia.org/wiki/Online_multiplayer">online multiplayer</a> mode is also included with the game, allowing up to 32 players to engage in both cooperative and competitive gameplay in a recreation of the single-player setting. Two <a href="https://en.wikipedia.org/wiki/Expansion_pack">expansion packs</a> were later released for the game, <i><a href="https://en.wikipedia.org/wiki/The_Lost_and_Damned">The Lost and Damned</a></i> and <i><a href="https://en.wikipedia.org/wiki/The_Ballad_of_Gay_Tony">The Ballad of Gay Tony</a></i>, which both feature new plots that are interconnected with the main <i>Grand Theft Auto IV</i> storyline, and follow new protagonists.</p>
+
+<p>Development of <i>Grand Theft Auto IV</i> began soon after the release of <i>San Andreas</i> and was shared between many of Rockstar's studios worldwide. The game introduced a shift to a more realistic and detailed style and tone for the series. Unlike previous entries, <i>Grand Theft Auto IV</i> lacked a strong cinematic influence, as the team attempted an original approach to the story. As part of their research for the open world, the development team conducted extensive field research in New York, capturing over 100,000 photographs and several hours of video. The developers considered the world to be the most important element of the game; though not the largest map in the series, they considered it comparable in scope due to its verticality and level of detail. The budget climbed to over US$100 million, making it one of the <a href="https://en.wikipedia.org/wiki/Most_expensive_video_games_to_develop">most expensive video games to develop</a>.</p>
+
+<p><i>Grand Theft Auto IV</i> was released for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> consoles in April 2008, and for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> in December. It received critical acclaim, with praise directed at the narrative and open-world design. <i>Grand Theft Auto IV</i> broke industry sales records and became the fastest-selling entertainment product in history at the time, earning US$310 million in its first day and US$500 million in its first week. Considered one of the most significant titles of the <a href="https://en.wikipedia.org/wiki/Seventh_generation_of_video_game_consoles">seventh generation</a> of video games, and by many critics as one of the <a href="https://en.wikipedia.org/wiki/Greatest_video_games_of_all_time">greatest video games of all time</a>, it won year-end accolades, including <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a> awards from several <a href="https://en.wikipedia.org/wiki/Gaming_publications">gaming publications</a>. It is among the <a href="https://en.wikipedia.org/wiki/Best-selling_video_games">best-selling video games</a> with over 25 million copies sold by 2013. The game generated controversy, with criticism directed at the game's depiction of violence and players' ability to <a href="https://en.wikipedia.org/wiki/Drive_drunk">drive drunk</a>. Its successor, <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_V">Grand Theft Auto V</a></i>, was released in 2013.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Grand Theft Auto IV</i> is an <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> played from a <a href="https://en.wikipedia.org/wiki/Third-person_(video_games)">third-person perspective</a>. Players complete <a href="https://en.wikipedia.org/wiki/Quest_(video_games)">missions</a>—linear scenarios with set objectives—to progress through the story. It is possible to have several active missions running at one time, as some require players to wait for further instructions or events. Outside of missions, players can <a href="https://en.wikipedia.org/wiki/Nonlinear_gameplay">freely roam</a> the game's <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> and complete optional side missions. Composed of the fictional city of Liberty City, the world is larger in area than most earlier <i>Grand Theft Auto</i> series entries. At the beginning of the game, players can only explore the first island—composed of Dukes and Broker—with all other islands unlocking as the story progresses.</p>
+
+<p>Players use <a href="https://en.wikipedia.org/wiki/Melee_phase">melee</a> attacks, firearms and explosives to fight enemies, and may run, jump, swim or use vehicles to navigate the game's world. There is a <a href="https://en.wikipedia.org/wiki/First-person_(video_games)">first-person perspective</a> option when using vehicles. In combat, <a href="https://en.wikipedia.org/wiki/Auto-aim">auto-aim</a> and a <a href="https://en.wikipedia.org/wiki/Cover_system">cover system</a> can be used as assistance against enemies. Should players take damage, their health meter can regenerate by consuming food or drinks, using medical kits, or calling for paramedics. If players commit crimes, law enforcement may respond as indicated by a "<a href="https://en.wikipedia.org/wiki/Fugitive">wanted</a>" meter in the <a href="https://en.wikipedia.org/wiki/HUD_(video_gaming)">head-up display</a> (HUD). On the meter, a count of stars indicates the current wanted level. Gaining more stars will cause law enforcement to incapacitate players more aggressively and extends the wanted vicinity area, and is capped at six stars. The player can evade police by travelling outside the wanted vicinity area, after this the wanted meter enters a cool-down mode, law enforcement hunt for the player, and eventually recedes when they are hidden from the officers' line of sight.</p>
+
+<p>The game's cover system allows players to move between obstacles, to fire blindly, aim freely, and target a specific enemy. Individual body parts can also be targeted. Melee attacks include additional moves, such as dodging, blocking, disarming an opponent and counter-attacking. <a href="https://en.wikipedia.org/wiki/Body_armour">Body armour</a> can be used to absorb gunshots and explosive damage, but is used up in the process. When health is entirely depleted, gameplay stops, and players <a href="https://en.wikipedia.org/wiki/Respawn">respawn</a> at the nearest hospital.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> mode lets players control an <a href="https://en.wikipedia.org/wiki/Eastern_European">Eastern European</a> war veteran, <a href="https://en.wikipedia.org/wiki/Niko_Bellic">Niko Bellic</a>. During the story, Niko meets and befriends various new characters. While free roaming the game world, players may engage in context-specific activities such as <a href="https://en.wikipedia.org/wiki/Bowling">bowling</a> or <a href="https://en.wikipedia.org/wiki/Darts">darts</a>, either alone or with friends. Other available activities include a <a href="https://en.wikipedia.org/wiki/Vigilante">vigilante</a> mini-game, and in-game television programming. Hanging out, answering calls, or completing missions of friends will increase that friend's respect. If their respect is high enough, the player can unlock favours; for example, Niko's cousin Roman owns a taxi service, and can send one of his <a href="https://en.wikipedia.org/wiki/Taxicab">cabs</a> to take Niko to any destination without a fee. Cabs are always available during gameplay for quick travel to a destination. Throughout the course of the game, players are also faced with <a href="https://en.wikipedia.org/wiki/Morality">morality</a> choices, which alter the storyline appropriately depending on the player's choice. Niko has a <a href="https://en.wikipedia.org/wiki/Cell_phone">cell phone</a> for contacting friends and hanging out with them through activities. The cell phone is also used to access the game's online multiplayer mode, and to enter <a href="https://en.wikipedia.org/wiki/Cheat_codes">cheat codes</a>. To access the in-game Internet, which allows Niko to send and receive emails and set up prospective <a href="https://en.wikipedia.org/wiki/Dating">dates</a> with potential girlfriends, Niko can use <a href="https://en.wikipedia.org/wiki/Internet_café">Internet cafés</a> located around the city. The game also features a <a href="https://en.wikipedia.org/wiki/Subway_system">subway system</a>, allowing players to quickly traverse through the game's world.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Online_multiplayer">online multiplayer</a> mode for <i>Grand Theft Auto IV</i> allows up to 32 players to freely roam across the map. Players decide which game mode they wish to play, including <a href="https://en.wikipedia.org/wiki/Deathmatch_(video_games)">deathmatches</a> and street races. Both <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperative</a> and competitive game modes are available, split into ranked and unranked matches. For players to level up through ranks, in-game money has to be earned. The game also features a Free Mode, in which players have the entire map open to explore, with no end goal or mission to complete. Hosts of the game can control many variables, such as police presence, traffic, and weapons. The multiplayer mode was discontinued on Windows in 2020.</p>
+
+<h2>Synopsis</h2>
+
+<h3>Setting</h3>
+
+<p><i>Grand Theft Auto IV</i> takes place in 2008, within an alternate version of Liberty City seen in <i>Grand Theft Auto III</i>. The design of the city focuses on a recreation of four of the boroughs of <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a>: Broker (based on <a href="https://en.wikipedia.org/wiki/Brooklyn">Brooklyn</a>), Dukes (<a href="https://en.wikipedia.org/wiki/Queens">Queens</a>), Bohan (<a href="https://en.wikipedia.org/wiki/The_Bronx">The Bronx</a>), and Algonquin (<a href="https://en.wikipedia.org/wiki/Manhattan">Manhattan</a>). The setting also includes the neighbouring state of Alderney (based on <a href="https://en.wikipedia.org/wiki/New_Jersey">New Jersey</a>). In the story, it is explained that bridges are locked down due to a terrorist threat, and police constantly pursue players if the bridges are crossed. These barricades are lifted as the player progresses the story, allowing them to traverse uninterrupted between islands.</p>
+
+<p><i>Grand Theft Auto IV</i> is set in the fictional "HD <a href="https://en.wikipedia.org/wiki/Fictional_universe">Universe</a>", which mirrors and parodies the real world. The previous games formed fictional universes of their own, which despite having many similarities with the HD Universe, are considered to be different continuities. Hence, the Liberty City depicted in <i>Grand Theft Auto IV</i> is different from its previous renditions, and the game itself serves as a <a href="https://en.wikipedia.org/wiki/Reboot_(fiction)">reboot</a> for the series. The new timeline established by <i>Grand Theft Auto IV</i> would continue with two expansion packs, <i><a href="https://en.wikipedia.org/wiki/The_Lost_and_Damned">The Lost and Damned</a></i> and <i><a href="https://en.wikipedia.org/wiki/The_Ballad_of_Gay_Tony">The Ballad of Gay Tony</a></i>, and a sequel, <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_V">Grand Theft Auto V</a></i>, as well as its online component, <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_Online">Grand Theft Auto Online</a></i>. The handheld game <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_Chinatown_Wars">Grand Theft Auto: Chinatown Wars</a></i> is also considered part of the HD Universe, because it features the same map as <i>Grand Theft Auto IV</i>, except for Alderney.</p>
+
+<p>Niko Bellic, an Eastern European ex-soldier, arrives in Liberty City aboard the cargo ship <i>Platypus</i> to escape his criminal past, pursue the <a href="https://en.wikipedia.org/wiki/American_Dream">American Dream</a>, and search for a man who betrayed his unit to an ambush during a war ten years prior. Reuniting with his cousin Roman, he discovers that his stories of riches were invented. Roman lives in a small, dirty apartment, owns an unprofitable taxi company, and has gambling debts and disputes with <a href="https://en.wikipedia.org/wiki/Loan_shark">loan sharks</a>. Niko begins assisting Roman with his problems, where he makes criminal contacts in the city. He befriends <a href="https://en.wikipedia.org/wiki/Yardie">Yardies</a> second-in-command Little Jacob and is forced to work for Vlad Glebov, Roman's Russian loan shark. Niko eventually kills Vlad upon learning he had slept with Roman's girlfriend, Mallorie.</p>
+
+<p>In retaliation, Niko and Roman are kidnapped by <a href="https://en.wikipedia.org/wiki/Russian_mafia">Russian mobsters</a> on orders of their boss Mikhail Faustin and his lieutenant, Dimitri Rascalov. Indifferent to Vlad's murder, Faustin releases them and employs Niko as a <a href="https://en.wikipedia.org/wiki/Hitman">hitman</a>. Faustin orders Niko to kill the son of Russian crime lord Kenny Petrović. When Petrović threatens retaliation, Dimitri persuades Niko to assassinate Faustin and satisfy Petrović. However, Dimitri betrays him after the killing and brings Niko to his former employer, Ray Bulgarin, who accuses Niko of stealing from him during a failed <a href="https://en.wikipedia.org/wiki/Human_trafficking">human trafficking</a> job years earlier. Niko denies the allegation and a firefight ensues, allowing Dimitri and Bulgarin to escape.</p>
+
+<p>Dimitri's men burn down Niko and Roman's apartment and taxi company, forcing them to flee to Bohan. While Niko finds work with several local <a href="https://en.wikipedia.org/wiki/Drug_lord">drug lords</a>, Dimitri briefly kidnaps Roman in a failed attempt to lure Niko into a trap. Later, Niko discovers that his romantic interest, a woman named Michelle, is an undercover government agent, who then <a href="https://en.wikipedia.org/wiki/Entrap">entraps</a> him into working for her superior. In exchange for the murders of known or suspected <a href="https://en.wikipedia.org/wiki/Terrorists">terrorists</a>, the superior clears Niko's criminal record and aids him with seeking Niko's traitor. Roman receives a large amount of insurance money from the arson, which he uses to rebuild the business and buy an apartment in Algonquin. Roman also proposes to Mallorie, who accepts.</p>
+
+<p>While working for the <a href="https://en.wikipedia.org/wiki/Irish_Mob">Irish Mob</a>, Niko befriends gangster Patrick "Packie" McReary, helping him and his brothers carry out various jobs, including a major bank robbery. Niko is later hired by Ray Boccino, a <i><a href="https://en.wikipedia.org/wiki/Caporegime">caporegime</a></i> in the Pegorino <a href="https://en.wikipedia.org/wiki/Crime_family">crime family</a>, to oversee a diamond deal, which goes awry. Boccino repays Niko by helping him find his ex-comrade Florian Cravic, now known as Bernie Crane, who claims he was not the one to betray their unit. Niko realises that the traitor was Darko Brevic, the only other survivor. Niko continues working for the <a href="https://en.wikipedia.org/wiki/American_Mafia">Mafia</a> and earns the trust of <a href="https://en.wikipedia.org/wiki/Crime_boss">Don</a> Jimmy Pegorino, who orders him to kill Boccino after suspecting him of being a police informant. Niko also helps Packie kidnap Don Giovanni Ancelotti's daughter to ransom her for the diamonds, but Bulgarin intercepts the exchange. In the ensuing firefight, the diamonds are lost.</p>
+
+<p>Eventually, government agents find Darko in <a href="https://en.wikipedia.org/wiki/Romania">Romania</a> and bring him to Liberty City for Niko to decide his fate. Afterwards, Niko is summoned by Pegorino for a final favour: to help with a highly lucrative <a href="https://en.wikipedia.org/wiki/Heroin">heroin</a> deal in collusion with Dimitri. Learning Dimitri is aboard the <i>Platypus</i>, Niko must decide to either work with Dimitri or exact revenge. If Niko agrees to the deal, Dimitri betrays him again, kills Pegorino, and sends an assassin to kill Niko at Roman's wedding, but the assassin accidentally kills Roman instead; Niko retaliates by tracking and murdering Dimitri. If Niko chooses revenge, he kills Dimitri, prompting Pegorino to target Niko at Roman's wedding but accidentally kill Packie's sister Kate, whom Niko had been dating; Niko tracks and murders Pegorino. In both endings, Niko learns that Mallorie is pregnant.</p>
+
+<h2>Development</h2>
+
+<p>Preliminary work on <i>Grand Theft Auto IV</i> began in November 2004, a month after the release of <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_San_Andreas">Grand Theft Auto: San Andreas</a></i>. Rockstar president <a href="https://en.wikipedia.org/wiki/Sam_Houser">Sam Houser</a> felt that following up <i>San Andreas</i> was "a nightmare". <a href="https://en.wikipedia.org/wiki/Rockstar_North">Rockstar North</a>, the core 220-person team behind the game, co-opted studios owned by parent company Rockstar Games to facilitate development between a full team of over 1,000, including 50 employees at <a href="https://en.wikipedia.org/wiki/Rockstar_NYC">Rockstar NYC</a>, 40 at <a href="https://en.wikipedia.org/wiki/Rockstar_Lincoln">Rockstar Lincoln</a>, 10 at <a href="https://en.wikipedia.org/wiki/Rockstar_San_Diego">Rockstar San Diego</a>, and around 600–700 working part-time internally and externally. Some key members of the development team worked 12-hour days during production, often without holidays. The team decided to continue the numbering scheme absent from the previous two main games to represent the same leap in production as <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_2">Grand Theft Auto 2</a></i> (1999) to <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_III">Grand Theft Auto III</a></i> (2001). Development of <i>Grand Theft Auto IV</i> ceased by 21 April 2008 when the game was <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Release_to_manufacturing_(RTM)">submitted for manufacturing</a>. Producer <a href="https://en.wikipedia.org/wiki/Leslie_Benzies">Leslie Benzies</a> estimated that the budget of the development efforts exceeded US$100 million, making <i>Grand Theft Auto IV</i> one of the <a href="https://en.wikipedia.org/wiki/List_of_most_expensive_video_games_to_develop">most expensive video games</a> ever made.</p>
+
+<h3>Research and open world design</h3>
+
+<p>The game's setting, Liberty City, is based on New York City. The team did not look at the previous renditions of Liberty City as inspiration, wanting it to retain the "general feel" but nothing else. The map is roughly three times the size of <i>Grand Theft Auto III</i>'s. The developers originally considered using the entire state of <a href="https://en.wikipedia.org/wiki/New_York_(state)">New York</a>, before restricting it to Manhattan, and then expanding it out again. They considered including more suburbs with woods, and would regularly vote on which areas to include. Art director Aaron Garbut said that the team chose the setting because of the detail and variety it provided, describing New York as "an amazing, diverse, vibrant, cinematic city". Writer <a href="https://en.wikipedia.org/wiki/Dan_Houser">Dan Houser</a> added that the team "wanted to be somewhere where we had a foothold" due to the amount of research required for the world; Rockstar Games's main headquarters are located in New York. The team consciously avoided a precise recreation of New York City to allow for more enjoyable game design, selecting the areas that they felt "characterised it the best". Garbut wanted to capture a caricature of the city as he felt that most people were familiar with "the highlights" from film or literature but did not need to know the areas precisely. The city was not built with specific missions in mind; the area was created first, and missions implemented later.</p>
+
+<p>To achieve a realistic environment, 60–70 employees from Rockstar North travelled to New York for research: first at the beginning of the project in March or April 2005 for a week and a half, and a smaller trip in 2007. Police officers who previously worked the <a href="https://en.wikipedia.org/wiki/Beat_(police)">beat</a> drove the team around <a href="https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan">Washington Heights</a>. A full-time research team based in New York handled further requests for information, such as the ethnic minority of a neighbourhood or videos of traffic patterns. Videos shot in New York were played on televisions at the Rockstar North offices "so while they worked they could look up and there was New York". Benzies claimed that the team took over 100,000 photographs on location in New York, though Garbut estimates that they took around 250,000. They also studied architectural plans for apartments, used satellite images to determine city block layout, researched sales figures for models of cars, and read books that detailed the city's infrastructure, including its <a href="https://en.wikipedia.org/wiki/New_York_City_Subway">subways</a>, sewers, and garbage disposal. Hove Beach is based on <a href="https://en.wikipedia.org/wiki/Brighton_Beach">Brighton Beach</a>, which Sam Houser found "pretty incredible" and unusual; the name is based on the English city <a href="https://en.wikipedia.org/wiki/Brighton_and_Hove">Brighton and Hove</a>, made up of the former neighbouring towns <a href="https://en.wikipedia.org/wiki/Brighton">Brighton</a> and <a href="https://en.wikipedia.org/wiki/Hove">Hove</a>. Houser appreciated that Brighton Beach was home to several Eastern Europeans due to the nature of the game's characters.</p>
+
+<p>Dan Houser described Liberty City as "the biggest character" of the game. The <i>Grand Theft Auto IV</i> rendition of Liberty City is more detailed and larger in size than most earlier entries in the series; although smaller than San Andreas, the setting of the previous main game, the developers considered it comparable in scope due to city's verticality, number of buildings, and level of detail. The team wanted less dead spots and irrelevant spaces, such as the wide open deserts in <i>San Andreas</i>. They wanted the game to be "a more focused experience" than <i>San Andreas</i>, and Dan Houser felt that the limited activities of New York allowed this. The team felt that the addition of Niko's <a href="https://en.wikipedia.org/wiki/Mobile_phone">mobile phone</a> added to the immersion of the world and represented society's shifted focus on phones. The in-game brands and products are designed over several years; the billboards were implemented in the game around six months prior to release.</p>
+
+<p>The game's script, written by Dan Houser and Rupert Humphries, is about 1,000 pages. Approximately 660 actors provided voices for the game over 80,000 lines of dialogue. After conceiving the character and setting, Dan Houser spoke with his brother Sam Houser and Leslie Benzies to bounce story ideas before writing a rough synopsis, a six-paged, detailed document. Once the synopsis was reworked, the designers broke it into missions, represented by a large flow document demonstrating each section. The writers then work on the introductions to the missions; the gameplay dialogue comes much later. Unlike previous <i>Grand Theft Auto</i> games, <i>Grand Theft Auto IV</i> does not have cinematic influences. "We were consciously trying to go, well, if video games are going to develop into the next stage, then the thing isn't to try and do a loving tribute or reference other stuff," said Dan Houser. He said that the writers wanted something "fresh and new and not something that was obviously derived from [a] movie". Dan Houser felt that the quality of the writing had to improve alongside the advancements in graphics and technology. He noted that the improvements in facial animation allowed for slower-paced cutscenes. The unique dialogue that plays when a mission is retried was to ensure that the gameplay felt "less canned and less like <i><a href="https://en.wikipedia.org/wiki/Groundhog_Day_(film)">Groundhog Day</a></i>".</p>
+
+<p>Dan Houser described Niko Bellic as "a more rounded character" than those in previous games. He felt that his dual personality—often saving innocent people, while also being a "cold-hearted killer"—made him more relatable. He also felt that Niko's unfamiliarity with Liberty City allowed for the player to relate to him more, only driven by his vague past and relationship with Roman. When deciding on Niko's background, the writers felt that being an immigrant could lead to more dangerous situations, and therefore more enjoyable missions; after discussions with criminal experts, Dan Houser found that "the real scary characters are not born in America anymore". He felt that Niko's outsider view of <a href="https://en.wikipedia.org/wiki/American_culture">American culture</a> was "fun". The team wanted Niko to be "more of an <a href="https://en.wikipedia.org/wiki/Anti_hero">anti hero</a> than a hero, capable of making positive actions within his criminal world". They wanted his demeanour to reflect the weight of his past and choices.</p>
+
+<p>Niko's design underwent a few changes, but was finalised early in development. His outfit underwent several changes based on Eastern Europeans, particularly photographs of men fighting in winter wars in <a href="https://en.wikipedia.org/wiki/Yugoslavia">Yugoslavia</a> and <a href="https://en.wikipedia.org/wiki/Chechnya">Chechnya</a>. The primary motivation for the design was a face to convey the appropriate emotions and a body that could move nicely with the new animations. The in-game purchasable outfits were also designed to fit with the character. The team ensured that the <a href="https://en.wikipedia.org/wiki/Dialogue_tree">gameplay choices</a> presented to the player were not too extensive, as they still had to make sense to the character, who is driven by the people around him. Dan Houser felt that the missions in <i>San Andreas</i> had become too linear, and wanted to present choices to the player in <i>Grand Theft Auto IV</i>.</p>
+
+<p>The writers found that Niko needed a motivation to come to America, so they created his cousin, Roman. Dan Houser felt that the two could not be brothers as there would be a deeper level of familiarity than necessary. He described the two as a <a href="https://en.wikipedia.org/wiki/Double_act">double act</a>, with Roman's fantasist charm playing off Niko's tough cynicism. The team gave other <a href="https://en.wikipedia.org/wiki/Non-playable_characters">non-playable characters</a> (NPCs) more definable behaviours and dialogue to make them feel more alive. The writers initially considered having a smaller group of characters, but found that the story became boring and that players were less likely to explore the world. The stranger characters found in the game world were based on the "crazy people" that populate New York, according to Dan Houser, which in previous games were only able to be captured through radio stations or mild pedestrian behaviours. The team based the ethnicities, clothing, and behaviours of the NPCs on the photographs and videos that they captured around New York, divided into different areas; they created <a href="https://en.wikipedia.org/wiki/Mood_board">mood boards</a> for each location. The NPCs also converse in different languages.</p>
+
+<p><i>Grand Theft Auto IV</i> sees a shift in the series to a more realistic and detailed style and tone, partly a result of the transition to consoles which offered <a href="https://en.wikipedia.org/wiki/High-definition_television">high-definition</a> graphics and the new and improved capabilities of such consoles. The development team worked to represent the upgrade in quality across all design aspects while maintaining the coherence of the previous games. The team took the game's development as an opportunity to "strip things back and start again", refining the art style without losing the style of the series; they distanced the game from the "cartoon-like style" of its predecessors while creating a new style that was consistent across all aspects of the game. Garbut found the increased demand of detail brought on by the advanced technology daunting. A technique used to make the visuals look real was to avoid harsh edges, instead blending surfaces together to make the world look dirty and lived-in. The <a href="https://en.wikipedia.org/wiki/Props">props</a> department created multiple variations of different objects to make the world more interesting and unique. <i>Grand Theft Auto IV</i> was the first contemporary game in the series since 2001's <i>Grand Theft Auto III</i>; the team felt that enough time had passed to avoid feeling repetitive. The types of in-game vehicles were decided upon early in development, after which the vehicles department begin creating the designs. The vehicles are not based on specific real-life counterparts, but take elements from several, with some original ideas by the developers.</p>
+
+<p>The proprietary <a href="https://en.wikipedia.org/wiki/Rockstar_Advanced_Game_Engine">Rockstar Advanced Game Engine</a> was used for <i>Grand Theft Auto IV</i>. Garbut found the game's technical design similar to <i>Grand Theft Auto III</i>'s, with both being the first in the series released on their respective platforms. He claimed an operable <a href="https://en.wikipedia.org/wiki/Game_engine">game engine</a> was not finalised until late in development, at which point "there's still plenty of guesswork" until optimisation near release. The characters' physical performances were recorded using <a href="https://en.wikipedia.org/wiki/Motion_capture">motion capture</a>. Up to eight actors, dressed in full suits, could perform on the motion capture stage at one time. The camera included a <a href="https://en.wikipedia.org/wiki/Teleprompter">teleprompter</a> for actors to read their scripts. Over a hundred moves would be captured each day of production. The <a href="https://en.wikipedia.org/wiki/Voice_acting">voice acting</a> performances were often recorded months later alongside facial reference capture, and an actor's voice could be composited over a different actor's physical performance. The in-game animations were crafted similarly, using a combination of different motion capture performances.</p>
+
+<p>For the gameplay and animations, the team redid a lot of the work from previous games, wanting <i>Grand Theft Auto IV</i> to "feel next-generation". The <a href="https://en.wikipedia.org/wiki/Role-playing_game">role-playing</a> elements from <i>San Andreas</i> were removed fairly early in development, partly due to the animation work it would have required, and because consistently needing to visit the gym felt antithetical to Niko's motivations. The game's targeting system was one of the first focuses of development due to the advanced technology; the team wanted it to feel realistic without being too technical. The cover system was a "natural addition" to the targeting. Benzies described the multiplayer as the hardest part of the game's development. The team wanted the multiplayer to feel like an extension of the cinematic single-player experience. Dan Houser described it as "a section of a film rather than the whole narrative". The developers considered adding co-operative multiplayer to the main story campaign, but decided it worked better as a single-player experience.</p>
+
+<p>When Sam Houser first showed interest in using the <a href="https://en.wikipedia.org/wiki/Euphoria_(software)">Euphoria</a> software in the game, he was told that it would be impossible or only limited to cutscenes, but some members of the team were able to make it work. Engineers from <a href="https://en.wikipedia.org/wiki/NaturalMotion">NaturalMotion</a> worked on-site at Rockstar North for several months at a time to incorporate Euphoria software into the game. Rockstar also worked with <a href="https://en.wikipedia.org/wiki/Image_Metrics">Image Metrics</a> for the game's facial animations. The facial rigs had around 100 joints, with a total of 300 minutes of facial animation. The scale of the project caused some issues for the animators, forcing them to have <a href="https://en.wikipedia.org/wiki/Skeletal_animation">rigs</a> completed before animation began. They also faced difficulty in the direction of the actor's head—either straight on when looking at the teleprompter, or down when looking at a script. Image Metrics head of production David Barton noted that "having realistic eyes is 90 percent of the battle", as it allows the player to believe the character. <a href="https://en.wikipedia.org/wiki/SpeedTree">SpeedTree</a> was used for in-game environment rendering.</p>
+
+<p>When selecting music for the in-game radio stations, music supervisor Ivan Pavlovich said "[we had] to pick the songs that make New York today what it is, but make sure they won't feel dated by the time the game comes out." The developers contacted over 2,000 people to obtain recording and publishing rights; they hired a private investigator to locate the relatives of late <a href="https://en.wikipedia.org/wiki/Skatt_Bros.">Skatt Bros.</a> member <a href="https://en.wikipedia.org/wiki/Sean_Delaney_(musician)">Sean Delaney</a> to license the band's song, "Walk the Night". <i><a href="https://en.wikipedia.org/wiki/Billboard_(magazine)">Billboard</a></i> reported that Rockstar paid as much as $5,000 per composition and another $5,000 per master recording per track. Developers originally considered letting players purchase music in an in-game <a href="https://en.wikipedia.org/wiki/Record_shop">record shop</a> and for Niko to have an <a href="https://en.wikipedia.org/wiki/Digital_audio_player">MP3 player</a>, but both ideas were cut. <a href="https://en.wikipedia.org/wiki/DJ_Green_Lantern">DJ Green Lantern</a> produced tracks exclusively for the game's hip-hop radio station The Beat 102.7. Record producer Bobby Konders, who owns the record label Massive B and hosts the in-game radio station Massive B Soundsystem 96.9, flew to <a href="https://en.wikipedia.org/wiki/Jamaica">Jamaica</a> to get <a href="https://en.wikipedia.org/wiki/Dancehall">dancehall</a> artists to re-record tracks to make references to the boroughs of Liberty City. The Housers's father, jazz musician Walter Houser, provided several classical music tracks for the game.</p>
+
+<h2>Release</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a>'s <a href="https://en.wikipedia.org/wiki/Peter_Moore_(businessman)">Peter Moore</a> announced <i>Grand Theft Auto IV</i> at <a href="https://en.wikipedia.org/wiki/E3_2006">E3 2006</a> by rolling up his sleeve to reveal a temporary tattoo of its logo. The game became widely anticipated. <a href="https://en.wikipedia.org/wiki/Wedbush_Morgan">Wedbush Morgan</a> analyst Michael Pachter suggested Take-Two may delay the game from its 16 October 2007 release date to boost 2008 financial results and avoid competing with games like <i><a href="https://en.wikipedia.org/wiki/Halo_3">Halo 3</a></i>‍; Rockstar responded it was still on track for "late October". In August 2007, Take-Two announced the game would miss its date, delayed to their second fiscal quarter (February–April) of 2008, citing technical difficulties with the PlayStation 3 version. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> predicted the delay would benefit other publishers, particularly <a href="https://en.wikipedia.org/wiki/Activision">Activision</a> with <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty_4:_Modern_Warfare">Call of Duty 4: Modern Warfare</a></i>. On 24 January 2008, Rockstar announced the 29 April release date. Some gameplay features were censored for the Australian and New Zealand versions but the restrictions were subsequently removed. <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> published the game in Japan on 30 October 2008.</p>
+
+<p>In August 2008, Rockstar announced that the game would be coming to <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> on 18 November 2008 in North America and 21 November in Europe, with additional development work by <a href="https://en.wikipedia.org/wiki/Rockstar_Toronto">Rockstar Toronto</a>. Microsoft partnered with Rockstar in a US$50 million deal to bring two episodic <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> packs to the Xbox 360: <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_IV:_The_Lost_and_Damned">Grand Theft Auto IV: The Lost and Damned</a></i> on 17 February 2009, and <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_The_Ballad_of_Gay_Tony">Grand Theft Auto: The Ballad of Gay Tony</a></i> on 29 October 2009. Dan Houser wanted the episodes to show "a different side of Liberty City". In January 2010, Rockstar announced that the DLC would be bundled as <i>Episodes from Liberty City</i>, released for PlayStation 3 and Windows on 13 April 2010 in North America and 16 April in Europe. <i>Episodes from Liberty City</i> was also bundled with the main game in <i>The Complete Edition</i>, released on 26 October 2010 in North America and 29 October in Europe. The Xbox 360 version of the game and its DLC were made <a href="https://en.wikipedia.org/wiki/List_of_Xbox_games_compatible_with_Xbox_360">backwards compatible</a> with the <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> on 9 February 2017.</p>
+
+<h3>Promotion</h3>
+
+<p>Industry analysts found <i>Grand Theft Auto IV</i>'s marketing much more subtle than Microsoft's <a href="https://en.wikipedia.org/wiki/Marketing_of_Halo_3">marketing of <i>Halo 3</i></a> (2007), identifying Rockstar's interest in controlling the output at all times. The game was marketed through video trailers and press demonstrations. On 29 March 2007, the debut trailer was released. It was narrated by protagonist Niko, and depicts the open world accompanied by the song "Pruit-Igoe" by <a href="https://en.wikipedia.org/wiki/Philip_Glass">Philip Glass</a>, originally composed for <a href="https://en.wikipedia.org/wiki/Godfrey_Reggio">Godfrey Reggio</a>'s 1982 documentary film <i><a href="https://en.wikipedia.org/wiki/Koyaanisqatsi">Koyaanisqatsi</a></i>. The trailer is credited for starting the <a href="https://en.wikipedia.org/wiki/Rickrolling">Rickrolling</a> meme; after the higher viewership crashed Rockstar's website, several users re-posted the trailer, but some misleadingly played the music video for <a href="https://en.wikipedia.org/wiki/Rick_Astley">Rick Astley</a>'s "<a href="https://en.wikipedia.org/wiki/Never_Gonna_Give_You_Up">Never Gonna Give You Up</a>". The second trailer was released on 28 June 2007, showcasing the game's physics engine and featuring the song "Arm in Arm (Shy Child Remix)" by <a href="https://en.wikipedia.org/wiki/The_Boggs">the Boggs</a>. Dan Houser noted that the game was "still rough" when the first trailer was released, but that cutscenes were "coming on board" by the second trailer's release.</p>
+
+<p>To unveil the game's cover art, Rockstar contracted artists to paint a mural on a wall at a secluded warehouse location, showcasing the art in a video on 28 November 2007. A third trailer was released on 6 December 2007, introducing some of the game's characters, such as Roman and Michelle. The trailer features the song "King Ring" by Russian rap artist <a href="https://en.wikipedia.org/wiki/Seryoga">Seryoga</a>, which Rockstar felt captured the "melting pot mentality" of Liberty City. Dan Houser wanted the third trailer to capture the "visceral qualities" of the game, but focus less on the story, as the first two trailers had done. On 8 February 2008, five teaser trailers for the game were released, each showcasing a particular character or service within the game. Similar teaser trailers were later released in pairs on 21 February, 7 March, and 11 April. Another trailer, released on 27 March 2008, showcases some scenes from the game, such as a bank robbery and police chase. A television commercial from <a href="https://en.wikipedia.org/wiki/GameStop">GameStop</a> debuted on 1 April, focusing on the activities in Liberty City.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Viral_marketing">Viral marketing</a> strategies were used to promote the game. <a href="https://en.wikipedia.org/wiki/Wanted_poster">Wanted posters</a> were placed around New York City promoting the game's characters and website; billboard versions were also posted throughout the city. Murals and posters advertising the game were placed on buildings and public transport. The <a href="https://en.wikipedia.org/wiki/Chicago_Transit_Authority">Chicago Transit Authority</a> (CTA) removed advertisements promoting the game from their property in April 2008; Take-Two filed a lawsuit in response, claiming that the CTA had violated a contract. Visitors to the website of WKTT Talk Radio—a fictional radio station within the game—were offered a chance to leave a voice mail message stating their problems. Prior to leaving the message, callers were asked to read the terms and conditions, which revealed that some of the voice mail message would be selected for use in the game.</p>
+
+<p>In the month prior to launch, Rockstar and GameStop held a competition offering up to US$10,000 and a trip to New York City for the game's launch event. Microsoft held a similar <a href="https://en.wikipedia.org/wiki/Sweepstake">sweepstakes</a> competition, offering consoles, games, <a href="https://en.wikipedia.org/wiki/Microsoft_Points">Microsoft Points</a>, a <a href="https://en.wikipedia.org/wiki/Baseball_bat">baseball bat</a>, and an invitation to the launch event as rewards. The official <i>Grand Theft Auto IV</i> website was redesigned on 8 February 2008 to show a preview of activities and locales within the game's world. To encourage pre-order sales, Rockstar collaborated with several retail outlets to provide a <a href="https://en.wikipedia.org/wiki/Special_edition">special edition</a> version of the game. It includes a metal <a href="https://en.wikipedia.org/wiki/Safe_deposit_box">safe deposit box</a>, an art book, and the soundtrack CD. The publisher also collaborated with <a href="https://en.wikipedia.org/wiki/Sony_Interactive_Entertainment">Sony</a> to release a 40 GB PlayStation 3 console with a copy of the game. GameStop hosted midnight launch events at over 3,500 of its American stores, with contests and giveaways.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical response</h3>
+
+<p><i>Grand Theft Auto IV</i> received "universal acclaim" from critics, according to review aggregator <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. It is the second-highest-rated game on the site, and the highest-rated PlayStation 3 and Xbox 360 game. Reviewers praised the narrative, open world design and combat system. Hilary Goldstein of <i>IGN</i> felt that the game "sets a new benchmark for open-world games", and Andrew Reiner of <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> wrote that the game "completely changes the landscape of gaming".</p>
+
+<p>Reviewers lauded the open world design, some further complimenting the freedom that it allows the player. Seth Schiesel of <i><a href="https://en.wikipedia.org/wiki/The_New_York_Times">The New York Times</a></i> named the city the "real star" of the game. <i>Official Xbox Magazine</i>'s Hicks was impressed by the city, attributing this to the game's <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_in_video_games">artificial intelligence</a>. Robinson of <i>Computer and Video Games</i> considered the environment believable, and felt that the world was "utterly unmatched". Goldstein of <i>IGN</i> felt that, although Liberty City is inspired by New York, it is not beholden to it. He wrote that the city "exists in its own universe and rightfully so". Crispin Boyer of <i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i> directed praise at the city's "breathtaking vistas, incredibly varied scenery, and lived-in look." Conversely, Jesse Costantino of <i><a href="https://en.wikipedia.org/wiki/GameRevolution">GameRevolution</a></i> felt that the game lacked important features common in other open world games.</p>
+
+<p>Reviewers praised the narrative. <i>IGN</i>'s Goldstein accepted that the darker tones to the story were a break from series tradition. <a href="https://en.wikipedia.org/wiki/Jon_Hicks_(journalist)">Jon Hicks</a> of <i><a href="https://en.wikipedia.org/wiki/Official_Xbox_Magazine">Official Xbox Magazine</a></i> felt surprised by the amount of depth to the story. Reiner of <i>Game Informer</i> wrote that the level of freedom in the game contributed to his enjoyment of the story. The morality choices faced by players throughout the narrative were also welcomed. <i>1UP.com</i>'s Boyer felt that they gave the game an element of "replayability". <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i>'s Tom Bramwell considered the morality choices a fair substitute over "bosses with large health bars".</p>
+
+<p>The game's characters—particularly Niko—received positive reactions from critics. Hicks of <i>Official Xbox Magazine</i> and Andy Robinson of <i><a href="https://en.wikipedia.org/wiki/Computer_and_Video_Games">Computer and Video Games</a></i> both called Niko "charismatic" and "likeable", stating that they prefer him over previous protagonists of the series. George Walter of <i><a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a></i> praised the depth of the character, and <i>IGN</i>'s Goldstein felt that the character of Niko feels relatable when faced with difficult decisions. <a href="https://en.wikipedia.org/wiki/Jeff_Gerstmann">Jeff Gerstmann</a> of <i><a href="https://en.wikipedia.org/wiki/Giant_Bomb">Giant Bomb</a></i> felt that Niko was "the only thing that mattered to [him]" as he progressed through the story, with the character becoming one of his favourite features of the game. Schiesel of <i>The New York Times</i> named Niko one of the most realised video game characters attributing this to the game's script, while <i>1UP.com</i>'s Boyer commended the use of character bonding during missions.</p>
+
+<p>Many reviewers found the combat system was more responsive than in previous games, particularly praising the addition of the cover system. Justin Calvert of <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> wrote that the cover system makes the game's combat a "huge improvement" over previous games. Reiner of <i>Game Informer</i> agreed, writing that the targeting system makes players feel responsible for all deaths. <i>IGN</i>'s Goldstein praised the fluidity of the cover system, and felt that the auto aim mechanic is a "great help in larger battles". <i>GamesRadar</i>'s Walter wrote that the cover system has "paved the way to a new style of mission". David McComb of <i><a href="https://en.wikipedia.org/wiki/Empire_(film_magazine)">Empire</a></i> called the combat "sharp and instinctive", and Hicks of <i>Official Xbox Magazine</i> felt that the cover system allows players to execute an attack plan. In addition to the combat system, most reviewers noted the vehicle handling was more realistic than in previous games. Robinson of <i>Computer and Video Games</i> felt that the vehicle handling echoed realism, while Hicks of <i>Official Xbox Magazine</i> called the vehicle selection "excellent". Costantino of <i>GameRevolution</i> praised the improvement of the game's mechanics, particularly the physics engine's advanced vehicle and character animations.</p>
+
+<p>Reviewers praised the sound design. Goldstein of <i>IGN</i> praised the actors' performances and the use of licensed music. <i>GameSpot</i>'s Calvert and <i>GamesRadar</i>'s Walter also commended the licensed music, the latter admiring the humour of the radio's talk stations. Michael Pinson of <i>The Pro Audio Files</i> praised the separate features of the sound design—including the city's ambiance, licensed music, character dialogue, and vehicle and weapon sound effects—applauding the developer's use of uniting the features together. Carolyn Gudmundson of <i>GamesRadar</i> also retroactively praised the soundtrack, commending its suitability to the setting.</p>
+
+<p>The online multiplayer mode received positive reactions from critics. Reiner of <i>Game Informer</i> praised the character customisation available in the multiplayer mode, and noted that it runs "just as smoothly" as the single-player game. <i>1UP.com</i>'s Boyer called the multiplayer modes "excellent", and <i>IGN</i>'s Goldstein named it one of the best. <i>Official Xbox Magazine</i>'s Hicks dubbed the multiplayer as "hugely entertaining", while Walter of <i>GamesRadar</i> praised the "seamless" process of entering a multiplayer match. <i>Giant Bomb</i>'s Gerstmann and <i>GameRevolution</i>'s Costantino felt divided about the multiplayer, the latter naming it a "fantastic idea", but feeling as though connectivity problems resulted in a "broken" experience.</p>
+
+<h4>Windows version</h4>
+
+<p>The Windows version received "universal acclaim", according to Metacritic. Reviewers liked the enhanced visuals and the additional features, but criticised the port for its inferiority over the console versions.</p>
+
+<p>The in-game features added in the port were well received. The addition of the Video Editor was met with positive reactions; <i>GameSpot</i>'s Calvert called it "a great way to get creative", while Kieron Gillen of <i>Eurogamer</i> criticised the unpredictability in its timing. Critics also praised the addition of the customisable radio station, which allows players to listen to their own choice of music; <a href="https://en.wikipedia.org/wiki/Tom_Chick">Tom Chick</a> of <i>1UP.com</i> named it the best feature of the port, and Steven Hopper of <i>GameZone</i> called it a "great touch". The port's upgrade to 32 concurrent players in the online multiplayer mode, as opposed to the console version's 16 players, was also met with positive feedback; <i>Eurogamer</i>'s Gillen said that the "possibility for mayhem... increases", while Will Tuttle of <i><a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a></i> felt that the player increase "changes the action significantly".</p>
+
+<p>The port's enhanced visuals were commended by many reviewers. <i>GameZone</i>'s Hopper considered the visuals an improvement over the original versions. Andy Robinson of <i>Computer and Video Games</i> called the visuals "impressive", while Tom Orry of <i>VideoGamer.com</i> called them "superb". Conversely, the port's system requirements, considered difficult to run with advanced settings, received criticism. <i>Eurogamer</i>'s Gillen said that, though the Windows version is "the most attractive version", it's "annoyingly fiddly to get there". <i>GameSpy</i>'s Tuttle was able to overlook the demanding system requirements in exchange for the game's other features.</p>
+
+<p><i>Grand Theft Auto IV</i> earned awards from several critics and publications. It received <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a> awards from <i><a href="https://en.wikipedia.org/wiki/Digital_Spy">Digital Spy</a></i>, the <a href="https://en.wikipedia.org/wiki/Entertainment_Merchants_Association">Entertainment Merchants Association</a>, <i><a href="https://en.wikipedia.org/wiki/GameTrailers">GameTrailers</a></i>, <i>Giant Bomb</i>, <i><a href="https://en.wikipedia.org/wiki/IGN_Australia">IGN Australia</a></i>, <i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i>, <i><a href="https://en.wikipedia.org/wiki/Los_Angeles_Times">Los Angeles Times</a></i>, <i>The New York Times</i>, and <i><a href="https://en.wikipedia.org/wiki/Time_(magazine)">Time</a></i>. The game led the nominees at the 2008 <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Spike Video Game Awards</a> with eight nominations; it led the winners (tying with <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid_4:_Guns_of_the_Patriots">Metal Gear Solid 4: Guns of the Patriots</a></i>) with three awards: Game of the Year, Best Action Adventure Game, and Best Performance by a Human Male for <a href="https://en.wikipedia.org/wiki/Michael_Hollick">Michael Hollick</a>'s role as Niko. The following year, <i>The Ballad of Gay Tony</i> won Best DLC.</p>
+
+<p><i>Grand Theft Auto IV</i> was nominated for three awards at the 9th <a href="https://en.wikipedia.org/wiki/Game_Developers_Choice_Awards">Game Developers Choice Awards</a> including <a href="https://en.wikipedia.org/wiki/Game_Developers_Choice_Award_for_Game_of_the_Year">Game of the Year</a>, four at the <a href="https://en.wikipedia.org/wiki/12th_Annual_Interactive_Achievement_Awards">12th Annual Interactive Achievement Awards</a> including <a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Game_of_the_Year">Overall Game of the Year</a>, and seven at the <a href="https://en.wikipedia.org/wiki/5th_British_Academy_Games_Awards">5th British Academy Games Awards</a>, tying with <i>Modern Warfare</i> for the most nominations at the latter. At <i>IGN</i>'s Best of 2008, it won eleven awards, including Best Voice Acting across all three platforms and overall, and Best Story for PlayStation 3 and Xbox 360. It was nominated for Choice Video Game at the <a href="https://en.wikipedia.org/wiki/2009_Teen_Choice_Awards">2009 Teen Choice Awards</a>.</p>
+
+<h2>Sales</h2>
+
+<p>Within twenty-four hours of its release, <i>Grand Theft Auto IV</i> sold over 3.6 million copies, equating to approximately $310 million in revenue. Within a week, it generated more than $500 million in worldwide revenue, equating to approximately 6 million copies sold for Take Two. The numbers surpassed analysts' expectations for the title. After one month of availability, the game had sold over 8.5 million copies. It broke three <a href="https://en.wikipedia.org/wiki/Guinness_World_Records">Guinness World Records</a> on 13 May 2008: highest grossing video game in 24 hours, highest revenue generated by an entertainment product in 24 hours, and fastest-selling video game in 24 hours. On 11 March 2011, Take-Two announced that the game had sold over 20 million copies, with the <i>Grand Theft Auto</i> series surpassing a collective total of 100 million copies. As of July 2013, the game has sold over 25 million copies, making it one of the <a href="https://en.wikipedia.org/wiki/Best-selling_video_games">best-selling video games</a>, and one of the best-selling games on both <a href="https://en.wikipedia.org/wiki/List_of_best-selling_PlayStation_3_video_games">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Xbox_360_video_games">Xbox 360</a>. All sales records broken by <i>Grand Theft Auto IV</i> were beaten by its successor, <i>Grand Theft Auto V</i>.</p>
+
+<p>In the United Kingdom, the game became the fastest-selling game of all time, selling over 631,000 copies in twenty-four hours. This broke the record set by <i>Grand Theft Auto: San Andreas</i> at 501,000 copies over the same period. During the first five days of availability, the game sold over 927,000 copies in the United Kingdom. In the United States, <i>Grand Theft Auto IV</i> sold 2.85 million units in its first five days. By the end of 2008, the game had sold over 5.18 million copies in the US. In its first four days of availability in Japan, it sold 133,000 copies on the PlayStation 3 and 34,000 on the Xbox 360, according to <a href="https://en.wikipedia.org/wiki/Media_Create">Media Create</a>.</p>
+
+<p>In the first week of availability, the Windows version of <i>Grand Theft Auto IV</i> debuted at seventh place on the weekly charts; by the second week, it had left the top-ten. Based on <a href="https://en.wikipedia.org/wiki/Unique_user">unique user</a> counts, the game was the most played <a href="https://en.wikipedia.org/wiki/Games_for_Windows_–_Live">Games for Windows – Live</a> game in 2009 and 2012, and the second-most played in 2011.</p>
+
+<h2>Controversies</h2>
+
+<h3>Pre-release</h3>
+
+<p>In 2007, then-Florida lawyer <a href="https://en.wikipedia.org/wiki/Jack_Thompson_(activist)">Jack Thompson</a>, known for his campaigns against the series, stated he would take measures to prevent the sale of <i>Grand Theft Auto IV</i> to minors. On 14 March, Take-Two filed a lawsuit against Thompson to preemptively restrict his attempts to ban the game from sale. Thompson responded by filing a <a href="https://en.wikipedia.org/wiki/Countersuit">countersuit</a> accusing Take-Two of violating federal <a href="https://en.wikipedia.org/wiki/RICO">RICO</a> statutes, committing <a href="https://en.wikipedia.org/wiki/Perjury">perjury</a> and <a href="https://en.wikipedia.org/wiki/Obstruction_of_justice">obstruction of justice</a>, and <a href="https://en.wikipedia.org/wiki/Conspiracy_(civil)">conspiring</a> to deprive him of his civil rights. On 20 April, both parties reached a settlement agreeing to drop their lawsuits: Thompson was barred from suing to ban the sale or distribution of Take-Two's games but able to act as counsel in lawsuits by other parties, while Take-Two agreed to drop the <a href="https://en.wikipedia.org/wiki/Contempt_of_court">contempt of court</a> lawsuit against Thompson regarding alleged improper conduct during the court hearings for Rockstar's game <i><a href="https://en.wikipedia.org/wiki/Bully_(video_game)">Bully</a></i> (2006).</p>
+
+<p>On 18 September 2007, Thompson filed a document with a federal court in Florida, claiming the assassination target of a mission in <i>Grand Theft Auto IV</i> is a lawyer character based upon himself. He threatened to "take necessary and proper means to stop release of the game" if the similarities were not removed. In April 2008, Thompson wrote a letter directed to the mother of Take-Two chairman <a href="https://en.wikipedia.org/wiki/Strauss_Zelnick">Strauss Zelnick</a>, in which he labelled <i>Grand Theft Auto</i> a "murder simulator" and criticised Zelnick's upbringing, comparing his <a href="https://en.wikipedia.org/wiki/Boy_Scouts_of_America">Boy Scouts</a> experience to <a href="https://en.wikipedia.org/wiki/Hitler_Youth">Hitler Youth</a>. Thompson subsequently claimed he sent the letter to Zelnick's lawyer, formulating it as a parody to induce "shame" in Zelnick.</p>
+
+<p>Following the release of the first trailer in March 2007, New York City officials criticised the choice of their city as inspiration for Liberty City; <a href="https://en.wikipedia.org/wiki/Peter_Vallone_Jr.">Peter Vallone Jr.</a>, chairman of <a href="https://en.wikipedia.org/wiki/New_York_City_Council">the council</a>'s public safety committee, compared it to "setting <i><a href="https://en.wikipedia.org/wiki/Halo_(franchise)">Halo</a></i> in <a href="https://en.wikipedia.org/wiki/Disneyland">Disneyland</a>", and <a href="https://en.wikipedia.org/wiki/New_York_City_Police_Commissioner">Police Commissioner</a> <a href="https://en.wikipedia.org/wiki/Raymond_Kelly">Raymond Kelly</a> called it "despicable to glamorize violence in games like these". A spokesman for <a href="https://en.wikipedia.org/wiki/Mayor_of_New_York_City">mayor</a> <a href="https://en.wikipedia.org/wiki/Michael_Bloomberg">Michael Bloomberg</a> said "the mayor does not support any video game where you earn points for injuring or killing police officers". <a href="https://en.wikipedia.org/wiki/Jason_Della_Rocca">Jason Della Rocca</a>, executive director of the <a href="https://en.wikipedia.org/wiki/International_Game_Developers_Association">International Game Developers Association</a>, accused city officials of <a href="https://en.wikipedia.org/wiki/Double_standard">double standards</a> for criticising video games but avoiding the argument for books, films, and television series set in the city.</p>
+
+<p>In April 2008, <a href="https://en.wikipedia.org/wiki/Non-profit_organisation">non-profit organisation</a> <a href="https://en.wikipedia.org/wiki/Mothers_Against_Drunk_Driving">Mothers Against Drunk Driving</a> (MADD) criticised the ability to <a href="https://en.wikipedia.org/wiki/Drive_drunk">drive drunk</a> in the game. MADD requested the <a href="https://en.wikipedia.org/wiki/Entertainment_Software_Rating_Board">Entertainment Software Rating Board</a> change the <a href="https://en.wikipedia.org/wiki/Video_game_content_rating_system">rating</a> of the game to "Adults Only", effectively removing it from sale. They asked Take-Two and Rockstar to consider halting distribution out of a sense of social responsibility and respect for victims of driving under the influence. Rockstar said it respected MADD's work but felt the game's audience "is more than sophisticated enough to understand the game's content", adding "you can't judge <i>Grand Theft Auto IV</i> by a small aspect of the game".</p>
+
+<p>On <a href="https://en.wikipedia.org/wiki/The_Glenn_Beck_Program">his program</a> in May 2008, <a href="https://en.wikipedia.org/wiki/Conservatism_in_the_United_States">conservative</a> American radio host <a href="https://en.wikipedia.org/wiki/Glenn_Beck">Glenn Beck</a> used the game as an example of <a href="https://en.wikipedia.org/wiki/Violence_in_video_games">violence in video games</a> "training our kids to be killers", erroneously stating the player can attack police officers with a <a href="https://en.wikipedia.org/wiki/Chainsaw">chainsaw</a>; <i>Kombo</i>'s David Oxford rebutted that the game is not targeted at children. Beck said games like <i>Grand Theft Auto IV</i> were being used to make militaries more violent; <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i>'s <a href="https://en.wikipedia.org/wiki/James_Stephanie_Sterling">James Stephanie Sterling</a> countered that violent wars occurred prior to the creation of video games. <i>Computer and Video Games</i>'s Robinson compared Beck's "rant" to the game's satirical radio shows.</p>
+
+<p>In June 2008, six teenagers who were arrested for robbery in <a href="https://en.wikipedia.org/wiki/New_Hyde_Park,_New_York">New Hyde Park, New York</a>, claimed they were inspired by <i>Grand Theft Auto IV</i>, according to the <a href="https://en.wikipedia.org/wiki/Nassau_County_Police_Department">Nassau County Police Department</a>. In August, an 18-year-old student was arrested in <a href="https://en.wikipedia.org/wiki/Bangkok">Bangkok</a> for the murder of a taxi driver after attempting to hijack the vehicle; according to the police captain, the student "wanted to find out if it was as easy in real life to rob a taxi as it was in the game". The game was subsequently banned in Thailand. In August 2013, 87-year-old Marie Smothers was killed in <a href="https://en.wikipedia.org/wiki/Slaughter,_Louisiana">Slaughter, Louisiana</a>, when her eight-year-old grandson shot her in the head with a handgun after playing <i>Grand Theft Auto IV</i>; under state law, the boy could not be charged for her death due to his age.</p>
+
+<h2>Bibliography</h2>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

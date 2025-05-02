@@ -1,0 +1,383 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Crysis&#174; 3</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('27606fcd-f8da-4d41-abf3-e7ed179a1cc1/e11b8975-3907-4a84-a07e-66a054fe380a.php');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="27606fcd-f8da-4d41-abf3-e7ed179a1cc1/c9c8afe5-6acd-4f49-b91b-c1ffa0275303.ico"/> Crysis&#174; 3</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="27606fcd-f8da-4d41-abf3-e7ed179a1cc1/2f7613d4-38aa-4e63-85ce-4376a2a256a4"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 4:58:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 22:53:26</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-2/19/2013">2/19/2013</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-86">86</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-74">74</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-FPS">FPS</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Crytek">Crytek</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Crytek UK">Crytek UK</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Crysis_3" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=2070" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/crysis-3" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/1282690/" target="_blank">SteamDB</a><br/><a href="https://www.mobygames.com/game/60626" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Crysis_3" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/crysis-3/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Action">Action</a><br/><a href="#quicklink-Adventure">Adventure</a><br/><a href="#quicklink-Aliens">Aliens</a><br/><a href="#quicklink-Benchmark">Benchmark</a><br/><a href="#quicklink-Co-op">Co-op</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-FPS">FPS</a><br/><a href="#quicklink-Gore">Gore</a><br/><a href="#quicklink-Great Soundtrack">Great Soundtrack</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Online Co-Op">Online Co-Op</a><br/><a href="#quicklink-Open World">Open World</a><br/><a href="#quicklink-Post-apocalyptic">Post-apocalyptic</a><br/><a href="#quicklink-Sci-fi">Sci-fi</a><br/><a href="#quicklink-Shooter">Shooter</a><br/><a href="#quicklink-Singleplayer">Singleplayer</a><br/><a href="#quicklink-Stealth">Stealth</a><br/><a href="#quicklink-Story Rich">Story Rich</a><br/><a href="#quicklink-Strategy">Strategy</a><br/><a href="#quicklink-Violent">Violent</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Crysis 3</b></i> is a 2013 <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> video game developed by <a href="https://en.wikipedia.org/wiki/Crytek">Crytek</a> and published by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a>. It is the third installment in the <a href="https://en.wikipedia.org/wiki/Crysis"><i>Crysis</i> series</a>, and a sequel to the 2011 video game <i><a href="https://en.wikipedia.org/wiki/Crysis_2">Crysis 2</a></i>. The multiplayer portion of the game was developed by <a href="https://en.wikipedia.org/wiki/Crytek_UK">Crytek UK</a>. <i>Crysis 3</i>'s story, which serves to end the <i>Crysis</i> trilogy, revolves around a Nanosuit holder named Prophet and his quest for revenge against the Alpha Ceph, the leader of the Ceph alien race. Gameplay revolves around the use of the Nanosuit, which grants players a variety of abilities such as invisibility. New features introduced in <i>Crysis 3</i> include a new Nanosuit ability called "Rip &amp; Throw", a <a href="https://en.wikipedia.org/wiki/Compound_bow">compound bow</a> and hacking, which allows players to hack into enemies' equipment, drones, and security defenses.</p>
+
+<p><i>Crysis 3</i> is set in a post-apocalyptic New York City, in an effort to merge the urban landscape of <i>Crysis 2</i> and the forest setting of the original <i><a href="https://en.wikipedia.org/wiki/Crysis_(video_game)">Crysis</a></i>. The game introduces the "Seven Wonders", with each wonder having its own unique landscape and tactical layout. Due to complaints about <i>Crysis 2</i>'s linearity, the game's levels were opened up so as to grant players more freedom. The development team also put efforts into creating a more emotional story, and the story's protagonist was inspired by the lead character of <i><a href="https://en.wikipedia.org/wiki/District_9">District 9</a></i>. The game was developed by a team of 100 people during its 23-month development cycle. <a href="https://en.wikipedia.org/wiki/Crytek_UK">Crytek UK</a> developed the game's multiplayer portion.</p>
+
+<p>Officially announced in April 2012, the game was released for <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> in February 2013. A <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> port was in development, but was canned because of relation troubles  between Nintendo and EA. The game received positive reviews upon release. Praise was directed at the weapon selection and customization, menus, level design, visuals and multiplayer, while it was criticized for its story, length, and outdated mechanics in comparison to its predecessors. With a budget of $66 million, the game sold 205,000 copies in its debut month, and became a commercial failure for Electronic Arts. The game was later included in <i>Crysis Trilogy</i>, a <a href="https://en.wikipedia.org/wiki/Video_game_compilation">compilation</a> released in February 2014. A remastered version, titled <i><b>Crysis 3 Remastered</b></i> and following in the steps of <i><a href="https://en.wikipedia.org/wiki/Crysis_2#Crysis_2_Remastered">Crysis 2 Remastered</a></i>, was released in 2021 for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>.
+and also bundled as part of the <i>Crysis Remastered Trilogy</i> compilation.</p>
+
+<h2>Gameplay</h2>
+
+<p>Similar to the earlier games in the <i>Crysis</i> series, <i>Crysis 3</i> is a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a>. Players take control of Prophet as he progresses through <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a> to defeat the Ceph, a technologically advanced alien race. Throughout the game, players can slide, sprint, jump and crouch. When encountering enemies, players can defeat them by using guns or a compound bow, utilizing explosives like <a href="https://en.wikipedia.org/wiki/Grenades">grenades</a> and <a href="https://en.wikipedia.org/wiki/C-4_(explosive)">C4</a>, or by performing a melee attack. Performing certain movements takes up energy from the Nanosuit, the armor worn by Prophet. Some abilities are not available for players to perform or utilize if the Nanosuit's energy is too low; they must wait until energy is refilled. As a result, players are tasked to manage the use of the energy. The game's <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">artificial intelligence</a> was updated allowing enemies to react more quickly to players' attacks. Enemies can take cover when attacked, and can employ strategy to assist and support each other against attacks.</p>
+
+<p>The Nanosuit allows players to identify the threat level, and the weapons held by enemies. Players can tag enemies and items by enabling visor, and can spot enemies using Nano-Vision, which detects the heat of both enemies and allies. Levels are more open-ended than in <i>Crysis 2</i>. Players are given more freedom, and can choose a gameplay style based on direct confrontation, or a more discreet and stealthy approach, in order to deal with enemies and to complete their objectives. There is no definite way to beat the game's seven levels. Instead, players can take different alternate routes to reach their objectives.</p>
+
+<p>Players can fight against enemies utilizing a wide array of gadgets and weapons, and by using the abilities granted by the Nanosuit. They can utilize an invisibility cloak to evade enemies, prevent themselves from being detected, or to perform silent takedowns. The nanosuit also has an armor mode, which reduces the amount of damage taken, in exchange for slower movement speed. New weapons are introduced in <i>Crysis 3</i>, such as a <a href="https://en.wikipedia.org/wiki/Compound_bow">compound bow</a>. Players can use the bow while in cloak mode. When using other firearms, the cloak is disrupted and can no longer function until it cools down. Arrows can be collected by players after use. Players can hack into enemies' technology, one of the game's new features. In addition, players can hack security codes, weapon boxes, Ceph technology, mines, lasers, and sentry turrets, which can all be used to fight against enemies.
+Players can also upgrade and customize their weapons and the Nanosuit. They can change the attachment and ammo types for their weapons. For instance, players can change between explosive arrows and electric arrows for their bow. The Nanosuit can be upgraded by collecting different suit upgrade modules scattered across the world. These upgrades can increase the suit's properties, and strengthen or unlock new abilities for players as they progress through the game.</p>
+
+<h3>Multiplayer</h3>
+
+<p>Gameplay remains similar when playing the multiplayer mode. Unlike the single-player campaign, when players sprint or boost their armor in the multiplayer modes, it does not use any nanosuit energy. There are 8 different modes, with a total of 12 available maps to play on. They are Team Deathmatch, Deathmatch, Crash Site / Spears, Capture the Relay / Extraction, Hunter, Assault, Cell Vs Rebel, Developers Choice, Maximum Team Deathmatch, and Maximum Deathmatch. Scattered throughout each map are special alien weapons with scarce ammo and can be picked up by players. Players also have a new passive ability called Rip and Throw, in which they interact with environmental objects to create obstacles for hostile players and tactical advantages for themselves. This ability to interact with the environment was pushed heavily upon the team by their publisher, EA. A refined kill streak system is introduced in <i>Crysis 3</i>, allowing players to gain rewards by killing hostile players simultaneously while collecting their dog tag. This refined kill system involves collecting dog tags that are dropped by enemy players when killed. The perks gained from this vary from map to map. They are Maximum Radar, Swarmer, Gamma Burst, EMP, and Maximum Nanosuit, which reveals enemy players locations on the mini-map.</p>
+
+<p>In addition to traditional multiplayer modes, a new multiplayer mode, the Hunter mode, is featured in the game. It is an <a href="https://en.wikipedia.org/wiki/Asymmetry">asymmetrical multiplayer</a> mode which pits two teams of players, playing as either hunters, or troopers from CELL, against each other. The three CELL classes are equipped with completely different weapons, and defeated troopers respawn as hunters and have to defeat their former teammates. Hunters are equipped with the nanosuit and infinite cloak, as well as the Hunter Bow, which allows the hunter to fire while they're cloaked. The hunters also have access to a Thermite Arrow tip, and the CELL have various explosives and weapons that change depending on class selected. The PC version of the game can accommodate up to 16 players, while the console versions can only support 12 players.</p>
+
+<h2>Synopsis</h2>
+
+<h3>Setting</h3>
+
+<p>Players take on the role of Prophet as he returns to <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a> in 2047, 24 years after the events of <i>Crysis 2</i>. He discovers the city has been encased in a giant <a href="https://en.wikipedia.org/wiki/Domed_city">dome</a> created by the corrupt CELL corporation. The New York City Liberty Dome is a veritable urban rainforest teeming with overgrown trees, dense swamplands, and raging rivers. Within the Liberty Dome, seven distinct and treacherous environments are known as the Seven Wonders. Prophet is said to be on a "revenge mission" after uncovering the truth behind CELL's motives for building the quarantined Nanodome.</p>
+
+<p>After the events of <i>Crysis 2</i>, Psycho and Prophet travel the world looking for the Alpha Ceph, the ultimate Ceph leader. Prophet and Psycho finally trace the Alpha Ceph in Russia and imprison it. However, shortly afterwards CELL Corporation, now attempting global domination of land and technology, disables Prophet in Siberia and captures all the Nanosuit soldiers, skinning them of their suits to recover the Ceph genetics stored in them. CELL transfers Prophet to a facility in New York, encased within a giant "Nanodome", to skin him. He is saved by a resistance force, led by Claire Fontanelli and Karl Ernst Rasch, as Prophet is the only Nanosuit holder left who can stop CELL. Psycho, who was saved by Claire after being skinned, explains to Prophet that during his absence, CELL used Ceph technology to generate <a href="https://en.wikipedia.org/wiki/Renewable_energy">unlimited energy</a>, and gained a monopoly over the world's power supply. Those who could not pay for energy were enslaved by debt to CELL. The source of CELL's power generation for the entire world, called System X, is located in now abandoned New York. The resistance group wants System X destroyed to free the world from CELL.</p>
+
+<p>After Psycho and Prophet disable System X's core, it turns out that it is a system protocol designed to contain the Alpha Ceph while draining energy off of the alien. However, the secondary defense protocol was initiated, causing the power facility to self-destruct. The Alpha Ceph, free from containment, opens a <a href="https://en.wikipedia.org/wiki/Wormhole">wormhole</a> to the Ceph homeworld. They plan to send the powerful Ceph warrior caste to invade Earth through the wormhole and <a href="https://en.wikipedia.org/wiki/Terraforming">terraform</a> it at the expense of all local life's extinction. With the Alpha Ceph no longer dormant, the Ceph coordinator reactivates, and a coordinated Ceph attack ensues.</p>
+
+<p>After unlocking his potential ability by removing some neural blocks in his suit, Prophet learns that CELL plans to use Archangel, a satellite-based energy distribution device that can draw power from the world's power grid, as a <a href="https://en.wikipedia.org/wiki/Directed-energy_weapon">directed energy weapon</a> to destroy the Alpha Ceph. Firing it would cause a chain reaction that would destroy Earth. They shut off the weapon before it has enough energy to fire.</p>
+
+<p>Along the way, Psycho discovers Claire was one of the scientists who reluctantly skinned him, causing friction in his previously romantic relationship with her. Unfortunately, Karl, who had secretly used Ceph technology to extend his lifespan, is possessed by the Ceph and critically wounds Claire while psychically crippling Prophet. Regaining control after Psycho shot him, he sacrifices himself to distract the Alpha Ceph. Prophet, Psycho, and Claire board the <a href="https://en.wikipedia.org/wiki/VTOL">VTOL</a> and battles with Ceph ships, eventually crashing. Claire dies in the process. Psycho, saddened by her death, laments to Prophet that he is powerless because he no longer possesses a Nanosuit. Upon being told that his lack of a Nanosuit saved him from Karl's control earlier, Psycho, now going by his real name, Michael, finds another VTOL to take Prophet to the Ceph.</p>
+
+<p>Michael and Prophet head towards the Alpha Ceph, but are bogged down by the Ceph Master Mind. Prophet finds his way through the Ceph Army hordes and kills the Alpha Ceph which in turn kills all other Ceph troopers in the area. However, they do not have enough time to destroy the Ceph wormhole structure and the beam powering the wormhole pulls Prophet into space. Now in orbit around Earth, Prophet sees a massive Ceph warship coming through the wormhole. Recalling Archangel's power, Prophet wakes up and hacks into the satellite, and uses it to destroy the warship, collapsing the wormhole and preventing Ceph warrior caste from invading Earth. Prophet is pushed back to Earth. He crashlands in the water near the Lingshan Islands where the events of <i><a href="https://en.wikipedia.org/wiki/Crysis_(video_game)">Crysis</a></i> took place 27 years earlier.</p>
+
+<p>When Prophet wakes the next morning, he is in an abandoned hut in Lingshan. A television playing in the background informs him that CELL's assets were frozen by Senator Strickland as the corporation is under investigation. As the neural blocks are removed from the Nanosuit, the suit's outer layer is changed to reform Prophet's former physical body, resurrecting him. He walks out onto the beach and relinquishes his past by throwing his tags into the water. He then decides to use his actual name "Laurence Barnes" from then on. The game ends with Prophet walking back to the shed and activating his stealth ability.</p>
+
+<p>In a <a href="https://en.wikipedia.org/wiki/Post-credit_scene">post-credit scene</a>, two CELL soldiers are shot by Michael after they escort three board members into a bunker. Michael announces he would like to make a complaint to the board members regarding his treatment at one of their "hospitals".</p>
+
+<h2>Development</h2>
+
+<p><i>Crysis 3</i>'s development began in February 2011, two months before the release of <i>Crysis 2</i>. The development of the game's campaign was handled by <a href="https://en.wikipedia.org/wiki/Crytek">Crytek</a>; its multiplayer was handled by <a href="https://en.wikipedia.org/wiki/Crytek_UK">Crytek UK</a>. Its development budget was significantly smaller than that of <i>Crysis 2</i>, as resources and manpower were relocated to develop <i><a href="https://en.wikipedia.org/wiki/Homefront_2">Homefront 2</a></i> and <i><a href="https://en.wikipedia.org/wiki/Ryse:_Son_of_Rome">Ryse: Son of Rome</a></i>. As a result, only about 100 people worked on the game during its 23 months development. The game's budget was about $66 million.</p>
+
+<p><i>Crysis 2</i> was criticised for abandoning the island setting of the original <i>Crysis</i>. The studio decided to recreate New York City and set the game in a post-apocalyptic environment. To do this, the company introduced a concept called "Nanodome", a dome set up by CELL to isolate New York City, which had fallen to ruins over the years. Plants have grown significantly, leading to an environment that is a mix between an urban environment and the jungle setting of the past two games. The decision was made to create this environment as the team wanted to stay away from typical urban war field shown in other games of the same genre. Instead of having a rainforest in the abandoned wasteland, the Nanodome is used to fix the shape of the forest, and Crytek hoped that it would define the atmosphere and the narrative of the game.</p>
+
+<p>The game's main protagonist is Prophet, a nanosuit holder who had previously appeared in <i>Crysis</i> and <i>Crysis 2</i>. He returns in <i>Crysis 3</i> as Crytek considered him as the most complex character who has the longest heritage in the series. When designing him, the team took inspiration from the protagonist of <i><a href="https://en.wikipedia.org/wiki/District_9">District 9</a></i>. Psycho from the original <i>Crysis</i> and <i><a href="https://en.wikipedia.org/wiki/Crysis_Warhead">Crysis Warhead</a></i> returns as Prophet's companion. The game revolves around Prophet attempting to redeem himself by taking revenge after finding his former squad members are dead. The story explores the themes of redemption and revenge as well as the relationship between humans and technology. Mike Read, the game's producer, summed up the game calling it "human". Unlike <i>Crysis 2</i>'s protagonist Alcatraz who does not speak throughout the game, Prophet is voiced in <i>Crysis 3</i> in an effort to deliver more emotional connection. The company made use of <a href="https://en.wikipedia.org/wiki/Performance_capture">performance capture</a> to record actor's performance, body movements and facial expressions. According to Read, this helps the company to create a more affecting and emotional story. This was not done in the previous games due to technological limitations.</p>
+
+<p>Unlike the original <i>Crysis</i>, which gives players more freedom to explore, <i>Crysis 2</i> was criticized for being too linear. As a result, in developing the game's campaign, Crytek attempted to integrate the two major aspects of the previous installments, the freedom given in the original <i>Crysis</i> and the linearity of <i>Crysis 2</i>. Despite not being as open as the first half of <i>Crysis</i>, maps are significantly larger in this game than in previous installments. Several linear segments were preserved. Crytek referred to the game's map as "action bubbles", which do not necessarily fix players in a small place but allows them to move around freely. Linearity was preserved as developers considered having such segments present could help players to experience "epic" moments and "massive <a href="https://en.wikipedia.org/wiki/Michael_Bay">Michael Bay</a>" moments. Crytek hoped that by opening up levels they could give players a sense of control, allowing them to plan and execute strategy. The game's seven levels were developed simultaneously, and the focus phrases of gameplay, art and optimization of a level was about one to two weeks.</p>
+
+<p>Another theme featured in the game is "hunt" and, as a result, many weapons were built around the concept. The studio wanted to stay away from typical weapon design and did not want a weapon to simply differentiate between <i>Crysis 3</i> and <i>Crysis 2</i>. The team aimed to use weapons to create narrative. The game features a compound bow which is reminiscent of a weapon that a hunter often uses. The game's gameplay is built based on three pillars, access, adapt, and attack. Players are often tasked to do detect, spot, and to learn their enemies' behaviors and patterns before attacking. With the bow, players are encouraged to play the game <a href="https://en.wikipedia.org/wiki/Stealth_game">stealthily</a>, extending the game's combat. A new feature called "hacking" was developed. According to Crytek, hacking plays a huge role throughout the game. The game's combat was also made more fast-paced than that of its predecessors.</p>
+
+<p>One of the major goals in developing <i>Crysis 3</i> was to "push graphics", as the company considered that they can effectively assist and drive gameplay and create immersion for the player. The game is powered by <a href="https://en.wikipedia.org/wiki/CryEngine_3">CryEngine 3</a>, Crytek's proprietary engine. It utilizes some of the newest features of CryEngine 3, such as <a href="https://en.wikipedia.org/wiki/Volumetric_lighting">volumetric fog</a> shadows, improved dynamic vegetation, dynamic <a href="https://en.wikipedia.org/wiki/Caustic_(optics)">caustics</a>, improved area lighting and diffuse shadows. After <i>Crysis 2</i> received some criticism from PC gamers because of the design sacrifices made due to the limitations of the older console hardware, Crytek responded that the PC version of <i>Crysis 3</i> will figuratively "melt down PCs" due to its high system requirements. The PC version of the game required a <a href="https://en.wikipedia.org/wiki/DirectX">DirectX 11</a> compatible video card and operating system. Similar to <i>Crysis 2</i>, the game is a multi-platform title, and Crytek considered the development of the game's console version a huge obstacle they had to "rip the engine to pieces" so as to get the game running on console.</p>
+
+<p>The multiplayer portion of the game was created by <a href="https://en.wikipedia.org/wiki/Crytek_UK">Crytek UK</a>. It was designed to improve the efficiency of the Nanosuit in an online environment. In an effort to create memorable maps, the team designed routes that can only be discovered after a player's first playthrough. Crytek UK hoped that this approach would help players to become more immersed in the game's universe. The Hunter mode, introduced in this game, originated from a <i><a href="https://en.wikipedia.org/wiki/TimeSplitters">TimeSplitters</a>'</i>s Gladiator mode. The decision to make sprint energy separated from the nanosuit energy was due to the development team's desire to create larger levels, and help players to navigate the map in a faster way.</p>
+
+<p>The game's music was composed by Borislav Slavov, who had previously led the soundtrack development of <i>Crysis 2</i>. New music was composed for the game, while some other themes from the past installments were rearranged. The theme of the game's music is changed so as to fit the game's post-apocalyptic setting. The game's music is dynamic and is designed to reflect players' gameplay style. As a result, when players use a radical approach to complete missions, more exciting background music will be played. In contrast, when players are playing stealthily, the background music will be relatively calmer and quieter.</p>
+
+<h2>Marketing and release</h2>
+
+<p>In November 2010, Nathan Camarillo, an executive producer from Crytek, revealed that the <i>Crysis</i> series could potentially be a very long-running franchise, as the company considered the series' universe easy for players to get into and become invested in. He added: "As the franchise grows down the line, there's no reason it can't be as big [as <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty">Call of Duty</a></i>]". The story elements of the game had already been planned in January 2011. Despite that, Cevat Yerli, Crytek's CEO, claimed that if <i>Crysis 2</i> was not a successful title, Crytek would not develop its sequel. In March 2012, Crytek teased an "absolutely fantastic" project and announced that a full reveal of the game would be held in April 2012. The game was accidentally revealed by EA on its web store on 11 April 2012. It was removed immediately from the store but the title was later officially announced on 16 April 2012. Filmmaker <a href="https://en.wikipedia.org/wiki/Albert_Hughes">Albert Hughes</a> was commissioned to produce <i>The 7 Wonders of Crysis 3</i>, a series of six short stylized videos, each of which features a different aspect of the game.</p>
+
+<p>A PC-only closed <a href="https://en.wikipedia.org/wiki/Alpha_test">alpha</a> version of the multiplayer was released to selected <a href="https://en.wikipedia.org/wiki/Origin_(service)">Origin</a> users on 31 October 2012. The test began on 2 November and ended on 9 November 2012. A public multiplayer <a href="https://en.wikipedia.org/wiki/Beta_test">beta</a> containing two maps ("Museum" and "Airport") and two game modes ("Crash Site" and "Hunter") was available for the Xbox 360 and PlayStation 3 console platforms, as well as for the PC through Origin. The beta was made available on 29 January 2013 and ended on 12 February 2013. Crytek and EA announced that 3 million people participated in the beta.</p>
+
+<p><i>Crysis 3</i> was released worldwide on 19 February 2013 in the US and 21 February 2013 in the UK for <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. The <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> version was cancelled after relations between Nintendo and EA became troubled. The <i>Hunter Edition</i>, which features exclusive in-game items, and early access to the compound bow in the multiplayer portion of the game, was released alongside the game. Players who had pre-ordered the game could also get the original <i>Crysis</i> for free. On 4 March 2015, the game was made available for <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a> via <a href="https://en.wikipedia.org/wiki/Nvidia_Shield">Nvidia Shield</a>. <i>The Crysis Trilogy</i> bundle was released on 20 February 2014 consisting of the original, the Deluxe Edition of <i>Crysis</i>, along with other games in the series.</p>
+
+<p>On 30 May 2013, Electronic Arts announced <i>The Lost Island</i> <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC). The multiplayer-only DLC includes two weapons, four maps, and two competitive multiplayer modes called "Frenzy" and "Possession". The downloadable content was released worldwide on 4 July 2013 for PlayStation 3, Windows, and Xbox 360.</p>
+
+<p>EA announced that it will shut down the game's servers on September 7, 2023.</p>
+
+<h3><i>Crysis 3 Remastered</i></h3>
+
+<p>A remastered version, following in the steps of <i><a href="https://en.wikipedia.org/wiki/Crysis_Remastered">Crysis Remastered</a></i>, was announced on May 21, 2021. It  was released for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> on October 15, 2021 both as a bundle with <i>Crysis Remastered</i> and <i><a href="https://en.wikipedia.org/wiki/Crysis_2">Crysis 2 Remastered</a></i>, titled <i>Crysis Remastered Trilogy</i>, and separately. This version of the game was co-developed with <a href="https://en.wikipedia.org/wiki/Saber_Interactive">Saber Interactive</a> and is self-published by Crytek. This version of the game does not feature any multiplayer modes.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical reception</h3>
+
+<p><i>Crysis 3</i> has received generally positive reviews from critics. Aggregating review websites <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> rated the Xbox 360 version 76/100, the PlayStation 3 version 77/100 and the PC version 76/100.</p>
+
+<p>The visuals and graphics of the game were widely praised by reviewers. Christian Donlan of <a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a> praised the game's stable <a href="https://en.wikipedia.org/wiki/Frame_rate">frame rate</a>. Furthermore, he considered the game's environmental design "artful". Matthew Rorie of <a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a> thought that the game was visually stunning. He applauded the team at Crytek for creating an environment that is "both inhospitable and queerly beautiful". Matt Bertz of <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> praised the visuals powered by CryEngine, and considered the game one of the best-looking games ever created. He especially praised its realistic environments, water effects, and character facial animation. Kevin VanOrd of <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> also praised the mix of the decayed urban environment and the rainforest, saying that it made the game striking to look at.</p>
+
+<p>The game's design was praised by various reviewers. Donlan considered the game's support of stealth a welcoming addition, despite calling the game's last level a forgettable experience. Rorie praised the game's map design; he opined that the opened-up levels encourage exploration. Bertz considered the game's world had successfully captured a balance between the settings of its predecessors, and that the larger levels allowed players to deploy strategy before performing attacks. He added that some of the best missions were featured in the later stages of the game. Tristan Ogilvie of <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> thought that the control was almost perfect, despite criticizing the clumsy control of several segments which require players to control vehicles. VanOrd criticized the game for being too easy for players to play.</p>
+
+<p>The game's online multiplayer received positive reviews from critics. Josh Harmon of <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> thought that the game's multiplayer was better than the campaign, and that it made the overall experience more enjoyable. Donlan praised the Hunter mode; he believed that it had delivered a tense experience. Bertz echoed similar thoughts, but felt that the mode's appeal was not as good as typical modes like Domination. As well, he criticized the multiplayer's respawn system and terrain-design. Lorenzo Veloria of <a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a> thought that some of the game modes were unique and entertaining, despite noting some technical issues. Michael Rougeau of <i><a href="https://en.wikipedia.org/wiki/Complex_(magazine)">Complex</a></i> criticized the Hunter mode, calling it "unbalanced". He criticized the game for lacking a co-operative multiplayer mode. David Hinkle of <i><a href="https://en.wikipedia.org/wiki/Joystiq">Joystiq</a></i> also noted some design errors in the Hunter mode.</p>
+
+<p>The story was disliked by critics compared to the game's other aspects. Harmon thought that several emotional segments of the game failed to deliver, as well as criticizing the forgettable storyline and plot twists. Despite that, he praised the game's finale and considered that it brought a proper closure to the <i>Crysis</i> trilogy. In contrast, Donlan commented that it was not quite the conclusion the series deserved. Rorie thought that the story was more mature than its predecessors, despite having a relatively weak start and short length of about six hours. Bertz opined that the story was the most cohesive of the titles in the series. Veloria, however, criticized the game's narrative; he added that it was uninspiring due to the lack of character development and interesting dialogue. In contrast, Ogilvie thought that the game's dialogue and voice-acting were excellent, citing the game's relateable characters that its predecessors failed to achieve. He considered the game's storytelling a massive improvement for the series.</p>
+
+<p>Many reviewers considered <i>Crysis 3</i> was an evolution of the series instead of a groundbreaking revolution. Rorie criticized the game for being unambitious, and that despite the game's overall refinements, it had not strayed far enough from its predecessors. He concluded that <i>Crysis 3</i> did not achieve the revolution brought by the original <i>Crysis</i>. Veloria thought that the title failed to bring any new element to the genre, but the overall experience delivered by the game was still satisfying. Jose Otero of <a href="https://en.wikipedia.org/wiki/1Up.com">1Up.com</a> thought the game was fun despite its lack of original ideas stating: "If you go in understanding that Crysis 3 delivers blockbuster entertainment and multiplayer that iterates on Call of Duty's perks system, you'll be fine. But if you want Crysis to stake a claim all its own, you might be disappointed." Evan Lahti of <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i> commented that the game did not surprise players, and that the title presented a feeling of <i>Crysis 2: Episode 2</i> instead of a proper sequel.</p>
+
+<p>During its debut release week and the next, <i>Crysis 3</i> was the best-selling retail game in the UK closely followed by <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_Rising:_Revengeance">Metal Gear Rising: Revengeance</a></i>. It sold 205,000 copies in 12 days in North America during its debut month. The title, along with <i><a href="https://en.wikipedia.org/wiki/Dead_Space_3">Dead Space 3</a></i>, another EA title that was released in the same month, failed to meet the company's sales expectations. Cevat Yerli, Crytek's CEO, was also disappointed by the sales of <i>Crysis 3</i>. Nevertheless, he considered <i>Crysis 3</i> the best game the studio had produced so far.</p>
+
+<h2>Sequel</h2>
+
+<p>A sequel under the <a href="https://en.wikipedia.org/wiki/Working_title">working title</a> <i><a href="https://en.wikipedia.org/wiki/Crysis_4">Crysis 4</a></i> is currently in development.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

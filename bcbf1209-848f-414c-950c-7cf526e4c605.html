@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Paper Mario</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('bcbf1209-848f-414c-950c-7cf526e4c605/db065ffb-6f72-4928-9c18-ff5ef575f99c.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="bcbf1209-848f-414c-950c-7cf526e4c605/7c1972c8-7d0c-4158-afc8-00afe1c2d884.ico"/> Paper Mario</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="bcbf1209-848f-414c-950c-7cf526e4c605/86cb6fd3-fabe-43b1-baca-bce6340d65d3.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:52:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:42:28</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo 64">Nintendo 64</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-8/11/2000">8/11/2000</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-93">93</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Role playing">Role playing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Intelligent Systems">Intelligent Systems</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Paper_Mario_(video_game)" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/20001019054744/http://www.nintendo.com/n64/papermario/index.html" target="_blank">Paper Mario profile</a><br/><a href="https://www.nintendo.co.jp/n01/n64/software/nus_p_nmqj/index.html" target="_blank">Official Nintendo Japan Mario Story site</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Naohiko Aoyama">[People] artist: Naohiko Aoyama</a><br/><a href="#quicklink-[People] composer: Yuka Tsujiyoko">[People] composer: Yuka Tsujiyoko</a><br/><a href="#quicklink-[People] director: Hironobu Suzuki">[People] director: Hironobu Suzuki</a><br/><a href="#quicklink-[People] director: Ryota Kawade">[People] director: Ryota Kawade</a><br/><a href="#quicklink-[People] director: Takahiro Ogi">[People] director: Takahiro Ogi</a><br/><a href="#quicklink-[People] director: Toshitaka Muramatsu">[People] director: Toshitaka Muramatsu</a><br/><a href="#quicklink-[People] producer: Kenji Miki">[People] producer: Kenji Miki</a><br/><a href="#quicklink-[People] producer: Shigeru Miyamoto">[People] producer: Shigeru Miyamoto</a><br/><a href="#quicklink-[People] programmer: Kaoru Kita">[People] programmer: Kaoru Kita</a><br/><a href="#quicklink-[People] programmer: Kenji Nakajima">[People] programmer: Kenji Nakajima</a><br/><a href="#quicklink-[People] writer: Kaori Aoki">[People] writer: Kaori Aoki</a><br/><a href="#quicklink-[People] writer: Kumiko Takeda">[People] writer: Kumiko Takeda</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Paper Mario</b></i> is a 2000 <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing video game</a> developed by <a href="https://en.wikipedia.org/wiki/Intelligent_Systems">Intelligent Systems</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a> home video game console. <i>Paper Mario</i> is the first game in the <i><a href="https://en.wikipedia.org/wiki/Paper_Mario">Paper Mario</a></i> series. First released in Japan in 2000 and then internationally in 2001, <i>Paper Mario</i> was later re-released for Nintendo's <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> in July 2007, the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> Virtual Console in April 2015, and the <a href="https://en.wikipedia.org/wiki/Nintendo_Classics">Nintendo Classics</a> service on December 10, 2021.</p>
+
+<p><i>Paper Mario</i> is set in the <a href="https://en.wikipedia.org/wiki/Mushroom_Kingdom">Mushroom Kingdom</a> as the protagonist <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> tries to rescue <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Peach</a> from <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a>, who has imprisoned the seven "Star Spirits", lifted her castle into the sky and has defeated Mario after stealing the Star Rod from Star Haven and making himself <a href="https://en.wiktionary.org/wiki/invincible">invincible</a>. To save the Mushroom Kingdom, rescue Peach, get the castle back, and defeat Bowser, Mario must locate the Star Spirits, who can negate the effects of the stolen Star Rod, by defeating Bowser's minions guarding the star spirits. The player controls Mario and a number of partners to solve puzzles in the game's <a href="https://en.wikipedia.org/wiki/Overworld">overworld</a> and defeat enemies in a turn-based battle system. The battles are unique in that the player can influence the effectiveness of attacks by performing required controller inputs known as "action commands".</p>
+
+<p>Although Nintendo planned to have <a href="https://en.wikipedia.org/wiki/Square_(video_game_company)">Square</a>, now <a href="https://en.wikipedia.org/wiki/Square_Enix">Square Enix</a>, develop <i>Paper Mario</i>, the company was occupied with developing <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy_VII">Final Fantasy VII</a></i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a>; Intelligent Systems developed the game instead. The game received acclaim, being praised for its concept, battle system, and graphics, and was rated the 63rd best game made on a Nintendo system in <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i>'s "Top 200 Games" list in 2006. It was followed by a line of sequels, starting with <i><a href="https://en.wikipedia.org/wiki/Paper_Mario:_The_Thousand-Year_Door">Paper Mario: The Thousand-Year Door</a></i> for the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> in 2004.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Paper Mario</i> combines traditional <a href="https://en.wikipedia.org/wiki/Role-playing_game">role-playing game</a> (RPG) elements with concepts and features from the <a href="https://en.wikipedia.org/wiki/Mario_(franchise)"><i>Mario</i> series</a>. For the majority of the game, the player controls Mario, who can jump and use his hammer to overcome physical obstacles placed in the game's <a href="https://en.wikipedia.org/wiki/Overworld">overworld</a>. Many of the game's puzzles and boundaries are based upon the abilities of Mario's partners, who each have a specialized skill required for progression in the game. The player accumulates partners as they advance into different locations; only one partner can accompany Mario in the overworld, although the player can interchange them at any time.</p>
+
+<p>These characters also assist Mario in the game's turn-based battles, where the damage inflicted against them results in temporary paralysis as the characters do not have individual <a href="https://en.wikipedia.org/wiki/Health_(gaming)">HP</a> statistics. Attacks in the game are similar to those in traditional RPGs, although the player can influence the power of a move when attacking or defending by timing a button-press accurately or performing some other action command as required. Mario and his partners have a finite capacity to perform special moves, with each of these consuming a particular number of flower points (FP) when performed. Such statistics can be increased by earning Star Points (<a href="https://en.wikipedia.org/wiki/Experience_points">experience points</a>) in combat to <a href="https://en.wikipedia.org/wiki/Experience_point#Level-based_progression">level up</a>. There is also an on-screen gauge to display Star Energy, which is required to perform another type of move that accumulates in number as the player advances through the game. The player can locate hidden battle upgrades in the game's overworld, which promotes one partner character to a new rank at a time.</p>
+
+<p>Progression through <i>Paper Mario</i> depends upon interaction with the game's <a href="https://en.wikipedia.org/wiki/Non-player_character">non-player characters</a> (NPCs), who would often offer clues or detail the next event in the storyline. As in other RPGs, the player can find or purchase items from NPCs to help in and outside of combat. Badges can also be obtained that yield bonuses ranging from added moves to gradual health restoration during combat; each consumes a set number of Badge Points (BP), meaning Mario can only equip a limited number of badges at a time. <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Peach</a> is playable at particular points in the game as a recurring quest line. The objectives and actions of each transition to Peach vary, although most are <a href="https://en.wikipedia.org/wiki/Stealth_game">stealth</a>-based.</p>
+
+<h2>Plot and setting</h2>
+
+<p>Set in the <a href="https://en.wikipedia.org/wiki/Mushroom_Kingdom">Mushroom Kingdom</a>, the game begins when Mario and Luigi receive an invitation from Peach for a party at the castle. There, when Mario and Peach are alone, <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a> lifts her castle, overpowers Mario with his invincibility that he gained by stealing the Star Rod and imprisoning the seven Star Spirits; Mario is thrown away from the castle in the sky and lands in Goomba Village, where he is aided by Goombario and his family. Mario and Goombario make their way to Shooting Star Summit, where the weakened seven Star Spirits' request Mario to find them in order to stop Bowser's invincibility. Mario and his friends go to the four Koopa Bros.' fortress where they save the first Star Spirit. and they find the second one in the Dry, Dry Desert inside a secret fortress ruled over by Tutankoopa. The third one is being kept by Tubba Blubba, a nemesis scaring the Boos and eating them when he is "invincible" (his heart is his true weak point). The fourth one is kept by the General Guy and his minions living in the Toy Box. Mario and his new friends travel to Lavalava Land, an island where its inhabitants are threatened by an impending volcanic eruption. After saving the fifth Spirit, they journey to Flower Fields retrieving the sixth one. Mario becomes a suspect of murder when he finds the Shiver City's mayor unconscious; after solving the mystery (which was the mayor's own accident), Mario gets to the Crystal Palace where he saves the last Star Spirit from the Crystal King. As he has saved every Star Spirit, Mario then departs to Peach's Castle.</p>
+
+<p>Meanwhile, Peach tries in numerous attempts to escape the castle alongside Twink. The player controls Peach in a variety of minigames each time Mario saves
+a Star Spirit, such as baking a cake for a Shy Guy or even cloning the appearance of Bowser's minions with a magic umbrella. At the end of every gameplay segment with Peach, she overhears Bowser speaking about the bosses Mario beats before being discovered and then transported to her room again.</p>
+
+<p>Mario enters the castle and confronts Bowser; with the power of the seven Star Spirits, Mario manages to beat Bowser by stopping his invincibility while Twink, with support from Peach, battles Bowser's sidekick Kammy Koopa. Mario and Peach, alongside their friends, eventually win against Bowser and Kammy. The Star Spirits restore the castle to its spot. On another day, Mario and Luigi receives a letter for another party, which lead to a parade as the game's credits rolls, and Mario and Peach watch fireworks together at his home.</p>
+
+<h3>Story and characters</h3>
+
+<p>The game's story centers on Mario as he tries to reclaim the seven Star Spirits, who have been sealed in playing cards by Bowser and his assistant, <a href="https://en.wikipedia.org/wiki/Kammy_Koopa">Kammy Koopa</a>. Their combined power is required to negate the effects of the Star Rod, which makes Bowser invincible. Once Mario rescues all of them, he uses their assistance to defeat Bowser and rescue Peach. The story is presented in the context of a <a href="https://en.wikipedia.org/wiki/Novel">novel</a>, with each adventure involving the rescue of a Star Spirit denoted as a single chapter. Peach is playable between chapters, where she allies with a star kid named Twink in the castle to relay vital information to Mario regarding his quest.</p>
+
+<p>Mario allies with eight partners in total, each of whom represents a different type of enemy from the <i>Mario</i> franchise. These allies are:</p>
+
+<ul>
+  <li>Goombario, a <a href="https://en.wikipedia.org/wiki/Goomba">Goomba</a> who has the ability to tell the player about any character, environment, and enemy;</li>
+  <li>Kooper, a <a href="https://en.wikipedia.org/wiki/Koopa_Troopa">Koopa Troopa</a> with the ability to throw his shell at otherwise unreachable objects;</li>
+  <li>Bombette, a <a href="https://en.wikipedia.org/wiki/Bob-omb">Bob-omb</a> with the ability to blow up weak parts of walls;</li>
+  <li>Parakarry, a <a href="https://en.wikipedia.org/wiki/Koopa_Troopa">Paratroopa</a> with the ability to help Mario cross gaps too large to jump across;</li>
+  <li>Lady Bow, a <a href="https://en.wikipedia.org/wiki/List_of_Mario_franchise_characters#Enemy_characters">Boo</a> with the ability to make Mario become invisible and transparent;</li>
+  <li>Watt, a Li'l Sparky with the ability to light up rooms and reveal hidden objects;</li>
+  <li>Sushie, a Cheep Cheep with the ability to allow Mario to swim;</li>
+  <li>and Lakilester, a <a href="https://en.wikipedia.org/wiki/Lakitu">Lakitu</a> with the ability to allow Mario to traverse dangerous environments, such as spikes and lava.</li>
+</ul>
+
+<p>After Peach's castle is sent back to the ground and Mario defeats Bowser, he recounts his tale to <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a>, who had remained at home while Mario went on the adventure. Peach throws a huge party to honor Mario and his allies for saving the entire kingdom, which is then followed by a <a href="https://en.wikipedia.org/wiki/Parade">parade</a> during the credits.</p>
+
+<h2>Development</h2>
+
+<p><i>Paper Mario</i> was developed by <a href="https://en.wikipedia.org/wiki/Intelligent_Systems">Intelligent Systems</a>. <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> served as producer and consulted on the project. Kumiko Takeda and Kaori Aoki wrote the game's script, while Naohiko Aoyama was the art director responsible for the game's distinctive graphical style. Nintendo approached <a href="https://en.wikipedia.org/wiki/Square_(video_game_company)">Square</a>, who had developed <i><a href="https://en.wikipedia.org/wiki/Super_Mario_RPG">Super Mario RPG</a></i> for the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Nintendo Entertainment System</a>, to develop the game, but they turned down the offer due to work on <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy_VII">Final Fantasy VII</a></i>. Instead, the company initially hired <a href="https://en.wikipedia.org/wiki/HAL_Laboratory">HAL Laboratory</a> to write the main story before development was handed over to <a href="https://en.wikipedia.org/wiki/Intelligent_Systems">Intelligent Systems</a> to develop the game. The game was initially called <i>Super Mario RPG 2</i>, was slated for release on the <a href="https://en.wikipedia.org/wiki/64DD">64DD</a>, and was first revealed at <a href="https://en.wikipedia.org/wiki/Nintendo_Space_World">Nintendo Space World</a> '97, a video game <a href="https://en.wikipedia.org/wiki/Trade_fair">trade show</a> hosted by Nintendo. However, the development moved to cartridge format instead. Aoyama took inspiration from the graphics of <i><a href="https://en.wikipedia.org/wiki/PaRappa_the_Rapper">PaRappa the Rapper</a></i>, <a href="https://en.wikipedia.org/wiki/Traditional_animation">cel animation</a>, and the work of <a href="https://en.wikipedia.org/wiki/Walt_Disney">Walt Disney</a> and <i><a href="https://en.wikipedia.org/wiki/Looney_Tunes">Looney Tunes</a></i> for the art style. According to producer Hiroyasu Sasano, the series' distinct paper-like style for character graphics came about from the belief that players "might be getting tired" of the computer-generated 3D graphics seen on consoles like the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> as it was difficult for polygons to bring out the characters' "cuteness". Miyamoto stated that the game was being developed with amateur gamers in mind. The game later released for the <a href="https://en.wikipedia.org/wiki/IQue_Player">iQue Player</a> in 2004. <i>Paper Mario</i> saw a number of re-releases for later Nintendo consoles: the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> in July 2007, the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> Virtual Console in April 2015, and via the <a href="https://en.wikipedia.org/wiki/Nintendo_Classics">Nintendo Classics</a> service in December 2021. In 2023, <i>Paper Mario</i> was fully <a href="https://en.wikipedia.org/wiki/Decompiled">decompiled</a>, making an unofficial PC port and mods possible.</p>
+
+<p>The game had a marketing budget of $4 million.</p>
+
+<h3>Music</h3>
+
+<p>The game's soundtrack was first released in Japan on September 21, 2000, with the game's original title by <a href="https://en.wikipedia.org/wiki/Enterbrain">Enterbrain</a>, and distributed by the magazine <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i>. It was followed in the United States a few months later as a <a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a> exclusive with the illustration from the international game cover. It included both the original music to the game, as well as sound effects, in 78 tracks on two discs. All of the game's compositions were written by <a href="https://en.wikipedia.org/wiki/Yuka_Tsujiyoko">Yuka Tsujiyoko</a>, with a reprised arrangement of previous <i>Super Mario</i> themes by <a href="https://en.wikipedia.org/wiki/Koji_Kondo">Koji Kondo</a>. The game's other event and sound effects music were composed by Taishi Senda. The game's music mostly received positive reviews, with Lucas M. Thomas of <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> describing it as "vividly appointed with catchy, expressive tunes and comical audio cues."</p>
+
+<h2>Reception and legacy</h2>
+
+<p><i>Paper Mario</i> received critical acclaim, receiving a 93/100 on <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> based on 15 reviews. The game was the top-selling game in Japan on the week of its release, selling more than 276,000 copies, and the top-selling game for two weeks in other regions. It was ranked #141 on <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i>'s "Greatest 200 Videogames of their Time" in February 2006, the 63rd best game made on a Nintendo system in <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i>'s "Top 200 Games" list, and the 13th greatest Nintendo 64 game of all time by the same magazine. It currently ranks as the sixth-highest scoring Nintendo 64 game on Metacritic, the ninth highest rated video game of 2001, and the highest-scoring Nintendo 64 game released that year.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>'s <a href="https://en.wikipedia.org/wiki/Matt_Casamassina">Matt Casamassina</a> praised the game's accessibility, commenting that "it serves as the perfect introductory game to any person hoping to explore the genre". Nonetheless, other reviewers complained about the "brain-dead easy" puzzles and bosses requiring "basic strategy at best". The game's nostalgic value was lauded, with reviewers noting the sense of familiarity with the <i>Mario</i> series present in the game's settings and characters. The game has often been compared to the previous Mario RPG title, <i><a href="https://en.wikipedia.org/wiki/Super_Mario_RPG">Super Mario RPG</a></i>. <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i>''s Tom Bramwell judged that "<i>Paper Mario</i> is a vastly superior game to <i>SMRPG</i>", while <i>IGN</i> compared the game's simple plot unfavourably with the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">SNES</a> game, and <i>RPGFan</i> claimed that some of <i>Paper Mario</i>'s story was copied from it. <i>RPGFan</i> also questioned the name of <i>Paper Mario</i>, as there were, in their opinion, insufficient gameplay features or aspects which used the paper theme to justify the name.</p>
+
+<p>Critics lauded the game's blend of RPG and platforming aspects. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> noted the "exciting and somewhat strategic" battle system, which requires the player exploit the enemies' weak points. The "refreshing" action command features was praised in particular for adding originality to a battle formula that was present in many games of the same genre. <i>IGN</i> claimed the game was "the best RPG for Nintendo 64", calling it "fantastically deep, intuitively designed, and wonderfully rewarding". Despite this, enemy design itself was bemoaned for being "corny and generic", with notable exceptions to some of the <i>Paper Mario</i>'s original boss characters. <i>Eurogamer</i> noted how "Of the various characters you meet, none is of less importance than any other", welcoming the partner characters and their relating puzzles. <i>GameSpot</i> praised the game's use of humour and side quests, with references to the control of Peach in particular.</p>
+
+<p>The reaction to the game's visuals was generally positive. <i>IGN</i> noted some paper-based visual effects such as when Mario folds in a bed to sleep, but complained about character zoom-ins, which revealed "a pixelated mass of colors". Although reviewers claimed that the novel graphical style was initially confusing, most welcomed the style eventually, with <i>GameSpot</i> claiming that it was "extremely well done". The audio was also mainly praised, although reviewers criticised the lack of voice acting and character-specific sound effects. <i>RPGFan</i> was particularly critical of the game's "generic filler music", despite enjoying use of multiple songs simultaneously.</p>
+
+<p>Chester Barber reviewed the Nintendo 64 version of the game for <i><a href="https://en.wikipedia.org/wiki/Next_Generation_(magazine)">Next Generation</a></i>, rating it five stars out of five, and stated that "One of the best RPGs ever, and definitely the best RPG available for Nintendo 64. Even if you've only been buying games for newer systems, this is a must-buy." <i>GameSpot</i> named <i>Paper Mario</i> the best Nintendo 64 game of 2001. It was a runner-up for the publication's annual "Best Role-Playing Game" prize among <a href="https://en.wikipedia.org/wiki/Console_game">console games</a>, which went to <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy_X">Final Fantasy X</a></i>. During the <a href="https://en.wikipedia.org/wiki/5th_Annual_Interactive_Achievement_Awards">5th Annual Interactive Achievement Awards</a>, <i>Paper Mario</i> was nominated for the "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Role-Playing_Game_of_the_Year">Console Role-Playing</a>" award by the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a>.</p>
+
+<p>The game was also well received upon release for the <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a>, with <i>IGN</i>'s Lucas M. Thomas stating "it's held up very well even placed into context against its GameCube and Wii era sequels, and it's an RPG for goodness sakes". <i>Paper Mario</i> also proved popular on the Virtual Console, reaching a high of "second most downloaded game" in the US in August 2007.</p>
+
+<p>In 2023, enthusiasts fully decompiled the game's ROM into human-readable C code.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

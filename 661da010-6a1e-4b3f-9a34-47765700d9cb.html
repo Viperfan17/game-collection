@@ -1,0 +1,352 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Super Street Fighter II Turbo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('661da010-6a1e-4b3f-9a34-47765700d9cb/e341be52-8a99-4764-bae6-ee010137560f.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="661da010-6a1e-4b3f-9a34-47765700d9cb/eaaa5b37-7ce5-4594-bdc3-1845fbb4fc1f.png"/> Super Street Fighter II Turbo</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="661da010-6a1e-4b3f-9a34-47765700d9cb/4127fe1a-26d5-4639-911f-0ce0dd420e69.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:52:10</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 2:26:58</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo SNES">Nintendo SNES</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-2/23/1994">2/23/1994</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-84">84</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Arcade">Arcade</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Fighting">Fighting</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Eurocom">Eurocom</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-GameTek">GameTek</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Super_Street_Fighter_II_Turbo" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=9458" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/super-street-fighter-ii-turbo" target="_blank">IGDB</a><br/><a href="http://strategywiki.org/wiki/Super_Street_Fighter_II_Turbo" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/1159" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Super_Street_Fighter_II_Turbo" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Pixel art">Pixel art</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Side view">Side view</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Super Street Fighter II Turbo</b></i>, released in Japan as <i><b>Super Street Fighter II X: Grand Master Challenge</b></i> is a 1994 <a href="https://en.wikipedia.org/wiki/Fighting_game">fighting game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> for <a href="https://en.wikipedia.org/wiki/Arcade_video_game">arcades</a>. It is the fifth installment in the <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_II">Street Fighter II</a></i> sub-series of <i><a href="https://en.wikipedia.org/wiki/Street_Fighter">Street Fighter</a></i> games, following <i><a href="https://en.wikipedia.org/wiki/Super_Street_Fighter_II">Super Street Fighter II</a></i> (1993). Like its predecessor, it ran on the <a href="https://en.wikipedia.org/wiki/CP_System_II">CP System II</a> hardware.</p>
+
+<p><i>Super Turbo</i> introduced several new gameplay mechanics not present in previous versions of <i>Street Fighter II</i>, including the addition of combination moves called super combos and air combos. It also introduced the secret character <a href="https://en.wikipedia.org/wiki/Akuma_(Street_Fighter)">Akuma</a>, who would go on to become a recurring character in later <i>Street Fighter</i> installments and other Capcom fighting games. While not as commercially successful as previous iterations of <i>Street Fighter II</i>, <i>Super Turbo</i> was well-received by critics and had a major impact on the competitive fighting game community. <i>Super Street Fighter II Turbo</i> is still played competitively, and is the oldest fighting game with an active international tournament scene.</p>
+
+<p>The game was ported to <a href="https://en.wikipedia.org/wiki/3DO">3DO</a> that same year followed by home computer ports for <a href="https://en.wikipedia.org/wiki/DOS">DOS</a> and the <a href="https://en.wikipedia.org/wiki/Amiga">Amiga</a>. In 1997 it was ported to the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> and <a href="https://en.wikipedia.org/wiki/Sega_Saturn">Sega Saturn</a> as part of the <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_Collection">Street Fighter Collection</a></i>, and in 2000 to the <a href="https://en.wikipedia.org/wiki/Dreamcast">Dreamcast</a> in Japan under the title of <i>Super Street Fighter II X for Matching Service</i>. A <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> version was also made. A remake of <i>Super Street Fighter II Turbo</i> was released in 2008 for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> titled <i><a href="https://en.wikipedia.org/wiki/Super_Street_Fighter_II_Turbo_HD_Remix">Super Street Fighter II Turbo HD Remix</a></i>.</p>
+
+<h2>Characters</h2>
+
+<p><i>Super Street Fighter II Turbo</i> allows players to play as versions of characters from the original <i>Super Street Fighter II</i> in addition to their regular counterparts in the game by inputting a code for each character. The character would play as they would in <i>Super Street Fighter II</i>, with subtle differences. For example, the alternate version of Sagat in <i>Super Turbo</i> can now cancel his light kick into any special move, whereas in <i>Super Street Fighter II</i> he couldn't.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p><i>Super Street Fighter II Turbo</i> also saw the introduction of the series' first secret character, <a href="https://en.wikipedia.org/wiki/Akuma_(Street_Fighter)">Akuma</a> (Gouki in Japan). Akuma is playable only as a secret character.  He can be used by inputting a code at the player select screen. Even in this weakened form, he is the most powerful character in the game, and has historically been banned in all competitive tournaments of the game, including updated versions of <i>Super Turbo</i>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Super Street Fighter II Turbo</i> featured several changes and additions to the play mechanics inherited from <i><a href="https://en.wikipedia.org/wiki/Super_Street_Fighter_II">Super Street Fighter II</a></i>. The <a href="https://en.wikipedia.org/wiki/Heads-up_display">HUD</a> featured new graphics. <i>Super Street Fighter II'</i>s <a href="https://en.wikipedia.org/wiki/Attract_mode">opening sequence and unused sequence</a> featuring lead character <a href="https://en.wikipedia.org/wiki/Ryu_(Street_Fighter)">Ryu</a> launching a <i><a href="https://en.wikipedia.org/wiki/Hadouken">Hadouken</a></i> projectile towards the screen (which had replaced two generic characters fighting in front of a crowd) was intercut with images of Chun-Li and Cammy, as well as flashes of the new hidden character Akuma. New animation frames were drawn for all the victory poses and the basic and special moves of the characters. For example, <a href="https://en.wikipedia.org/wiki/Chun-Li">Chun-Li</a> received a new animation for her <i>Kikōken</i> (fireball) projectile.
+A large criticism of <i>Super Street Fighter II</i> was the slower game speed in comparison to the previous release, <i>Street Fighter II: Hyper Fighting.</i>  <i>Super Turbo</i> was the first <i>Street Fighter</i> game released in arcades to feature an adjustable speed setting. The game speed can be adjusted through the system configuration by the game's operator or (if the speed setting is set to "Free Select") can be chosen by the player at the start of the game. The player has a choice between four speed settings.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p><i>Super Street Fighter II Turbo</i> introduced "Super Combos". After building up the "Super" meter, players can execute a multi-hit automatic combo which deals a large amount of damage.</p>
+
+<h2>Home versions</h2>
+
+<h3>Direct ports</h3>
+
+<h4>3DO Interactive Multiplayer</h4>
+
+<p>The 3DO port was released on November 13, 1994 in Japan, with subsequent releases in North America and Europe during the same year. While the graphics are more accurately reproduced compared to the previous console ports for 16-bit platforms, the game doesn't support parallax scrolling and is missing animations on characters. Also, the Super versions of characters are not present.</p>
+
+<p>While often claimed to suffer from poor, stuttery performance, due to CDs of the time often having such issues, modern testing disputes these claims, and verifiable reports from the time are rare, if any exist at all.</p>
+
+<p>The soundtrack features the same remixed music from the FM Towns version of <i>Super Street Fighter II</i> (with a few additional remixes specific to <i>Super Turbo</i>). This port also features "CPS1 Chains", a feature that only existed in the arcade versions up until <i>Hyper Fighting</i>.</p>
+
+<h4>MS-DOS and Amiga</h4>
+
+<p>The <a href="https://en.wikipedia.org/wiki/MS-DOS">MS-DOS</a> version, developed by <a href="https://en.wikipedia.org/wiki/Eurocom">Eurocom</a> and published by <a href="https://en.wikipedia.org/wiki/GameTek">GameTek</a>, was released in May 1995 in North America and Europe.  There are secret commands to use each character's original color scheme or attacks that were removed from the 3DO version due to memory constraints. The option menus have custom settings (such as enabling and disabling parallax scrolling) that allows the game to be played with low hardware specifications. The biggest change is the game's resolution; the game is played with a resolution of 320×200 on AT/PC-compatible machines and, since the graphic data is ported straight from the arcade version, all of the characters appear large due to the narrow screen size. Because of this, the distance between both fighters at the beginning of a match is slightly narrower than in the arcade version. There were many glitches in the initial shipments of the DOS port, such as characters landing and recovering normally after being knocked out with a basic attack in mid-air. A patch file was distributed that corrected these glitches, which were later fixed in version 1.5 of the retail release. A patch file for version 1.6 was released as well. The music was remixed, although the arrangements are different from the ones used in the 3DO soundtrack.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Amiga">Amiga</a> port was also released by Gametek (and ported by Human Soft) in <a href="https://en.wikipedia.org/wiki/1996_in_video_gaming">1996</a>, which is graphically very close to the original arcade version and features a remixed soundtrack, but suffers from jerky animation and other shortcomings when played on an unexpanded machine.</p>
+
+<h4>PlayStation and Sega Saturn</h4>
+
+<p><i>Super Turbo</i> is included in the <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_Collection">Street Fighter Collection</a></i> compilation for the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> and <a href="https://en.wikipedia.org/wiki/Sega_Saturn">Sega Saturn</a>, which also includes <i><a href="https://en.wikipedia.org/wiki/Super_Street_Fighter_II">Super Street Fighter II</a></i> on the same disc, as well as <i>Street Fighter Alpha 2 Gold</i> on a second disc. There is a small delay at the beginning of every match, and there are numerous small differences from the arcade version.</p>
+
+<h4>Dreamcast</h4>
+
+<p>Capcom released <i>Super Street Fighter II X for Matching Service</i> for the <a href="https://en.wikipedia.org/wiki/Dreamcast">Dreamcast</a> in Japan exclusively as a mail-order release via the online Dreamcast Direct store (later known as <i>Sega Direct</i>) on December 22, 2000. The Dreamcast version features an online versus mode on Sega's "Matching Service" compatible only on analog modems. (The Matching Service closed on September 1, 2003.) The bonus mini-games from previous versions of <i>Street Fighter II</i>, which had been cut from the arcade, were restored in this version and can be enabled via a special options menu making it more arcade-accurate. Other secret options are available as well. The Dreamcast version is considerably more accurate than the PlayStation and Sega Saturn versions, as almost nothing was changed aside from the score display. It features additional speed settings including faster speeds (speeds 4–6) and a very slow speed (speed 0) that doesn't remove any frames.</p>
+
+<h4>Capcom Classics Collection</h4>
+
+<p><i>Super Turbo</i> is included in <i>Capcom Classics Collection Vol. 2</i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> and <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a>. Although the first compilation included the first three <i>Street Fighter II</i> games, the second volume skipped the original <i>Super Street Fighter II</i> and only included <i>Super Turbo</i>. This version has many glitches.</p>
+
+<h4>30th Anniversary Collection</h4>
+
+<p><i>Super Street Fighter II Turbo</i> is included in <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_30th_Anniversary_Collection">Street Fighter 30th Anniversary Collection</a></i>. The existing updates of this title are not included in the collection as <i>Hyper Street Fighter II</i> is exclusive to arcade, PlayStation 2 and Xbox, while <i>Ultra Street Fighter II</i> is exclusive to Switch. In this release, save states are featured in the source code, while other features can be toggled on and off. Regarding online functionality, this title (along with <i>Street Fighter II: Hyper Fighting</i>, <i>Street Fighter Alpha 3</i> and <i>Street Fighter III: 3rd Strike</i>) has availability for multiplayer matches.</p>
+
+<p>The arcade version was also ported in the compilation <i>Capcom Arcade Stadium</i> as an individual purchase option in the software. This edition allows for selection of either US and Japan editions of the game.</p>
+
+<h2>Reception</h2>
+
+<p>In Japan, <i>Game Machine</i> listed <i>Super Street Fighter II Turbo</i> on their April 15, 1994 issue as being the second most-successful table arcade unit of the month, just below <i><a href="https://en.wikipedia.org/wiki/Virtua_Fighter_(video_game)">Virtua Fighter</a></i> while outperforming titles like <i><a href="https://en.wikipedia.org/wiki/Art_of_Fighting_2">Art of Fighting 2</a></i> and <i><a href="https://en.wikipedia.org/wiki/Karnov's_Revenge">Karnov's Revenge</a></i>. It went on to become Japan's highest-grossing <a href="https://en.wikipedia.org/wiki/1994_in_video_games">arcade game of 1994</a>, and sixth highest <a href="https://en.wikipedia.org/wiki/1995_in_video_games">of 1995</a>. In the United States, <i>Super Street Fighter II Turbo</i> was the top-earning arcade <a href="https://en.wikipedia.org/wiki/Printed_circuit_board">printed circuit board</a> (PCB) in May 1994. It was one of America's top twelve best-selling arcade video games of 1994.</p>
+
+<p>In the January 30, 1995 issue of Japanese magazine <i><a href="https://ja.wikipedia.org/wiki/Gamest">Gamest</a></i>, <i>Super Street Fighter II X</i> (known as <i>Super Turbo</i> internationally) placed fourth place in the award for <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Best Game of 1994</a> and Best Fighting Game. Upon release on home consoles, <i><a href="https://en.wikipedia.org/wiki/Famicom_Tsūshin">Famicom Tsūshin</a></i> scored the 3DO version of the game a 29 out of 40.</p>
+
+<p>The four reviewers of <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> gave the 3DO version a unanimous score of 8/10, commenting that the graphics and content accurately recreate the arcade version, and that the control is "near perfect" even when using the standard 3DO pad. In contrast, <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> stated that the control is imperfect even with Panasonic's six-button controller, and is terrible with the standard pad due to the "mushy" D-pad. They also criticized the absence of the older versions of the fighters and concluded that the port, though "a reasonably close translation of the coin-op", falls second to the SNES version of <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_II:_Hyper_Fighting">Street Fighter II: Hyper Fighting</a></i> among <i>Street Fighter II</i> conversions. A reviewer for <i><a href="https://en.wikipedia.org/wiki/Next_Generation_(magazine)">Next Generation</a></i> concurred with <i>GamePro</i> that the 3DO controllers are not optimal for the game, but still held it to be "without a doubt, the best version [of <i>Street Fighter II</i>] to hit home systems." He described the conversion as "colorful, fast, and so impressive you hardly notice the disk access time between rounds." Arcade Sushi ranked <i>Super Street Fighter II Turbo</i> as the "best fighting game", adding that it "is easily the most loved, and the most played game in the franchise. If you haven't played this fighter, then you haven't played fighting games at all." <a href="https://en.wikipedia.org/wiki/Future_plc">Future Publishing</a>'s <i>Ultimate Future Games</i> gave the 3DO version a 95% score, hailing it as the "game that'll save the 3DO". They praised it as the "ultimate beat 'em up" while their only criticism was the "Slow CD access" times. In 2019, <i>Game Informer</i> ranked it as the 3rd best fighting game of all time.</p>
+
+<h2>Competitive play</h2>
+
+<p><i>Super Street Fighter II Turbo</i> has been a staple in the competitive fighting game scene for its entire existence in one form or another. It was a featured game at the <a href="https://en.wikipedia.org/wiki/Evolution_Championship_Series">Evolution Championship Series</a> (EVO) from 2002 to 2008. Its remixed version, <i>Super Street Fighter II Turbo: HD Remix</i>, was played in 2009 and 2010. It has returned to EVO as a featured side event as the invite/qualifier limited "Tournament of Legends" in 2012 and 2014 and the "ST Games" in 2013. The game is also a staple at the Japanese X-MANIA series of tournaments and has featured in the Tougeki Super Battle Opera series of tournaments multiple times. <sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

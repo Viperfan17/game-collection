@@ -1,0 +1,427 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Donkey Kong Country</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('11256424-1b7b-42e6-8d8a-09a0669251f2/e0e21a9d-5e1e-46a9-b3ce-109d15113848.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="11256424-1b7b-42e6-8d8a-09a0669251f2/e6f51cfb-0883-41ce-81b4-ad2a379da0fa.png"/> Donkey Kong Country</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="11256424-1b7b-42e6-8d8a-09a0669251f2/1b88d35f-2e35-4d51-a0ab-9c7a3909dd13.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 6:52:10</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:29:50</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo SNES">Nintendo SNES</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/18/1994">11/18/1994</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Rare">Rare</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/19980705003317/http://www.rare.co.uk/recent/games/dkc/" target="_blank">Official website</a><br/><a href="https://www.mariowiki.com/Donkey_Kong_Country" target="_blank">Donkey Kong Country at the Super Mario Wiki</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Adrian Smith">[People] artist: Adrian Smith</a><br/><a href="#quicklink-[People] artist: Kevin Bayliss">[People] artist: Kevin Bayliss</a><br/><a href="#quicklink-[People] artist: Mark Stevenson">[People] artist: Mark Stevenson</a><br/><a href="#quicklink-[People] artist: Steve Mayles">[People] artist: Steve Mayles</a><br/><a href="#quicklink-[People] composer: David Wise">[People] composer: David Wise</a><br/><a href="#quicklink-[People] composer: Eveline Novakovic">[People] composer: Eveline Novakovic</a><br/><a href="#quicklink-[People] composer: Robin Beanland">[People] composer: Robin Beanland</a><br/><a href="#quicklink-[People] designer: Gregg Mayles">[People] designer: Gregg Mayles</a><br/><a href="#quicklink-[People] director: Chris Stamper">[People] director: Chris Stamper</a><br/><a href="#quicklink-[People] director: Tim Stamper">[People] director: Tim Stamper</a><br/><a href="#quicklink-[People] programmer: Chris Sutherland">[People] programmer: Chris Sutherland</a><br/><a href="#quicklink-[People] writer: Daniel Owsen">[People] writer: Daniel Owsen</a><br/><a href="#quicklink-[People] writer: Gregg Mayles">[People] writer: Gregg Mayles</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Donkey Kong Country</b></i> is a 1994 <a href="https://en.wikipedia.org/wiki/Platform_game">platform game</a> developed by <a href="https://en.wikipedia.org/wiki/Rare_(company)">Rare</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Nintendo Entertainment System</a> (SNES). It is a <a href="https://en.wikipedia.org/wiki/Reboot_(fiction)">reboot</a> of Nintendo's <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong">Donkey Kong</a></i> franchise and follows the gorilla <a href="https://en.wikipedia.org/wiki/Donkey_Kong_(character)">Donkey Kong</a> and his nephew <a href="https://en.wikipedia.org/wiki/Diddy_Kong">Diddy Kong</a> as they set out to recover their stolen banana hoard from the crocodile <a href="https://en.wikipedia.org/wiki/King_K._Rool">King K. Rool</a> and his army, the <a href="https://en.wikipedia.org/wiki/Kremlings">Kremlings</a>. The player traverses 40 <a href="https://en.wikipedia.org/wiki/Side-scrolling">side-scrolling</a> <a href="https://en.wikipedia.org/wiki/Level_(video_games)">levels</a> as they jump between platforms and avoid obstacles. They collect items, ride <a href="https://en.wikipedia.org/wiki/Minecart">minecarts</a> and animals, defeat enemies and <a href="https://en.wikipedia.org/wiki/Boss_(video_games)">bosses</a>, and find secret <a href="https://en.wikipedia.org/wiki/Bonus_stage">bonus stages</a>. In <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> modes, two players work <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperatively</a> or race.</p>
+
+<p>After developing <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a> games in the 1980s, Rare, a British studio founded by <a href="https://en.wikipedia.org/wiki/Tim_and_Chris_Stamper">Tim and Chris Stamper</a>, purchased <a href="https://en.wikipedia.org/wiki/Silicon_Graphics">Silicon Graphics</a> workstations to render <a href="https://en.wikipedia.org/wiki/3D_model">3D models</a>. Nintendo sought a game to compete with <a href="https://en.wikipedia.org/wiki/Sega">Sega</a>'s <i><a href="https://en.wikipedia.org/wiki/Disney's_Aladdin_(Sega_Genesis_video_game)">Aladdin</a></i> (1993) and commissioned Rare to revive the dormant <i>Donkey Kong</i> franchise. Rare assembled 12 developers to work on <i>Donkey Kong Country</i> over 18 months. <i>Donkey Kong Country</i> was inspired by the <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> series and was one of the first <a href="https://en.wikipedia.org/wiki/Home_console">home console</a> games to feature <a href="https://en.wikipedia.org/wiki/Pre-rendering">pre-rendered</a> graphics, achieved through a <a href="https://en.wikipedia.org/wiki/Data_compression">compression</a> technique that converted 3D models into SNES <a href="https://en.wikipedia.org/wiki/Sprite_(computer_graphics)">sprites</a> with little loss of detail. It was the first <i>Donkey Kong</i> game neither produced nor directed by the franchise's creator, <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a>, though he contributed design ideas.</p>
+
+<p>Following its announcement at the <a href="https://en.wikipedia.org/wiki/Consumer_Electronics_Show">Consumer Electronics Show</a> in June 1994, <i>Donkey Kong Country</i> was highly anticipated and backed by a major marketing campaign that cost $16 million in America alone. It was released in November 1994 to acclaim; critics hailed its visuals as groundbreaking and praised its gameplay and music. Its quality and design were favourably compared to the <i>Super Mario</i> series. <i>Donkey Kong Country</i> received several year-end accolades and set the record for the fastest-selling video game at the time. With 9.3 million copies sold worldwide, it is the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Super_Nintendo_Entertainment_System_video_games">third-bestselling SNES game</a> and the bestselling <i>Donkey Kong</i> game. Following the success, Nintendo purchased a large <a href="https://en.wikipedia.org/wiki/Minority_interest">minority stake</a> in Rare, which became a prominent <a href="https://en.wikipedia.org/wiki/Second-party_developer">second-party developer</a> for Nintendo during the late 1990s.</p>
+
+<p><i>Donkey Kong Country</i> re-established <i>Donkey Kong</i> as a popular Nintendo franchise and helped maintain the SNES's popularity into the <a href="https://en.wikipedia.org/wiki/Fifth_generation_of_video_game_consoles">fifth generation of video game consoles</a>. It is considered one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games of all time</a> and has been <a href="https://en.wikipedia.org/wiki/Video_game_port">ported</a> to platforms such as the <a href="https://en.wikipedia.org/wiki/Game_Boy_Color">Game Boy Color</a>, <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a>, and <a href="https://en.wikipedia.org/wiki/Digital_distribution">digital distribution</a> services. Rare followed it with two sequels for the SNES, <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country_2:_Diddy's_Kong_Quest">Donkey Kong Country 2: Diddy's Kong Quest</a></i> (1995) and <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country_3:_Dixie_Kong's_Double_Trouble!">Donkey Kong Country 3: Dixie Kong's Double Trouble!</a></i> (1996), and the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a> game <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_64">Donkey Kong 64</a></i> (1999). After a hiatus, during which Rare was acquired by the Nintendo competitor <a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a>, <a href="https://en.wikipedia.org/wiki/Retro_Studios">Retro Studios</a> revived the series with <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country_Returns">Donkey Kong Country Returns</a></i> (2010) for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> and <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country:_Tropical_Freeze">Donkey Kong Country: Tropical Freeze</a></i> (2014) for the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Donkey Kong Country</i> is a <a href="https://en.wikipedia.org/wiki/Side-scrolling">side-scrolling</a> <a href="https://en.wikipedia.org/wiki/Platform_game">platform game</a>. A <a href="https://en.wikipedia.org/wiki/Reboot_(fiction)">reboot</a> of the <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong">Donkey Kong</a></i> franchise, its story begins when <a href="https://en.wikipedia.org/wiki/King_K._Rool">King K. Rool</a> and his army of crocodiles, the <a href="https://en.wikipedia.org/wiki/Kremlings">Kremlings</a>, steal the <a href="https://en.wikipedia.org/wiki/List_of_Donkey_Kong_characters#Kongs">Kongs</a>' banana hoard. The gorilla <a href="https://en.wikipedia.org/wiki/Donkey_Kong_(character)">Donkey Kong</a> and his nephew <a href="https://en.wikipedia.org/wiki/Diddy_Kong">Diddy Kong</a> set out to reclaim the hoard and defeat the Kremlings. Donkey and Diddy serve as the <a href="https://en.wikipedia.org/wiki/Player_character">player characters</a> of the <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> game; they run alongside each other and the player can swap between them at will. Donkey is stronger and can defeat enemies more easily; Diddy is faster and more agile. Both can walk, run, jump, pick up and throw objects, and roll; Donkey can slap the terrain to defeat enemies or find items.</p>
+
+<p>The player begins in a <a href="https://en.wikipedia.org/wiki/Overworld#Platform_games">world map</a> that tracks their progress and provides access to the 40 <a href="https://en.wikipedia.org/wiki/Level_(video_games)">levels</a>. The player attempts to complete each level while traversing the environment, jumping between platforms, and avoiding enemy and inanimate obstacles. Level themes include jungles, underwater reefs, caves, mines, mountains, and factories. Some feature unique <a href="https://en.wikipedia.org/wiki/Game_mechanics">game mechanics</a>, such as rideable <a href="https://en.wikipedia.org/wiki/Minecart">minecarts</a>, blasting out of cannons resembling barrels, and swinging ropes. Each area ends with a <a href="https://en.wikipedia.org/wiki/Boss_(video_games)">boss</a> fight with a large enemy. Donkey and Diddy can defeat enemies by jumping on, rolling into, or throwing barrels at them. If hit by an obstacle, one of the Kongs runs off and the player automatically takes control of the other. They will only be able to control that Kong unless they free the other Kong from a barrel.</p>
+
+<p>In certain levels, the player can free an animal that provides the Kongs with special abilities, similar to <a href="https://en.wikipedia.org/wiki/Yoshi">Yoshi</a> from the <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> series. Buddies include Rambi, a rhino that can charge into enemies and find hidden entrances; Enguarde, a swordfish that can defeat enemies with its bill; Squawks, a parrot that carries a lantern; Expresso, an ostrich that flies; and Winky, a frog that can jump high. Each level contains collectible bananas, letters that spell out K–O–N–G, balloons, and animal tokens. These items can be found within the main level or by discovering hidden <a href="https://en.wikipedia.org/wiki/Bonus_stage">bonus stages</a>, where they are earned via solving puzzles. The player starts with six <a href="https://en.wikipedia.org/wiki/Life_(video_games)">lives</a>. Collecting 100 bananas, all the K–O–N–G letters, a balloon, or three of the same animal token grants <a href="https://en.wikipedia.org/wiki/Life_(video_games)#Extra_lives">extra lives</a>.</p>
+
+<p>The player can visit other members of the Kong family from the world map. <a href="https://en.wikipedia.org/wiki/Funky_Kong">Funky Kong</a> operates a flight service allowing the player to travel across different areas of Donkey Kong Island; <a href="https://en.wikipedia.org/wiki/Cranky_Kong">Cranky Kong</a>, the aged incarnation of Donkey Kong from the original <a href="https://en.wikipedia.org/wiki/Donkey_Kong_(arcade_game)"><i>Donkey Kong</i></a> (1981), provides tips and <a href="https://en.wikipedia.org/wiki/Fourth_wall">fourth wall</a>-breaking humour; and <a href="https://en.wikipedia.org/wiki/Candy_Kong">Candy Kong</a> <a href="https://en.wikipedia.org/wiki/Saved_game">saves the player's progress</a>. The player can increase their completion percentage by finding bonus stages. Reaching the maximum 101 per cent results in a different ending. The game also features two <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> <a href="https://en.wikipedia.org/wiki/Game_mode">game modes</a>. In the <a href="https://en.wikipedia.org/wiki/Player_versus_player">competitive</a> "Contest" mode, players take turns playing each level as quickly as possible. In the <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperative</a> "Team" mode, they play as a tag team.</p>
+
+<h2>Development</h2>
+
+<p>In 1985, the British game developers <a href="https://en.wikipedia.org/wiki/Tim_and_Chris_Stamper">Tim and Chris Stamper</a> established <a href="https://en.wikipedia.org/wiki/Rare_(company)">Rare Ltd.</a> The brothers previously founded the British computer game studio <a href="https://en.wikipedia.org/wiki/Ultimate_Play_the_Game">Ultimate Play the Game</a> and founded Rare to focus on the burgeoning Japanese <a href="https://en.wikipedia.org/wiki/Video_game_console">console</a> market. After <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> rejected their efforts to form a partnership in 1983, Chris Stamper studied the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a> (NES) hardware for six months. Rare demonstrated it was possible to <a href="https://en.wikipedia.org/wiki/Reverse_engineer">reverse-engineer</a> the NES and showed several <a href="https://en.wikipedia.org/wiki/Tech_demo">tech demos</a> to Nintendo executive <a href="https://en.wikipedia.org/wiki/Minoru_Arakawa">Minoru Arakawa</a>; impressed, Arakawa granted Rare a Nintendo developer licence. Rare developed more than 60 NES games, including the <i><a href="https://en.wikipedia.org/wiki/Battletoads">Battletoads</a></i> series.</p>
+
+<p>When Nintendo released their next console, the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Nintendo Entertainment System</a> (SNES), in 1991, Rare decided to limit their output. Around 1992, Rare invested their NES profit in <a href="https://en.wikipedia.org/wiki/Silicon_Graphics,_Inc.">Silicon Graphics, Inc.</a> (SGI) <a href="https://en.wikipedia.org/wiki/SGI_Challenge">Challenge</a> workstations with <a href="https://en.wikipedia.org/wiki/Alias_Systems_Corporation">Alias</a> rendering software to render <a href="https://en.wikipedia.org/wiki/3D_models">3D models</a>. It was a significant risk, as each workstation cost £80,000. The move made Rare the most technologically advanced UK developer and situated them high in the international market. In 1993, Nintendo formed a partnership with SGI to develop the SNES's successor, the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a>.</p>
+
+<h3>Conception</h3>
+
+<p>Though they had purchased the workstations to produce games for the Nintendo 64, Rare discovered it was possible to use them with the <a href="https://en.wikipedia.org/wiki/16-bit">16-bit</a> SNES. Rare tested the SGI technology with <i><a href="https://en.wikipedia.org/wiki/Battletoads_Arcade">Battletoads Arcade</a></i> (1994) and began developing a boxing game, <i>Brute Force</i>, using <a href="https://en.wikipedia.org/wiki/PowerAnimator">PowerAnimator</a>. Around this time, Nintendo was embroiled in a <a href="https://en.wikipedia.org/wiki/Console_war">console war</a> with <a href="https://en.wikipedia.org/wiki/Sega">Sega</a>, whose <a href="https://en.wikipedia.org/wiki/Mega_Drive">Mega Drive</a> competed with the SNES. Nintendo wanted a game to compete with Sega's <i><a href="https://en.wikipedia.org/wiki/Disney's_Aladdin_(Sega_Genesis_video_game)">Aladdin</a></i> (1993), which featured graphics by <a href="https://en.wikipedia.org/wiki/Walt_Disney_Animation_Studios">Disney</a> animators, when Nintendo of America's chairman <a href="https://en.wikipedia.org/wiki/Howard_Lincoln">Howard Lincoln</a> learned of Rare's SGI experiments during a trip to Europe. Nintendo sent several representatives, including the chief technology officer <a href="https://en.wikipedia.org/wiki/Genyo_Takeda">Genyo Takeda</a>; they asked the Stampers if they could demonstrate <i>Brute Force</i> on the SNES hardware. Within two days, the Stampers developed a working build, impressing Nintendo.</p>
+
+<p>Tim Stamper—inspired by <i><a href="https://en.wikipedia.org/wiki/Mortal_Kombat_(1992_video_game)">Mortal Kombat</a></i>'s (1992) use of digitised footage in place of hand-drawn art—suggested developing a platform game that used <a href="https://en.wikipedia.org/wiki/Pre-rendering">pre-rendered</a> graphics. Nintendo granted the Stampers permission to use the <i>Donkey Kong</i> <a href="https://en.wikipedia.org/wiki/Intellectual_property">intellectual property</a>. The franchise had been largely dormant since the unsuccessful <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_3">Donkey Kong 3</a></i> (1983), so Nintendo figured that licensing it posed minimal risk. Some sources indicate that the Stampers obtained the licence after Nintendo offered them their catalogue of characters and they chose Donkey Kong. Conversely, the lead designer <a href="https://en.wikipedia.org/wiki/Gregg_Mayles">Gregg Mayles</a> and his brother <a href="https://en.wikipedia.org/wiki/Steve_Mayles">Steve</a> recalled that it was Nintendo that requested a <i>Donkey Kong</i> game. <i>Donkey Kong</i>'s creator, <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a>, said that Rare approached Nintendo and offered to handle <i>Donkey Kong</i> since other developers were preoccupied with franchises such as <i><a href="https://en.wikipedia.org/wiki/Mario_(franchise)">Mario</a></i> and <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda">The Legend of Zelda</a></i>.</p>
+
+<p>Rare assembled a team of 12, the largest in their history at that point, and development began in mid-1993. Nintendo was sceptical of Rare's approach to graphics, concerned it would make the game unplayable. Early in development, Mayles and other developers presented a demo to Nintendo staff in Japan. One in attendance, the <a href="https://en.wikipedia.org/wiki/Game_Boy">Game Boy</a> creator <a href="https://en.wikipedia.org/wiki/Gunpei_Yokoi">Gunpei Yokoi</a>, felt the game "looked too 3D", but Mayles said Miyamoto was supportive and gave Rare his approval. Nintendo codenamed the project "Country" (based on Rare's location in <a href="https://en.wikipedia.org/wiki/Twycross">Twycross</a>), leading to the title <i>Donkey Kong Country</i>. Other titles considered included <i>Rumble in the Jungle</i>, <i>Monkey Mayhem</i>, and <i>Donkey Kong and the Golden Bananas</i>. <i>Donkey Kong Country</i> was the first <i>Donkey Kong</i> game that was neither directed nor produced by Miyamoto, who was working on <i><a href="https://en.wikipedia.org/wiki/Super_Mario_World_2:_Yoshi's_Island">Super Mario World 2: Yoshi's Island</a></i> (1995). Miyamoto was still involved with the project and Rare said he provided crucial input.</p>
+
+<p>Nintendo is usually highly protective of their intellectual properties, but was relatively uninvolved with <i>Donkey Kong Country</i>, leaving most of the work to Rare. Programmer Brendan Gunn noted that the Stampers worked to shield the team from outside influence. Rare spent 18 months developing <i>Donkey Kong Country</i> from an initial concept to a finished game, and according to product manager <a href="https://en.wikipedia.org/wiki/Dan_Owsen">Dan Owsen</a>, 20 people worked on it in total. It cost an estimated US$1 million to produce, and Rare said that it had the most <a href="https://en.wikipedia.org/wiki/Man-hour">man hours</a> ever invested in a video game at the time, 22 years. The team worked 12–16-hours every day of the week. Gunn said that the team was under significant pressure from the Stampers and to finish the game in time for <a href="https://en.wikipedia.org/wiki/Thanksgiving_(United_States)">Thanksgiving</a> due to Nintendo's competition with Sega.</p>
+
+<p>Rare drew inspiration from the <i>Super Mario</i> series, Mayles citing <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._3">Super Mario Bros. 3</a></i> (1988) as the primary influence on the <a href="https://en.wikipedia.org/wiki/Level_design">level design</a>. Mayles wanted to make a game that was accessible but would flow seamlessly for a skilled player; as such, objects were placed so well-timed players could continually move through a level. Mayles noted that although the concept of <a href="https://en.wikipedia.org/wiki/Speedrunning">speedrunning</a> did not exist at the time, "the way the game was designed definitely supports it". The level locales were inspired by the films <i><a href="https://en.wikipedia.org/wiki/Return_of_the_Jedi">Return of the Jedi</a></i> (1983) and <i><a href="https://en.wikipedia.org/wiki/Indiana_Jones_and_the_Temple_of_Doom">Indiana Jones and the Temple of Doom</a></i> (1984).</p>
+
+<p>The team designed levels using <a href="https://en.wikipedia.org/wiki/Post-it_Note">Post-it Notes</a>; they conceived set pieces (such as swinging ropes), created every variation they could think of, drew them on Post-it Notes, and pieced them together. Rare featured barrels as a primary game mechanic to pay homage to the original arcade game, and included hidden collectibles like coins and balloons to add depth. Diddy Kong originated from Rare's search for a game mechanic akin to <i>Super Mario</i>'s <a href="https://en.wikipedia.org/wiki/Power-up">power-up</a> system in that he would serve as the player's <a href="https://en.wikipedia.org/wiki/Health_(game_terminology)">health</a>. Mayles said: "We thought a second character could perform this function, look visually impressive, and give the player a feeling that they were not alone".</p>
+
+<p><i>Donkey Kong Country</i> did not have much scrapped content; Gunn said he only regretted that Donkey Kong walks across dotted lines instead of paths on the world map, which could not be implemented due to time constraints. One scrapped idea, a collectible that would evade the player by running or hiding, served as the basis for the <a href="https://en.wikipedia.org/wiki/Jinjo">Jinjos</a> in Rare's subsequent game <i><a href="https://en.wikipedia.org/wiki/Banjo-Kazooie_(video_game)">Banjo-Kazooie</a></i> (1998). Reviewing <i>Donkey Kong Country</i> for release, Nintendo directed Rare to reduce the difficulty to appeal to a broad audience, reasoning that the secrets would provide sufficient challenge for hardcore gamers. At this point, Miyamoto made some last-minute suggestions, such as Donkey Kong's terrain slap, that were incorporated. Nintendo's <a href="https://en.wikipedia.org/wiki/Kensuke_Tanabe">Kensuke Tanabe</a> flew to Twycross to <a href="https://en.wikipedia.org/wiki/Video_game_localization">localise</a> the game with Rare.</p>
+
+<p>Kevin Bayliss was in charge of redesigning Donkey Kong. He wanted a character that looked believable and could perform animations like pounding his chest. His initial design was blocky and muscular to make Donkey Kong easy to animate, but it became more cartoonish when Nintendo <a href="https://en.wikipedia.org/wiki/Fax">faxed</a> reference material. Some of Bayliss' designs were in the style of his <i>Battletoads</i> work, and the final design's eyes came from those of the <a href="https://en.wikipedia.org/wiki/Battletoads_(characters)">Battletoads</a>. Miyamoto provided some suggestions, including the red tie, but left the design's specifics to Bayliss.</p>
+
+<p>Because <i>Donkey Kong</i> did not have much of an established universe, Rare was free to expand it with new characters. Mayles conceived Diddy as a redesign of <a href="https://en.wikipedia.org/wiki/Donkey_Kong_Jr._(character)">Donkey Kong Jr.</a>, and Bayliss designed him. Unlike the original Donkey Kong Jr., Rare did not want Diddy to share his build with Donkey Kong, so Bayliss based the design on a <a href="https://en.wikipedia.org/wiki/Spider_monkey">spider monkey</a> and made him agile to give him distinct moves. The redesign was also motivated by Bayliss' distaste for Donkey Kong Jr. Nintendo considered the redesign too great a departure and asked it to be reworked or presented as a new character. Mayles felt the redesign suited the updated <i>Donkey Kong</i> universe, so he chose to make it a new character. Naming the character was a challenge; considered names included "Diet Donkey Kong", "Donkey Kong Lite", and "Titchy Kong". Rare settled on "Dinky", but ultimately changed it to "Diddy" due to legal problems.</p>
+
+<p>Rare staff spent hours at the nearby <a href="https://en.wikipedia.org/wiki/Twycross_Zoo">Twycross Zoo</a> recording gorillas for reference, which they described as "a complete waste of time". They found their movements unsuitable for a fast game and their noises too quiet to be captured by a microphone, so they based Donkey Kong's running animation on a horse's <a href="https://en.wikipedia.org/wiki/Canter_and_gallop#Gallop">gallop</a> and had programmer <a href="https://en.wikipedia.org/wiki/Mark_Betteridge">Mark Betteridge</a> provide Donkey and Diddy's voice clips. Rare positioned Cranky Kong as the original Donkey Kong character from the arcade games but avoided mentioning this in the game and marketing materials out of fear that Nintendo would disapprove of the idea, though it was mentioned in the instruction manual. Rare created each character using Donkey Kong's model as a base and made the Kong designs consistent to reflect that they were relatives.</p>
+
+<p>All story drafts centered on the theft of Donkey Kong's banana hoard. According to Mayles, the team pitched the <i>Super Mario</i> character <a href="https://en.wikipedia.org/wiki/Wario">Wario</a> as the antagonist, but Nintendo asked them to use original characters. They recycled the Kremlings from <i>Johnny Blastoff and the Kremling Armada</i>, a cancelled <i><a href="https://en.wikipedia.org/wiki/Monkey_Island">Monkey Island</a></i>-style <a href="https://en.wikipedia.org/wiki/Adventure_game">adventure game</a>. Their name is a play on the <a href="https://en.wikipedia.org/wiki/Moscow_Kremlin">Moscow Kremlin</a>. Rare's initial story was extensive and spanned 15 pages, but Nintendo had it condensed to fit into an <a href="https://en.wikipedia.org/wiki/Instruction_manual">instruction manual</a>.</p>
+
+<p><i>Donkey Kong Country</i> was one of the first games for a mainstream home video game console to use pre-rendered 3D graphics, a technique used in the earlier 1993 <a href="https://en.wikipedia.org/wiki/Finland">Finnish</a> game <i><a href="https://en.wikipedia.org/wiki/Stardust_(1993_video_game)">Stardust</a></i> for the <a href="https://en.wikipedia.org/wiki/Amiga">Amiga</a>. Rare developed a <a href="https://en.wikipedia.org/wiki/Data_compression">compression</a> technique to incorporate more detail and animation for each <a href="https://en.wikipedia.org/wiki/Spritesheet">sprite</a> for a given memory footprint, which better preserved the pre-rendered graphics. Nintendo and Rare called the technique Advanced Computer Modelling (ACM). Rare briefly feared competition from <a href="https://en.wikipedia.org/wiki/DMA_Design">DMA Design</a>'s <i><a href="https://en.wikipedia.org/wiki/Uniracers">Uniracers</a></i> (1994), which also featured pre-rendered graphics, but the staff was relieved upon learning that the player character was <i>Uniracer</i>'s only element that was pre-rendered.</p>
+
+<p>The artists began by modelling the characters in <a href="https://en.wikipedia.org/wiki/NURBS">NURBS</a> using PowerAnimator and adding <a href="https://en.wikipedia.org/wiki/Texture_mapping">textures</a>. They then created the animations and rendered them frame by frame before compressing them for the game. The ACM process was handled by a designated computer that had a proprietary utility similar to <a href="https://en.wikipedia.org/wiki/Deluxe_Paint">Deluxe Paint</a>. Adapting to the cutting-edge SGI workstations was difficult; Gregg Mayles' brother <a href="https://en.wikipedia.org/wiki/Steve_Mayles">Steve</a> said they had a steep learning curve. To help, Nintendo provided Rare with research material regarding apes, barrels, and caves. The pre-rendered graphics allowed for variety and detail uncommon at the time, and Tim Stamper constantly pushed the team to go further and incorporate weather and lighting effects.</p>
+
+<p>The game was Rare's first to require multiple programmers, and they worked with little guidance. The ACM process pushed the SNES hardware to its limits; Betteridge said Rare wanted to do everything they could with the hardware similar to what they had done with the NES game <i><a href="https://en.wikipedia.org/wiki/Battletoads_(1991_video_game)">Battletoads</a></i> (1991). A single SGI screen took up more <a href="https://en.wikipedia.org/wiki/Computer_memory">memory</a> than an entire SNES cartridge, and Gregg Mayles described transferring the backgrounds into the game by splitting them into tiles as "the bane of the project". Models took hours to render, so the team would leave the computers running overnight. Sometimes, artists would shut down other artists' computers in the middle of the process so they could render their own models. The SGI machines required a massive <a href="https://en.wikipedia.org/wiki/Air_conditioning">air conditioning</a> unit to prevent overheating, while the team worked in the summer heat without relief. Programmer <a href="https://en.wikipedia.org/wiki/Chris_Sutherland_(programmer)">Chris Sutherland</a> was responsible for implementing the graphics and found reducing the characters' frames of animation challenging.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/David_Wise_(composer)">David Wise</a> composed most of the soundtrack. Wise initially worked as a <a href="https://en.wikipedia.org/wiki/Freelancer">freelancer</a> and assumed his music would be replaced by <a href="https://en.wikipedia.org/wiki/Koji_Kondo">Koji Kondo</a> because of the importance of <i>Donkey Kong</i> to Nintendo. Rare asked Wise to record three jungle <a href="https://en.wikipedia.org/wiki/Demo_(music)">demo</a> tunes that were merged to become the "DK Island Swing", the first level's track. Miyamoto was impressed, and Wise was enlisted to produce the final score. Before composing, Wise was shown the graphics and given an opportunity to play the level they would appear in, which gave him a sense of the music he would compose. He chose <a href="https://en.wikipedia.org/wiki/Sampling_(music)">samples</a> and optimised the music to work on the SNES's <a href="https://en.wikipedia.org/wiki/SPC700">SPC700</a> sound chip. Wise worked separately from the team in a former cattle shed, visited occasionally by Tim Stamper.</p>
+
+<p><i>Donkey Kong Country</i> features atmospheric music that mixes natural environmental sounds with prominent <a href="https://en.wikipedia.org/wiki/Melody">melodic</a> and percussive accompaniments. Its soundtrack attempts to evoke the environments and includes music from levels set in Africa-inspired jungles, caverns, oceanic reefs, frozen landscapes, and industrial factories. Wise cited <a href="https://en.wikipedia.org/wiki/Koji_Kondo">Koji Kondo</a>'s music for the <i>Super Mario</i> and <i>Legend of Zelda</i> games, <a href="https://en.wikipedia.org/wiki/Tim_Follin">Tim</a> and Geoff Follin's music for <i><a href="https://en.wikipedia.org/wiki/Plok!">Plok!</a></i> (1993), and 1980s <a href="https://en.wikipedia.org/wiki/Synthesiser">synthesiser</a> film soundtracks, rock, and dance music as influences, and wanted to imitate the sound of the <a href="https://en.wikipedia.org/wiki/Korg_Wavestation">Korg Wavestation</a> synthesiser. He wrote lyrics for each melody, though <i><a href="https://en.wikipedia.org/wiki/The_New_York_Times">The New York Times</a></i> noted "no one is really meant to hear them".</p>
+
+<p>Since <i>Donkey Kong Country</i> featured advanced pre-rendered graphics, Wise wanted to push the limits to create "equally impressive" music and make the most of the limited memory he was working with. Wise found Donkey Kong "a little more brutal" than <a href="https://en.wikipedia.org/wiki/Mario">Mario</a>, so departed from <i>Super Mario</i>'s <a href="https://en.wikipedia.org/wiki/Latin_music">Latin</a> and <a href="https://en.wikipedia.org/wiki/Calypso_music">calypso</a>-inspired sound. He wanted to compose in the style of <a href="https://en.wikipedia.org/wiki/1940s_jazz">1940s jazz</a>, seeking to imitate the <a href="https://en.wikipedia.org/wiki/Glenn_Miller_Orchestra">Glenn Miller Orchestra</a> in the "DK Island Swing", but was restricted by the SPC700's limitations; he "used a lot of small samples and made [the soundtrack] very synthesised" to work around them. His colleague <a href="https://en.wikipedia.org/wiki/Grant_Kirkhope">Grant Kirkhope</a> said that Wise's familiarity with the SNES hardware meant he could "make it do things that people hadn't heard before".</p>
+
+<p>"<a href="https://en.wikipedia.org/wiki/Aquatic_Ambience">Aquatic Ambience</a>", the music that plays in the underwater levels, took five weeks to compose. Wise was inspired by a recent breakup, which made him feel as if he was drowning. He considers the track his favourite and the game's biggest technological accomplishment in regards to the audio. The boss theme was inspired by the <a href="https://en.wikipedia.org/wiki/Nine_Inch_Nails">Nine Inch Nails</a> song "<a href="https://en.wikipedia.org/wiki/March_of_the_Pigs">March of the Pigs</a>" (1994), and K. Rool's theme was influenced by <a href="https://en.wikipedia.org/wiki/Sea_shanties">sea shanties</a>, <a href="https://en.wikipedia.org/wiki/Barrel_organ">barrel organ</a> music, and the work of <a href="https://en.wikipedia.org/wiki/Iron_Maiden">Iron Maiden</a>. For the title screen theme, Wise <a href="https://en.wikipedia.org/wiki/Remix">remixed</a> Nintendo's original <i>Donkey Kong</i> theme to demonstrate Donkey Kong's evolution. Wise said his primary focus was to make the most of the SPC700, and he input the music by hand to save memory. He noted the process was easier than composing for the NES due to the larger number of sound channels.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Eveline_Novakovic">Eveline Novakovic</a> contributed seven tracks, including the world map theme, as her first SNES project. Novakovic was inexperienced with the SNES hardware and Wise helped teach her as they worked together. She attempted to provide the levels a sense of purpose and drew inspiration from film composers like <a href="https://en.wikipedia.org/wiki/Alan_Silvestri">Alan Silvestri</a> and <a href="https://en.wikipedia.org/wiki/Klaus_Doldinger">Klaus Doldinger</a>. Funky Kong's theme was originally written by <a href="https://en.wikipedia.org/wiki/Robin_Beanland">Robin Beanland</a>. According to Beanland, the track was intended for an internal progress video about another Rare game, <i><a href="https://en.wikipedia.org/wiki/Killer_Instinct_(1994_video_game)">Killer Instinct</a></i> (1994), before Nintendo decided to use it in a <i>Donkey Kong Country</i> promotional trailer. Beanland said Tim Stamper liked it and wanted to include it in the game, so Wise adopted it.</p>
+
+<h2>Release</h2>
+
+<h3>Marketing</h3>
+
+<p>Lincoln unveiled <i>Donkey Kong Country</i> at the <a href="https://en.wikipedia.org/wiki/Consumer_Electronics_Show">Consumer Electronics Show</a> in <a href="https://en.wikipedia.org/wiki/Chicago">Chicago</a>, which took place from 23 to 25 June 1994. The unveiling was the finale of Nintendo's conference and did not reveal that <i>Donkey Kong Country</i> was a SNES game until the end of the presentation, fooling the audience into believing that it was for the upcoming Nintendo 64. Gregg Mayles recalled the audience was stunned in silence before bursting into applause.</p>
+
+<p>As one of the flagship games of Nintendo's <a href="https://en.wikipedia.org/wiki/Nintendo_marketing#Play_It_Loud!">Play It Loud!</a> promotion, <i>Donkey Kong Country</i> was backed by an exceptionally large marketing campaign—"marketing <a href="https://en.wikipedia.org/wiki/Blitzkrieg">blitzkrieg</a>", as <i><a href="https://en.wikipedia.org/wiki/Hardcore_Gaming_101">Hardcore Gaming 101</a></i> put it. According to the <i><a href="https://en.wikipedia.org/wiki/Los_Angeles_Times">Los Angeles Times</a></i>, Nintendo spent US$16 million on marketing <i>Donkey Kong Country</i> in America alone; at the time, major games typically had an average marketing budget of US$5 million. Marketing materials emphasised the revolutionary graphics—often noting that Rare's SGI workstations had been used to create the <i><a href="https://en.wikipedia.org/wiki/Jurassic_Park_(film)">Jurassic Park</a></i> (1993) film's dinosaurs—and positioned <i>Donkey Kong Country</i> as a direct competitor to Sega's <a href="https://en.wikipedia.org/wiki/Mega-CD">Mega-CD</a> and <a href="https://en.wikipedia.org/wiki/32X">32X</a> platforms to remind players it was not for next-generation hardware.</p>
+
+<p>Nintendo sent a promotional <a href="https://en.wikipedia.org/wiki/VHS">VHS</a> tape, <i>Donkey Kong Country: Exposed</i>, to subscribers of the magazine <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i>. <i>Exposed</i>, hosted by comedian <a href="https://en.wikipedia.org/wiki/Josh_Wolf_(comedian)">Josh Wolf</a>, provides a "behind-the-scenes" glimpse of the Treehouse, the Nintendo of America division where games are tested. <i>Nintendo World Report</i> wrote that <i>Exposed</i> was "probably the first time most people outside of Nintendo learned about the [Treehouse]" and the promotion allowed players to see the game for themself at home, rather than having to learn about it secondhand from a magazine. <i>Exposed</i> also features gameplay tips and interviews with localisers, <a href="https://en.wikipedia.org/wiki/Playtester">playtesters</a>, and Tim Stamper.</p>
+
+<p>In October 1994, Nintendo of America held an online promotional campaign through the internet service <a href="https://en.wikipedia.org/wiki/CompuServe">CompuServe</a>. The campaign included downloadable video samples of the game, a trivia contest in which 800 people participated, and an hour-long <a href="https://en.wikipedia.org/wiki/Online_chat">online chat</a> conference attended by 80 people, in which Lincoln, Arakawa, and vice-president of marketing Peter Main answered questions. Nintendo's CompuServe promotion marked an early instance of a major video game company using the internet to promote its products. Nintendo gave away <i>Donkey Kong</i> T-shirts as a pre-order bonus, and partnered with <a href="https://en.wikipedia.org/wiki/Kellogg's">Kellogg's</a> for a promotional campaign in which the packaging for Kellogg's <a href="https://en.wikipedia.org/wiki/Breakfast_cereal">breakfast cereals</a> featured <i>Donkey Kong Country</i> character art and announced a prize giveaway. The campaign ran from November 1994 to April 1995. <a href="https://en.wikipedia.org/wiki/Fleetway_Publications">Fleetway Publications</a> published a promotional comic in the UK in 1995.</p>
+
+<p>By October 1994, Nintendo was still in fierce competition with Sega and its popular <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog">Sonic the Hedgehog</a></i> franchise. <i>Donkey Kong Country</i> was released a month after <i><a href="https://en.wikipedia.org/wiki/Sonic_&amp;_Knuckles">Sonic &amp; Knuckles</a></i> for the Mega Drive. The <i>Los Angeles Times</i> characterised the coinciding releases as a battle; both featured company mascots, boasted "<a href="https://en.wikipedia.org/wiki/Cinema_of_the_United_States">Hollywood</a>-sized" marketing budgets, and advertised revolutionary technological advances (<a href="https://en.wikipedia.org/wiki/Lock-on_technology">lock-on technology</a> for <i>Sonic &amp; Knuckles</i> and 3D-rendered graphics for <i>Donkey Kong Country</i>).</p>
+
+<p><i>Donkey Kong Country</i> was highly anticipated. <i>Hardcore Gaming 101</i> wrote: "It was everywhere. You couldn't escape it. It was on the cover of every magazine. It was on gigantic, imposing displays and marquees at <a href="https://en.wikipedia.org/wiki/Wal-Mart">Wal-Mart</a> and <a href="https://en.wikipedia.org/wiki/GameStop">Babbages</a>... For kids of the era, November 20th seemed like the eve of a revolution". The <i>Exposed</i> VHS tape contributed significantly to the hype. <i>Donkey Kong Country</i> was expected to gross at least US$140 million in the US if it matched sales projections. Nintendo anticipated that it would sell two million copies in a month, an expectation that Main acknowledged was unprecedented but was "based on the off-the-chart reactions we've received from game players and retailers".</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/USGamer">USGamer</a></i> noted that Nintendo, at the time of <i>Donkey Kong Country</i>'s release, faced difficulty to keep the SNES profitable. The <a href="https://en.wikipedia.org/wiki/Fifth_generation_of_video_game_consoles">fifth generation of video game consoles</a> was on the horizon, the <a href="https://en.wikipedia.org/wiki/32-bit">32-bit</a> prowess of <a href="https://en.wikipedia.org/wiki/Sony_Interactive_Entertainment">Sony</a>'s <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> and the <a href="https://en.wikipedia.org/wiki/Sega_Saturn">Sega Saturn</a> far exceeding the SNES's capabilities. The Nintendo 64 was not due for release until 1996, so <i>Donkey Kong Country</i>, wrote <i>USGamer</i>, served as Nintendo's "bluff" to make it seem that the SNES could hold its ground against next-generation hardware.</p>
+
+<p><i>Donkey Kong Country</i> was released worldwide in November 1994, two weeks ahead of schedule and around the <a href="https://en.wikipedia.org/wiki/Black_Friday_(shopping)">Black Friday</a> shopping season. It was released in the UK on 18 November, in North America on 21 November, in Europe on 24 November, and in Japan on 26 November. In Japan, the game was released under the title <i>Super Donkey Kong</i>. <i>Donkey Kong Country</i> set the record for the fastest-selling video game at the time: it sold over 500,000 copies within a week, and sales reached one million copies in the US alone in two weeks. In its second week on sale in the US, the game grossed US$15 million, outpacing the week's highest-grossing film (<i><a href="https://en.wikipedia.org/wiki/The_Santa_Clause">The Santa Clause</a></i>, US$11.5 million) and album (<i><a href="https://en.wikipedia.org/wiki/Miracles:_The_Holiday_Album">Miracles: The Holiday Album</a></i>, US$5.2 million). In the UK, it was the top-selling SNES game in November 1994. <i>Donkey Kong Country</i> sold six million copies worldwide in its first holiday season, grossing $400 million in worldwide sales revenue. Cumulative sales reached 9.3 million copies. Based on available sales figures, it is the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Super_Nintendo_Entertainment_System_video_games">third-bestselling SNES game</a> and the bestselling <i>Donkey Kong</i> game.</p>
+
+<h2>Reception</h2>
+
+<p><i>Donkey Kong Country</i> received critical acclaim and was lauded as a paradigm shift that set new standards for video games. It received perfect scores from several outlets. <i><a href="https://en.wikipedia.org/wiki/Diehard_GameFan">Diehard GameFan</a></i> and <i><a href="https://en.wikipedia.org/wiki/Total!">Total!</a></i> said it changed expectations for 16-bit and platform games, and <i><a href="https://en.wikipedia.org/wiki/Entertainment_Weekly">Entertainment Weekly</a></i> wrote it "is to most 16-bit games what most 16-bit games are to their <a href="https://en.wikipedia.org/wiki/Atari_2600">Atari</a> forebears. Once you've played it, everything else before it seems like a peewee". <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> (<i>EGM</i>) called <i>Donkey Kong Country</i> "one of the few games that is actually as good as the hype", and <i>Total!</i> declared it the best game of 1994. <i>GameFan</i> said that <i>Donkey Kong Country</i> set a new quality standard that many developers would attempt to imitate.</p>
+
+<p>The visuals were considered the best aspect. Reviewers considered them a major technological achievement, their detail unprecedented for a 16-bit game. <i>EGM</i> said that the graphical quality prompted questions about the purpose of 32- and <a href="https://en.wikipedia.org/wiki/64-bit_computing">64-bit</a> hardware. <i>Total!</i> said the character animations surpassed those of a Disney film and applauded the <a href="https://en.wikipedia.org/wiki/Parallax_scrolling">parallax scrolling</a>. Several critics said the graphics were the best on available hardware, with <i>Entertainment Weekly</i> writing that they were comparable to <a href="https://en.wikipedia.org/wiki/Matte_painting">matte paintings</a>. The soundtrack and audio were also lauded. <i>Total!</i> said the music built atmosphere, <i><a href="https://en.wikipedia.org/wiki/Top_Secret_(magazine)">Top Secret</a></i> wrote the "captivating" soundtrack asserted itself as a masterpiece in its own right, and <i>EGM</i> and <i>Entertainment Weekly</i> said the audio quality was unprecedented for the SNES and on par with a CD's.</p>
+
+<p>Reviewers praised the gameplay for its variety and depth; <i>Entertainment Weekly</i> appreciated that it did not build upon the original arcade game's design. <i>Total!</i> described <i>Donkey Kong Country</i> as addictive, accessible and exciting, with humour, imagination, puzzles and secrets, that proved there was still potential in the platform game genre. <i>EGM</i> and <i>GameFan</i> wrote that the game was lengthy and offered plenty of technique, and <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> commended the <a href="https://en.wikipedia.org/wiki/Replay_value">replay value</a> that searching for bonus stages provided. <i>EGM</i> and <i>GamePro</i> found searching for bonus stages was challenging, though <i>GamePro</i> said it was easy to "breeze through the game" without them and criticised the boss fights as simplistic.</p>
+
+<p>Critics frequently compared <i>Donkey Kong Country</i> to the <i>Super Mario</i> series, particularly <i><a href="https://en.wikipedia.org/wiki/Super_Mario_World">Super Mario World</a></i> (1990). Some considered <i>Donkey Kong Country</i> an improvement upon the <i>Mario</i> formula. <i>GameFan</i> said it would be a worthy successor to <i>Super Mario World</i> even without the graphics and <i>Total!</i> wrote that it took <i>Mario</i>'s best elements, increased the speed, and presented them better. <i>Next Generation</i> felt the gameplay, though good, did not meet the standards of previous SNES games such as the <i>Mario</i> and <i>Legend of Zelda</i> series and prevented it from being a "typical Nintendo blockbuster". <i>CVG</i> wrote that <i>Donkey Kong Country</i> was the only SNES game that matched <i>Super Mario World</i>, but that it would be a conventional platformer without its graphics. It warned that experienced players may find the game, designed for a broad audience, unoriginal.</p>
+
+<h3>Accolades</h3>
+
+<p><i>Donkey Kong Country</i> received many <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a> awards. For <i>EGM</i>'s Best and Worst of 1994, it won Game of the Year, Best SNES Game, and Best Animation; Donkey Kong and Diddy Kong won Best Game Duo. It also received <i><a href="https://en.wikipedia.org/wiki/Video_Games:_The_Ultimate_Gaming_Magazine">Video Games: The Ultimate Gaming Magazine</a></i>'s awards for Game of the Year, Best SNES Game, Best Action Game, and Best Graphics. <i>Donkey Kong Country</i> was the only video game included in <i><a href="https://en.wikipedia.org/wiki/Time_(magazine)">Time</a></i>'s Best Products of 1994 list, coming in second behind the <a href="https://en.wikipedia.org/wiki/Chrysler_Neon">Chrysler Neon</a>, and it became the first game to win the <a href="https://en.wikipedia.org/wiki/Kids'_Choice_Award_for_Favorite_Video_Game">Favourite Video Game</a> <a href="https://en.wikipedia.org/wiki/Kids'_Choice_Award">Kids' Choice Award</a> at the <a href="https://en.wikipedia.org/wiki/1995_Kids'_Choice_Awards">1995 Kids' Choice Awards</a>.</p>
+
+<h2>Post-release</h2>
+
+<p>In April 1995, following <i>Donkey Kong Country</i>'s success, Nintendo purchased a 25% <a href="https://en.wikipedia.org/wiki/Minority_interest">minority stake</a> in Rare, which increased to 49% over time. Rare was the first non-Japanese studio to enter such a relationship with Nintendo, making them a <a href="https://en.wikipedia.org/wiki/Second-party_developer">second-party developer</a>; Nintendo published Rare's subsequent games and allowed them to expand their staff from 84 to over 250 and move out of the farmhouse to an advanced development site elsewhere in Twycross. Rare was one of the first developers to receive Nintendo 64 <a href="https://en.wikipedia.org/wiki/Software_development_kits">software development kits</a> and decided to start spending more time developing fewer games. Nintendo and Rare's partnership produced acclaimed Nintendo 64 games such as <i><a href="https://en.wikipedia.org/wiki/GoldenEye_007_(1997_video_game)">GoldenEye 007</a></i> (1997), <i>Banjo-Kazooie</i> (1998), <i><a href="https://en.wikipedia.org/wiki/Perfect_Dark">Perfect Dark</a></i> (2000), and <i><a href="https://en.wikipedia.org/wiki/Conker's_Bad_Fur_Day">Conker's Bad Fur Day</a></i> (2001).</p>
+
+<p>A proposed Game Boy port of <i>Donkey Kong Country</i> was repurposed as a separate game, <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Land">Donkey Kong Land</a></i> (1995), after the programmer Paul Machacek convinced Rare that it would be a better use of resources and expand the potential audience. Rare began developing concepts for a <i>Donkey Kong Country</i> sequel during production, and Nintendo <a href="https://en.wikipedia.org/wiki/Green-light">green-lit</a> the project immediately after the success. <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country_2:_Diddy's_Kong_Quest">Donkey Kong Country 2: Diddy's Kong Quest</a></i>, released in 1995, features Diddy rescuing a kidnapped Donkey Kong from K. Rool and introduces Diddy's girlfriend <a href="https://en.wikipedia.org/wiki/Dixie_Kong">Dixie Kong</a>. <i>Diddy's Kong Quest</i> was designed to be less linear and more challenging, with a theme reflecting Gregg Mayles' fascination with pirates. Like its predecessor, <i>Diddy's Kong Quest</i> was a major critical and commercial success.</p>
+
+<p>Other teams at Rare used <i>Donkey Kong Country</i>'s technology in the fighting game <i>Killer Instinct</i> and <i>Donkey Kong Land</i>, <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Land_2">Donkey Kong Land 2</a></i> (1996) and <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Land_III">Donkey Kong Land III</a></i> (1997), which attempted to replicate <i>Donkey Kong Country</i>'s visuals and gameplay on the handheld Game Boy. Following <i>Diddy's Kong Quest</i>, the <i>Donkey Kong Country</i> team split in two: one half began working on <i><a href="https://en.wikipedia.org/wiki/Project_Dream">Project Dream</a></i>, a <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing game</a> that used the <i>Donkey Kong Country</i> technology, and the other on <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country_3:_Dixie_Kong's_Double_Trouble!">Donkey Kong Country 3: Dixie Kong's Double Trouble!</a></i> (1996). Rare followed <i>Dixie Kong's Double Trouble!</i> with <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_64">Donkey Kong 64</a></i> (1999), the first <i>Donkey Kong</i> game to feature 3D gameplay. In 2002, Rare was acquired by Nintendo's competitor <a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a> and the <i>Donkey Kong</i> rights reverted to Nintendo.</p>
+
+<h3>Other media</h3>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Video_game_music">soundtrack</a> CD, <i>DK Jamz</i>, was released in North America via news media and retailers in November 1994, with a standalone release in 1995. It was one of the earliest video game soundtrack albums released in the United States. The Japanese soundtrack CD, <i>Super Donkey Kong Game Music CD ~ Jungle Fantasy</i>, was released in January 1995. In addition to the game music, it features seven rearrangements by Yoshiyuki Ito, who previously composed rearrangements for Nintendo's <i>Zelda</i> and <i><a href="https://en.wikipedia.org/wiki/Metroid">Metroid</a></i> soundtrack releases. The soundtrack was rereleased through the <i>Donkey Kong Country Trilogy</i> <a href="https://en.wikipedia.org/wiki/Compilation_album">compilation album</a> in November 1996 and via <a href="https://en.wikipedia.org/wiki/Nintendo_Music">Nintendo Music</a>, Nintendo's <a href="https://en.wikipedia.org/wiki/Music_streaming_service">music streaming service</a>, when it launched in October 2024.</p>
+
+<p>A competition-oriented version of <i>Donkey Kong Country</i> was sold through <a href="https://en.wikipedia.org/wiki/Blockbuster_Video">Blockbuster Video</a>. Its changes include a <a href="https://en.wikipedia.org/wiki/Time_limit">time limit</a> for the playable levels and a <a href="https://en.wikipedia.org/wiki/Score_(game)">scoring</a> system, which had been used in the <a href="https://en.wikipedia.org/wiki/Nintendo_PowerFest_'94">Nintendo PowerFest '94</a> and Blockbuster World Video Game Championships II competitions. It was later distributed in limited quantities through <i>Nintendo Power</i>. The competition version of <i>Donkey Kong Country</i> is the rarest licensed SNES game; only 2,500 cartridges are known to exist.</p>
+
+<p>In 2000, Rare developed a port of <i>Donkey Kong Country</i> for Nintendo's <a href="https://en.wikipedia.org/wiki/Game_Boy_Color">Game Boy Color</a> (GBC) handheld console. It was released in North America on 4 November 2000, in Europe on 17 November, and in Japan on 21 January 2001. The port was developed alongside the <a href="https://en.wikipedia.org/wiki/Perfect_Dark_(Game_Boy_Color_video_game)">GBC version of <i>Perfect Dark</i></a> and many assets, including graphics and audio, were re-used from the <i>Donkey Kong Land</i> games. Aside from graphical and sound-related downgrades due to the GBC's weaker <a href="https://en.wikipedia.org/wiki/8-bit">8-bit</a> hardware, the port is mostly identical to the original release. One level was redesigned and another was added. It also adds bonus modes, including two <a href="https://en.wikipedia.org/wiki/Minigame">minigames</a> that supplement the main quest and support multiplayer via the <a href="https://en.wikipedia.org/wiki/Game_Link_Cable">Game Link Cable</a>, as well as <a href="https://en.wikipedia.org/wiki/Game_Boy_Printer">Game Boy Printer</a> support. The GBC version was a runner-up for <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i>'s annual Best Game Boy Color Game and Best Platform Game awards, and during the <a href="https://en.wikipedia.org/wiki/4th_Annual_Interactive_Achievement_Awards">4th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated it for the "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Family_Game_of_the_Year">Console Family</a>" award. It sold 2.19 million copies worldwide.</p>
+
+<p>Despite its acquisition by Microsoft, Rare continued to produce games for Nintendo's <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> (GBA) since Microsoft did not have a competing handheld. It ported <i>Donkey Kong Country</i> as part of Nintendo's line of SNES rereleases for the GBA. The GBA version was released in Australia on 4 June 2003, Europe on 6 June, in North America on 9 June, and in Japan on 12 December. It adds a new animated introductory cutscene, redesigned <a href="https://en.wikipedia.org/wiki/User_interface">user interfaces</a> and world maps, the ability to save progress anywhere, minigames, and a <a href="https://en.wikipedia.org/wiki/Time_trial">time trial</a> mode. It features downgraded graphics and sound, the former due to the GBA's lack of a <a href="https://en.wikipedia.org/wiki/Backlight">backlit</a> screen. The GBA version sold 1.82 million copies, including 960,000 in the US by August 2006. Between January 2000 and August 2006, it was the 19th highest-selling game for a Nintendo handheld console in the US.</p>
+
+<p>The SNES version of <i>Donkey Kong Country</i> has been digitally rereleased for later Nintendo consoles via Nintendo's <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> service. It was released for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> Virtual Console in Japan and Europe in December 2006, and in North America in February 2007. In September 2012, the game was delisted from the Virtual Console for unknown reasons, though <i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i>'s <a href="https://en.wikipedia.org/wiki/Jason_Schreier">Jason Schreier</a> suggested it may have been related to licensing problems with Rare. <i>Donkey Kong Country</i> returned to the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>'s Virtual Console in February 2015 and was added to the <a href="https://en.wikipedia.org/wiki/New_Nintendo_3DS">New Nintendo 3DS</a> Virtual Console in March 2016. It was included in the <a href="https://en.wikipedia.org/wiki/Super_NES_Classic_Edition">Super NES Classic Edition</a>, a <a href="https://en.wikipedia.org/wiki/Dedicated_console">dedicated console</a> Nintendo released in September 2017, and was released on the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> via the <a href="https://en.wikipedia.org/wiki/Nintendo_Classics">Nintendo Classics</a> service in July 2020.</p>
+
+<h2>Legacy</h2>
+
+<p><i>Donkey Kong Country</i>'s visual appeal helped the SNES remain popular in a period of uncertainty for cartridge-based games. Consumers were unfamiliar with 3D graphics at the time. According to <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i>, by bringing next-generation graphics to the SNES just 12 days before the PlayStation's Japanese launch, <i>Donkey Kong Country</i> persuaded consumers that an immediate upgrade was unnecessary. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> wrote that the game "saved the SNES" and revitalised sales by bringing back lapsed fans. <i>Donkey Kong Country</i> also helped Nintendo pull ahead of Sega and win the <a href="https://en.wikipedia.org/wiki/Console_wars">console wars</a> of the 1990s. Whereas Nintendo continued to release <a href="https://en.wikipedia.org/wiki/AAA_(video_game_industry)">AAA</a> games such as <i>Donkey Kong Country</i>, Sega had alienated audiences with add-ons such as the Mega-CD and 32X, and its subsequent console, the Saturn, failed.</p>
+
+<p>The <i>Donkey Kong Country</i> series re-established <i>Donkey Kong</i> as one of Nintendo's most popular and profitable franchises. <i>Donkey Kong Country</i> heralded Donkey Kong's transition from villain to hero; Rare's redesign became his standard appearance, and its gameplay format was followed by sequels. The game inspired <a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country_(TV_series)">an animated series</a> that ran for <a href="https://en.wikipedia.org/wiki/List_of_Donkey_Kong_Country_episodes">40 episodes</a> from 1997 to 2000, and Diddy Kong starred in a Nintendo 64 <a href="https://en.wikipedia.org/wiki/Racing_game">racing game</a> spin-off, <i><a href="https://en.wikipedia.org/wiki/Diddy_Kong_Racing">Diddy Kong Racing</a></i> (1997). Following <i>Dixie Kong's Double Trouble!</i>, the <i>Country</i> series went on a hiatus until <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country_Returns">Donkey Kong Country Returns</a></i>, developed by <a href="https://en.wikipedia.org/wiki/Retro_Studios">Retro Studios</a>, was released for the Wii on <i>Donkey Kong Country</i>'s 16th anniversary in 2010. A sequel, <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_Country:_Tropical_Freeze">Donkey Kong Country: Tropical Freeze</a></i>, was released for the Wii U in 2014. Wise, who left Rare in 2009, returned to compose <i>Tropical Freeze</i>'s score.</p>
+
+<h3>Retrospective assessments</h3>
+
+<p>Reviewing the Virtual Console rerelease, <i><a href="https://en.wikipedia.org/wiki/Nintendo_Life">Nintendo Life</a></i> felt the visuals were still among the SNES's best, and <i><a href="https://en.wikipedia.org/wiki/Jeuxvideo.com">Jeuxvideo.com</a></i> said they had offered a new depth of realism. <i>IGN</i> and <i><a href="https://en.wikipedia.org/wiki/AllGame">AllGame</a></i> said the visuals remained impressive for the SNES (though <i>IGN</i> thought they were no longer as significant a draw), while <i>GameSpot</i> thought the graphics rivalled 32-bit consoles. Conversely, <i>USGamer</i> said that, though technically impressive, they did not age well, with "cringe-inducing", "paper-thin backgrounds". <i>Hardcore Gaming 101</i> agreed, writing that the visuals looked plastic-like, did not hold up well once the novelty of pre-rendering had worn off, and were clearly experimental, even if their detail was admirable. Critics praised the GBC version for attempting to preserve the visuals in spite of hardware limitations, but criticised the GBA version's downgrades, which <i>IGN</i> considered detrimental to the experience.</p>
+
+<p><i>Donkey Kong Country</i> became divisive in the years following its release. <i>Eurogamer</i> wrote that it became popular to dislike it in the early 2000s, and it was often described as one of the most overrated video games. For example, <i><a href="https://en.wikipedia.org/wiki/Vice_Media">Vice</a></i> wrote that it did not deserve to be considered a classic and, alongside <i><a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a></i>, called its gameplay unremarkable and lacking depth. According to <i>IGN</i>, critics accused <i>Donkey Kong Country</i> of "sacrificing gameplay for the sake of a short-run attention grab and quick impulse sales", which <i>USGamer</i> attributed to the "flimflammery of its visuals and the relative mundanity of its actual game design". <i>USGamer</i> wrote the game was often criticised as an example of <a href="https://en.wikipedia.org/wiki/Style_over_substance">style over substance</a>, with gameplay that was arguably inferior to SNES <a href="https://en.wikipedia.org/wiki/Launch_game">launch games</a> such as <i>Super Mario World</i> and <i><a href="https://en.wikipedia.org/wiki/Super_Castlevania_IV">Super Castlevania IV</a></i> (1991). <i>GameSpy</i> complained that <i>Donkey Kong Country</i> overshadowed games such as <i>Yoshi's Island</i>, which it considered superior.</p>
+
+<p><i>Donkey Kong Country</i> has been described as one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games of all time</a>. <i>USGamer</i> wrote that the criticism was unfair because it "exudes craftsmanship ... Rare went to great pains to create a consistent, seamless world that managed to convey <a href="https://en.wikipedia.org/wiki/Trompe-l'œil">trompe-l'oeil</a> immersion", something few developers could replicate. Though retrospective reviewers criticised the boss fights, they praised the rhythm, variety, and replay value. <i><a href="https://en.wikipedia.org/wiki/Polygon_(website)">Polygon</a></i> said that although some aspects had not aged well, <i>Donkey Kong Country</i> remained among the best <i>Donkey Kong</i> games and deserved praise for resurrecting the franchise. Its soundtrack is considered one of the best in games, praised for its atmosphere and diversity. <i>Hardcore Gaming 101</i> said it was the one element that had unquestionably aged well and contained some of the <a href="https://en.wikipedia.org/wiki/16-bit_era">16-bit era</a>'s most memorable music.</p>
+
+<p>In the years following its release, rumours spread that Miyamoto disliked <i>Donkey Kong Country</i> and found it amateurish, and had created the hand-drawn art style of <i>Yoshi's Island</i> in retaliation for its pre-rendered visuals. Miyamoto spoke highly of <i>Donkey Kong Country</i> in a 2000 interview; he said that Rare "breathed new life into" Donkey Kong, had demonstrated excellent research into what made a Nintendo game work, and proved they could be trusted with the <i>Donkey Kong</i> franchise. However, the author <a href="https://en.wikipedia.org/wiki/Steven_L._Kent">Steven L. Kent</a> claimed Miyamoto said that "<i>Donkey Kong Country</i> proves gamers will put up with mediocre gameplay if the art is good" in a 1995 <i><a href="https://en.wikipedia.org/wiki/Electronic_Games">Electronic Games</a></i> interview. Kent said that Nintendo's marketing department had rejected <i>Yoshi's Island</i> as it lacked <i>Donkey Kong Country</i>'s pre-rendered graphics, and that this had possibly motivated Miyamoto's remark. Miyamoto denied this in 2010, noting he "was very involved" in <i>Donkey Kong Country</i> and had corresponded with Stamper throughout development. In 2014, <i>USGamer</i> described Kent's claims as "seemingly apocryphal", and in 2019, the video game historian <a href="https://en.wikipedia.org/wiki/Frank_Cifaldi">Frank Cifaldi</a> found that the <i>Electronic Games</i> interview did not contain the alleged quote from Miyamoto.</p>
+
+<p><i>Donkey Kong Country</i> exerted "revolutionary influence", according to <i>GameSpot</i>. <i>Kotaku</i> said its unprecedented graphics represented the future of games and <i>Nintendo World Report</i> wrote that it set standards for how platform games could look and play. Sega commissioned <a href="https://en.wikipedia.org/wiki/BlueSky_Software">BlueSky Software</a> to develop the Mega Drive game <i><a href="https://en.wikipedia.org/wiki/Vectorman">Vectorman</a></i> (1995) in response to <i>Donkey Kong Country</i>'s popularity. Many developers imitated the visuals; <i>IGN</i> identified the Saturn games <i><a href="https://en.wikipedia.org/wiki/Clockwork_Knight">Clockwork Knight</a></i> (1994) and <i><a href="https://en.wikipedia.org/wiki/Bug!">Bug!</a></i> (1995) as examples. <i>USGamer</i> wrote that few games achieved the same quality and that <a href="https://en.wikipedia.org/wiki/2.5D">2.5D</a> games, such as <a href="https://en.wikipedia.org/wiki/Crystal_Dynamics">Crystal Dynamics</a>' <i><a href="https://en.wikipedia.org/wiki/Pandemonium!_(video_game)">Pandemonium!</a></i> (1996), exposed the "illusion upon which [<i>Donkey Kong Country</i>] was built". <i>Kotaku</i> said <i>Donkey Kong Country</i> was an event that could not be replicated in modern times due to the game industry's growth.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Naughty_Dog">Naughty Dog</a>'s founders <a href="https://en.wikipedia.org/wiki/Andy_Gavin">Andy Gavin</a> and <a href="https://en.wikipedia.org/wiki/Jason_Rubin">Jason Rubin</a> cited <i>Donkey Kong Country</i> as the primary influence on their break-out game <i><a href="https://en.wikipedia.org/wiki/Crash_Bandicoot_(video_game)">Crash Bandicoot</a></i> (1996). <i>Crash</i>'s first functional levels drew upon techniques employed by <i>Donkey Kong Country</i>, such as steam vents, drop platforms, bouncy pads, heated pipes, and enemies that move back and forth. The pre-rendered visuals inspired other games, including <i><a href="https://en.wikipedia.org/wiki/Kirby_Super_Star">Kirby Super Star</a></i> (1996) and <i><a href="https://en.wikipedia.org/wiki/Sonic_3D:_Flickies'_Island">Sonic 3D: Flickies' Island</a></i> (1996), and critics have identified <i>Donkey Kong Country</i> references or influence in games such as the Mega-CD version of <i><a href="https://en.wikipedia.org/wiki/Earthworm_Jim_(video_game)">Earthworm Jim</a></i> (1995), <i><a href="https://en.wikipedia.org/wiki/Sonic_Blast">Sonic Blast</a></i> (1996), <i><a href="https://en.wikipedia.org/wiki/Rayman_Origins">Rayman Origins</a></i> (2011), <i><a href="https://en.wikipedia.org/wiki/Mekazoo?action=edit&amp;redlink=1">Mekazoo</a></i> (2016), and <i><a href="https://en.wikipedia.org/wiki/Kaze_and_the_Wild_Masks?action=edit&amp;redlink=1">Kaze and the Wild Masks</a></i> (2021). The <a href="https://en.wikipedia.org/wiki/Australian_Broadcasting_Corporation">Australian Broadcasting Corporation</a> credited <i>Donkey Kong Country</i> for maintaining the popularity of 2D games and ensuring the development of new entries in the <i>Mario</i>, <i><a href="https://en.wikipedia.org/wiki/Kirby_(series)">Kirby</a></i>, and <i><a href="https://en.wikipedia.org/wiki/List_of_Yoshi_video_games">Yoshi</a></i> series.</p>
+
+<p>The soundtrack was also influential and Wise developed a <a href="https://en.wikipedia.org/wiki/Cult_following">cult following</a> for his work. <i>IGN</i> said <i>Donkey Kong Country</i> contributed to an increased appreciation for <a href="https://en.wikipedia.org/wiki/Video_game_music">video game music</a> as an art form, and <i>The New York Times</i> called it the video game equivalent to <a href="https://en.wikipedia.org/wiki/The_Beatles">the Beatles</a>' <i><a href="https://en.wikipedia.org/wiki/Revolver_(Beatles_album)">Revolver</a></i> (1966). Rearrangements of the music appear in <i>Donkey Kong 64</i>, <i>Donkey Kong Country Returns</i>, and <i>Donkey Kong Country: Tropical Freeze</i>, and in <a href="https://en.wikipedia.org/wiki/Crossover_(fiction)">crossover</a> games such as Nintendo's <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros.">Super Smash Bros.</a></i> fighting series. Its tracks are often remixed, Wise contributing to an <a href="https://en.wikipedia.org/wiki/OverClocked_ReMix">OverClocked ReMix</a> album in 2004. "Aquatic Ambience" has been particularly influential. It has been described as "the '<a href="https://en.wikipedia.org/wiki/Eleanor_Rigby">Eleanor Rigby</a>' of video game music", praised by artists such as <a href="https://en.wikipedia.org/wiki/Trent_Reznor">Trent Reznor</a> and <a href="https://en.wikipedia.org/wiki/Donald_Glover">Donald Glover</a>, and <i><a href="https://en.wikipedia.org/wiki/The_A.V._Club">The A.V. Club</a></i> wrote that it spawned a "minor cult" dedicated to remixes. Glover sampled it in his 2012 song "Eat Your Vegetables", to which Wise expressed approval.</p>
+
+<p><i>Donkey Kong Country</i> established Rare as one of the leading video game developers and set the standard for its work. It originated conventions characteristic of Rare's later output, including an emphasis on collecting items, irreverent humour, visual appeal, and tech demo-like design. Nintendo and Rare's partnership continued until <i><a href="https://en.wikipedia.org/wiki/Star_Fox_Adventures">Star Fox Adventures</a></i> (2002) for the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a>, after which Rare was acquired by Microsoft. The 2019 game <i><a href="https://en.wikipedia.org/wiki/Yooka-Laylee_and_the_Impossible_Lair">Yooka-Laylee and the Impossible Lair</a></i>—developed by <a href="https://en.wikipedia.org/wiki/Playtonic_Games">Playtonic Games</a>, whose staff includes Rare alumni that worked on <i>Donkey Kong Country</i>—was noted for its gameplay similarities to <i>Donkey Kong Country</i>, though Playtonic's head Gavin Price declined to label it a <a href="https://en.wikipedia.org/wiki/Spiritual_successor">spiritual successor</a>. <i>Nintendo Life</i> also identified similarities between <i>Donkey Kong Country</i> and <i>Kroko Bongo: Tap to the Beat!</i> (2017), a platform game developed by the Stampers' <a href="https://en.wikipedia.org/wiki/Mobile_game">mobile game</a> studio <a href="https://en.wikipedia.org/wiki/FortuneFish">FortuneFish</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>The Elder Scrolls I: Arena</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('1b4354ae-12e6-451a-b9ec-6edb90ef5b6b/f70f9a29-8d06-4c67-a08d-fe21096b4eea.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="1b4354ae-12e6-451a-b9ec-6edb90ef5b6b/945e5069-f0f7-458e-a60c-9bdfcd922950.png"/> The Elder Scrolls I: Arena</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="1b4354ae-12e6-451a-b9ec-6edb90ef5b6b/3522ee28-307a-4bb7-91b2-7b601d76bd4d.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 4:09:09</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 8:41:08</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-3/25/1994">3/25/1994</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-68">68</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-ARPG">ARPG</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Open world">Open world</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Bethesda Softworks">Bethesda Softworks</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Bethesda Softworks">Bethesda Softworks</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-US Gold">US Gold</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/The_Elder_Scrolls:_Arena" target="_blank">PCGamingWiki</a><br/><a href="https://elderscrolls.bethesda.net/en/arena/" target="_blank">Official site</a><br/><a href="https://www.gogdb.org/product/1435828982" target="_blank">GOG Database</a><br/><a href="https://howlongtobeat.com/game?id=9862" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/the-elder-scrolls-arena" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/1812290/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/The_Elder_Scrolls:_Arena" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/803" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/The_Elder_Scrolls:_Arena" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-1990's">1990's</a><br/><a href="#quicklink-Action">Action</a><br/><a href="#quicklink-Action RPG">Action RPG</a><br/><a href="#quicklink-Adventure">Adventure</a><br/><a href="#quicklink-Atmospheric">Atmospheric</a><br/><a href="#quicklink-Character Customization">Character Customization</a><br/><a href="#quicklink-Classic">Classic</a><br/><a href="#quicklink-Difficult">Difficult</a><br/><a href="#quicklink-Dungeon Crawler">Dungeon Crawler</a><br/><a href="#quicklink-Exploration">Exploration</a><br/><a href="#quicklink-Fantasy">Fantasy</a><br/><a href="#quicklink-Female Protagonist">Female Protagonist</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-Free to Play">Free to Play</a><br/><a href="#quicklink-Nudity">Nudity</a><br/><a href="#quicklink-Open World">Open World</a><br/><a href="#quicklink-Retro">Retro</a><br/><a href="#quicklink-RPG">RPG</a><br/><a href="#quicklink-Singleplayer">Singleplayer</a><br/><a href="#quicklink-Story Rich">Story Rich</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>The Elder Scrolls: Arena</b></i> is an <a href="https://en.wikipedia.org/wiki/Open_world">open-world</a> <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing</a> video game developed and published by <a href="https://en.wikipedia.org/wiki/Bethesda_Softworks">Bethesda Softworks</a>. The first game in the <a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls"><i>Elder Scrolls</i> series</a>, it was released for <a href="https://en.wikipedia.org/wiki/MS-DOS">MS-DOS</a> on March 25, 1994. The game follows the player trying to uncover a conspiracy against Emperor Uriel Septim VII.</p>
+
+<p><i>Arena</i> takes place on the entire continent of <a href="https://en.wikipedia.org/wiki/Tamriel">Tamriel</a>, complete with wilderness, towns and dungeons which are <a href="https://en.wikipedia.org/wiki/Procedural_generation">procedurally generated</a>. The game features a day/night cycle and includes a spell creation system that allows players to mix various spell effects. Development for <i>Arena</i> was initially planned to have the player travel in towns across Tamriel, fighting other teams in their arenas until the player became "grand champion". As development on the game progressed, side quests took more importance, and the tournament aspect of the game took a back seat. Role-playing elements were added to the game, and the game expanded to include towns outside the arenas and dungeons beyond the cities.</p>
+
+<p><i>Arena</i> would spawn later sequels that created a series which has gone on to become one of the biggest Western RPGs of all time. The game received praise from critics and would go on to win several awards such as <i>Computer Gaming World</i>'s 1994 "Role-Playing Game of the Year". The game set a new standard for this type of <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">CRPG</a> and demonstrated just how much room was left for innovation. Although not as popular as the later games, <i>Arena</i> generated a cult following and sold 120,000 units. The game was followed by <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_II:_Daggerfall">Daggerfall</a></i> in 1996. In 2004, a downloadable version of the game was made available free of charge as part of the tenth anniversary of the series.</p>
+
+<h2>Gameplay</h2>
+
+<p>The game is played from a first-person perspective. <a href="https://en.wikipedia.org/wiki/Melee">Melee</a> combat is performed by right-clicking the mouse and dragging the cursor across the screen to attack as if swinging a weapon. Magic is used by cycling through a menu found by clicking the appropriate button on the main game screen, then clicking the spell to be used, and its target.</p>
+
+<p>The game's world is infinite. While the game's manual claims that the player can walk from one village to another, in actuality it is infinite and requires fast travel to get between towns. This is achieved by combining procedurally generated content and specifically designed world spaces to create a realistic and massive wilderness, where one may find inns, farms, small towns, dungeons, and other places of interest. The towns contain developer-designed buildings and shops, but the order in which these appear and their names are procedurally generated. There are several hundred dungeons and 17 specially designed dungeons for the main quest.</p>
+
+<p><i>Arena</i> is notable for being one of the first games to feature a realistic day/night cycle, where at sunset shops close and people clear the streets before the monsters arrive and roam around until morning. This soon became a staple feature of most <a href="https://en.wikipedia.org/wiki/Open_world">open-world games</a>.</p>
+
+<p>In addition to the main quest, which is completed by beating all seventeen dungeons and finding pieces of the staff, small side quests also appear. These are often found by asking around town for rumours. These quests are usually very simple, such as delivering a parcel or defeating a randomly chosen dungeon.</p>
+
+<p><i>Arena</i> has been noted for its tendency to be unforgiving towards new players. It is easy to die in the starting dungeon, as powerful enemies can be encountered if the player lingers too long. This effect gradually disappears as the player becomes more powerful and more aware of the threats that loom everywhere. <a href="https://en.wikipedia.org/wiki/Ken_Rolston">Ken Rolston</a>, lead designer of <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_III:_Morrowind">Morrowind</a></i>, says that he started the game at least 20 times, and only got out of the beginning dungeon once.</p>
+
+<h2>Plot</h2>
+
+<p>The game's setting begins in Tamriel on the 389th year of the Third Era when Emperor Uriel Septim VII summons his advisor and Imperial Battlemage Jagar Tharn over concerns of betrayal from within the court. His concerns are justified when Tharn is revealed to be the traitor, magically trapping the Emperor and his general, Talin Warhaft, in another dimension.</p>
+
+<p>When Tharn proceeds to magically disguise himself as Emperor to usurp the throne, his conspiracy is witnessed by mage apprentice Ria Silmane, whom he murders before she can warn the Elder Council. Tharn then summons demon minions to replace the Emperor's Guard. In his disguise, he sends the player character, a court official and subordinate of General Warhaft, to die in the Imperial dungeons.</p>
+
+<p>After her death, Ria uses magic to take an <a href="https://en.wikipedia.org/wiki/Incorporeal">incorporeal</a> form. She holds herself together long enough to inform the imprisoned player of Tharn's betrayal and instructs them throughout their escape from the infamous dungeons. Past that point, she lacks the power to manifest physically and appears to the player during dreams. She creates a key to allow the player to escape the dungeons and teleports them to a different province through a mystical Shift Gate.</p>
+
+<p>The player is informed that the only way to stop Tharn is to get hold of the Staff of Chaos, which holds his life force. Tharn has split this staff into many fragments throughout the continent of Tamriel. Each time one is found, Ria appears to the player the next time they rest to provide the general location of the next fragment. At the end of the quest in 3E 399 (a decade after the start of the game), the player finds the final piece and reassembles the staff. This, however, does not release the Emperor, as all of the staff's power has been drained into the Jewel of Fire, an oversight by Ria. The player travels to the Imperial City to confront Tharn's minions, the player finds the Jewel of Fire and touches it with the Staff of Chaos, this destroys both the jewel and the staff as well as releasing the Emperor. The jewel also turned out to be where Tharn had stored his life force, and the destruction of the jewel resulted in his death. As a token of respect and gratitude, Uriel Septim grants the player the title of Eternal Champion, and Ria Silmane finally enters the afterlife.</p>
+
+<h2>Development</h2>
+
+<h3>Background</h3>
+
+<p>Designer Ted Peterson recalls the experience: "I remember talking to the guys at <a href="https://en.wikipedia.org/wiki/Sir-Tech">SirTech</a> who were doing <i><a href="https://en.wikipedia.org/wiki/Wizardry_VII:_Crusaders_of_the_Dark_Savant">Wizardry: Crusaders of the Dark Savant</a></i> at the time, and them literally laughing at us for thinking we could do it." Peterson worked alongside Vijay Lakshman as one of the two designers of what was then simply <i>Arena</i>, a "medieval-style gladiator game". The game's engine was derived from the same codebase as that of <i><a href="https://en.wikipedia.org/wiki/The_Terminator:_Rampage">The Terminator: Rampage</a></i> from 1993.</p>
+
+<p>Ted Peterson, Lakshman and <a href="https://en.wikipedia.org/wiki/Julian_Lefay">Julian LeFay</a> were those who, in Peterson's opinion, "really spear-headed the initial development of the series." Game journalist Joe Blancato credits company co-founder Chris Weaver with the development: "If Weaver had a baby, <i>Arena</i> was it, and it showed." During the development of <i>Arena</i>, <a href="https://en.wikipedia.org/wiki/Todd_Howard_(video_game_designer)">Todd Howard</a>, later executive producer of <i>Oblivion</i>, lead designer on <i>Skyrim</i> and <i><a href="https://en.wikipedia.org/wiki/Fallout_3">Fallout 3</a></i> and <i><a href="https://en.wikipedia.org/wiki/Fallout_4">4</a></i> and director of <a href="https://en.wikipedia.org/wiki/Starfield_(video_game)">Starfield</a>, joined <a href="https://en.wikipedia.org/wiki/Bethesda_Softworks">Bethesda Softworks</a>, testing the <a href="https://en.wikipedia.org/wiki/CD-ROM">CD-ROM</a> version of <i>Arena</i> as his first assignment. Peterson had joined the company in 1992, working assignments on <i><a href="https://en.wikipedia.org/wiki/The_Terminator_2029">Terminator 2029</a></i>, <i><a href="https://en.wikipedia.org/wiki/Terminator:_Rampage">Terminator: Rampage</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Terminator:_Future_Shock">Terminator: Future Shock</a></i>, as well as other "fairly forgettable titles".</p>
+
+<p>Peterson, Lakshman and LeFay were longtime aficionados of <a href="https://en.wikipedia.org/wiki/Tabletop_role-playing_game">pencil-and-paper role-playing games</a>, and it was from these games that the world of <a href="https://en.wikipedia.org/wiki/Tamriel">Tamriel</a> was created. They were also fans of <a href="https://en.wikipedia.org/wiki/Looking_Glass_Studios">Looking Glass Studios</a>' <i><a href="https://en.wikipedia.org/wiki/Ultima_Underworld:_The_Stygian_Abyss">Ultima Underworld</a></i> series, which became their main inspiration for <i>Arena</i>.</p>
+
+<p>The influence of <i><a href="https://en.wikipedia.org/wiki/Legends_of_Valour">Legends of Valour</a></i>, a game Peterson describes as a "free-form first-person perspective game that took place in a single city", has also been noted. Asked for his overall comment on the game, he replied "It was certainly derivative ...". Aside from the fact that Bethesda had made <i>Arena</i> "Much, much bigger" than other titles on the market, Peterson held that the team "[wasn't] doing anything too new" in <i>Arena</i>.</p>
+
+<p>Initially, <i>Arena</i> was not to be an RPG at all. The player and a team of his fighters would travel about a world fighting other teams in their arenas until the player became "grand champion" in the world's capital, the Imperial City. Along the way, side quests of a more role-playing nature could be completed. As the process of development progressed, however, the tournaments became less important and the side quests more. Role-playing elements were added to the game, as the game expanded to include the cities outside the arenas, and dungeons beyond the cities. Eventually it was decided to drop the idea of tournaments altogether, and focus on quests and dungeons, making the game a "full-blown RPG".</p>
+
+<p>The original concept of arena combat never made it to the coding stage, so few artifacts from that era of development remain: the game's title, and a text file with the names of fighting teams from every large city in Tamriel, and a brief introduction for them. The concept of travelling teams was eventually left aside as well because the team's decision to produce a first-person RPG had made the system somewhat less fun. The game was going to have a team of up to four party members, but that feature was dropped and reduced to a single adventurer.</p>
+
+<p>Although the team had dropped all arena combat from the end game, because all the material had already been printed up with the title, the game went to market as <i>The Elder Scrolls: Arena</i>. The team came up with a lore-friendly explanation for this, being because the Empire of Tamriel was so violent, it had been nicknamed the <i>Arena</i>. It was Lakshman who came up with the idea of "The Elder Scrolls", and though, in the words of Peterson, "I don't think he knew what the hell it meant any more than we did", the words eventually came to mean "Tamriel's mystical tomes of knowledge that told of its past, present, and future." The game's initial <a href="https://en.wikipedia.org/wiki/Voice-over">voice-over</a> was changed in response, beginning: "It has been foretold in the Elder Scrolls ..."</p>
+
+<h2>Release</h2>
+
+<p>The game was originally due to release on Christmas Day 1993 but it was then released three months later in March 1994. The misleading packaging further contributed to distributor distaste for the game, leading to an initial distribution of only 3,000 units—a smaller number even, recalls Peterson, than the sales for his <i><a href="https://en.wikipedia.org/wiki/The_Terminator_2029">Terminator 2029</a></i> add-on. "We were sure we had screwed the company and we'd go out of business." However, <i><a href="https://en.wikipedia.org/wiki/PC_Gamer_US">PC Gamer US</a></i> reported in late 1995:</p>
+
+<p><i>Arena</i> was originally released on CD-ROM and 3.5" floppy disk. The CD-ROM edition is the more advanced, featuring enhanced speech for some characters and CGI video sequences. In late 1994, <i>Arena</i> was re-released in a special "Deluxe Edition" package, containing the CD-ROM patched to the latest version, a mousepad with the map of <a href="https://en.wikipedia.org/wiki/Tamriel">Tamriel</a> printed on it, and the Codex Scientia, an in-depth hint book.</p>
+
+<p>The version that was released as <a href="https://en.wikipedia.org/wiki/Freeware">freeware</a> by Bethesda Softworks in 2004 is the 3.5" floppy disk version, not the CD-ROM edition. Newer systems may require an emulator such as <a href="https://en.wikipedia.org/wiki/DOSBox">DOSBox</a> to run it, as <i>Arena</i> is a DOS-based program.</p>
+
+<h2>Reception</h2>
+
+<p>When previewing the game in December 1993, <i><a href="https://en.wikipedia.org/wiki/Computer_Gaming_World">Computer Gaming World</a></i> noted <i>Arena</i>'s "huge world split into nine provinces", many races and terrains, NPC interactions, and absence of level limits. The magazine stated that the game had sophisticated graphics "without forgetting the lessons of the past in terms of game design" or being "more like [console] action games", citing similarities with <i><a href="https://en.wikipedia.org/wiki/Ultima_IV">Ultima IV</a></i>, <i><a href="https://en.wikipedia.org/wiki/Wasteland_(computer_game)">Wasteland</a></i>, <i><a href="https://en.wikipedia.org/wiki/Dragon_Wars">Dragon Wars</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Darklands_(computer_game)">Darklands</a></i>. The magazine in April 1994 said that <i>Arena</i> "looks like a cross between <i>Ultima Underworld</i> and <i><a href="https://en.wikipedia.org/wiki/Might_and_Magic:_World_of_Xeen">Might and Magic: World of Xeen</a></i>", with both depth and sophisticated 3D graphics. It surmised "This may be the 'biggest' world, in terms of game play, that will reach store shelves this year", with a "rich and compelling" storyline and setting. The magazine's <a href="https://en.wikipedia.org/wiki/Scorpia_(journalist)">Scorpia</a> in May 1994 noted the game's "many, many, <i>many</i> side quests". She liked the combat ("the most natural way of fighting that I've seen in a first-person game"), <a href="https://en.wikipedia.org/wiki/Magic_system">magic system</a>, world detail, and <a href="https://en.wikipedia.org/wiki/Character_creation">character creation</a>, but disliked <i>Arena</i>'s instability "even with three patches so far" and insufficient travel time to finish quests. Scorpia complained that "in a game of this size, everything eventually becomes mechanical and repetitious", including towns, <a href="https://en.wikipedia.org/wiki/Conversation_tree">conversation trees</a>, quests, and enemies, reporting that "Everything is isolated, and there is no sense of a coherent whole here". She said that "<i>Arena</i> ... is too big to offer real variety, and thus becomes no more than a very sophisticated <a href="https://en.wikipedia.org/wiki/Dungeon_crawl">dungeon crawl</a> with minimal plot", but hoped that Bethesda would apply to <i>Elder Scrolls</i> "a tightening of the code, a little polishing up of the basic engine, a little scaling back of the size, and the inclusion of some real role-playing elements ... with a solid storyline. These are well within Bethesda's abilities". The next month she reported that another patch had been released and a fifth was being developed ("Obviously, the game was released far, far too soon, with less than adequate playtesting"). She advised players to store their <a href="https://en.wikipedia.org/wiki/Save_game">save games</a> after finishing <i>Arena</i>, as "I expect that the next game will show quite a few improvements over the initial entry in the series".</p>
+
+<p>In <i><a href="https://en.wikipedia.org/wiki/PC_Gamer_US">PC Gamer US</a></i>, Bernie Yee summarized <i>Arena</i> as a "stunning technological achievement; give this game a better storyline, and you might have the best FRP ever designed." Later that year, the magazine named <i>Arena</i> the 18th greatest game of all time. The editors praised it as "next-generation role-playing that will satisfy both newcomers and veterans alike." The game was a runner-up for <i>PC Gamer US</i>'s 1994 "Best Role-playing Game" award, losing to <i><a href="https://en.wikipedia.org/wiki/Realms_of_Arkania:_Star_Trail">Realms of Arkania: Star Trail</a></i>. Barry Brenesal of <i>Electronic Entertainment</i> wrote, "While <i>The Elder Scrolls, Chapter One: Arena</i> has nothing revolutionary to offer in role-playing fantasy, it is nevertheless a worthwhile game for the sheer depth of its quest capabilities that far outnumber the competition." <i>Arena</i> won <i>Computer Gaming World</i>'s 1994 "Role-Playing Game of the Year" award, beating <i><a href="https://en.wikipedia.org/wiki/Wolf_(video_game)">Wolf</a></i>, <i>Realms of Arkania: Star Trail</i>, <i><a href="https://en.wikipedia.org/wiki/Ravenloft:_Strahd's_Possession">Ravenloft: Strahd's Possession</a></i> and <i><a href="https://en.wikipedia.org/wiki/Superhero_League_of_Hoboken">Superhero League of Hoboken</a></i>. The editors hailed <i>Arena</i> as "a breakthrough game".</p>
+
+<p>James V. Trunzo reviewed <i>The Elder Scrolls: Arena</i> in <i><a href="https://en.wikipedia.org/wiki/White_Wolf_(magazine)">White Wolf</a></i> #45 (July, 1994), giving it a final evaluation of "Excellent" and stated that "<i>Arena</i> feels real. The dialogue, the weather, the dungeons, the building interiors and the armor you wear will help create the illusion of being in a real fantasy world [...] there's a feeling of involvement that transcends that of the other games in this genre."</p>
+
+<p>Despite the formidable demands the game made on players' machines, the game became a cult hit. Evaluations of the game's success vary from "minor" to "modest" to "wild", but are unvarying in presenting the game as a success. Game historian Matt Barton concludes that, in any case, "the game set a new standard for this type of <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">CRPG</a>, and demonstrated just how much room was left for innovation."</p>
+
+<h2>Sales</h2>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/PC_Data">PC Data</a>, Arena sold 90,000 units in 1994, 24,000 units in 1995, and 6,000 in 1996 for a total of 120,000 units.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

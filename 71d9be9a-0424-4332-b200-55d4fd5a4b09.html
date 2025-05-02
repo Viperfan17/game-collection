@@ -1,0 +1,331 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Crackdown 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('71d9be9a-0424-4332-b200-55d4fd5a4b09/50ba9118-cebf-45f6-817e-962fbd7dae9a.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="71d9be9a-0424-4332-b200-55d4fd5a4b09/ec46e48e-32b6-48d5-9f14-6f09d130617d.ico"/> Crackdown 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="71d9be9a-0424-4332-b200-55d4fd5a4b09/d9dbe26f-ddef-4fdc-af21-27bdc91055b0.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 7:31:29</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/1/2025">5/1/2025</a> 1:05:10</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-7/6/2010">7/6/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-88">88</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Ruffian Games">Ruffian Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Microsoft Game Studios">Microsoft Game Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Crackdown_2" target="_blank">Wikipedia</a><br/><a href="https://www.mobygames.com/game/xbox360/crackdown-2" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Chris Gottgetreu">[People] artist: Chris Gottgetreu</a><br/><a href="#quicklink-[People] artist: Paul Simms">[People] artist: Paul Simms</a><br/><a href="#quicklink-[People] artist: Ryan Astley">[People] artist: Ryan Astley</a><br/><a href="#quicklink-[People] artist: Stuart Campbell">[People] artist: Stuart Campbell</a><br/><a href="#quicklink-[People] composer: Kevin Riepl">[People] composer: Kevin Riepl</a><br/><a href="#quicklink-[People] designer: Dean Smith">[People] designer: Dean Smith</a><br/><a href="#quicklink-[People] designer: Ed Campbell">[People] designer: Ed Campbell</a><br/><a href="#quicklink-[People] designer: Steve Iannetta">[People] designer: Steve Iannetta</a><br/><a href="#quicklink-[People] director: Billy Thomson">[People] director: Billy Thomson</a><br/><a href="#quicklink-[People] producer: Gareth Noyce">[People] producer: Gareth Noyce</a><br/><a href="#quicklink-[People] producer: James Cope">[People] producer: James Cope</a><br/><a href="#quicklink-[People] programmer: Mike Enoch">[People] programmer: Mike Enoch</a><br/><a href="#quicklink-[People] writer: Rich Bryant">[People] writer: Rich Bryant</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Crackdown 2</b></i> is a 2010 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> developed by <a href="https://en.wikipedia.org/wiki/Ruffian_Games">Ruffian Games</a> and published by <a href="https://en.wikipedia.org/wiki/Xbox_Game_Studios">Microsoft Game Studios</a>. It was released for the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> in July 2010 and is a direct sequel to the 2007 video game <i><a href="https://en.wikipedia.org/wiki/Crackdown_(video_game)">Crackdown</a></i>. A sequel, <i><a href="https://en.wikipedia.org/wiki/Crackdown_3">Crackdown 3</a></i>, was released for the <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> and <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> in February 2019.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Crackdown 2</i> is modeled similarly to its predecessor <i>Crackdown</i>, a third-person shooter in <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> gameplay. The player character is an advanced super-powered officer for the city-funded "Agency", known simply as the "Agent". This time around, players choose one of four faces and armor colours (eight colours if they pre-ordered it), instead of just the preset heads offered before. Along with that, the orbs have been carried on from the first game, and the Agent's powers are expanded and enhanced such as the Agility Skill which now allows the Agent to jump higher than in <i>Crackdown</i>, glide, and gain access to the helicopter landing pad at the Agency Tower. The player is able to commandeer any number of vehicles in the game, including Agency vehicles, Peacekeeper Cruisers and a large number of civilian vehicles that the Cell have armor plated. Checkpoint races are back, both Road and Rooftop versions. Like <i>Crackdown</i>, the game allows for online <a href="https://en.wikipedia.org/wiki/Co-operative_play">co-operative play</a> in the main game, but now supports up to four players. The game also features competitive multiplayer modes for up to sixteen players. While the original <i>Crackdown</i> supported System Link playing for co-op, <i>Crackdown 2</i> does not feature the same option. Microsoft Producer Peter Connelly stated: "It would've taken a half-day of work, for something that only a tiny percentage of gamers will ever use." In <i>Crackdown 2</i>, the player fights both the Cell, a terrorist organization, and "Freaks," strange infected <a href="https://en.wikipedia.org/wiki/Mutant_(fiction)">mutants</a>. Both organizations' members can be killed with <a href="https://en.wikipedia.org/wiki/Melee">melee</a> attacks, explosions, and bullets but there are special UV weapons made for the Freaks, who cannot survive in sunlight. There are five skills to be leveled up: Agility, which the player increases by collecting Agility Orbs and Renegade Agility Orbs, by doing Rooftop Races, or by killing enemies from a highly elevated location; Firearms, which is increased by shooting both handheld and mounted guns; Driving, which is increased by running enemies over, power slides, <a href="https://en.wikipedia.org/wiki/Handbrake_turn">handbrake turns</a>, completing Road Races, jumping through Stunt Rings and collecting Renegade Driving Orbs; Explosives, which is increased by using explosives, both Launchers and thrown Grenades; and Strength, which is increased by using hand-to-hand attacks, throwing objects, beating people with those objects, or using the moves you unlock as your Strength increases, such as the Charge or Ground Slam.</p>
+
+<h3>Multiplayer</h3>
+
+<p>Multiplayer playlists include game modes such as Rocket Tag, Vehicle Tag, Capture the Orb, Deathmatch and Team Deathmatch.</p>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">co-op</a> game type allows you to party up with up to four friends. In co-op, you can obtain special orbs known as "Online Orbs" or "Xbox Live Orbs" which give an overall bonus to all your skills. Co-op mode is similar to single player except the campaign missions will only advance for the player that hosts the game.</p>
+
+<h2>Plot</h2>
+
+<p><i>Crackdown 2</i> takes place 10 years after the events of <i>Crackdown</i>. After "saving" Pacific City, there was a short time of peace. Then, according to the Agency, a new medical student named Catalina Thorne was accepted into the Agency as a scientist. However she was found to have been performing her own unauthorized experiments and was kicked out. Afterwards, her life was ruined, with her blaming the Agency. Later, she broke into the Agency cloning facility which housed the original agents, and introduced a virus into them which mutated the already genetically modified Agents, who became mindless and enraged, going on a killing spree before dying hours later.  She then went on to destroy the research labs, sending the project back to square one and single-handedly destroying the Agent program.</p>
+
+<p>Soon after, Catalina unleashed the "Freak" virus into the populace of Pacific City, turning the infected into mindless mutated monstrosities that kill anything they find. With no agents to combat them, the Agency and the city were left helpless as criminals also began to resurface in the absence of the agents and the weakness of the Agency. While the people were weaker and more desperate than ever, Catalina rallied their support, claiming the Agency has a cure for the virus but is keeping it secret. Desperate for hope, they formed the "Cell", a terrorist group devoted to destroying the Agency and making them give up the cure.</p>
+
+<p>That's when the Agency unveiled Project Sunburst, in which a large bomb of direct sunlight is planted and detonated inside "Freak" lairs. The light is perfectly harmless to normal people, but the sunlight burns and destroys the Freaks. These bombs are dependent on generators to gather sunlight. Upon hearing of these generators and Project Sunburst, the Cell took over and stole the generators. The Agent must reactivate all of the absorption units, three per beacon for a total of twenty-seven. The Agent must visit each freak lair, summon air support with the beacon, and defend it against the freaks until it detonates.</p>
+
+<p>During the final few beacons, Catalina Thorne hacks into the Agent's comm system and pleads with him to cease the beacon re-activations, but eventually is silenced by the Voice of the Agency. After the last beacon is detonated, the Agent must return to the Tower and activate the final beacon: the Tower itself. During the process, ex-agents turned into freaks, which were kept for research, break free and attack the three cores which must be defended by the Agent. After the beacon charges, Catalina herself attacks in a stolen and repainted Agency helicopter, firing at the core.</p>
+
+<p>Ordered to stop her, the Agent, though damaged and bruised, leaps from the tower, firing at the helicopter as he falls. Catalina turns the helicopter when it is fired upon, causing the agent to hit the rotor blades rather than the cockpit. He is torn apart, sacrificing himself, succeeds in stopping Thorne. His hand lands in the helicopter as Thorne spins out of control away from the tower. The beacon fires and kills all remaining freaks in Pacific City, with the Voice of the Agency admitting he feels sorry for anyone who tries to stand in the Agency's way now. After the credits, a short video shows Thorne performing research, with the hand of the Agent in a test tube on the table in front of her. The downloadable content "Keys to the City" features the Agency after the events of <i>Crackdown 2</i>, now sporting newer and more advanced technologies, and the return of the Agent.</p>
+
+<h3>Alternate plot</h3>
+
+<p>The plot, as given above, is not necessarily the true story in the game. Audio Log collectibles found in the game give a different story, which paints the Agency as evil and manipulating, having engaged in a multi-step program to once again give the public a reason to accept unconditional control by their forces and cover up their own involvement in the events of the first game. This alternate story matches the twist at the end of the first <i>Crackdown</i> game.</p>
+
+<p>Prior to the events of the game, the Agency, after taking control of Pacific City after the events of <i>Crackdown</i>, invites a group of Pacific City journalists and Agency whistleblowers to a press conference and destroys it, blaming it on terrorists. Thorne, a doctor who actually wants to help the Pacific City populace, attempts to open a clinic to give free medical care to the homeless, but "freaks" left over from a Pacific City super-gang (funded by the Agency, as revealed in <i>Crackdown</i>) invade the clinic and kill almost everyone; the Agency blames this on wild animals. Following this incident, Thorne attempts to lead protests against the Agency and call for an antidote to the freak virus, leading the Agency to blame Thorne for creating the freaks in the first place by infecting the homeless she claimed to treat at her clinic.</p>
+
+<p>The Agency then walls off the infected area of Pacific City and secretly creates an antidote, but only uses it on their own agents; as a side effect, the agents lose their superhuman abilities, which the Agency again blames on Thorne. They then send undercover police to instigate violence at Thorne's peaceful protests, turning the public against her entirely. The Sunburst weapon is built to supposedly deal with the freaks, but is actually built as an antipersonnel weapon, meant to kill anyone who might oppose the Agency. Thorne, in an attempt to stop the Agency's plan, leads attacks by the Cell on the Sunburst bombs, giving the Agency a reason to send their Agents back into the field.</p>
+
+<h2>Development</h2>
+
+<p>Phil Wilson and Billy Thomson, respectively Producer and Lead Design of <i>Crackdown</i> had previously confirmed that the game was designed from the outset to be a long-running series, stating that sequels for the game are very likely to be produced, especially if <i>Crackdown</i> performed well commercially. However, during the Industry All Stars event in September 2007, Wilson confirmed that Realtime Worlds was not working on a sequel to the game, saying "Microsoft [was] a little late in stepping up to the plate to ask for <i>Crackdown 2</i>, and by then we had already started working on bigger, better things."  However, then-Microsoft Game Studios corporate vice president, Shane Kim, stated that Microsoft still holds the <a href="https://en.wikipedia.org/wiki/Intellectual_property">intellectual property</a> rights for <i>Crackdown</i> and that a <i>Crackdown</i> sequel was still a possibility.</p>
+
+<p>Realtime's Studio Manager Colin MacDonald clarified that if they have the resources after completion of <i><a href="https://en.wikipedia.org/wiki/APB_(video_game)">APB</a></i>, they could approach Microsoft to discuss a sequel. Prior to its announcement, industry rumors stated that the new start-up company, <a href="https://en.wikipedia.org/wiki/Ruffian_Games">Ruffian Games</a>, a Scottish studio formed from members from the Realtime Worlds team, may be involved in the development of a <i>Crackdown</i> sequel. This was confirmed when the game was announced during the 2009 <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">Electronic Entertainment Expo</a> Conference. The rumors of Ruffian's involvement with the sequel were initially dismissed by McDonald, saying he doubted "Microsoft would harm an otherwise fruitful existing development relationship by gambling on funding <i>Crackdown 2</i> with a startup on RTW's doorstep, for obvious reasons." Following the announcement, <a href="https://en.wikipedia.org/wiki/David_Jones_(video_game_developer)">David Jones</a>, founder of Realtime Worlds, stated he was "a bit miffed" with Microsoft's decision, believing that Microsoft may have been looking at an internal development studio instead of the new start-up located in the same geographical area as his company and formed of many of his team's former members. Ruffian's executive producer, Peter Connelly, agreed that the situation that caused Realtime Worlds to move onto <i>APB</i> was unfortunate, but hold no animosity towards the company. Ruffian's Thomson noted that about half of their team formerly worked on <i>Crackdown</i> across all areas of game development, and felt their studio was the best choice to make the game's sequel.</p>
+
+<p>The team chose to keep the sequel located in Pacific City as they considered that setting had a character of its own in the first game and wanted to preserve that for the sequel to keep up its familiarity with players, while still making it "bigger and better". The team also sought to preserve the same free-form gaming experience from <i>Crackdown</i> and opted to avoid any significant dialog-driven cutscenes, while improving on parts of the gameplay from the first game that were seen as weaker aspects. There are no significant mechanical changes to the game, though Ruffian continues to improve on the rendering engine to allow the display of the large vista of Pacific City.</p>
+
+<h2>Reception</h2>
+
+<p><i>Crackdown 2</i> received "mixed or average reviews" according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregation</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. Jeremy Parish of <a href="https://en.wikipedia.org/wiki/1Up.com">1Up.com</a> praised the game for the four player Co-op; however, he states: "But everything else about Crackdown 2 is a letdown: The best parts are those lifted straight from the first game, while all the new additions are annoying at best, infuriating at worst. Crackdown 2 is ridiculously fun, but it owes that success entirely to the first game." <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> praised the game's exploration, orb collecting and four-player co-op, while also criticizing its similarities to its predecessor. <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> also faulted it for similarities to its predecessor and its absence of a true story, but complimented its orb collecting and cooperative campaign. <a href="https://en.wikipedia.org/wiki/Giant_Bomb">Giant Bomb</a> said that while the game was enjoyable, too much was lifted from the first game and little new was added. <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i> gave the game a negative review, criticizing its similarities to the previous game, while also noting new issues not present in the original. The writer said that the game "has no real reason to exist." <a href="https://en.wikipedia.org/wiki/GameTrailers">GameTrailers</a> praised the game's addictive Orb collecting, but criticized its lack of story or structure. <i><a href="https://en.wikipedia.org/wiki/Official_Xbox_Magazine">Official Xbox Magazine UK</a></i> praised its four-player co-op, combat system, but criticized the layout of Pacific City for being too similar to its predecessor, as well as lack of transforming vehicle, but the author, Ben Talbot, still described the game "an addictive experience, and one that offers the best sandbox co-op this side of <i><a href="https://en.wikipedia.org/wiki/Saints_Row_2">Saints Row 2</a></i>". Ben Reeves from <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> criticised the game for being too similar to the original <i>Crackdown</i>, as well as unfinished texture work, unimpressive score, mindless enemy AI, as well as low replay value. He stated that the game is almost indistinguishable from the first <i>Crackdown</i>. In Japan, where the game was released under the name <i><b>Riot Act 2</b></i> (ライオットアクト 2, <i>Raiotto Akuto Tsu</i>) on 8 July 2010 (the same release date as Australia's),<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave it a score of 30 out of 40.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/The_Escapist_(magazine)">The Escapist</a></i> gave the game four stars out of five and said that it "offers hours of satisfying, brainless fun for those who enjoy that sort of thing. Newcomers to the series and die-hard fans alike will find plenty to obsess over." <i><a href="https://en.wikipedia.org/wiki/The_A.V._Club">The A.V. Club</a></i> gave it a B and said, "Dissing <i>Crackdown 2</i> for its lack of narrative is too easy. A videogame shouldn't articulate everything. Games should be mysterious; something should always be left to the imagination." <i><a href="https://en.wikipedia.org/wiki/The_Daily_Telegraph">The Daily Telegraph</a></i> gave it seven out of ten and said it was "immense fun, but this is thanks to the fact that its core gameplay remains largely unchanged from its predecessor. In a way, the game feels more like a slightly more evolved version of the original <i>Crackdown</i> than a true sequel." <i><a href="https://en.wikipedia.org/wiki/Metro_(British_newspaper)">Metro UK</a></i> gave it six out of ten and said it was "Rushed, repetitive and a huge waste of potential. More expansion pack than sequel - and not even a good one." However, 411Mania gave it a score of five out of ten and said it was "quite a fun game, and for gamers who love collecting things this is the way to go. But if you're not into that, or [you] already beat the original, there's nothing new worth seeing here." <i><a href="https://en.wikipedia.org/wiki/Wired_(magazine)">Wired</a></i> similarly gave it five stars out of ten and said, "An interesting experiment? Sure. But the changes to the game design have all but removed the most-fun parts while emphasizing the game's weaknesses. Whoops."</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

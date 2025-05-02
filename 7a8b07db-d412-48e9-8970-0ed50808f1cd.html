@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tron: Evolution</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('7a8b07db-d412-48e9-8970-0ed50808f1cd/b8920c86-15a4-453c-be85-8f0e5167db94.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="7a8b07db-d412-48e9-8970-0ed50808f1cd/9da43944-566e-46fc-8c46-7c8b6807a0f9.ico"/> Tron: Evolution</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="7a8b07db-d412-48e9-8970-0ed50808f1cd/b051b057-cc0f-49e6-ba21-352cebeb9432.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 7:31:29</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/25/2010">11/25/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-66">66</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-59">59</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-GameStar">GameStar</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Propaganda Games">Propaganda Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-CD Projekt">CD Projekt</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Disney Interactive Studios">Disney Interactive Studios</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Noviy Disk">Noviy Disk</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Disney_TRON:_Evolution" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=10669" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/tron-evolution" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/315440/" target="_blank">SteamDB</a><br/><a href="https://www.mobygames.com/game/tron-evolution" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Tron:_Evolution" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Sci-fi">Sci-fi</a><br/><a href="#quicklink-Stylized">Stylized</a><br/><a href="#quicklink-Third Person">Third Person</a><br/><a href="#quicklink-Unreal Engine 3">Unreal Engine 3</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Tron: Evolution</b></i> is a 2010 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> published by <a href="https://en.wikipedia.org/wiki/Disney_Interactive_Studios">Disney Interactive Studios</a>. It serves as a <a href="https://en.wikipedia.org/wiki/Tie-in">tie-in</a> to the 2010 film <i><a href="https://en.wikipedia.org/wiki/Tron:_Legacy">Tron: Legacy</a></i>, with its game taking place before the events of the film. It was announced at the 2009 <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Spike Video Game Awards</a> and was released for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, and <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>. It was released on November 25, 2010, in Australia, November 26, 2010, in Europe, and December 7, 2010, in North America and Asia.</p>
+
+<p><i>Tron: Evolution</i> received mixed reviews from critics. As of October 2019, the Microsoft Windows version of the game can no longer be installed or played due to the game's use of <a href="https://en.wikipedia.org/wiki/SecuROM">SecuROM</a> <a href="https://en.wikipedia.org/wiki/Digital_rights_management">DRM</a>, which stopped providing authentication servers after Disney revoked their service subscription. Additionally, a variation of the game for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> and <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, <i><a href="https://en.wikipedia.org/wiki/Tron:_Evolution_-_Battle_Grids">Tron: Evolution - Battle Grids</a></i>, released simultaneously with its counterpart.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Tron: Evolution</i> is a third-person action game with racing and <a href="https://en.wikipedia.org/wiki/Role-playing_game">role-playing game</a> elements incorporated. The game features both singleplayer and multiplayer modes. The basic gameplay focuses on acrobatics and combat. Player's movements are heavily <a href="https://en.wikipedia.org/wiki/Parkour">parkour</a>-influenced, while combat was inspired by <a href="https://en.wikipedia.org/wiki/Capoeira">capoeira</a> and that of <a href="https://en.wikipedia.org/wiki/Prince_of_Persia">Prince of Persia</a>. The game also features light cycle races. Each cycle leaves a light trail that can destroy or "derez" any enemy. <i>Evolution</i> features persistent character progression system, that lets players earn new levels and unlock new upgrades, both in multiplayer and singleplayer.</p>
+
+<h3>Multiplayer</h3>
+
+<p>There are four different game modes in the game and four maps available initially. Two modes focus on combat with light discs and two other modes feature vehicular combat on light cycles, as well as a special light tank vehicle. Up to 10 people can play in online matches. Disintegration and team disintegration are classic <a href="https://en.wikipedia.org/wiki/Deathmatch_(gaming)">deathmatch</a> modes. Power Monger is a node control mode and Bit Runner is a capture-the-flag variation. There is also a levelling system, which upgrades player's character version (level) and gains memory for upgrades. The character can gain versions up to 50. After becoming version 50, the players cannot upgrade own character anymore.</p>
+
+<p>Two more multiplayer maps, as well as a <a href="https://en.wikipedia.org/wiki/List_of_Tron_characters#Sam_Flynn">Sam Flynn</a> character skin, were made available at the game's launch as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> through codes included in the game package. Five more maps and the Black Guard character skin were released in a downloadable pack; one of these, the "Classic" map, is a replica of the light cycle grid from the original <i>Tron</i> film.</p>
+
+<h2>Plot</h2>
+
+<p><i>Tron: Evolution</i> serves as a <a href="https://en.wikipedia.org/wiki/Prequel">prequel</a> to the film <i><a href="https://en.wikipedia.org/wiki/Tron:_Legacy">Tron: Legacy</a></i>. <i>Tron: Evolution</i> explains the events that led to <a href="https://en.wikipedia.org/wiki/Kevin_Flynn_(character)">Kevin Flynn</a>'s imprisonment inside the Grid, as well as telling how the Grid evolved through the years. The player controls a system monitor program named "Anon" (short for anonymous), a security program owned by Flynn to investigate a conspiracy in the world of Tron.</p>
+
+<p>The game starts with video footage of Kevin Flynn who is discussing the existence of ISOs (Isomorphic Algorithms), a group of programs with a measure of free will that has emerged spontaneously on the Grid, and are disliked by the Basic programs. Jalen, one of the leaders of the ISOs, recently died and Flynn suspects the murder was organized by Clu, a second version of the original program from the <a href="https://en.wikipedia.org/wiki/Tron">first film</a>. Flynn has got Anon to try to control the system.</p>
+
+<p>Radia, leader of the ISOs, is at a formal ceremony to make her a System Administrator alongside Clu. Tron asks Anon to guard the ceremony but finds a suspicious female ISO, Quorra, who tries to talk her way past the guards, prompting Anon to follow her. The ceremony is violently disrupted by the virus program, Abraxas, but Anon intervenes and battles him, damaging Abraxas' identity disc and forcing the virus to flee. Clu disparages the "flaws" of the new ISOs, while Tron suggests Flynn leave the Grid for his own safety.</p>
+
+<p>During his battle against Abraxas-generated corruption, Anon sees Flynn and Tron being ambushed and killed by Clu and his guards; Anon discovers Quorra, who also saw the killings. They visit Zuse at a nightclub that serves as a haven for ISOs. Zuse gives them Solar-Sailer access codes and suggests they warn Radia since her word will be believed by the ISOs. As they leave the nightclub, the elevator slope connecting it, and the ground is shattered, leaving those in the nightclub stranded. As they travel to the solar sailer station, they see several groups of ISOs being terrorized; they realize that Clu has declared war on the ISOs.</p>
+
+<p>Quorra and Anon are secretly present to observe a meeting between Clu and Radia.  Clu tells Radia that Anon killed Flynn requesting that Radia gather the ISOs together for "protection". After Clu leaves, Quorra and Anon tell the truth to Radia.  Radia responds that Flynn was not killed, but was rescued by an ISO called Gibson. Anon rescues Gibson from the Game Grid and they head for the colony where Flynn was taken, but they discover the colony has been infected by Abraxas and that Flynn has vanished. Anon and Gibson flee, but Abraxas catches up with them and infects and presumably possesses Gibson. Anon is then forced to fight the now infected Gibson and successfully defeats him, who thanks Anon as he is derezzed. After many battles, Anon finds Quorra again and she explains that Clu has recently attacked and destroyed all ISOs on the Grid.</p>
+
+<p>Quorra and Anon once again secretly observe a meeting between Clu and Radia. Abraxas arrives, and Radia realizes that he was once Jalen and that Clu had corrupted him to create the pretext for the destruction of the ISOs. Abraxas kills Radia, making Quorra the last ISO. No longer wanting to wait, Quorra goes after Clu, leaving Anon to fight against Abraxas, who he manages to defeat by leading him under falling debris. Anon later meets with Flynn, who had modified his disc with the Abraxas shards he found and reveals that Quorra has stowed away on Clu's warship. Anon finds a way aboard, and Clu throws Quorra down to the deck. When the monstrous virus reappears, Anon and Abraxas have a final showdown, with Abraxas using the ships' energy cores to multiply his power, which Anon fights back by damaging and overloading them. When Abraxas enters the central core, Clu yells that he will overload the core and the ship. Anon destroys the core with Abraxas in it, finally de-rezzing him. Clu runs away while Anon goes to Quorra and picks her up. As the ship is exploding, Anon dives off the side of the ship and grabs onto a Recognizer. The blast from the explosion malfunctions and damages the cruiser, causing it to fall. Anon throws Quorra out of the way as the ships' remains fall towards them following Flynn's last command to protect her. The ship then crushes Anon.</p>
+
+<p>Quorra wakes up and sees Anon fading under the Recognizer and watches him Derez in front of her. Alone in the middle of the wasteland, she collapses, expecting to run out of energy and Derez. Just when she thinks all hope is lost she opens her eyes and sees the creator of the Grid, Flynn, standing above her and he recharges her energy. Clu survives to rule an ISO-free Grid, and Flynn and Quorra are outcasts, with the latter reflecting on how both Flynn and Anon saved her.</p>
+
+<h2>Development and release</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Downloadable_content">Downloadable content</a> is available via digital download. A limited edition was available for <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>. It contains a Light Cycle collectible model by <a href="https://en.wikipedia.org/wiki/Sideshow_Collectibles">Sideshow Collectibles</a>, a display case for the model, and the game.</p>
+
+<h3>Soundtrack</h3>
+
+<p>The music in the game was composed by Sascha Dikiciyan (aka <a href="https://en.wikipedia.org/wiki/Sonic_Mayhem">Sonic Mayhem</a>), <a href="https://en.wikipedia.org/wiki/Cris_Velasco">Cris Velasco</a>, and <a href="https://en.wikipedia.org/wiki/Kevin_Manthei">Kevin Manthei</a>. Two tracks come from the film's soundtrack: "<a href="https://en.wikipedia.org/wiki/Derezzed">Derezzed</a>" and "The Grid", composed by <a href="https://en.wikipedia.org/wiki/Daft_Punk">Daft Punk</a>.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> and <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> version of <i>Tron: Evolution</i>, entitled <i><a href="https://en.wikipedia.org/wiki/Tron:_Evolution_-_Battle_Grids">Tron: Evolution - Battle Grids</a></i> was developed by <a href="https://en.wikipedia.org/wiki/N-Space">n-Space</a>, and features different gameplay than its counterpart. <i>Battle Grids</i> released simultaneously with its counterpart, and also received mixed critical reviews.</p>
+
+<h2>Reception</h2>
+
+<p><i>Tron: Evolution</i> received "mixed or average" reviews on all platforms according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregation</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/The_Guardian">The Guardian</a></i> gave the PS3 version four stars out of five, complimenting that "It manages a pretty impressive balancing act: non-gamers obsessed with <i>Tron</i> will love its ambiance and authenticity, and may even discover they like games more than they thought." Another positive review came from <i><a href="https://en.wikipedia.org/wiki/The_Escapist_(magazine)">The Escapist</a></i>, which gave the Xbox 360 version a similar score of four stars out of five and said that it "may not re-write the book on action games, but for licenses, it just might." However, <i><a href="https://en.wikipedia.org/wiki/USA_Today">USA Today</a></i> gave the game two-and-a-half stars out of four, saying, "While ambitious, the glow-in-the-dark <i>TRON: Evolution</i> will likely disappoint those looking forward to the game (including those excited over the sleek <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a> trailers). It's certainly fun at times, and offers multiplayer modes to take the action online, but alas, it's one of those games you'll likely want to rent for the weekend instead of buying at full price." 411Mania gave the Xbox 360 version a score of six out of ten, saying, "Fans hoping for a good movie tie-in here will be sorely disappointed. The game starts off promising, but gets repetitive before the first chapter is even over. <i>Tron</i> fans will like the game just to see how the first and second movies get tied in together, but plenty of other games have better platforming and gameplay."  <i><a href="https://en.wikipedia.org/wiki/The_A.V._Club">The A.V. Club</a></i> gave the PS3 version a C−, saying that it "has a few passable moments, but it's ultimately too dull to be anything more than a missed opportunity."</p>
+
+<p><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> said of the PS3 and Xbox 360 versions: "<i>TRON: Evolution</i> mixes free-running platforming with simple but engaging combat and is a fun if slightly repetitive trip back into the digital world of the Grid." <a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a> called the Xbox 360 version "a game that entertains without inspiring, doing enough to settle comfortably into the realms of "good" while never exerting the additional effort required to raise expectations any higher." <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> said of the same console version: "Tron newcomers probably needn't apply, but those who count the original film among their favorites may want to enter Evolution's grid." <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>, in contrast, gave a somewhat mixed review, saying that "It's a repetitive cyberpunk <i><a href="https://en.wikipedia.org/wiki/Prince_of_Persia">Prince of Persia</a></i>. The platforming and combat are flashy, but both feel awkward to control and get really competitive."</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i>'s Dustin Quillen gave a negative review of the PS3 and Xbox 360 versions, saying that "As much as it pains me to say it, <i>Tron: Evolution</i> proves that it takes a lot more than nostalgia and shiny graphics to make an enjoyable videogame." <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> was another to make a negative appointment about the same console versions, arguing that "<i>Tron: Evolution</i> will probably have a handful of defenders, but I can't reasonably suggest that anyone play it. It's a shoddy experience that ultimately isn't much fun. <i>Tron</i> superfans would do better simply watching the movie again and calling it a day."</p>
+
+<p><i>Tron: Evolution</i> sold 190,755 copies in North America, and its critical and commercial underperformance led to the shutdown of Propaganda Games.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

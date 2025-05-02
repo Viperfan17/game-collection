@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sly Cooper: Thieves in Time</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('a1724479-0458-4e3a-97f5-8f3e38906979/e1b8e69d-3f25-47eb-a9af-1336e6a695ec.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="a1724479-0458-4e3a-97f5-8f3e38906979/c6a8eac5-b417-4f01-aca2-967e4c4f0a06.ico"/> Sly Cooper: Thieves in Time</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="a1724479-0458-4e3a-97f5-8f3e38906979/ba54eed5-9c1f-4678-b03d-a7f2690ba353.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:54:57</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:59:11</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-2/5/2013">2/5/2013</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-78">78</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-75">75</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Stealth">Stealth</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sanzaru Games">Sanzaru Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Sony Computer Entertainment">Sony Computer Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Sly_Cooper:_Thieves_in_Time" target="_blank">Wikipedia</a><br/><a href="http://slycooper.playstation.com/en-us/" target="_blank">Official website</a><br/><a href="https://www.imdb.com/title/tt1972756/" target="_blank">IMDb</a><br/><a href="https://www.mobygames.com/game/sly-cooper-thieves-in-time" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] composer: Peter McConnell">[People] composer: Peter McConnell</a><br/><a href="#quicklink-[People] designer: Mat Kraemer">[People] designer: Mat Kraemer</a><br/><a href="#quicklink-[People] director: Bill Spence">[People] director: Bill Spence</a><br/><a href="#quicklink-[People] producer: Glen Egan">[People] producer: Glen Egan</a><br/><a href="#quicklink-[People] programmer: David Grace">[People] programmer: David Grace</a><br/><a href="#quicklink-[People] programmer: Jenny Spurlock">[People] programmer: Jenny Spurlock</a><br/><a href="#quicklink-[People] programmer: Paul Murray">[People] programmer: Paul Murray</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Sly Cooper: Thieves in Time</b></i><!--Please do not add "also known as Sly 4". It was never known officially as Sly 4, in the same way that the second Ratchet &#x26; Clank game isn't called Ratchet 2. --> is a 2013 <a href="https://en.wikipedia.org/wiki/Stealth_game">stealth</a> <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/Sanzaru_Games">Sanzaru Games</a> and published by <a href="https://en.wikipedia.org/wiki/Sony_Computer_Entertainment">Sony Computer Entertainment</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Vita">PlayStation Vita</a>. The fourth installment in the <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper">Sly Cooper</a></i> series, it is the first game in the series to not be developed by <a href="https://en.wikipedia.org/wiki/Sucker_Punch_Productions">Sucker Punch Productions</a>. Sanzaru Games had remastered the original trilogy for the PlayStation 3 as <i>The Sly Collection</i>, with <i>Thieves in Time</i> being teased in the bundle, but it was not formally announced until several months later at the 2011 <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">Electronic Entertainment Expo</a> during Sony's presentation in June 2011.</p>
+
+<p>The game, set in a world populated by <a href="https://en.wikipedia.org/wiki/Anthropomorphic">anthropomorphic</a> animals, follows from the end of <i><a href="https://en.wikipedia.org/wiki/Sly_3:_Honor_Among_Thieves">Sly 3: Honor Among Thieves</a></i>. <a href="https://en.wikipedia.org/wiki/Sly_Cooper_(character)">Sly Cooper</a>, a raccoon from a long line of master thieves, will need to reunite with his gang to repair the <i>Thievius Raccoonus</i>, a book chronicling the Cooper family line whose pages have been affected by a villain traveling through time. The player controls Sly, Bentley, Murray, Carmelita Fox, and Sly's ancestors, using their skills to pull off heists and reveal who is putting the Cooper history in a jam.</p>
+
+<p><i>Sly Cooper: Thieves in Time</i> was a part of Sony's <a href="https://en.wikipedia.org/wiki/Cross-buy">cross-buy</a> initiative, allowing purchasers of the PlayStation 3 version of the game to receive a free copy of the game for the PlayStation Vita via the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a>. The player can also save their game in the cloud, allowing them to play on one system and later continue playing on the other. The game was met with generally favorable critical reception upon release. It was praised for its amount of content, graphics, writing, and the utilization of the Cross-Buy program. However, reviewers were divided over how well the retained gameplay from the previous entries had aged, the sections for side-characters, and the mini-games, while the loading screens were widely criticized.</p>
+
+<h2>Gameplay</h2>
+
+<p>As with other <i>Sly Cooper</i> entries, <i>Thieves in Time</i> is an <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> <a href="https://en.wikipedia.org/wiki/Stealth_game">stealth game</a> with puzzle-solving and the ability to explore wide open spaces, regardless if they are part of the required objective. Players primarily control Sly Cooper, who must sneak around and navigate various obstacles to help restore the history of the <i>Thievius Raccoonus</i>. Similar to the series <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed">Assassin's Creed</a></i>, players go back into time periods saving his ancestors and killing the land's tyrant. Many of Sly's abilities return, such as navigating poles and ropes, jumping across narrow platforms and stealing items from guards. New to this game are costumes earned throughout the course of the game, which give Sly access to new abilities. Examples include a suit of armor that allows Sly to reflect projectiles with a shield, an archery outfit that lets him shoot arrows at targets to create rope lines, and an Arabian pirate-like suit that allows him to slow down time and use a sword to break sturdy objects. These costumes can be taken to previously visited levels to reach secret areas.</p>
+
+<p>New secret masks and treasures are hidden throughout the game; the latter item, unlike its counterpart in previous installments, is collectible only and cannot be sold on the game's ThiefNet service (although the player still receives an in-game monetary reward). The clue bottles from <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper_and_the_Thievius_Raccoonus">Sly Cooper and the Thievius Raccoonus</a></i> and <i><a href="https://en.wikipedia.org/wiki/Sly_2:_Band_of_Thieves">Sly 2: Band of Thieves</a></i> make a return, allowing the player to unlock new abilities for all of the playable characters. A new feature allows anyone who owns both the PlayStation Vita and PlayStation 3 versions of the game to use the Vita system as "a set of x-ray goggles" to find any of these hidden collectibles anywhere in the world, through the use of <a href="https://en.wikipedia.org/wiki/Augmented_reality">augmented reality</a>. The binary characters displayed during Bentley's plans are ASCII-encoded text messages and can be decoded manually.</p>
+
+<p>Bentley, Murray, and Carmelita Fox return as playable characters, along with some of Sly's ancestors, who each possess unique abilities. Worlds in the game are claimed to be three times the size of the original trilogy. The game also supports <a href="https://en.wikipedia.org/wiki/Stereoscopic_3D">stereoscopic 3D</a> and local multiplayer in some sections of the game.</p>
+
+<h2>Plot</h2>
+
+<p>Sly is faking <a href="https://en.wikipedia.org/wiki/Amnesia">amnesia</a> to be with his love interest Carmelita, Murray is racing with the team van, and Bentley and Penelope are constructing a time machine. However, the words begin vanishing from the pages of the <i>Thievius Raccoonus</i>, and Penelope disappears, so Bentley reforms the gang to repair the damage to the Coopers' family history and find out who is responsible. Meanwhile, Carmelita discovers Sly's deception after she catches him robbing an art museum to steal the Feudal Japan-era dagger to get to Feudal Japan, and wants to permanently get her hands on him for lying to her.</p>
+
+<p>The team begins their <a href="https://en.wikipedia.org/wiki/Time_travel">time-traveling</a> journey in <a href="https://en.wikipedia.org/wiki/Feudal_Japan">Feudal Japan</a>, where they rescue Rioichi Cooper, a <a href="https://en.wikipedia.org/wiki/Ninja">ninja</a> and the inventor of <a href="https://en.wikipedia.org/wiki/Sushi">sushi</a>. After a showdown with El Jefe, a <a href="https://en.wikipedia.org/wiki/Cuba">Cuban</a> military strategist <a href="https://en.wikipedia.org/wiki/Siberian_tiger">tiger</a> who overthrew several small countries and sold them to the highest bidder, Rioichi's cane is stolen. In the <a href="https://en.wikipedia.org/wiki/Wild_West">Wild West</a>, the gang breaks outlaw Tennessee "Kid" Cooper, who was framed for bank robbery before he had started, out of jail. They also discover Carmelita being held hostage by Toothpick, a self-proclaimed "gunslinger" <a href="https://en.wikipedia.org/wiki/Nine-banded_armadillo">armadillo</a> posing as the town's new <a href="https://en.wikipedia.org/wiki/Sheriff">sheriff</a>, under the orders of a black-market art dealer <a href="https://en.wikipedia.org/wiki/Striped_skunk">skunk</a> named Cyrille Le Paradox, who sent her back in time to impede her investigation of him. The gang, however, gets captured as well.</p>
+
+<p>After the rescue, they manage to defeat Toothpick, but unforeseen complications cause them to be sent to the <a href="https://en.wikipedia.org/wiki/Ice_age">Ice Age</a> in <a href="https://en.wikipedia.org/wiki/Prehistoric_Australia">Prehistoric Australia</a>. Carmelita is still very upset at Sly and leaves the group. A cave-raccoon nicknamed "Bob", revealed to Sly's primordial ancestor, teams up with the gang to stop The Grizz, an art thief <a href="https://en.wikipedia.org/wiki/Grizzly_bear">bear</a> forging cave paintings. After much thought, Carmelita finally decides to help the gang in order to stop Le Paradox and return home. They then travel to <a href="https://en.wikipedia.org/wiki/Medieval_England">Medieval England</a>, where they recruit Sir Galleth of The Knights of the Cooper Order, a knight with a flair for the dramatic. They confront the tyrant Black Knight in control of the area, but are shocked to discover it is actually Penelope, who believes Sly is a negative influence on Bentley and provided Le Paradox with a means of traveling through time. This revelation sends Bentley into a deep depression, but eventually overcomes it and arrives just in time to save the gang from Penelope and break up with her.</p>
+
+<p>The gang finally catches up to Le Paradox in <a href="https://en.wikipedia.org/wiki/Ancient_Arabia">Ancient Arabia</a> with the help of Salim Al-Kupar, the last active member of the <a href="https://en.wikipedia.org/wiki/Ali_Baba">Forty Thieves</a>, and battle Ms. Decibel, a "music snob" <a href="https://en.wikipedia.org/wiki/Asian_elephant">elephant</a> with the power of <a href="https://en.wikipedia.org/wiki/Hypnosis">hypnosis</a> thanks to a trumpet stuck in her trunk. Le Paradox's plan is eventually revealed: forge documents in the past depicting a fake royal lineage to expand his fortune and influence, and steal the Cooper ancestors' canes as revenge for his own family's misfortune as thieves. As a final insult to Sly, he kidnaps Carmelita.</p>
+
+<p>The gang returns to present-day <a href="https://en.wikipedia.org/wiki/Paris">Paris</a>, now under Le Paradox's control. Using Carmelita as bait, Le Paradox captures Sly. However, Bentley, Murray, and a team of Cooper ancestors retrieve the missing canes and free them just as Le Paradox inadvertently rips a hole in the <a href="https://en.wikipedia.org/wiki/Spacetime">space-time</a> continuum. Finally reconciling with Carmelita, Sly sends everyone home just before entering a final showdown with Le Paradox atop his blimp, ending with Le Paradox falling into the sea. The various villains are sent to prison, though Penelope escapes and remains at large. However, though Le Paradox was later found and incarcerated, Sly was trapped aboard the blimp and has disappeared, saddening everyone, especially Carmelita who was hurt the most. Despite this, the gang vows to do whatever it takes to find him, no matter when or where he is.</p>
+
+<p>If all <a href="https://en.wikipedia.org/wiki/PlayStation_Network#Trophies">trophies</a> are collected or if the "end credits" are selected in the menu, a secret ending is unlocked that shows Sly waking up, surrounded by the wreckage of Le Paradox's blimp in front of a jackal-headed temple and pyramids in <a href="https://en.wikipedia.org/wiki/Ancient_Egypt">Ancient Egypt</a>.</p>
+
+<h2>Development</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Sanzaru_Games">Sanzaru Games</a>  was interested in developing the <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper">Sly Cooper</a></i> franchise further after <a href="https://en.wikipedia.org/wiki/Sucker_Punch_Productions">Sucker Punch Productions</a>, the original developer, had moved on to the <i><a href="https://en.wikipedia.org/wiki/Infamous_(series)">Infamous</a></i> series. Quickly after the purchase of a <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> <a href="https://en.wikipedia.org/wiki/Game_development_kit">development kit</a>, they worked out a prototype game engine for the console which they presented to <a href="https://en.wikipedia.org/wiki/Sony_Computer_Entertainment">Sony Computer Entertainment</a>. Sony was impressed and gave them the development duties for the PlayStation 3 conversion of the original trilogy, <i>The Sly Collection</i> and then subsequently green-lit <i>Sly Cooper: Thieves in Time</i>.</p>
+
+<p><i>Thieves in Time</i> represents a return to the series after a nearly eight-year hiatus following the release of <i>Sly 3</i>. Several hints of the series' revival were previously included in <i><a href="https://en.wikipedia.org/wiki/Infamous_(video_game)">Infamous</a></i> and <i><a href="https://en.wikipedia.org/wiki/Infamous_2">Infamous 2</a></i>, released in 2009 and 2011 respectively. In addition to other nods to the series, such as Sly's calling-card logo patch on <i>Infamous'</i> protagonist Cole MacGrath's backpack in both games and the ability to use Sly's cane as an alternate melee weapon within <i>Infamous 2</i>, both games features marquees that included the title "<i>Sly 4</i>". A teaser trailer included in <i>The Sly Collection</i>, released in late 2010, titled "<i>Sly 4</i>", was believed to be an indication that a new game would soon be announced. The game was formally announced for PlayStation 3 during Sony's presentation at the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">Electronic Entertainment Expo</a> (E3) convention <a href="https://en.wikipedia.org/wiki/E3_2011">on June 6, 2011</a>. A <a href="https://en.wikipedia.org/wiki/PlayStation_Vita">PlayStation Vita</a> version was revealed on May 18, 2012 during <i><a href="https://en.wikipedia.org/wiki/GameTrailers_TV_with_Geoff_Keighley">GameTrailers TV with Geoff Keighley</a></i>.</p>
+
+<p>At <a href="https://en.wikipedia.org/wiki/Gamescom">Gamescom</a> 2012, Sony announced the new <a href="https://en.wikipedia.org/wiki/Cross-buy">cross-buy</a> program. Through this program, one could purchase the PS3 version of a game and receive the PS Vita version (provided one is available) completely free of charge through a code redeemable at the PS Vita's PlayStation Store, with <i>Thieves in Time</i> among the games supporting the program. A new trailer was also seen at Gamescom 2012, introducing Salim Al-Kupar as another confirmed ancestor and sending news that the release date had been pushed back to early 2013. Sony later clarified the release date to be in February 2013, stating that they didn't want <i>Thieves in Time</i> to release at the same time as all of the other games coming out in the fall of 2012; putting it in February would give it more prominence during the game's vital opening week with fewer big-name titles releasing at the same time.</p>
+
+<p>A demo for the game is included on the North American version of the <i><a href="https://en.wikipedia.org/wiki/Ratchet_&amp;_Clank_Collection">Ratchet &amp; Clank Collection</a></i>, which released on August 28, 2012; however, it only has a single mission to play. Another demo, including the Paris prologue, was released on January 22, 2013 for PlayStation Plus members and January 29 for everyone on both the PS3 and PS Vita. On September 21, 2012, ten years after <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper_and_the_Thievius_Raccoonus">Sly Cooper and the Thievius Raccoonus</a></i> released, Sony announced Sly 4's release date to be February 5, 2013, and announced that those who preordered would gain early access to a special outfit for Murray and two Paraglider "skins" that are available to everyone else in game once a certain amount of "Secret Sly Masks" are collected.</p>
+
+<h3>Soundtrack</h3>
+
+<p>The score for <i>Thieves in Time</i> was composed by <a href="https://en.wikipedia.org/wiki/Peter_McConnell">Peter McConnell</a>, who also scored the previous two <i>Sly</i> games. McConnell composed more than 2.5 hours of music for this score in a wide variety of styles. All the music was recorded at <a href="https://en.wikipedia.org/wiki/Ocean_Way_Nashville">Ocean Way</a> in Nashville and performed by the Nashville Scoring Orchestra. It is available on <a href="https://en.wikipedia.org/wiki/ITunes">iTunes</a> and the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a>.</p>
+
+<h2>Reception</h2>
+
+<p>Upon its release, <i>Thieves in Time</i> was the 9th best selling retail game of the month in the United States, and received "generally favorable reviews" according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. The creators of <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper">Sly Cooper</a></i> at <a href="https://en.wikipedia.org/wiki/Sucker_Punch_Productions">Sucker Punch Productions</a> expressed approval as well, stating on their Twitter account that they had "no problem handing over the Sly reigns [sic] to Sanzaru. Hope all enjoy it as much as we did."</p>
+
+<p><i>Thieves in Time</i>'s gameplay, in terms of how well it adapted <i>Sly Cooper</i> to the generation of video gaming at the time, was debated. <i><a href="https://en.wikipedia.org/wiki/PlayStation_Official_Magazine_–_UK">Official Playstation Magazine</a></i> journalist Robert Pearson argued it was a success, minus the "dated boss battles and one or two grating design choices". Some critics appreciated the return of the series' explorative collect-a-thon style as a nostalgic reminder of both it and the gaming era it was from. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>'s Colin Moriarty was one of them, adding that it kept the franchise relevant by modernizing the previous-era mascot-based 3D platformer, not accomplished by other PlayStation series like <i><a href="https://en.wikipedia.org/wiki/Jak_&amp;_Daxter">Jak &amp; Daxter</a></i> and <i><a href="https://en.wikipedia.org/wiki/Ratchet_&amp;_Clank">Ratchet &amp; Clank</a></i> which "have either disappeared entirely or gone in new and strange directions respectively". As reviewers from <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> and <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> explained, the gameplay was fresh by how skillfully-incorporated and varied its established gameplay components were. Others felt <i>Thieves in Times</i> latched too closely to the gameplay of the previous installments and did not take enough risks, resulting in a repetitive, unsurprising, and dated experience. Marty Sliva disparagingly described the franchise's gameplay as dated to the early 2000s era after <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_III">Grand Theft Auto III</a></i>: "It strives to deliver an open world, but that space feels sparse and unlived in. It leans on variety at the detriment of not allowing any one element to feel truly refined. It knows how to tell a long story, but doesn't quite know how to tell a particularly good one."</p>
+
+<p>Moriarty and <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i>'s Tom McShea wrote the game's new set of characters, and the addition of moves unique to the ancestors, kept the gameplay fresh, exciting and diverse. <i><a href="https://en.wikipedia.org/wiki/Push_Square">Push Square</a></i>'s Sammy Barker claimed that the discovery of an ancestor's move motivated the player to search for the next world. On the other hand, Bramwell was disappointed by the moves. He argued that they lacked the "tactile pleasure" of maneuvering Sly Cooper, being only for "obvious and functional skills", and were overly fiddly to alternate between. <i><a href="https://en.wikipedia.org/wiki/GameRevolution">GameRevolution</a></i>'s Alex Osborn argued the gameplay styles were too "shallow" to change up the gameplay. The ratio of sections for specific characters was also considered unbalanced by some reviewers. Osborn perceived that Sly Cooper still dominated the experience, and Carmichael found opportunities to play as Carmelita and the ancestors too small to be satisfying. Contrarily, <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i>'s Tom Bramwell felt that the experience was generally let down by not enough platforming with Sly, and an overabundance of mini-games and sections with the other characters that were less thrilling. Similarly, Moriarty, despite being impressed by the amount of playable characters, wrote most lacked the "versatility" of Sly Cooper.</p>
+
+<p>The locales were generally praised for their detail, vibrant color palette, and diversity between them. Stephanie Carmichael of <i><a href="https://en.wikipedia.org/wiki/VentureBeat">VentureBeat</a></i> also acknowledged detail and variety in the character designs. However, Sliva called the stage layouts "bland" and all the same, which "does a disservice to [the periods'] admittedly interesting themes". The cutscenes were praised as "bright and colorful" by <i><a href="https://en.wikipedia.org/wiki/GameRevolution">GameRevolution</a></i>'s Alex Osborn and "cartoony, charming, and funny to watch" by Carmichael. Staff from <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> also praised the cutscenes, although found fault with "noticeable artifacting" encountered when the subtitles were off.</p>
+
+<p>The story, voice acting, and humor were well-received. Matt Helgeson of <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> opined <i>Thieves in Time</i> had one of the best stories of a platform game. In addition to getting hooked the characters, Moriarty praised it as a rare video game to keep the player constantly laughing, citing examples of Murray's third-person narration of himself and Bentley's pokes at Sly's sense of humor. Barker enjoyed the return of the detailed character development and silliness of previous entries. Like Moriarty, he lauded the comedy as exceptional in comparison to others of its kind, reasoning that it emphasizes "fun puns and genuinely calamitous scenarios" over "shouting, screaming, and tired memes". McShea appreciated the diversity of Sly's ancestors for contributing to the game's comedy, despite being non-evolving archetypes. He called Salim the funniest of them, also highlighting Tennessee's disparity between the modest way he acts towards women and his self-bloating when he's not with them. Carmichael appreciated how much the voice-acted dialogue contributed to the missions, but argued Bentley and Murray provided too much advice for the player to solve problems on their own. Even <i>Edge</i>, who found the script not funny, acknowledged that the unexpected twists in the gameplay and plot meant "even the most groansome gags and lame puns add to the freewheeling, ramshackle charm". A detractor of the comedy and dialogue was Osborn, who found it "forced and played out" and had a hard time watching "any more of the nonsensical stupidity that would spew from [the characters'] mouths".</p>
+
+<p>Critics spotlighted the depth and length, reporting that it would take 20 hours to beat the campaign and hours more to explore every part of the stages for optional collectables. <i>Hardcore Gamer</i>'s Steve Hannley suspected the environments were the largest in the series. McShea called the gameplay's scavenging, particularly for collectables not required by the task, its best element. The freedom of maneuverability was enjoyed by reviewers, including McShea. However, he also suggested the game focused too much on freedom of movement over difficulty, especially in the early sections. The game was also criticized for continuing the platform control of jumping then pressing the circle button. It was called "archaic" by Moriarty and "clunky" by Osborn, who also noted that the button indicator was sometimes in hard-to-notice edges of the screen.</p>
+
+<p>The bosses were highlighted for their difficulty, to the enjoyment of Carmichael and McShea but to the frustration of Pearson. However, they were also negatively cited for their over-dependence on patterns, Carmichael finding the last boss to be anti-climatic due to this. McShea was the most critical toward the combat sections apart from the bosses, finding the situations "forced" and the sense of impact and peril small. The Murray sections were considered the worst by McShea, noting that they involved nothing more than repeatedly punching. Murray's sections were also disliked by Pearson for the same reason, who also criticized Bentley's sections. More positively, the character-specific sections besides Sly were noted by Hegelson to add diversity to the gameplay.</p>
+
+<p>The mini-games garnered mixed responses. McShea wrote that they were short enough to not overstay their welcome, and their disparate genres added to the game's diversity. Steve Hannley highlight how the different styles of each character-specific section meshed without being jarring. The <i>Edge</i> staff also appreciated the diversity and wackiness of the mini-games' situations, but found them "rarely exciting". Barker claimed that "there's something admirable about a title that includes a fully functioning table-tennis mini-game just because it can", and found Bob's Winter Olympics-esque mini-game to be one of the title's funniest moments. He was, however, irritated by the repetition of genres, and was critical of mini-games that utilized the motion detection on the <a href="https://en.wikipedia.org/wiki/DualShock_3">DualShock 3</a>. Bramwell disliked the mini-games as "quirky but unoriginal".</p>
+
+<p>The incorporation of the Cross-Buy program was enthusiastically received by critics, who recommended Sony to utilize it for future projects. Bramwell did so with the advice to make the saving automatic. However, there were critiques towards the use of the Vita. Moriarty considered the handheld console port's graphics to be significantly inferior to the PlayStation 3 counterpart, reasoning that it was "far more at home" on the household system in all manners. Bramwell noted the framerate went from 60fps to 30fps on the Vita. Carmichael disliked the requirement of the Vita for a <a href="https://en.wikipedia.org/wiki/Viewfinder">viewfinder</a> for masks and clues, which served a similar function of the binocucom on the screen of the prior PlayStation 2 entries. The loading screens were considered by some critics to be the worst aspect, and frequently condemned as long and common. <i>Edge</i> reported the problem being the worst on the Vita, and the magazine's staff and Pearson claimed these plus the mini-games deterred the narrative pacing.</p>
+
+<h2>Future</h2>
+
+<p>Despite <i>Thieves in Time</i> ending on a cliffhanger, the <i>Sly Cooper</i> series has been on hiatus. Sanzaru Games stated in 2014 via <a href="https://en.wikipedia.org/wiki/Facebook">Facebook</a> that they were not developing a sequel. Although the developer did not state a rationale, Caty McCarthy of <i><a href="https://en.wikipedia.org/wiki/USgamer">USgamer</a></i> inductively-reasoned that low sales and the industry's focus of hyper-realistic video games that took advantage of console power at the expense of cartoon-y products may have motivated Sony to not continue the series. When McCarthy asked Sanzaru development director Omar Woodley, who joined the company after <i>Thieves in Time</i>, about a potential future entry, he responded, "You never know what's on the horizon. Some of these projects come in of our own initiative trying to drive them, others are publishers outside Sony, <a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a>, <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a>, and they come to us with an idea and we come together on cohesion of a vision. But you never know what you'll embark on next."</p>
+
+<p>In December 2019, Sanzaru creative director Matt Kramer, who served as designer on <i>Thieves in Time</i>, revealed in an interview on the <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a> channel Kinda Funny Games Daily that the Ancient Egypt chapter teased in the secret ending was intended to be released as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a>, but Sony canceled these plans.</p>
+
+<p>In August 2021, a "reputable leaker" backed up a claim that a fifth <i>Sly Cooper</i> was being developed, although neither Sanzaru nor Sucker Punch are expected to return. Despite this, in July 2022, Sucker Punch officially confirmed that there were no <i>Infamous</i> nor any <i>Sly Cooper</i> projects currently in development, but didn't rule out future installments in either series.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

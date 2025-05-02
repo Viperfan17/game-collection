@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mortal Kombat vs. DC Universe</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('0d7ce641-3403-4f82-a39a-de3123685380/bca4b195-f17a-4084-b9ce-4e7c4cd784ca.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="0d7ce641-3403-4f82-a39a-de3123685380/81741992-d987-4c8b-afa6-0855d4411a35.ico"/> Mortal Kombat vs. DC Universe</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="0d7ce641-3403-4f82-a39a-de3123685380/4a974cab-e33a-4ac6-9ce2-402be3c2a597.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:54:57</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 9:13:44</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/16/2008">11/16/2008</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-61">61</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-74">74</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Fighting">Fighting</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Midway  Games">Midway  Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Midway  Games">Midway  Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-local & online multiplayer">local & online multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Mortal_Kombat_vs._DC_Universe" target="_blank">Wikipedia</a><br/><a href="http://web.archive.org/web/20090312040517/http://www.worldscollide.com/" target="_blank">Official website</a><br/><a href="https://www.mobygames.com/game/mortal-kombat-vs-dc-universe" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[Game Engine] Unreal Engine 3">[Game Engine] Unreal Engine 3</a><br/><a href="#quicklink-[People] artist: Carlos Pesina">[People] artist: Carlos Pesina</a><br/><a href="#quicklink-[People] artist: Dave Pindara">[People] artist: Dave Pindara</a><br/><a href="#quicklink-[People] artist: Steve Beran">[People] artist: Steve Beran</a><br/><a href="#quicklink-[People] composer: Cris Velasco">[People] composer: Cris Velasco</a><br/><a href="#quicklink-[People] composer: Dynamedion">[People] composer: Dynamedion</a><br/><a href="#quicklink-[People] composer: Sascha Dikiciyan">[People] composer: Sascha Dikiciyan</a><br/><a href="#quicklink-[People] composer: Soundelux DMG">[People] composer: Soundelux DMG</a><br/><a href="#quicklink-[People] designer: John Edwards">[People] designer: John Edwards</a><br/><a href="#quicklink-[People] designer: Paulo Garcia">[People] designer: Paulo Garcia</a><br/><a href="#quicklink-[People] director: Ed Boon">[People] director: Ed Boon</a><br/><a href="#quicklink-[People] producer: Hans Lo">[People] producer: Hans Lo</a><br/><a href="#quicklink-[People] producer: Hector Sanchez">[People] producer: Hector Sanchez</a><br/><a href="#quicklink-[People] producer: Michaelene Zawacki">[People] producer: Michaelene Zawacki</a><br/><a href="#quicklink-[People] programmer: Alan Villani">[People] programmer: Alan Villani</a><br/><a href="#quicklink-[People] programmer: Alexander Barrentine">[People] programmer: Alexander Barrentine</a><br/><a href="#quicklink-[People] programmer: Michael Boon">[People] programmer: Michael Boon</a><br/><a href="#quicklink-[People] writer: John Vogel">[People] writer: John Vogel</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Mortal Kombat vs. DC Universe</b></i> is a 2008 <a href="https://en.wikipedia.org/wiki/Fighting_game">fighting video game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Midway_Games">Midway Games</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. The game is a crossover between <i><a href="https://en.wikipedia.org/wiki/Mortal_Kombat">Mortal Kombat</a></i> and the <a href="https://en.wikipedia.org/wiki/DC_Universe">DC Universe</a>, and is the eighth main installment in the <i>Mortal Kombat</i> franchise. The game was released on November 16, 2008.</p>
+
+<p><i>Mortal Kombat vs. DC Universe</i> was developed using <a href="https://en.wikipedia.org/wiki/Epic_Games">Epic Games</a>' <a href="https://en.wikipedia.org/wiki/Unreal_Engine_3">Unreal Engine 3</a>, and was the first <i>Mortal Kombat</i> title developed solely for the <a href="https://en.wikipedia.org/wiki/Seventh_generation_of_video_game_consoles">seventh generation of video game consoles</a>. Its story was written by comic writers <a href="https://en.wikipedia.org/wiki/Jimmy_Palmiotti">Jimmy Palmiotti</a> and <a href="https://en.wikipedia.org/wiki/Justin_Gray">Justin Gray</a>. The game was the final entry in the franchise developed by Midway Games before the company went bankrupt in 2009 and sold the franchise to <a href="https://en.wikipedia.org/wiki/Warner_Bros._Interactive_Entertainment">Warner Bros. Interactive Entertainment</a>.</p>
+
+<p>The game's story takes place after <a href="https://en.wikipedia.org/wiki/Raiden_(Mortal_Kombat)">Raiden</a>, Earthrealm's god of thunder, and <a href="https://en.wikipedia.org/wiki/Superman">Superman</a>, Metropolis' defender, repel invasions from both their worlds. An attack by both Raiden and Superman simultaneously in their separate universes causes the merging of the <i>Mortal Kombat</i> and DC villains, <a href="https://en.wikipedia.org/wiki/Shao_Kahn">Shao Kahn</a> and <a href="https://en.wikipedia.org/wiki/Darkseid">Darkseid</a>, resulting in the creation of Dark Kahn, whose mere existence causes the two universes to begin merging; if allowed to continue, it would result in the destruction of both. Characters from both universes begin to fluctuate in power, becoming stronger or weaker.</p>
+
+<p><i>Mortal Kombat vs. DC Universe</i> received mixed-to-positive reviews. Most reviewers agreed that the game was entertaining and made good use of its DC Universe license, but its lack of <a href="https://en.wikipedia.org/wiki/Unlockable_(gaming)">unlockable</a> features compared to past installments of <i>Mortal Kombat</i> and toned-down finishing moves garnered some criticism. The game was followed by a <i><a href="https://en.wikipedia.org/wiki/Mortal_Kombat_(2011_video_game)">Mortal Kombat</a></i> reboot in 2011, and by <i><a href="https://en.wikipedia.org/wiki/Injustice:_Gods_Among_Us">Injustice: Gods Among Us</a></i> in 2013.</p>
+
+<h2>Gameplay</h2>
+
+<p>The game features a story mode, playable from two different perspectives. The perspectives consist of one segment from the <a href="https://en.wikipedia.org/wiki/DC_Universe">DC Universe</a> side, and one from the <i><a href="https://en.wikipedia.org/wiki/Mortal_Kombat">Mortal Kombat</a></i> side, each split up into various chapters. Depending on which side players choose, the characters from one universe see those from the opposite universe as the invaders of their own. The player has the ability to play as all the characters in the story mode at one point during development, but the story mode ultimately lacked story arcs for a few characters. <i>Mortal Kombat vs. DC Universe</i> also contains a mode called "Kombo Challenge", where players must perform ten pre-created <a href="https://en.wikipedia.org/wiki/Combo_(video_gaming)">combos</a> of increasing difficulty.</p>
+
+<p>Intertwined within fight matches, which are played in a 3D <a href="https://en.wikipedia.org/wiki/Fighting_game">fighter</a> style, are new gameplay modes, such as "Free-Fall Kombat" or "Falling Kombat," which are activated automatically after throwing the opponent to a lower level in the arena. The players can fight in the air during the fall in a quasi-<a href="https://en.wikipedia.org/wiki/Minigame">mini-game</a>, with one player having to hit certain buttons to be above the other during the fall and land on the other player when the fall ends. "Klose Kombat" is a mode the players can enter during a fight, causing the characters to lock with each other and the perspective to change to a close-up shot of the two, to make for an interval of close-quarters fighting. A "Test Your Might" mini-game is also worked into the gameplay; while fighting in certain areas, the player can smash the opponent through a series of walls and engage in a <a href="https://en.wikipedia.org/wiki/Tug-of-war">tug-of-war</a> with the damage meter at the top of the screen. The player on the offense presses buttons to increase damage given, while the player on the defense presses buttons to decrease damage taken.</p>
+
+<p>Another in-fight feature called "Rage mode" is introduced in <i>Mortal Kombat vs. DC Universe</i>. The Rage mode is governed by a rage meter placed below the player's health meter that fills progressively every time the player receives damage or attacks. Once the meter is completely filled, Rage mode can be activated and lasts for several seconds. Rage mode enables the player to break the opponent's guard on the second hit, prevents the attacker from experiencing hit stun, knockdown or pop-up, and increases the damage of an attacker's moves. During fights, characters show permanent signs of damage, such as bruises, scrapes, bleeding, and broken or torn clothing. All of the characters except Darkseid, Shao Kahn, and Dark Kahn have finishing moves; the <i>Mortal Kombat</i> characters and the DC villains can execute <a href="https://en.wikipedia.org/wiki/Fatality_(Mortal_Kombat)">Fatalities</a>, while the DC heroes can execute moves called "Heroic Brutalities," which function in the same manner but do not kill opponents, in order to stay in tone with the heroes who have an established reputation of never taking a life.</p>
+
+<h2>Plot</h2>
+
+<p>After <a href="https://en.wikipedia.org/wiki/Shao_Kahn">Shao Kahn's</a> invasion of <a href="https://en.wikipedia.org/wiki/Earthrealm">Earthrealm</a> is halted by <a href="https://en.wikipedia.org/wiki/Raiden_(Mortal_Kombat)">Raiden's</a> forces of light, Raiden blasts and sends Kahn through a portal. At exactly the same time on Earth, <a href="https://en.wikipedia.org/wiki/Superman">Superman</a> stops <a href="https://en.wikipedia.org/wiki/Darkseid">Darkseid's</a> <a href="https://en.wikipedia.org/wiki/Apokolips">Apokoliptian</a> invasion by blasting Darkseid with his heat vision as he enters a boom tube. These acts do not destroy either of them, but merge them into Dark Kahn, and causes the DC and <i>Mortal Kombat</i> universes to merge. As this happens, the characters' abilities fluctuate, causing violent "rage" outbreaks that are actually the feelings of Dark Kahn being infused in the characters from afar. Because of this, certain characters gain either strength or vulnerability. This allows for such things as the possibility of Superman being defeated due to his vulnerability to magic and giving the Joker the ability to fight skilled martial artists such as his nemesis Batman and <a href="https://en.wikipedia.org/wiki/Deathstroke">Deathstroke</a>.</p>
+
+<p>With each world thinking that the other is responsible for the merger, they fight each other until only one fighter from each side remains: Raiden and Superman. In the final battle, the two fight while Dark Kahn feeds on their rage. Both realizing that neither is working with Dark Kahn, Raiden and Superman overcome their rage for each other and defeat their fused enemy, restoring the two worlds to their normal separation. While everyone else has been sent to their original universe, Darkseid and Shao Kahn have been switched and are both rendered powerless. In the end, they both face eternal imprisonment in the other's universe; Darkseid is restrained in the Netherrealm, while Shao Kahn is trapped in the <a href="https://en.wikipedia.org/wiki/Phantom_Zone">Phantom Zone</a>.</p>
+
+<h2>Characters</h2>
+
+<h3><a href="https://en.wikipedia.org/wiki/Mortal_Kombat">Mortal Kombat</a> characters</h3>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Baraka_(Mortal_Kombat)">Baraka</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Jax_(Mortal_Kombat)">Jax</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Kano_(Mortal_Kombat)">Kano</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Kitana">Kitana</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Liu_Kang">Liu Kang</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Raiden_(Mortal_Kombat)">Raiden</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Scorpion_(Mortal_Kombat)">Scorpion</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Shang_Tsung">Shang Tsung</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Shao_Kahn">Shao Kahn</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Sonya_Blade">Sonya Blade</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Sub-Zero_(Mortal_Kombat)">Sub-Zero</a></li>
+</ul>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Batman">Batman</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Captain_Marvel_(DC_Comics)">Captain Marvel</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Catwoman">Catwoman</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Darkseid">Darkseid</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Deathstroke">Deathstroke</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Barry_Allen">The Flash</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Hal_Jordan">Green Lantern</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Joker_(character)">The Joker</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Lex_Luthor">Lex Luthor</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Superman">Superman</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Wonder_Woman">Wonder Woman</a></li>
+</ul>
+
+<h2>Development</h2>
+
+<p><i>Mortal Kombat vs. DC Universe</i> was Midway Games's last project before filing for bankruptcy and selling the rights to <a href="https://en.wikipedia.org/wiki/Warner_Bros._Interactive_Entertainment">Warner Bros. Interactive Entertainment</a> in 2009. In February 2007, <a href="https://en.wikipedia.org/wiki/Midway_Games">Midway Games</a> announced they were planning a new game in the <i>Mortal Kombat</i> franchise, inspired by seeing a showcase of <i><a href="https://en.wikipedia.org/wiki/Gears_of_War">Gears of War</a></i>. "<i>Mortal Kombat 8</i>" would have been "dark, gritty, serious" and a "back to basics <a href="https://en.wikipedia.org/wiki/Reboot_(fiction)">reboot</a>" of the series. Eventually, during the planning process, a deal with <a href="https://en.wikipedia.org/wiki/DC_Comics">DC Comics</a> was made and this project was cancelled, thus leading to the development of a different game. An announcement in April 2008 confirmed the game as a <a href="https://en.wikipedia.org/wiki/Crossover_(fiction)">crossover</a>, and a <a href="https://en.wikipedia.org/wiki/Trailer_(promotion)">trailer</a> was released. The only notable aspect that remained from the original project was the use of the <a href="https://en.wikipedia.org/wiki/Unreal_Engine_3">Unreal Engine 3</a>, also used in <i>Gears of War</i>.</p>
+
+<p><i>Mortal Kombat vs. DC Universe</i> was co-published by Midway Games and <a href="https://en.wikipedia.org/wiki/Warner_Bros._Interactive_Entertainment">Warner Bros. Interactive Entertainment</a> and was the final <i>Mortal Kombat</i> title to be developed under the Midway label prior to its purchase by Warner Bros. Interactive. Midway used AutoDesk software to develop <i>Mortal Kombat vs DC Universe</i>, according to Maurice Patel, entertainment industry manager at <a href="https://en.wikipedia.org/wiki/AutoDesk">AutoDesk</a>, and Illuminate Labs products for lighting.</p>
+
+<p>The use of a DC license imposed some restrictions on the characteristic violence in <i>Mortal Kombat</i> games. <i>Mortal Kombat vs. DC Universe</i> was thus restricted to a "Teen" <a href="https://en.wikipedia.org/wiki/Entertainment_Software_Rating_Board">ESRB</a> rating. Therefore, certain Fatalities such as Sub-Zero's "Spine Rip" were excluded or replaced due to their graphic nature. In order to keep that rating, two of the Fatalities in the game were <a href="https://en.wikipedia.org/wiki/Censorship">censored</a> in <a href="https://en.wikipedia.org/wiki/North_America">North America</a>. In the <a href="https://en.wikipedia.org/wiki/Europe">European</a> version, both the Joker and Deathstroke's first Fatality depict them each finishing their opponent with a gunshot to the head, both shown uncut from a distance. The North American version has the camera quickly pan toward the victor before the shot is fired, thereby cutting the victim out of the shot completely. Additionally, one of Kitana's Fatalities which involved impaling the opponent in the head and the torso with her fanblades was modified so that both fanblades impaled her opponent's chest instead.</p>
+
+<p>According to interviews, the characters were chosen for their popularity, and for parallels between them from both universes. <a href="https://en.wikipedia.org/wiki/Ed_Boon">Ed Boon</a>, creative director of <i>Mortal Kombat vs. DC Universe</i> and co-creator of the <i>Mortal Kombat</i> franchise, has said that some of the characters' abilities, especially those from the DC Universe, had been toned down to make them balanced within <i>Mortal Kombat vs. DC Universe</i>. For example, Boon specifically mentioned that Superman became vulnerable because of magic. Boon revealed that two new characters were developed as downloadable content, <a href="https://en.wikipedia.org/wiki/Quan_Chi">Quan Chi</a> from <i>Mortal Kombat</i> and <a href="https://en.wikipedia.org/wiki/Harley_Quinn">Harley Quinn</a> from DC comics but had been discarded. He had also hinted earlier at the prospect of <a href="https://en.wikipedia.org/wiki/Kung_Lao">Kung Lao</a> and <a href="https://en.wikipedia.org/wiki/Doomsday_(DC_Comics)">Doomsday</a> being downloadable characters.</p>
+
+<p>For the release of the <i>Kollector's Edition</i> of <i>Mortal Kombat vs. DC Universe</i>, a new cover was created by <a href="https://en.wikipedia.org/wiki/Alex_Ross">Alex Ross</a>. Also included in the <i>Kollector's Edition</i> is a 16-page comic book prequel, <i>Beginnings</i>, which was illustrated by <i>Mortal Kombat</i> co-creator <a href="https://en.wikipedia.org/wiki/John_Tobias">John Tobias</a>.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Downloadable_content">Downloadable content</a> (DLC) had been confirmed by <a href="https://en.wikipedia.org/wiki/Larry_Hryb">Major Nelson</a>, but was canceled due to Midway's financial issues. Ed Boon had stated that they would have been updating <i>Mortal Kombat vs. DC Universe</i> periodically with new content all the way up to the release of the next installment of the <i>Mortal Kombat</i> series: "I'd like to have [DLC] as soon as possible. I think that might be a great Christmas gift to reinvigorate the game". Ed Boon said on his Twitter account that the plan for DLC had been scrapped, which occurred because, as clarified by <a href="https://en.wikipedia.org/wiki/1UP.com">1UP</a>, Midway had filed for <a href="https://en.wikipedia.org/wiki/Bankruptcy">bankruptcy</a> and was purchased by Warner Bros. Interactive after the suggestion of downloadable content.</p>
+
+<p>The game features a four hour long, fully motion captured and voiced acted story mode, becoming among the first fighting games to attempt something like this. Ed Boon pitched the idea to Midway Game's artists, animators, and producers, who were initially unwilling on the grounds they felt it was unnecessary and not possible. It required tech and knowledge that was not available at that time, such as the ability for the game to stream a video while at the same time loading the data required for the next fight. The team was also not sold on the idea of fighting game fans wanting a film-inspired "Story mode". Midway's financial crisis also contributed to this decision making. The team pitched alternatives to Ed Boon's idea, such as still images accompanied by music and voiced dialogue, “like you'd see in some fancy comic presentations”. These alternatives frustrated Boon and he used his authority to force the team to develop his pitch as he envisioned.</p>
+
+<p>According to Ed Boon, the team was sold after they completed a single scene transition into gameplay and out of gameplay. Many workers at Midway had skillsets in film, scriptwriting, and animation that they finally got to utilize. DC comics also assisted by employing two writers, Jimmy Palmiotti and Justin Gray, so Midway would keep the characterization of DC characters consistent. Making sure Midway did not diverge from what DC characters would normally say or do. The work done for <i>Mortal Kombat vs. DC Universe's</i> story mode would eventually be seen in future <i>Mortal Kombat</i> games, such as <i><a href="https://en.wikipedia.org/wiki/Mortal_Kombat_(2011_video_game)">Mortal Kombat 9</a></i>, and the future <i>Injustice</i> series, developed by <i>Netherrealm Studios</i> from the ashes of Midway Games. Ed Boon viewed the single-player mode as a major source of appeal to casual fans who would have otherwise not paid attention to a fighting game.</p>
+
+<h2>Reception</h2>
+
+<p><i>Mortal Kombat vs. DC Universe</i> received mixed to positive reviews from critics. <a href="https://en.wikipedia.org/wiki/Adam_Sessler">Adam Sessler</a> of <i><a href="https://en.wikipedia.org/wiki/X-Play">X-Play</a></i> stated: "Whether it's a decade-late answer to the <i><a href="https://en.wikipedia.org/wiki/Marvel_vs._Capcom">Marvel vs. Capcom</a></i> team up games or an off-the-cuff boardroom joke gone wildly too far, <i>Mortal Kombat vs. DC Universe</i> is destined to make just about anyone's shortlist of bizarre video game team-ups. Still, sometimes two disparate things can merge to create a unique synergy that makes the melding work, however unlikely it may have seemed at the outset." In <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i>, Sid Shuman called it "surprisingly enjoyable." <i><a href="https://en.wikipedia.org/wiki/Wired.com">Wired.com</a></i>'s preview stated that the concept of the game was "nose-pokingly ludicrous", noting that Superman's powers could be used to easily defeat a character with the comment, "from <a href="https://en.wikipedia.org/wiki/Sub-Zero_(Mortal_Kombat)">Sub-Zero</a> to Well-Done in eight seconds flat." <a href="https://en.wikipedia.org/wiki/ABC_News_(United_States)">ABC News</a> praised the game's story because it did "a great job of giving players a cohesive, if far-fetched, story line that's fun if not engaging," as well as "comic book-like" dialogue. <i>Mortal Kombat vs. DC Universe</i>'s Kombo Challenge mode was criticized as a thin and frustrating mode with combos that required very precise timing. The modes of Klose Kombat and Free-Fall Kombat were praised as concepts but were criticized in their execution as they appeared to slow the gameplay down and took the player out of the fast gameplay experience. Critics noted that the change in the amount of gore was disappointing to longtime fans of the series who were used to the "insane amounts of gore."</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/American_Academy_of_Child_and_Adolescent_Psychiatry">American Academy of Child and Adolescent Psychiatry</a> approved of <i>Mortal Kombat vs. DC Universe</i> because of its departure from the earlier M-rated games of the series praising its "simpler play, familiar graphics and adjustable gore content" but still not recommending it for younger players. In 2008, <i>GamePro</i>, ranked it as the 15th best fighting game out of 18.</p>
+
+<p>Midway Games announced that as of January 26, 2009, <i>Mortal Kombat vs. DC Universe</i> had shipped 1.8 million copies since its release in mid-November 2008, not including the sales of the <i>Kollector's Edition</i>. The chief operating officer of <a href="https://en.wikipedia.org/wiki/GameStop">GameStop</a> stated that the <i>Kollector's Edition</i> of <i>Mortal Kombat vs. DC Universe</i> made up 55% of the game's total sales at GameStop locations in its first week. In their 10-K filing, Midway Games revealed the title had sold over 1.9 million units, making it one of the company's most successful titles since 2002. According to Wired.com, <i>Mortal Kombat vs. DC Universe</i> also "holds the distinction of being the most <a href="https://en.wikipedia.org/wiki/Pre-order">pre-ordered</a> <i>MK</i> game of all time." In a ranking by <a href="https://en.wikipedia.org/wiki/Rentrak">Rentrak</a>, the Xbox 360 version of <i>Mortal Kombat vs. DC Universe</i> was the sixth most rented game of 2009.</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/12th_Annual_Interactive_Achievement_Awards">12th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>Mortal Kombat vs. DC Universe</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Fighting_Game_of_the_Year">Fighting Game of the Year</a>" and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Story">Outstanding Achievement in Adapted Story</a>".</p>
+
+<h2>Legacy</h2>
+
+<p>Midway's work on <i>Mortal Kombat vs. DC Universe's</i> cinematic story mode would influence development of future <i><a href="https://en.wikipedia.org/wiki/Mortal_Kombat">Mortal Kombat</a></i> games and the <i><a href="https://en.wikipedia.org/wiki/Injustice_(franchise)">Injustice</a></i> series after Midway filed for <a href="https://en.wikipedia.org/wiki/Chapter_11_bankruptcy">Chapter 11 bankruptcy</a> and became <a href="https://en.wikipedia.org/wiki/NetherRealm_Studios">NetherRealm Studios</a>. Future fighting games like <i><a href="https://en.wikipedia.org/wiki/Guilty_Gear_Xrd">Guilty Gear Xrd</a></i>, <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_V">Street Fighter V</a></i>, <i><a href="https://en.wikipedia.org/wiki/Tekken_7">Tekken 7</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Marvel_vs._Capcom:_Infinite">Marvel vs. Capcom: Infinite</a></i> attempted to create similar film-inspired experiences. Screenwriter Jeremy Adams pitched an animated film for <i>Mortal Kombat vs. DC Universe</i> but was rejected by Warner Bros.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

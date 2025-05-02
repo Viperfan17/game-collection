@@ -1,0 +1,354 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Guitar Hero III: Legends of Rock</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('86ea7c71-63af-4990-bafd-2300082835ae/2f4a21f7-fe05-40b2-af5a-48f727e9c797.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="86ea7c71-63af-4990-bafd-2300082835ae/9ba04041-7004-4cba-a83e-9a617d510add.png"/> Guitar Hero III: Legends of Rock</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="86ea7c71-63af-4990-bafd-2300082835ae/0ef76c3e-4949-4291-a15d-faebeb163f8f.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:41:33</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 0:06:12</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/13/2007">11/13/2007</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-84">84</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-84">84</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Music/rhythm">Music/rhythm</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Neversoft">Neversoft</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Aspyr Media">Aspyr Media</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Guitar_Hero_III:_Legends_of_Rock" target="_blank">PCGamingWiki</a><br/><a href="https://web.archive.org/web/20081028210129/http://www.aspyr.com/product/story/85" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=4177" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/guitar-hero-iii-legends-of-rock" target="_blank">IGDB</a><br/><a href="http://strategywiki.org/wiki/Guitar_Hero_III:_Legends_of_Rock" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/30809" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Guitar_Hero_III:_Legends_of_Rock" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/guitar-hero-iii-legends-rock" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Cinematic camera">Cinematic camera</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Stylized">Stylized</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Guitar Hero III: Legends of Rock</b></i> is a 2007 <a href="https://en.wikipedia.org/wiki/Rhythm_game">rhythm game</a> developed by <a href="https://en.wikipedia.org/wiki/Neversoft">Neversoft</a> and published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>. It is the third main installment and the fourth overall installment in the <a href="https://en.wikipedia.org/wiki/Guitar_Hero"><i>Guitar Hero</i> series</a>. It is the first game in the series to be developed by Neversoft after Activision's acquisition of <a href="https://en.wikipedia.org/wiki/RedOctane">RedOctane</a> and <a href="https://en.wikipedia.org/wiki/MTV_Games">MTV Games</a>' purchase of <a href="https://en.wikipedia.org/wiki/Harmonix">Harmonix</a>, the previous development studio for the series. The game was released worldwide for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, and <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> in October 2007. <a href="https://en.wikipedia.org/wiki/Aspyr">Aspyr</a> published the <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> and <a href="https://en.wikipedia.org/wiki/Mac_OS_X">Mac OS X</a> versions of the game, releasing them later in 2007.</p>
+
+<p><i>Guitar Hero III: Legends of Rock</i> retains the basic gameplay from previous games in the <i>Guitar Hero</i> series, in which the player uses a guitar-shaped controller to simulate the playing of <a href="https://en.wikipedia.org/wiki/Lead_guitar">lead</a>, <a href="https://en.wikipedia.org/wiki/Bass_guitar">bass</a>, and <a href="https://en.wikipedia.org/wiki/Rhythm_guitar">rhythm guitar</a> parts in <a href="https://en.wikipedia.org/wiki/Rock_music">rock</a> songs by playing in time to scrolling notes on-screen. The game, in addition to existing single-player Career modes, includes a new Co-Op Career mode and competitive challenges that pit the player against in-game characters and other players. <i>Guitar Hero III: Legends of Rock</i> is the first game in the series to include an online multiplayer feature, which is enabled in the PlayStation 3, Wii and Xbox 360 versions. Initially the game offers over 70 songs, most of which are <a href="https://en.wikipedia.org/wiki/Master_recording">master tracks</a>. The PlayStation 3 and Xbox 360 versions feature the ability to download additional songs. The musicians <a href="https://en.wikipedia.org/wiki/Tom_Morello">Tom Morello</a> (of the bands <a href="https://en.wikipedia.org/wiki/Rage_Against_the_Machine">Rage Against the Machine</a> and <a href="https://en.wikipedia.org/wiki/Audioslave">Audioslave</a>) and <a href="https://en.wikipedia.org/wiki/Slash_(musician)">Slash</a> (of <a href="https://en.wikipedia.org/wiki/Guns_N'_Roses">Guns N' Roses</a> and <a href="https://en.wikipedia.org/wiki/Velvet_Revolver">Velvet Revolver</a>) make appearances both as guitar battle opponents and <a href="https://en.wikipedia.org/wiki/List_of_artists_who_have_portrayed_themselves_in_music_games">playable characters</a> in the game. The PlayStation 3, Xbox 360 and Microsoft Windows versions also include <a href="https://en.wikipedia.org/wiki/Bret_Michaels">Bret Michaels</a> (of <a href="https://en.wikipedia.org/wiki/Poison_(American_band)">Poison</a>) as a non-playable character.</p>
+
+<p>Critics and fans acclaimed the game, but reviewers noted a difference in the game's style compared to previous installments, associating it with it being Neversoft's first development attempt with the series. The game is often cited to be too difficult, creating "walls of notes" that are difficult to complete, and led to alterations in note placement for future games in the series.  According to Activision, <i>Guitar Hero III: Legends of Rock</i> is the best-selling video game of 2007, both in terms of units sold and revenue earned, and that it is the first single retail video game to exceed one billion <a href="https://en.wikipedia.org/wiki/USD">dollars</a> in sales. It is one of the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Wii_games">best-selling third-party games</a> available for the Wii.</p>
+
+<h2>Gameplay</h2>
+
+<p>Gameplay for <i>Guitar Hero III: Legends of Rock</i> is similar to previous titles in the series. The player hits notes as they scroll towards the bottom of the screen in time with music to maintain their performance and earn points. To hit notes using the guitar controller, the player hits the <a href="https://en.wikipedia.org/wiki/Strum">strum</a> bar while holding down the corresponding colored <a href="https://en.wikipedia.org/wiki/Fret">fret</a> buttons. If the player uses the standard controller instead of the guitar controller, the correct buttons need to be pressed, but the player is not required to strum. Notes can be sustained, during which the fret button is held until the note is complete, and they can also form two- to four-note chords. The game simulates <a href="https://en.wikipedia.org/wiki/Hammer-on">hammer-ons</a> and <a href="https://en.wikipedia.org/wiki/Pull-off">pull-offs</a> for sections with a rapid series of notes, allowing the player to forgo strumming on specifically marked notes. Missing a note causes the performance meter to drop. When the meter drops too low, the player fails the song, represented in-game by the band being booed off the stage. A string of 10 consecutive correct notes earns a multiplier to increase the player's score, which can occur up to four times. Special sections, marked by starred notes, can be used to build Star Power. When the player has enough Star Power, they can activate it and further double the scoring multiplier either by tilting the guitar controller vertically or by pressing a specific button on the controller. While Star Power enabled, the performance meter increases more quickly when a correct note is hit, and missing notes have a decreased penalty. <i>Guitar Hero III: Legends of Rock</i> contains four difficulty levels: Easy, which uses three of the fret buttons; Medium, which makes use of four of the fret buttons; Hard, which uses all five fret buttons; and Expert, which adds no new fret buttons, but increases the number of notes and the general difficulty.</p>
+
+<p>During a song, avatars of the virtual band, including one character selected by the player, will perform in time to the music, responding appropriately to the unleashing of Star Power or the failing of a song. <i>Guitar Hero III: Legends of Rock</i> has a cast of thirteen characters, which the player can further customize with alternate guitar skins and stage outfits using in-game money earned from successful performances. The player can access the game's three <a href="https://en.wikipedia.org/wiki/Boss_(video_games)">boss</a> characters—<a href="https://en.wikipedia.org/wiki/Tom_Morello">Tom Morello</a>, <a href="https://en.wikipedia.org/wiki/Slash_(musician)">Slash</a>, and Lou the Devil—as playable characters once they have completed their respective Boss Battles in Career mode. Although <a href="https://en.wikipedia.org/wiki/Bret_Michaels">Bret Michaels</a> appears in the game and sings specific songs, he is not a playable character in the game.</p>
+
+<h3>Career Mode</h3>
+
+<p>The single-player Career mode in <i>Guitar Hero III: Legends of Rock</i> features 8 tiers with 42 songs total. Within each tier, the player completes a number of songs, the number depending on the selected difficulty level, before they are offered an encore performance of one additional song and complete the tier. After a tier is complete, a new tier is introduced. <i>Guitar Hero III: Legends of Rock</i> includes Career mode boss battles based on the game's multiplayer Battle mode; at three points during the Career mode, the player must compete against a boss character to progress. Each successfully completed song earns in-game money that the player uses at the game's store to unlock new characters, outfits, guitars and finishes, bonus songs, and videos. Additionally, completing a song in Career mode unlocks it for play in all other game modes.</p>
+
+<p><i>Guitar Hero III: Legends of Rock</i> is the first game in the series to feature a storyline for the Career mode, portrayed through animated cartoon scenes between venues produced by <a href="https://en.wikipedia.org/wiki/Chris_Prynoski">Titmouse, Inc. Studios</a>.
+The band starts as a neighborhood sensation, and after signing a recording contract with a shady music producer named Lou, gains worldwide fame, performing at venues around the world. However, when the band attempts to break the contract, Lou reveals himself to be the <a href="https://en.wikipedia.org/wiki/Devil">Devil</a>, and their recording contract is actually a contract for their souls. Lou forces the band to play against him in the netherworld at "Lou's Inferno", but the band is able to succeed, forcing Lou to break the contract. The band returns to the mortal world as "Rock Legends".</p>
+
+<p>Two players using the same console can participate in Co-Op Career mode, with one player on <a href="https://en.wikipedia.org/wiki/Lead_guitar">lead guitar</a> and the other on <a href="https://en.wikipedia.org/wiki/Bass_guitar">bass</a> or <a href="https://en.wikipedia.org/wiki/Rhythm_guitar">rhythm guitar</a> depending on the song. There are six tiers of songs which the players complete in the same manner as the single player Career mode. The encore song for each tier is unique to Co-Op Career mode. There are no boss battles in this mode. The animated Co-Op storyline portrays the vocalist and drummer, who are looking for a guitarist and bassist.  After their first performance, the drummer decides to make a video of the band. The video helps boost the band's popularity, and they soon earn a gig in Japan. The band is forced to take a three-month hiatus to reconcile their differences of opinion on the band's future. Their comeback performance starts a neighborhood fire and places the band in jail. Lou arrives, offering the band to be freed from jail if they perform for the inmates. However, after their performance, the band finds themselves in Lou's Inferno, and is forced to play a live show for the netherworld in order to return to the mortal world.</p>
+
+<p>The Xbox 360, PlayStation 3, and Wii versions of <i>Guitar Hero III: Legends of Rock</i> feature online competitive play, in which the player can compete against another user through the console's network service. There are three modes of online play, Face Off, Pro Face Off, and Battle mode. Face Off challenges are <a href="https://en.wikipedia.org/wiki/Score_attack">score attack</a> modes introduced in <i>Guitar Hero II</i> where two players attempt to gain the best score on a given song; in the standard Face Off challenge, the players may select different difficulty levels, while Pro Face Off requires the players to play at the same difficulty.</p>
+
+<p>The Battle mode in <i>Guitar Hero III: Legends of Rock</i> is a competitive mode between two players either locally or over network play. Two players compete against each other and attempt to make their opponent fail or lose by successfully playing Battle Power sequences, which replaces Star Power sections, to earn attacks that can be used against the opponent. Players can store up to three attacks at a time, and release them by using the same methods used to trigger Star Power in normal gameplay.  The resulting effect may either make the song more difficult for the other player by adding additional notes or partially displaying the gem tracks, or may force the opponent to perform special actions to clear the effect, such as by pressing a fret button down repeatedly in response to a broken guitar string effect. Should a player fail the song, the other player wins. If neither player fails the song, they compete in a Sudden Death segment, in which the only attainable Battle Powers are Death Drain attacks, which inevitably makes the opponent fail by draining his or her Rock Meter.</p>
+
+<p><i>Guitar Hero III</i> was bundled with newly developed <a href="https://en.wikipedia.org/wiki/Wireless">wireless</a> guitar controllers for the console releases, though previous controllers from other <i>Guitar Hero</i> games could be used. Lee Guinchard, RedOctane's vice president of hardware, stated that wireless controllers were the "first, foremost consideration" for the game. The Xbox 360 and PlayStation 3 version of the controller was modeled after a black <a href="https://en.wikipedia.org/wiki/Les_Paul">Les Paul</a> guitar, with faceplates that can be swapped out. The PlayStation 3 version requires a <a href="https://en.wikipedia.org/wiki/Dongle">dongle</a> to achieve wireless capabilities. The Wii version is also a Les Paul design, but features a special slot to insert the <a href="https://en.wikipedia.org/wiki/Wii_Remote">Wii Remote</a> into.  This slot allows the game to offer several features exclusive to the console, such as by using the internal speaker and rumble on the Remote to provide feedback on missed notes and Star Power. The PlayStation 2 guitar is based on a <a href="https://en.wikipedia.org/wiki/Kramer_Guitars">Kramer</a> Striker model, and also uses a dongle to achieve wireless functionality. All models features a detachable guitar neck that would make it easier to transport the controller. The PC and Mac versions of the game are bundled with the same <a href="https://en.wikipedia.org/wiki/USB">USB</a>-based <a href="https://en.wikipedia.org/wiki/Gibson_X-plorer">Gibson X-plorer</a> model that shipped with <i><a href="https://en.wikipedia.org/wiki/Guitar_Hero_II">Guitar Hero II</a></i>.</p>
+
+<h2>Development</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Activision">Activision</a> purchased <a href="https://en.wikipedia.org/wiki/RedOctane">RedOctane</a> in 2006 for <a href="https://en.wikipedia.org/wiki/USD">$</a>100 million to achieve "an early leadership position in music-based gaming". In September of that year, <a href="https://en.wikipedia.org/wiki/MTV">MTV</a> acquired <a href="https://en.wikipedia.org/wiki/Harmonix">Harmonix</a>, the developer of all <i>Guitar Hero</i> games up to that point; this purchase would later lead to the development of the competing music-game series, <i><a href="https://en.wikipedia.org/wiki/Rock_Band">Rock Band</a></i>. Without Harmonix's availability, Activision selected <a href="https://en.wikipedia.org/wiki/Neversoft">Neversoft</a> to develop <i>Guitar Hero III: Legends of Rock</i>. Neversoft president Joel Jewett stated his company was asked to develop the game because of a conversation that Jewett had with RedOctane's founders Kai and Charles Huang at the 2006 <a href="https://en.wikipedia.org/wiki/E3_Media_and_Business_Summit">E3 Convention</a>, in which Jewett mentioned how the first <i><a href="https://en.wikipedia.org/wiki/Guitar_Hero_(video_game)">Guitar Hero</a></i> game helped reduce the stress in the Neversoft offices during their development of <i><a href="https://en.wikipedia.org/wiki/Tony_Hawk's_Project_8">Tony Hawk's Project 8</a></i>. Several months later, Jewett was contacted by the Huangs, asking if Neversoft wanted to work on <i>Guitar Hero III: Legends of Rock</i>. Dusty Welch, head of publishing at RedOctane, recognized Neversoft had a "10-year track record of launching a game every single year and being in the top of the charts" and felt that the development group "brought a better and deeper sense of music sensibilities" to the series. Despite the experience from the previous games, Alan Flores, head of development at Neversoft, commented that the game was "deceptively simple" and that it took much work for their 30-person team to recreate the gameplay for <i>Guitar Hero III</i>. Though they "wanted to take the Guitar Hero experience to the next level" by adding additional instruments in the same manner as <i>Rock Band</i>, they opted to focus on perfecting the guitar gameplay. In 2010, Activision CEO Bobby Kotick stated that they believed Neversoft would help them to develop great games for the series, but has since come to regret their failure to seek Harmonix for further development responsibility and believed this would have been a better move for both companies.</p>
+
+<p>The note tracks, on-stage motions of the band, and stage lighting and effect synchronization were created by the same team of developers who were all musicians and had previous experience in note tracking either from other music video games or from <a href="https://en.wikipedia.org/wiki/MIDI">MIDI</a> tracking. The note tracks were developed by placing notes in time with the song; for sections that had difficult parts to track within the game's engine, they opted to use sequences of notes that would seem to the match the music but still be playable. Hammer-ons and pull-offs ("HOPOs") for the previous <i>Guitar Hero</i> games were automatically placed by the software; in this iteration, the engine was designed to allow manual placement of HOPOs to make it easier to create certain effects in songs, such as sustained <a href="https://en.wikipedia.org/wiki/Finger_vibrato#Radial_pitch-shifting_(string_bending)">string bends</a>. Character animations were selected from several made available by the animation team, while stage lighting and effects were selected to mimic those used in live performances from <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a> or from concert appearances. A separate team came up with the concepts for the various stages and arenas in the game. The team wanted to keep the same art style as the previous <i>Guitar Hero</i> games but add "a certain spark" to improve upon previous designs. Once a stage idea was brainstormed, the team sought visual references from real stages to expand upon, and a <a href="https://en.wikipedia.org/wiki/Two_dimension">2D</a> drawing of the envisioned stage was prepared for review and to remain a constant goal of the stage design. From that, a "<a href="https://en.wikipedia.org/wiki/Pop-up_book">pop up</a>" <a href="https://en.wikipedia.org/wiki/3D_computer_graphics">three-dimensional</a> version of the stage was created, and elements from the 2D concept art were added to determine the appropriate placement of set decorations. This team worked with the animation department to place the band members, stage lighting, and other effects in the game before the final 3D version of the stage was completed. The final stages included several animated elements to help further bring the stage to life.</p>
+
+<p>For the game's characters, the developers intended to keep the comical looks from the previous games, but they decided to update their appearances with realistic materials and textures to take advantage of the more powerful level of graphics capabilities of <a href="https://en.wikipedia.org/wiki/Seventh-generation_console">seventh-generation consoles</a>. The designers first drew character sketches to determine the characters' looks and clothing, creating a main and an alternate outfit for each character, which were then made into reference artwork. Afterward, <a href="https://en.wikipedia.org/wiki/Low_poly">low-level meshes</a> for each character were created, with details added with <a href="https://en.wikipedia.org/wiki/Zbrush">Zbrush</a>, resulting in characters that, before being scaled down for the game environment, had more than six million <a href="https://en.wikipedia.org/wiki/Polygon_(computer_graphics)">polygons</a>. Texture of Couches and <a href="https://en.wikipedia.org/wiki/Pixel_shader">pixel shaders</a> were added using the team's previous work on <i>Tony Hawk's Project 8</i> to match the style of earlier <i>Guitar Hero</i> games. Unlike the <i>Tony Hawk</i> games, each character in the game was given a unique <a href="https://en.wikipedia.org/wiki/Skeletal_animation">skeleton</a> to match their variations in sizes and shapes, allowing the animators to create unique moves for individual characters. <i>Guitar Hero III: Legends of Rock</i> introduces three new characters modeled after real-life musicians. <a href="https://en.wikipedia.org/wiki/Slash_(musician)">Slash</a>, <a href="https://en.wikipedia.org/wiki/Tom_Morello">Tom Morello</a>, and <a href="https://en.wikipedia.org/wiki/Bret_Michaels">Bret Michaels</a>, each performing one or more songs from their past recordings. All three were brought into the game using <a href="https://en.wikipedia.org/wiki/Motion_capture">motion capture</a> from the Motion Analysis Corporation.</p>
+
+<h2>Soundtrack</h2>
+
+<p><i>Guitar Hero III: Legends of Rock</i> features 73 playable songs; 42 are part of the main setlist, 6 are exclusive to the Co-Op Career mode, and the remaining 25 are bonus tracks. In total, 54 of the game's songs are master recordings. In addition, the Career mode includes three guitar battles, one against each boss: Slash, Tom Morello, and Lou the Devil. Slash and Morello both wrote and recorded original battle music for the game. Guitarists <a href="https://en.wikipedia.org/wiki/Steve_Ouimette">Steve Ouimette</a>, Ed DeGenaro and Geoff Tyson play as Lou the Devil for the final battle, and re-recorded a <a href="https://en.wikipedia.org/wiki/Heavy_metal_music">metal</a> guitar version of "<a href="https://en.wikipedia.org/wiki/The_Devil_Went_Down_to_Georgia">The Devil Went Down to Georgia</a>" for that purpose.<!-- CAUTION&#x26;nbsp;— as the inclusion of what example songs there are in Gh3 is going to invoke a lot of POV, the list given below is taken directly from the Activiation press release announcing GH3 &#x2D; effectively the most non&#x2D;biased source for these songs. The Sex Pistols is added because of the specificity of the re&#x2D;recording for GH3. DO NOT ADD ANY MORE EXAMPLES, that's what the "main" template above is doing --> The soundtrack features songs such as "<a href="https://en.wikipedia.org/wiki/Paint_It_Black">Paint It Black</a>" by <a href="https://en.wikipedia.org/wiki/The_Rolling_Stones">The Rolling Stones</a>, "<a href="https://en.wikipedia.org/wiki/Cherub_Rock">Cherub Rock</a>" by <a href="https://en.wikipedia.org/wiki/The_Smashing_Pumpkins">The Smashing Pumpkins</a>, "<a href="https://en.wikipedia.org/wiki/Sabotage_(Beastie_Boys_song)">Sabotage</a>" by <a href="https://en.wikipedia.org/wiki/Beastie_Boys">Beastie Boys</a>, "<a href="https://en.wikipedia.org/wiki/Tenacious_D_(album)">The Metal</a>" by <a href="https://en.wikipedia.org/wiki/Tenacious_D">Tenacious D</a>, "<a href="https://en.wikipedia.org/wiki/My_Name_is_Jonas">My Name is Jonas</a>" by <a href="https://en.wikipedia.org/wiki/Weezer">Weezer</a>, "<a href="https://en.wikipedia.org/wiki/Rock_and_Roll_All_Nite">Rock and Roll All Nite</a>" by <a href="https://en.wikipedia.org/wiki/Kiss_(band)">Kiss</a>, "<a href="https://en.wikipedia.org/wiki/School's_Out_(song)">School's Out</a>" by <a href="https://en.wikipedia.org/wiki/Alice_Cooper_(band)">Alice Cooper</a>, "<a href="https://en.wikipedia.org/wiki/Talk_Dirty_to_Me">Talk Dirty to Me</a>" by <a href="https://en.wikipedia.org/wiki/Poison_(American_band)">Poison</a>, "<a href="https://en.wikipedia.org/wiki/Slow_Ride">Slow Ride</a>" by <a href="https://en.wikipedia.org/wiki/Foghat">Foghat</a>, "<a href="https://en.wikipedia.org/wiki/Barracuda_(song)">Barracuda</a>" by <a href="https://en.wikipedia.org/wiki/Heart_(band)">Heart</a>, and "Down 'n Dirty" by L.A. Slum Lords. It also features re-recordings of "<a href="https://en.wikipedia.org/wiki/Anarchy_in_the_U.K.">Anarchy in the U.K.</a>" by <a href="https://en.wikipedia.org/wiki/Sex_Pistols">Sex Pistols</a> and "<a href="https://en.wikipedia.org/wiki/Cult_of_Personality_(song)">Cult of Personality</a>" by <a href="https://en.wikipedia.org/wiki/Living_Colour">Living Colour</a> specifically for <i>Guitar Hero III: Legends of Rock</i>, as the original master tracks could not be found. This game is the second game in the series to feature a bonus track (<a href="https://en.wikipedia.org/wiki/The_Stone_Roses">The Stone Roses</a>' "<a href="https://en.wikipedia.org/wiki/She_Bangs_the_Drums">She Bangs the Drums</a>") that is not an original recording. The first being a remake of "Drink Up" performed by <a href="https://en.wikipedia.org/wiki/Ounce_of_Self">Ounce of Self</a> on <i><a href="https://en.wikipedia.org/wiki/Guitar_Hero_II">Guitar Hero II</a></i>.</p>
+
+<p>The game also supports downloadable tracks for the Xbox 360 and PlayStation 3 versions; several free and for-cost downloadable songs and song packs are available on the <a href="https://en.wikipedia.org/wiki/PlayStation_Store">PlayStation Store</a>. They are unavailable for purchase on the Xbox 360 due to the <a href="https://en.wikipedia.org/wiki/Xbox_Games_Store">Xbox Live Marketplace</a> being shut down on July 29, 2024.</p>
+
+<p>In July 2008, Activision announced that it would release downloadable content for the Wii in the first quarter of 2008, but eventually was unable to do so because of limitations with the Wii's internal memory storage, an issue that was overcome in the sequel, <i><a href="https://en.wikipedia.org/wiki/Guitar_Hero_World_Tour">Guitar Hero World Tour</a></i>. When heavy metal band <a href="https://en.wikipedia.org/wiki/Metallica">Metallica</a> released their album <i><a href="https://en.wikipedia.org/wiki/Death_Magnetic">Death Magnetic</a></i> on September 12, 2008, it was also made available as a downloadable song pack for <i>Guitar Hero III: Legends of Rock</i>, <i>Guitar Hero World Tour</i> and the 2009 spin-off <i><a href="https://en.wikipedia.org/wiki/Guitar_Hero_Metallica">Guitar Hero Metallica</a></i>. In addition, the compact disc soundtrack for the game offers a code used to redeem three exclusive playable tracks on the Xbox Live Marketplace.</p>
+
+<h2>Release</h2>
+
+<p>Activision's original announcement of <i>Guitar Hero III: Legends of Rock</i> indicated a planned release in their 2008 <a href="https://en.wikipedia.org/wiki/Fiscal_year">fiscal year</a>, ending on March 31, 2008.; RedOctane later clarified a release in the last quarter of 2007, and further revealed that all versions of the game would feature wireless controllers as well as online multiplayer and downloadable content. The game was officially announced by Activision and RedOctane on May 23, 2007, for the PlayStation 2, PlayStation 3, Wii and Xbox 360. <a href="https://en.wikipedia.org/wiki/Budcat_Creations">Budcat Creations</a> ported the game to the PlayStation 2, and <a href="https://en.wikipedia.org/wiki/Vicarious_Visions">Vicarious Visions</a> ported it to the Wii. In September 2007, <a href="https://en.wikipedia.org/wiki/Aspyr">Aspyr</a> announced they would be publishing <i>Guitar Hero III: Legends of Rock</i> for the Microsoft Windows and Mac OS X ports. Demos of <i>Guitar Hero III: Legends of Rock</i> appeared in <i><a href="https://en.wikipedia.org/wiki/Tony_Hawk's_Proving_Ground">Tony Hawk's Proving Ground</a></i> for the Xbox 360 in the <a href="https://en.wikipedia.org/wiki/Xbox_Live_Marketplace">Xbox Live Marketplace</a>, and from the Internet as an <a href="https://en.wikipedia.org/wiki/ISO_image">ISO image</a>. The demo features five songs ("<a href="https://en.wikipedia.org/wiki/Hello_Master">Lay Down</a>", "<a href="https://en.wikipedia.org/wiki/Rock_You_Like_a_Hurricane">Rock You Like a Hurricane</a>", "<a href="https://en.wikipedia.org/wiki/Even_Flow">Even Flow</a>", "<a href="https://en.wikipedia.org/wiki/Hit_Me_with_Your_Best_Shot">Hit Me with Your Best Shot</a>", and "<a href="https://en.wikipedia.org/wiki/The_Metal">The Metal</a>") played within the Desert Rock Tour venue. As shipped, the game did not offer offline Co-Op Quickplay mode, a feature that was included in <i>Guitar Hero II</i>. This mode was added to the Xbox 360 and PlayStation 3 versions via a patch.</p>
+
+<p>Activision called <i>Guitar Hero III: Legends of Rock</i> its "largest product launch ever", selling more than 1.4 million copies, and making over $100 million in its first week of release in North America; another 1.9 million copies were sold in the following month. Subsequently, the company was concerned that they were unable to meet the game's demand for the 2007 holiday season. As of July 15, 2008, the game has sold more than eight million copies. During the first seven months of 2008, the game sold 3.037 million units in the United States, 412,000 in the United Kingdom, and 26,000 in Japan, for a total of 3.475 million units, according to the <a href="https://en.wikipedia.org/wiki/NPD_Group">NPD Group</a>, <a href="https://en.wikipedia.org/wiki/GfK">GfK</a> <a href="https://en.wikipedia.org/wiki/Chart-Track">Chart-Track</a>, and <a href="https://en.wikipedia.org/wiki/Enterbrain">Enterbrain</a>. More than two million copies of the game were sold for the Wii platform, making it the  <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Wii_video_games">best-selling third-party title</a> for the platform. Game sales during the first 12 months after the game's release were over $750 million. At the 2009 <a href="https://en.wikipedia.org/wiki/Consumer_Electronics_Show">Consumer Electronics Show</a>, Activision CEO Mike Griffith stated that <i>Guitar Hero III: Legends of Rock</i> is the first retail video game to exceed one billion dollars in sales. According to accumulated data from NPD Group in January 2010, <i>Guitar Hero III</i> is the second best-selling video game in the United States since 1995, following <i><a href="https://en.wikipedia.org/wiki/Wii_Play">Wii Play</a></i>. In March 2011, the title had become the top selling game with $830.9 million in lifetime sales.</p>
+
+<h2>Reception</h2>
+
+<p><i>Guitar Hero III: Legends of Rock</i> received acclaim from critics and fans, although it scored lower than its predecessors on review aggregator <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>.  The <a href="https://en.wikipedia.org/wiki/Gibson_Les_Paul">Gibson Les Paul</a> controller included with the game's bundled version received particular praise. <i><a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a></i>, in a review of the four console versions, favorable reviewed the new controllers, and called the Wii guitar the best guitar peripheral that they had seen, praising the vibration option.</p>
+
+<p>Several reviews criticized the changes made to <i>Guitar Hero III: Legends of Rock</i> compared to previous games in the <i>Guitar Hero</i> series. <i>IGN</i>'s review of the Xbox 360 and PlayStation 3 versions considered the game a "pretty safe effort" from Neversoft, doing little to change the game due to it being their first time working on the series.  They also criticized the lack of customizable characters. <i>IGN</i>'s review of the Wii version described the game's presentation and art direction as feeling "forced", and, as a result, less visually appealing than previous installments. <i>GameSpy</i> criticized some of the difficulty tweaks in the game, stating that "Medium simply feels like Hard-minus-the-orange-button," and that the Star Power phrases were too long, comparing the overall game to a "<a href="https://en.wikipedia.org/wiki/Trial_by_ordeal">trial by fire</a>" in contrast to the previous games in the series. They were critical of the dongle approach used for the PlayStation 3 controllers, and failings in the online support for the PlayStation 3 version. They also stated that the PlayStation 2 version received "the short end of the stick" because of a lack of online play. <i>GameSpot</i> criticized the game for its "heavy dose of <a href="https://en.wikipedia.org/wiki/In-game_advertising">in-game advertising</a>." <i>Official Xbox Magazine</i> also criticized the game for being "too competitive", a facet not readily found in the previous games. The PC version has been criticized for its high system requirements, and for <a href="https://en.wikipedia.org/wiki/Lag_(video_games)">lag</a> and slowdown problems even on high-end systems.</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/11th_Annual_Interactive_Achievement_Awards">11th Annual Interactive Achievement Awards</a>, <i>Guitar Hero III</i> received nominations for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Family_Game_of_the_Year">Family Game of the Year</a>" and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Original_Music_Composition">Outstanding Achievement in Soundtrack</a>" by the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a>.</p>
+
+<h3>Guinness World Record</h3>
+
+<p>Recognizing the game's popularity, <i><a href="https://en.wikipedia.org/wiki/Guinness_World_Records">Guinness World Records</a></i> created a category for the Highest Score for a Single Song on <i>Guitar Hero III: Legends of Rock</i> in its <i><a href="https://en.wikipedia.org/wiki/Guinness_World_Records_Gamer's_Edition">Gamer's Edition</a></i>, using the song "<a href="https://en.wikipedia.org/wiki/Through_the_Fire_and_Flames">Through the Fire and Flames</a>", noted as the most difficult song in the game. The record has been traded back and forth between <a href="https://en.wikipedia.org/wiki/Chris_Chike">Chris Chike</a>, who also won the 2008 <a href="https://en.wikipedia.org/wiki/Play_N_Trade">Play N Trade</a> National <i>Guitar Hero III</i> Tournament, and Danny Johnson, the present holder of the record. Both Chike and Johnson have completed the song without missing a note, documenting their performances on <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a>, though both Chike and Johnson have hit 100% of the notes at an official event leading to a hard world record breaker.</p>
+
+<p>In November 2010, <a href="https://en.wikipedia.org/wiki/Axl_Rose">Axl Rose</a> sued Activision for $20 million for misuse of <a href="https://en.wikipedia.org/wiki/Guns_N'_Roses">Guns N' Roses</a> music and its musicians (specifically Slash) in <i>Guitar Hero III</i>. In the lawsuit, Rose claims that when he learned that a Slash-like character and other <a href="https://en.wikipedia.org/wiki/Velvet_Revolver">Velvet Revolver</a> songs would be included in <i>Guitar Hero II</i>, he refused to allow Activision to use "<a href="https://en.wikipedia.org/wiki/Welcome_to_the_Jungle">Welcome to the Jungle</a>" within <i>Guitar Hero III</i>, nor promotional images of Slash that had already been created. According to Rose's claims, Activision stated that these would only be used as promotional material for a trade show, but ended up using them within the game. Furthermore, Rose asserts that Activision had used "<a href="https://en.wikipedia.org/wiki/Sweet_Child_o'_Mine">Sweet Child o' Mine</a>", which was only licensed for use on <i>Guitar Hero II</i>, for promotional material within <i>Guitar Hero III</i>. The judge in the case allowed the trial to move forward after an initial hearing in March 2011. A jury trial was expected to start in May 2012.</p>
+
+<p>At initial hearings in August 2012, the judge dismissed a fraud claim made by Rose, considering that it took three years for Rose and his publisher Black Frog Music to file these claims after the release of the game, an excessively long time for such a claim. The judge maintained the likelihood of the breach of contract argument, setting a jury trial to likely occur in early 2013. In January and February 2013, the judge dismissed the case, indicated that the lateness of the filing of the lawsuit, about three years since the release of the game, gave him grounds to throw out the suit, though Rose stated that the delay was due to promises made by Activision for a Guns N' Roses-themed game as compensation for the violation of contract terms.</p>
+
+<h2>Technical issues</h2>
+
+<p>Although the Wii version of the game was advertised as supporting <a href="https://en.wikipedia.org/wiki/Dolby_Pro_Logic_II">Dolby Pro Logic II</a>, players reported that the game would output audio in neither Pro Logic II nor <a href="https://en.wikipedia.org/wiki/Stereophonic_sound">stereo</a>, providing only <a href="https://en.wikipedia.org/wiki/Monaural">mono</a> sound. Activision had offered a free replacement remastered game disc that corrects this issue for North American and European releases. Later, Activision further extended the replacement program to include a full refund of the game's purchase price as an alternative to obtaining a replacement disc. A class-action lawsuit over the mono sound issue was settled out of court, and Activision agreed to ship free faceplates for the Les Paul guitar controller to those who requested a replacement disc. Additionally, during the first few days of the game's release, players experienced difficulties uploading their scores to the official <i>Guitar Hero</i> website. Neversoft attributed the problem to "heavy amounts of traffic".</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

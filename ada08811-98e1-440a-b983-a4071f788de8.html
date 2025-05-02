@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>PlayStation Move Heroes</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('ada08811-98e1-440a-b983-a4071f788de8/544baa43-68d0-4f20-8dea-ddd4110642f2.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="ada08811-98e1-440a-b983-a4071f788de8/fbb391e4-a2c1-4631-9431-6b7e90909d4c.png"/> PlayStation Move Heroes</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="ada08811-98e1-440a-b983-a4071f788de8/0378e5d0-55b5-4b4e-a79b-c25bbe8c4204.webp"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/27/2025">4/27/2025</a> 10:06:45</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 8:21:13</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-3/22/2011">3/22/2011</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-60">60</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nihilistic Software">Nihilistic Software</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Sony Computer Entertainment">Sony Computer Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/PlayStation_Move_Heroes" target="_blank">Wikipedia</a><br/><a href="http://us.playstation.com/games-and-media/games/heroes-on-the-move-ps3.html" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] composer: David Bergeaud">[People] composer: David Bergeaud</a><br/><a href="#quicklink-[People] composer: James Dooley">[People] composer: James Dooley</a><br/><a href="#quicklink-[People] composer: Niels Bye Nielsen">[People] composer: Niels Bye Nielsen</a><br/><a href="#quicklink-[People] programmer: Brandon Moro">[People] programmer: Brandon Moro</a><br/><a href="#quicklink-[People] writer: Micah Wright">[People] writer: Micah Wright</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>PlayStation Move Heroes</b></i> is a 2011 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/Nihilistic_Software">Nihilistic Software</a> and published by <a href="https://en.wikipedia.org/wiki/Sony_Computer_Entertainment">Sony Computer Entertainment</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>. It utilizes the <a href="https://en.wikipedia.org/wiki/PlayStation_Move">PlayStation Move</a> controller. It is a crossover of the <i><a href="https://en.wikipedia.org/wiki/Ratchet_&amp;_Clank">Ratchet &amp; Clank</a></i>, <i><a href="https://en.wikipedia.org/wiki/Jak_and_Daxter">Jak and Daxter</a></i> and <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper">Sly Cooper</a></i> franchises to form a total of six main characters.</p>
+
+<h2>Gameplay</h2>
+
+<p>The game features both single-player as well as two-player co-operative multiplayer as players traverse through a series of levels. The game features six playable characters: Ratchet, Clank, Jak, Daxter, Sly Cooper, and Bentley. It also features a total of 50 levels, which can be categorized into five "archetypes", five weapon classes, and four environments, namely Paris, France from <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper">Sly Cooper</a></i>, Metropolis on Kerwan from <i><a href="https://en.wikipedia.org/wiki/Ratchet_&amp;_Clank">Ratchet &amp; Clank</a></i>, Haven City from <i><a href="https://en.wikipedia.org/wiki/Jak_and_Daxter">Jak and Daxter</a></i>, and Planet X, which is an original environment created for the game. 
+Players can choose which character they want to play as on each level; each character will have a different gameplay style and may have advantages on certain levels. Co-operative play allows the second player to play as the first player's sidekick character. For example, if the first player selects Jak as their character, the second player will automatically be assigned Daxter.</p>
+
+<p>The five weapon classes are Disc, Whip, Bowling, Projectile, and Melee. The disc is thrown in a similar fashion to a <a href="https://en.wikipedia.org/wiki/Frisbee">frisbee</a>; once thrown, players navigate it around the level remotely using the Move controller to achieve objectives, for example to hit moving targets. The whip is controlled by the Move controller via 1 to 1 movement. Bowling acts similar to the disc: the player throws the <a href="https://en.wikipedia.org/wiki/Bowling_ball">bowling ball</a> and subsequently guides it with the Move controller. Projectiles involve the use of mainly guns as well as other weapons such as grenade launchers. Melee uses each character's iconic weapons — Sly's cane, Ratchet's wrench, and Jak's gunstaff — to hit enemies in a fashion similar to their original games.</p>
+
+<h2>Plot</h2>
+
+<p>A mysterious alien duo named Lunk and Gleeber have swept through the galaxy, fiendishly snatching entire chunks from the worlds of Ratchet, Jak, and Sly to create a ring around the mysterious Planet X. After being abducted to this new world, <a href="https://en.wikipedia.org/wiki/Ratchet_(Ratchet_&amp;_Clank)">Ratchet</a> and <a href="https://en.wikipedia.org/wiki/Clank_(Ratchet_&amp;_Clank)">Clank</a>, Jak and <a href="https://en.wikipedia.org/wiki/Daxter">Daxter</a>, and Sly and Bentley are invited by their alien hosts to compete in a friendly, yet challenging competition to test their extraordinary skills and determine who the best hero duo is. The heroes discover that all is not as it seems as Gleeber and Lunk have made the Whibbles (a race of small floating aliens) their slaves and forced them to mine their planet hollow to build what appears to be a giant weapon. The heroes soon find themselves joined together in a battle to protect the Whibbles and themselves from Gleeber and Lunk and their evil Lunk heads. They defeat the three cities' challenges and complete the game's hardest challenges. While completing the challenges, the heroes also discover that Gleeber and Lunk had been recording their adventures in order to go to each of their universes to take their places — after killing the heroes — and take credit for their actions; in order to do this, they plan to use the weapon, which is revealed to be a teleportation device. After beating all of the levels and a suspicious tower hiding the Main Evil Lunk Head with the help of the Whibbles, Daxter destroys the rest of the Evil Lunk Heads and throws a disk at the large head, destroying the power source for the teleporter and foiling Gleeber and Lunk's plot. The heroes and Whibbles apprehend Gleeber and Lunk and send them into space using one of the duo's own rockets. Afterward, the Whibbles power up the teleporter and open a portal to each city. After saying a final goodbye to each other, the heroes return to the individual points in time in which they were first teleported. Each pair of heroes, however, maintains a communicator to keep in contact with the others, except Daxter, who slips his and Jak's behind a rock.</p>
+
+<h2>Development</h2>
+
+<p>The game was first announced as <i>Heroes on the Move</i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_Move">PlayStation Move</a> during Sony's Press Conference at the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2010">Electronic Entertainment Expo 2010</a>. The title was later changed in October to its current name, <i>PlayStation Move Heroes</i>. None of the developers of the three franchises: <a href="https://en.wikipedia.org/wiki/Naughty_Dog">Naughty Dog</a>, <a href="https://en.wikipedia.org/wiki/Insomniac_Games">Insomniac Games</a> and <a href="https://en.wikipedia.org/wiki/Sucker_Punch_Productions">Sucker Punch Productions</a>, were involved on the game. It was released in Japan as <i><b>Gachinko Heroes</b></i>.</p>
+
+<h2>Release</h2>
+
+<p>On January 14, 2011, it was announced on the US edition of <a href="https://en.wikipedia.org/wiki/PlayStation_Blog">PlayStation Blog</a> that <i>PlayStation Move Heroes</i> would be released in North America on March 22, 2011. On February 9, 2011, Sony released a story trailer for the game, which confirmed that all the original voice actors would return to reprise their roles. On February 18, 2011, Sony released a developer diary featuring the lead designer and lead programmer, which explored how <i>PlayStation Move Heroes</i> was built "from the ground up, specifically for the PlayStation Move."</p>
+
+<p>Sony had worked with <a href="https://en.wikipedia.org/wiki/Nihilistic_Software">Nihilistic</a> and several retail partners for an exclusive skin pack featuring Pirate Sly, Freedom League Jak, and Trillium Armor Ratchet. It was included as a free <a href="https://en.wikipedia.org/wiki/Pre-order">pre-order</a> bonus at participating retailers, including <a href="https://en.wikipedia.org/wiki/Amazon.com">Amazon.com</a> and <a href="https://en.wikipedia.org/wiki/GameStop">GameStop</a>. The skins have since been made available to all via the PlayStation Store, bundled together with additional skins for Clank, Daxter, and Bentley.</p>
+
+<p>Alongside the standard edition, the game also came in a bundle with PlayStation Move, which included the game, a <a href="https://en.wikipedia.org/wiki/PlayStation_Eye">PlayStation Eye</a> camera, and a <a href="https://en.wikipedia.org/wiki/PlayStation_Move">PlayStation Move</a> motion controller. The <i>PlayStation Move Heroes</i> bundle was only available in North American <a href='https://en.wikipedia.org/wiki/Toys_"R"_Us'>Toys "R" Us</a> stores.</p>
+
+<p>While announcing the exclusive North American <i>PlayStation Move Heroes</i> bundle, Sony confirmed that there would be a demo of the game on the <a href="https://en.wikipedia.org/wiki/PlayStation_Store">PlayStation Store</a>. The single player demo was released early in March in the PlayStation Store, while <a href="https://en.wikipedia.org/wiki/PlayStation_Plus">PlayStation Plus</a> members had access starting March 1. On February 16, GameStop gave away 5,000 voucher codes for early access to the demo.</p>
+
+<h2>Reception</h2>
+
+<p><i>PlayStation Move Heroes</i> received mixed reviews overall, with the game's spotty controls, repetitive gameplay, and camera being the most commonly criticized elements, while also being criticized for not being the true crossover that fans of each series had wanted. Holds a <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> score of 53/100 based on 39 reviews. <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> gave the game a 5.0/10, commenting on the lack of a decent story along with the "boring mini-game collection with spotty controls".</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Metroid Prime</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('e1e646c2-113f-4237-a721-557803bd078c/d2615322-a651-48ae-9e11-e5c9745231e3.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="e1e646c2-113f-4237-a721-557803bd078c/27e30353-8841-45fc-88d7-8fad37f21ded.png"/> Metroid Prime</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="e1e646c2-113f-4237-a721-557803bd078c/55c49623-6f61-4888-a269-650158c8354e.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:51:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:40:12</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Entertainment System">Nintendo Entertainment System</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/18/2002">11/18/2002</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-71">71</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-96">96</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Retro Studios">Retro Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Metroid_Prime" target="_blank">PCGamingWiki</a><br/><a href="https://www.igdb.com/games/metroid-prime" target="_blank">IGDB</a><br/><a href="https://www.mobygames.com/game/metroid-prime" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Metroid_Prime" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Metaforce">Metaforce</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Metroid Prime</b></i> is a 2002 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> developed by <a href="https://en.wikipedia.org/wiki/Retro_Studios">Retro Studios</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a>. <i>Metroid Prime</i> is the fifth main <i><a href="https://en.wikipedia.org/wiki/Metroid">Metroid</a></i> game and the first to use <a href="https://en.wikipedia.org/wiki/3D_computer_graphics">3D computer graphics</a> and a <a href="https://en.wikipedia.org/wiki/First-person_(gaming)">first-person perspective</a>. It was released in North America in November 2002, and in Japan and Europe the following year. Along with the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> game <i><a href="https://en.wikipedia.org/wiki/Metroid_Fusion">Metroid Fusion</a></i>, <i>Prime</i> marked the return of the <i>Metroid</i> series after an eight-year hiatus following <i><a href="https://en.wikipedia.org/wiki/Super_Metroid">Super Metroid</a></i> (1994).</p>
+
+<p><i>Metroid Prime</i> takes place between the original <i><a href="https://en.wikipedia.org/wiki/Metroid_(video_game)">Metroid</a></i> and <i><a href="https://en.wikipedia.org/wiki/Metroid_II:_Return_of_Samus">Metroid II: Return of Samus</a></i>. Players control the bounty hunter <a href="https://en.wikipedia.org/wiki/Samus_Aran">Samus Aran</a> as she battles the <a href="https://en.wikipedia.org/wiki/Characters_in_the_Metroid_series#Space_Pirates">Space Pirates</a> and their biological experiments on the planet Tallon IV. <i>Metroid Prime</i> was a collaboration between Retro in <a href="https://en.wikipedia.org/wiki/Austin,_Texas">Austin, Texas</a>, and Japanese Nintendo employees, including producers <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> and <a href="https://en.wikipedia.org/wiki/Kensuke_Tanabe">Kensuke Tanabe</a>. Miyamoto suggested the project after visiting Retro's headquarters in 2000. Since exploration takes precedence over combat, Nintendo described the game as a "first-person adventure" rather than a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a>.</p>
+
+<p><i>Metroid Prime</i> sold more than 2.8 million copies worldwide. It won a number of Game of the Year awards and is regarded by many as one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games</a>, remaining one of the highest-rated games on <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>.</p>
+
+<p><i>Metroid Prime</i> was followed by <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime_2:_Echoes">Metroid Prime 2: Echoes</a></i> (2004) and <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime_3:_Corruption">Metroid Prime 3: Corruption</a></i> (2007), with <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime_4:_Beyond">Metroid Prime 4: Beyond</a></i> scheduled for 2025. In 2009, an enhanced version of <i>Metroid</i> <i>Prime</i> was released for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> in Japan and as part of the <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime:_Trilogy">Metroid Prime: Trilogy</a></i> compilation internationally. A remastered version was released on the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> in 2023.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Metroid Prime</i> is an <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> in which players control protagonist <a href="https://en.wikipedia.org/wiki/Samus_Aran">Samus Aran</a> from a <a href="https://en.wikipedia.org/wiki/First-person_(video_games)">first-person</a> perspective, unlike previous games in the <i><a href="https://en.wikipedia.org/wiki/Metroid">Metroid</a></i> series, with <a href="https://en.wikipedia.org/wiki/Third-person_view">third-person</a> elements used for Morph Ball mode. The gameplay involves solving puzzles to reveal secrets, <a href="https://en.wikipedia.org/wiki/Platform_game">platform jumping</a>, and shooting foes with the help of a "lock-on" mechanism that allows <a href="https://en.wikipedia.org/wiki/Circle_strafing">circle strafing</a> while staying aimed at the enemy.</p>
+
+<p>Samus must travel through the world of Tallon IV searching for twelve Chozo Artifacts that will open the path to the Phazon meteor impact crater, while collecting <a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a> that let her reach new areas. The Varia Suit, for example, protects Samus' armor against high temperatures, allowing her to enter volcanic regions. Some items are obtained after <a href="https://en.wikipedia.org/wiki/Boss_(video_games)">boss</a> fights. Items must be collected in a specific order; for example, players cannot access certain areas until they find a certain Beam to open doors, or discover new ordnance with which to beat bosses. Players are incentivized to explore to find upgrades that increase Samus' maximum ammunition and <a href="https://en.wikipedia.org/wiki/Health_(gaming)">health</a>.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Heads-up_display_(video_games)">heads-up display</a>, which simulates the inside of Samus' helmet, features a radar display, a map, ammunition for missiles, a health meter, a danger meter for negotiating hazardous landscape or materials, and a health bar and name display for bosses. The display can be altered by exchanging visors; one uses <a href="https://en.wikipedia.org/wiki/Thermography">thermal imaging</a>, another has <a href="https://en.wikipedia.org/wiki/Radiography">x-ray vision</a>, and another features a scanner that searches for enemy weaknesses and interfaces with mechanisms such as force fields and elevators. The game introduces a hint system that provides the player with clues about ways to progress through the game.</p>
+
+<p>By connecting <i>Prime</i> with <i><a href="https://en.wikipedia.org/wiki/Metroid_Fusion">Metroid Fusion</a></i> using a <a href="https://en.wikipedia.org/wiki/GameCube_–_Game_Boy_Advance_link_cable">GameCube – Game Boy Advance link cable</a>, players can unlock Samus's Fusion Suit as an optional cosmetic, as well as a playable <a href="https://en.wikipedia.org/wiki/Video_game_console_emulator">emulation</a> of the original <i><a href="https://en.wikipedia.org/wiki/Metroid_(video_game)">Metroid</a></i> game.</p>
+
+<h3>Items</h3>
+
+<p>Throughout the game, players must find and collect items that improve Samus' arsenal and suit, including weapons, armor upgrades for Samus' Power Suit and items that grant abilities—including the Morph Ball, which allows Samus to compress herself into a ball in order to roll into narrow passages and drop energy bombs, and the Grapple Beam, which works by latching onto special hooks called grapple nodes, allowing Samus to swing across gaps. Unlike those in earlier games in the series, the beam weapons in <i>Metroid Prime</i> have no stacking ability, in which the traits of each beam merge. Instead, the player must cycle the four beam weapons; there are charge combos with radically different effects for each. Other upgrades include boots that allow Samus to double-jump and a Spider Ball upgrade that allows her to climb magnetic rails.</p>
+
+<p>Items from previous <i>Metroid</i> games appear with altered functions. Art galleries and <a href="https://en.wikipedia.org/wiki/Multiple_endings">different endings</a> are unlockable if the player collects a high percentage of items and Scan Visor logs. <i>Prime</i> is one of the first <i>Metroid</i> games to address the reason Samus does not start with power-ups acquired in previous games; she begins the game with some upgrades, including the Varia Suit, Missiles and Grapple Beam, but they are lost during an explosion on the Space Pirate frigate <i>Orpheon</i>. The producers stated that starting with some power-ups was a way to give the player "different things to do" and to learn the functions of these items before settling into the core gameplay.</p>
+
+<h2>Plot</h2>
+
+<h3>Setting</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Retro_Studios">Retro Studios</a> wrote an extensive storyline for <i>Metroid Prime</i>, which was considered a major difference from previous <i><a href="https://en.wikipedia.org/wiki/Metroid">Metroid</a></i> games. Short <a href="https://en.wikipedia.org/wiki/Cutscene">cutscenes</a> appear before important battles, and a scanner in the heads-up display extracts backstory-related information from objects. The <i>Prime</i> trilogy is set between the events of <i><a href="https://en.wikipedia.org/wiki/Metroid_(video_game)">Metroid</a></i> and <i><a href="https://en.wikipedia.org/wiki/Metroid_II:_Return_of_Samus">Metroid II</a></i>.</p>
+
+<p>The game takes place on the planet Tallon IV, formerly inhabited by the <a href="https://en.wikipedia.org/wiki/Characters_in_the_Metroid_series#Chozo">Chozo race</a>. Five decades ago, the Chozo race fell after a <a href="https://en.wikipedia.org/wiki/Meteor">meteor</a> impacted on Tallon IV. The meteor contaminated the planet with a corruptive, mutagenic substance that the Space Pirates later named Phazon, and also brought with it a creature known to the Chozo as "The Worm". A large containment field emitter of the Artifact Temple in the Tallon Overworld area was built as a seal to the meteor's energies and influence within the crater where it landed, which the <a href="https://en.wikipedia.org/wiki/Characters_in_the_Metroid_series#Space_Pirates">Space Pirates</a> attempt to disable or bypass in order to gain better access to extract the Phazon. The containment field is controlled by twelve Chozo artifacts that are scattered around the planet.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Samus_Aran">Samus Aran</a> intercepts a <a href="https://en.wikipedia.org/wiki/Distress_signal">distress signal</a> from the Space Pirate <a href="https://en.wikipedia.org/wiki/Spacecraft">frigate</a> <i>Orpheon</i>, whose crew have been slaughtered by the Pirates' own <a href="https://en.wikipedia.org/wiki/Genetically_modified">genetically modified</a>, experimental subjects, using a mysterious radioactive substance called Phazon. At the ship's core, she battles with the Parasite Queen, a giant version of the tiny parasites aboard the ship. The Parasite Queen is defeated and falls into the ship's reactor core, initiating the destruction of the ship. While Samus is escaping from the frigate, she encounters a cybernetic version of <a href="https://en.wikipedia.org/wiki/Ridley_(Metroid)">Ridley</a> called Meta Ridley, who also escapes. During her escape, an explosion damages Samus' suit, causing some of her abilities to malfunction. Samus escapes the frigate and chases Ridley in her gunship towards the nearby planet Tallon IV.</p>
+
+<p>After landing in the Tallon Overworld, Samus explores nearby areas of Tallon IV and discovers ruins of an ancient Chozo settlement. As she explores the ruins, she learns that the Chozo on the planet had been killed off by the Phazon infesting the planet, which originated from a meteor that impacted on the planet many years ago. After regaining her lost abilities in the ruins, as well as defeating a mutated plant creature that was poisoning the local water supply, Samus finds her way to the Magmoor Caverns, a series of <a href="https://en.wikipedia.org/wiki/Magma">magma</a>-filled tunnels, which are used by the Space Pirates as a source of <a href="https://en.wikipedia.org/wiki/Geothermal_power">geothermal power</a>. Following the tunnels, Samus travels to the Phendrana Drifts, a cold, mountainous region which is home to another ancient Chozo ruin and a Space Pirate research laboratory used to study the <a href="https://en.wikipedia.org/wiki/Metroid_(fictional_species)">Metroids</a>. After obtaining new abilities, Samus explores the wreckage of the crashed <i>Orpheon</i> and then infiltrates the Phazon Mines, where she learns the outcome of the Phazon experimentation project, including the Metroid Prime, a creature that had come to Tallon IV with the meteor. Advancing deeper into the mines, Samus fights her way through the Phazon-enhanced Space Pirates and obtains the Phazon Suit after defeating the monstrous Omega Pirate.</p>
+
+<p>At some point, Samus discovers the Artifact Temple that the Chozo built to contain the Metroid Prime and to stop the Phazon from spreading over the planet. To gain access to the meteor's Impact Crater, Samus must collect and unite the twelve Chozo artifacts. As Samus returns to the temple with the artifacts, Meta Ridley appears and attacks her. Samus defeats Ridley and enters the Impact Crater, where she finds the Metroid Prime. After she defeats it, the Metroid Prime absorbs Samus' Phazon Suit and explodes. Samus escapes the collapsing crater and leaves Tallon IV in her ship.</p>
+
+<p>If the player completes the game with all of the items obtained, Metroid Prime reconstructs itself into a body resembling Samus.</p>
+
+<h2>Development</h2>
+
+<p>According to producer <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a>, Nintendo did not develop a <i><a href="https://en.wikipedia.org/wiki/Metroid">Metroid</a></i> game for the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a> as the company "couldn't come out with any concrete ideas". <i>Metroid</i> co-creator <a href="https://en.wikipedia.org/wiki/Yoshio_Sakamoto">Yoshio Sakamoto</a> said he could not imagine how the <a href="https://en.wikipedia.org/wiki/Nintendo_64_controller">Nintendo 64 controller</a> could be used to control Samus. Nintendo approached another company to make <i>Metroid</i> for Nintendo 64, but the offer was declined, supposedly because the developers thought they could not equal <i>Super Metroid</i>.</p>
+
+<p><i>Metroid Prime</i> was a collaboration between <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_Analysis_and_Development">Nintendo EAD</a> and <a href="https://en.wikipedia.org/wiki/Nintendo_Research_&amp;_Development_1">R&amp;D1</a> and the American company <a href="https://en.wikipedia.org/wiki/Retro_Studios">Retro Studios</a>. Retro was created in 1998 by an alliance between Nintendo and <a href="https://en.wikipedia.org/wiki/Iguana_Entertainment">Iguana Entertainment</a> founder <a href="https://en.wikipedia.org/wiki/Jeff_Spangenberg">Jeff Spangenberg</a>. The studio would create games for the forthcoming <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> targeted at a mature demographic. After establishing its offices in <a href="https://en.wikipedia.org/wiki/Austin,_Texas">Austin, Texas</a> in 1999, Retro worked on four GameCube projects. When Miyamoto visited Retro in 2000, he suggested a new <i>Metroid</i> game after seeing their prototype <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> <a href="https://en.wikipedia.org/wiki/Game_engine">engine</a>. In 2000 and early 2001, four games in development at Retro were canceled, including an RPG, <i>Raven Blade</i>, leaving <i>Prime</i> the only game in development. During the last nine months of development, Retro's staff <a href="https://en.wikipedia.org/wiki/Crunch_time_(video_gaming)">worked 80- to 100-hour weeks to reach Nintendo's deadline</a>. According to senior artist James Dargie, it took them almost six months to do the first level that Nintendo approved, and then they had less than a year to do the rest of the game. Concept artist <a href="https://en.wikipedia.org/wiki/Andrew_Jones_(artist)">Android Jones</a>, a lifelong fan of the series whose work included Samus's Varia Suit and most of the art in the Scan Visor, would sleep in the office and resume working when he woke up.</p>
+
+<p>Nintendo created the music, Retro handled art and engineering, and both teams worked on the overall design. The Japanese crew, which included producers Miyamoto, Kensuke Tanabe, Kenji Miki, and designer and <i>Metroid</i> co-creator Sakamoto, communicated with Retro through e-mails, telephone conferences and personal gatherings. The game was planned to use a third-person perspective, but after Miyamoto intervened this was changed to first-person perspective and almost everything already developed was scrapped. The change was prompted by camera problems experienced by <a href="https://en.wikipedia.org/wiki/Rare_(company)">Rare</a>, which was developing the Nintendo 64 game <i><a href="https://en.wikipedia.org/wiki/Jet_Force_Gemini">Jet Force Gemini</a></i>. According to director <a href="https://en.wikipedia.org/wiki/Mark_Pacini">Mark Pacini</a>, Miyamoto believed that "shooting in third person was not very intuitive"; Pacini also said that exploration is easier using first-person. Pacini said that after picking that perspective, the crew decided not to make a traditional first-person shooter, instead they had to break down the stereotypes of what a first-person game is and make a fun <i>Metroid</i> game.</p>
+
+<p>Pacini said that Retro tried to design the game so that the only difficult parts would be boss battles and players would not be afraid to explore because "the challenge of the game was finding your way around". Senior designer Mike Wikan said that the focus on exploration led the team to spend time making the platform jumping "approachable to the player", and to ensure the gameplay had "shooting [as] a very important, though secondary, consideration". Retro developed the storyline under the supervision of Yoshio Sakamoto, who verified that the ideas were consistent with the earlier games. The developers intended that <a href="https://en.wikipedia.org/wiki/Characters_in_the_Metroid_series#Kraid">Kraid</a>, a boss from <i><a href="https://en.wikipedia.org/wiki/Metroid_(video_game)">Metroid</a></i> and <i><a href="https://en.wikipedia.org/wiki/Super_Metroid">Super Metroid</a></i>, would appear in <i>Metroid Prime</i>, and designer Gene Kohler modeled and skinned him for that purpose, but he was cut for time reasons. The team considered implementing the Speed Booster power-up from <i>Super Metroid</i> but concluded it would not work well because of the first-person perspective and the limitations imposed by the scale of game's environment.</p>
+
+<p>The first public appearance of the game was a ten-second video at <a href="https://en.wikipedia.org/wiki/Nintendo_Space_World#Space_World_2000">Space World 2000</a>. In November of the same year, Retro Studios confirmed its involvement with the game in the "job application" part of its website. In February 2001, the game was confirmed by Nintendo, which also announced that because of its emphasis on exploration and despite the first-person perspective, <i>Metroid Prime</i> would be a first-person adventure rather than a first-person shooter. The game was showcased at <a href="https://en.wikipedia.org/wiki/E3_2001">E3 2001</a> in May, with its title confirmed as <i>Metroid Prime</i>.</p>
+
+<h3>Audio</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Kenji_Yamamoto_(composer_born_1964)">Kenji Yamamoto</a>, assisted by Kouichi Kyuma, composed the music for <i>Prime</i>. The soundtrack contains <a href="https://en.wikipedia.org/wiki/Arrangement">arrangements</a> of tracks from previous games in the series because Yamamoto wanted to satisfy old <i>Metroid</i> fans. The initial Tallon Overworld theme is a reinterpretation of <i>Metroid</i>'s Brinstar theme, the music heard in Magmoor Caverns is a new version of the music from <i>Super Metroid</i>'s Lower Norfair area, and the music heard during the fight with Meta Ridley is a fast-paced reimagining of the Ridley boss music first featured in <i>Super Metroid</i>, which has reappeared in most <i>Metroid</i> games since. Early in development, the English electronic duo <a href="https://en.wikipedia.org/wiki/Autechre">Autechre</a> were asked by Retro Studios to compose the soundtrack, but this was halted by Nintendo. <a href="https://en.wikipedia.org/wiki/Tommy_Tallarico">Tommy Tallarico Studios</a> initially provided sound effects, but Miyamoto deemed them not good enough for an extended presentation at <a href="https://en.wikipedia.org/wiki/Nintendo_Space_World#Space_World_2001">Space World 2001</a>. The game supports <a href="https://en.wikipedia.org/wiki/Dolby_Pro_Logic">Dolby Pro Logic II</a> setups and can be played in <a href="https://en.wikipedia.org/wiki/Surround_sound">surround sound</a>. A soundtrack album, <i>Metroid Prime &amp; Fusion Original Soundtracks</i>, was published by <a href="https://en.wikipedia.org/wiki/Scitron">Scitron</a> on June 18, 2003.</p>
+
+<h2>Release</h2>
+
+<p><i>Metroid Prime</i> was released for the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> in North America on November 18, 2002. In 2003, the game arrived in Japan on February 28, and Europe on March 21. In 2004, <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> released a <i>Metroid Prime</i> GameCube bundle, including a second disc featuring a trailer and a <a href="https://en.wikipedia.org/wiki/Game_demo">demo</a> for <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime_2:_Echoes">Metroid Prime 2: Echoes</a></i>, a timeline of <i><a href="https://en.wikipedia.org/wiki/Metroid">Metroid</a></i> games, and an art gallery.</p>
+
+<p><i>Metroid Prime</i> was re-released in Japan in 2009 for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> as part of the <i><a href="https://en.wikipedia.org/wiki/New_Play_Control!">New Play Control!</a></i> series. It has improved controls that use the <a href="https://en.wikipedia.org/wiki/Wii_Remote">Wii Remote</a>'s pointing functionality, bonus content and the ability to take screenshots of gameplay. In other countries, this version was released in the Wii compilation <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime:_Trilogy">Metroid Prime: Trilogy</a></i>. The compilation became available for download from the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>'s <a href="https://en.wikipedia.org/wiki/Nintendo_eShop">Nintendo eShop</a> in January 2015.</p>
+
+<h3><i>Metroid Prime Remastered</i></h3>
+
+<p><i><b>Metroid Prime Remastered</b></i>, a <a href="https://en.wikipedia.org/wiki/High-definition_video">high-definition</a> <a href="https://en.wikipedia.org/wiki/Remaster_(video_games)">remaster</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, was released digitally on February 9, 2023, with a physical release on February 22 in North America and March 3 in Europe and Japan. The remaster was developed by <a href="https://en.wikipedia.org/wiki/Retro_Studios">Retro Studios</a> with assistance from developers including <a href="https://en.wikipedia.org/wiki/Iron_Galaxy_Studios">Iron Galaxy Studios</a>. It features new visuals, updated control schemes (including an option for dual-stick controls) and unlockable art.</p>
+
+<p><i>Metroid Prime Remastered</i> was acclaimed. Samuel Claiborn of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> described it as "a perfect example of how to both honor a lauded classic and bring it up to code". It was criticized for not crediting the developers of previous versions of <i>Metroid Prime</i> by name, instead crediting them as "original Nintendo GameCube and Wii version development staff". As of March 2023, <i>Metroid Prime Remastered</i> had sold 1.09 million copies.</p>
+
+<h2>Reception</h2>
+
+<p><i>Metroid Prime</i> became one of the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_GameCube_video_games">best-selling games on the GameCube</a>. It was the second-best-selling game of November 2002 in North America, behind <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_Vice_City">Grand Theft Auto: Vice City</a></i>; 250,000 units were sold in the first week of its release. As of July 2006, the game had sold more than 1.49 million copies in the U.S. alone, and had earned more than US$50 million. It was also the eighth-bestselling GameCube game in Australia. More than 78,000 copies were sold in Japan, and Nintendo added the game to its Player's Choice line in the PAL region. It sold 2.84 million copies worldwide and was the best-selling <i>Metroid</i> game until <i><a href="https://en.wikipedia.org/wiki/Metroid_Dread">Metroid Dread</a></i> (2021).</p>
+
+<p><i>Metroid Prime</i> received "universal acclaim", according to <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> awarded it a perfect score. It won numerous <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a> awards and was praised for its detailed graphics, special effects, varied environments, moody soundtrack and sound effects, <a href="https://en.wikipedia.org/wiki/Level_design">level design</a>, immersive atmosphere and innovative gameplay centered on exploration in contrast with action games such as <i><a href="https://en.wikipedia.org/wiki/Halo:_Combat_Evolved">Halo</a></i>, while staying faithful to the <i>Metroid</i> formula. Criticisms included the unusual control scheme, lack of focus on the story, and repetitive backtracking. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> considered the control scheme awkward, <i><a href="https://en.wikipedia.org/wiki/Entertainment_Weekly">Entertainment Weekly</a></i> compared the game to a "1990s <a href="https://en.wikipedia.org/wiki/Arcade_game">arcade game</a>, filled with over the top battle sequences, spectacular visual effects—and a pretty weak plot", and <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> wrote that inexperienced players "might find it exhausting to keep revisiting the same old places over and over and over". In 2004, the video game countdown show <i><a href="https://en.wikipedia.org/wiki/Filter_(TV_series)">Filter</a></i> said <i>Metroid Prime</i> had the best graphics of all time.</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/6th_Annual_Interactive_Achievement_Awards">6th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> awarded <i>Metroid Prime</i> with "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Action_Game_of_the_Year">Console First-Person Action Game of the Year</a>"; it also received nominations for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Game_of_the_Year">Game of the Year</a>", "Console Game of the Year", "Outstanding Innovation in Console Gaming", and outstanding achievement in "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Art_Direction">Art Direction</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Game_Design">Game Design</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Technical_Achievement">Gameplay Engineering</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Original_Music_Composition">Original Music Composition</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Audio_Design">Sound Design</a>", and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Technical_Achievement">Visual Engineering</a>". It was the most nominated game at the awards ceremony.</p>
+
+<p><i>Metroid Prime</i> appeared on several lists of best games; it was ranked 23rd in <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>'s Top 100, 29th in a 100-game list chosen by <a href="https://en.wikipedia.org/wiki/GameFAQs">GameFAQs</a> users, 18th in <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i>'s 2009 list of greatest Nintendo games and 10th in <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i>'s "Top 200 Nintendo Games Ever". <i>IGN</i> named <i>Metroid Prime</i> the best GameCube game, while <i><a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a></i> ranked it third in a similar list, behind <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_The_Wind_Waker">The Legend of Zelda: The Wind Waker</a></i> and <i><a href="https://en.wikipedia.org/wiki/Resident_Evil_4">Resident Evil 4</a></i>. <i>Nintendo Power</i> also ranked <i>Metroid Prime</i> as the sixth-best game of the 2000s. <i><a href="https://en.wikipedia.org/wiki/Wired_(magazine)">Wired</a></i> ranked the game 10th in its list of "The 15 Most Influential Games of the Decade" for popularizing "exploration, puzzle-solving, platforming and story" among first-person shooters, saying that the game was "breaking the genre free from the clutches of <i><a href="https://en.wikipedia.org/wiki/Doom_(1993_video_game)">Doom</a></i>". <i>Wired</i>'s writer continued that <i>Metroid Prime</i> took a massive stride forward for first-person games. <i>Metroid Prime</i> also became popular among players for <a href="https://en.wikipedia.org/wiki/Speedrun">speedrunning</a>; specialized communities were formed to share these speed runs.</p>
+
+<h2>Legacy</h2>
+
+<p><i>Metroid Prime</i> was followed by <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime_2:_Echoes">Metroid Prime 2: Echoes</a></i> (2004) on the GameCube and <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime_3:_Corruption">Metroid Prime 3: Corruption</a></i> (2007) on the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>. The first two games were re-released on Wii as part of the <i><a href="https://en.wikipedia.org/wiki/New_Play_Control!">New Play Control!</a></i> series in Japan, and as part of the Wii compilation <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime:_Trilogy">Metroid Prime: Trilogy</a></i> (2009). A pinball game, <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime_Pinball">Metroid Prime Pinball</a></i> (2005), and the action spin-offs <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime_Hunters">Metroid Prime Hunters</a></i> (2006) were released for the handheld <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> console, and <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime:_Federation_Force">Metroid Prime: Federation Force</a></i> (2016) for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>. <i><a href="https://en.wikipedia.org/wiki/Metroid_Prime_4:_Beyond">Metroid Prime 4: Beyond</a></i> is planned for release in 2025 for the Nintendo Switch and <a href="https://en.wikipedia.org/wiki/Nintendo_Switch_2">Nintendo Switch 2</a>.</p>
+
+<p>Characters and stages from <i>Metroid Prime</i> have frequently appeared in other Nintendo games such as the <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Brawl">Super Smash Bros</a></i> series, in which the Frigate Orpheon is a playable stage, with the Parasite Queen in the background and music from <i>Metroid Prime</i>. <i>Metroid Prime</i>'s gameplay and HUD have influenced other first-person shooters such as <i><a href="https://en.wikipedia.org/wiki/Geist_(video_game)">Geist</a></i> and <i><a href="https://en.wikipedia.org/wiki/Star_Wars:_Republic_Commando">Star Wars: Republic Commando</a></i>.</p>
+
+<h3>Unofficial versions</h3>
+
+<p>A branch of the <a href="https://en.wikipedia.org/wiki/Dolphin_(emulator)">Dolphin emulator</a> entitled <i><a href="https://en.wikipedia.org/wiki/Dolphin_(emulator)#PrimeHack">Primehack</a></i> was released unofficially in 2019. <i>Primehack</i> modifies the game, adding new high resolution textures, 4K and 60fps support, improved lighting and keyboard and mouse controls. The project was brought to <a href="https://en.wikipedia.org/wiki/Steam_Deck">Steam Deck</a> in 2022 via Emudeck.</p>
+
+<p>A demo of a <a href="https://en.wikipedia.org/wiki/2D_computer_graphics">2D</a> <a href="https://en.wikipedia.org/wiki/Fangame">fangame</a> version of <i>Metroid Prime</i> was released in April 2021. The development was forced to end via a cease and desist from Nintendo by that August.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

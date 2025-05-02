@@ -1,0 +1,389 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Halo: Reach</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('40856e41-4733-4bb6-b4f8-15cbca7a3a9e/c546514c-d5f9-42db-bdb6-b068f9007b36.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="40856e41-4733-4bb6-b4f8-15cbca7a3a9e/3405d700-583d-4b7d-b259-30dae34c2329.ico"/> Halo: Reach</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="40856e41-4733-4bb6-b4f8-15cbca7a3a9e/b216d512-6f11-4ce8-88c3-960f720101a2.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-4/2/2016">4/2/2016</a> 16:01:38</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-12/3/2019">12/3/2019</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-94">94</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-89">89</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-FPS">FPS</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-343 Industries">343 Industries</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Bungie">Bungie</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Ruffian Games">Ruffian Games</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Splash Damage">Splash Damage</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Xbox Game Studios">Xbox Game Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Cloud Saves">Cloud Saves</a><br/><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Halo:_Reach" target="_blank">PCGamingWiki</a><br/><a href="https://www.halowaypoint.com/en-us/games/halo-the-master-chief-collection/windows" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=4271" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/halo-reach" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/1064220/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Halo:_Reach" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/138079" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Halo:_Reach" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/halo-master-chief-collection/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Automobile">Automobile</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-Flight">Flight</a><br/><a href="#quicklink-Halo Engine">Halo Engine</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Sci-fi">Sci-fi</a><br/><a href="#quicklink-Space">Space</a><br/><a href="#quicklink-Unreal Engine 4">Unreal Engine 4</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Halo: Reach</b></i> is a 2010 <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/Bungie">Bungie</a> and published by <a href="https://en.wikipedia.org/wiki/Xbox_Game_Studios">Microsoft Game Studios</a>, originally for the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. The sixth installment in the <a href="https://en.wikipedia.org/wiki/Halo_(franchise)"><i>Halo</i> series</a> and a direct <a href="https://en.wikipedia.org/wiki/Prequel">prequel</a> to <i><a href="https://en.wikipedia.org/wiki/Halo:_Combat_Evolved">Halo: Combat Evolved</a></i>, <i>Reach</i> was released worldwide in September 2010. The game takes place in the year 2552, where humanity is locked in a war with an alien theocracy known as the <a href="https://en.wikipedia.org/wiki/Covenant_(Halo)">Covenant</a>, which seeks to exterminate humanity. Players play as Noble Six, a member of an elite squad of <a href="https://en.wikipedia.org/wiki/Supersoldiers">supersoldiers</a>, known as Noble Team, attempting to stage a defense of the human world known as Reach, which falls under Covenant attack.</p>
+
+<p>After releasing <i><a href="https://en.wikipedia.org/wiki/Halo_3">Halo 3</a></i> in 2007, Bungie split into teams to develop two different games—what would become <i><a href="https://en.wikipedia.org/wiki/Halo_3:_ODST">Halo 3: ODST</a></i> and <i>Reach</i>. The developers decided to create a prequel to the original <i>Halo</i> game trilogy, freeing themselves from the obligation of addressing old story threads. As the game would take place on a human world doomed to be destroyed, they focused on making the environment a character unto itself. Longtime <i>Halo</i> composers <a href="https://en.wikipedia.org/wiki/Martin_O'Donnell">Martin O'Donnell</a> and <a href="https://en.wikipedia.org/wiki/Michael_Salvatori">Michael Salvatori</a> returned to compose <i>Reach</i>'s music, aiming for a more somber sound to match the story.</p>
+
+<p><i>Reach</i> was announced at <a href="https://en.wikipedia.org/wiki/E3_2009">E3 2009</a> in <a href="https://en.wikipedia.org/wiki/Los_Angeles">Los Angeles</a>, and the first in-<a href="https://en.wikipedia.org/wiki/Game_engine">engine</a> trailer was shown at the 2009 <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Spike Video Game Awards</a>. Players who purchased <i>ODST</i> were eligible to participate in a <i>Reach</i> multiplayer <a href="https://en.wikipedia.org/wiki/Video_game_development#Beta">beta</a> in May 2010; the beta allowed Bungie to gain player feedback for fixing <a href="https://en.wikipedia.org/wiki/Software_bug">bugs</a> and making gameplay tweaks before shipping the final version. <a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a> gave <i>Reach</i> its biggest game marketing budget yet and created award-winning live-action commercials, action figures, and interactive media to promote the game.</p>
+
+<p>The game grossed US$200 million on its launch day, setting a new record for the franchise. <i>Reach</i> sold well in most territories, moving more than three million units its first month in <a href="https://en.wikipedia.org/wiki/North_America">North America</a>. Critical reception was positive; reviewers from publications such as <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i>, <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>, and <i><a href="https://en.wikipedia.org/wiki/Official_Xbox_Magazine">Official Xbox Magazine</a></i> called it the best <i>Halo</i> title yet. Critics generally praised the game's gameplay, graphics and sound, but the plot and characters were less positively received. <i>Reach</i> was Bungie's final <i>Halo</i> game; subsequent games have been overseen by Microsoft subsidiary 343 Industries, later known as <a href="https://en.wikipedia.org/wiki/Halo_Studios">Halo Studios</a>. <i>Halo: Reach</i> was re-released as an add-on game for <i><a href="https://en.wikipedia.org/wiki/Halo:_The_Master_Chief_Collection">Halo: The Master Chief Collection</a></i> in December 2019, for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Halo: Reach</i> is a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> in which players predominantly experience gameplay from a first-person perspective; the game perspective switches to third-person when using certain weapons, equipments, vehicles and when a player dies. Gameplay is more similar to <i><a href="https://en.wikipedia.org/wiki/Halo:_Combat_Evolved">Halo: Combat Evolved</a></i> than later games in the series. The player's <a href="https://en.wikipedia.org/wiki/Heads-up_display">heads-up display</a> shows and tracks a player's current weapons, abilities, and health; it also contains a compass and a "motion tracker" that registers moving allies, enemies, and vehicles in a certain radius of the player. The HUD changes when the player pilots vehicles.<sup>: 2–5 </sup></p>
+
+<p>In the game's campaign, which can be played alone or cooperatively, players assume the role of Noble Six, a <a href="https://en.wikipedia.org/wiki/Supersoldier">supersoldier</a> engaged in combat with the alien collective known as the <a href="https://en.wikipedia.org/wiki/Covenant_(Halo)">Covenant</a>. The Covenant come in eight distinct varieties with different ranks and classes for each type; for example, Elites are the leaders of a group, while Grunts are less intelligent and only dangerous in large groups.<sup>: 11 </sup> The player is equipped with a recharging energy shield that absorbs damage from weapons, fire and impacts. When the energy shield is depleted, the player loses health. When the player's health reaches zero, the character dies and the game reloads from a saved checkpoint. Health is replenished using <a href="https://en.wikipedia.org/wiki/Health_pack">health packs</a> scattered throughout <i>Reach</i>'s levels. The campaign's encounters with enemies are typically large, open spaces with weapons caches, cover from enemy fire and strategic vantage points. New to the <i>Halo</i> series are <a href="https://en.wikipedia.org/wiki/Dogfight">dogfight</a> sequences set in space.</p>
+
+<p><i>Reach</i> features updated versions of old weapons, plus new weapons fulfilling various combat roles. In <i>Halo 3</i>, players can carry single-use equipment <a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a> that offer temporary offensive or defensive advantages. This system of single-use equipment is replaced in <i>Reach</i> by reusable and persistent armor abilities that remain with a character until they are replaced by a different equipment. The abilities are sprint, which allows the player to move at an increased rate for several seconds; jetpack, which allows the player to fly for a limited time; <a href="https://en.wikipedia.org/wiki/Active_camouflage">active camouflage</a>, which makes a player harder to see (the less the player moves, the more camouflaged they will be); hologram, which creates a facsimile of the player running towards a target point; drop shield, which creates a bubble that heals those inside and protects them from a limited amount of damage; and armor lock, which immobilizes the player, but grants invincibility for a brief period of time. When the player exits armor lock, they release a close range <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse">EMP</a>, breaking nearby players' shields and pushing away movable objects. If a vehicle rams a player that is armor locking, the vehicle will sustain heavy damage. When playing as Covenant Elites, players also have access to an evade armor ability which allows the player to quickly dash in any direction.</p>
+
+<h3>Multiplayer</h3>
+
+<p><i>Reach</i> supports <a href="https://en.wikipedia.org/wiki/Player-versus-player">player-versus-player</a> multiplayer through split-screen on a single Xbox, local networks (<a href="https://en.wikipedia.org/wiki/System_Link">System Link</a>), and the <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a> service before servers were shut down in January 2022. The game includes standard multiplayer modes such as "<a href="https://en.wikipedia.org/wiki/Deathmatch_(gaming)">Slayer</a>" and <a href="https://en.wikipedia.org/wiki/Capture_the_flag#Software_and_games">Capture The Flag</a>, as well as game types new to the franchise. In "Headhunter", players drop skulls upon death, which other players can pick up and deposit at special zones for points. When players die, all their accumulated skulls are dropped. "Stockpile" has teams race to collect neutral flags, holding them at capture points every minute for points. "Generator Defense" pits three human supersoldiers, or Spartans, against three Covenant soldiers called Elites. The Elites' objective is to destroy three generators, while the Spartans defend the installation. After every round, the players switch roles. "Invasion" is a six versus six mode with three squads of two on each team. The game type matches Spartans against Elites; Elites vie for control of territories to disable a shield guarding a navigation core. Once the shield is disabled, they must transfer the core to a dropship; the Spartans must prevent this. As the game progresses, new vehicles and areas of the map become open.  The gameplay for Spartans and Elites is similar, but not identical. Elites are larger, move faster, and can fully regenerate their health. Depending on the game mode the player chooses, Spartans and Elites have different default loadouts. However, if playing locally, the player can alter the loadouts for both Spartans and Elites to be whatever the player chooses in the settings menu.</p>
+
+<p>Alongside other multiplayer options is "firefight", where players take on increasingly difficult waves of foes in a game of survival. Players can customize the firefight options, including the number and types of enemies. Firefight versus allows a player-controlled Elite team to try to stop a Spartan team from scoring points. Game modes like generator defense are also playable in firefight.</p>
+
+<p>Also included with <i>Reach</i> is "<a href="https://en.wikipedia.org/wiki/Forge_(level_editor)">Forge</a>", a level editor. Players can edit the default multiplayer maps and a large empty map known as "Forge World", adding or modifying <a href="https://en.wikipedia.org/wiki/Spawn_point">spawn points</a>, weapons and items. Objects may be phased into other objects, and can also be <a href="https://en.wikipedia.org/wiki/Snap_(computer_graphics)">snapped</a> to specific orientations. Other included features are the "theater", where players can watch saved films of their games and take screenshots and video clips for posterity, and the file share, where players can upload their screenshots, films, custom maps, and gametypes for public viewing.<sup>: 20–24 </sup></p>
+
+<h2>Synopsis</h2>
+
+<h3>Setting and characters</h3>
+
+<p><i>Reach</i> takes place in a futuristic <a href="https://en.wikipedia.org/wiki/Science_fiction">science fiction</a> setting; the year is 2552, shortly before the events of the video game <i>Halo: Combat Evolved</i>, and during the events of the novel <i><a href="https://en.wikipedia.org/wiki/Halo:_The_Fall_of_Reach">Halo: The Fall of Reach</a></i>. <i>Halo: Reach</i> largely ignores the canon and timeline of events established in the novel, leading to several plot inconsistencies in the franchise. Humans, under the auspices of the <a href="https://en.wikipedia.org/wiki/Factions_of_Halo#United_Nations_Space_Command">United Nations Space Command</a> (UNSC), have been waging a long war against a collective of alien races known as the Covenant. By the events of <i>Reach</i>, almost all of humanity's interstellar colonies have fallen. Reach itself is an Earth-like colony that serves as the UNSC's main military hub in the system of <a href="https://en.wikipedia.org/wiki/Epsilon_Eridani">Epsilon Eridani</a>. The colony is home to over 700 million civilians in addition to the military presence there.</p>
+
+<p>The game follows the actions of "Noble Team", a UNSC special operations unit composed of elite supersoldiers known as <a href="https://en.wikipedia.org/wiki/Characters_of_Halo#Spartans">Spartans</a>. Players assume the role of a new addition to the team identified by the call sign Noble Six. Noble Team's leader is Carter-A259, a no-nonsense soldier. His second-in-command, Catherine-B320 (referred to by other team members as "Kat"), has a bionic arm; together, Carter and Kat are the only remaining original members of Noble Team. The other current members include heavy weapons specialist and surviving Spartan-II Jorge-052, assault specialist Emile-A239, and marksman Jun-A266.</p>
+
+<p>Noble Six meets the rest of Noble Team, shortly before they are dispatched to investigate why a communications relay has gone offline. They discover Covenant forces have invaded Reach. The team is relocated to defend Sword Base, an Office of Naval Intelligence (ONI) installation, from a Covenant assault. After repelling the attack, Noble Team meets <a href="https://en.wikipedia.org/wiki/Characters_of_Halo#Catherine_Halsey">Catherine Halsey</a>, a scientist and the mastermind behind the Spartan program and their MJOLNIR <a href="https://en.wikipedia.org/wiki/Powered_armor">powered armor</a>. Halsey enquires about Noble's engagement at the relay, suspecting that the Covenant were attempting to retrieve highly classified ONI data from the site.</p>
+
+<p>Jun and Six discover an invasion force gathering on the planet. The UNSC launches an assault the next morning to repel the invasion. Noble Team assists the strike force, targeting key artillery stations and command posts. A cloaked Covenant supercarrier reveals itself; lacking a conventional weapon to destroy the carrier, Jorge and Six smuggle a slipspace engine onto a Covenant corvette en route to refuel at the carrier. With the timer damaged, Jorge drops Six out of the hangar of the corvette, remaining behind to detonate the engine manually and destroy the carrier. Another Covenant fleet arrives soon afterwards.</p>
+
+<p>Back on the surface, Six assists with city defense and civilian evacuation and reunites with Noble Team, but Kat is killed by a Covenant sniper. Recalled to Sword Base for a <a href="https://en.wikipedia.org/wiki/Scorched_earth">scorched earth</a> demolition mission, Noble Team is redirected underground by Halsey to an ancient alien artifact, which she believes is vital to winning the war against the Covenant. Noble Team is entrusted with transporting the artificial intelligence <a href="https://en.wikipedia.org/wiki/Cortana_(Halo)">Cortana</a> and her data on the artifact to the UNSC ship <i>Pillar of Autumn</i>, docked at a shipyard. Jun leaves the team to escort Halsey to safety.</p>
+
+<p>En route to the <i>Pillar of Autumn</i>, Carter is wounded and sacrifices himself to allow Six and Emile to reach the shipyard. Emile uses a <a href="https://en.wikipedia.org/wiki/Coilgun">mass driver</a> emplacement to defend the <i>Autumn</i> against enemies while Six gives Cortana to <i>Autumn</i>'s captain, <a href="https://en.wikipedia.org/wiki/Characters_of_Halo#Jacob_Keyes">Jacob Keyes</a>. When Emile is killed, Six remains behind to operate the gun and ensure <i>Autumn</i>'s escape. Cortana, using the data from the alien artifact, leads the <i>Autumn</i> to a <a href="https://en.wikipedia.org/wiki/Halo_(megastructure)">Halo</a> ringworld, leading to the events of <i>Halo: Combat Evolved</i>. In a <a href="https://en.wikipedia.org/wiki/Post-credits_scene">post-credits scene</a>, Six fights a <a href="https://en.wikipedia.org/wiki/Last_stand">last stand</a> against overwhelming Covenant forces. In 2589, Six's helmet remains on the grassy plains of a now-restored Reach. A narration by Halsey eulogizes Noble Team, who enabled humanity's victory over the Covenant.</p>
+
+<h2>Development</h2>
+
+<h3>Announcements and teasers</h3>
+
+<p><i>Halo: Reach</i> was announced on June 1, 2009, accompanied by a trailer at the Microsoft <a href="https://en.wikipedia.org/wiki/E3_2009">Electronic Entertainment Expo</a> (E3) press conference. A press release announced that an invitation to the open multiplayer <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Beta">beta</a> of the game would appear in 2010. <i>Reach</i> is the final game in the <i>Halo</i> series developed by Bungie; responsibility for developing future <i>Halo</i> titles fell to Microsoft subsidiary <a href="https://en.wikipedia.org/wiki/343_Industries">343 Industries</a>, beginning with <i><a href="https://en.wikipedia.org/wiki/Halo:_Combat_Evolved_Anniversary">Halo: Combat Evolved Anniversary</a></i> in 2011.</p>
+
+<p>A trailer released March 3, 2010, showcased the game's multiplayer. Bungie revealed parts of the game's campaign and Firefight at <a href="https://en.wikipedia.org/wiki/E3_2010">E3 2010</a>. The game reached the "zero bug release" milestone on June 23, signifying a shift from content creation to troubleshooting; buggy artificial intelligence or other elements would be removed rather than fixed at this point because of time constraints. Bungie released the complete list of achievements for the game on July 30, including their titles, symbols, and requirements, and completed <i>Reach</i>  between the end of July and beginning of August 2010.</p>
+
+<p>After <i><a href="https://en.wikipedia.org/wiki/Halo_3">Halo 3</a></i>, development studio Bungie created an internal team to work on <a href="https://en.wikipedia.org/wiki/Peter_Jackson">Peter Jackson</a>'s planned <i>Halo</i> game, <i>Halo Chronicles</i>. The game was eventually canceled and the team began working on a standalone expansion project—<i>Halo 3: ODST</i>—while another team, led by creative director Marcus Lehto and design lead Christian Allen, worked on <i>Reach</i>. The team considered many different concepts and approaches to the game; among the rejected ideas was a sequel to <i>Halo 3</i>. The team eventually settled on a prequel to the first <i>Halo</i> game in brainstorming sessions. It would take place on the planet Reach, during a pivotal time in the war. "Reach, as a fictional planet, was just a great candidate [to] play around with. It's such a rich world, with such a great fiction surrounding it," said Lehto. "We were like: 'Okay, that's it. We've just got a lot of things we can do there so we can build an immense story with it.'" No longer burdened with continuing the story threads of the <i>Halo</i> trilogy, Bungie used <i>Reach</i> to introduce new characters and settings. As <i>Reach</i> ends with the destruction of the titular planet, Bungie wanted to be sure players still felt a sense of accomplishment and success. "It is a challenge overall to ensure the player feels they're doing the right thing all the way to the end," said Lehto.</p>
+
+<p>Lehto recalled that making a character-driven story was a great challenge—players would come to know more about them as they progressed through the campaign, but the Spartan characters also had to behave intelligently. The <i>Halo</i> games consistently featured protagonists that were silent during gameplay sequences. Community manager Brian Jarrard pushed for allowing players to choose a female Noble Six and have the cinematics and dialogue change accordingly. The post-credit game sequence was the subject of intense discussion; some at Bungie wanted to remove it. Executive producer Joe Tung noted, "the 'survive' component ... felt great to us. We definitely talked about different versions of how that was happening and different versions of ending [the game] cinematically, but I think the way that it ultimately ended up is just a really well-paced, significant and emotionally impactful ending."</p>
+
+<p>The developers originally intended to <a href="https://en.wikipedia.org/wiki/Porting">port</a> existing <i>Halo 3</i> assets to <i>Reach</i> and update them. For <i>Halo 3</i>, Bungie had been forced to shrink parts of the game to fit the game engine's constraints, but wanted to make <i>Reach</i> look better than its predecessors. "The more we started looking into this, the more we found that realistically we could rebuild each asset from scratch with a huge increase in quality without significantly investing more time," said Bungie 3D artist Scott Shepherd.  Texture resolution and polygon counts for models increased; the <i>Reach</i> assault rifle is constructed of more polygons than an entire Marine character from <i>Halo 3</i>. The prequel concept also gave the art team an opportunity to redesign key enemies, weapons, and elements of the series. Artists found inspiration in the original concept art for <i>Halo: Combat Evolved</i>; the shape for the redesigned Covenant Grunts came from a sketch that <a href="https://en.wikipedia.org/wiki/Concept_art">concept artist</a> Shi Kai Wang created ten years earlier.</p>
+
+<p>The developers redesigned the <a href="https://en.wikipedia.org/wiki/Game_engine">game engine</a>, the software that handles rendering and much of gameplay. Bungie hired an expert in <a href="https://en.wikipedia.org/wiki/Motion_capture">motion capture</a> to develop more realistic character animations. Building a motion capture studio in-house saved Bungie time as motion capture data could be applied to the game models the same day it was shot. The developers sought to increase replay value by focusing on improving artificial intelligence. Rather than scripting enemy encounters, they focused on a more <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> or sandbox approach to battles.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Martin_O'Donnell">Martin O'Donnell</a> scored <i>Reach</i> with additional music by <a href="https://en.wikipedia.org/wiki/Michael_Salvatori">Michael Salvatori</a>. O'Donnell wrote "somber, more visceral" music since the plot is character-driven and focuses on a planet that is already known—in the <i>Halo</i> <a href="https://en.wikipedia.org/wiki/Fictional_universe">fictional universe</a>—to have fallen. The first music he wrote for <i>Reach</i> was played for the game's world premiere, and he used it as a starting piece to develop further themes.  O'Donnell began work on <i>Reach</i> while <i>ODST</i>, for which he also wrote the music, was still in production, but did not begin composing until August 2009. Past <i>Halo</i> collaborators Salvatori, C. Paul Johnson, and Stan LePard assisted O'Donnell. Both Reach and ODST don't have the Gregorian chant. With <i>Reach</i>, he did not give them strictly divided responsibilities. "I decided this time to come up with some themes, tempos, keys, and other basic starting points for musical ideas," explained O'Donnell. "I shared these with all the other composers and just asked them to take off if they felt inspired by any of that material." The works-in-progress they came up with were either retouched by O'Donnell or sent back to be finished by their composer.</p>
+
+<p>In previous <i>Halo</i> titles, sections of music overlap and change depending on player action. <i>Reach</i>'s system of interactive audio was much more complex, featuring the ability to combine up to seven layers of instrumentation compared to <i>Combat Evolved</i>'s two. The developers also expanded the sound effect system. Every interacting object in <i>Reach</i> produces two sounds for respective objects; for example, a <a href="https://en.wikipedia.org/wiki/Warthog_(Halo)">Warthog</a> vehicle that hits an armored Covenant soldier produces a crunching metal noise based on the two colliding elements.<!-- game engine --> The interaction between objects and terrain was demonstrated in an in-game environment that O'Donnell called "the stripey room" after the bands of alternating colors on the objects and environment.</p>
+
+<p><i>Reach</i>'s multiplayer beta was open to owners of <i>Halo 3: ODST</i>. More than three million copies of <i>ODST</i> were sold by November 2009. Bungie estimated between two and three million players for the upcoming <i>Reach</i> beta, compared to the 800,000 that participated in <i>Halo 3</i>'s trial. Development schedules forced Bungie to release a six-week-old beta, fraught with bugs and issues already addressed in newer builds. Though concerned that these issues might tarnish the game's image, Jarrard noted that they had little choice but to ship it as it was and communicate with players concerning the fixes.</p>
+
+<p>More than 2.7 million players participated in the beta, which lasted from May 3 to 20. The game was rolled out from an internal group of Bungie and Microsoft employees, with the total number of players in the thousands. When the beta went public, more than a million played the first day, causing back-end servers to struggle to handle the traffic. While the engineering team had overestimated server load, bugs in server clusters caused game uploads to become backed up, slowing matchmaking until the underlying issues could be fixed. Jarrard noted that the 16 million total hours of play time and large-scale rollout of the beta was vital to seeing how <i>Reach</i> would perform.</p>
+
+<p>Bungie used the beta to fix mistakes, glitches, and balance issues within gameplay elements. "We needed our fans to provide feedback," said Lehto, adding that having a large audience to "hammer" on the game allowed them to gather useful feedback to mold the finished product. The game automatically collected statistics such as upload and matchmaking speeds, as well as game preferences; sorting out what Jarrard called "the more subjective anecdotal feedback" from emails, notes, and forums proved more difficult. The <i>Reach</i> beta generated over 360,000 forum posts on Bungie's community forums. Bungie created official threads for groups of issues to manage the high volume of feedback; "We tried to give people a little bit more of a direct avenue to give that feedback and to make our lives easier. It was definitely a lot to assess and digest," said Jarrard. Certain feedback from the players did not correlate with the statistical data obtained from the matches during the beta. Chris Carney, the lead designer for the multiplayer mode, recalled vocal dissatisfaction with the pistol early in the beta; by the end of the beta, the weapon was responsible for most of the kills coming from newly included weapons in the game. Bungie deployed special test matches to eliminate <a href="https://en.wikipedia.org/wiki/Lurking_variable">lurking variables</a>, balance gameplay, and make other informed changes.</p>
+
+<h2>Release</h2>
+
+<p><i>Reach</i> was released on September 14, 2010 in 25 countries. Tens of thousands of stores signed up for midnight launch events; sponsored events took place in London, Oslo, Stockholm, and New York. Three editions were sold. The standard edition consisted of the game and its manual. The limited edition featured an artifact bag with story information, different packaging, and an exclusive set of in-game Elite armor. The "legendary edition" contained all the materials from the limited edition, a different packaging, two hours of developer commentary on the game's cutscenes, an in-game Spartan armor effect, and a 10-pound (4.5 kg) statue created by <a href="https://en.wikipedia.org/wiki/McFarlane_Toys">McFarlane Toys</a>. North American players who purchased a first run copy of the game (in-store near launch day or pre-ordered) received an in-game Spartan "recon" helmet customization; players in other regions could earn it only by pre-ordering. <i>Reach</i> also came bundled with a limited edition Xbox 360 Slim that sports <i>Halo</i>-themed sounds and finish and two controllers.</p>
+
+<p>Microsoft later listed <i>Reach</i> as an <a href="https://en.wikipedia.org/wiki/Xbox_Live_Marketplace">Xbox Live Marketplace</a> download on August 12, 2010, at a price of 99999 <a href="https://en.wikipedia.org/wiki/Microsoft_Points">Microsoft Points</a> (~US$1250). A spokesperson confirmed the download was for media review purposes, and that there were no plans to distribute the game to the public through Games on Demand. Four days later, hackers managed to access, download, and distribute the game online; Microsoft stated they were investigating the matter. <i>Halo 2</i>, <i>Halo 3</i>, and <i>ODST</i> were similarly leaked ahead of their planned release. Bungie released a <a href="https://en.wikipedia.org/wiki/Game_demo">demo</a> on May 24, 2011, featuring a single player level from the game's story mode, a multiplayer competitive map, and a cooperative firefight mission.</p>
+
+<p><i>Halo: Reach</i> was released for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> as part of <i><a href="https://en.wikipedia.org/wiki/Halo:_The_Master_Chief_Collection">Halo: The Master Chief Collection</a></i> on December 3, 2019.</p>
+
+<h3>Marketing</h3>
+
+<p>According to Jarrard, the team decided to have much more "grandiose" marketing for <i>Reach</i> than that of <i>ODST</i>. Microsoft gave <i>Reach</i> its largest game marketing budget at the time, surpassing the scale and $6.5 million cost of <a href="https://en.wikipedia.org/wiki/Halo_3_marketing"><i>Halo 3</i>'s award-winning marketing</a>. Marketers focused their efforts on connecting with consumers via universal themes, rather than outdoing <i>Halo 3</i>'s push. <a href="https://en.wikipedia.org/wiki/Interpublic_Group_of_Companies">Interpublic Group of Companies</a>' AgencyTwoFifteen handled strategy and video development for the marketing push, while <a href="https://en.wikipedia.org/wiki/AKQA">AKQA</a> developed interactive components. The agencies were involved with <i>Halo 3</i>'s marketing. The advertisers' brief was simple: "Remember Reach. Focus on the heroes, not the victims. Expand our audience beyond <i>Halo</i> <a href="https://en.wikipedia.org/wiki/Fanboy">fanboys</a>."</p>
+
+<p>The advertising campaign commenced in April 2010 with the live-action short "Birth of a Spartan". A series of online videos highlighting a day in the life of average Reach citizens before the Covenant invade, began on August 23, followed by TV spots on August 29. The series concluded in late August with another short, "Deliver Hope". As part of the promotions, Microsoft created an interactive <a href="https://en.wikipedia.org/wiki/Light_art">light sculpture</a>; users logged onto a website where they could direct a <a href="https://en.wikipedia.org/wiki/KUKA">KUKA industrial robot</a> to plot pinpricks of light; over 54,000 points created a monument to Noble Team that faded unless more points were plotted. <i>Reach</i>'s marketing won several industry distinctions, among them thirteen medals from the MI6 Game Marketing Conference Awards.</p>
+
+<p>Several lines of tie-in merchandise were launched. McFarlane, who had produced toys for <i>Halo 3</i>, created a line of five-inch action figures, while Square Enix's Play Arts toy label created additional figures.</p>
+
+<p><i>Reach</i> made $200 million in first-day sales, a record for the franchise. Its strong sales suggested to analysts that core titles in the holiday season could reverse sluggish video game sales in 2010. In its first sixteen days the game sold $350 million worth of merchandise. <i>Reach</i> premiered at the top of Xbox 360 and multi-platform charts in most territories. Figures from the <a href="https://en.wikipedia.org/wiki/NPD_Group">NPD Group</a> estimated that <i>Reach</i> sold 3.3 million units in North America, making it the third game for its console generation (Xbox 360, PS3, Wii) to sell more than three million units during the first month of its release (alongside <i>Halo 3</i> and <i><a href="https://en.wikipedia.org/wiki/Modern_Warfare_2">Modern Warfare 2</a></i>). <i>Halo: Reach</i> became the third bestselling game of 2010 in North America, behind <i><a href="https://en.wikipedia.org/wiki/Call_of_Duty:_Black_Ops">Call of Duty: Black Ops</a></i> and <i><a href="https://en.wikipedia.org/wiki/Madden_NFL_11">Madden NFL 11</a></i>. It sold 4.7 million units by September 2011.</p>
+
+<p>In the United Kingdom, <i>Reach</i>'s opening week was the fifth-best launch in the territory, beating <i>Halo 3</i>'s debut by 20,000 units and <i>ODST</i>'s by 200,000 units. In its second week on the UK charts <i>Reach</i> was the second bestselling title, displaced by the racing game <i><a href="https://en.wikipedia.org/wiki/F1_2010_(video_game)">F1 2010</a></i>. <i>Reach</i> continued to hold the top place in North America.  In Japan, the game debuted at first place with 44,413 units, but fared poorly in the long-term (as have other <i>Halo</i> games). This showing was above <i>ODST</i>'s sales of 29,734 in the comparable timeframe, but below <i>Halo 3</i>'s 61,143. <i>Reach</i> dropped out of the top 20 best selling titles entirely its second week.</p>
+
+<p><i>Reach</i> supports additional <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC). Bungie released the game's first DLC, dubbed the "Noble Map Pack", on November 30, 2010; this map pack contains three maps, unique in that they are not based on <i>Reach</i> campaign levels. Microsoft partnered with <a href="https://en.wikipedia.org/wiki/Certain_Affinity">Certain Affinity</a>, which had worked on <i>Halo 2</i> maps, to produce the second, "Defiant Map Pack", made available for download on March 15, 2011.</p>
+
+<p>A "title update" was released by 343 Industries for <i>Reach</i> that modified game mechanics such as bullet spread and melee damage. The update also contained playlists for <i><a href="https://en.wikipedia.org/wiki/Halo:_Combat_Evolved_Anniversary">Halo: Combat Evolved Anniversary</a></i>. Purchasers of anniversary edition received a voucher to download the game's seven multiplayer maps directly into <i>Reach</i>, the map pack was also made available to purchase via the Xbox Live Marketplace.</p>
+
+<h2>Reception</h2>
+
+<p><i>Halo: Reach</i> received critical acclaim upon its release. On aggregating review website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, it holds an average of 91/100. Critics such as <a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a>'s Thierry Nguyen, the staff of <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i>, <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i>'s Matt Cabral, and others considered <i>Reach</i> the best <i>Halo</i> title yet. Reviewers noted there were few major changes to the <i>Halo</i> formula; <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>'s Erik Brudvig wrote that <i>Reach</i> was not "another rehash", though franchise veterans would feel immediately at home with the game.</p>
+
+<p>Nguyen, Tom Hoggins of <i><a href="https://en.wikipedia.org/wiki/The_Daily_Telegraph">The Daily Telegraph</a></i>, and others wrote that <i>Reach</i> took the best elements from previous games and combined them in Bungie's final entry. Hoggins noted that this approach made <i>Reach</i> "a blistering, breathless crescendo to a decade's worth of work", but also that it was unlikely to convert non-<i>Halo</i> fans. The <i><a href="https://en.wikipedia.org/wiki/Daily_Mirror">Daily Mirror</a></i>'s Kevin Lynch praised Bungie for introducing new gameplay mechanics like jetpacks without ruining the title's learning curve or game balance.</p>
+
+<p>Brudvig praised the campaign for avoiding the "repetitive landscapes and circuitous, difficult to follow plots" of past <i>Halo</i> titles. <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a>'s Chris Watters and others felt the artificial intelligence of friendly non-player characters was less advanced than that of enemies, especially while driving. Steve Boxer wrote for <i><a href="https://en.wikipedia.org/wiki/The_Guardian">The Guardian</a></i> that <i>Reach</i>'s story made previous entries feel "amateurish"; Nguyen felt that whereas previous <i>Halo</i> titles had become mired in inconsistencies and <i><a href="https://en.wikipedia.org/wiki/Star_Trek">Star Trek</a></i>-like <a href="https://en.wikipedia.org/wiki/Technobabble">technobabble</a>, <i>Reach</i> told a broader and more accessible story. Despite this, he contended, the game suffered from archetypal characters with which players spent little time: "I almost forgot that Noble Four (Emile) even existed for a big chunk of the campaign, as I rarely saw him." <i><a href="https://en.wikipedia.org/wiki/Wired_(website)">Wired</a></i>'s Gus Mastrapa unfavorably compared Noble Team to the marines of <i><a href="https://en.wikipedia.org/wiki/Aliens_(film)">Aliens</a></i>, writing that most of the characters were unmemorable and one-dimensional. Nguyen also faulted the game for occasional lapses in exposition, but summed these up as "minor quibbles" compared to the improvements. In contrast, <a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a>'s Charlie Baratt opined that <i>Reach</i>'s campaign was better than <i>ODST</i>'s, but lacked the "franchise-changing potential" it promised. Lynch judged that while Bungie still had not learned to create a perfect story, "[<i>Reach</i>] does expertly set up bombastic scene after scene".</p>
+
+<p>Ben Kuchera of <i><a href="https://en.wikipedia.org/wiki/Ars_Technica">Ars Technica</a></i> enjoyed the multiplayer component of <i>Reach</i> for its scope—"no matter how you play, you will find something to like." Reviewers lauded the many customization options available to players: Watters and Kuchera praised the concept of psych profiles to hone more agreeable teammate selections, but questioned its effectiveness; <a href="https://en.wikipedia.org/wiki/G4_(U.S._TV_channel)">G4</a> considered <i>Reach</i>'s Forge World more expansive and impressive than <i>Halo 3</i>'s Forge offerings; and Lynch wrote that the sheer quantity of multiplayer options would give the game a long life cycle for players.</p>
+
+<p>Critics considered the audio-visual components a marked advance over <i>Halo 3</i> and <i>ODST</i>'s. <i><a href="https://en.wikipedia.org/wiki/The_New_Zealand_Herald">The New Zealand Herald</a></i>'s Troy Rawhiti-Forbes wrote that with the improved graphics and animation, "[<i>Reach</i>] looks just like a big-budget Hollywood project." <i><a href="https://en.wikipedia.org/wiki/Official_Xbox_Magazine">Official Xbox Magazine</a></i> acknowledged better graphics in other games, but praised <i>Reach</i> for "eye-catching beauty and breathless scope", noting that the inclusion of wildlife and civilians heightened the impression of a planet under siege. Martin Robinson of IGN UK appreciated O'Donnell's moody score and the redone sound effects, writing that the new weapons "feel like they're about to tear your hands off".</p>
+
+<h3>Accolades</h3>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

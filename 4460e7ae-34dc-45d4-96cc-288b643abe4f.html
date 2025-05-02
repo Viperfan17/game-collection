@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mario Kart 64</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('4460e7ae-34dc-45d4-96cc-288b643abe4f/14437dce-e6e6-4134-a9e0-32974630b1e3.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="4460e7ae-34dc-45d4-96cc-288b643abe4f/c9db118c-0cb0-4fec-a46f-532df7d30695.png"/> Mario Kart 64</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="4460e7ae-34dc-45d4-96cc-288b643abe4f/edee5552-158c-42d4-a842-2006a99fb42c.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:52:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:42:20</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo 64">Nintendo 64</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-12/14/1996">12/14/1996</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-83">83</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Kart racing">Kart racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo EAD">Nintendo EAD</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Mario_Kart_64" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/19970401070517/http://www.nintendo.com/product/n64/mk64/mk64hq.html" target="_blank">Mario Kart 64 HQ</a><br/><a href="https://www.nintendo.co.jp/n01/n64/software/nus_p_nmkj/index.html" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Tadashi Sugiyama">[People] artist: Tadashi Sugiyama</a><br/><a href="#quicklink-[People] composer: Kenta Nagata">[People] composer: Kenta Nagata</a><br/><a href="#quicklink-[People] director: Hideki Konno">[People] director: Hideki Konno</a><br/><a href="#quicklink-[People] producer: Shigeru Miyamoto">[People] producer: Shigeru Miyamoto</a><br/><a href="#quicklink-[People] programmer: Masato Kimura">[People] programmer: Masato Kimura</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Mario Kart 64</b></i> is a 1996 <a href="https://en.wikipedia.org/wiki/Kart_racing_game">kart racing game</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a> (N64). It is the second installment in the <i><a href="https://en.wikipedia.org/wiki/Mario_Kart">Mario Kart</a></i> series after 1992's <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Kart">Super Mario Kart</a></i>. The game retains the gameplay of its predecessor: the player, controlling a <a href="https://en.wikipedia.org/wiki/List_of_Mario_franchise_characters"><i>Mario</i></a> franchise character, races opponents around tracks based on locales from the <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> platform games. Tracks contain obstacles to slow the player down and item boxes which give the player <a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a> to aid in their progress. <i>Mario Kart 64</i> contains different <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> and local <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> game modes, including a <a href="https://en.wikipedia.org/wiki/Grand_Prix_motor_racing">Grand Prix</a> racing mode and a <a href="https://en.wikipedia.org/wiki/Last_man_standing_(video_games)">last man standing</a> battle mode.</p>
+
+<p>Developed and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a>, <i>Mario Kart 64</i> was first revealed in 1995 alongside the N64. The development team focused on utilising the N64's technology to create a smooth playing experience rather than deviating significantly from its predecessor's gameplay in order to appeal to a wide audience. Developers were bounded by the N64's <a href="https://en.wikipedia.org/wiki/Computer_performance">processing power</a> and made use of <a href="https://en.wikipedia.org/wiki/Rendering_(computer_graphics)">rendering techniques</a> to save on <a href="https://en.wikipedia.org/wiki/Computer_memory">memory</a>, and used car physics simulations to aid the game's kart design. Nintendo released <i>Mario Kart 64</i> in late 1996 in Japan and in 1997 worldwide, months after the launch of the N64.</p>
+
+<p><i>Mario Kart 64</i> received acclaim from critics. The track designs, multiplayer, and presentation were lauded, while criticism was directed towards its technical issues and difficulty. The game has sold 9.87 million copies worldwide since its release, making it the second-<a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_64_video_games">bestselling N64 game</a>. <i>Mario Kart 64</i> was nominated for awards following its release, and retrospectively has been considered one of the <a href="https://en.wikipedia.org/wiki/Greatest_video_games_of_all_time">greatest video games of all time</a>. The game has a notable <a href="https://en.wikipedia.org/wiki/Speedrunning">speedrunning</a> presence online. <i>Mario Kart 64</i> was rereleased digitally on the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> in 2007, the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> in 2016, and the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> in 2021.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Mario Kart 64</i> is a <a href="https://en.wikipedia.org/wiki/Kart_racing_video_game">kart racing video game</a> featuring characters and elements from the <i><a href="https://en.wikipedia.org/wiki/Mario_(franchise)">Mario</a></i> franchise largely similar in gameplay to its predecessor <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Kart">Super Mario Kart</a></i> (1992). The player controls one of eight <a href="https://en.wikipedia.org/wiki/List_of_Mario_franchise_characters"><i>Mario</i> franchise characters</a> and races opponents in <a href="https://en.wikipedia.org/wiki/Kart">karts</a> around <a href="https://en.wikipedia.org/wiki/Race_track">tracks</a> based on locales from the <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> platform games. The game's 20 courses are populated with obstacles to slow the player down, shortcuts letting the player skip sections, and boxes labeled with <a href="https://en.wikipedia.org/wiki/Question_marks">question marks</a> which give the player a random item based on elements from the <i>Super Mario</i> series. Items can be either <a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a>, such as giving the player a speed boost, or offensive, such as causing an opponent to <a href="https://en.wikipedia.org/wiki/Skid_(automobile)#Spin_out">spin out</a>. The player can also <a href="https://en.wikipedia.org/wiki/Drifting_(motorsport)">drift</a> around corners or enter an opponent's <a href="https://en.wikipedia.org/wiki/Drafting_(aerodynamics)">slipstream</a> to receive a speed boost. Playable characters are divided into three <a href="https://en.wikipedia.org/wiki/Weight_class">weight classes</a> which determine characteristics such as speed, acceleration, and handling. <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Peach</a>, <a href="https://en.wikipedia.org/wiki/Toad_(Nintendo)">Toad</a>, and <a href="https://en.wikipedia.org/wiki/Yoshi">Yoshi</a> are lightweights; <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a> and <a href="https://en.wikipedia.org/wiki/Mario">Mario</a> are middleweights; and <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a>, <a href="https://en.wikipedia.org/wiki/Donkey_Kong_(character)">Donkey Kong</a>, and <a href="https://en.wikipedia.org/wiki/Wario">Wario</a> are heavyweights. There are three <a href="https://en.wikipedia.org/wiki/Difficulty_levels">difficulty levels</a> based on engine classes—50<a href="https://en.wikipedia.org/wiki/Engine_displacement">cc</a>, 100cc, or 150cc—, with the harder difficulties' more powerful engine classes providing increased maximum speeds and control difficulty.</p>
+
+<p>There are two <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> <a href="https://en.wikipedia.org/wiki/Game_mode">game mode</a> options in <i>Mario Kart 64</i>: <a href="https://en.wikipedia.org/wiki/Grand_Prix_motor_racing">Grand Prix</a> (GP) and <a href="https://en.wikipedia.org/wiki/Time_Trial">Time Trials</a>. Time Trials is a solely single-player mode and GP can be played in single-player or with two players. In GP, the game's main mode, the player races seven <a href="https://en.wikipedia.org/wiki/Non-player_character">computer opponents</a> in one of four "cups" consisting of four tracks, with the objective of achieving the highest points across all four three-lap races. The player must race on every track in the cup, and points are given out at the end of each race based on position—nine for first place, six for second, three for third, and one for fourth. The player must come in at least fourth place in each race to continue racing for a trophy. Achieving highest points on all cups in the 150cc difficulty unlocks a "mirror" mode in which all tracks are flipped left-to-right. In Time Trials, the player races on any of the 16 tracks with the aim of achieving the lowest time across three laps. There are no opponents or items on the track; the player is given three speed boosts to use across the whole race. The player can race against another player's time by sharing "<a href="https://en.wikipedia.org/wiki/Ghost_(video_gaming)">ghost</a>" data using the <a href="https://en.wikipedia.org/wiki/Controller_Pak">Controller Pak</a>, a <a href="https://en.wikipedia.org/wiki/Memory_card">memory card</a> that plugs into the back of the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a> (N64) <a href="https://en.wikipedia.org/wiki/Nintendo_64_controller">controller</a>.</p>
+
+<p>Three local multiplayer modes are present in <i>Mario Kart 64</i>: GP, Versus (VS), and Battle. The game utilises a <a href="https://en.wikipedia.org/wiki/Split_screen_(computing)">split screen</a> to display each player's gameplay. GP is unchanged from its single-player version, but allows for two players. In VS mode, two to four players race around any track without computer opponents. Battle mode sees two to four players compete in one of four <a href="https://en.wikipedia.org/wiki/Arena">arenas</a> rather than tracks. The player begins with three balloons over their character, with the objective of popping other players' balloons using items. Players are knocked out upon losing all their balloons—though can control a bomb with wheels to attack remaining players afterwards—, and the winner is whoever remains the <a href="https://en.wikipedia.org/wiki/Last_man_standing_(video_games)">last man standing</a>.</p>
+
+<h2>Development</h2>
+
+<p>The game was provisionally titled <i>Super Mario Kart R</i> during development—the "R" being short for "<a href="https://en.wikipedia.org/wiki/Rendering_(computer_graphics)">rendered</a>". <i>Mario Kart 64</i> was developed concurrently with <i><a href="https://en.wikipedia.org/wiki/Super_Mario_64">Super Mario 64</a></i> (1996) and <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Ocarina_of_Time">The Legend of Zelda: Ocarina of Time</a></i> (1998) by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a>'s <a href="https://en.wikipedia.org/wiki/Entertainment_Analysis_&amp;_Development">Entertainment Analysis &amp; Development</a> division. The game was revealed alongside the N64 console itself in November 1995 at the <a href="https://en.wikipedia.org/wiki/Nintendo_Space_World">Shoshinkai</a> trade show via a <a href="https://en.wikipedia.org/wiki/Videotape">videotape</a> given out to journalists. The game was reportedly considered "95% complete" at the time of the show. <i>Mario Kart 64</i> was intended to be released alongside the N64 itself in mid-1996 but became delayed as development resources were directed towards <i>Super Mario 64</i>, itself a launch title for the system.</p>
+
+<p>Developers didn't focus on gameplay deviating significantly from its predecessor <i>Super Mario Kart</i>, wanting the game to appeal to a wide audience. Nintendo instead focused on the game's use of technology and internal processes, like making multiplayer gameplay performance smooth and generally using the full extent of the N64's processing capabilities. <a href="https://en.wikipedia.org/wiki/Hideki_Konno">Hideki Konno</a>, the director of <i>Mario Kart 64</i>, stated that developers wanted a racing environment in the game where all players were "in it until the end". Konno claimed that they weren't able to achieve this due to the  <a href="https://en.wikipedia.org/wiki/Computer_performance">processing capabilities</a> of the N64 not allowing eight players on the screen at all times. Developers created a simulation of remote-controlled vehicles and did research on the physics of cars to aid in designing the game's kart mechanics. Ultimately, it was decided these kart mechanics were too "realistic" and unenjoyable for game testers, and developers settled on a more straightforward approach to controls in the final release. Game designers wanted freedom in regards to where the player can race on tracks. This caused programmers to struggle with <a href="https://en.wikipedia.org/wiki/Collision_detection">collision detection</a>, trying to find a balance between not overloading the processor and not wanting to cut corners such as by letting players overlap each other.</p>
+
+<p>The game uses a rendering technique known as <a href="https://en.wikipedia.org/wiki/2.5D#Billboarding">billboarding</a> to represent characters. Characters are represented by a two-dimensional image kept perpendicular to the <a href="https://en.wikipedia.org/wiki/Virtual_camera_system">camera</a> rather than being rendered in <a href="https://en.wikipedia.org/wiki/3D_computer_graphics">3D</a>. This technique allowed developers to save on <a href="https://en.wikipedia.org/wiki/Computer_memory">memory</a>—the game's Battle mode and ability to render eight players on the track at once were made possible by this. Producer <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> credited the game's technical performance to the N64's use of <a href="https://en.wikipedia.org/wiki/ROM_cartridge">ROM cartridges</a> over disc-based <a href="https://en.wikipedia.org/wiki/CD-ROM">CD-ROMs</a> for game media, due to the way they handle <a href="https://en.wikipedia.org/wiki/Prefetching">pre-loading</a> data to the game system. During development, a <a href="https://en.wikipedia.org/wiki/Hard_disk_drive_failure">hard disk failure</a> resulted in designers remaking "about 80%" of the game's character models. An early <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha">alpha</a> version of the game appeared in the <a href="https://en.wikipedia.org/wiki/Nintendo_Gigaleak">Nintendo Gigaleak</a>, a 2020 <a href="https://en.wikipedia.org/wiki/Internet_leak">data leak</a> of internal material at Nintendo. The alpha used assets from <i>Super Mario Kart</i> as placeholders. A pre-release version of the game originally featured <a href="https://en.wikipedia.org/wiki/Kamek">Kamek</a>, a villain in the <i><a href="https://en.wikipedia.org/wiki/List_of_Yoshi_video_games">Yoshi</a></i> series, before being replaced by Donkey Kong. Other features cut during development include a racing game mode without items—scrapped due to disinterest from <a href="https://en.wikipedia.org/wiki/Game_testing">game testers</a>—and two tracks. The cut tracks were based on a parking garage and a large city, respectively.</p>
+
+<h2>Release</h2>
+
+<p><i>Mario Kart 64</i> was released in Japan on December 14, 1996, in the United States on February 10, 1997, and in Europe on June 24—the American release of the game was moved forward a week from the initially announced date. It was the second entry in the <i><a href="https://en.wikipedia.org/wiki/Mario_Kart">Mario Kart</a></i> series after <i>Super Mario Kart</i>. <a href="https://en.wikipedia.org/wiki/Nintendo_of_America">Nintendo of America</a> chairman <a href="https://en.wikipedia.org/wiki/Howard_Lincoln">Howard Lincoln</a> stated that the difference in time between the Japanese and American releases of the game was due to the company's desire to release the game during the <a href="https://en.wikipedia.org/wiki/Christmas_and_holiday_season">holiday season</a> in Japan, considering a lack of N64 releases in the region. Nintendo released a special edition of <i>Mario Kart 64</i> in Japan which came with a specially-styled black-and-grey <a href="https://en.wikipedia.org/wiki/N64_controller">N64 controller</a>. It was released in China on December 25, 2003 on the <a href="https://en.wikipedia.org/wiki/IQue_Player">iQue Player</a> through the Chinese <a href="https://en.wikipedia.org/wiki/Video_game_localization">localization</a> company <a href="https://en.wikipedia.org/wiki/IQue">iQue</a>. <i>Mario Kart 64</i> was digitally rereleased on the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> and the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a> through the <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a>, releasing on the Wii worldwide across January 2007. On the Wii U, the game released on January 21, 2016 in Europe and on December 29 in the United States. <i>Mario Kart 64</i> was also rereleased on the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> as part of the <a href="https://en.wikipedia.org/wiki/Nintendo_Classics">Nintendo Classics</a> service on October 25, 2021.</p>
+
+<p>The <i>Mario Kart 64</i> soundtrack, composed by Kenta Nagata, was released on <a href="https://en.wikipedia.org/wiki/CD">CD</a> several times across 1997 in Japan and the United States. The American releases were published by Nintendo on April 1, 1997 and March 1 respectively, and the Japanese release was published by <a href="https://en.wikipedia.org/wiki/Pony_Canyon">Pony Canyon</a> on September 19. The releases include the game's songs as well as different sound effects and remixes of songs from the game, and each includes a different track listing. <i>Mario Kart 64 on Club Circuit</i>, published by <a href="https://en.wikipedia.org/wiki/Tokuma_Japan_Communications">Tokuma Japan Communications</a> [<a href="https://ja.wikipedia.org/wiki/徳間ジャパンコミュニケーションズ">ja</a>] on December 26, 1997, is a <a href="https://en.wikipedia.org/wiki/Remix_album">remix album</a> containing <a href="https://en.wikipedia.org/wiki/Electronic_dance_music">club</a> remixes of the game's soundtrack.</p>
+
+<h2>Reception</h2>
+
+<p><i>Mario Kart 64</i> received "generally favorable" reviews according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. The game was commercially successful, selling 9.87 million copies worldwide—the second-<a href="https://en.wikipedia.org/wiki/List_of_best-selling_Nintendo_64_video_games">bestselling game on the N64</a>. It was the highest selling game in the United States over the first three months of 1997, and reached over one million sales within two months of its release in the region. By 1999, <i>Mario Kart 64</i> had sold 6.23 million copies in the United States and 2.06 million units in Japan, the highest and third-highest selling N64 game in those regions respectively.</p>
+
+<p>Critics debated the game's presentation and visuals. Supporters felt the game adequately used the power of the N64, made the game stand out from others in the racing genre and in the Mario series, and was an improvement over its <a href="https://en.wikipedia.org/wiki/16-bit">16-bit</a> predecessor. The French <i>Officiel Nintendo Magazine</i> enjoyed the game's colourful and fluid visuals, adding that its overall presentation likened a "magical" experience. Detractors of the graphics felt they lacked detail, weren't better enough than the previous 16-bit entry, and failed to fully benefit from the N64's power. The use of 2D sprites was a common critique, with <i><a href="https://en.wikipedia.org/wiki/Next_Generation_(magazine)">Next Generation</a></i> arguing that it made the game look outdated.</p>
+
+<p><i>Mario Kart 64</i>'s track design and gameplay polarised critics. The game was panned for being un-innovative, too easy, and simple and monotonous. <i><a href="https://en.wikipedia.org/wiki/Computer_and_Video_Games">Computer and Video Games</a></i> and <i><a href="https://en.wikipedia.org/wiki/N64_Magazine">N64 Magazine</a></i> felt that success was too dependent on getting the right power-ups. <i>Cubed3</i> disliked <i>Mario Kart 64</i>'s wide, motorway-like track design, saying that it did not provide an "adrenaline filled" experience which the player might have hoped for. Critics also found fault in the game's use of <a href="https://en.wikipedia.org/wiki/Dynamic_game_difficulty_balancing">rubberband difficulty balancing</a>, recognizing that it gave the enemy <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_in_video_games">artificial intelligence</a> (AI) an unfair advantage. Technical issues such as poor <a href="https://en.wikipedia.org/wiki/Collision_detection">collision detection</a> and <a href="https://en.wikipedia.org/wiki/Lag_(video_games)">lag</a> in the four-player "Battle Mode" were also noted.</p>
+
+<p>The gameplay did have supporters, who noted its large amount of courses, found its track designs more detailed and impressive than <i>Super Mario Kart</i>, and thought it had a lot of replay value. <i><a href="https://en.wikipedia.org/wiki/Hyper_(magazine)">Hyper</a></i> and <i>N64 Magazine</i> highlighted the flexible turning control with the multiple-angled <a href="https://en.wikipedia.org/wiki/Analog_stick">analog stick</a>, calling it "perfect" and true to real-life karts. <i>N64 Magazine</i> enjoyed the amount of focus and fast reflexes demanded from the player. <i>Hyper</i> reported having many unexpected moments while playing the game due to its "ingeniously fiendish AI" and the boxes containing different power-ups each time they're collected. Reviewers, even those lukewarm towards the graphics, positively noted touches such as the 180-degree turns in Bowser's Castle, the train tracks on Kalimari Desert, the trucks in Toad's Turnpike, the cows in Moo Moo Farm, Peach's castle on Royal Raceway, and the sliding penguins in Sherbet Land as highlights, as well as smoke puffs coming out of the kart.</p>
+
+<p>Critics found the multiplayer mode to be better than the single player, with <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> calling it "multi-player mayhem at its best". <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> described the game as "one of the best multiplayer games ever made", citing the game's vehicle dynamics and items as aiding the multiplayer experience. Some reviewers criticized the four-player split screen mode for making gameplay difficult to see due to the small size of quadrants, and <i><a href="https://en.wikipedia.org/wiki/GameFan">GameFan</a></i> noted a poor <a href="https://en.wikipedia.org/wiki/Frame_rate">frame rate</a> performance playing the multiplayer modes compared to single-player.</p>
+
+<p>In 1998, <i>Mario Kart 64</i> was nominated for <a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Racing_Game_of_the_Year">Console Racing Game of the Year</a> by the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_and_Sciences">Academy of Interactive Arts and Sciences</a> during the <a href="https://en.wikipedia.org/wiki/1st_Annual_Interactive_Achievement_Awards">inaugural Interactive Achievement Awards</a>. <i>Electronic Gaming Monthly</i> named it a runner-up for "Multiplayer Game of the Year" (behind <i><a href="https://en.wikipedia.org/wiki/Saturn_Bomberman">Saturn Bomberman</a></i>) at their 1997 Editors' Choice Awards.</p>
+
+<h2>Legacy</h2>
+
+<p><i>Mario Kart 64</i> placed 17th in <i><a href="https://en.wikipedia.org/wiki/Official_Nintendo_Magazine">Official Nintendo Magazine</a></i>'s 100 greatest Nintendo games of all time and 49th in <i>Electronic Gaming Monthly</i>'s 1997 list of the 100 best console games of all time. It has been placed by several reviewers on "<a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games of all time</a>" lists, including <i><a href="https://en.wikipedia.org/wiki/Entertainment_Weekly">Entertainment Weekly</a></i>, <i><a href="https://en.wikipedia.org/wiki/Polygon_(website)">Polygon</a></i>, <i>Hyper</i>, and <i>Gameswelt</i>.</p>
+
+<p>Critics have been mixed in regards to the game's ranking on retrospective lists of the best <i>Mario Kart</i> games. Some critics praised it for defining the direction of the series, noting its utilisation of 3D graphics and expansion of local multiplayer content. <i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i> and <i>Game Informer</i> however believed <i>Mario Kart 64</i> to fall short compared to other games in the series, with the former panning "empty" tracks and a less palatable art style. It has also been retrospectively described by some reviewers as one of the best N64 games, with <i>IGN</i> declaring the game's tracks to be "some of the most memorable" in the kart racing genre. The <a href="https://en.wikipedia.org/wiki/Blue_shell">blue shell</a> item, which directly targets the player in first place, was first introduced in <i>Mario Kart 64</i>. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a>'</i>s Steve Watts described the item as "synonymous with <i>Mario Kart</i>" and an icon of video game history, while <i><a href="https://en.wikipedia.org/wiki/The_Guardian">The Guardian</a></i> placed it on its list of the "11 greatest video game objects".</p>
+
+<p><i>Mario Kart 64</i> has a significant <a href="https://en.wikipedia.org/wiki/Speedrunning">speedrunning</a> scene of players competing to set time records on the game's 16 tracks through separate Grand Prix, three lap, or single lap time rankings. Times are recorded on the unofficial <i>Mario Kart 64 Players' Page</i> website, which tracks records starting from 1997. A speedrunner named Daniel Burbank notably obtained all 32 time records at once in 2021, across both three lap and single lap competitions.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

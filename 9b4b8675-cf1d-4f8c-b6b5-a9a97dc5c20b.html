@@ -1,0 +1,429 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>The Elder Scrolls V: Skyrim</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('9b4b8675-cf1d-4f8c-b6b5-a9a97dc5c20b/290eff43-39c5-4249-a4d3-d825b4ecd1e5.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="9b4b8675-cf1d-4f8c-b6b5-a9a97dc5c20b/3558248c-0fb2-408d-810a-ef69b2276da9.png"/> The Elder Scrolls V: Skyrim</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="9b4b8675-cf1d-4f8c-b6b5-a9a97dc5c20b/f5e657a4-af24-4dfa-a840-f34b797e216f.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-9/21/2016">9/21/2016</a> 18:43:46</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 1:30:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 2:42:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Xbox">Xbox</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/11/2011">11/11/2011</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-88">88</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-96">96</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-ARPG">ARPG</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Open world">Open world</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Bethesda Game Studios">Bethesda Game Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Bethesda Softworks">Bethesda Softworks</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/The_Elder_Scrolls_V:_Skyrim" target="_blank">PCGamingWiki</a><br/><a href="https://elderscrolls.bethesda.net/en/skyrim" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=9859" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/the-elder-scrolls-v-skyrim" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/72850/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/The_Elder_Scrolls_V:_Skyrim" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/53545" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/The_Elder_Scrolls_V:_Skyrim" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/elder-scrolls-v-skyrim/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Creation Engine">Creation Engine</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Fantasy">Fantasy</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Third Person">Third Person</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>The Elder Scrolls V: Skyrim</b></i> is a 2011 <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing game</a> developed by <a href="https://en.wikipedia.org/wiki/Bethesda_Game_Studios">Bethesda Game Studios</a> and published by <a href="https://en.wikipedia.org/wiki/Bethesda_Softworks">Bethesda Softworks</a>. It is the fifth main installment in <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls">The Elder Scrolls</a></i> series, following <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_IV:_Oblivion">The Elder Scrolls IV: Oblivion</a></i> (2006), and was released worldwide for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> on November 11, 2011.<!-- Please DON'T add the Alexa version in the lead or infobox, as it is not a full port of the game. --> <i>Skyrim</i> was developed using the <a href="https://en.wikipedia.org/wiki/Creation_Engine">Creation Engine</a>, which was rebuilt specifically for the game. The team opted for a unique and more diverse open world than <i>Oblivion</i>'s Imperial Province of Cyrodiil, which game director and executive producer <a href="https://en.wikipedia.org/wiki/Todd_Howard">Todd Howard</a> considered less interesting by comparison.</p>
+
+<p>The game is set 200 years after the events of <i>Oblivion</i> and takes place in Skyrim, the northernmost province of <a href="https://en.wikipedia.org/wiki/Tamriel">Tamriel</a>, a continent on the planet Nirn. Its main story focuses on the player character, the Dragonborn, on their quest to defeat Alduin the World-Eater, a dragon prophesied to destroy the world. Throughout the game, the player completes quests and develops the character by improving skills. The game continues the <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> tradition of its predecessors by allowing the player to travel to discovered locations in the game world at any time, and to ignore or postpone the main storyline indefinitely.</p>
+
+<p>Upon release, the game received critical acclaim, with praise for its <a href="https://en.wikipedia.org/wiki/Character_creation">character advancement</a>, world design, visuals, and the ability to dual-wield in combat. Criticism targeted the melee combat, dragon battles, and numerous technical issues present at launch. The game shipped over seven million units within the first week of its release and had sold over 20 million units by June 2013. It is considered one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games ever made</a>.</p>
+
+<p>Three <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC) add-ons were released: <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_V:_Skyrim_–_Dawnguard">Dawnguard</a></i>, <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_V:_Skyrim_–_Hearthfire">Hearthfire</a></i> and <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_V:_Skyrim_–_Dragonborn">Dragonborn</a>,</i> which were bundled along with the base game into the "Legendary Edition" released in June 2013. A remastered version subtitled <i><b>Special Edition</b></i>, containing all three DLC add-ons along with a graphical upgrade, was released in October 2016; a <a href="https://en.wikipedia.org/wiki/Porting">port</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> was released in November 2017 alongside a separate <a href="https://en.wikipedia.org/wiki/Virtual_reality">virtual reality</a>-only version titled <i><b>Skyrim VR</b></i>. In addition, the remastered version was bundled with additional <a href="https://en.wikipedia.org/wiki/Creation_Club">Creation Club</a> content and released as the "Anniversary Edition" in 2021–22. A sequel, <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_VI">The Elder Scrolls VI</a></i>, is currently in development.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>The Elder Scrolls V: Skyrim</i> is a fantasy <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing game</a>, playable from either a <a href="https://en.wikipedia.org/wiki/First-person_(video_games)">first</a> or <a href="https://en.wikipedia.org/wiki/Virtual_camera_system#Third_person_view_games">third-person perspective</a>. The player may <a href="https://en.wikipedia.org/wiki/Nonlinear_gameplay">freely roam</a> over the land of Skyrim, an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> environment based on <a href="https://en.wikipedia.org/wiki/Scandinavia">Scandinavia</a> consisting of wilderness expanses, dungeons, caves, cities, towns, fortresses, and villages. Players may navigate the game world more quickly by riding horses, paying for a ride from a city's stable, or utilizing a fast-travel system that allows them to move their character immediately to a previously discovered location.</p>
+
+<p>At the beginning of the game, players select their character's gender and <a href="https://en.wikipedia.org/wiki/Character_race">race</a>, with 10 choices for the latter, including races of humans and fantasy races such as <a href="https://en.wikipedia.org/wiki/Elf">elves</a> and <a href="https://en.wikipedia.org/wiki/Orc">orcs</a>. The player chooses the character's appearance; this is not necessarily permanent, however, as an in-game mechanic allows for changing the appearance later. Characters have three primary attributes: <a href="https://en.wikipedia.org/wiki/Health_(gaming)">health</a> is how much damage the character can take before dying, <a href="https://en.wikipedia.org/wiki/Magic_(gaming)">magicka</a> is depleted to cast spells, and stamina allows the character to perform heavy "power attacks" or sprint. A status bar for each attribute appears onscreen when the attribute falls below its maximum value. Attributes regenerate over time and can be refilled faster by drinking potions, casting regenerative spells, or through various enchantments. Characters gain <a href="https://en.wikipedia.org/wiki/Experience_point">experience</a> indirectly, via leveling up <a href="https://en.wikipedia.org/wiki/Statistic_(role-playing_games)">skills</a>. The 18 skills are divided evenly among the three schools of combat, magic, and stealth. Each skill has its own experience bar, which increases when the character performs an action in-game related to the skill. For example, crafting a dagger increases the Smithing skill, and dealing damage with a bow increases the Archery skill. When a skill's experience bar fills, the skill levels up and the bar is reset. After enough skills level up, the character levels up, enabling the player to increase the maximum value of one of the three attributes and providing a perk point. Perk points can be spent immediately on a skill-specific perk or stored for later use.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Non-player_character">Non-player characters</a> (NPCs) populate the world; the player may engage them in conversation (potentially leading to new quests or map locations), marry predetermined ones, or engage them in lethal or nonlethal combat. As in previous games in the series, killing certain individuals can make some quests or items unobtainable. Certain NPCs essential to the narrative cannot be killed by the player and will survive attacks of any magnitude. Committing a crime like murder or theft accrues the player a bounty if the crime is witnessed, leading to confrontations with guards. Depending on some factors, including how serious the crime was, the player can choose to go to jail, pay the guard off, persuade the witness to forget about it, declare that one is a <a href="https://en.wikipedia.org/wiki/Thegn">thane</a> of a certain hold (which leads the guard to pardon the player), 'pacify' the guard or silence witnesses through killing them.</p>
+
+<p>NPCs frequently offer the player side-quests; some have parameters adjusted based on nearby unexplored areas. Some NPCs who are befriended or hired by the player may act as companions who will accompany the player and aid them in combat. Some individuals have quests that the player needs to complete in order to gain their services as a companion. The player may choose to join factions, organized groups of NPCs—for example, the Dark Brotherhood, a band of assassins. Each of the factions has an associated quest path to progress through.</p>
+
+<p>The player's effectiveness in combat relies on the use of weapons, armor, and enchantments (which may be bought, found from containers, raided from dead bodies, stolen and/or forged) and on the use of magic spells: similarly, spells are unlocked with spell tomes, which may be may be bought, stolen or found.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability">failed verification</a></i>]</sup> Weapons, shields, and magic are assigned to each hand allowing for <a href="https://en.wikipedia.org/wiki/Dual-wield">dual-wielding</a>, and can be swapped out through a quick-access menu of favorite items.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability">failed verification</a></i>]</sup> Some weapons and spells require both hands. Shields can be used to fend off enemy attacks and reduce incurred damage or offensively through bashing attacks. Blunt, bladed, and hacking weapons can be used in close combat and each have specific advantages and roles. Power attacks expend stamina to temporarily stun/stagger an enemy and deal increased damage. Spells have several functions, both in combat (e.g. damaging or confusing enemies, resurrecting dead bodies and conjuring other entities, restoring the player's health and/or stamina) and out (e.g. showing the way to an objective, illuminating a dark room or turning iron into silver). <a href="https://en.wikipedia.org/wiki/Bow_and_arrow">Bows</a> are used for long-range combat and can be used to bash enemies in melee combat. The player can enter sneak mode to pickpocket or deliver powerful sneak attacks to unsuspecting enemies.</p>
+
+<p>When exploring the game world the player may encounter wildlife. Many creatures in the wilderness, such as wolves or bears, are immediately hostile towards the player, while other species are docile and will run away. <i>Skyrim</i> is the first entry in <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls">The Elder Scrolls</a></i> to include dragons in the game's wilderness, although dragons are frequently referenced/mentioned in several of the other games. Like other creatures, dragons are generated randomly in the world and will engage in combat with NPCs, creatures and the player. Some dragons may attack cities and towns when in their proximity. The player character can absorb the souls of dragons in order to use powerful spells called "dragon shouts" or "Thu'um". Each shout contains three words in the language spoken by dragons, and the strength of the shout will vary depending on how many words have been spoken. Some words to shouts can be learned by visiting "word walls" in dungeons or around the wilderness, while other words can be taught by different characters. The words to each shout are unlocked for use by spending the absorbed souls of slain dragons. A regeneration period limits the player's use of shouts in gameplay.</p>
+
+<h2>Synopsis</h2>
+
+<h3>Setting</h3>
+
+<p><i>Skyrim</i> is set 200 years after the events of <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_IV:_Oblivion">The Elder Scrolls IV: Oblivion</a></i>, although it is not a direct sequel. Skyrim is a cold and mountainous region in the north of the continent of Tamriel. It has traditionally been divided into nine administrative sections, called "holds", each governed by a <a href="https://en.wikipedia.org/wiki/Jarl">jarl</a> from a larger town. Of these settlements, Solitude, Windhelm, Markarth, Riften, and Whiterun are larger and more powerful. The landscape is littered with forts, camps, and ruins, some of which were built by the now-extinct race of the Dwemer, or Dwarves. The Nords, one of the human races, view Skyrim as their homeland, though members of other races populate Skyrim as well.</p>
+
+<p>Skyrim is a province of the much larger Empire, which comprises most of Tamriel. The Empire has recently fought a war with the elvish Aldmeri Dominion, who believe that they are <a href="https://en.wikipedia.org/wiki/Supremacism">racially superior</a> to humans. While the conflict, known as the Great War, ended in a military stalemate after a hard-fought battle at the imperial capital, the greatly weakened Empire was forced to sign a humiliating peace treaty called the White-Gold Concordat.</p>
+
+<p>While most of Tamriel worship a religious pantheon of eight deities, the Nords of Skyrim are accustomed to worshiping a ninth god, Talos, the <a href="https://en.wikipedia.org/wiki/Apotheosis">deified</a> Nord general who founded the Empire. The Dominion, led by the intolerant Thalmor sect, rejects this notion and its implication that a man became greater than any elf. They instituted a clause in the Concordat forbidding Talos worship in the Empire. Motivated in part by this condition, Ulfric Stormcloak, the jarl of Windhelm, leads a rebellion against imperial rule, with the holds divided between the two sides.</p>
+
+<p>In the ancient past, dragons ruled over vast swaths of Tamriel. Their hegemony was overthrown when three human warriors threw the dragon ruler, Alduin, forward in time using an Elder Scroll, a powerful and mysterious artifact. When <i>Skyrim</i> begins, the survival of the last dragon, the sage Paarthurnax, is a secret kept by an order of monks called the Greybeards. Within their monastery atop the Throat of the World, Skyrim's highest mountain, the Greybeards dedicate their lives to the Way of the Voice, a discipline for powerful draconic spells called "shouts". Generational warriors are "Dragonborn", able to learn shouts intuitively by absorbing the souls of dead dragons. Ancient prophecy maintains that Alduin will return to consume the world, and a "Last Dragonborn" will defeat him.</p>
+
+<p>The player character is Dragonborn and is typically referred to as such. The Dragonborn can be male or female, from one of ten races. Each of the ten races has, in addition to a bonus for certain skills, a power specific to their race – for example, Nords start with a bonus to several martial skills, and the ability to intimidate enemies for a short period. The player can recruit one NPC at a time as a follower, who can travel and fight alongside the Dragonborn; there are forty-five available followers in the base game, with thirteen more added in the <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable</a> expansions.</p>
+
+<p>Outside of followers and Alduin (the primary antagonist) NPCs prominent to the plot of <i>Skyrim</i> include Balgruuf, Jarl of Whiterun, a town in the center of Skyrim; Arngeir, the leader of the Greybeards; Delphine and Esbern, two of the last members of the Blades, an order of warriors sworn to help the Dragonborn but nearly wiped out after the Great War; and Paarthurnax, the last surviving dragon and grandmaster of the Greybeards. Also notable are General Tullius and Ulfric, who command the Imperial Legion and Stormcloaks respectively. During the course of the game, the Dragonborn can join and assist either side to gain victory in the civil war. Other factions that the Dragonborn can elect to join include the Companions, a noble order of warriors; the College of Winterhold, an institution dedicated to the mystic arts and magic; the Thieves Guild, a league of burglars who have fallen on hard times; the Dark Brotherhood, a fellowship of assassins; and the Bard's College, a group consisting of bards, poets, writers, and public speakers.</p>
+
+<p>Imperial soldiers have captured Ulfric Stormcloak and are preparing to execute him, along with the player who was caught up in the skirmish and mistakenly believed to be a rebel. Before the player can be executed, Alduin appears, attacking the imperial outpost and thus rescuing the player. The player escapes and warns Jarl Balgruuf of Whiterun of the dragon attack. When another dragon attacks and is slain, the dragon's soul flows into the player character, causing the nearby guards to call them "Dragonborn". The Greybeards summon the Dragonborn to the Throat of the World with a deafening shout, where the Dragonborn begins training in the Way of the Voice.</p>
+
+<p>Delphine, a member of a secret society called the Blades who were known as dragon hunters, intercepts the Dragonborn on a training quest and arranges for the Dragonborn to infiltrate the Thalmor Embassy in Solitude, on the (mistaken) suspicion that the Thalmor are responsible for the dragon attacks. There, they learn that Esbern, a Blades lore master obsessed with the prophecy of Alduin's return, is alive and hiding somewhere in Riften. The Dragonborn rescues Esbern  in Riften as Thalmor agents also try to capture him. Esbern leads them to an ancient Blade temple and a massive engraving depicting Alduin's prior defeat. Esbern deciphers that the ancient Nords used a special shout that forces a dragon to land and experience the concept of mortality, thus rendering Alduin and any dragon weaker, unable to fly, and vulnerable.</p>
+
+<p>Arngeir does not know the shout, which is called Dragonrend and violates the Way of the Voice. Arngeir sends the Dragonborn to Paarthurnax at the summit of the Throat. Paarthurnax reveals that no one living knows Dragonrend, but theorizes that the Dragonborn could learn it by looking through time at the throat of the world the site of Alduin's banishment. To do this, the Dragonborn retrieves the Elder Scroll used in the banishment from a massive subterranean Dwemer city. The Dragonborn returns to the summit and learns Dragonrend. Alduin attacks. The Dragonborn uses Dragonrend, and together with Paarthurnax, overpowers Alduin, who flees.</p>
+
+<p>The Dragonborn's allies hatch a plan to capture a dragon at Whiterun. The Dragonborn helps negotiate a truce in the civil war to prevent either side from capturing Whiterun, the Jarl of which has remained neutral in the conflict, during this delicate operation. The captured dragon, Odahviing, questions whether Alduin deserves lordship over dragons. He reveals that Alduin has gone to recover his strength in Sovngarde, the Nord afterlife, where he feeds on the souls of the dead. Since the portal to Sovngarde cannot be reached on foot, Odahviing bargains for his freedom in exchange for flying the Dragonborn there. Entering Sovngarde, the Dragonborn meets the three heroes who had defeated Alduin originally. With their help, the Dragonborn kills Alduin and returns to Skyrim.</p>
+
+<h2>Development</h2>
+
+<p>Having completed work on <i>Oblivion</i> in 2006, <a href="https://en.wikipedia.org/wiki/Bethesda_Game_Studios">Bethesda Game Studios</a> began work on <i><a href="https://en.wikipedia.org/wiki/Fallout_3">Fallout 3</a></i>. It was during this time that the team began planning the next entry in <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls">The Elder Scrolls</a></i> series. From the outset, they had decided to set the new game in the land of Skyrim, incorporating dragons into the main theme of the game. Full development began following the release of <i>Fallout 3</i> in 2008; the developers considered <i>Skyrim</i> a <a href="https://en.wikipedia.org/wiki/Spiritual_successor">spiritual successor</a> to both <i>Fallout 3</i> and previous <i>The Elder Scrolls</i> games. The game was developed by a team of roughly 100 people composed of new talent as well as of the series' veterans. The production was supervised by <a href="https://en.wikipedia.org/wiki/Todd_Howard">Todd Howard</a>, who has been the director of several titles released by Bethesda Softworks.</p>
+
+<h3>Design</h3>
+
+<p>The team set the game in the province of Skyrim, designing it by hand. While similar in size to <i>Oblivion</i>'s game world of Cyrodiil, the mountainous topography of the world inflates the game space and makes it more difficult to traverse than Cyrodiil, which was relatively flat. In designing <i>Skyrim</i>'s world, the team opted for a different approach to what was taken with <i>Oblivion</i>; art director Matt Carofano considered the "epic-realism" of <i>Skyrim</i>'s world design as a departure from <i>Oblivion</i>'s generic representation of classic European fantasy lore. Howard expressed the team's desire to re-encapsulate the "wonder of discovery" of <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_III:_Morrowind">Morrowind</a></i>'s game world in <i>Skyrim</i>, as the return to the classic fantasy of <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls:_Arena">Arena</a></i> and <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_II:_Daggerfall">The Elder Scrolls II: Daggerfall</a></i> in <i>Oblivion</i> meant sacrificing a world with a unique culture. As a way of creating diversity, the team divided the world into nine sectors, known as holds, and attempted to make each hold feel topographically unique from one another; in addition, the team wanted to reflect the socioeconomic background of the NPCs by making some locations elaborate and wealthy while others are poorer and lower-tech.</p>
+
+<p>The team sought to make each of the game's ten races feel unique; Howard considered the player's choice of race at the beginning of the game a more important decision than it had been in previous <i>The Elder Scrolls</i> games because the culture of <i>Skyrim</i>'s world contains more racism. However, he reiterated that the player's choice of race does not have major game-affecting consequences as it adds "flavor" to different NPCs' dispositions towards the player, and is not meant as a way of locking players out of particular quests. Efforts to make <i>Skyrim</i>'s world feel hand-crafted extended to the team abandoning the use of generated landscapes as they had done in <i>Oblivion</i>. While just one team member was charged with designing dungeons in <i>Oblivion</i>, <i>Skyrim</i>'s 150 dungeons were designed by a group of eight people. <i>Skyrim</i> features 244 quests, over 300 points of interest with a map marker and numerous unmarked locations.</p>
+
+<p><i>Skyrim</i> is powered by Bethesda's Creation Engine, forked from the <i><a href="https://en.wikipedia.org/wiki/Fallout_3">Fallout 3</a></i> codebase specifically for <i>Skyrim</i>. After <i>Fallout 3</i>'s release, the team devised numerous design objectives to meet for <i>Skyrim</i>, and according to Howard, the team "got all those done and kept going". Had the team not been able to meet their design goals with <a href="https://en.wikipedia.org/wiki/Seventh_generation_of_video_game_consoles">seventh generation of video game consoles</a>, they would have waited for the <a href="https://en.wikipedia.org/wiki/Eighth_generation_of_video_game_consoles">next generation</a> and released <i>Skyrim</i> then, but Howard felt that the technology of the time did not hold the team back at all. The Creation Engine allows for numerous improvements in graphical fidelity over Bethesda's previous efforts. For example, the <a href="https://en.wikipedia.org/wiki/Draw_distance">draw distance</a> renders farther than in previous <i>The Elder Scrolls</i> games; Howard provided an example where the player can stare at a small object such as a fork in detail, and then look up at a mountain and run to the top of it. Dynamic lighting allows shadows to be created by any structure or item in the game world, and the Creation Engine allowed for greater detail in <a href="https://en.wikipedia.org/wiki/Flora">flora</a> production than <a href="https://en.wikipedia.org/wiki/SpeedTree">SpeedTree</a> had in previous Bethesda games. For example, with Bethesda's own technology, developers were able to give weight to the branches of trees, which affects how trees blow in the wind. In addition, the technology allows wind to affect the flow of water in channels such as rivers and streams. Because of the large presence of snow in <i>Skyrim</i>'s game world, the technological upgrades were applied to weather effects and allow for dynamic snowfall upon the terrain, instead of snow that was rendered as a textural effect in previous games.</p>
+
+<p>The team used <a href="https://en.wikipedia.org/wiki/Havok_(software)">Havok</a>'s Behavior toolset for character animation, which allows for a greater fluidity between the character's movements of walking, running and sprinting, and also increases the efficiency of the third-person camera option, which had been criticized in <i>Oblivion</i>. The toolset allows interactions between the player and NPCs to take place in <a href="https://en.wikipedia.org/wiki/Real-time_computer_graphics">real time</a>; in <i>Oblivion</i>, when the player went to interact with an NPC, time would freeze and the camera would zoom in on the NPC's face. In <i>Skyrim</i>, NPCs can move around and make body gestures while conversing with the player. Children are present in the game, and their presence is handled similarly to <i>Fallout 3</i> in that they cannot be harmed by the player in any way, since depictions of violence involving children in video games are controversial. <i>Skyrim</i> uses the <a href="https://en.wikipedia.org/wiki/Radiant_AI">Radiant AI</a> <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">artificial intelligence</a> system that was created for <i>Oblivion</i>, and it has been updated to allow NPCs to "do what they want under extra parameters". The updated system allows for greater interaction between NPCs and their environments; NPCs can perform tasks such as farming, milling, and mining in the game world, and will react to each other.</p>
+
+<p>The team employed <a href="https://en.wikipedia.org/wiki/Jeremy_Soule">Jeremy Soule</a> to compose the music for <i>Skyrim</i>, who previously worked on <i><a href="https://en.wikipedia.org/wiki/Morrowind">Morrowind</a></i> and <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_IV:_Oblivion">Oblivion</a></i>. The game's main theme "<a href="https://en.wikipedia.org/wiki/Dragonborn_(Skyrim_theme)">Dragonborn</a>" was recorded with a choir of over 30 people singing in the fictional dragon language. Creative director <a href="https://en.wikipedia.org/wiki/Todd_Howard">Todd Howard</a> envisioned the theme for <i>Skyrim</i> as <i>The Elder Scrolls</i> theme sung by a choir of barbarians. This became a reality when the idea was passed by Soule, who recorded the 30-man choir and layered three separate recordings to create the effect of 90 voices. Bethesda's concept artist <a href="https://en.wikipedia.org/wiki/Adam_Adamowicz">Adam Adamowicz</a> created the Draconic language, and also developed a 34-character runic alphabet for the game. He expanded the lexicon of Draconic as needed; <a href="https://en.wikipedia.org/wiki/Bruce_Nesmith">Bruce Nesmith</a> explained that words were introduced to the lexicon every time that the studio "wanted to say something".</p>
+
+<p>Bethesda released four audio CDs along with the game on November 11, 2011. The <a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_V:_Skyrim:_Original_Game_Soundtrack">soundtrack to <i>Skyrim</i></a> is sold via Jeremy Soule's distributor DirectSong, and Soule autographed all physical copies ordered via DirectSong. "Day One" pre-orders from <a href="https://en.wikipedia.org/wiki/Amazon.de">Amazon.de</a> also included a five-track promotional <i>Skyrim</i> soundtrack sampler. A digital version of the soundtrack was released via <a href="https://en.wikipedia.org/wiki/ITunes">iTunes</a> on January 31, 2013.</p>
+
+<p>The voice-overs in the game included more than 70 actors and over 60,000 lines of dialogue. Casting director and production supervisor <a href="https://en.wikipedia.org/wiki/Timothy_Cubbison">Timothy Cubbison</a> worked with Bethesda to evaluate auditions and oversee the recordings. The full cast consisted of three <a href="https://en.wikipedia.org/wiki/Academy_Awards">Academy Award</a> nominees (<a href="https://en.wikipedia.org/wiki/Max_von_Sydow">Max von Sydow</a>, <a href="https://en.wikipedia.org/wiki/Christopher_Plummer">Christopher Plummer</a>, and <a href="https://en.wikipedia.org/wiki/Joan_Allen">Joan Allen</a>) and several other high-profile actors (including <a href="https://en.wikipedia.org/wiki/Michael_Hogan_(Canadian_actor)">Michael Hogan</a>, <a href="https://en.wikipedia.org/wiki/Vladimir_Kulich">Vladimir Kulich</a>, and <a href="https://en.wikipedia.org/wiki/Lynda_Carter">Lynda Carter</a>).</p>
+
+<h2>Marketing and release</h2>
+
+<p><i>Skyrim</i> was announced at the <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">Spike Video Game Awards</a> on December 11, 2010; Howard appeared onstage during the awards and presented the announcement trailer, which introduced the game's story and revealed its "11–11–11" release date. It was the cover story for the February 2011 issue of the <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> magazine, wherein journalist Matt Miller wrote a fifteen-page article that revealed the first details about the game's story and gameplay. Asked about <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC) packages in a June 2011 interview, Howard expressed the team's intention to release DLC packages, having done so for previous releases; he revealed that it was the team's goal to release a lower number of DLC packages that were larger in content than those released for <i>Fallout 3</i>, as he felt that releasing a larger number of low-content packages was "chaotic". Via a press release, the team announced that the first two planned DLC packages would release on the Xbox 360 via <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a> a month ahead of PCs and the PlayStation 3.</p>
+
+<p>In October 2011, pictures of many pages of the manual of the game were leaked, later followed by footage from the introduction, revealing some more details. By November 1, 2011, a copy of the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> version had been leaked and made available through the Internet, allowing those with a hacked Xbox 360 to play <i>Skyrim</i> 10 days before its release. In the Netherlands, the game was made available for purchase on November 7. On November 10, stores in Australia began selling the game ahead of its November 11 release date.</p>
+
+<p>On January 11, 2014, Bethesda partnered with <a href="https://en.wikipedia.org/wiki/2K_Games">2K Games</a> to bundle <i>Skyrim</i> with <i><a href="https://en.wikipedia.org/wiki/BioShock_Infinite">BioShock Infinite</a></i> on the Xbox 360 and PlayStation 3. The bundle was released on February 11, 2014.</p>
+
+<h3>Retail editions</h3>
+
+<p>At the 2011 <a href="https://en.wikipedia.org/wiki/QuakeCon">QuakeCon</a> conference, the team unveiled <i>Skyrim</i>'s "Collector's Edition" package. Bundled with a copy of the game is a map of the game world, a 12-inch figurine of Alduin, as well as a 200-page concept art book and a DVD feature about the making of <i>Skyrim</i>. A "Premium Edition" package consisting of the base game along with physical extras was released in <a href="https://en.wikipedia.org/wiki/Europe">Europe</a> in October 2012. A "Legendary Edition" was released on June 4, 2013. It contains the version 1.9 patch and the three expansions, along with the main game.</p>
+
+<p>On June 4, 2016, Bethesda announced <i>The Elder Scrolls V: Skyrim – Special Edition</i>, a remaster for the <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>. It was released on October 28, 2016. Windows players who owned the original game and all of its downloadable content on <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> were offered the <i>Special Edition</i> for free. The remastered version contains an upgraded game engine as well as numerous graphical enhancements, along with mod support on consoles. A <a href="https://en.wikipedia.org/wiki/Digital_rights_management">DRM</a>-free version of the <i>Special Edition</i> was released on <a href="https://en.wikipedia.org/wiki/GOG.com">GOG</a> on September 29, 2022.</p>
+
+<p>As part of Skyrim's 10th anniversary celebration, a new retail edition titled "Anniversary Edition" was released in November 2021 for Windows, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a>, <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> and <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a>. It includes the <i>Special Edition</i>, 74 "Creations" from the Creation Club, and introduces the ability to fish and player-owned aquariums. The "Anniversary Edition" was released for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> on September 29, 2022. A <a href="https://en.wikipedia.org/wiki/Digital_rights_management">DRM</a>-free version of the "Anniversary Edition" was released on GOG on September 29, 2022. In addition, a DLC pack for the <i>Special Edition</i> that includes the content added in the "Anniversary Edition" became available on Steam and GOG.</p>
+
+<p>At <a href="https://en.wikipedia.org/wiki/E3_2017">E3 2017</a>, Bethesda announced a <a href="https://en.wikipedia.org/wiki/PlayStation_VR">PlayStation VR</a> version of <i>Skyrim</i>, titled <i>The Elder Scrolls V: Skyrim VR</i>, for release in November 2017. A standalone VR port of the game was released for Windows on April 2, 2018, supporting the <a href="https://en.wikipedia.org/wiki/HTC_Vive">HTC Vive</a>, <a href="https://en.wikipedia.org/wiki/Oculus_Rift">Oculus Rift</a>, and <a href="https://en.wikipedia.org/wiki/Windows_Mixed_Reality">Windows Mixed Reality</a> headsets.</p>
+
+<p>In October 2016, the reveal trailer for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> featured gameplay of <i>Skyrim</i> on the console. At the time, it was reported that Bethesda only used the game for the reveal trailer and that it was not officially releasing on the Nintendo Switch. On January 13, 2017, Todd Howard confirmed that the game would come out on the Nintendo Switch, making it the first Bethesda title to be released on a Nintendo platform <!--  (not counting the ''Skyrim'' pinball adaptation that was part of the ''Bethesda Pinball'' collection, released in late 2016 for ''Zen Pinball 2'', which was available for the Wii U), as well as the first game Bethesda has confirmed to be released--><!-- Doom, another Bethesda&#x2D;published title which was announced for the Switch at a later date, was technically released before Skyrim on the console. --> for a Nintendo home console since <i><a href="https://en.wikipedia.org/wiki/Home_Alone_(video_game)">Home Alone</a></i> for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">NES</a> in 1991. During Bethesda's <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2017">E3 2017</a> showcase, it was revealed that the Nintendo Switch version will support <a href="https://en.wikipedia.org/wiki/Amiibo">Amiibo</a> and the <a href="https://en.wikipedia.org/wiki/Joy-Con">Joy-Con</a> <a href="https://en.wikipedia.org/wiki/Motion_control">motion controls</a>.</p>
+
+<p>A parody of <i>Skyrim</i>'s numerous ports and re-releases, titled <i><b>Skyrim: Very Special Edition</b></i>, was released by Bethesda at their <a href="https://en.wikipedia.org/wiki/E3_2018">E3 2018</a> press conference for <a href="https://en.wikipedia.org/wiki/Amazon_Alexa">Amazon Alexa</a>, stating it would be also released for the <a href="https://en.wikipedia.org/wiki/Etch_A_Sketch">Etch A Sketch</a>, <a href="https://en.wikipedia.org/wiki/Motorola">Motorola</a> <a href="https://en.wikipedia.org/wiki/Pagers">pagers</a> and <a href="https://en.wikipedia.org/wiki/Samsung">Samsung</a> smart refrigerators. The Alexa version was found to be a legitimate version of the game developed by Bethesda, playing off the joke that the studios had seemingly ported <i>Skyrim</i> to all possible platforms following its E3 2017 announcements.</p>
+
+<p>While <i>Skyrim</i> was being ported to next-generation systems, <a href="https://en.wikipedia.org/wiki/Zen_Studios">Zen Studios</a> developed a <a href="https://en.wikipedia.org/wiki/Pinball#Computer_pinball_simulation">virtual</a> <a href="https://en.wikipedia.org/wiki/Pinball">pinball</a> adaptation of the game as part of the <i>Bethesda Pinball</i> collection, which became available as part of <i><a href="https://en.wikipedia.org/wiki/Zen_Pinball_2">Zen Pinball 2</a></i>, <i><a href="https://en.wikipedia.org/wiki/Pinball_FX_2">Pinball FX 2</a></i> and <i><a href="https://en.wikipedia.org/wiki/Pinball_FX_3">Pinball FX 3</a></i>, as well as a standalone <a href="https://en.wikipedia.org/wiki/Free-to-play">free-to-play</a> game for <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> and <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a> devices. A <i>Skyrim</i>-themed expansion for the <a href="https://en.wikipedia.org/wiki/Digital_collectible_card_game">digital collectible card game</a> <i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls:_Legends">The Elder Scrolls: Legends</a></i>, titled <i>Heroes of Skyrim</i>, was released on June 29, 2017.</p>
+
+<h2>Additional content</h2>
+
+<h3>Official expansions</h3>
+
+<p><i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_V:_Skyrim_–_Dawnguard">Dawnguard</a></i> was the first downloadable add-on for <i>Skyrim</i>, revolving around a battle between the Dawnguard and Clan Volkihar. The Dawnguard are a band of vampire hunters who rely on the use of <a href="https://en.wikipedia.org/wiki/Crossbow">crossbow</a> weapons in their pursuit against Clan Volkihar, a family of <a href="https://en.wikipedia.org/wiki/Vampire">vampires</a>. Early in <i>Dawnguard</i>'s quest line, players must choose which of the two factions to join forces with. <i>Dawnguard</i> adds new content to the game, including weapons, spells, and armor, and expands the abilities afforded to players who choose to become either a vampire or a <a href="https://en.wikipedia.org/wiki/Werewolf">werewolf</a>. It adds two new areas to explore outside of the mainland of Skyrim: the Soul Cairn (a plane of the realm of Oblivion) and the Forgotten Vale (a secluded glacial valley). <i>Dawnguard</i> released on the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> in English-speaking territories on June 26, 2012, and in European countries in mid-July 2012. It was released for Windows on August 2, 2012, via the <a href="https://en.wikipedia.org/wiki/Digital_distribution">digital distribution</a> platform <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a>. Performance issues on the PlayStation 3 hampered <i>Dawnguard</i>'s release on that platform. It was released on the PlayStation 3 on February 26, 2013, in North America, and on February 27, 2013, in Europe.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_V:_Skyrim_–_Hearthfire">Hearthfire</a></i> was <i>Skyrim</i>'s second add-on, which allows players to build houses and adopt children. Three plots of land are added to the game world which players can purchase. Once land is purchased, players build a small basic house, then select rooms to add on. The house and its additions are built from raw materials such as lumber and clay, which can be gathered or purchased. Players may adopt up to two children and have them live in the home, along with the player's spouse. <i>Hearthfire</i> was released for the Xbox 360 on September 4, 2012, and for Windows on October 4, 2012. It was later released for PlayStation 3 on February 19, 2013, in North America, and February 20, 2013, in Europe.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_V:_Skyrim_–_Dragonborn">Dragonborn</a></i> is the third and final add-on for <i>Skyrim</i>. It revolves around the player character's efforts to defeat Miraak, the first Dragonborn to become corrupted and seek to control the world. The add-on takes place on Solstheim, an island northeast of Skyrim, belonging to the province of Morrowind, which is presented as an additional open world. It adds content to the game and allows players to ride on the backs of dragons, along with other shouts that can be learned from Solstheim. <i>Dragonborn</i> was released for the Xbox 360 on December 4, 2012, for Windows on February 5, 2013, and for PlayStation 3 on February 12, 2013.</p>
+
+<p>In April 2013, Bethesda announced via their blog that they were "moving on" from <i>Skyrim</i> and preparing to work on other projects. They added that they would only be releasing "minor updates" for the game.</p>
+
+<p>Through Creation Club, 74 small downloadable content packs, termed "Creations", were released for the <i>Special Edition</i> between 2017 and 2021. All 74 Creations were compiled as part of the "Anniversary Edition" in 2021. The 74 Creations were also separately packaged together on Steam and GOG.com as <i>The Elder Scrolls V: Skyrim Anniversary Upgrade</i>, which was sold as a single DLC pack for the <i>Special Edition</i> in 2021. The "Anniversary Edition" was not available as a standalone title on GOG.com until 2022.</p>
+
+<p>A wide variety of official and fan-created <a href="https://en.wikipedia.org/wiki/Mod_(video_gaming)">mods</a>, short for modifications, are available for <i>Skyrim</i>, which are generally made using the packaged Creation Kit. These mods are distributed freely on file-sharing sites such as <a href="https://en.wikipedia.org/wiki/Nexus_Mods">Nexus Mods</a>, and are aggregated via the Steam Workshop's controlled content distribution mechanism. The mods may include features such as better game stability, improvements and tweaks of gameplay features, significantly enhanced visuals, overhauled weather systems, new characters and locations, user interface updates, and more.</p>
+
+<p>The first <i>Skyrim</i> modification was <i>The Fall of the Space Core, Vol. 1</i>, created by Bethesda in collaboration with <a href="https://en.wikipedia.org/wiki/Valve_Corporation">Valve</a>. It causes a fictional device known as the Space Core from Valve's video game <i><a href="https://en.wikipedia.org/wiki/Portal_2">Portal 2</a></i> to fall from the sky and land where the player can recover it. The Space Core acts as a non-player character voiced by <a href="https://en.wikipedia.org/wiki/Nolan_North">Nolan North</a> which follows the player around the world of Skyrim and dispenses space-related comments.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Enderal:_The_Shards_of_Order">Enderal: The Shards of Order</a></i> is a total conversion mod of <i>Skyrim</i> developed by <a href="https://en.wikipedia.org/wiki/SureAI">SureAI</a> as a sequel to <i><a href="https://en.wikipedia.org/wiki/Nehrim:_At_Fate's_Edge">Nehrim: At Fate's Edge</a></i> which was developed for <i>Oblivion</i>. It was released in July 2016, initially in German only. An English version was released August 16, 2016. A 2015 mod entitled <i><a href="https://en.wikipedia.org/wiki/The_Forgotten_City">The Forgotten City</a></i> was later adapted into a full standalone game and released on PC and consoles in 2021.</p>
+
+<p>Several <i>Skyrim</i> modders were ultimately hired by Bethesda, or other games studios to work on future projects. A notable early example was Alexander J. Velicky, who created the <i>Falskaar</i> mod as a job application for Bethesda. The mod ultimately added a large new landmass with new quests, 25 hours of gameplay, and 29 voice actors for the 54 new NPCs. Velicky was hired by <a href="https://en.wikipedia.org/wiki/Bungie">Bungie</a> in late 2013. Emmi Junkkari aka "Elianora", a Finnish mod developer who created a "Breezehome" replacement mod for the <i>Special Edition</i>, was hired in 2023 to work on <i><a href="https://en.wikipedia.org/wiki/Starfield_(video_game)">Starfield</a></i> as a level artist.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical reception</h3>
+
+<p><i>Skyrim</i> received critical acclaim upon release. The removal of the <a href="https://en.wikipedia.org/wiki/Character_class">character class</a> system, present in previous <i>The Elder Scrolls</i> entries, was generally well received by reviewers. Billy Shibley of <a href="https://en.wikipedia.org/wiki/Machinima,_Inc.">Machinima</a>'s Inside Gaming and Charles Onyett of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> praised its removal because it allowed players to experiment with different skills without having to make decisions about a class early in the game. John Bedford of <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> stated that by removing the character class system, the game tailored itself to players who wanted to build an all-around character, while still letting other players specialize in a preferred play-style. Steve Butts of <i><a href="https://en.wikipedia.org/wiki/The_Escapist_(magazine)">The Escapist</a></i> considered the addition of perks to the character advancement system "a great method to make your character feel even more unique and personal". Kevin VanOrd of <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> praised the way perks allowed for the player's preferred skills to become more powerful over time, stating that the perk system "forms around the way you play, but allows for tweaking so that you retain a sense of control". The <a href="https://en.wikipedia.org/wiki/User_interface">user interface</a> was also praised by reviewers for its accessibility; Bedford complimented its "elegant design" which succeeded <i>Oblivion</i>'s comparatively complex interface.</p>
+
+<p>The art style of the game world drew acclaim from many reviewers, who welcomed the departure from <i>Oblivion</i>'s Cyrodiil. <a href="https://en.wikipedia.org/wiki/Jason_Schreier">Jason Schreier</a> of <i><a href="https://en.wikipedia.org/wiki/Wired_(magazine)">Wired</a></i> described the land of Skyrim as a "Viking-inspired treasure trove of flavor and charm", noting its contrast to Cyrodiil, which he considered generic by comparison. The Staff at <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> magazine described Cyrodiil as a "patchwork of varying terrains", praising the more consistent design of Skyrim. Shibley praised "the lack of copy-and-paste level design that's plagued Bethesda's previous games, ... giving a lived-in and handcrafted look to the world". Bedford noted that the improved graphical fidelity over <i>Oblivion</i> allowed the game world to feel more lifelike, praising the "misty mountain setting, complete with swirling fog and high-altitude snowstorms". An editor for <i><a href="https://en.wikipedia.org/wiki/PC_PowerPlay">PC PowerPlay</a></i> praised the diversity of the dungeon design. Andrew Reiner of <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> cited criticisms that <i>Oblivion</i> faced for repetitive dungeons, noting that "the composition of each dungeon is largely unique and individualized" in <i>Skyrim</i>. He also favored the design choice to have a quick route out of a dungeon leading from its last room, eliminating a problem he identified <i>Oblivion</i> as having, where the player would clear a dungeon and then have to go all the way back to the beginning to exit it. Many reviewers praised the large number of things to do in the world outside of the main story. Tom Francis of <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i> noted that it was difficult to explore the world without becoming distracted by things to do, stating that, "it's hard to walk for a minute in any direction without encountering an intriguing cave, a lonely shack, some strange stones, a wandering traveller, [or] a haunted fort".</p>
+
+<p>Reviewers welcomed the ability to dual-wield weapons and magic. An editor for <i><a href="https://en.wikipedia.org/wiki/PC_PowerPlay">PC PowerPlay</a></i> felt that the dual-wielding ability "transforms the tactical scope of each combat encounter". Shibley noted that the dual-wielding option gave the player more freedom to experiment with combat, writing that, "the ability to apply a spell to each hand ... generates huge potential for getting creative with your spell combinations". However, reviewers were critical of the melee combat, feeling that it had not been improved upon as much as other areas in the game. <a href="https://en.wikipedia.org/wiki/Justin_McElroy">Justin McElroy</a> of <i><a href="https://en.wikipedia.org/wiki/Joystiq">Joystiq</a></i> felt that "what should be thrilling fights in <i>Skyrim</i> are often weighed down by the same clunky melee system <i>Oblivion</i> suffered from". Onyett described the melee combat as "flat" and "floaty", and that "many times it feels like you're slicing air instead of a mythical creature's flesh". Francis agreed with this sentiment, stating that, "too much of the time, you wave your weapon around and enemies barely react to the hits".</p>
+
+<p>The game received minor criticism in several other areas. The quality of the main quest divided some reviewers. While Reiner praised the main quest as "superbly penned" and "Bethesda's best effort to date", Butts and Francis criticized the fact that the story was delivered primarily through conversations and quest journals, rather than through the player's own interactions. While the dragon battles were well-received, some reviewers observed flaws in the AI for dragons. Onyett pointed out their "predictable attack patterns", which Francis agreed with, claiming that "fighting them never changes much: you can just ignore them until they land, then shoot them from a distance when they do". Reiner felt that, due to the repetitiveness of their attack patterns, the dragons were not challenging enough for low-level players. <i>Edge</i> pointed out a curve in difficulty for players who favored archery and magic, as dragons were difficult to attack while airborne. Many reviewers noted glitches while playing <i>Skyrim</i>, some game-breaking. Nick Cowen of <i><a href="https://en.wikipedia.org/wiki/The_Guardian">The Guardian</a></i> pointed out that the game's glitches were a trade-off for its ambitious scope, and that he had experienced glitches that forced him to reload earlier saves. <i>Edge</i> began their review by criticizing the lack of polish, while still acknowledging many areas in the game that made up for it.</p>
+
+<p>At the launch of <i>Skyrim</i>, many technical issues of varying severity were reported. Some examples include a texture down-scaling issue on the Xbox 360 version when the game was run from the hard drive; crashes, slowdown and frame rate issues on the PlayStation 3 version when save files exceeded 6 MB, commonly occurring due to extended gameplay times; and various crashes and slowdowns on the Windows version. According to <i>Skyrim</i>'s director Todd Howard, the notion that bugs were caused by "restrictive RAM" is incorrect. Howard said, "It's literally the things you've done in what order and what's running."</p>
+
+<p>Since its release, several patches have been published to address technical issues and improve overall gameplay. Patch 1.2 was released on November 29, 2011, to fix some of the game's issues; however, some players reported new bugs in the game following the patch, including more frequent game crashes. Patch 1.3 was released on December 7, 2011, to improve stability, further address known issues, and fix some problems that were introduced in version 1.2. Patch 1.4 was released on February 1, 2012, for the PC. Another list of issues and bugs were addressed in this patch, and <i>Skyrim</i> launcher support for Skyrim Workshop (PC) was provided. Patch 1.5 was released on March 20, 2012, for the PC. Numerous bugs were fixed, and new archery/spellcasting kill cams were included. On April 12, 2012, Bethesda announced that <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> support would be coming for the Xbox 360 version of <i>Skyrim</i>, with over 200 voice commands. Patch 1.6 was released on May 24, 2012, for the PC. This includes a new feature: mounted combat. Patch 1.7 was released on July 30, 2012, for the PC, and 1.8 was released on November 1, 2012, for the PC. These two introduced only minor bugfixes. Patch 1.9 was released on March 18, 2013. In addition to providing various bug fixes, this patch also added new features, most prominently the new "Legendary" difficulty, and "Legendary" skills, which effectively remove the level cap.</p>
+
+<p>An <a href="https://en.wikipedia.org/wiki/Unofficial_patch">unofficial patch</a> attempts to fix the remaining issues unattended by the official patches. It lists hundreds of gameplay, quest, and other bugs that it fixes in the game and its add-ons.</p>
+
+<p>Within two days after the game's launch, 3.4 million physical units were sold. Of those sales, 59% were for the Xbox 360, 27% for the PS3, and 14% for the PC. In the first week of release, Bethesda stated that 7 million units of the game had been shipped to retailers worldwide, and that total sales through the following Wednesday were expected to generate an estimated US$450 million. By December 2011, this had risen to 10 million units shipped to retail and around US$620 million (~$829 million in 2023) generated. In June 2013, Bethesda announced that over 20 million units of the game had been sold. According to Todd Howard, <i>Skyrim</i> had sold over 30 million units by November 2016. By June 2023, he claimed the game had sold over 60 million units.</p>
+
+<p>During the first day of release, <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> showed over 230,000 people playing <i>Skyrim</i> concurrently. Additionally, <a href="https://en.wikipedia.org/wiki/Valve_Corporation">Valve</a> stated that it was the fastest selling game to date on their <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> platform. Steam's statistics page showed the client breaking a five million user record by having 5,012,468 users logged in on January 2, 2012. The total number of sold copies on the PC platform is difficult to confirm because Valve does not publicly publish digital sales. Shortly after its release, <i>Skyrim</i> was the most-played game on Steam by a huge margin, with double the number of players as <i><a href="https://en.wikipedia.org/wiki/Team_Fortress_2">Team Fortress 2</a></i>, the second-placed game. In the United Kingdom, <i>Skyrim</i> was the 9th best selling title of 2012. Regarding sales on the PC, Todd Howard stated in an interview with <i><a href="https://en.wikipedia.org/wiki/Rock,_Paper,_Shotgun">Rock, Paper, Shotgun</a></i> that, "<i>Skyrim</i> did better than we've ever done on PC by a large, large number. And that's where the mods are. That feeds the game for a long time."</p>
+
+<p><i>Skyrim</i> received awards from numerous gaming sites and publications. <i>IGN</i> and <i>GameSpot</i> named <i>Skyrim</i> "PC Game of the Year". It also received <i>GameSpot</i>'s "Readers' Choice" award. The game received the "RPG of the Year" award from <a href="https://en.wikipedia.org/wiki/Spike_TV">Spike TV</a>, <i>IGN</i>, <i><a href="https://en.wikipedia.org/wiki/X-Play">X-Play</a></i>, <i>GameSpot</i> <a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a>, and the <a href="https://en.wikipedia.org/wiki/15th_Annual_Interactive_Achievement_Awards">Interactive Achievement Awards</a>. It received "Overall Game of the Year" wins from Spike TV, <i><a href="https://en.wikipedia.org/wiki/Giant_Bomb">Giant Bomb</a></i>, <i>X-Play</i>, <a href="https://en.wikipedia.org/wiki/Machinima.com">Machinima.com</a>, <i>GameSpot</i>, <i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i>, <i><a href="https://en.wikipedia.org/wiki/Game_Revolution">Game Revolution</a></i>, <i>GameSpy</i>, <i><a href="https://en.wikipedia.org/wiki/Joystiq">Joystiq</a></i>, and the <a href="https://en.wikipedia.org/wiki/15th_Annual_Interactive_Achievement_Awards">Interactive Achievement Awards</a>. Along with winning the "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Game_of_the_Year">Game of the Year</a>" and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Role-Playing_Game_of_the_Year">Role-Playing/Massively Multiplayer Game of the Year</a>" awards, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> also honored <i>Skyrim</i> with outstanding achievement in "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Game_Direction">Game Direction</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Technical_Achievement">Gameplay Engineering</a>", and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Story">Story</a>". It was voted No. 1 in <i><a href="https://en.wikipedia.org/wiki/Good_Game_(television_series)">Good Game</a></i>'s top 100 video games of all time and No. 1 in <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i>'s "The 100 Greatest PC Games of All Time". In <i>Giant Bomb</i>'s 2017 Game of the Year Awards, the game was a runner-up for "2017's Old Game of the Year".</p>
+
+<p>The VR version was nominated for "Best Virtual Reality Game" at the <a href="https://en.wikipedia.org/wiki/Gamescom">Gamescom 2017</a> Awards; for the Coney Island Dreamland Award for Best Virtual Reality Game and the Tappan Zee Bridge Award for Best Remake (along with the Switch version) at the New York Game Awards 2018; for "Excellence in Technical Achievement" and "VR Game of the Year" at the 2018 <a href="https://en.wikipedia.org/wiki/SXSW_Gaming_Awards">SXSW Gaming Awards</a>; and for "Best VR/AR Game" at the 2018 <a href="https://en.wikipedia.org/wiki/Game_Developers_Choice_Awards">Game Developers Choice Awards</a>. At the 17th Annual National Academy of Video Game Trade Reviewers Awards, the VR version was nominated for "Control Design, VR", "Direction in Virtual Reality", and "Sound Mixing in Virtual Reality", while the Switch version was nominated for "Costume Design". The VR version won the award for "Best VR Game" at the 2018 <a href="https://en.wikipedia.org/wiki/Golden_Joystick_Awards">Golden Joystick Awards</a>.</p>
+
+<p>Critics often consider <i>Skyrim</i> among the <a href="https://en.wikipedia.org/wiki/Best_video_games_of_all_time">best video games of all time</a>. <i>Skyrim</i> has been credited by developers as an influence on later games, such as <i><a href="https://en.wikipedia.org/wiki/Valheim">Valheim</a></i>, <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild">The Legend of Zelda: Breath of the Wild</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Avowed">Avowed</a></i>. The game has received credit for popularizing large-scale open worlds in fantasy role-playing games, influencing the settings of installations in game series including <i><a href="https://en.wikipedia.org/wiki/The_Witcher_(video_game_series)">The Witcher</a></i> and <i><a href="https://en.wikipedia.org/wiki/Dragon_Age">Dragon Age</a></i>.</p>
+
+<p><i>Skyrim</i> spawned a number of noteworthy <a href="https://en.wikipedia.org/wiki/Internet_memes">Internet memes</a> that circulated as image macros or video parodies and achieved viral popularity. These include the dragon shout "Fus Ro Dah", and variations or adaptations of the phrase "I used to be an adventurer like you, then I took an <a href="https://en.wikipedia.org/wiki/Arrow_in_the_knee">arrow in the knee</a>."</p>
+
+<p>During an interview in 2018, Todd Howard attributed <a href="https://en.wikipedia.org/wiki/Bethesda_Softworks">Bethesda</a>'s frequent re-releases of the game to the "millions" of people still playing <i>Skyrim</i>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

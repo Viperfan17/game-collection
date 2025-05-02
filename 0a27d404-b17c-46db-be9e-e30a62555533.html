@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>EA Sports UFC 4</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('0a27d404-b17c-46db-be9e-e30a62555533/b66cfab1-d1b7-4b67-82ea-ac8c34815926.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="0a27d404-b17c-46db-be9e-e30a62555533/13002a84-35bd-455c-b0c5-d8e203e819ea.png"/> EA Sports UFC 4</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="0a27d404-b17c-46db-be9e-e30a62555533/a335fd5e-2a7c-4000-9a53-b78a3779d6e8.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>4m 4s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-2/13/2022">2/13/2022</a> 1:07:27</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 6:00:16</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:19:28</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-PlayStation">PlayStation</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-PlayStation">PlayStation</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 4">Sony PlayStation 4</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-8/14/2020">8/14/2020</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-69">69</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-80">80</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Fighting">Fighting</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Sports">Sports</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-EA Vancouver">EA Vancouver</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-EA SPORTS">EA SPORTS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/EA_Sports_UFC_4" target="_blank">Wikipedia</a><br/><a href="https://www.ea.com/games/ufc/" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[Game Engine] Ignite">[Game Engine] Ignite</a><br/><a href="#quicklink-[People] director: Brian Hayes">[People] director: Brian Hayes</a><br/><a href="#quicklink-[People] producer: Nate McDonald">[People] producer: Nate McDonald</a><br/><a href="#quicklink-PlayStation Plus">PlayStation Plus</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>EA Sports UFC 4</b></i> is a <a href="https://en.wikipedia.org/wiki/Mixed_martial_arts">mixed martial arts</a> <a href="https://en.wikipedia.org/wiki/Fighting_game">fighting</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/EA_Vancouver">EA Vancouver</a> and published by <a href="https://en.wikipedia.org/wiki/EA_Sports">EA Sports</a>. Serving as the sequel to <i><a href="https://en.wikipedia.org/wiki/EA_Sports_UFC_3">EA Sports UFC 3</a></i> (2018), it was released on August 14, 2020 for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p>Like its predecessor, <i>UFC 4</i> is a <a href="https://en.wikipedia.org/wiki/Fighting_game">fighting game</a> based on the <a href="https://en.wikipedia.org/wiki/Mixed_martial_arts">mixed martial arts</a> promotion <a href="https://en.wikipedia.org/wiki/Ultimate_Fighting_Championship">Ultimate Fighting Championship</a> (UFC). There are 229 unique fighters, with 81 alternate versions. The game features a career mode, which was designed to be an "onboarding experience" to teach the player the basics of four MMA disciplines which include <a href="https://en.wikipedia.org/wiki/Boxing">boxing</a>, <a href="https://en.wikipedia.org/wiki/Kickboxing">kickboxing</a>, <a href="https://en.wikipedia.org/wiki/Wrestling">wrestling</a>, and <a href="https://en.wikipedia.org/wiki/Brazilian_jiu-jitsu">jiujitsu</a>. The goal of the career mode, which allows players to create their own custom fighter, is to become the G.O.A.T. (which stands for "greatest of all time"). As players progress in the game, they can choose to accept or decline fights, which will affect the development of the fighter's career. The control scheme was also improved and streamlined to make the game more accessible. Multiplayer modes, including Blitz Battles, and Online World Championships, would also be available. In addition to fighting in <a href="https://en.wikipedia.org/wiki/Ultimate_Fighting_Championship#Cage">The Octagon</a>, players can also fight in Backyard and Kumite, which resembles an underground fighting arena. However, unlike its predecessor, Ultimate Team would not return in <i>UFC 4</i>.</p>
+
+<h2>Development</h2>
+
+<p>The game was officially announced on July 12, 2020. Similar to <i>UFC 3</i>, the game utilized the Real Player Motion technology, which was designed to make clinches believable. The tech also helped create new takedown animations which respond to how players play the game. EA also recruited <a href="https://en.wikipedia.org/wiki/Daniel_Cormier">Daniel Cormier</a> and <a href="https://en.wikipedia.org/wiki/Jon_Anik">Jon Anik</a> to provide commentary for the game. <a href="https://en.wikipedia.org/wiki/Joe_Rogan">Joe Rogan</a>, who provided the commentary for previous games, did not return due to his dislike for voiceover in video games. Players who pre-ordered the game would get exclusive access to play as <a href="https://en.wikipedia.org/wiki/Tyson_Fury">Tyson Fury</a> and <a href="https://en.wikipedia.org/wiki/Anthony_Joshua">Anthony Joshua</a>. On the day of announcement, EA also revealed that <a href="https://en.wikipedia.org/wiki/Jorge_Masvidal">Jorge "Gamebred" Masvidal</a> and <a href="https://en.wikipedia.org/wiki/Israel_Adesanya">Israel "The Last Stylebender" Adesanya</a> would be the cover fighters for the game. The game was released for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> on August 14, 2020.</p>
+
+<h2>Reception</h2>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, the game received generally positive reviews upon release.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> praised the new submission system and career mode, but said that "longstanding problems still remain in the ground game and some dated visuals". <i>Push Square</i> stated that it was "significantly better" than its predecessor, however, <i>Hardcore Gamer</i> said it was "fun albeit bland". <i><a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a></i> praised the clinches but criticised the camera. Brian Shea, writing for <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>, described the submission system as one of the game's best additions. He further described the game as the "terrific next step" for EA's <i>UFC</i> franchise.</p>
+
+<p>The game was heavily criticised by fans for the addition of in-game advertisements that were added two weeks after the game's release. A post on <a href="https://en.wikipedia.org/wiki/Reddit">Reddit</a> showing advertisements in the game for the second season premiere of the <a href="https://en.wikipedia.org/wiki/Amazon_Prime_Video">Amazon Prime Video</a> television series <i><a href="https://en.wikipedia.org/wiki/The_Boys_(TV_series)">The Boys</a></i>, which included two full-screen pop-ups at the beginning and end of the replay, a smaller pop-up on the timer overlay during gameplay, and the show and service's logos layered in the middle of the Octagon canvas, garnered over 86,000 upvotes as of September 5, 2020. EA later apologised for the inconvenience and removed the pop-up advertising in response to the backlash.</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/24th_Annual_D.I.C.E._Awards">24th Annual D.I.C.E. Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>EA Sports UFC 4</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Fighting_Game_of_the_Year">Fighting Game of the Year</a>", which was ultimately awarded to <i><a href="https://en.wikipedia.org/wiki/Mortal_Kombat_11">Mortal Kombat 11 Ultimate</a></i>.</p>
+
+<p>The game topped the sales chart in the UK, however first-week physical sales were down 47% on <i>UFC 3</i>. The game was also number 1 in Australia, New Zealand, and the EMEA, but only got to number 28 in Japan. It got to number 2 in the USA, behind Madden, setting a sales record for the franchise. In North America, it was the 16th most downloaded game of 2021 on PSN. It was still in the top 10 of the PS4 download charts in both the US and Europe in April 2023.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

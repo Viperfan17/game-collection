@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Transformers: The Game</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('e3aad44f-7b1b-4226-b4f8-47f3702b861b/695b05f4-b1e4-48a2-90d6-2d89a7d8a989.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="e3aad44f-7b1b-4226-b4f8-47f3702b861b/0fe41d6b-9610-414a-a764-a2813161f829.ico"/> Transformers: The Game</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="e3aad44f-7b1b-4226-b4f8-47f3702b861b/df6ba7f6-0904-4dfe-9866-1e8f3f25b13e.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 5:00:18</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 8:37:03</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation Portable">Sony PlayStation Portable</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-6/19/2007">6/19/2007</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-68">68</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-57">57</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Traveller's Tales">Traveller's Tales</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Transformers:_The_Game" target="_blank">PCGamingWiki</a><br/><a href="https://howlongtobeat.com/game?id=10613" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/transformers-the-game" target="_blank">IGDB</a><br/><a href="http://strategywiki.org/wiki/Transformers:_The_Game" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/transformers-the-game" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Transformers:_The_Game" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Automobile">Automobile</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Nu2">Nu2</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Third Person">Third Person</a><br/><a href="#quicklink-Truck">Truck</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Transformers: The Game</b></i> is an <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> based on the 2007 film <i><a href="https://en.wikipedia.org/wiki/Transformers_(film)">Transformers</a></i>, developed by <a href="https://en.wikipedia.org/wiki/Traveller's_Tales">Traveller's Tales</a> and published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>. The game closely follows the story of the film, depicting the <a href="https://en.wikipedia.org/wiki/Autobot">Autobots</a> and <a href="https://en.wikipedia.org/wiki/Decepticon">Decepticons</a>' arrival on Earth following a war between them that has ravaged their home planet of Cybertron. While trying to conceal their existence from humanity, both factions search for a powerful artifact called the AllSpark, which could be used to restore Cybertron to its former glory, or to enslave Earth's population. The game features a split-campaign format, with players choosing to join either the Autobots or the Decepticons, and completing various missions for whichever faction they chose. A sequel, <a href="https://en.wikipedia.org/wiki/Transformers:_Revenge_of_the_Fallen_(video_game)"><i>Transformers: Revenge of the Fallen</i></a>, was released in June 2009, based on the <a href="https://en.wikipedia.org/wiki/Transformers:_Revenge_of_the_Fallen">film of the same name</a>.</p>
+
+<p>The home console and PC versions were developed by <a href="https://en.wikipedia.org/wiki/Traveller's_Tales">Traveller's Tales</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Personal_computer">PC</a>, while a different <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> version was developed by Savage Entertainment. <i><a href="https://en.wikipedia.org/wiki/Transformers_Autobots">Transformers Autobots</a></i> and <i><a href="https://en.wikipedia.org/wiki/Transformers_Decepticons">Transformers Decepticons</a></i> are the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> versions of the game. <a href="https://en.wikipedia.org/wiki/Vicarious_Visions">Vicarious Visions</a>, who was tasked with bringing the adaptation to the Nintendo DS, chose to adapt the DS version into two separate games. Unlike games with multiple <a href="https://en.wikipedia.org/wiki/Stock_Keeping_Unit">SKUs</a> such as <i><a href="https://en.wikipedia.org/wiki/Pokémon_(video_game_series)">Pokémon</a></i> which feature only minor differences between versions, these are two separate games, sharing some basic similarities, but overall feature different characters, missions and locations.</p>
+
+<p>The game was released in June 2007 for several different platforms, and received mixed reviews from critics, who praised its graphics, sound effects, voice acting (particularly Cullen and Welker), entertainment value and quality of the Wii version, but criticized its camera troubles, repetitive gameplay, controls and unbalanced difficulty.</p>
+
+<h2>Gameplay</h2>
+
+<p>The game (in all its versions) is mainly a <a href="https://en.wikipedia.org/wiki/Virtual_camera_system">third-person</a> action-shooter. All the robots have at least five attack types: a light weapon, a heavy weapon, a melee attack, and the ability to throw objects such as cars, lamp posts, trees, etc., and using a long object like a lamp post as a sword. As its title and characters imply, a robot can transform into a vehicle and vice versa, this gives the game some racing elements, as the player must, in some missions, race to certain point within a time limit or before a character of the opposing faction does. Each area is an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> environment, and there are also side-missions, Energon cubes and Autobot/Decepticon emblems scattered through the city, if accomplished successfully/collected the player can unlock trailers, production photos and unlock color schemes for certain characters.</p>
+
+<h3>Consoles and PC</h3>
+
+<p>The <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, <a href="https://en.wikipedia.org/wiki/Personal_computer">PC</a> and the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> versions all have the same features. By completing certain objectives throughout the game, the <a href="https://en.wikipedia.org/wiki/Transformers:_Generation_1">G1</a> versions of <a href="https://en.wikipedia.org/wiki/Optimus_Prime">Optimus Prime</a> and <a href="https://en.wikipedia.org/wiki/Megatron">Megatron</a> become available as alternate appearances, as well as G1 color schemes for <a href="https://en.wikipedia.org/wiki/Jazz_(Transformers)">Jazz</a>, <a href="https://en.wikipedia.org/wiki/Starscream">Starscream</a>, and Optimus (labeled Robovision Optimus Prime). These options are turned on or off once obtained through the bonus menu, and only appear while playing as the specified character.  On January 9, 2008, downloadable content entitled <i><b>Transformers Unlockables</b></i> was made available for the Xbox 360 on the <a href="https://en.wikipedia.org/wiki/Xbox_Live_Marketplace">Xbox Live Marketplace</a>. It unlocks all bonus characters/skins, items, upgrades, and other unlockable content. The PlayStation 2 version of <i>Transformers: The Game,</i> has the same gameplay and features like all the other console versions, with graphic quality being reduced.</p>
+
+<p>The Wii is unlike the other consoles, utilizing a different control scheme for movement and attacks that take advantage of its motion sensing controls. With a controller in the left and right hand the player can swipe to imitate attacks or throwing objects and point the Wii Remote at the screen to aim and shoot the gun. The Wii graphics are at a lower resolution than the PC and Xbox 360, though more detailed than the PlayStation 2 version.</p>
+
+<p><i>Transformers: The Game</i> for the PSP is very different from its console counterparts. Where the console versions allow the player to choose which side's storyline they wish to play, the PSP version has only one storyline which alternates between the two different sides. Also, the player is able to play a total of 23 characters, including characters from previous generations. Overall the PSP version of the game has the most playable characters out of all versions, and also includes an alternate story, unrelated to that of other versions.</p>
+
+<h2>Synopsis</h2>
+
+<h3>Setting</h3>
+
+<p>The game focuses on the eponymous <a href="https://en.wikipedia.org/wiki/Transformers">Transformers</a>, a race of <a href="https://en.wikipedia.org/wiki/Extraterrestrial_life">extraterrestrials</a> from the planet Cybertron who resemble robots, and can change their form into various vehicles. The Transformers consist of two factions: the heroic <a href="https://en.wikipedia.org/wiki/Autobot">Autobots</a> and the evil <a href="https://en.wikipedia.org/wiki/Decepticon">Decepticons</a>, that arrived on Earth following a <a href="https://en.wikipedia.org/wiki/Civil_war">civil war</a> that left their home planet a deserted and lifeless place. Forced to disguise themselves by taking the form of human vehicles, the Transformers soon reenact their past conflict upon learning that the AllSpark, a powerful artifact and the source of all Transformer life, is on Earth. While the Decepticons seek its power to subjugate the Earth, the Autobots attempt to stop them and make peace with mankind. The game features two separate campaigns, one from the Autobots' perspective and the other from the Decepticons', which cross over on several occasions.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Autobot">Autobot</a> scout <a href="https://en.wikipedia.org/wiki/Bumblebee_(Transformers)">Bumblebee</a> lands on Earth and takes on the form of a yellow <a href="https://en.wikipedia.org/wiki/Chevrolet_Camaro_(second_generation)">Camaro</a> to disguise himself from humans. Upon defeating a group of <a href="https://en.wikipedia.org/wiki/Decepticon">Decepticon</a> drones, Bumblebee learns that <a href="https://en.wikipedia.org/wiki/Witwicky_family#Samuel_James_Witwicky">Sam Witwicky</a> has the transformers code and is going to buy a used car, so he transforms into his car form in order to be bought by him. Later, Sam and his girlfriend, <a href="https://en.wikipedia.org/wiki/Mikaela_Banes">Mikaela Banes</a>, are attacked by the Decepticon Barricade, but Bumblebee saves them, defeating Barricade. Afterwards, he is contacted by Autobot leader <a href="https://en.wikipedia.org/wiki/Optimus_Prime">Optimus Prime</a>, who informs him that Sam is in possession of an artifact which could lead them to the AllSpark and, as such, must be protected at all costs. Optimus and other surviving Autobots - Ironhide, Ratchet, and <a href="https://en.wikipedia.org/wiki/Jazz_(Transformers)">Jazz</a> - soon land on Earth and assume alternate forms as well (namely a <a href="https://en.wikipedia.org/wiki/Peterbilt_379">Peterbilt 379</a>, a <a href="https://en.wikipedia.org/wiki/GMC_Topkick">GMC Topkick</a>, a <a href="https://en.wikipedia.org/wiki/Hummer_H2">Hummer H2</a> <a href="https://en.wikipedia.org/wiki/Search_and_Rescue">Search and Rescue</a> vehicle, and a <a href="https://en.wikipedia.org/wiki/Pontiac_Solstice">Pontiac Solstice</a>). After they meet with Bumblebee, Mikaela, and Sam, the latter gives them the artifact -  his grandfather's glasses - and Optimus proceeds to explain to the two humans their mission on Earth: to find the AllSpark and use it to revitalize their homeworld of Cybertron. Ratchet then explains that the Decepticon leader <a href="https://en.wikipedia.org/wiki/Megatron">Megatron</a>, trapped in the Arctic, burned the location of the AllSpark in Sam's grandfather's glasses for the Decepticons to find.</p>
+
+<p>After Bumblebee takes on a new alternate form - an improved yellow <a href="https://en.wikipedia.org/wiki/Chevrolet_Camaro_(fifth_generation)">Camaro</a> - the Autobots' location is detected by the Sector 7 agency and helicopters are sent to capture them. Jazz creates a distraction, allowing the others to escape, but the Autobots are then attacked by another group of Decepticon drones, led by <a href="https://en.wikipedia.org/wiki/Shockwave_(Transformers)">Shockwave</a>. While the Autobots fight the drones, with Optimus defeating Shockwave, Bumblebee, Sam, and Mikaela are captured by Sector 7. Decoding Shockwave's transmissions, the Autobots then discover that <a href="https://en.wikipedia.org/wiki/Starscream">Starscream</a>, Megatron's second-in-command, has also learned about the AllSpark and Megatron's whereabouts. Bumblebee, Sam and Mikaela are imprisoned at the <a href="https://en.wikipedia.org/wiki/Hoover_Dam">Hoover Dam</a>, but the former manages to escape following a power outage. While exploring the base, he stumbles upon the frozen Megatron and the AllSpark. As Megatron partially unfreezes himself, he attacks Bumblebee, who manages to retrieve the AllSpark and escape with Sam and Mikaela. Starscream and Blackout then attack the dam and free Megatron.</p>
+
+<p>Bumblebee, Sam and Mikaela travel to Mission City with the AllSpark, whose power surges transform ordinary machines into feral drones that attack Bumblebee. While Ironhide protects Bumblebee, Jazz defeats Starscream and Blackout, but is then killed by <a href="https://en.wikipedia.org/wiki/Brawl_(Transformers)">Brawl</a>, who is in turn defeated by Ironhide. Meanwhile, Bumblebee fights Barricade to stop him from taking the AllSpark, but after defeating him, he is quickly subdued by Megatron. Sam and Mikaela flee with the AllSpark and as Optimus intercepts and battles Megataron. The latter is ultimately killed after Optimus takes the AllSpark and rams it into Megatron's chest, destroying both him and the AllSpark. The game ends with the surviving Autobots choosing to remain on Earth and protect it from any potential future threat.</p>
+
+<p>The Decepticon Blackout lands in <a href="https://en.wikipedia.org/wiki/Qatar">Qatar</a>, where he attacks an <a href="https://en.wikipedia.org/wiki/Sikorsky_MH-53">MH-53 Pave Low</a> helicopter and takes on its form to disguise himself from humans. He then attacks a <a href="https://en.wikipedia.org/wiki/Special_Operations_Command_Central">SOCCENT</a> Air Base, before sending his minion Scorponok to chase and kill all the survivors to prevent from calling for help using mobile communication vehicles. Afterwards, Blackout searches for top secret data about the AllSpark from the remains of SOCCENT through computer terminals kept inside Software towers, but in the process accidentally sends a <a href="https://en.wikipedia.org/wiki/Morse_Code">Morse Code</a> signal informing <a href="https://en.wikipedia.org/wiki/Northrop_Grumman_B-2_Spirit">Stealth Bombers</a> and <a href="https://en.wikipedia.org/wiki/Lockheed_Martin_F-22_Raptor">F-22s</a> of his location. After destroying them, Blackout finds data about an artifact that will lead the Decepticons to the AllSpark.</p>
+
+<p>Meanwhile, the Decepticon scout Barricade, taking on the alternate form of a <a href="https://en.wikipedia.org/wiki/Saleen">Saleen</a> <a href="https://en.wikipedia.org/wiki/Ford_Mustang">Ford Mustang</a> <a href="https://en.wikipedia.org/wiki/Police_cruiser">Police cruiser</a>, arrives to find Sam Witwicky, who has the artifact revealing the AllSpark's location. After recovering his minicon Frenzy from Sector 7 at the Power Plant, Barricade finds Sam and his girlfriend Mikaela Banes, but before he can take the artifact, he is attacked by the Autobot Bumblebee. Barricade defeats Bumblebee and retrieves the artifact: a pair of glasses with the location of the AllSpark burned into them. During this time, the Decepticon sub-commander Starscream is gathering an army to retrieve the AllSpark, and arrives at an airbase, which he destroys after recruiting Brawl and Bonecrusher. He and Blackout later attack the Hoover Dam, releasing their leader Megatron.</p>
+
+<p>Both the Decepticons and the Autobots gather in Mission City, where Sam and Mikaela are taking the AllSpark. After dropping the two humans off, the Autobot Jazz fights Barricade, but is ultimately killed. The other Decepticons then arrive in the city and battle the Autobots, with Blackout deploying Scorponok to destroy several Energon drones that have spawned from the AllSpark. After destroying them, Scorponok is chased away by Ironhide, whom Blackout then battles and kills. Meanwhile, Megatron destroys the city as he searches for Optimus Prime, and finds Sam and Mikeala hiding with the AllSpark. Before he can kill them and claim it, Megatron is attacked by Optimus, whom he ultimately defeats. After executing Optimus, Megatron retrieves the AllSpark, which releases a massive shockwave, presumably converting all electronics in the world into Decepticons. With his new army, Megatron takes over the Earth and is later seen sitting on his <a href="https://en.wikipedia.org/wiki/Lincoln_Memorial">"throne"</a>, ordering his Decepticons to kill all of mankind before they leave the planet.</p>
+
+<h2>Development</h2>
+
+<h3>Cybertron Edition</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/GameStop">GameStop</a>/<a href="https://en.wikipedia.org/wiki/EB_Games">EB Games</a> sold <i>Transformers: The Game Cybertron Edition</i> for the Xbox 360. This collector's edition contains exclusive material; codes that unlock the Cybertron level, a making of the game DVD, a Transformers <a href="https://en.wikipedia.org/wiki/Comic_book">comic book</a> by <a href="https://en.wikipedia.org/wiki/Simon_Furman">Simon Furman</a>, and Cybertron Edition box art.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<h2>Reception</h2>
+
+<p><i>Transformers: The Game</i> received mixed reviews upon release. <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> and <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> gave it a score of 57.69% and 55 out of 100 for the PC version; 57.44% and 56 out of 100 for the PlayStation 2 version; 54.38% and 53 out of 100 for the Wii version; 53.49% and 54 out of 100 for the PlayStation 3 version; 52.42% and 52 out of 100 for the Xbox 360 version; and 46.89% and 47 out of 100 for the PSP version.</p>
+
+<p>In most reviews, graphics and sound effects were praised, <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>'s review named the graphics of the Wii version in the time of its release as the best on the system while <a href="https://en.wikipedia.org/wiki/Peter_Cullen">Peter Cullen</a>'s voice acting as Optimus Prime, alongside <a href="https://en.wikipedia.org/wiki/Frank_Welker">Frank Welker</a> (Megatron's original voice in the 1984 cartoon) were considered strong points also. <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> also commended the responsive motion-controls on the Wii.</p>
+
+<p>However, the various reviewers noted multiple flaws, such as a troublesome camera that tumbled (intended to give an effect of the walking of the Transformers themselves), repetitive missions, and clunky driving in the vehicle modes. They also commented that the game was too short and it had an unbalanced difficulty, older gamers finding it too easy, while younger players finding extremely hard to pass certain missions. Furthermore, although there were few complaints about it, the main console versions of the game lack multiplayer modes (though there is multiplayer on the DS and PSP versions). <i><a href="https://en.wikipedia.org/wiki/Hyper_(magazine)">Hyper</a>'</i>s Maurice Branscombe commended the game for looking good and comments that "exploration and destruction is fun". However, he criticised the game for its "mission objectives that are repetitive and boring". He also criticised the combat as poor.</p>
+
+<p>The game was nominated for the <a href="https://en.wikipedia.org/wiki/35th_Annie_Awards">35th Annie Award</a> title of <a href="https://en.wikipedia.org/wiki/Annie_Award_for_Best_Animated_Video_Game">Best Animated Video Game</a>, but lost to <i><a href="https://en.wikipedia.org/wiki/Ratatouille_(video_game)">Ratatouille</a></i>.</p>
+
+<p>The game shipped about 1 million copies.</p>
+
+<h3>Sequels</h3>
+
+<p>A sequel for the game has been subsequently released based on the film's sequel, <i><a href="https://en.wikipedia.org/wiki/Transformers:_Revenge_of_the_Fallen">Transformers: Revenge of the Fallen</a></i>. <a href="https://en.wikipedia.org/wiki/Vicarious_Visions">Vicarious Visions</a> returned to develop the two DS games, and Savage Entertainment again developed the PSP version. <a href="https://en.wikipedia.org/wiki/Luxoflux">Luxoflux</a> developed the PlayStation 3 and Xbox 360 version, which was ported to PC by <a href="https://en.wikipedia.org/wiki/Beenox">Beenox</a>. The PlayStation 2 and Wii versions were developed by <a href="https://en.wikipedia.org/wiki/Krome_Studios">Krome Studios</a>. A third game, <i><a href="https://en.wikipedia.org/wiki/Transformers:_Dark_of_the_Moon">Transformers: Dark of the Moon</a></i>, based on the third film, was released in June 2011, and a fourth game, <i><a href="https://en.wikipedia.org/wiki/Transformers:_Rise_of_the_Dark_Spark">Transformers: Rise of the Dark Spark</a></i>, which is both a tie-in to <i><a href="https://en.wikipedia.org/wiki/Transformers:_Age_of_Extinction">Age of Extinction</a></i> and a crossover with the <i><a href="https://en.wikipedia.org/wiki/Transformers:_War_for_Cybertron">War for Cybertron</a></i> games, was released in June 2014.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

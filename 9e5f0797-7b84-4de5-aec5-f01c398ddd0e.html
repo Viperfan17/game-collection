@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Iron Man 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('9e5f0797-7b84-4de5-aec5-f01c398ddd0e/cc661de9-24e6-4ddc-a39f-cbed6a3b8399.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="9e5f0797-7b84-4de5-aec5-f01c398ddd0e/6afeae21-a2d0-428c-a465-cbcdf2b41920.png"/> Iron Man 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="9e5f0797-7b84-4de5-aec5-f01c398ddd0e/0d5ba1ae-fe0a-4c99-a8dc-508bf1cce825.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-5/28/2013">5/28/2013</a> 10:59:31</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/24/2025">4/24/2025</a> 6:00:16</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 3:24:08</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-PlayStation">PlayStation</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-PlayStation">PlayStation</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-4/29/2010">4/29/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-50">50</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-47">47</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Gameloft">Gameloft</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Griptonite Games">Griptonite Games</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-High Voltage Software">High Voltage Software</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sega Studios San Francisco">Sega Studios San Francisco</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Gameloft">Gameloft</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-SEGA">SEGA</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Iron_Man_2_(video_game)" target="_blank">Wikipedia</a><br/><a href="https://www.imdb.com/title/tt1371159/" target="_blank">IMDb</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] artist: Matthew Butler">[People] artist: Matthew Butler</a><br/><a href="#quicklink-[People] composer: David Earl">[People] composer: David Earl</a><br/><a href="#quicklink-[People] composer: Maxime Goulet (Gameloft composer)">[People] composer: Maxime Goulet (Gameloft composer)</a><br/><a href="#quicklink-[People] composer: Paul Lipson">[People] composer: Paul Lipson</a><br/><a href="#quicklink-[People] director: Kevin Boyle">[People] director: Kevin Boyle</a><br/><a href="#quicklink-[People] director: Kyle Brink">[People] director: Kyle Brink</a><br/><a href="#quicklink-[People] producer: Edward Tucker">[People] producer: Edward Tucker</a><br/><a href="#quicklink-[People] programmer: Gregg Broxterman">[People] programmer: Gregg Broxterman</a><br/><a href="#quicklink-[People] writer: Matt Fraction">[People] writer: Matt Fraction</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Iron Man 2</b></i> is an <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> loosely based on the <a href="https://en.wikipedia.org/wiki/Iron_Man_2">2010 film of the same name</a>. It was released in Australia on April 29, 2010, Europe on April 30, and in North America on May 4 for <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>, <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, and <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>. Published by <a href="https://en.wikipedia.org/wiki/Sega">Sega</a>, the game was developed by <a href="https://en.wikipedia.org/wiki/Sega_Studios_San_Francisco">Sega Studios San Francisco</a>  for PlayStation 3 and Xbox 360, <a href="https://en.wikipedia.org/wiki/Griptonite_Games">Griptonite Games</a> for Nintendo DS, <a href="https://en.wikipedia.org/wiki/High_Voltage_Software">High Voltage Software</a> for Wii and PlayStation Portable, and by <a href="https://en.wikipedia.org/wiki/Gameloft">Gameloft</a> for <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> (released on May 3) and <a href="https://en.wikipedia.org/wiki/BlackBerry_PlayBook">BlackBerry PlayBook</a> (released on August 25). A <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> version was planned, but it was cancelled.</p>
+
+<p>The game has an original story written by <i><a href="https://en.wikipedia.org/wiki/The_Invincible_Iron_Man_(comics)">The Invincible Iron Man</a></i> author, <a href="https://en.wikipedia.org/wiki/Matt_Fraction">Matt Fraction</a>. The game takes place after the film, although the iOS and BlackBerry versions follow the film's plot. The game features the voices of <a href="https://en.wikipedia.org/wiki/Don_Cheadle">Don Cheadle</a> and <a href="https://en.wikipedia.org/wiki/Samuel_L._Jackson">Samuel L. Jackson</a>, reprising their respective roles as <a href="https://en.wikipedia.org/wiki/James_Rhodes_(Marvel_Cinematic_Universe)">War Machine</a> and <a href="https://en.wikipedia.org/wiki/Nick_Fury_(Marvel_Cinematic_Universe)">Nick Fury</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p>Players can play as either <a href="https://en.wikipedia.org/wiki/Iron_Man">Iron Man</a> or <a href="https://en.wikipedia.org/wiki/War_Machine">War Machine</a>, each with their own unique style. While Iron Man is sleeker and relies much more on energy weapons, War Machine is outfitted with ballistic weaponry and tougher armor. Iron Man can choose from multiple suits of armour, including Marks II through VI. Players can customize upgrades and weaponry on the armor. Weapons can also be switched during gameplay. Flight control has been improved upon since the <a href="https://en.wikipedia.org/wiki/Iron_Man_(video_game)">first game</a>, as has melee combat, allowing players to get near to the ground. <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">AI</a> was also updated from the previous title. New enemies have been included, and new strategies are now available in combat.</p>
+
+<p>In the Wii/PlayStation Portable version, simplified graphics, different combat systems, and different missions are added. Flying across levels was removed, instead letting Iron Man hover or walk across the level. The <a href="https://en.wikipedia.org/wiki/Virtual_camera_system">point of view</a> was also changed. Also included are "Tech Trophies", collectibles which can be used as upgrades, while "Ammo Cases" are used to supply ammunition.</p>
+
+<h2>Plot</h2>
+
+<p>The game begins with Iron Man defending the Dataspine, an archived version of <a href="https://en.wikipedia.org/wiki/J.A.R.V.I.S.">J.A.R.V.I.S.</a>, from attackers. However, an <a href="https://en.wikipedia.org/wiki/Electromagnetic_pulse">EMP</a> is dropped, disabling him. Three hours earlier, Tony Stark had recorded a journal message in which he mentions the <a href="https://en.wikipedia.org/wiki/Roxxon_Energy_Corporation">Roxxon Energy Corporation</a>, and how they tried to duplicate the Iron Man armor without success. Tony is then interrupted by <a href="https://en.wikipedia.org/wiki/James_Rhodes_(Marvel_Cinematic_Universe)">James Rhodes</a>, who says that there is trouble at Stark Archives. Following the EMP bomb, the power reserves in Iron Man's armor activate, and upon recovering, Iron Man learns that Roxxon is behind the attack. He grimly decides that he should destroy the Dataspine to keep Roxxon from getting the archives. Outside, Rhodey, in his War Machine armor, intercepts some Roxxon dropships.</p>
+
+<p>Iron Man makes contact with <a href="https://en.wikipedia.org/wiki/S.H.I.E.L.D.">S.H.I.E.L.D.</a> director <a href="https://en.wikipedia.org/wiki/Nick_Fury_(Marvel_Cinematic_Universe)">Nick Fury</a>, who informs him that separatists under the command of General Shatalov have seized control of a Tesla facility. During Iron Man's escort of S.H.I.E.L.D. helicopter forces, they are attacked by a battle platform called the Roxxon Armiger. After destroying it, Iron Man and War Machine head to a <a href="https://en.wikipedia.org/wiki/Battlecruiser">battlecruiser</a> and destroy it, learning the Armiger was remote-controlled. They discover that Shatalov is working with the terrorist group <a href="https://en.wikipedia.org/wiki/Advanced_Idea_Mechanics">Advanced Idea Mechanics</a> to create the <a href="https://en.wikipedia.org/wiki/Crimson_Dynamo">Crimson Dynamo</a> suit. Upon learning that the suit is being developed at a power plant in <a href="https://en.wikipedia.org/wiki/Siberia">Siberia</a>, Fury reveals that he has sent <a href="https://en.wikipedia.org/wiki/Natasha_Romanoff_(Marvel_Cinematic_Universe)">Natasha Romanoff</a>, the Black Widow, to spy on the plant.</p>
+
+<p>At the plant, Shatalov makes contact with A.I.M.'s <a href="https://en.wikipedia.org/wiki/Kearson_DeWitt">Kearson DeWitt</a>, who tells him that there is a spy in his ranks, displeased that he has brought S.H.I.E.L.D. to their front door. Shatalov gives orders to prep the Crimson Dynamo armor and then informs his men that their connection with A.I.M. is now severed. Iron Man finds and protects Natasha from Shatalov's men and a S.H.I.E.L.D. transport is sent to their location. Natasha is extracted while Iron Man and War Machine battle Shatalov in his Crimson Dynamo armor. The defeated Shatalov reveals that A.I.M. was behind the theft of J.A.R.V.I.S.'s AI, and are planning to use it to create <a href="https://en.wikipedia.org/wiki/Ultimo_(Marvel_Comics)">Ultimo</a>.</p>
+
+<p>The team learns that Kearson DeWitt was behind the attack led by Shatalov and that he had previously worked at Stark's Theoretical Weapons Division until Stark shut it down. Aside from DeWitt working on the prototype of the arc reactor, <a href="https://en.wikipedia.org/wiki/Pepper_Potts_(Marvel_Cinematic_Universe)">Pepper Potts</a> also reveals that he had a secret project called PROTEAN. Inside an A.I.M. base, DeWitt uses his PROTEAN technology to merge with an enormous metal suit and become Ultimo. With the merge complete, DeWitt has his men upgraded with PROTEAN implants. Arriving at the base, War Machine battles PROTEAN drones while Iron Man searches for DeWitt. J.A.R.V.I.S. detects Ultimo shortly after the base is secured with help from S.H.I.E.L.D.</p>
+
+<p>Meanwhile, the S.H.I.E.L.D. <a href="https://en.wikipedia.org/wiki/Helicarrier">Helicarrier</a> is attacked, and Iron Man protects it from DeWitt's drones. When War Machine defeats an Arc Armiger dropped on the Helicarrier, Iron Man decides to reprogram it. Using the reprogrammed Armiger, Iron Man and War Machine assault an A.I.M. base in <a href="https://en.wikipedia.org/wiki/Malaysia">Malaysia</a>. When the giant Ultimo arrives, War Machine disables some of its arc reactors while Iron Man fights the DeWitt/Ultimo within. Upon defeating DeWitt/Ultimo, Iron Man learns that the effects on DeWitt are irreversible. War Machine finishes Ultimo off while the Helicarrier rams it. Afterward, J.A.R.V.I.S. tells Stark to promise him not to let anyone gain access to his programming again.</p>
+
+<h2>Development</h2>
+
+<p><i>Iron Man 2</i> was written by <i>The Invincible Iron Man</i> writer Matt Fraction and Sega creative director Kyle Brink, with additional writing by Sega writer Phil Campbell and Sega associate producer Stephen Frost. The game features an exclusive song recorded by <a href="https://en.wikipedia.org/wiki/Lamb_of_God_(band)">Lamb of God</a>, "Hit the Wall", along with a soundtrack composed by other bands.</p>
+
+<h3>Audio</h3>
+
+<p>Unlike the first <i>Iron Man</i> game, Iron Man is not voiced by <a href="https://en.wikipedia.org/wiki/Robert_Downey_Jr.">Robert Downey Jr.</a>, but Eric Loomis, who would go on to voice the character in the animated series <i><a href="https://en.wikipedia.org/wiki/The_Avengers:_Earth's_Mightiest_Heroes">The Avengers: Earth's Mightiest Heroes</a></i>. Don Cheadle and Samuel L. Jackson reprised their roles as War Machine/James Rhodes and Nick Fury, respectively, making them the only actors to have reprised their film roles in the video game version. Additional voices include <a href="https://en.wikipedia.org/wiki/Steve_Blum">Steve Blum</a> and <a href="https://en.wikipedia.org/wiki/Phil_LaMarr">Phil LaMarr</a>, with the former voicing Mauler and <a href="https://en.wikipedia.org/wiki/Ghost_(Marvel_Comics)">Ghost</a>, and the latter providing additional dialogue for War Machine; animator <a href="https://en.wikipedia.org/wiki/Eric_Goldberg_(animator)">Eric Goldberg</a> voicing <a href="https://en.wikipedia.org/wiki/Advanced_Idea_Mechanics">A.I.M. soldiers</a>; and John Eric Bentley providing additional dialogue for Nick Fury.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<h2>Reception</h2>
+
+<p>The game received mixed reviews, with <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> scores of 44 and 45 out of 100 for the PlayStation 3 and Xbox 360 versions, respectively. There is division among critics as to whether or not the game is an improvement over its predecessor. <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> gave a score of 5.1 for the PS3 and Xbox 360 version, 5.5 for the Wii version and 4.9 for the PSP version. They felt the game was an improvement upon the original, but did not quite hit the mark, citing the game's short campaign, poor graphics, repetitive gameplay, and a lack of challenge, which made the upgrade system unnecessary; "<i>Iron Man 2</i> isn't terrible, but it rarely gets exciting. It's fun to blow up tanks and trucks, and Iron Man has all his powers like his repulsor shots and his unibeam laser. But the whole game feels repetitive. You see the same enemies over and over again, and even though they get bigger guns and more armor as you go, the gameplay stays the same. The PSP version features even fewer guys than the Wii game, so a lot of times areas just seem empty because there aren't artillery trucks rolling up and dumping out bad guys".</p>
+
+<p>Michael Lafferty from <i>GameZone</i> gave it a 4.5, suggesting that players should "watch the movie, read the comic book, but pass on the game". <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> also gave it a 4.5, arguing that "every decent element is overshadowed by stumbles and shortcomings. It should be thrilling and fun to take to the sky in a superpowered battle suit, but <i>Iron Man 2</i> crashes to the Earth with a dull thud". <i><a href="https://en.wikipedia.org/wiki/Empire_(magazine)">Empire</a></i> magazine gave it one star, calling it a "rare failure for Sega", and stating that the experience felt like an early <a href="https://en.wikipedia.org/wiki/PlayStation">PlayStation 1</a> game.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

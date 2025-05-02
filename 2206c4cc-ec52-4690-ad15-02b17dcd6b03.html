@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bodycount</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('2206c4cc-ec52-4690-ad15-02b17dcd6b03/68ce93ee-f66f-4bce-be50-fb1865fb509e.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="2206c4cc-ec52-4690-ad15-02b17dcd6b03/f68ff1b4-2c32-4365-a782-28b130b08105.ico"/> Bodycount</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="2206c4cc-ec52-4690-ad15-02b17dcd6b03/1843bc06-438c-42eb-823b-1387217b0562.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 7:31:29</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/30/2025">4/30/2025</a> 7:53:11</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Microsoft Xbox 360">Microsoft Xbox 360</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-8/30/2011">8/30/2011</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-40">40</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-52">52</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-First-person shooter">First-person shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Codemasters Guildford">Codemasters Guildford</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Codemasters">Codemasters</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Bodycount_(video_game)" target="_blank">Wikipedia</a><br/><a href="https://www.mobygames.com/game/bodycount" target="_blank">MobyGames</a><br/><a href="https://web.archive.org/web/20110822090717/http://www.bodycountgame.com:80/agegate.php" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[Game Engine] EGO Engine">[Game Engine] EGO Engine</a><br/><a href="#quicklink-[People] designer: Steve Watt">[People] designer: Steve Watt</a><br/><a href="#quicklink-[People] designer: Stuart Black">[People] designer: Stuart Black</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Bodycount</b></i> is a 2011 <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> video game for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>. It was developed and published by <a href="https://en.wikipedia.org/wiki/Codemasters">Codemasters</a>. It is considered a <a href="https://en.wikipedia.org/wiki/Spiritual_successor">spiritual successor</a> to the 2006 video game <i><a href="https://en.wikipedia.org/wiki/Black_(video_game)">Black</a></i>. The player assumes control of Jackson, a former mercenary resolving wars between countries under an organization called the "Network". Like its predecessor, the game utilizes environmental destruction during gameplay. The game also features both cooperative and competitive multiplayer modes. <i>Bodycount</i> garnered mixed reviews upon release. Critics found enjoyable moments in the gameplay and campaign but felt it didn't distinguish itself from other first-person shooters. Because of the game's reception, Codemasters closed their Guildford studio, and cut their studio base by a third.</p>
+
+<h2>Plot</h2>
+
+<p><i>Bodycount</i> revolves around Jackson, a former <a href="https://en.wikipedia.org/wiki/U.S._Army">American soldier</a> recruited by the enigmatic "Network", seemingly a <a href="https://en.wikipedia.org/wiki/Private_military_contractor">private military contractor</a> who resolves international conflicts. On behalf of the Network, Jackson must fight different groups of enemies across the globe including <a href="https://en.wikipedia.org/wiki/Terrorism">terrorists</a> and enemy <a href="https://en.wikipedia.org/wiki/Mercenary">mercenaries</a> of the hostile "Target" network. The Target network utilises some advanced <a href="https://en.wikipedia.org/wiki/Science_fiction">science-fiction</a> weaponry and is revealed to be influencing global conflicts. As the plot progresses, Jackson infiltrates and destroys bases of the Target network. The primary antagonist is a female Target mercenary who serves as the final boss. The game has an ambiguous conclusion which seems to imply that the Network has established a dominant influence in global affairs with the destruction of the last Target bases in <a href="https://en.wikipedia.org/wiki/Lagos">Lagos</a> and <a href="https://en.wikipedia.org/wiki/Jiangsu">Jiangsu</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p>The game is set in <a href="https://en.wikipedia.org/wiki/First_person_(video_games)">first-person</a>. One of the main features is <a href="https://en.wikipedia.org/wiki/Destructible_environment">environment destructibility</a>; nearly everything in the game is expected to be destructible. Environments and most of everything in them is destroyed realistically, creating a dynamically-changing playing environment. By scoring kills, the player can unlock deadly power-ups such as air strikes that further decimate the environment. There is a unique cover system where the player has near complete freedom to aim while in cover.</p>
+
+<p>Multiplayer is available in competitive and cooperative modes. The former offers traditional <a href="https://en.wikipedia.org/wiki/Deathmatch_(video_games)">deathmatch</a> style sessions (individual or team-based) and the latter challenges two players to survive increasingly difficult waves of enemies.</p>
+
+<h2>Reception</h2>
+
+<p><i>Bodycount</i> received "mixed" reviews on both platforms according to video game review aggregator <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. As a result of very mixed reception Codemasters closed down their <a href="https://en.wikipedia.org/wiki/Guildford">Guildford</a> studio, laying off 70 employees and cutting down Codemasters' studio base by a third.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/The_Guardian">The Guardian</a></i> gave the Xbox 360 version a score of three stars out of five, saying that the game "isn't the future of first-person shooters. But it is great fun". <i><a href="https://en.wikipedia.org/wiki/The_Daily_Telegraph">The Daily Telegraph</a></i> gave the same version two-and-a-half stars out of five, saying that it "professes to be a reaction to overblown, scripted rollercoaster FPSes, but never manages to bring a whole lot to the table for itself. Bodycount even makes a fuss over destructible cover, which was done better by <i><a href="https://en.wikipedia.org/wiki/Battlefield:_Bad_Company">Battlefield: Bad Company</a></i>. <i>Bodycount</i> is not a poor game, just a confused and unremarkable one, even if those instant restarts really are wonderful". However, <i>The Digital Fix</i> gave the same version four out of ten, calling it "an ill conceived, poorly constructed, seemingly rushed mess which isn't fun and in no way warrants its full price tag. It's all been done before and a hell of a lot better, many times - keep your cash in your wallet (or purse)". <i>411Mania</i> gave the PlayStation 3 version a score of three out of ten, saying that it "had a ton of potential. There are a few moments in the campaign that are quite fun and enjoyable but that isn't enough to make this a great game by any means. Overall, it lacks in almost every area. It should have taken a note from "Bulletstorm" and focused on fun, over-the-top kills and detailed maps instead of trying to do everything perfect. The game lacked in almost all areas and I cannot say this was an overall enjoyable experience".</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

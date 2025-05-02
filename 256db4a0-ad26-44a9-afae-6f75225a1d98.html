@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mega Man</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('256db4a0-ad26-44a9-afae-6f75225a1d98/aa133677-9a3a-4bc4-982e-99796fad7d1a.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="256db4a0-ad26-44a9-afae-6f75225a1d98/77b56814-87ed-4999-b60c-39fe9d6b684b.png"/> Mega Man</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="256db4a0-ad26-44a9-afae-6f75225a1d98/caeb6d77-6ade-4f91-9738-f12a79f0ed77.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 4:51:34</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-4/29/2025">4/29/2025</a> 23:39:58</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Nintendo Entertainment System">Nintendo Entertainment System</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-12/17/1987">12/17/1987</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-76">76</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Hi Tech Expressions">Hi Tech Expressions</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Mega_Man" target="_blank">PCGamingWiki</a><br/><a href="https://www.mobygames.com/game/889" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Side view">Side view</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Mega Man</b></i> (known as <i><b>Rockman</b></i> in Japan) is a Japanese <a href="https://en.wikipedia.org/wiki/Science_fiction">science fiction</a> <a href="https://en.wikipedia.org/wiki/Video_game_franchise">video game franchise</a> developed and published by <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a>, featuring the <a href="https://en.wikipedia.org/wiki/Mega_Man_(character)">protagonist of the same name</a>. <a href="https://en.wikipedia.org/wiki/Mega_Man_(1987_video_game)">The original game</a> was released for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a> in 1987, and spawned a franchise that expanded to over 50 games on multiple systems. <!-- A roster of six corrupted Robot Masters face Mega Man in separate stages of that original game. --> As of July 2024, the series has sold 42 million units worldwide.
+Mega Man has been popular among gamers and has been reimagined and evolved as a video game character for over 30 years.</p>
+
+<p>The main series consists of eleven games, the standalone <i><a href="https://en.wikipedia.org/wiki/Mega_Man_&amp;_Bass">Mega Man &amp; Bass</a></i>, the spin-off <a href="https://en.wikipedia.org/wiki/Game_Boy">Game Boy</a> series (released in Japan as <i>Rockman World</i>), and various ports, remakes, and compilations. The core games in the franchise have all been set in a single continuity; the storyline of the "classic" series is succeeded by the <i><a href="https://en.wikipedia.org/wiki/Mega_Man_X">Mega Man X</a></i>, <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Zero">Mega Man Zero</a></i>, <i><a href="https://en.wikipedia.org/wiki/Mega_Man_ZX">Mega Man ZX</a></i>, and the <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Legends">Mega Man Legends</a></i> series. This timeline excludes the spin-off <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Battle_Network_(series)">Mega Man Battle Network</a></i> and <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Star_Force">Mega Man Star Force</a></i> series, both of which take place in an alternate universe where the <a href="https://en.wikipedia.org/wiki/Internet">internet</a> flourished rather than robotics.</p>
+
+<h2>Games</h2>
+
+<h3>Original series</h3>
+
+<p>The original <i>Mega Man</i> series, dubbed <i>Classic Mega Man</i>, marks the start of the franchise, released on the NES on December 17, 1987. In the original series, <i>Mega Man</i> is an <a href="https://en.wikipedia.org/wiki/Android_(robot)">android</a> originally named Rock (nicknamed "Mega" in later installments), created as a lab assistant by the scientist <a href="https://en.wikipedia.org/wiki/Doctor_Light_(Mega_Man)">Dr. Light</a> with <a href="https://en.wikipedia.org/wiki/Dr._Wily">Dr. Wily</a> as his partner. Following treachery by Dr. Wily in which he reprogrammed most of Dr. Light's robots, Rock volunteered to be converted into a fighting robot to defend the world from Wily's violent robotic threats, thus becoming Mega Man.</p>
+
+<p><i>Mega Man</i> is a <a href="https://en.wikipedia.org/wiki/Side-scrolling_video_game">side-scrolling</a> <a href="https://en.wikipedia.org/wiki/Action_game">action</a> <a href="https://en.wikipedia.org/wiki/Platform_game">platformer</a>. The <a href="https://en.wikipedia.org/wiki/Player_character">player character</a> must fight through the levels using Mega Man's "Mega Buster"—a cannon attached to his arm—to shoot the robotic enemies inhabiting his environment. When Mega Man was released in 1987, the characteristic that made it revolutionary was the choice given to the player of which robot master to attempt first. After defeating a Robot Master—the <a href="https://en.wikipedia.org/wiki/Boss_(video_game)">boss</a> of a level—Mega Man gains the ability to use that Robot Master's special weapon. Each Robot Master represents a specific element or object, with bosses such as Fire Man, Ice Man, Guts Man, Cut Man, Elec Man, and Bomb Man. The weapons Mega Man gains share the theme of the defeated boss. After defeating all of the Robot Masters, Mega Man travels to a multi-stage fortress to confront Dr. Wily, the person responsible for the robotic enemies' destructive acts. In the fortress, Mega Man fights new bosses, clones of the game's Robot Masters, and Wily himself, who is usually in a large multi-phase war machine.</p>
+
+<p>Enemies are weak to at least one weapon; for instance, Fire Man will take more damage from Ice Man's weapon than from other weapons. This concept draws inspiration from <a href="https://en.wikipedia.org/wiki/Rock-paper-scissors">rock-paper-scissors</a>. Robot Master levels can generally be completed in any order, resulting in a strategic hallmark of the series: determining the best order to defeat bosses and earn weapons. Sequels of <i>Mega Man</i> games contain new enemies alongside familiar ones, new bosses, new weapons, and occasionally new gadgets that Mega Man could use. Starting from <i>Mega Man 3</i>, <i>Rush</i>—Mega Man's trusty robot dog companion became a series mainstay, and later installments would provide Rush abilities for Mega Man to use. Later installments of the game give the player the option of commanding other <a href="https://en.wikipedia.org/wiki/Player_characters">player characters</a> with different abilities, such as <a href="https://en.wikipedia.org/wiki/Proto_Man">Proto Man</a>, Duo, and Bass.</p>
+
+<p>The <i>Classic</i> series has yet to reach a definite conclusion. Originally developed for the <a href="https://en.wikipedia.org/wiki/NES">NES</a>, the original Mega Man series experienced graphical improvements in fourth and fifth-generation installments. The series had no games developed for sixth-generation consoles but returned in the seventh generation purposely sporting graphics, sound, and gameplay similar to the original NES games to inspire a nostalgic look and feel, distributed as downloadable content instead of retail games like the previous installments.</p>
+
+<p>On December 4, 2017, Capcom announced that a new game in the classic series, <i><a href="https://en.wikipedia.org/wiki/Mega_Man_11">Mega Man 11</a></i>, would be released in late 2018. Unlike <i>Mega Man 9</i> and <i>10</i>, this game makes a return to the modern era, featuring Mega Man in a 2.5D environment, with 3D cel-shaded graphics, and is presented in a widescreen aspect ratio. When using a special weapon, in addition to changing colors, Mega Man's armor also changes appearance.</p>
+
+<p>Capcom wanted a redesign in graphics and control as the <i>Mega Man</i> series moved from the NES to the SNES, prompting the creation of the <i>Mega Man X</i> series in 1993. Set years in the future, this series follows the story of Mega Man's successor, <a href="https://en.wikipedia.org/wiki/X_(Mega_Man)">X</a>, a new, advanced robot that has complete free will over his actions, thoughts and feelings. This character, also a creation of Dr. Light, was put into <a href="https://en.wikipedia.org/wiki/Suspended_animation">suspended animation</a> and uncovered 100 years in the future by a researcher named <a href="https://en.wikipedia.org/wiki/Dr._Cain">Dr. Cain</a>. The <i>Mega Man X</i> series features more detailed 16-bit graphics and greater freedom of movement. In the <i>Mega Man X</i> series, the characters grow in abilities and power as the game progresses. While the gameplay loop and combat is largely similar to the <i>Classic Mega Man</i> series, <i>Mega Man X</i> series differs from its increased emphasis on mobility, with X being able to dash and reach higher places through the use of his various armors gained throughout the games, as well as its more mature story than its predecessor.</p>
+
+<p>As the series progressed, various other <a href="https://en.wikipedia.org/wiki/Player_characters">player characters</a> have appeared, such as fellow Maverick Hunter Zero who was created by Dr. Wily of the <i>Classic</i> series, and Axl, a Reploid with an adolescent personality who has the ability to shape-shift into other Reploids. Zero would later star in his own spin-off series, <i>Mega Man Zero</i>.</p>
+
+<p>The series was originally intended to conclude with <i><a href="https://en.wikipedia.org/wiki/Mega_Man_X5">Mega Man X5</a></i>, which will lead to the <i>Mega Man Zero</i> series, however, as Inafune began work on the Zero series, its storyline was continued without his supervision, with three additional installments (<i><a href="https://en.wikipedia.org/wiki/Mega_Man_X6">Mega Man X6</a></i>, <i><a href="https://en.wikipedia.org/wiki/Mega_Man_X7">Mega Man X7</a></i>, <i><a href="https://en.wikipedia.org/wiki/Mega_Man_X8">Mega Man X8</a></i>), releasing in 2001, 2003, and 2004 respectively, causing confusion in the games' official timeline. <i>Mega Man X8</i> ended with a cliffhanger, leaving the series to not have a conclusion.</p>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Role_playing_game">Role playing game</a> spin-off, <a href="https://en.wikipedia.org/wiki/Mega_Man_X:_Command_Mission">Mega Man X: Command Mission</a>, was released on July 29, 2004, developed by Capcom Production Studio 3, who previously worked on the <i>Breath of Fire</i> series of role-playing games. The game takes place 100 years after the events of the <i>Mega Man X</i> series and follows X, Zero, and Axl as they take part in a resistance on an artificial island from its oppressors, and the conspiracy within the Maverick Hunters. Due to the game being mostly independent from the rest of the series, it is unclear whether the game was canon or not.</p>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Gacha_game">mobile</a> game spin-off, <i><a href="https://ja.wikipedia.org/wiki/ロックマンX%20DiVE">Rockman X DiVE</a></i>, was developed and published by Capcom Taiwan and was released on March 24, 2020 in Taiwan, in Japan on October 26, 2022, and globally on August 16, 2021, the latter was published by NebulaJoy. The Steam version of the game was released in Asian territories by Capcom Taiwan on September 15, 2021. The game is a meta-narrative, taking place within a cyberspace database called the <i>Deep Log</i> which contains data from all games in the Mega Man X series, along with the experiences of players all around the world. The game follows the Player, and RiCO, the latest administrator of the Deep Log, welcoming the Player and enlisting their help in clearing up the glitches plaguing the database.</p>
+
+<p>The Taiwan/Japanese servers of the game were shut down on September 27, 2023, with the global servers shutting down July 30, 2024. The offline version of the game, <i>Mega Man X DiVE Offline</i>, was released on September 1, 2023.</p>
+
+<p>In 2002, a follow-up series to the <i>Mega Man X</i> franchise was developed for the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> by <a href="https://en.wikipedia.org/wiki/Inti_Creates">Inti Creates</a>. Taking place hundreds of years after the events of the <i>Mega Man X</i> series, the new series stars <a href="https://en.wikipedia.org/wiki/Zero_(Mega_Man)">Zero</a>, a sidekick/ally of X. Set in a post-apocalyptic world in which Reploids were falsely branded as Mavericks and were hunted down, and surviving Reploids formed an opposing faction called "The Resistance", with the help of human scientist Ciel, Zero awakens and begins his battle against a powerful <a href="https://en.wikipedia.org/wiki/Xenophobia">human-supremacy</a> force called <i>Neo Arcadia</i> as he protects the oppressed remaining reploids, uncovers the history behind "The Elf Wars", and the cause of his slumber.</p>
+
+<p>In the <i>Mega Man Zero</i> series, the gameplay is largely similar to Zero's play style in the later <i>Mega Man X</i> games, featuring a more close-quarter hack-n-slash combat compared to Mega Man X's ranged combat, and features an in-depth ranking system that rewards the player with new abilities and enhancements (such as copied abilities from boss characters) in exchange for better play performance. In the fourth game, Zero can also physically steal weapons from enemies (such as axes and guns).</p>
+
+<p>With its <a href="https://en.wikipedia.org/wiki/Mega_Man_Zero_4">fourth installment</a>, <i>Mega Man Zero</i> became the first series in the franchise to reach a definitive conclusion.</p>
+
+<p>The <i><a href="https://en.wikipedia.org/wiki/Mega_Man_ZX">Mega Man ZX</a></i> series debuted in 2006 for <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>, once again developed by <a href="https://en.wikipedia.org/wiki/Inti_Creates">Inti Creates</a>, and chronologically takes place 200 years after the <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Zero">Mega Man Zero</a></i> series. In this series, progression has led to the equality of humankind and robotkind. Humans are given the physical advantages of robots, and robots are also given biological lifespans. With equality achieved, the world enters a new era of peace. The series follows multiple protagonists as they become involved in a new incident called the "Game of Destiny", in which people who were chosen with the powers of a "Biometal", called a "Mega Man", are pitted against each other to see who was worthy of ruling the world.</p>
+
+<p>The gameplay for Mega Man ZX is similar to the Mega Man Zero series, with an emphasis on close-quarter combat. The player is given the choice of choosing a male or female human protagonist in each installment, a first in the franchise. New to the series is the interconnected Metroidvania-esque world that encourages exploration and replay value, and the ability to collect "Biometals", which are central to the story. "Biometals" contains data on the legendary heroes of the past (including X, Zero, and the Four Guardians from the <i>Zero</i> series). Using these Biometals, the protagonists are able to transform (or "Mega-Merge", in the English releases) and use the powers of these heroes. In the second game, 2007's <i><a href="https://en.wikipedia.org/wiki/Mega_Man_ZX_Advent">Mega Man ZX Advent</a></i>, the player character is also able to transform into boss characters upon defeating them, which allows them to access previously inaccessible areas.</p>
+
+<p>A third game, code-named <i>Mega Man ZXC</i> was under development around 2008, but was cancelled by Capcom's decision in favor of developing <a href="https://en.wikipedia.org/wiki/Mega_Man_9">Mega Man 9</a>. As such, the series has not received a proper conclusion.</p>
+
+<p>Beginning on the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> in 1997, a <a href="https://en.wikipedia.org/wiki/3D_computer_graphics">3D</a> <a href="https://en.wikipedia.org/wiki/Action_game">action game</a> series called <i>Mega Man Legends</i> was created to take advantage of the console's advanced <a href="https://en.wikipedia.org/wiki/Computer_graphics">graphics</a> hardware. The <i>Legends</i> series is set thousands of years in the future, where the world is covered by immense bodies of water, and humanity is extinct. In its place, Carbons, artificial humans, roam what was left of the world. The story follows Mega Man (Rock) Volnutt, a <a href="https://en.wikipedia.org/wiki/Relic">relic</a> hunter called a "Digger" who scavenges various ruins throughout the world in search of refractor shards that can be mined and traded as currency. <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Legends">Mega Man Legends</a></i> brings the gameplay into 3D and is an action-adventure game with third-person shooting role-playing elements.</p>
+
+<p>The <i>Legends</i> series was left on a cliffhanger, with only two main games and a spin-off starring mainstay antagonist Tron Bonne before being discontinued. A continuation to the <i>Legends</i> series has become an oft-requested game among many Capcom and Mega Man fans. A <a href="https://en.wikipedia.org/wiki/Mega_Man_Legends_3">third game</a> was once under development for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>, but on July 17, 2011, Capcom canceled the project saying it did not meet certain requirements. This decision was met with criticism from fans and gaming news outlets.</p>
+
+<p>Despite the many years since the last new release in the series, various characters from the <i>Legends</i> series consistently appear in Capcom cross-over games such as <i><a href="https://en.wikipedia.org/wiki/Marvel_vs._Capcom_(series)">Marvel vs. Capcom</a></i>, and the Servbot characters have become iconic within the Capcom community, making many cameo appearances in non-<i>Mega Man</i> games, including <i><a href="https://en.wikipedia.org/wiki/Dead_Rising_(video_game)">Dead Rising</a></i> and as part of the outfit obtained via achievements in <i><a href="https://en.wikipedia.org/wiki/Lost_Planet_2">Lost Planet 2</a></i>.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Mega_Man_Battle_Network">Mega Man Battle Network</a></i>, a series primarily on the Game Boy Advance, began in 2001 as a way for the <i>Mega Man</i> games to branch out into the <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing video game</a> market and to celebrate <i>Mega Man</i>'s 15th anniversary. This series features a Net Navi called <i><a href="https://en.wikipedia.org/wiki/MegaMan.EXE">MegaMan.EXE</a></i>. NetNavis acts as virtual assistants to Operators, such as the protagonist <a href="https://en.wikipedia.org/wiki/Lan_Hikari">Lan Hikari</a>, an elementary school student and a future hero who uses his Net Navi to help battle <a href="https://en.wikipedia.org/wiki/Computer_virus">computer viruses</a> and other Internet-based threats. The game combines <a href="https://en.wikipedia.org/wiki/Real-time_strategy">real-time strategy</a>, <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing</a>, and <a href="https://en.wikipedia.org/wiki/Collectible_card_game">collectible card games</a> to create a unique fast-paced battle system. Players and enemies are placed in a 6x3 grid, with each side usually occupying 3x3 of the space. Players must select Battle Chips from a select few from a folder deck, and once selected, the game switches to real-time as the player must move to dodge enemy attacks while attacking at the same time using said Battle Chips. Once the Custom Gauge is full, the player is able to select new chips from the deck.</p>
+
+<p>An <a href="https://en.wikipedia.org/wiki/Anime">anime</a> series, <i><a href="https://en.wikipedia.org/wiki/MegaMan_NT_Warrior">MegaMan NT Warrior</a></i>, was also produced, ending with 209 episodes and a 50-minute film adaptation. A spin-off game <i>Mega Man Network Transmission</i>, was released in 2003. It is the only entry in the series released on a home console rather than a handheld, and takes place chronologically between the first two <i>Battle Network</i> games. It is also different from other games in the Battle Network universe as the game plays similarly to the <i>Classic Mega Man</i> series with several <i>Battle Network</i> elements.</p>
+
+<p>Along with the anime and games, Mega Man Battle Network had toys mainly based on the Advanced PET from the series, the user would buy a starter pack which included 3 battle chips, and an Advanced PET, the toy came in three colors, Red (based on <i>ProtoMan.EXE</i>), Black (based on <i>Bass.EXE</i>) and Blue (based on <i>MegaMan.EXE</i>). Several battle chip expansion packs were also released, when the toy was discontinued, a total of 333 Battle Chips were released. The toy could be linked together via a link cable with another Advanced PET to battle each other.</p>
+
+<p>With the series' <a href="https://en.wikipedia.org/wiki/Mega_Man_Battle_Network_6">sixth installment</a>, <i>Battle Network</i> was the second series in the franchise to reach a definitive conclusion.</p>
+
+<p>A follow-up to the <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Battle_Network">Mega Man Battle Network</a></i> series and released on the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>, The <i>Star Force</i> series' marks the 20th anniversary of the <i>Mega Man</i> franchise. <i>Star Force</i> takes place roughly 200 years after the events of Battle Network, where network technology has progressed with <a href="https://en.wikipedia.org/wiki/Electromagnetic_wave">electromagnetic wave</a> technology to connect the world via radio waves. The series follows a boy named Geo Stelar, who lost his father after a space incident, and Omega-Xis, an extraterrestrial EM-wave fugitive arriving on Earth. The two transform into an EM-Human being known as "Mega Man," and as they explore both the real world and the EM-world, they face off against malicious EM-beings like Omega-Xis merging with other humans for their malicious intentions.</p>
+
+<p>With the series <a href="https://en.wikipedia.org/wiki/Mega_Man_Star_Force_3">third installment</a> completing the story arc that started in the first game, <i>Star Force</i> became the third series in the Mega Man franchise to have a proper conclusion.</p>
+
+<p>The <i>Star Force</i> games are similar to the <i>Battle Network</i> games, in which players must use a select number of Battle Cards on a folder deck to attack enemies. However, unlike <i>Battle Network,</i> combat takes place in 3D space, with most of the grid occupied by enemies, and the player having only a 1x3 grid to move, making combat much faster-paced and focusing more on player reflexes and quick-reaction time from an opening. To compensate, the <a href="https://en.wikipedia.org/wiki/Collectible_card_game">collectible card</a> system has been simplified, and players were given the "Mega Attack" ability which allows the player to lock on and move straight to the enemy to attack, and a regenerating shield that can deflect most attacks.</p>
+
+<p>Like <i>Battle Network</i>, multiple merchandise and toys have been created for this series, such as add-on accessories for the Nintendo DS, as well as physical Battle Cards that can be used in-game. An <a href="https://en.wikipedia.org/wiki/Mega_Man_Star_Force_(anime)">anime</a> based on this series began airing on <a href="https://en.wikipedia.org/wiki/TV_Tokyo">TV Tokyo</a> in October 2006 for 76 episodes. A remake of the first <i>Battle Network</i> game, "Operation Shooting Star", features crossover content between <i>Battle Network</i> and <i>Star Force</i> and was released exclusively in Japan in 2009.</p>
+
+<p><i>Rockman Xover</i> (ロックマン Xover <i>Rokkuman Kurosuōbā</i>, pronounced as Rockman Cross-over) is a game for Apple's <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> platform. The game marks the 25th anniversary of the <i>Mega Man</i> franchise and was released on November 29, 2012, on the Hong Kong iTunes Store. The game features a new protagonist, OVER-1 (オーバー ワン <i>Ōbā Wan</i>), a Reploid created by Dr. Light and Dr. Cossack, as he travels confronting villains from the entire <i>Mega Man</i> franchise, who have crossed between dimensions to join forces. The game received largely negative reviews from Japanese players, prompting Capcom to cancel the game's North American release. The game ceased operations on March 31, 2015.</p>
+
+<h2>In other media</h2>
+
+<h3>In other video games</h3>
+
+<p>Various incarnations of Mega Man appear as playable fighters in the <i><a href="https://en.wikipedia.org/wiki/Marvel_vs._Capcom">Marvel vs. Capcom</a></i> series. The original was a playable fighter in <i><a href="https://en.wikipedia.org/wiki/Marvel_vs._Capcom:_Clash_of_Super_Heroes">Marvel vs. Capcom: Clash of Super Heroes</a></i> and <i><a href="https://en.wikipedia.org/wiki/Marvel_vs._Capcom_2:_New_Age_of_Heroes">Marvel vs. Capcom 2: New Age of Heroes</a></i>. He is assisted by his companion robots, Rush, Beat and Eddie. His sister robot, Roll, is also playable in both games, but is a secret character in the first game. Although he did not make a playable appearance in <i><a href="https://en.wikipedia.org/wiki/Marvel_vs._Capcom_3:_Fate_of_Two_Worlds">Marvel vs. Capcom 3: Fate of Two Worlds</a></i>, and its successor, <i><a href="https://en.wikipedia.org/wiki/Ultimate_Marvel_vs._Capcom_3">Ultimate Marvel vs. Capcom 3</a></i>, Zero from <i><a href="https://en.wikipedia.org/wiki/Mega_Man_X">Mega Man X</a></i> and Tron Bonne from <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Legends">Mega Man Legends</a></i> appear as representatives for the series. <a href="https://en.wikipedia.org/wiki/X_(Mega_Man)">X</a> appears as an alternate costume for Zero and <a href="https://en.wikipedia.org/wiki/Frank_West_(Dead_Rising)">Frank West</a> and as a card in Heroes and Heralds mode. The original Mega Man appears in the arcade endings of <a href="https://en.wikipedia.org/wiki/Thor_(Marvel_Comics)">Thor</a> and <a href="https://en.wikipedia.org/wiki/Nova_(Richard_Rider)">Nova</a>, and also appears on a poster in the Days of Future Past stage, and finally, as another card in Heroes and Heralds Mode. X and Zero appear as playable characters in <i><a href="https://en.wikipedia.org/wiki/Marvel_vs._Capcom:_Infinite">Marvel vs. Capcom: Infinite</a></i>, with Sigma appearing as both a DLC fighter and a major antagonist in the Story Mode, where he merges with the supervillain <a href="https://en.wikipedia.org/wiki/Ultron">Ultron</a> to become Ultron Sigma.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p>MegaMan.EXE and Zero both appear as bonus playable characters in the fighting game <i><a href="https://en.wikipedia.org/wiki/Onimusha_Blade_Warriors">Onimusha Blade Warriors</a></i>, while a different version of Mega Man, based on his appearance on the American box art of the first game, appears as a playable fighter in the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Vita">PlayStation Vita</a> versions of <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_X_Tekken">Street Fighter X Tekken</a></i>. Mega Man Volnutt and Roll also make an appearance in <i><a href="https://en.wikipedia.org/wiki/Tatsunoko_vs._Capcom:_Ultimate_All-Stars">Tatsunoko vs. Capcom: Ultimate All-Stars</a></i>, with Zero added to the U.S. version. In 2014, Mega Man appeared as a playable character in <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._for_Nintendo_3DS_and_Wii_U">Super Smash Bros. for Nintendo 3DS and Wii U</a></i> and its sequel, <i><a href="https://en.wikipedia.org/wiki/Super_Smash_Bros._Ultimate">Super Smash Bros. Ultimate</a></i>. An <a href="https://en.wikipedia.org/wiki/Amiibo">amiibo</a> based on his appearance was confirmed on November 11, and can be utilized in <i>Super Smash Bros.</i> as well as <i><a href="https://en.wikipedia.org/wiki/Mario_Kart_8">Mario Kart 8</a></i> where it can be scanned to unlock a costume for the player's <a href="https://en.wikipedia.org/wiki/Mii">Mii</a> based on Mega Man's. In <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Maker">Super Mario Maker</a></i>, the player can unlock a Mega Man costume by scanning the character's <a href="https://en.wikipedia.org/wiki/Amiibo">amiibo</a>.</p>
+
+<p>In <i><a href="https://en.wikipedia.org/wiki/Monster_Hunter:_World">Monster Hunter: World</a></i>, Mega Man is a playable character through <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a>.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p>Mega Man's first television appearances were produced for the American market and were based on the classic series. First was <i><a href="https://en.wikipedia.org/wiki/Captain_N:_The_Game_Master">Captain N: The Game Master</a></i> (1989–91), a show that took place in a universe that was made up of many different Nintendo games. It featured Mega Man as a main character and also featured Dr. Wily as one of the antagonists. This was followed by <i><a href="https://en.wikipedia.org/wiki/Mega_Man_(1994_TV_series)">Mega Man</a></i> (1994–95), the first series to be based in the Mega Man universe.</p>
+
+<p>Mega Man next appeared in anime produced in Japan and based on spin-off series. First was <i><a href="https://en.wikipedia.org/wiki/MegaMan_NT_Warrior">MegaMan NT Warrior</a></i> (2002–06), based on the <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Battle_Network">Mega Man Battle Network</a></i> video game series (both the anime and the video game series were known as <i>Rockman.EXE</i> in Japan). This was followed by <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Star_Force_(anime)">Mega Man Star Force</a></i> (2006–08), based on <a href="https://en.wikipedia.org/wiki/Mega_Man_Star_Force">the video game series of the same name</a> (both were known as <i>Shooting Star Rockman</i> in Japan).</p>
+
+<p>A series titled <i><a href="https://en.wikipedia.org/wiki/Mega_Man:_Fully_Charged">Mega Man: Fully Charged</a></i> began airing in 2018. Unlike the previous anime, it is again an American-produced animated series loosely based on the classic series.</p>
+
+<p>In August 2024, it was revealed that Mega Man would be adapted in video game anthology series <i><a href="https://en.wikipedia.org/wiki/Secret_Level">Secret Level</a></i> created by <a href="https://en.wikipedia.org/wiki/Tim_Miller_(director)">Tim Miller</a> for <a href="https://en.wikipedia.org/wiki/Amazon_Prime_Video">Amazon Prime Video</a>.</p>
+
+<p>Mega Man starred in <i><a href="https://en.wikipedia.org/wiki/Mega_Man:_Upon_a_Star">Mega Man: Upon a Star</a></i>, a three-part <a href="https://en.wikipedia.org/wiki/OVA">OVA</a> that was developed in Japan. Production on this series started circa 1992-1993, before the <a href="https://en.wikipedia.org/wiki/Mega_Man_(1994_TV_series)">American TV series</a>, but was not officially released in the United States until 2005.</p>
+
+<p>Development of a film based on <i>Mega Man</i> had begun by December 2014 when <a href="https://en.wikipedia.org/wiki/20th_Century_Studios">20th Century Fox</a> registered a website domain for the film. In September 2015, Fox was revealed to be developing the film with <a href="https://en.wikipedia.org/wiki/Chernin_Entertainment">Chernin Entertainment</a>, and its CEO <a href="https://en.wikipedia.org/wiki/Peter_Chernin">Peter Chernin</a> was set to serve as a producer, with <a href="https://en.wikipedia.org/wiki/David_Ready">David Ready</a> and Michael Finfer overseeing the production for Chernin, while Mike Ireland and Ryan Horrigan were overseeing for Fox. Fox had attempted to secure the <i>Mega Man</i> rights for over two years, and officially signed a deal to do so in early 2017. The filmmaking duo of <a href="https://en.wikipedia.org/wiki/Henry_Joost">Henry Joost</a> and <a href="https://en.wikipedia.org/wiki/Ariel_Schulman">Ariel Schulman</a> were in final negotiations to write and direct the film for Fox and Chernin Entertainment in July 2017, when <a href="https://en.wikipedia.org/wiki/Masi_Oka">Masi Oka</a> joined as a producer. In October 2018, Capcom officially announced that a live-action film was in development at Fox and Chernin Entertainment, and confirmed the involvement of Joost and Schulman along with Oka. The film was part of Capcom's plans to increase value in the <i>Mega Man</i> franchise following the release of the <a href="https://en.wikipedia.org/wiki/Mega_Man_(original_series)"><i>Mega Man</i> original series</a> video game <i><a href="https://en.wikipedia.org/wiki/Mega_Man_11">Mega Man 11</a></i> that month, and the company intended for the film to draw different audiences interested in video games or <a href="https://en.wikipedia.org/wiki/Action_film">action films</a>. The film was set to depict the world of the <i>Mega Man</i> games by using a higher-budgeted film production. In March 2019, <a href="https://en.wikipedia.org/wiki/The_Walt_Disney_Company">The Walt Disney Company</a> officially <a href="https://en.wikipedia.org/wiki/Acquisition_of_21st_Century_Fox_by_Disney">acquired</a> Fox, and in August, Disney CEO <a href="https://en.wikipedia.org/wiki/Bob_Iger">Bob Iger</a> announced that several films in development at Fox would not be progressing, citing operating losses from that studio in Disney's third fiscal quarter; the <i>Mega Man</i> film was believed to have been one of these films. That October, Capcom announced that <i>Mega Man</i> remained slated for a live-action film adaptation to create further awareness for the brand.</p>
+
+<p>In January 2020, Disney and Chernin mutually agreed to end their production deal, citing Disney rarely having third-party studios finance their films. Chernin Entertainment was set to retain 70 of its projects from Fox, while the remaining productions were Disney-owned properties that would still involve Chernin as an executive producer. Later that month, <a href="https://en.wikipedia.org/wiki/Mattson_Tomlin">Mattson Tomlin</a> was revealed to be rewriting the <i>Mega Man</i> script. In April, Chernin signed a non-exclusive multi-year first-look film deal between Chernin Entertainment and the streaming service <a href="https://en.wikipedia.org/wiki/Netflix">Netflix</a>. In July, Joost and Schulman said that "big news" would soon be provided for the film, and said they invited Tomlin to co-write the script after he wrote their Netflix film <i><a href="https://en.wikipedia.org/wiki/Project_Power">Project Power</a></i> (2020), a process they enjoyed. Joost and Schulman wanted to combine their interest in <a href="https://en.wikipedia.org/wiki/Robotics">robotics</a> and the future of <a href="https://en.wikipedia.org/wiki/Automation">automation</a> with their favorite <i>Mega Man</i> games, and called <a href="https://en.wikipedia.org/wiki/Mega_Man_(character)">Mega Man</a> an "underdog hero". In August, Tomlin said his approach was to explore Mega Man as a real person with a "primal and emotional" story that can be relatable beyond the character's traditional depictions. In December 2021, Joost and Schulman's production company Supermarché was revealed to be developing the film alongside Chernin Entertainment for Netflix, with the duo's in-house producer Orlee-Rose Strauss also attached. Ryan Leston at <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> reported the film was still in early development at that time. In August 2022, Schulman confirmed that he and Joost were writing a <i>Mega Man</i> film adaptation for Netflix, and said it would explore the future of automation and "man and robot becoming one" as either being good or bad. Shortly after, Joost said that Josh Koenigsberg, who co-wrote Joost and Schulman's film <i><a href="https://en.wikipedia.org/wiki/Secret_Headquarters">Secret Headquarters</a></i> (2022), was writing a new draft of the screenplay with the duo and hoped to turn in a completed draft to Netflix in the following weeks. Koenigsberg said he had replayed past <i>Mega Man</i> video games to research the property.</p>
+
+<p>Various artbooks and source books have been released for many years in Japan, often including conceptual artwork, interviews with production staff, and background information on the storyline and concepts that are not present within the games themselves. One of the most well-known is the <i>Rockman Perfect Memories</i> sourcebook released in 2002 which first confirmed the presence of an alternate timeline (for <i>Battle Network</i>), as well as exactly where the <i>Legends</i> series fit into the fictional <i>Mega Man</i> universe.</p>
+
+<p>Recently a series of artbooks called the <i>Official Complete Works</i> has been published for individual <i>Mega Man</i> series, showcasing a large collection of artwork and background information. To date, books for the <i>Zero</i>, <i>Classic</i> and <i>X</i> (released together as <i>R20</i>), <i>Star Force</i>, and <i>Battle Network</i> series have been produced. Although these books have for many years been exclusive to Japan, <a href="https://en.wikipedia.org/wiki/Udon_Entertainment">Udon Entertainment</a> has finished translating the <i>Official Complete Works</i> series for the North American market, called "R25". <i>Mega Man: Official Complete Works</i> was re-released as a hardcover on October 16, 2018, <i>Mega Man X: Official Complete Works</i> was followed by a hardcover re-release on November 27, 2018. A hardcover re-release of <i>Mega Man Zero: Official Complete Works</i> was released on June 11, 2019. On April 2, 2019, it was announced that <i>Mega Man Battle Network Official Complete Works</i> would be getting a hardcover re-release on August 20, 2019. On October 31, 2019, it was announced that <i>Mega Man Star Force Official Complete Works</i> would be getting a hardcover re-release on May 5, 2020.</p>
+
+<p>Mega Man has also been featured in many comics and <a href="https://en.wikipedia.org/wiki/Manga">manga</a> in Japan, although few have been localized in North America.</p>
+
+<p>The most well-known series is produced by Hitoshi Ariga (who went on to provide character designs and artwork for future official <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> releases, including the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Famicom</a> game <i><a href="https://en.wikipedia.org/wiki/Mega_Man_and_Bass">Mega Man and Bass</a></i>). The series began with <i>Rockman Remix</i>, later known as <i>Rockman Megamix</i>, and followed up by <i>Rockman Gigamix</i>. The <i>Megamix</i> portion of the series would eventually be brought to North American shores thanks to <a href="https://en.wikipedia.org/wiki/Udon_Entertainment">Udon Entertainment</a>, also responsible for the localization of the short <i><a href="https://en.wikipedia.org/wiki/Mega_Man_ZX">Mega Man ZX</a></i> manga by Shin Ogino. In the original <i>Mega Man</i> series, <a href="https://en.wikipedia.org/wiki/Doctor_Light_(Mega_Man)">Dr. Light</a> was known as Dr. <i>R</i>ight, so many of his robots featured in Ariga's comic have "R"s in their designs. Udon did not alter this detail in the English version of <i>Mega Man Megamix</i>.</p>
+
+<p>In addition, <a href="https://en.wikipedia.org/wiki/Viz_Media">Viz Media</a> localized the 13-volume <i>Rockman EXE</i> manga by <a href="https://en.wikipedia.org/wiki/Ryo_Takamisaki">Ryo Takamisaki</a> under the name <i><a href="https://en.wikipedia.org/wiki/MegaMan_NT_Warrior">MegaMan NT Warrior</a></i>. Takamisaki would later serialize a short adaptation of <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Star_Force_3">Mega Man Star Force 3</a></i> that was never published outside Japan.</p>
+
+<p>Some other manga series that have not been localized outside Japan include a 12-volume <i>Rockman X</i> adaptation by Yoshihiro Iwamoto, over 15 <i>Classic</i> and <i>X</i> adaptations by Shigeto Ikehara, a light-hearted adaptation of <i>Rockman Zero</i> by Hideto Kajima, a slapstick adaptation of <i>Shooting Star Rockman</i> by Masaya Itagaki, another <i>Battle Network</i> adaptation by Jun Keijima and Miho Asada called <i>Rockman EXE Battle Story</i>, and a short series of slapstick <i>Battle Network</i> and <i>Star Force</i>-themed adaptations by Takumi Kawano.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Dreamwave">Dreamwave Productions</a> and Brazilian publisher Magnum Press made its own comic books based on the classic game series. The Brazilian series, <i>Novas Aventuras de Megaman</i> ("New Adventures of Megaman"), were originally published and sold in Brazil between 1996 and 1997 and drew certain criticism for featuring bizarrely altered storylines (with characters from several installments appearing at random, as well as <a href="https://en.wikipedia.org/wiki/Erotic">erotic</a> and <a href="https://en.wikipedia.org/wiki/Sexual_innuendo">sexual innuendo</a> in Mega Man and X's relationship with Roll) as well for frequent nudity involving Roll and an original character named Princesa, which attempted to take over the status as the main character of the comics; its sudden end on a cliffhanger. The series was illustrated by <a href="https://en.wikipedia.org/wiki/Erica_Awano">Erica Awano</a>, Eduardo Francisco, Daniel HDR and others.</p>
+
+<p>The Dreamwave series lasted only four issues and also ended abruptly, with plot-threads from the first three issues being dropped completely in the final issue and the inclusion of a short story promising a <i>Mega Man X</i> follow-up that never materialized. This was one of several Dreamwave Capcom comics that were cut short or simply never made it to issue #1, including <i><a href="https://en.wikipedia.org/wiki/Maximo:_Ghosts_to_Glory">Maximo</a></i>, <i><a href="https://en.wikipedia.org/wiki/Darkstalkers">Darkstalkers</a></i> and <i><a href="https://en.wikipedia.org/wiki/Rival_Schools">Rival Schools</a></i>.</p>
+
+<p>On July 20, 2017, it was announced that <i>Mega Man Megamix</i> would be getting remastered on January 24, 2018, titled "<i>Mega Man: Mastermix</i>" These releases will contain remastered versions of the original stories and in full color provided by Josh Perez. And on September 29, 2018, It was announced that <i>Mega Man Mastermix</i> would be getting released in trade paperback form on April 2, 2019.</p>
+
+<p>In July 2024, Udon Entertainment announced a <i>Mega Man</i> comic for release in 2025.</p>
+
+<p>In 1990, a junior novel version of <i><a href="https://en.wikipedia.org/wiki/Mega_Man_2">Mega Man 2</a></i> was released as part of the <i>Worlds of Power</i> novel series. Mega Man is turned human by Dr. Light during an accident in a machine designed to clone Mega Man. Instead of a Mega Buster, human Mega Man uses a hand gun, and instead of being able to copy the robot master's weapons, he instead takes them off of their arms. For some reason, being human does not affect him much and he is still able to consume E-drinks (Energy Tanks) and gain a power boost. The book follows the general plot of <i>Mega Man 2</i> and even provides game hints at the end of some chapters.</p>
+
+<p>Ascertaining the identity of video game composers, especially prior to the <a href="https://en.wikipedia.org/wiki/History_of_video_game_consoles_(fifth_generation)">fifth generation</a> of consoles, can be difficult, as the composers were often uncredited or credited under a <a href="https://en.wikipedia.org/wiki/Pseudonym">pseudonym</a>. Recent soundtrack releases and interviews have discovered the true names of the composers; and in some cases, specific track credits.</p>
+
+<p>The indie rock music group <a href="https://en.wikipedia.org/wiki/The_Protomen">The Protomen</a> dedicated their first two albums to a rock opera based on Mega Man, called <i><a href="https://en.wikipedia.org/wiki/The_Protomen_(album)">The Protomen</a></i> (2005) and <i><a href="https://en.wikipedia.org/wiki/Act_II:_The_Father_of_Death">Act II: The Father of Death</a></i> (2009).</p>
+
+<p>Independent rap artist <a href="https://en.wikipedia.org/wiki/Mega_Ran">Mega Ran</a> remixed several Mega Man tracks for an album called <i><a href="https://en.wikipedia.org/wiki/Mega_Ran">Mega Ran</a></i> (2007) and several follow-up albums, which were officially licensed by Capcom. He now holds a <a href="https://en.wikipedia.org/wiki/Guinness_World_Record">Guinness World Record</a> for the most songs recorded referencing Megaman with 130.</p>
+
+<p>Indie video game cover band <a href="https://en.wikipedia.org/wiki/The_Megas_(band)">The Megas (band)</a> is a band that covers the music of the original NES Mega Man games, known for adding their own twist on the original story in their lyrics such as giving Robot Masters distinct personalities unseen in the games. <i>Get Equipped</i> (2008), their debut album covering the events of Mega Man 2; while their most recent albums, <i>History Repeating: Blue</i> (2012) and <i>History Repeating: Red</i> (2014) cover the events of <i>Mega Man 3</i>.</p>
+
+<h2>Reception and legacy</h2>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a>, the <i>Mega Man</i> games were the first to feature a <a href="https://en.wikipedia.org/wiki/Nonlinear_gameplay">non-linear</a> "level select" option. This was a stark contrast to both linear games (like <i><a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.">Super Mario Bros.</a></i>) and <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> games (like <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda_(video_game)">The Legend of Zelda</a></i> and <i><a href="https://en.wikipedia.org/wiki/Metroid">Metroid</a></i>). GamesRadar credits the "level select" feature of <i>Mega Man</i> as the basis for the non-linear mission structure found in most open-world, multi-mission, <a href="https://en.wikipedia.org/wiki/Sidequest">sidequest</a>-heavy games, including modern games like <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto">Grand Theft Auto</a></i>, <i><a href="https://en.wikipedia.org/wiki/Red_Dead_Redemption">Red Dead Redemption</a></i> and <i><a href="https://en.wikipedia.org/wiki/Spider-Man:_Shattered_Dimensions">Spider-Man: Shattered Dimensions</a></i>. In <i><a href="https://en.wikipedia.org/wiki/Street_Fighter:_Assassin's_Fist">Street Fighter: Assassin's Fist</a></i> tenth episode "Raging Demon", <a href="https://en.wikipedia.org/wiki/Ryu_(Street_Fighter)">Ryu</a> and <a href="https://en.wikipedia.org/wiki/Ken_Masters">Ken</a> were seen playing <i>Mega Man 2</i> from a gift from Ken's father.</p>
+
+<p>The original Mega Man series was well received, with IGN ranking all six original titles in the top 100 best NES games. Mega Man 2 in particular is widely regarded as the best of the series and one of the finest and most influential platformers of all-time. IGN ranked it as the fourth best NES game, behind only Super Mario and Legend of Zelda titles, calling it "virtually flawless" and its gameplay "oft-replicated and never exceeded".</p>
+
+<p>The <i>Mega Man X</i> series has been positively received. The first Mega Man X game was widely acclaimed by critics since its release. Gaming magazines in the United States and Europe including <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> (<i>EGM</i>), <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i>, <i><a href="https://en.wikipedia.org/wiki/Game_Players">Game Players</a></i>, <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i>, <i><a href="https://en.wikipedia.org/wiki/Super_Play">Super Play</a></i>, and the German version of <i><a href="https://en.wikipedia.org/wiki/Total!">Total!</a></i> consistently lauded the game's visuals, audio, control, and overall gameplay. <i>Game Players</i> summarized <i>Mega Man X</i> as "a near-perfect <a href="https://en.wikipedia.org/wiki/ROM_cartridge">cart</a> with classic gameplay, excellent graphics and sound and tons of hidden items and power-ups". <i>Nintendo Power</i> stated that the game had "great control and fun" along with "challenging play".<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p>Websites such as <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>, <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a>, <a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a>, and <a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a> retrospectively held <i>Mega Man X</i> as a successful milestone in converting the <i>Mega Man</i> series from its increasingly stale existence on the NES to the SNES. Brett Elston of GamesRadar stated, "<i>X</i> was a total reinvention of the series, a perfectly executed update that had fans anticipating its release with a fervor the franchise hadn't seen since the <i><a href="https://en.wikipedia.org/wiki/Mega_Man_2">Mega Man 2</a></i> and <i><a href="https://en.wikipedia.org/wiki/Mega_Man_3">3</a></i> days."</p>
+
+<p><i>Mega Man X</i> received criticism from some publications as well. Ed Semrad, Danyon Carpenter, and Al Manuel of the <i>EGM</i> review panel all noted that the game may have too low a <a href="https://en.wikipedia.org/wiki/Difficulty_level">difficulty level</a>; Semrad disliked the introductory stage and felt that the game was too short as well. <i>Super Play</i> editor Zy Nicholson lowered his review score of the game because he found the levels were neither large nor challenging. "A few elementary tricks like repeating easy sections to recoup energy and weapon power will see you through the harder bits," Nicholson explained. "Within the level you'll also find restart points, extra lives, and no harsh time limit to put pressure on your performance. Couple this with a password system that records your level completion, status and weapon accumulation and you'll see we're not looking at a lasting challenge for the experienced player." <i>Nintendo Power</i> criticized how little the game had changed stating that "the theme remains the same as the Game Boy and NES Mega Man titles." The game's title initially proved a source of some confusion; the gaming media reported that many gamers mistook the "X" for the <a href="https://en.wikipedia.org/wiki/Roman_numeral">roman numeral</a> 10.</p>
+
+<p><i>Mega Man X</i> was ranked number 58 in <i>Nintendo Power'</i>s "100 Best Nintendo Games of All Time" in its 100th issue in September 1997, number 103 in the publication's "Top 200 Games" list for its 200th issue in February 2006, and the 11th best SNES game of all time in its August 2008 issue. Both GamesRadar and <a href="https://en.wikipedia.org/wiki/ScrewAttack">ScrewAttack</a> listed <i>Mega Man X</i> as the <a href="https://en.wikipedia.org/wiki/ScrewAttack's_Top_10">eighth best game in the SNES library</a>. <i>GamePro</i> similarly listed it as the eighth greatest 16-bit video game. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> considered it the 120th best game of all time in its own 200th issue in December 2009. IGN named it the twelfth-best on its own top 100 SNES games list in 2011.</p>
+
+<p><i>Mega Man X</i> was a commercial success. The SNES version has sold 1.16 million copies worldwide as of March 31, 2021, making it the 89th best-selling Capcom game of all time. IGN's Jeremy Dunham speculated that the game's more mature storyline and its inclusion of numerous gameplay extensions over the original <i>Mega Man</i> series helped create a "unique cadre of fans". A spin-off series, <i><a href="https://en.wikipedia.org/wiki/Mega_Man_Zero">Mega Man Zero</a></i>, began in 2002 on the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> handheld as a result of the immense popularity of the character Zero.</p>
+
+<p>The <i>Mega Man Zero</i> games have earned generally positive reviews. Review sources both criticized and praised the high difficulty level of the game and remarked that they were similar in nature to earlier installments in the Mega Man series. Positive reviews noted the variety of abilities and customization along with an engaging story than compared to its earlier series, while negative reviews focused on the series repetitiveness and lack of originality. Review scores were lower for the last two games in the series, with critics pointing out that the games were just using the same gameplay without introducing anything new. When the first game in the series came out, reviewers were quick to hail a return to what they considered "the Mega Man roots", however some fans criticized that the lack of knowing which boss the player will face next was a change for the worse and that it "takes away what made the series unique in the past".</p>
+
+<p>Overall, the character of Mega Man has been well received by critics. <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> called him an icon of Capcom. <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i> listed Mega Man as their fourth favourite hero, citing his ability to steal weapons from downed Robot Masters. Mega Man was also listed as the best robot in video games by many sources such <a href="https://en.wikipedia.org/wiki/Joystick_Division">Joystick Division</a>, <a href="https://en.wikipedia.org/wiki/UGO_Networks">UGO Networks</a>, and <i><a href="https://en.wikipedia.org/wiki/Complex_(magazine)">Complex</a></i>. <a href="https://en.wikipedia.org/wiki/GameDaily">GameDaily</a> ranked him as the best Capcom character of all time. UGO Networks listed Mega Man as one of their best heroes of all time, and called him "one of the most iconic video game heroes of all time". He was included in GameSpot's "All Time Greatest Video Game Hero" contest and reached the "Elite Eight" round before losing to <a href="https://en.wikipedia.org/wiki/Mario">Mario</a>. In a <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> poll done in February 2010, Mega Man was voted by readers as the twenty-second most popular video game character. The 2011 <i><a href="https://en.wikipedia.org/wiki/Guinness_World_Records_Gamer's_Edition">Guinness World Records Gamer's Edition</a></i> lists Mega Man as the 23rd most popular video game character. In 2012, <a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a> ranked him as the 12th "most memorable, influential, and badass" protagonist in games.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Complex_(magazine)">Complex</a></i> ranked him as having the tenth best fighting game cameos for his guest appearances in <i><a href="https://en.wikipedia.org/wiki/Street_Fighter_X_Tekken">Street Fighter X Tekken</a></i> in 2012. <a href="https://en.wikipedia.org/wiki/Joystick_Division">Joystick Division</a> cited his rivalry with Dr. Wily as seventh of the ten greatest in video games, adding giving "great credit to this rivalry for its open-endedness" and <a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a> listed him and <a href="https://en.wikipedia.org/wiki/Proto_Man">Proto Man</a> as having one of the best brotherly rivalries in gaming. UGO Networks have placed Mega Man as the eighth character who most deserves his own movie.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a> described Mega Man as "Capcom's ill-treated mascot", and "one of the most incongruous characters of all time", saying "it wouldn't be completely incorrect to assume that the popularity of the series has almost nothing to do with Mega Man himself", but with "his rivals, his enemies, and their abilities." <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> agreed with his dependency on support characters, saying <a href="https://en.wikipedia.org/wiki/Zero_(Mega_Man)">Zero</a> is "cooler than Mega Man". <a href="https://en.wikipedia.org/wiki/Den_of_Geek">Den of Geek</a> listed Mega Man's incarnation from <i>Street Fighter X Tekken</i> as the 15th best cameo in fighting game history due to how it represented Capcom's lack of interest in featuring other games as of 2012, as well as the apparent self-mockery of it due to Mega Man's poor characterization. <a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a> described this Mega Man as "legit" stating it was "an unexpected and interesting creative decision by [Capcom] using this version of Mega Man to represent them in what may be one of their biggest games of 2012".</p>
+
+<p><i>Mega Man</i> series director <a href="https://en.wikipedia.org/wiki/Keiji_Inafune">Keiji Inafune</a> announced the similarly themed <i><a href="https://en.wikipedia.org/wiki/Mighty_No._9">Mighty No. 9</a></i> in September 2013, but after much controversy surrounding delays and mishandling, the game was released in June 2016 to a mixed-to-negative reception. Batterystaple Games released the <i>Mega Man X</i>-inspired <i><a href="https://en.wikipedia.org/wiki/20XX_(video_game)">20XX</a></i> in 2014.</p>
+
+<h2>Related</h2>
+
+<ul>
+  <li><i><a href="https://en.wikipedia.org/wiki/The_Krion_Conquest">Magical Kids Doropie</a></i></li>
+  <li><i><a href="https://en.wikipedia.org/wiki/20XX_(video_game)">20XX</a></i></li>
+  <li><i><a href="https://en.wikipedia.org/wiki/Azure_Striker_Gunvolt">Azure Striker Gunvolt</a></i></li>
+  <li><i><a href="https://en.wikipedia.org/wiki/Mighty_Gunvolt">Mighty Gunvolt</a></i></li>
+  <li><i><a href="https://en.wikipedia.org/wiki/Mighty_No._9">Mighty No. 9</a></i></li>
+</ul>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
