@@ -1,0 +1,333 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Fallout: Brotherhood of Steel</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('ad815439-9de3-4ffb-b4ad-0513b06c506f/46296e7e-ace0-4cf5-9948-e4a63f802a87.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="ad815439-9de3-4ffb-b4ad-0513b06c506f/3b141a64-5973-4c88-ac52-c2395d21b9b6.png"/> Fallout: Brotherhood of Steel</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="ad815439-9de3-4ffb-b4ad-0513b06c506f/395fcdd5-19b6-466b-978e-1229a8800a67.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/2/2025">5/2/2025</a> 21:12:51</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/2/2025">5/2/2025</a> 21:13:54</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 2">Sony PlayStation 2</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-1/13/2004">1/13/2004</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-65">65</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action role-playing">Action role-playing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Interplay Entertainment">Interplay Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Interplay Entertainment">Interplay Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Fallout:_Brotherhood_of_Steel" target="_blank">Wikipedia</a><br/><a href="https://web.archive.org/web/20040427215056/http://www.interplay.com/fbos/index.html" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] composer: Craig Stuart Garfinkle">[People] composer: Craig Stuart Garfinkle</a><br/><a href="#quicklink-[People] composer: Devin Townsend">[People] composer: Devin Townsend</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Fallout: Brotherhood of Steel</b></i> is a 2004 <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Interplay_Entertainment">Interplay Entertainment</a>. It was released for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> and <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a>, and was the first entry in the <i><a href="https://en.wikipedia.org/wiki/Fallout_(franchise)">Fallout</a></i> series to be released for <a href="https://en.wikipedia.org/wiki/Home_video_game_console">home video game consoles</a>. Set in the year 2208, the player controls an initiate of the <a href="https://en.wikipedia.org/wiki/Brotherhood_of_Steel">Brotherhood of Steel</a>, a militant organization that attempts to bring order to a world that has been decimated by <a href="https://en.wikipedia.org/wiki/Nuclear_warfare">nuclear warfare</a>. Critics often compared <i>Fallout: Brotherhood of Steel</i> to a <a href="https://en.wikipedia.org/wiki/Hack_and_slash">hack and slash</a> game, due to its emphasis on fast-paced combat and encounters with large groups of enemies. <i>Fallout: Brotherhood of Steel</i> does not feature an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> map like other <i>Fallout</i> games, and is instead linear in design.</p>
+
+<p>In the early 2000s, Interplay attempted to expand into the console game market, and found commercial success with the 2001 game <i><a href="https://en.wikipedia.org/wiki/Baldur's_Gate:_Dark_Alliance">Baldur's Gate: Dark Alliance</a></i>. This in turn inspired Interplay to greenlight development on a console entry to the <i>Fallout</i> series. The action-oriented tone of <i>Fallout: Brotherhood of Steel</i> significantly differed from the <a href="https://en.wikipedia.org/wiki/Retrofuturism">retrofuturistic</a> aesthetic that had previously defined the series. Notable changes included a <a href="https://en.wikipedia.org/wiki/Heavy_metal_music">heavy metal</a> soundtrack and overtly sexualized female characters. <i>Fallout: Brotherhood of Steel</i> sold poorly on release, and received mixed reviews. Critics found the gameplay to be repetitive and monotonous, and were divided in their opinions of the game's tone. In the years since its release, journalists and fans have consistently ranked <i>Fallout: Brotherhood of Steel</i> as one of the worst entries in the series, and the game's tepid reception contributed to the stagnation of the <i>Fallout</i> series in the mid-2000s.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Fallout: Brotherhood of Steel</i> is an <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing game</a> that is played from a <a href="https://en.wikipedia.org/wiki/Top-down_perspective">top-down perspective</a>. Set in the year 2208, the player controls an initiate of the <a href="https://en.wikipedia.org/wiki/Brotherhood_of_Steel">Brotherhood of Steel</a>, a militant organization that attempts to bring order to a world that has been decimated by <a href="https://en.wikipedia.org/wiki/Nuclear_warfare">nuclear warfare</a>. At the beginning of the game, the player can choose to play as one of three <a href="https://en.wikipedia.org/wiki/Player_character">player characters</a>; three additional player characters can be unlocked for subsequent playthroughs by progressing through the game. Each character specializes in specific weapons. For example, the Nadia character can <a href="https://en.wikipedia.org/wiki/Dual_wield">dual wield</a> weapons, while the <a href="https://en.wikipedia.org/wiki/Ghoul_(Fallout)">ghoul</a> character Cain specializes in bladed melee weapons. <i>Fallout: Brotherhood of Steel</i> features both a <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> mode and a <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperative</a> mode, in which two players can play through the game together.</p>
+
+<p>Some critics have compared the gameplay of <i>Fallout: Brotherhood of Steel</i> to that of a <a href="https://en.wikipedia.org/wiki/Hack_and_slash">hack and slash</a> game, due to its emphasis on fast-paced combat and encounters with large groups of enemies. There are over 50 weapons available for the player to use, such as <a href="https://en.wikipedia.org/wiki/Directed-energy_weapon">energy-based guns</a>, <a href="https://en.wikipedia.org/wiki/Gauntlet_(glove)">gauntlets</a>, and grenades. While in combat, the player can target specific enemies by locking onto them, which means the player character will always face the targeted enemy regardless of where it moves. The player can also jump, crouch, and dodge enemy attacks while in combat. Whenever the player kills an enemy or completes a <a href="https://en.wikipedia.org/wiki/Quest_(video_games)">quest</a>, they will earn <a href="https://en.wikipedia.org/wiki/Experience_point">experience points</a>. Once enough experience points are earned, the player can <a href="https://en.wikipedia.org/wiki/Experience_point#Level-based_progression">level up</a> and select a perk, which is a permanent beneficial upgrade. For example, the Cat-Like perk increases the speed at which melee weapons are swung and the dodge speed. Some perks are only available to specific characters.</p>
+
+<p><i>Fallout: Brotherhood of Steel</i> does not feature an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> map like other <i>Fallout</i> games, and is instead linear in design. The player is confined to specific areas until all of the objectives have been met. For example, an early objective is to kill all of the mutated scorpions in an abandoned building. <i>Fallout: Brotherhood of Steel</i> is divided into three chapters, each increasing in difficulty. When not in combat, the player can talk to <a href="https://en.wikipedia.org/wiki/Non-player_characters">non-player characters</a> (NPCs). Some NPCs act as vendors, and will buy and sell items to the player. NPCs can also offer optional quests known as sidequests, which will provide additional experience points.</p>
+
+<h2>Plot</h2>
+
+<p><i>Fallout: Brotherhood of Steel</i> is set in the year 2208, 131 years after a devastating nuclear war between the United States and China. After the war, a militant organization called the Brotherhood of Steel is formed, which seek to restore order and secure harmful technology. The player controls a Brotherhood of Steel member nicknamed the Initiate, and is tasked with finding a group of Brotherhood of Steel soldiers called paladins that went missing near the town of Carbon. After defending the town from a group of raiders, the Initiate confronts the raider leader Jane, and learns Jane directed the paladins to the city of Los to investigate <a href="https://en.wikipedia.org/wiki/Super_mutant">super mutant</a> activity.</p>
+
+<p>The city of Los is populated by <a href="https://en.wikipedia.org/wiki/Ghoul_(Fallout)">ghouls</a>, many of whom belong to a cult called the Church of the Lost. The paladins were captured by the Church of the Lost, and all but paladin Rhombus were killed. The Initiate kills the cult leader Blake, but during the escape attempt Rhombus is mortally wounded. Before his death, Rhombus instructs the Initiate to destroy the super mutant compound in an underground <a href="https://en.wikipedia.org/wiki/Fallout_shelter">fallout shelter</a> called a Vault. The Initiate investigates the Vault, but their left arm is severed in a fight with the super mutant leader Attis. A group of Vault scientists rescue the Initiate and give them a robotic arm. The Initiate progresses further into the Vault, and learns that Attis was using the compound laboratory to research a cure for the virus that sterilizes super mutants. The Initiate starts a self-destruct sequence, and escapes the Vault via monorail.</p>
+
+<h2>Development</h2>
+
+<p>In the early 2000s, <a href="https://en.wikipedia.org/wiki/Interplay_Entertainment">Interplay Entertainment</a> attempted to expand into the <a href="https://en.wikipedia.org/wiki/Console_game">console game</a> market, which they had previously ignored in favor of the <a href="https://en.wikipedia.org/wiki/PC_game">PC game</a> market. At the time, Interplay was undergoing a period of financial hardship, an issue that would persist for several years. Journalist Kat Bailey credits Interplay's financial struggles to the increased cost for game development, and the industry shift toward console gaming in the late 1990s. In 2001, Interplay released <i><a href="https://en.wikipedia.org/wiki/Baldur's_Gate:_Dark_Alliance">Baldur's Gate: Dark Alliance</a></i>, the first console entry in the <i><a href="https://en.wikipedia.org/wiki/Baldur's_Gate">Baldur's Gate</a></i> series. <i>Baldur's Gate: Dark Alliance</i> was a commercial success, and sold over one million copies by 2003. This in turn inspired Interplay to greenlight development on a console entry to the <i><a href="https://en.wikipedia.org/wiki/Fallout_(franchise)">Fallout</a></i> series.</p>
+
+<p>The idea for a <i>Fallout</i> console game had existed for years before development began on <i>Fallout: Brotherhood of Steel</i>. Designer Chris Pasetto noted that an initial pitch was to make it a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a>. After the release of <i>Baldur's Gate: Dark Alliance</i> however, Interplay mandated that <i>Fallout: Brotherhood of Steel</i> should feature more <a href="https://en.wikipedia.org/wiki/Action_game">action</a> oriented gameplay as opposed to the role-playing gameplay that had previously defined the series. Additionally, it would need to use the Snowblind <a href="https://en.wikipedia.org/wiki/Game_engine">game engine</a>, which had been developed by <a href="https://en.wikipedia.org/wiki/Snowblind_Studios">Snowblind Studios</a> for <i>Baldur's Gate: Dark Alliance</i>. Pasetto described the engine as a "rigid template". In an interview with <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i>, Pasetto said, "We didn't have the engineering <a href="https://en.wikipedia.org/wiki/Bandwidth_(computing)">bandwidth</a> to do more than a few tweaks. Our main technical focus was improving the ranged combat for the gun-focused gameplay of <i>Fallout</i>."</p>
+
+<p>The action-oriented tone of <i>Fallout: Brotherhood of Steel</i> significantly differed from the <a href="https://en.wikipedia.org/wiki/Retrofuturism">retrofuturistic</a> aesthetic that had previously defined the series. For example, instead of a soundtrack that comprised popular songs from the 1950s, <i>Fallout: Brotherhood of Steel</i>'s soundtrack consisted of contemporary <a href="https://en.wikipedia.org/wiki/Heavy_metal_music">heavy metal</a> tracks from bands like <a href="https://en.wikipedia.org/wiki/Killswitch_Engage">Killswitch Engage</a> and <a href="https://en.wikipedia.org/wiki/Slipknot_(band)">Slipknot</a>. Craig Garfinkle and heavy metal musician <a href="https://en.wikipedia.org/wiki/Devin_Townsend">Devin Townsend</a> contributed <a href="https://en.wikipedia.org/wiki/Ambient_music">ambient</a> tracks. Additionally, the ideology of the Brotherhood of Steel organization was simplified, the fictional Nuka-Cola <a href="https://en.wikipedia.org/wiki/Soft_drink">soft drink</a> brand that had appeared in previous <i>Fallout</i> games was replaced with <a href="https://en.wikipedia.org/wiki/Bawls">Bawls</a>, and female characters are overtly sexualized. Pasetto claims these changes were instituted by Interplay executives, who wanted the game to appeal to a wider console audience. The development team objected to these changes, but their concerns were dismissed.</p>
+
+<p><i>Fallout: Brotherhood of Steel</i> was developed in tandem with the "<a href="https://en.wikipedia.org/wiki/Van_Buren_(video_game)">Van Buren</a>" project by <a href="https://en.wikipedia.org/wiki/Black_Isle_Studios">Black Isle Studios</a>, which was intended to be the third entry in the mainline <i>Fallout</i> series. However, development on "Van Buren" was hampered by mismanagement from Interplay, and after numerous developers from Black Isle resigned, the project was canceled in 2003.</p>
+
+<h2>Release and reception</h2>
+
+<p><i>Fallout: Brotherhood of Steel</i> was announced in March 2003, and was initially scheduled for a <a href="https://en.wikipedia.org/wiki/Fourth_quarter_of_a_calendar_year">fourth quarter</a> release. Its release date was postponed when Interplay terminated its contract with distributor <a href="https://en.wikipedia.org/wiki/Vivendi_Games">Vivendi Universal Games</a>, due to a legal dispute between the two companies regarding payments for the game <i><a href="https://en.wikipedia.org/wiki/Lionheart:_Legacy_of_the_Crusader">Lionheart: Legacy of the Crusader</a></i>. <i>Fallout: Brotherhood of Steel</i> was released for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> and <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a> in North America on January 13, 2004, and in Europe on April 2, 2004. According to Pasetto, <i>Fallout: Brotherhood of Steel</i> sold poorly. When asked about the commercial impact the game had on Interplay, Pasetto remarked, "It was just one of many projects that underperformed and would have had to sell miraculous numbers to change the fate of Interplay."</p>
+
+<p><i>Fallout: Brotherhood of Steel</i> received mixed reviews from critics. On the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, the PlayStation 2 version received a 64/100, while the Xbox version received a 66/100. Many critics noted the repetitive nature of the gameplay. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i>'s <a href="https://en.wikipedia.org/wiki/Greg_Kasavin">Greg Kasavin</a> felt the game was longer than it actually was due to the repetitive gameplay and uninteresting enemies. Kasavin wrote, "Hack-and-slash games shouldn't be complicated, but that doesn't mean they shouldn't have any depth." <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> described the gameplay as unengaging, noted that enemies often killed themselves due to poor coding, and the overall experience came across as "half-hearted". By contrast, Ed Lewis of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> found the repetitive combat enjoyable and satisfying. Lewis said, "While it won't make you think too much, it's got enough action for a Saturday afternoon." Some critics bemoaned <i>Fallout: Brotherhood of Steel</i>'s inability to properly simplify the role-playing mechanics of the <i>Fallout</i> series when compared to <i>Baldur's Gate: Dark Alliance</i>. Kristan Reed of <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> felt that leveling up was pointless since enemies got proportionally harder as the game progressed.</p>
+
+<p>The dialogue and more action-oriented tone divided critics. Some critics enjoyed the expletive heavy dialogue and dark humor, such as Joe Juba of <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>, who wrote, "It gives the game a tongue-in-cheek kind of feel that is hard to resist. I never thought I would have an excuse to use the phrase 'post-apocalyptic charm,' but this game's got it. Other critics chastised the writing as superfluous and unnecessary. Reed characterized the expletive-laden dialogue as "childish swearing", while <i>Edge</i> compared the overall feel of the game to an "angry schoolboy". <i>Fallout: Brotherhood of Steel</i>'s graphics and overall presentation similarly divided critics. <i><a href="https://en.wikipedia.org/wiki/GamesTM">GamesTM</a></i> described the visuals as "nice and shiny", but found the audio mixing to be inconsistent, and heavily chastised the top-down perspective for not allowing the player to zoom in and out to see the action better. Although Zach Meston of <i><a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a></i> did enjoy the presentation, he noted, "Hack-and-slash [role-playing games] are required to dress up their limited and repetitive gameplay with exceptional graphics and sound, but what was an amazing 3D engine in 2001 is merely a very good 3D engine in early 2004, especially on Xbox.</p>
+
+<p>Critics often discussed how longtime <i>Fallout</i> fans may feel betrayed by <i>Fallout: Brotherhood of Steel</i>. Meston further questioned if casual players who had not played the <i>Fallout</i> series would even be interested in <i>Fallout: Brotherhood of Steel</i>. Meston said, "<i>Fallout: Brotherhood of Steel</i> is a competent and occasionally compelling hack-and-slash, but fans of the PC games will continue to dream of the true [role-playing game] they'll never get, and fans of <i>Dark Alliance</i> would presumably rather play <i><a href="https://en.wikipedia.org/wiki/Baldur's_Gate:_Dark_Alliance_II">Dark Alliance II</a></i>. Reed echoed this remark, and stated, "Even if you're blissfully unaware of <i>Fallout</i>'s award-winning heritage, there's every reason to suspect that even casual action gamers (which this has presumably been targeted at in a desperate stab at commerciality) will turn their noses up at this lazy and uninspired piece of action [role-playing game] fodder. Paul Byrnes of <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> called the story "an insult to the <i>Fallout</i> series", and noted the new players might misconstrue the series as "derivative and campy".</p>
+
+<h3>Retrospective commentary</h3>
+
+<p><i>Fallout: Brotherhood of Steel</i> is consistently ranked by journalists as one of the worst entries in the series, due to its repetitive gameplay and linear design. Fans similarly deride the game, and sometimes refer to it not by the acronym <i>Fallout: BOS</i>, but as <i>Fallout: <a href="https://en.wikipedia.org/wiki/Piece_of_shit">POS</a></i>. In a retrospective article, Zoey Handley of <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i> gave a different opinion, and argued that the game's negative reputation was not the result of poor gameplay, but the mismanagement of the <i>Fallout</i> series by Interplay and its parent company <a href="https://en.wikipedia.org/wiki/Titus_Interactive">Titus Interactive</a>. Handley wrote, "The developers definitely didn't just phone it in. While <i>Fallout: Brotherhood of Steel</i> isn't a great game, it's not just a quick write-off. You can tell the team behind it at least cared to some extent about the quality of the final product."</p>
+
+<p>The tepid reception toward <i>Fallout: Brotherhood of Steel</i> and its predecessor <i><a href="https://en.wikipedia.org/wiki/Fallout_Tactics:_Brotherhood_of_Steel">Fallout Tactics: Brotherhood of Steel</a></i>, as well as the cancellation of the <i>Van Buren</i> project, led to the stagnation of the <i>Fallout</i> series in the mid-2000s. In October 2004 <a href="https://en.wikipedia.org/wiki/Bethesda_Softworks">Bethesda Softworks</a> purchased the rights to develop <i><a href="https://en.wikipedia.org/wiki/Fallout_3">Fallout 3</a></i> from Interplay for $1,175,000 minimum guaranteed <a href="https://en.wikipedia.org/wiki/Advance_against_royalties">advance against royalties</a>. <i>Fallout 3</i> was released in 2008, and revitalized interest in the series. It was well received by critics, and sold more than 5 million copies in its first year. In a pre-release interview, producer Ashley Cheng noted his disdain for <i>Fallout: Brotherhood of Steel</i>, and stated that Bethesda sought to avoid any resemblance to the game while working on <i>Fallout 3</i>. Executive producer <a href="https://en.wikipedia.org/wiki/Todd_Howard">Todd Howard</a> further added, "For our purposes, neither <i>Fallout Tactics</i> nor <i>Fallout: Brotherhood of Steel</i> happened."</p>
+
+<h2>Canceled sequel</h2>
+
+<p>A sequel to <i>Fallout: Brotherhood of Steel</i>, titled <i>Fallout: Brotherhood of Steel 2</i>, was planned. It was scheduled for a 2004 fourth quarter release, and would have been a PlayStation 2 exclusive title. According to a leaked design document, the gameplay of <i>Fallout: Brotherhood of Steel 2</i> would have been more in line with the first two <i>Fallout</i> games as opposed to <i>Fallout: Brotherhood of Steel</i>. It would have featured a reputation mechanic, which would have allowed players to change how other characters viewed them depending on whether their choices were deemed good or bad, as well as a stealth mechanic. The story was written by series veteran Brian Freyermuth, and would have featured roaming tribes like Caesar's Legion and the Jackals, both of which would eventually appear in the game <i><a href="https://en.wikipedia.org/wiki/Fallout:_New_Vegas">Fallout: New Vegas</a></i>. Ian Dransfield of <i><a href="https://en.wikipedia.org/wiki/Retro_Gamer">Retro Gamer</a></i> claims that the development of <i>Fallout: Brotherhood of Steel 2</i> was close to completion before its cancellation by Interplay.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

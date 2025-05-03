@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Fallout</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('fc441b7e-0f97-4223-ab8c-212c6b276f99/aea59fe7-8c9e-42b5-b4db-31072310219e.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="fc441b7e-0f97-4223-ab8c-212c6b276f99/a7941788-dbd4-4ac5-8a55-f87bcfd97819.png"/> Fallout</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="fc441b7e-0f97-4223-ab8c-212c6b276f99/471d4101-fed9-482a-bcfa-1473f885910a.JPG"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/2/2025">5/2/2025</a> 21:11:26</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/2/2025">5/2/2025</a> 21:18:34</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/10/1997">10/10/1997</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-95">95</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-89">89</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-RPG">RPG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Interplay Entertainment">Interplay Entertainment</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-The Omni Group">The Omni Group</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Bethesda Softworks">Bethesda Softworks</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Interplay Entertainment">Interplay Entertainment</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-MacPlay">MacPlay</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Sold Out Software">Sold Out Software</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Fallout" target="_blank">PCGamingWiki</a><br/><a href="https://fallout.bethesda.net/en/games/fallout" target="_blank">Official site</a><br/><a href="https://www.gogdb.org/product/1440166342" target="_blank">GOG Database</a><br/><a href="https://howlongtobeat.com/game?id=3338" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/fallout" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/38400/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Fallout" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/223" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Fallout_(video_game)" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/fallout/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Action">Action</a><br/><a href="#quicklink-Action RPG">Action RPG</a><br/><a href="#quicklink-Adventure">Adventure</a><br/><a href="#quicklink-Atmospheric">Atmospheric</a><br/><a href="#quicklink-Character Customization">Character Customization</a><br/><a href="#quicklink-Exploration">Exploration</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-FPS">FPS</a><br/><a href="#quicklink-Moddable">Moddable</a><br/><a href="#quicklink-Open World">Open World</a><br/><a href="#quicklink-Post-apocalyptic">Post-apocalyptic</a><br/><a href="#quicklink-RPG">RPG</a><br/><a href="#quicklink-Sandbox">Sandbox</a><br/><a href="#quicklink-Sci-fi">Sci-fi</a><br/><a href="#quicklink-Shooter">Shooter</a><br/><a href="#quicklink-Singleplayer">Singleplayer</a><br/><a href="#quicklink-Story Rich">Story Rich</a><br/><a href="#quicklink-Survival">Survival</a><br/><a href="#quicklink-Third Person">Third Person</a><br/><a href="#quicklink-Western">Western</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Fallout</b></i> (also known as <i><b>Fallout: A Post Nuclear Role Playing Game</b></i>) is a 1997 <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing video game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Interplay_Productions">Interplay Productions</a>, set in a mid-22nd century <a href="https://en.wikipedia.org/wiki/Post-apocalyptic">post-apocalyptic</a> and <a href="https://en.wikipedia.org/wiki/Retrofuturism">retro-futuristic</a> world, decades after a global <a href="https://en.wikipedia.org/wiki/Nuclear_war">nuclear war</a> lead by the United States and China. <i>Fallout</i>'s protagonist, the Vault Dweller, inhabits an underground nuclear shelter. The player must scour the surrounding wasteland for a computer chip that can fix the Vault's failed water supply system. They interact with other survivors, some of whom give them <a href="https://en.wikipedia.org/wiki/Quest_(video_games)">quests</a>, and engage in <a href="https://en.wikipedia.org/wiki/Turn-based">turn-based</a> combat.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Tim_Cain">Tim Cain</a> began working on <i>Fallout</i> in 1994. It began and was conceptualized as based on the role-playing game <i><a href="https://en.wikipedia.org/wiki/GURPS">GURPS</a>,</i> but after <a href="https://en.wikipedia.org/wiki/Steve_Jackson_Games">Steve Jackson Games</a> objected to <i>Fallout</i>'s violence, Cain and designer <a href="https://en.wikipedia.org/wiki/Christopher_Taylor_(game_designer)">Christopher Taylor</a> created a new character customization scheme, SPECIAL. Interplay initially gave the game little attention, but eventually spent $3 million and employed up to thirty people to develop it. Interplay considered <i>Fallout</i> the spiritual successor to its 1988 role-playing game <i><a href="https://en.wikipedia.org/wiki/Wasteland_(video_game)">Wasteland</a></i> and drew artistic inspiration from 1950s literature and media emblematic of the <a href="https://en.wikipedia.org/wiki/Atomic_Age">Atomic Age</a> as well as the films <i><a href="https://en.wikipedia.org/wiki/Mad_Max_(franchise)">Mad Max</a></i> and <i><a href="https://en.wikipedia.org/wiki/A_Boy_and_His_Dog_(1975_film)">A Boy and His Dog</a></i>. The quests were intentionally made <a href="https://en.wikipedia.org/wiki/Moral_ambiguity">morally ambiguous</a>. After three and a half years of development, <i>Fallout</i> was released in North America in October 1997.</p>
+
+<p><i>Fallout</i> received acclaim for its open-ended gameplay, character system, plot, and setting. It won "Role-Playing Game of the Year" from <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> and <i><a href="https://en.wikipedia.org/wiki/Computer_Games_Magazine">Computer Games Magazine</a></i> and was nominated by the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> at the <a href="https://en.wikipedia.org/wiki/Spotlight_Awards">Spotlight Awards</a>. <i>Fallout</i> was a commercial success, selling more than half a million copies worldwide. Often listed among the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games of all time</a>, <i>Fallout</i> has been credited for renewing consumer interest in the role-playing video game genre. It spawned the widely successful <a href="https://en.wikipedia.org/wiki/Fallout_(franchise)"><i>Fallout</i> series</a>, the rights to which were purchased in 2007 by <a href="https://en.wikipedia.org/wiki/Bethesda_Softworks">Bethesda Softworks</a>.</p>
+
+<h2>Gameplay</h2>
+
+<h3>Character creation</h3>
+
+<p><i>Fallout</i> is a <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing video game</a>. The player begins by selecting one of three <a href="https://en.wikipedia.org/wiki/Player_character">characters</a>, or one with player-customized <a href="https://en.wikipedia.org/wiki/Attribute_(role-playing_games)">attributes</a>. The protagonist, known as the Vault Dweller, has seven primary statistics that the player can set: strength, perception, endurance, charisma, intelligence, agility, and luck. Each statistic may range from one to ten, provided their sum does not exceed 40. Two other statistics set during <a href="https://en.wikipedia.org/wiki/Character_creation">character creation</a> are skills and traits. All 18 skills are learned abilities, their effectiveness determined by a percentage value. Their initial effectivenesses are determined by the primary statistics, but three can be tagged and given a 20% boost. Traits are character qualities with both a positive and negative effect; the player can pick up to two from a list of sixteen. During gameplay, the player can gather <a href="https://en.wikipedia.org/wiki/Experience_point">experience points</a> through various actions. For gathering experience points, the player will <a href="https://en.wikipedia.org/wiki/Experience_point#Level-based_progression">level up</a> and may increase their skills by a set number of points. Every three (or four with the Skilled trait) levels, the player can grant themself a special ability, known as perks. There are 48 perks (plus two extra perks which can only be obtained by wearing certain types of armor) and each has prerequisites that must be met. For example, "Animal Friend", which prevents animals from attacking the player character, requires the player to be level nine, have an intelligence of five, and have an outdoorsman skill of 25%.</p>
+
+<p>In <i>Fallout</i>, the player explores the game world from a <a href="https://en.wikipedia.org/wiki/Axonometric_projection#Three_types">trimetric perspective</a> and interacts with <a href="https://en.wikipedia.org/wiki/Non-player_character">non-player characters</a> (NPCs). Characters vary in their amount of dialogue; some say short messages, while others speak at length. Significant characters are illustrated with <a href="https://en.wikipedia.org/wiki/3D_model">3D models</a>, known as "talking heads", during conversations. The player can barter with other characters or buy goods using bottle caps as currency. The game has companions that the player can recruit for exploration and combat, although they cannot be directly controlled.</p>
+
+<p>There are three main <a href="https://en.wikipedia.org/wiki/Quest_(video_games)">quests</a> where completion is required, two of them given after completion of the first one. The first main quest has a time limit of 150 in-game days; the <a href="https://en.wikipedia.org/wiki/Game_over">game ends</a> if the player fails to complete it within the allotted time. Some characters give the player side quests; if the player solves them, they receive experience points and occasionally a reward in the form of money and/or goods. The player can utilize the <a href="https://en.wikipedia.org/wiki/Pip-Boy">PIP-Boy 2000</a>, a portable <a href="https://en.wikipedia.org/wiki/Wearable_computer">wearable computer</a> that tracks these quests. Many quests feature multiple solutions; they can often be completed through diplomacy, combat, or stealth, and some allow solutions that are unconventional or contrary to the original task. Based on how they completed quests, the player can earn or lose <a href="https://en.wikipedia.org/wiki/Karma">reputation</a> points, which determine how others treat them. The player's actions dictate what future story or gameplay opportunities are available and the ending.</p>
+
+<p>Combat is <a href="https://en.wikipedia.org/wiki/Turn-based">turn based</a> and uses an <a href="https://en.wikipedia.org/wiki/Action_point_(video_gaming)">action-point</a> system, the number of action points that are available depending on certain perks and the player's allocation in the agility statistic. During each turn, multiple actions may be performed by the player until they run out of action points. Different actions such as attacking, moving, reloading, interacting with objects mid-combat, and accessing the inventory consume different amounts of points. The player can rapidly switch between two equipped weapons, and may acquire a diverse range of weapons, many of which can target specific areas of enemies.  Melee (<a href="https://en.wikipedia.org/wiki/Hand-to-hand_combat">hand-to-hand</a>) weapons typically have two attacks: swing or thrust. If the player has equipped no weapon, they can punch or kick.</p>
+
+<h2>Plot</h2>
+
+<h3>Setting</h3>
+
+<p>On October 23, 2077, a worldwide <a href="https://en.wikipedia.org/wiki/Nuclear_war">nuclear war</a> between the United States and China following a global conflict caused by resource shortages devastated the world and destroyed modern civilization. The events of <i>Fallout</i> take place nearly a century later in 2161, and follow the Vault Dweller, a human born and raised within Vault 13, one of a number of high-tech underground <a href="https://en.wikipedia.org/wiki/Fallout_shelter">fallout shelters</a> built to protect survivors. Those on the surface live off the salvage of the old world.</p>
+
+<p>Vault 13 is located beneath the mountains of <a href="https://en.wikipedia.org/wiki/Southern_California">Southern California</a>. The Vault Dweller can explore major settlements including Junktown, which is mired in conflict between local sheriff Killian Darkwater (<a href="https://en.wikipedia.org/wiki/Richard_Dean_Anderson">Richard Dean Anderson</a>) and criminal Gizmo (<a href="https://en.wikipedia.org/wiki/Jim_Cummings">Jim Cummings</a>); the Hub, a bustling merchant city with job opportunities; and Necropolis, a city founded by <a href="https://en.wikipedia.org/wiki/Ghoul_(Fallout)">Ghouls</a>, humans mutated by radiation, who are revealed to be the former inhabitants of Vault 12. The Vault Dweller's journey also brings them into contact with various factions, including the <a href="https://en.wikipedia.org/wiki/Brotherhood_of_Steel">Brotherhood of Steel</a>, a quasi-religious military order devoted to finding and restoring pre-war technology, the Children of the Cathedral, an optimistic religious cult; and the <a href="https://en.wikipedia.org/wiki/Super_Mutants">Super Mutants</a>, an army of virtually immortal humanoids immune to radiation.</p>
+
+<p>The player controls the Vault Dweller, who is sent into the Wasteland to save their vault. The Vault Dweller can be customized or based on one of three pre-generated characters: Albert Cole, a negotiator and charismatic leader with a legal background; Natalia Dubrovhsky, a talented acrobat and the intelligent and resourceful granddaughter of a Russian diplomat in the pre-War <a href="https://en.wikipedia.org/wiki/Soviet_Union">Soviet</a> consulate in Los Angeles; and Max Stone, the largest person in the Vault who is known for his strength, stamina, and lack of intelligence. The three characters present a diplomatic, deceptive, or combative approach to the game, respectively. Although the character can be male or female, the Vault Dweller is canonically male.</p>
+
+<p>The four companions the player can recruit are: Ian, a mercenary guard from Shady Sands; Tycho, a desert ranger; <a href="https://en.wikipedia.org/wiki/Dogmeat_(Fallout)">Dogmeat</a>, a tireless loyal dog; and Katja, a member of an organization called the Followers of the Apocalypse. Other major characters include <a href="https://en.wikipedia.org/wiki/Vault_Boy">Vault Boy</a>, the mascot of Vault-Tec, the creators of the Vaults; Killian Darkwater, the mayor, sheriff, and shopkeeper of Junktown; and the Master (Cummings and <a href="https://en.wikipedia.org/wiki/Kath_Soucie">Kath Soucie</a>), leader of the Super Mutants and the main <a href="https://en.wikipedia.org/wiki/Antagonist">antagonist</a>.</p>
+
+<p>In Vault 13, the Water Chip, a computer component responsible for the Vault's water recycling and pumping machinery, stops working. With only 150 days before water reserves will run dry, the Vault Overseer (Ken Mars) tasks the Vault Dweller with finding a replacement. Armed with the PIPBoy 2000 and meager equipment, the Vault Dweller leaves Vault 13 for the nearest source of possible help, Vault 15, but finds it abandoned and in ruins. The Vault Dweller then explores the wasteland and locates a replacement chip in the destroyed Vault 12, underneath Necropolis.</p>
+
+<p>The Vault Dweller returns to Vault 13 with the chip and the water system is repaired. However, the Overseer becomes concerned about the mutants reported by the Vault Dweller. Believing the mutations are too widespread and extreme to be a natural occurrence, the Overseer assigns the Vault Dweller a new task: finding and stopping the source of the mutations. Information discovered throughout the wasteland reveals that humans are being captured and turned into Super Mutants by exposure to the Forced Evolutionary Virus (F.E.V.). The Super Mutants are led by the Master, who intends to transform every human into a Super Mutant and establish "unity" on Earth. The Children of the Cathedral are a front created by the Master, who is using them to trick humans into peaceful submission.</p>
+
+<p>To stop the mutations, the Vault Dweller must destroy the vats containing the F.E.V. and kill the Master; the order of the tasks is chosen by the player. The Vault Dweller travels to the Mariposa Military Base to destroy it and the vats within, preventing the creation of more Super Mutants. To kill the Master, the Vault Dweller travels to the Children's Cathedral and locates a prototype Vault beneath it, from which the Master commands his army. The Vault Dweller infiltrates the Vault and can choose to convince the Master that his plan will fail because the Super Mutants are infertile, kill him immediately, or set off an explosion that destroys the Cathedral. The Vault Dweller returns to Vault 13 but is denied entry by the Overseer, who fears that they have been changed by their experiences and the tales of their exploits and accomplishments will encourage the inhabitants to abandon the Vault. As such, the Overseer exiles the Vault Dweller into the wasteland. <i>Fallout</i> concludes with the legacy of the Vault Dweller's decisions on the societies and people they had encountered.</p>
+
+<p>Additionally, there is an alternate ending if the player chooses to join the master. This ending has the player character dunked into the F.E.V. and made into a super mutant, who then returns to Vault 13 with the master’s army and massacres its inhabitants as witnessed on security footage.</p>
+
+<h2>Development</h2>
+
+<p>Development on <i>Fallout</i> began in early 1994. Initially, Interplay gave the game little attention, and for the first six months, the programmer <a href="https://en.wikipedia.org/wiki/Tim_Cain">Tim Cain</a> was the sole developer. Cain eventually enlisted the aid of Interplay employees during their spare time. The development team—led by Cain, the designer <a href="https://en.wikipedia.org/wiki/Christopher_Taylor_(game_designer)">Christopher Taylor</a>, and the art director <a href="https://en.wikipedia.org/wiki/Leonard_Boyarsky">Leonard Boyarsky</a>—reached 15 people in 1995. In 1996, the producer <a href="https://en.wikipedia.org/wiki/Feargus_Urquhart">Feargus Urquhart</a> recruited some Interplay workers, expanding the team to 30. Cain considered the team "amazing" for their dedication, while Urquhart described working under Interplay as "barely controlled chaos".</p>
+
+<p>The tentative title, <i>Vault-13: A GURPS Post-Nuclear Role-Playing Game</i>, was rejected as unfitting. <i>Armageddon</i> was considered as an alternative, but was already in use for another Interplay project (which was later canceled). Interplay's president <a href="https://en.wikipedia.org/wiki/Brian_Fargo">Brian Fargo</a> suggested the title <i>Fallout</i>. Interplay intended to use "<a href="https://en.wikipedia.org/wiki/I_Don't_Want_to_Set_the_World_on_Fire">I Don't Want to Set the World on Fire</a>" by <a href="https://en.wikipedia.org/wiki/The_Ink_Spots">the Ink Spots</a> as the theme song, but was hindered by a <a href="https://en.wikipedia.org/wiki/Copyright">copyright</a> problem, so used another Ink Spots song, "<a href="https://en.wikipedia.org/wiki/Maybe_(1935_song)">Maybe</a>". The development concluded on October 1, 1997, after three and a half years and a total cost of approximately $3 million (~$5.29 million in 2023).</p>
+
+<h3>Engine and design</h3>
+
+<p><i>Fallout</i> started as a <a href="https://en.wikipedia.org/wiki/Game_engine">game engine</a> that Cain was developing during his spare time, based on the tabletop role-playing game <i><a href="https://en.wikipedia.org/wiki/Generic_Universal_RolePlaying_System">Generic Universal RolePlaying System</a></i> (<i>GURPS</i>). It entered more coordinated development after Cain convinced Fargo of its potential, and Interplay announced it had acquired the <i>GURPS</i> license in 1994. The first <i>Fallout</i> prototype was finished that year.</p>
+
+<p>The team considered making the game <a href="https://en.wikipedia.org/wiki/First-person_(video_games)">first-person</a> and 3D, but discarded the idea because the models would not have held the desired amount of detail. They instead selected an <a href="https://en.wikipedia.org/wiki/Oblique_projection">oblique projection</a>, producing a trimetric perspective. Designed to be open-world and non-linear, <i>Fallout</i> was <a href="https://en.wikipedia.org/wiki/Game_balance">balanced</a> so that, even though side quests are optional, characters who do not improve their skills and experience through them would be too ill-equipped to finish. However, Taylor also added the 150-day time limit to the game to keep the player focused on the main quests.</p>
+
+<p>The game was nearly canceled in late 1994 after Interplay acquired the licenses to the <i><a href="https://en.wikipedia.org/wiki/Dungeons_&amp;_Dragons">Dungeons &amp; Dragons</a></i> franchises <i><a href="https://en.wikipedia.org/wiki/Forgotten_Realms">Forgotten Realms</a></i> and <i><a href="https://en.wikipedia.org/wiki/Planescape">Planescape</a></i>, but Cain convinced Interplay to let him finish. After the success of the role-playing video game <i><a href="https://en.wikipedia.org/wiki/Diablo_(video_game)">Diablo</a></i>, released in January 1997, Cain resisted pressure to convert <i>Fallout</i> into a real-time <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> game. In March 1997, Interplay dropped the license for <i>GURPS</i> due to creative differences with <i>GURPS</i>'s creator <a href="https://en.wikipedia.org/wiki/Steve_Jackson_Games">Steve Jackson Games</a>. According to Interplay, <a href="https://en.wikipedia.org/wiki/Steve_Jackson_(American_game_designer)">Steve Jackson</a> objected to the amount of violence and gore. Interplay was forced to change the <i>GURPS</i> system to the internally-developed SPECIAL system; Taylor and Cain were each given a week to design and code it, respectively.</p>
+
+<p>Prior to the license's termination, the engine for <i>Fallout</i> was based on <i>GURPS</i>. Fantasy and time-traveling settings were considered before the development team decided on a post-apocalyptic setting. Taylor outlined the design goals in a vision statement, which Cain called an inspiration for the development team and "a major reason why the game came together at all."</p>
+
+<p><i>Fallout</i> was a spiritual successor to Interplay's role-playing video game <i><a href="https://en.wikipedia.org/wiki/Wasteland_(video_game)">Wasteland</a></i> (1988), published by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a>. Almost everyone who worked on <i>Fallout</i> had played it. The team was unable to make <i>Fallout</i> a direct sequel to <i>Wasteland</i> because Electronic Arts refused to license it. The team drew inspiration for <i>Fallout</i>'s <a href="https://en.wikipedia.org/wiki/Retrofuturistic">retro-futuristic</a> art style from 1950s literature and media related to the <a href="https://en.wikipedia.org/wiki/Atomic_Age#Influence_on_popular_culture">Atomic Age</a>. Examples included the films <i><a href="https://en.wikipedia.org/wiki/Forbidden_Planet">Forbidden Planet</a></i> (1956), <i><a href="https://en.wikipedia.org/wiki/A_Boy_and_His_Dog_(1975_film)">A Boy and His Dog</a></i> (1975), and <i><a href="https://en.wikipedia.org/wiki/Mad_Max_(film)">Mad Max</a></i> (1979). Influence was also drawn from the optimistic <a href="https://en.wikipedia.org/wiki/Cold_War">Cold War</a> posters, which Boyarsky reportedly loved.</p>
+
+<p>The vaults were influenced by the underground base in <i>A Boy and His Dog</i>. Cain said that the team "all loved <i><a href="https://en.wikipedia.org/wiki/X-COM">X-COM</a></i>" and that <i>Fallout</i> featured combat similar to <i>X-COM</i>'s prior to the <i>GURPS</i> license. Cain admired <i><a href="https://en.wikipedia.org/wiki/Star_Control_II">Star Control II</a></i> (1992) and said it influenced <i>Fallout</i>'s open-ended design. <i>Fallout</i> features many popular culture references. The team was only allowed to include references if understanding the source material was not required for the reference to make sense. For example, the Slayer perk's name references the television series <i><a href="https://en.wikipedia.org/wiki/Buffy_the_Vampire_Slayer">Buffy the Vampire Slayer</a></i> while generically matching its effect (turning all attacks to critical hits).</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Sprite_(computer_graphics)">sprites</a> in <i>Fallout</i> were highly detailed and required a significant amount of <a href="https://en.wikipedia.org/wiki/Computer_memory">memory</a> on contemporary computers. 21 NPCs were voiced by various actors, including Anderson, Cummings, Soucie, <a href="https://en.wikipedia.org/wiki/Tony_Shalhoub">Tony Shalhoub</a>, <a href="https://en.wikipedia.org/wiki/Keith_David">Keith David</a>, <a href="https://en.wikipedia.org/wiki/Brad_Garrett">Brad Garrett</a>, <a href="https://en.wikipedia.org/wiki/CCH_Pounder">CCH Pounder</a>, <a href="https://en.wikipedia.org/wiki/Tony_Jay">Tony Jay</a>, <a href="https://en.wikipedia.org/wiki/Pamela_Adlon">Pamela Adlon</a>, <a href="https://en.wikipedia.org/wiki/Richard_Moll">Richard Moll</a>, <a href="https://en.wikipedia.org/wiki/David_Warner_(actor)">David Warner</a>, <a href="https://en.wikipedia.org/wiki/Clancy_Brown">Clancy Brown</a>, <a href="https://en.wikipedia.org/wiki/Kenneth_Mars">Kenneth Mars</a>, and <a href="https://en.wikipedia.org/wiki/Ron_Perlman">Ron Perlman</a>, who also voiced the narrator. Some NPCs feature 3D models during conversation called "talking heads", most of which were created by Scott Redenhizer. Each took eight weeks to create, and voice recording took a few months. The talking heads began as sculpted heads of clay, which the team studied to determine which parts should be most animated. The heads were digitized using a Faro Space Arm and <i>VertiSketch</i>, with <i><a href="https://en.wikipedia.org/wiki/LightWave_3D">LightWave 3D</a></i> used for geometric corrections and the <a href="https://en.wikipedia.org/wiki/Texture_mapping">texture maps</a> created in <a href="https://en.wikipedia.org/wiki/Adobe_Photoshop">Adobe Photoshop</a>. Much of the spoken dialogue was written by designer Mark O'Green, whose method of writing Taylor considered efficient and impressive. The companions, conceived late in development, were not easy to implement. As a result, they were riddled with glitches, including a tendency to shoot the Vault Dweller when they are obscuring an enemy. <a href="https://en.wikipedia.org/wiki/Dogmeat_(Fallout)">Dogmeat</a> was the first companion added. Tycho was a reference to the desert rangers from <i>Wasteland</i>.</p>
+
+<p>Cain wrote the prologue, which included the series catchphrase "War. War never changes". Vault Boy and his cheerful nature parodied how 1950s media downplayed the perils of nuclear war. Cain, who dislikes it when the player character knows more than the player, devised <i>Fallout</i>'s narrative so that the Vault Dweller would know just as much as the player. The development team conceived of a faction of mutants who grew their ranks by dipping people into virus vats. During the discussion, someone wondered what would happen if more than one person was dropped into the vat. The team conceptualized the leader of the faction as a synthesis of a man, a woman, and a computer terminal mutated together. Cain enjoyed modelling, animating, and writing the Master's dialog, particularly because the Master switched between three voices: male, female, and electronic. The development team became confident in their vision after the audio director reacted to the voice-switching concept, and every department believed the Master would be a great antagonist.</p>
+
+<p>The quests in <i>Fallout</i> were given <a href="https://en.wikipedia.org/wiki/Moral_ambiguity">moral ambiguity</a>, with no clear right or wrong solutions. This was done so the player could take whatever choice suited them best. An example is the final encounter with the Master, whose motives for establishing unity among the wasteland population and making it immune to radiation by turning them into mutants could be perceived as persuasive by the player. Assistant designer <a href="https://en.wikipedia.org/wiki/Scott_Bennie">Scott Bennie</a> described the backstory of the Master, who views himself as a well-intentioned hero, as an example of their intention of "hit[ting] the player with an emotional sledgehammer as often as possible" with their story design.</p>
+
+<h2>Release</h2>
+
+<p>Boyarsky and lead artist <a href="https://en.wikipedia.org/wiki/Jason_D._Anderson">Jason D. Anderson</a> created advertisements for <i>Fallout</i>. <i>Fallout</i> did not have a trailer, but a <a href="https://en.wikipedia.org/wiki/Game_demo">demo</a> was released on April 26, 1997. Taylor felt the demo did not demonstrate <i>Fallout</i> well. The packaging was designed to resemble a lunch box, and the manual was designed to resemble a survival guide to reflect the game's style. <i>Fallout</i> was released on October 10, 1997, in North America for <a href="https://en.wikipedia.org/wiki/MS-DOS">MS-DOS</a> and <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>. The game was later released for <a href="https://en.wikipedia.org/wiki/Classic_Mac_OS">Mac OS</a> by the Interplay division <a href="https://en.wikipedia.org/wiki/MacPlay">MacPlay</a>. Version 1.1 was released on November 13, 1997, patching many bugs in the original release and removing the 500-day time limit. The patch was released for the Mac OS on December 11, 1997.</p>
+
+<p><i>Fallout</i> was initially not released in Europe due to the player's ability to kill children in-game. Version 1.2 removed the children from <i>Fallout</i> and was released at an unspecified date in Europe. MacPlay, which had become independent from Interplay, ported <i>Fallout</i> to <a href="https://en.wikipedia.org/wiki/Mac_OS_X">Mac OS X</a> in 2002 as part of its "Value Series". <i>Fallout</i> and its sequels, <i><a href="https://en.wikipedia.org/wiki/Fallout_2">Fallout 2</a></i> and <i><a href="https://en.wikipedia.org/wiki/Fallout_Tactics:_Brotherhood_of_Steel">Fallout Tactics: Brotherhood of Steel</a></i>, were <a href="https://en.wikipedia.org/wiki/Video_game_compilation">bundled</a> as <i>Fallout Trilogy</i> in April 2009. To mark its 20th anniversary, the game was made temporarily free on video game <a href="https://en.wikipedia.org/wiki/Digital_distribution">digital distribution</a> service <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> on September 30, 2017. It was also included in <i>Fallout Anthology</i> in September and October 2015 and <i>Fallout Legacy Collection</i> in October 2019.</p>
+
+<h2>Reception</h2>
+
+<p><i>Fallout</i> received critical acclaim, with critics considering it one of the best role-playing video games at the time. <i><a href="https://en.wikipedia.org/wiki/PC_PowerPlay">PC PowerPlay</a></i> predicted that <i>Fallout</i> would revive the genre and thought that both casual gamers and fans of role-playing games would enjoy the game. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> declared that because of the release of <i>Fallout</i>, gamers would not have to wait for a good role-playing game anymore. <i><a href="https://en.wikipedia.org/wiki/The_Electric_Playground">The Electric Playground</a></i> said that they "can't think of another game that comes even close to <i>Fallout</i>'s excellent character generation and skill system, great story, and classy delivery."</p>
+
+<p>Critics praised the character system. <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> considered it the best aspect, and Todd Vaughn of <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i> found the system "easy and fun to use." <i><a href="https://en.wikipedia.org/wiki/The_Washington_Post">The Washington Post</a></i> praised the "realistic tradeoffs" during customization.  <i><a href="https://en.wikipedia.org/wiki/Computer_Games_Strategy_Plus">Computer Games Strategy Plus</a></i> said the system allowed for a variety of effective character builds, and <i>The Electric Playground</i> and <i>PC PowerPlay</i> praised the game for allowing each skill to be useful. <i>GameSpot</i> felt that "the variety of characters that can be created and the truly different experiences that each type of character can have should satisfy even hard-core RPG players."</p>
+
+<p>The post-apocalyptic setting and story were praised. The setting was lauded as refreshing for a role-playing game; <i><a href="https://en.wikipedia.org/wiki/Just_Adventure">Just Adventure</a></i> said that <i>Fallout</i> abandoned the traditional fantasy-based settings of many role-playing games. Butcher said the game's appearance, sound, and ambient music delivered a believable environment, and <i>Computer Games Strategy Plus</i> found the mix of satire and grit well-executed. <i>GameSpot</i> and <i><a href="https://en.wikipedia.org/wiki/The_Independent">The Independent</a></i> said the storyline was compelling. Critics commended the cinematic introduction; <i>The Electric Playground</i> called it "the most haunting opening movie" he had seen. Butcher praised the ability to complete quests in multiple ways, and <i><a href="https://en.wikipedia.org/wiki/Next_Generation_(magazine)">Next Generation</a></i> found the subquests to be a natural outgrowth of the main quest. <i><a href="https://en.wikipedia.org/wiki/Computer_Gaming_World">Computer Gaming World</a></i>, however, said the dialogue was unable to account for the player's unpredictability, resulting in out-of-order dialogue. <i>Just Adventure</i> considered the ending among the best in video games.</p>
+
+<p>The combat received a slightly positive reception. Several reviews praised its tactical nature, and <i>GameSpot</i> found the targeting system satisfying. <i>Computer Games Strategy Plus</i> said that fans of turn-based RPGs would greatly enjoy the combat because of the wide variety of weapons. Finding the combat unrealistic, <i>Computer Gaming World</i> said that the turn-based system "might bore or disappoint <i>Diablo</i> fans, but will be welcome to most hard-core RPGers." The companions were criticized because the player could not control them directly. Vaughn said the combat was great when playing without companions and frustrating when playing with them.</p>
+
+<h3>Sales</h3>
+
+<p><i>Fallout</i> was commercially successful, although it was not as popular as other role-playing video games such as <i><a href="https://en.wikipedia.org/wiki/Baldur's_Gate_(video_game)">Baldur's Gate</a></i> and <i>Diablo</i>. It did not meet sales expectations, but developed a fan following and sold enough copies for a sequel to be produced. In the United States, it debuted at No. 12 on <a href="https://en.wikipedia.org/wiki/PC_Data">PC Data</a>'s computer game sales rankings for October 1997. <i><a href="https://en.wikipedia.org/wiki/CNET_Gamecenter">CNET Gamecenter</a></i> noted that the game was part of a trend of role-playing successes that month, alongside <i><a href="https://en.wikipedia.org/wiki/Ultima_Online">Ultima Online</a></i> and <i><a href="https://en.wikipedia.org/wiki/Lands_of_Lore_2:_Guardians_of_Destiny">Lands of Lore 2: Guardians of Destiny</a></i>, and said, "If October's list is any indication, [role-playing games] are back." <i>Fallout</i> sold 53,777 copies in the US by the end of 1997.</p>
+
+<p>Worldwide, over 100,000 copies were shipped by December 1997, and <a href="https://en.wikipedia.org/wiki/Erik_Bethke">Erik Bethke</a> reported sales of over 120,000 copies after a year. By March 2000, 144,000 copies had been sold in the US alone. <i>GameSpot</i> called these "very good sales, especially since the overall [worldwide] figures are likely double those amounts". <i>Fallout</i> was unpopular in the United Kingdom, where sales for it and its sequel totaled just over 50,000 combined lifetime sales by 2008. In 2017, Fargo said in an interview that <i>Fallout</i> sold a total of 600,000 copies. After the release of the <a href="https://en.wikipedia.org/wiki/Fallout_(2024_TV_series)">2024 television adaptation</a>, <i>Fallout</i> experienced renewed commercial success. According to data trackers Steam Charts and SteamDB respectively, <i>Fallout</i>'s player base experienced a 160% increase, peaking at 2,300 players.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>Fallout</i> for "Computer Entertainment Title of the Year", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Role-Playing_Game_of_the_Year">PC Role-Playing Game of the Year</a>", and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Audio_Design">Outstanding Achievement in Sound and Music</a>" at the <a href="https://en.wikipedia.org/wiki/1st_Annual_Interactive_Achievement_Awards">inaugural Interactive Achievement Awards</a>. Similarly, the <a href="https://en.wikipedia.org/wiki/Game_Developers_Conference">Computer Game Developers Conference</a> nominated <i>Fallout</i> for its "Best Adventure/RPG" <a href="https://en.wikipedia.org/wiki/Spotlight_Awards">Spotlight Award</a>. <i>Fallout</i> received GameSpot's "Best Role-Playing Game" and "Best Ending" prize; and was nominated for <i>GameSpot</i>'s "Game of the Year". It also won the "Role-Playing Game of the Year" award from both <i>Computer Games Magazine</i> and <i>Computer Gaming World</i>.</p>
+
+<h2>Legacy</h2>
+
+<h3>Influence</h3>
+
+<p>The 1990s saw a decline in the popularity of the <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing video game</a> genre as a result of stale settings and ideas, competition with other genres, and poor quality assurance. <i>Fallout</i> has been credited as one of several innovative role-playing games that revived the genre's popularity. In 2000, <i>CNET Gamecenter</i>'s Mark H. Walker wrote, "The RPG genre was clearly in a slump in the mid-'90s, but ... the renaissance began when Interplay's <i>Fallout</i> hit store shelves." Rowan Kaiser, writing for <i><a href="https://en.wikipedia.org/wiki/Engadget">Engadget</a></i>, called <i>Fallout</i> the "first modern role-playing game".</p>
+
+<p><i>Fallout</i>'s post-apocalyptic setting was novel, as contemporary role-playing games often featured <a href="https://en.wikipedia.org/wiki/Tolkien">Tolkien</a>-inspired fantasy settings. <i>Fallout</i> also stood out for its focus on the player character, how their choices impacted the game world, and the open-world gameplay. Matthew Byrd of <i><a href="https://en.wikipedia.org/wiki/Den_of_Geek">Den of Geek</a></i> wrote that <i>Fallout</i>'s departure from gameplay inspired by the tabletop role-playing game <i><a href="https://en.wikipedia.org/wiki/Dungeons_&amp;_Dragons">Dungeons &amp; Dragons</a></i>, prevalent in role-playing games at the time, made it influential. Kaiser stated that any modern game with a morality system could be tied back to <i>Fallout</i>. At the 2012 <a href="https://en.wikipedia.org/wiki/Game_Developers_Conference">Game Developers Conference</a>, Cain gave a presentation about <i>Fallout</i>'s development and noted traits that were shared by subsequent role-playing games, including open-world gameplay, ambiguous morality, and perks.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Polygon_(website)">Polygon</a></i> described <i>Fallout</i> as "one of the most influential games of its time." After leaving Interplay in 1998, Cain, Boyarsky, and Anderson formed <a href="https://en.wikipedia.org/wiki/Troika_Games">Troika Games</a> and created <i><a href="https://en.wikipedia.org/wiki/Arcanum:_Of_Steamworks_and_Magick_Obscura">Arcanum: Of Steamworks and Magick Obscura</a></i> (2001). Cain considered <i>Fallout</i> a "stepping stone" to the creation of <i>Arcanum</i>. Years later, working for <a href="https://en.wikipedia.org/wiki/Obsidian_Entertainment">Obsidian Entertainment</a>, Cain and Boyarsky created <i><a href="https://en.wikipedia.org/wiki/The_Outer_Worlds">The Outer Worlds</a></i> (2019), a role-playing video game influenced by <i>Fallout</i>. After the <i>Fallout</i> series became popular, <i><a href="https://en.wikipedia.org/wiki/Wasteland_2">Wasteland 2</a></i> (2014) was pitched by Fargo and developed by <a href="https://en.wikipedia.org/wiki/InXile_Entertainment">inXile Entertainment</a>, which Fargo founded, with a design team featuring Anderson and <i>Fallout</i> composer <a href="https://en.wikipedia.org/wiki/Mark_Morgan_(composer)">Mark Morgan</a>. <i>PC Gamer</i> found <i>Wasteland 2</i> to be more similar the first two <i>Fallout</i> games than the original <i>Wasteland</i>. Other personnel from the <i>Fallout</i> development team have worked on games that were influenced by <i>Fallout</i>  such as <i><a href="https://en.wikipedia.org/wiki/Neverwinter_Nights_2">Neverwinter Nights 2</a></i> (2006) and <i><a href="https://en.wikipedia.org/wiki/Alpha_Protocol">Alpha Protocol</a></i> (2008). A feature similar to the perks in <i>Fallout</i>, called "feats", was added to the third edition of <i>Dungeons &amp; Dragons</i>. Other games with similar features, according to Cain, include <i><a href="https://en.wikipedia.org/wiki/World_of_Warcraft">World of Warcraft</a></i> (2004) and <i><a href="https://en.wikipedia.org/wiki/Oblivion_(video_game)">Oblivion</a></i> (2006). Both <i><a href="https://en.wikipedia.org/wiki/Metro_2033_(video_game)">Metro 2033</a></i> (2010) and <i><a href="https://en.wikipedia.org/wiki/Atom_RPG">Atom RPG</a></i> (2018) are post-apocalyptic games that were influenced by <i>Fallout</i>. Other games influenced by <i>Fallout</i> include <i><a href="https://en.wikipedia.org/wiki/Deus_Ex_(video_game)">Deus Ex</a></i> (2000), <i><a href="https://en.wikipedia.org/wiki/Dark_Angel:_Vampire_Apocalypse">Dark Angel: Vampire Apocalypse</a></i> (2001), and <i><a href="https://en.wikipedia.org/wiki/Weird_West_(video_game)">Weird West</a></i> (2022).</p>
+
+<p><i>Fallout</i> continues to receive acclaim, and is considered one of the best role-playing games on PC. Retrospective critics have considered the game innovative and praised its setting, dark tone, gameplay mechanics, and character system. Several critics have also found the game outdated yet still enjoyable. Critical assessments of <i>Fallout</i>'s quality relative to its sequels differ. <i>GamesRadar+</i> ranked it low among the series, <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> ranked it in the middle, and <i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i> and <i><a href="https://en.wikipedia.org/wiki/Paste_Magazine">Paste Magazine</a></i> ranked it high.</p>
+
+<p>Critics have particularly highlighted the Master, the game's villain. <i>GameSpot</i> singled out <a href="https://en.wikipedia.org/wiki/Jim_Cummings">Jim Cummings</a>'s voice acting as the Master as "chilling" and considered him "one of the most memorable antagonists in computer-gaming history." The final encounter with the Master has been lauded for its multiple solutions that took advantage of the character system, with the boss fight itself being optional. 
+Multiple journalists especially praised the option to convince the Master that he is wrong, with <i>Kotaku</i> describing it as "unforgettable", and <i><a href="https://en.wikipedia.org/wiki/UGO">UGO</a></i> describing it as "fun". <i>IGN</i> said that this aforementioned ability proved that in role-playing games, dialogue can be just as valid as fighting. Praising the final confrontation, <i><a href="https://en.wikipedia.org/wiki/USGamer">USGamer</a></i>'s Mike Williams said, "Even at its end, <i>Fallout</i> is about player choice, and the choices available to you are pretty clever." <i>GamesRadar+</i> called the player's encounter with the Master "one of the most striking storytelling devices of its era", and <i>IGN</i> called it one of the series' most memorable moments.</p>
+
+<p><i>Fallout</i> has been inducted into the "Hall of Fame" (or similar award) of <i>Computer Gaming World</i>, <i>GameSpot</i>, <i><a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a></i>, and <i>IGN</i>. It has also been ranked as among the best PC games of all time by <i>PC Gamer</i> and <i>IGN</i> and among the <a href="https://en.wikipedia.org/wiki/Greatest_video_games_of_all_time">greatest video games of all time</a> by <i>IGN</i>, <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>, and <i>Polygon</i>. The 2002 MacPlay ports of <i>Fallout</i> and <i>Fallout 2</i> were listed under "Best Games Rescued from Oblivion" in <i><a href="https://en.wikipedia.org/wiki/Macworld">Macworld</a></i>'s "2002 Game Hall of Fame". <i>Fallout</i> was included in the 2010 reference book <i><a href="https://en.wikipedia.org/wiki/1001_Video_Games_You_Must_Play_Before_You_Die">1001 Video Games You Must Play Before You Die</a></i> and was exhibited in <a href="https://en.wikipedia.org/wiki/Smithsonian_American_Art_Museum">Smithsonian American Art Museum</a>'s "<a href="https://en.wikipedia.org/wiki/The_Art_of_Video_Games">The Art of Video Games</a>" under the category of <a href="https://en.wikipedia.org/wiki/Adventure_games">adventure games</a> in March 2011.</p>
+
+<p><i>Fallout</i> was followed by a series of sequels and spin-offs, often different in genre and ambiance from the original game. Cain did not work on any sequels and spin-offs beyond brainstorming for <i><a href="https://en.wikipedia.org/wiki/Fallout_2">Fallout 2</a></i>, and left Interplay during its development. Interplay owned the <i>Fallout</i> rights until 2007, when they were purchased by <a href="https://en.wikipedia.org/wiki/Bethesda_Softworks">Bethesda Softworks</a>. The first Bethesda-developed <i>Fallout</i> game was <i><a href="https://en.wikipedia.org/wiki/Fallout_3">Fallout 3</a></i>. The series has been acclaimed, influential among developers, and among the most popular in the video game industry. Vault Boy has been considered an iconic mascot of the franchise. Other recurring elements include the Super Mutants, the Brotherhood of Steel, the PIPBoy (known as the <a href="https://en.wikipedia.org/wiki/Pip-Boy">Pip-Boy</a> in later games), and <a href="https://en.wikipedia.org/wiki/Power_Armor_(Fallout)">Power Armor</a>.</p>
+
+<p>Three sequels have been released: <i>Fallout 2</i> in 1998, <i>Fallout 3</i> in 2008, and <i><a href="https://en.wikipedia.org/wiki/Fallout_4">Fallout 4</a></i> in 2015. All received positive reviews. Spin-offs include <i><a href="https://en.wikipedia.org/wiki/Fallout_Tactics:_Brotherhood_of_Steel">Fallout Tactics: Brotherhood of Steel</a></i> in 2001, <i><a href="https://en.wikipedia.org/wiki/Fallout:_Brotherhood_of_Steel">Fallout: Brotherhood of Steel</a></i> in 2004, <i><a href="https://en.wikipedia.org/wiki/Fallout:_New_Vegas">Fallout: New Vegas</a></i> in 2010, <i><a href="https://en.wikipedia.org/wiki/Fallout_Shelter">Fallout Shelter</a></i> in 2015, and <i><a href="https://en.wikipedia.org/wiki/Fallout_76">Fallout 76</a></i> in 2018. <i>Fallout Tactics: Brotherhood of Steel</i> and <i>Fallout: New Vegas</i> received positive reviews, while <i>Fallout: Brotherhood of Steel</i>, <i>Fallout Shelter</i>, and <i>Fallout 76</i> received mixed reviews.</p>
+
+<p>In 1998, Interplay wrote a script for a film adaptation of <i>Fallout</i>, to be produced by its Interplay Films studio. The adaptation was canceled following the dissolution of Interplay Films in 2000. Throughout 2002, <a href="https://en.wikipedia.org/wiki/Chris_Avellone">Chris Avellone</a>, a designer of <i>Fallout 2</i>, compiled research of <i>Fallout</i>'s world and released a series of issues known as the <i>Fallout Bible</i>. Following Bethesda's acquisition of the <i>Fallout</i> franchise, the <i>Fallout Bible</i> became <a href="https://en.wikipedia.org/wiki/Non-canon">non-canon</a>. Morgan released a remastered <a href="https://en.wikipedia.org/wiki/Music_of_the_Fallout_series#Fallout">soundtrack album for <i>Fallout</i></a> on May 10, 2010.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Fallout_(2024_TV_series)">A television adaptation</a> of the video game series, announced in July 2020 with <a href="https://en.wikipedia.org/wiki/Lisa_Joy">Lisa Joy</a> and <a href="https://en.wikipedia.org/wiki/Jonathan_Nolan">Jonathan Nolan</a> as executive producers, premiered on <a href="https://en.wikipedia.org/wiki/Amazon_Prime_Video">Amazon Prime Video</a> on April 10, 2024, to positive reception from critics and fans. In a <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a> video, Cain praised the adaptation for matching the mood of the series and for its <a href="https://en.wikipedia.org/wiki/Easter_egg_(media)">easter eggs</a> and characters. He also defended the adaptation from accusations of contradicting the <i>Fallout</i> canon. The adaptation's success on Amazon Prime Video has led to renewed commercial success of the <i>Fallout</i> video games, including the original game; according to Steam Charts, it experienced the highest percentage increase in player base at 160%.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
