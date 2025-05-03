@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Grand Theft Auto VI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('c6c98729-e2f8-4481-9661-79b39493572b/389ad9cb-0008-469c-a397-6ce2f3f5f948');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="c6c98729-e2f8-4481-9661-79b39493572b/06d0fa2a-8a93-4b5b-84c7-857e6ebd3f3c.png"/> Grand Theft Auto VI</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="c6c98729-e2f8-4481-9661-79b39493572b/131ed24a-b481-4b9d-840a-3ec9b6dfad99.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>52m 4s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/3/2025">5/3/2025</a> 0:23:12</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/3/2025">5/3/2025</a> 0:27:46</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-5/26/2026">5/26/2026</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Rockstar Games">Rockstar Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Co-Operative">Co-Operative</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI" target="_blank">Wikipedia</a><br/><a href="https://www.rockstargames.com/VI" target="_blank">Official website</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Grand Theft Auto VI</b></i><!-- Please don't add the abbreviation "GTA VI" here as it isn't used throughout the article and therefore isn't needed. --> is an upcoming video game in <a href="https://en.wikipedia.org/wiki/Video_game_development">development</a> by <a href="https://en.wikipedia.org/wiki/Rockstar_Games">Rockstar Games</a>. It is due to be the eighth main <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto">Grand Theft Auto</a></i> game, following <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_V">Grand Theft Auto V</a></i> (2013), and the sixteenth entry overall. Set within an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a>—the fictional <a href="https://en.wikipedia.org/wiki/U.S._state">U.S. state</a> of Leonida, based on <a href="https://en.wikipedia.org/wiki/Florida">Florida</a>—and its <a href="https://en.wikipedia.org/wiki/Miami">Miami</a>-inspired <a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto#Vice_City">Vice City</a>, the story is expected to follow the criminal duo of Lucia and her male partner.<!--Do not change to "Jason" unless it can be confirmed officially. There is already a note right here--></p>
+
+<p>Following years of speculation and anticipation, Rockstar confirmed in February 2022 that the game was in development. That September, footage from unfinished versions was <a href="https://en.wikipedia.org/wiki/Data_breach">leaked</a> on the internet in what journalists described as one of the biggest leaks in the history of the <a href="https://en.wikipedia.org/wiki/Video_game_industry">video game industry</a>. The game was formally revealed in December 2023 and is scheduled to be released on 26 May 2026 for the <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a> and <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a>.</p>
+
+<h2>Setting and characters</h2>
+
+<p><i>Grand Theft Auto VI</i> is set in the fictional <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> <a href="https://en.wikipedia.org/wiki/U.S._state">U.S. state</a> of Leonida—based on <a href="https://en.wikipedia.org/wiki/Florida">Florida</a>—which includes Vice City, a fictionalised version of <a href="https://en.wikipedia.org/wiki/Miami">Miami</a>. Vice City was previously featured in <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_(video_game)">Grand Theft Auto</a></i> (1997) and as the main setting of <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_Vice_City">Grand Theft Auto: Vice City</a></i> (2002) and <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_Vice_City_Stories">Grand Theft Auto: Vice City Stories</a></i> (2006). The game world parodies contemporary <a href="https://en.wikipedia.org/wiki/American_culture">American culture</a>, with satirical depictions of <a href="https://en.wikipedia.org/wiki/Social_media">social media</a> and <a href="https://en.wikipedia.org/wiki/Influencer">influencer</a> culture, and references to <a href="https://en.wikipedia.org/wiki/Internet_meme">Internet memes</a> such as <a href="https://en.wikipedia.org/wiki/Florida_Man">Florida Man</a>. The story follows a criminal duo: Lucia, the series's first non-optional female protagonist, and her male partner; the first trailer depicts Lucia as a prison inmate, and later evading custody with her partner.</p>
+
+<h2>Development and release</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Rockstar_Games">Rockstar Games</a> began preliminary work on <i>Grand Theft Auto VI</i> in 2014 after <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_V">Grand Theft Auto V</a></i>'s release, and principal development started after <i><a href="https://en.wikipedia.org/wiki/Red_Dead_Redemption_2">Red Dead Redemption 2</a></i>'s release in 2018. During its production, the game was code-named <i>Project Americas</i>. <a href="https://en.wikipedia.org/wiki/Jason_Schreier">Jason Schreier</a> reported the game was "a moderately sized release" that would expand over time to avoid its predecessors' <a href="https://en.wikipedia.org/wiki/Crunch_(video_games)">developer crunch</a>, and that it would feature two <a href="https://en.wikipedia.org/wiki/Bonnie_and_Clyde">Bonnie and Clyde</a>–inspired protagonists, including a <a href="https://en.wikipedia.org/wiki/Latinas">Latina</a> woman, and "a significant online mode" akin to <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_Online">Grand Theft Auto Online</a></i>. He claimed the developers were cautiously subverting the series's trend of joking about <a href="https://en.wikipedia.org/wiki/Marginalised_groups">marginalised groups</a>. In 2018, <i><a href="https://en.wikipedia.org/wiki/Inside_Gaming">The Know</a></i> reported that the game would be set primarily in Vice City and partly in <a href="https://en.wikipedia.org/wiki/South_America">South America</a>, and in 2021, Tom Henderson claimed its map could evolve akin to <i><a href="https://en.wikipedia.org/wiki/Fortnite">Fortnite</a></i>.</p>
+
+<p>The game became highly anticipated in the years before its announcement, and journalists noted some fans became frustrated by Rockstar's continued silence, particularly after they announced a re-release of <i>Grand Theft Auto V</i> in 2020. An individual referencing the game received media attention for interrupting several live stage and television shows. On 4 February 2022, Rockstar confirmed development was "well underway". In July, Rockstar announced <i><a href="https://en.wikipedia.org/wiki/Red_Dead_Online">Red Dead Online</a></i> would not receive more major updates as development resources were withdrawn to focus on the upcoming game; industry sources stated Rockstar reallocated resources after planned remasters of <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_IV">Grand Theft Auto IV</a></i> (2008) and <i><a href="https://en.wikipedia.org/wiki/Red_Dead_Redemption">Red Dead Redemption</a></i> (2010) were paused due to the backlash received by <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_The_Trilogy_–_The_Definitive_Edition">Grand Theft Auto: The Trilogy – The Definitive Edition</a></i> (2021).</p>
+
+<p>Schreier reported in February 2024 that Rockstar requested employees cease <a href="https://en.wikipedia.org/wiki/Remote_work">remote work</a> and return to offices full time from April "for productivity and security" as development entered its "final stages". The <a href="https://en.wikipedia.org/wiki/Independent_Workers'_Union_of_Great_Britain">Independent Workers' Union of Great Britain</a> criticised Rockstar for contradicting their promise to maintain flexible working conditions; some employees were concerned it could negatively impact staff health and morale and prompt resignations and crunch conditions. In March, <i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i>'s Zack Zwiezen reported the decision was partly to avoid a delay, though other journalists said the game remained "on schedule" and Rockstar's parent company <a href="https://en.wikipedia.org/wiki/Take-Two_Interactive">Take-Two Interactive</a> confirmed the game was scheduled for late 2025. In May 2025, Rockstar announced the game was delayed to 26 May 2026.</p>
+
+<p>Anticipation surrounding the game spawned an <a href="https://en.wikipedia.org/wiki/Internet_meme">internet meme</a> indicating bemusement that other surprising events occurred "<a href="https://en.wiktionary.org/wiki/before%20GTA%206">before <i>GTA 6</i></a>". It won Most Wanted Game at the <a href="https://en.wikipedia.org/wiki/Golden_Joystick_Awards">Golden Joystick Awards</a> and Most Anticipated Game at <a href="https://en.wikipedia.org/wiki/The_Game_Awards_2024">the Game Awards</a> in 2024. Several publishers awaited a release date announcement before scheduling their own games, with others prepared to reschedule to avoid potential competition with <i>Grand Theft Auto VI</i>. Some are hoping it is sold for US$80 to $100—more than the standard $70—as it would prompt industry-wide changes, but analysts consider it unlikely. The research firm <a href="https://en.wikipedia.org/wiki/Circana">Circana</a> predicted the launches of <i>Grand Theft Auto VI</i> and the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch_2">Nintendo Switch 2</a> could allow the video game market to "rebound" with record consumer spending; DFC Intelligence projected sales of 40 million and earnings of $3.2 billion in the first year—twice as much as <i>Grand Theft Auto V</i>, which had the highest-grossing game launch—including $1 billion in preorders.</p>
+
+<h3>Promotion</h3>
+
+<p>In November 2023, <a href="https://en.wikipedia.org/wiki/Sam_Houser">Sam Houser</a>, the president of Rockstar Games, announced the first <a href="https://en.wikipedia.org/wiki/Trailer_(promotion)">trailer</a> would release in early December to celebrate the company's 25th anniversary. Within five hours, the announcement on <a href="https://en.wikipedia.org/wiki/X_(formerly_Twitter)">X (formerly Twitter)</a> surpassed two previous posts about the game to become the platform's most-<a href="https://en.wikipedia.org/wiki/Like_button">liked</a> gaming-related post, later surpassed by Rockstar's post announcing the trailer's 5 December release date, with 1.8 million likes in 24 hours. Other developers imitated the announcement's formatting to promote their trailers. On 4 December, a low-quality version of the trailer was leaked on X; in response, Rockstar published the official version on <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a>, revealing the title, protagonists, setting, and 2025 release window for the <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a> and the <a href="https://en.wikipedia.org/wiki/Xbox_Series_X_and_Series_S">Xbox Series X and Series S</a>.</p>
+
+<p>The trailer broke the record for most first-day views on a non-music YouTube video within 12 hours, with 46 million, and, within 24 hours, became the third-most-viewed overall, with 93 million, and most-liked game trailer, with 8.9 million. It surpassed the lifetime viewership of <i>Grand Theft Auto V</i>'s 2011 reveal trailer within two days, with 101 million views, and became the second-most-viewed game trailer by January, with 168 million. Its featured song, <a href="https://en.wikipedia.org/wiki/Tom_Petty">Tom Petty</a>'s "<a href="https://en.wikipedia.org/wiki/Love_Is_a_Long_Road_(song)">Love Is a Long Road</a>", saw a near-37,000 per cent increase in <a href="https://en.wikipedia.org/wiki/Spotify">Spotify</a> streams, had almost 250,000 searches on <a href="https://en.wikipedia.org/wiki/Shazam_(music_app)">Shazam</a>, and ranked second on the worldwide <a href="https://en.wikipedia.org/wiki/ITunes">iTunes</a> chart. The trailer spawned fan-created recreations in other video games, as a <a href="https://en.wikipedia.org/wiki/Brickfilm">brickfilm</a>, and in live-action by the <a href="https://en.wikipedia.org/wiki/Hyundai_World_Rally_Team">Hyundai World Rally Team</a>.</p>
+
+<p>On 18 September 2022, a user known as "teapotuberhacker" published 90 videos to the website <i>GTAForums</i> showing 50 minutes of work-in-progress game footage. Schreier confirmed with sources at Rockstar that the footage was genuine, and <i><a href="https://en.wikipedia.org/wiki/The_Guardian">The Guardian</a></i> reported it was from several stages of development, with some videos about a year old. The footage revealed a modern-day Vice City setting, contained animation and gameplay tests, level layouts, and character conversations, and depicted the player characters, Lucia and Jason, entering a <a href="https://en.wikipedia.org/wiki/Strip_club">strip club</a> and robbing a <a href="https://en.wikipedia.org/wiki/Diner">diner</a>. The hacker claimed to be responsible for the <a href="https://en.wikipedia.org/wiki/Uber#September_2022_security_breach">Uber security breach</a> from the prior week, said they had downloaded the files directly from Rockstar's internal <a href="https://en.wikipedia.org/wiki/Slack_(software)">Slack</a> groups, and threatened to publish <a href="https://en.wikipedia.org/wiki/Source_code">source code</a>, assets, and internal builds of <i>Grand Theft Auto V</i> and <i>VI</i>.</p>
+
+<p>Take-Two responded by submitting <a href="https://en.wikipedia.org/wiki/Notice_and_take_down">takedowns</a> of videos showing or discussing the leaks hosted on YouTube, and contacted <i>GTAForums</i> and <a href="https://en.wikipedia.org/wiki/Reddit">Reddit</a> moderators to remove access. The hacker wrote they were "looking to negotiate a deal" with Rockstar or Take-Two. Journalists described the event as one of the biggest leaks in <a href="https://en.wikipedia.org/wiki/Video_game_history">video game history</a>; Schreier called it "a nightmare for Rockstar Games" which could limit employees' remote-work flexibility. The <a href="https://en.wikipedia.org/wiki/Jefferies_Group">Jefferies Group</a> analyst Andrew Uerkwitz called it a "PR disaster" that could potentially delay the game and diminish staff morale, but was unlikely to impact reception or sales. <i>The Guardian</i> noted the leaked footage was being widely criticised "by ill-informed users" due to its quality, despite not being representative of the final product. Some users erroneously claimed graphics and art assets are finalised early in game development. In solidarity, several developers shared work-in-progress footage of their games and some, including <a href="https://en.wikipedia.org/wiki/Cliff_Bleszinski">Cliff Bleszinski</a>, <a href="https://en.wikipedia.org/wiki/Neil_Druckmann">Neil Druckmann</a>, <a href="https://en.wikipedia.org/wiki/Rami_Ismail">Rami Ismail</a>, and <a href="https://en.wikipedia.org/wiki/Alanah_Pearce">Alanah Pearce</a>, offered sympathies to Rockstar.</p>
+
+<p>On 19 September, Rockstar confirmed the leak to be a "network intrusion" and lamented the manner in which the game was first demonstrated, but did not anticipate long-term effects on development. They disabled comments and replies on their social media accounts in the days following the leak. Take-Two added that steps had been taken "to isolate and contain this incident". Take-Two's share price dropped by more than six per cent in <a href="https://en.wikipedia.org/wiki/Pre-market_trading">pre-market trading</a> that day, but recovered during <a href="https://en.wikipedia.org/wiki/Regular_trading_hours">regular trading hours</a> following their statement. <a href="https://en.wikipedia.org/wiki/Uber">Uber</a> acknowledged the potential links to their security breach and noted they were working with the <a href="https://en.wikipedia.org/wiki/Federal_Bureau_of_Investigation">Federal Bureau of Investigation</a> and the <a href="https://en.wikipedia.org/wiki/United_States_Department_of_Justice">United States Department of Justice</a>. They believed the hacker was affiliated with the group <a href="https://en.wikipedia.org/wiki/Lapsus$">Lapsus$</a>, which was thought to have breached companies such as <a href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</a>, <a href="https://en.wikipedia.org/wiki/Nvidia">Nvidia</a>, and <a href="https://en.wikipedia.org/wiki/Samsung">Samsung</a> over the preceding year. <a href="https://en.wikipedia.org/wiki/Strauss_Zelnick">Strauss Zelnick</a>, Take-Two's chairman and chief executive officer, said the incident caused the companies to become more vigilant with <a href="https://en.wikipedia.org/wiki/Cybersecurity">cybersecurity</a> and had impacted staff emotionally but business remained unaffected. Rockstar later claimed the incident cost the company $5 million and thousands of staff hours to recover.</p>
+
+<p>A 17-year-old boy from <a href="https://en.wikipedia.org/wiki/Oxfordshire">Oxfordshire</a>—identified as "teapotuberhacker" and a key member of Lapsus$—was arrested by the <a href="https://en.wikipedia.org/wiki/City_of_London_Police">City of London Police</a> on 22 September as part of an investigation supported by the <a href="https://en.wikipedia.org/wiki/National_Cyber_Crime_Unit">National Cyber Crime Unit</a> and American federal law enforcement. While on <a href="https://en.wikipedia.org/wiki/Bail_in_the_United_Kingdom">bail</a> for hacking <a href="https://en.wikipedia.org/wiki/EE_(telecommunications)">EE</a> and Nvidia and under <a href="https://en.wikipedia.org/wiki/Police_protection">police protection</a> at a <a href="https://en.wikipedia.org/wiki/Travelodge_(British_company)">Travelodge</a> hotel, he breached Rockstar using a mobile phone, television, and an <a href="https://en.wikipedia.org/wiki/Amazon_Fire_TV_Stick">Amazon Fire TV Stick</a> and threatened to release the source code in a Slack message to all Rockstar staff. Appearing before Highbury Corner Youth Court, he <a href="https://en.wikipedia.org/wiki/Plea">pleaded</a> guilty to two counts of <a href="https://en.wikipedia.org/wiki/Bail_in_the_United_Kingdom#Breach_of_Police_Bail">breaching bail conditions</a> and not guilty to two counts of <a href="https://en.wikipedia.org/wiki/Computer_Misuse_Act_1990">computer misuse</a>. The case was referred to a higher court while the boy was <a href="https://en.wikipedia.org/wiki/Remand_(detention)">remanded</a> to a <a href="https://en.wikipedia.org/wiki/Youth_detention_centre">youth detention centre</a>. In mid-2023, he stood trial at <a href="https://en.wikipedia.org/wiki/Southwark_Crown_Court">Southwark Crown Court</a> for twelve offences, including six counts of computer misuse, three of blackmail, and two of fraud. He was deemed <a href="https://en.wikipedia.org/wiki/Fitness_to_plead">unfit to stand trial</a> due to his <a href="https://en.wikipedia.org/wiki/Autism">autism</a>; instead of assessing his guilt, a jury determined he had committed the acts. A judge placed him under an indefinite <a href="https://en.wikipedia.org/wiki/Psychiatric_hospital">hospital order</a> in December for being a high public risk as he expressed an intent to continue committing <a href="https://en.wikipedia.org/wiki/Cybercrimes">cybercrimes</a>.</p>
+
+<p>On 1 January 2025, a Reddit user posted a photograph and two videos of a PlayStation 5 <a href="https://en.wikipedia.org/wiki/Game_development_kit">development kit</a> running the game, taken by a person who "worked at the Rockstar office for a few months" in mid-2021; the post was later deleted. Based on the office's surroundings, <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> determined the photograph and videos were taken at <a href="https://en.wikipedia.org/wiki/Rockstar_San_Diego">Rockstar San Diego</a>. <i><a href="https://en.wikipedia.org/wiki/Polygon_(website)">Polygon</a></i>'s Ian Walker found no new information was revealed from the post, which he called the "worst leak of all time".</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
