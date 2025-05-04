@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Resistance 3</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('737e3154-9567-4eb5-a25f-8b4abaed8a86/bc982706-2a97-4a98-8392-b421ea737473.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="737e3154-9567-4eb5-a25f-8b4abaed8a86/76be491e-ff91-4d8a-a1ed-6efd05edc1f9.ico"/> Resistance 3</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="737e3154-9567-4eb5-a25f-8b4abaed8a86/f4b94888-a7a5-41f7-a910-f589bd57d4a2.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/4/2025">5/4/2025</a> 15:28:29</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/4/2025">5/4/2025</a> 15:34:55</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-9/6/2011">9/6/2011</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-83">83</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-First-person shooter">First-person shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Insomniac Games">Insomniac Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Sony Computer Entertainment">Sony Computer Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Resistance_3" target="_blank">Wikipedia</a><br/><a href="https://www.mobygames.com/game/ps3/resistance-3" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[People] composer: Boris Salchow">[People] composer: Boris Salchow</a><br/><a href="#quicklink-[People] designer: Drew Murray">[People] designer: Drew Murray</a><br/><a href="#quicklink-[People] director: Marcus Smith">[People] director: Marcus Smith</a><br/><a href="#quicklink-[People] writer: Jon Paquette">[People] writer: Jon Paquette</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Resistance 3</b></i> is a 2011 <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/Insomniac_Games">Insomniac Games</a> and published by <a href="https://en.wikipedia.org/wiki/Sony_Computer_Entertainment">Sony Computer Entertainment</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>. It is the third installment in the <a href="https://en.wikipedia.org/wiki/Resistance_(video_game_series)"><i>Resistance</i></a> series and the last to be developed by Insomniac Games. <i>Resistance 3</i> is the first in the series to support 3D and PlayStation Move and was the first to introduce the PSN Pass program. The game shifts away from the military aspect of <i><a href="https://en.wikipedia.org/wiki/Resistance:_Fall_of_Man">Resistance: Fall of Man</a></i> and <i><a href="https://en.wikipedia.org/wiki/Resistance_2">Resistance 2</a></i> and takes on a post-apocalyptic survival-horror feel.</p>
+
+<p><i>Resistance 3</i> received generally positive reviews from critics, some of whom deemed it the best in the series, but the game sold poorly and was deemed a commercial failure. On April 8, 2014, the <i>Resistance 3</i> online servers, along with those for <i><a href="https://en.wikipedia.org/wiki/Resistance:_Fall_of_Man">Resistance: Fall of Man</a></i> and <i><a href="https://en.wikipedia.org/wiki/Resistance_2">Resistance 2</a></i>, were shut down by Sony.</p>
+
+<h2>Gameplay</h2>
+
+<p>The game retains mostly the same gameplay mechanics as its predecessor albeit with several changes. The weapon wheel and health bar from the first <i><a href="https://en.wikipedia.org/wiki/Resistance:_Fall_of_Man">Resistance</a></i> game return. There are also new environmental objects such as chimeran plants which explode when shot. The game sees a mixture of new and old weapons; returning weapons include the Bullseye, Magnum, Rossmore, Auger, Marksman and Carbine. New weapons include the Mutator, which shoots biological mist that causes enemies to eventually explode causing splash damage, the Deadeye sniper rifle, and a new food-can based explosive, the shrapnel grenade, which releases a shower of nails when it explodes. Weapons are upgradeable, and become more powerful the more they are used. Humans are forced to assemble their weapons from whatever scrap they can gather. The game features <a href="https://en.wikipedia.org/wiki/PlayStation_Move">PlayStation Move</a> support and <a href="https://en.wikipedia.org/wiki/Stereoscopic_3D">Stereoscopic 3D</a>. Additionally, players can utilize the PlayStation Sharp Shooter peripheral attachment.</p>
+
+<h3>Multiplayer</h3>
+
+<p><i>Resistance 3</i> featured an online 16-player competitive multiplayer component. It offered five modes: Team Deathmatch, Chain Reaction, Deathmatch, Breach, and Capture the Flag. It also included a customizable progression system where players spend points earned by playing online to unlock customized loadouts that include various attributes. There was also a co-operative mode where players could team up to play through the story mode either online or split-screen. <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>'s podcast revealed that there would be no eight-player co-op as in <i>Resistance 2</i>. The multiplayer maps were set in locations around the world, such as the Fort Lamy prison in Chad; the Seaside of <a href="https://en.wikipedia.org/wiki/Glamorgan,_Wales">Glamorgan, Wales</a>, <a href="https://en.wikipedia.org/wiki/United_Kingdom">UK</a>; <a href="https://en.wikipedia.org/wiki/Alice_Springs">Alice Springs</a> in <a href="https://en.wikipedia.org/wiki/Australia">Australia</a>; <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a> in the <a href="https://en.wikipedia.org/wiki/United_States">United States</a>; the Trainyard in <a href="https://en.wikipedia.org/wiki/Bogota,_Colombia">Bogota, Colombia</a>. Some of the locations these maps took place in are not included in the story mode.</p>
+
+<p>Sony turned off the servers for the <a href="https://en.wikipedia.org/wiki/Resistance_(video_game_series)"><i>Resistance</i> trilogy</a> on April 8, 2014.</p>
+
+<h2>Plot</h2>
+
+<p>In 1953, shortly after Lt. Nathan Hale's death, Corporal Joseph Capelli, the only remaining member of the Sentinels, is dishonorably <a href="https://en.wikipedia.org/wiki/Military_discharge">discharged</a> for executing the former, despite having done it due to Hale having turned into a Chimera. Four years later, Capelli marries Susan Farley, the adoptive-sister of Nathan Hale, and now lives with a community of survivors in Haven, <a href="https://en.wikipedia.org/wiki/Oklahoma">Oklahoma</a>. Despite their best efforts, they are discovered by Chimeran forces, who have launched a full-scale <a href="https://en.wikipedia.org/wiki/Genocide">genocide</a> against the human race, now that their virus can be cured. Capelli and his militia company fight off the attackers, but not before they summon a massive <a href="https://en.wikipedia.org/wiki/Terraforming">terraforming</a> platform to destroy the town.</p>
+
+<p>While prepping for evacuation, Capelli runs into Dr. Fyoder Malikov, who explains that the Chimera have opened a <a href="https://en.wikipedia.org/wiki/Wormhole">wormhole</a> in the middle of New York as part of their plan to permanently freeze the planet and render it uninhabitable for humanity. Capelli refuses to help him, but his wife begs him to reconsider, as their son is too weak to survive such a harsh environment. Stealing an old trawler, the two make their way up the <a href="https://en.wikipedia.org/wiki/Mississippi_River">Mississippi River</a>, fighting off hordes of feral Chimera until the boat is destroyed by a Goliath. Upon awakening, they find that the currents have brought them to <a href="https://en.wikipedia.org/wiki/St._Louis,_Missouri">St. Louis, Missouri</a>.</p>
+
+<p>With Malikov too injured to continue, Capelli enters the city and links up with a <a href="https://en.wikipedia.org/wiki/Survivalism">survivalist</a> group known as the Remnants. In exchange for his help in fixing their transport, their leader, Charlie, agrees to take them to <a href="https://en.wikipedia.org/wiki/New_York_(state)">New York</a>. A squad of Chimeran fighters ambush them near <a href="https://en.wikipedia.org/wiki/Mount_Pleasant,_Pennsylvania">Mount Pleasant, Pennsylvania</a>, forcing Capelli and Malikov to ditch the Remnants. After working together to evade enemy search parties, the two reach an abandoned <a href="https://en.wikipedia.org/wiki/Coal_town">coal town</a> occupied by another group of survivors. They learn that the town priest, Jonathan Rose, vanished several days ago while hunting for "Satan", an oversized Chimera who lives in the nearby mines. Capelli tracks down Jonathan, and they manage to kill Satan. Out of gratitude, the townsfolk fix up an old coal train so they can resume their journey.</p>
+
+<p>While en route, a pack of bandits, the Wardens, assault the train. Capelli defeats them, but the train is subsequently overturned by a feral Widowmaker. Trapped under the wreckage, Capelli is forced to watch as Malikov is beheaded by the Warden leader, Mick. Taken to their hideout in <a href="https://en.wikipedia.org/wiki/Graterford_Prison">Graterford Prison</a>, he is forced to fight as a gladiator for the gang's amusement. Mick's lackey Herbert, a talented engineer, frees Capelli from confinement and tasks him with disabling the prison's defenses so he can stage a breakout. Despite Mick's interference, the plan succeeds and the Chimera lay waste to the prison and wipe out the Wardens. In the chaos, Capelli finds Mick and kills him.</p>
+
+<p>Now on his own, Capelli finally reaches <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a>. After sending a farewell message to his family via radio, he fights his way through the Chimera until they overwhelm him with a mortar barrage. At the last second, the Remnants arrive and <a href="https://en.wikipedia.org/wiki/Extraction_(military)">extract</a> him. Charlie offers to take him home, but Capelli persuades him to help stage an attack on a nearby terraformer.</p>
+
+<p>By disabling the platform's controls and sabotaging its power core, the two are able to maneuver it into a collision course with the central tower, sealing the wormhole and returning Earth's temperatures back to normal, although Capelli nearly dies in the process. With the Chimera's chief advantage gone, human resistance groups around the world move to exterminate the Chimera and begin rebuilding all their nations, ending the Chimera threat. Capelli, meanwhile, is happily reunited with his wife and son, finally at peace with himself.</p>
+
+<h2>Development</h2>
+
+<p>In 2009, a promotional billboard for <i>Resistance 3</i> was spotted on a location set for <i><a href="https://en.wikipedia.org/wiki/Battle:_Los_Angeles">Battle: Los Angeles</a></i>, a film by <a href="https://en.wikipedia.org/wiki/Columbia_Pictures">Columbia Pictures</a> (a subsidiary of Sony) released in early 2011.(as the film is set in nearly one month prior to the game's release),  Though neither Sony nor Insomniac Games commented on the appearance, Insomniac announced on May 25, 2010, that, in addition to creating a new multiplatform franchise, they would be developing multiple games exclusively for the PlayStation 3. The game was officially announced at Sony's <a href="https://en.wikipedia.org/wiki/Gamescom">Gamescom</a> 2010 press conference in <a href="https://en.wikipedia.org/wiki/Cologne">Cologne, Germany</a> on August 17, 2010, alongside a live-action trailer for the game. On September 28, 2010, leaked concept art and screenshots were released onto a Flickr account which depict a number of different Chimera and two unidentified human characters (later confirmed in Game Informer's November 2010 cover story as Joseph Capelli and Susan Farley). When asked about the authenticity of the images, Insomniac replied with "no comment". The first gameplay was revealed at the Spike Video Game Awards, showing new weapons and enemies. Insomniac worked with <a href="https://en.wikipedia.org/wiki/Olly_Moss">Olly Moss</a> to create the logo and box art.</p>
+
+<p>The game was released on September 6, 2011 in North America, September 7 in Europe, September 8 in Australia and New Zealand, and September 9 in the United Kingdom and Ireland.</p>
+
+<h3>Downloadable content</h3>
+
+<p>The downloadable content for <i>Resistance 3</i> includes the "Survival" game pack along with the "Brutality" game pack. The Survival pack includes: a Haven static theme, four new character skins for use in multiplayer, and a new multiplayer mode known as "Invasion". The Invasion mode forces Human and Chimeran teams to divide their resources with the goal of holding multiple control nodes on the map simultaneously. The more nodes a team holds, the faster they score points to achieve victory. The Brutality game pack is a survival-based wave mode which consists of the player roaming around a version of the Seaside multiplayer map, searching for new weapons along with ammunition and health to defend against the hordes of enemies. All weapons from the campaign can be found around the map and upgrade the more they are used. The game pack also includes seven tracks from the acclaimed heavy metal band Mastodon along with a prison theme and Mick Cutler skin for use in multiplayer.</p>
+
+<p>Both packs were removed in March 2014 from PlayStation Store, although only in Europe, around the same time of the multiplayer servers closure. However, the Brutality pack returned shortly after, possibly due to being also playable in singleplayer.</p>
+
+<p>Owners of specially marked copies of <i><a href="https://en.wikipedia.org/wiki/SOCOM_4_U.S._Navy_SEALs">SOCOM 4</a></i> were able to download and play the beta on August 4 using the codes provided with that game, while PlayStation Plus subscribers in Region 2 territories gained access on August 10. On August 23, the beta opened to worldwide subscribers of PlayStation Plus. Insomniac announced that they would give away codes via <a href="https://en.wikipedia.org/wiki/Facebook">Facebook</a> and <a href="https://en.wikipedia.org/wiki/Twitter">Twitter</a> to join the beta. The public beta began on August 30. The beta offered two multiplayer modes: Team Deathmatch and Chain Reaction. These modes were playable on two maps. People that played the beta between August 30 and September 4 received a SRPA Nathan Hale skin for <i>Resistance 3</i>. The beta ended on September 4. <i>Resistance 3</i> has two demos, one for purchasing <i><a href="https://en.wikipedia.org/wiki/Battle:_Los_Angeles">Battle: Los Angeles</a></i> on Blu-ray and the other is downloadable from the PlayStation Store.</p>
+
+<p>Global Resistance was a social media strategy game designed to promote the release of <i>Resistance 3</i>, where players could choose to play as Human or Chimera. Global Resistance had exclusive unlockable content for Resistance 3, like skins, artworks and videos. The game was disabled when the multiplayer servers for the Resistance trilogy closed on April 8, 2014.</p>
+
+<p><i>Resistance 3</i> came in two special editions. The Doomsday edition of <i>Resistance 3</i> includes a copy of the game and a Move Controller bundle which includes the <a href="https://en.wikipedia.org/wiki/PlayStation_Move">PlayStation Move controller</a>, the <a href="https://en.wikipedia.org/wiki/PlayStation_Move#Accessories">PlayStation Move Sharp Shooter Attachment</a>, the <a href="https://en.wikipedia.org/wiki/PlayStation_Move#Navigation_controller">PlayStation Move navigation controller</a> and the <a href="https://en.wikipedia.org/wiki/PlayStation_Eye#Camera">PlayStation Eye camera</a>. The bundle was available in North America and Latin America.</p>
+
+<p>In Europe, the Survivor edition is available which includes Joseph Capelli's journal, Chimera firing range target, SRPA playing cards, a canvas satchel, SRPA hip flask and Fight for Freedom toy soldiers. Also released in Europe is the special edition which includes steelbook packaging, vinyl effect Blu-ray disc, SRPA Black Ops skin, infected Nathan Hale skin, air fuel grenade, special multiplayer title "Sentinel" and a multiplayer booster.</p>
+
+<h2>Reception</h2>
+
+<p><i>Resistance 3</i> received "favorable" reviews according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregation</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> said, "In terms of tone, Insomniac has really amped up the gut-wrenching terror for Resistance 3. This is the darkest and most violent game in the series, and almost the entire second act of the game will have you on the edge of your seat." Thierry Nguyen of <i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i> said that "While Resistance 3 clearly steps forward as a improvement to the series, it's still not quite a great game overall."</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> praised the game for its exciting, deep campaign and fun multiplayer and said, "No matter what your gaming setup, you're in for a treat. Resistance 3 offers a brand of excitement you won't find in any other shooter franchise." <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> criticized the "bland environments", "predictable" level design, and "numerous glitches" that "halt the flow of the game entirely." In Japan, <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave it a score of one nine, two eights, and one nine for a total of 34 out of 40.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/The_A.V._Club">The A.V. Club</a></i> gave it a B+, saying that the game "delivers the goods, make no mistake. They just happen to be the goods that gamers already had, dolled up in a shiny new package." <a href="https://en.wikipedia.org/wiki/Common_Sense_Media">Common Sense Media</a> gave it four stars out of five, saying, "It's not a perfect sci-fi shooter, but this new sequel from Insomniac Games is the best yet in the <i>Resistance</i> franchise." <i><a href="https://en.wikipedia.org/wiki/The_Daily_Telegraph">The Daily Telegraph</a></i> similarly gave it four stars out of five and said, "Connection issues aside, <i>Resistance 3</i> really is one of the most enjoyable, memorable action games in years, on any platform. It has giant arachnids, constant action, and an awesome shotgun. It's visually stunning, artistically evocative. And most importantly, it's definitely got soul. And soldiers too, which is nice." <i><a href="https://en.wikipedia.org/wiki/Digital_Spy">Digital Spy</a></i> likewise gave it four stars out of five and said that the game "doesn't exactly rewrite the book on first-person shooters, but it offers thoroughly enjoyable gameplay, with a low learning curve, set against a strong narrative. Fans of the previous games will find much to love here, and even newcomers will find it a good jumping on point thanks to the intuitive controls." <i><a href="https://en.wikipedia.org/wiki/The_Guardian">The Guardian</a></i> likewise gave it four stars out of five and said it was "fast, furious and entertaining throughout but lacks the uniqueness that would boost it to the very top of the FPS ladder." However, <i><a href="https://en.wikipedia.org/wiki/Metro_(British_newspaper)">Metro UK</a></i> gave it a score of seven out of ten and said, "Although this is a considerably more interesting and accomplished game than any of its predecessors it's still nowhere near the cutting edge of the first person shooter genre. And we say that not just because of its abandonment of all that <i>Halo</i> introduced to the concept a decade ago."</p>
+
+<p><i>Resistance 3</i> sold 180,000 copies in September and was seventh best selling game in the United States. In the UK it entered the PS3 software chart in fourth position in the first week of launch.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

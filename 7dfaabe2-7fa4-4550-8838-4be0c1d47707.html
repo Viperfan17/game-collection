@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Battlefield 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('7dfaabe2-7fa4-4550-8838-4be0c1d47707/3efd7703-9f71-4c38-820f-c07cdd91763b.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="7dfaabe2-7fa4-4550-8838-4be0c1d47707/a748141e-8063-4082-a7ff-48bf130c1aac.png"/> Battlefield 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="7dfaabe2-7fa4-4550-8838-4be0c1d47707/b64fc349-da7c-4c12-b022-094152405bcb.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/4/2025">5/4/2025</a> 15:22:25</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/4/2025">5/4/2025</a> 15:26:20</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-6/21/2005">6/21/2005</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-93">93</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-FPS">FPS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-DICE">DICE</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-DICE Canada">DICE Canada</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Battlefield_2" target="_blank">PCGamingWiki</a><br/><a href="https://web.archive.org/web/20100329231105/http://www.battlefield.ea.com/battlefield/bf2/" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=935" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/battlefield-2" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/24860/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Battlefield_2" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/18194" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Battlefield_2" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/battlefield-2" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Automobile">Automobile</a><br/><a href="#quicklink-Contemporary">Contemporary</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-Flight">Flight</a><br/><a href="#quicklink-Helicopter">Helicopter</a><br/><a href="#quicklink-Naval/watercraft">Naval/watercraft</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Refractor 2">Refractor 2</a><br/><a href="#quicklink-Tank">Tank</a><br/><a href="#quicklink-Transport">Transport</a><br/><a href="#quicklink-Truck">Truck</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Battlefield 2</b></i> is a 2005 <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter game</a> developed by <a href="https://en.wikipedia.org/wiki/Digital_Illusions_CE">Digital Illusions CE</a> and published by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>. It was released in June 2005 as the third game in the <a href="https://en.wikipedia.org/wiki/Battlefield_(video_game_series)"><i>Battlefield</i></a> franchise.</p>
+
+<p>Players fight in a modern battlefield, using modern <a href="https://en.wikipedia.org/wiki/Weapon">weapon systems</a>. <i>Battlefield 2</i> is a first-person shooter with <a href="https://en.wikipedia.org/wiki/Military_tactics">strategy</a> and <a href="https://en.wikipedia.org/wiki/Tactical_Shooter">tactical shooter</a> elements.</p>
+
+<p>The single-player aspect features missions that involve clashes between <a href="https://en.wikipedia.org/wiki/United_States_Marine_Corps">U.S. Marines</a>, <a href="https://en.wikipedia.org/wiki/People's_Liberation_Army">China</a> and the fictional Middle Eastern Coalition. The multiplayer aspect of the game allows players to organize into squads that come under the leadership of a single commander to promote teamwork. The story takes place in the early 21st century during a fictional world war between various power blocs: <a href="https://en.wikipedia.org/wiki/China">China</a>, the <a href="https://en.wikipedia.org/wiki/European_Union">European Union</a>, the fictional Middle Eastern Coalition (MEC), <a href="https://en.wikipedia.org/wiki/Russia">Russia</a> and the <a href="https://en.wikipedia.org/wiki/United_States">United States</a>. The game takes place in different fronts, as the Middle East and China are being invaded by US and EU forces, and the United States is being invaded by Chinese and MEC forces.</p>
+
+<p>On June 30, 2014, the multiplayer master server was shut down alongside other <a href="https://en.wikipedia.org/wiki/GameSpy_Technology">GameSpy-powered</a> titles, although it can still be played online throughout fan-created <a href="https://en.wikipedia.org/wiki/Game_mod">mods</a> with alternative servers. In 2017, Electronic Arts demanded the takedown of the modified versions of <i>Battlefield 2</i> on alternate servers, distributed by a group known as "Revive Network", as infringement of their copyrights.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Battlefield 2</i> is a sequel to <i><a href="https://en.wikipedia.org/wiki/Battlefield_Vietnam">Battlefield Vietnam</a></i> and introduces several modifications to the gameplay mechanics of its predecessor. Several new gameplay features emphasize teamwork and collaboration. The new game engine includes improved physics, dynamic lighting, and more realistic material penetration.</p>
+
+<p><i>Battlefield 2</i> is a <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer video game</a> played via the <a href="https://en.wikipedia.org/wiki/Internet">Internet</a> or on a <a href="https://en.wikipedia.org/wiki/Local_area_network">local area network</a>. A <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> mode with three difficulty levels is included. Both player modes use the same maps and use <i>Battlefield</i>'s conquest game mode. Single-player mode allows 16 <a href="https://en.wikipedia.org/wiki/Computer_game_bot">computer-controlled players</a> while Internet mode allows up to 64 players. Players can choose to play as the <a href="https://en.wikipedia.org/wiki/United_States_Marine_Corps">United States Marine Corps</a>, the <a href="https://en.wikipedia.org/wiki/People's_Liberation_Army">People's Liberation Army</a>, or the "Middle Eastern Coalition". Additional factions are playable through the <a href="https://en.wikipedia.org/wiki/Battlefield_2#Official_Expansion_Pack">expansion packs</a>, such as the <a href="https://en.wikipedia.org/wiki/European_Union">European Union</a>. Progress in the game is made via promotions which allow additional weapons to be unlocked. By playing the game on ranked servers, players are able to add to their <a href="https://en.wikipedia.org/wiki/Battlefield_2#Global_ranking">global player statistics</a>. These statistics are used to award promotions and other achievements.</p>
+
+<p>In <i>Battlefield 2</i>, players are divided into two opposing teams, with the factions determined by the selected map. The primary objective is to reduce the opposing team's tickets, which represent the army's capacity to reinforce their position on the battlefield. Each team has a limited number of tickets, and each casualty decreases the available total. Control points, represented by flags, serve as <a href="https://en.wikipedia.org/wiki/Spawnpoints">spawn points</a> and are strategically important on the map. If one team controls a significant majority of the control points, the opposing team's tickets gradually decrease regardless of casualties. A round ends when one team's tickets are depleted, the round timer expires, or if a team holds no control points and has no remaining soldiers on the battlefield.</p>
+
+<p><i>Battlefield 2</i>'s two game modes are Conquest and Cooperative. Cooperative games emphasize teamwork, prioritizing group achievement over individual victory. The only difference between the two modes is that Cooperative includes <a href="https://en.wikipedia.org/wiki/Computer_game_bot">computer-controlled players</a>, whilst Conquest allows only human players. Results from Cooperative mode do not count toward <a href="https://en.wikipedia.org/wiki/Battlefield_2#Global_ranking">global player statistics</a>.</p>
+
+<h3>Infantry classes</h3>
+
+<p>In <i>Battlefield 2</i>, as with previous <i>Battlefield</i> titles, players are able to select from a variety of infantry classes. Each class of soldier is equipped with different weaponry appropriate to their role in the battle. Assault soldiers, for example, are general-purpose <a href="https://en.wikipedia.org/wiki/Infantry">infantry</a> with <a href="https://en.wikipedia.org/wiki/Grenade_launcher">grenade-launcher</a> equipped assault-rifles and extra armor, Medics carry <a href="https://en.wikipedia.org/wiki/First_aid_kit">first-aid equipment</a> such as a field <a href="https://en.wikipedia.org/wiki/Defibrillation">defibrillator</a>, and <a href="https://en.wikipedia.org/wiki/Anti-tank_warfare">Anti-Tank</a> troopers are equipped with missiles which are effective against heavy armor.</p>
+
+<p>Players are able to choose a class at the start of a match, or between dying and <a href="https://en.wikipedia.org/wiki/Respawning">respawn</a>. Players can change their class by picking up a 'kit' from the body of an incapacitated soldier, regardless of whether the soldier is friendly or enemy. For example, an Assault soldier can become a Medic by acquiring a fallen Medic's kit. Player classes are categorized into 'Heavy' and 'Light' types: Heavy classes have reduced damage to the torso but lower stamina, while Light classes have standard damage multipliers and higher stamina, allowing for longer sprinting.</p>
+
+<p>Within the infantry class, there are three support classes with special abilities. Within the infantry, three support classes have unique abilities: the Engineer can repair vehicles using his wrench; the Medic can revive and heal teammates using defibrillator paddles; and the Support can resupply ammunition using ammunition bags. When any of these classes occupies a vehicle, nearby personnel and vehicles can receive repairs, healing, or resupply, provided they are within close proximity.</p>
+
+<ul>
+  <li><b>Assault</b> - Primary role is to engage in combat with enemies at medium range.</li>
+  <li><b>Medic</b> - Primary role is to revive and heal teammates</li>
+  <li><b>Anti-Tank</b> - Primary role is to undertake <a href="https://en.wikipedia.org/wiki/Anti-tank_warfare">anti-tank warfare</a></li>
+  <li><b>Engineer</b> - Primary role is to repair or destroy vehicles</li>
+  <li><b>Support</b> - Primary role is to provide <a href="https://en.wikipedia.org/wiki/Suppressive_fire">suppressive fire</a> against enemies and resupply teammates</li>
+  <li><b>Special Forces</b> - Primary role is carry out stealth and <a href="https://en.wikipedia.org/wiki/Sabotage">sabotage</a> missions</li>
+  <li><b>Sniper</b> - Primary role is to engage targets at long distances.</li>
+</ul>
+
+<p>Battlefield 2 continues the series’ signature vehicle-based gameplay, allowing players to enter and control a wide variety of vehicles. There are many different types of vehicles playable in <i>Battlefield 2</i>, all based on real-life vehicles used by the militaries of different countries.</p>
+
+<p>In contrast to <i><a href="https://en.wikipedia.org/wiki/Battlefield_1942">Battlefield 1942</a></i>, <i>Battlefield 2</i> has only one purely water-based vehicle, the <a href="https://en.wikipedia.org/wiki/Rigid-hulled_inflatable_boat">rigid-inflatable boat</a>; however, the three <a href="https://en.wikipedia.org/wiki/Armoured_personnel_carrier">APCs</a> can travel in water as well. The game was designed with a counterbalance system in which each vehicle type has specific vulnerabilities, creating a dynamic similar to <a href="https://en.wikipedia.org/wiki/Rock,_paper,_scissors">rock-paper-scissors</a>. For example, mobile anti-air was intended to effectively destroy helicopters, but are vulnerable against opposing tanks. Included within this relationship are stationary defenses such as light machine guns and <a href="https://en.wikipedia.org/wiki/Anti-aircraft_warfare">anti-aircraft</a>/<a href="https://en.wikipedia.org/wiki/BGM-71_TOW">TOW</a> emplacements. The availability and number of certain vehicles are dependent on the map and its size as well as control points captured. Also, more vehicles become available to be used on the maps of expansion/booster packs. (see <a href="https://en.wikipedia.org/wiki/Battlefield_2#Maps">Maps</a>). The <a href="https://en.wikipedia.org/wiki/USS_Essex_(LHD-2)">USS Essex</a> is the only naval ship featured in BF2, featuring two spawn points and aircraft spawn points, and is not drivable or destroyable, except for its <a href="https://en.wikipedia.org/wiki/Phalanx_CIWS">Phalanx</a> turrets.</p>
+
+<p>Players are able to form squads of up to six soldiers in order to more effectively work as a team. Up to nine squads are permitted per team; each squad has a number (automatically assigned) and name (usually a <a href="https://en.wikipedia.org/wiki/NATO_Phonetic_Alphabet">phonetic alphabet</a> letter) for identification. Members of a squad have the ability to communicate with one another via <i>Battlefield 2</i>'s integrated <a href="https://en.wikipedia.org/wiki/Voice_over_IP">voice over IP</a> (VoIP) system.</p>
+
+<p>Squad leaders may assign their squad a variety of objectives (for example, moving to or attacking a specific location). Orders may also be given by the team's commander. Squad leaders are able to issue requests for commander assets (such as artillery fire) and have a direct <a href="https://en.wikipedia.org/wiki/Voice_over_IP">VoIP</a> channel to the commander.</p>
+
+<p>Members of a squad may <a href="https://en.wikipedia.org/wiki/Spawning_(computer_gaming)">spawn</a> near their squad leader, provided that the leader is not dead (or incapacitated), and that the team holds at least one control point. This feature allows squads to more quickly regroup after taking casualties.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Commander">commander</a> position is an exclusive role played by one member of each team. Any member of a team may apply for the position, but priority is given to players of higher <a href="https://en.wikipedia.org/wiki/United_States_Marine_Corps_rank_insignia">rank</a>.</p>
+
+<p>The commander alone has access to the "commander screen", an interface similar to that of a <a href="https://en.wikipedia.org/wiki/Real-time_strategy">real-time strategy</a> game. This allows the commander an overview of the battlefield as a whole, or zoom in and view parts of the map in real-time. The commander also has control of the various commander assets, which include artillery strikes, vehicle and supply drops, and UAVs. They can deploy them to assist their team. The commander can communicate with squads either by sending orders, or via <a href="https://en.wikipedia.org/wiki/VoIP">VoIP</a> voice communication. These tools allow the commander to strategically coordinate their forces on the battlefield.</p>
+
+<p>A commander may resign at any point, freeing the position for other members of their team; they may also be forcibly removed by a successful <a href="https://en.wikipedia.org/wiki/Mutiny">mutiny</a> vote conducted by their team (provided the <a href="https://en.wikipedia.org/wiki/Game_server">server</a> allows mutiny votes). Although the commander does not gain points by normal methods (kills, flag captures, etc.), their score is doubled at the end of the round if their team wins.</p>
+
+<p>The commander position would be seen again in <i><a href="https://en.wikipedia.org/wiki/Battlefield_2142">Battlefield 2142</a></i> and <i><a href="https://en.wikipedia.org/wiki/Battlefield_4">Battlefield 4</a></i>.</p>
+
+<p>Players can earn awards (ribbons, badges, and medals) for certain in-game accomplishments. <a href="https://en.wikipedia.org/wiki/Badge">Badges</a> and <a href="https://en.wikipedia.org/wiki/Ribbon_bar">ribbons</a> are the easiest to obtain, while <a href="https://en.wikipedia.org/wiki/Medal">medals</a> are usually much harder, requiring more extensive play. As players ascend through the ranks they will gain the ability to unlock certain weapons. Each time a player is promoted to an eligible rank, they are given the opportunity to unlock one of seven unlockable weapons, one corresponding to each class, which they may subsequently use in place of the standard weapon for the given class.</p>
+
+<p>A built-in game recorder records battles for subsequent replay. These files can be downloaded from a server which supports BattleRecorder directly after their respective game. Recorded battle files are around 1 to 8 megabytes in size and are played within the <i>Battlefield 2</i> engine. Camera angles can be changed (free roaming &amp; selected player), as well as the speed, though there is no rewind capability. Files can be exported to <a href="https://en.wikipedia.org/wiki/Audio_Video_Interleave">AVI</a> format. The Battlefield Recorder has facilitated the creation of various <a href="https://en.wikipedia.org/wiki/Machinima">machinima</a>. Usage of the <a href="https://en.wikipedia.org/wiki/PunkBuster">PunkBuster</a> service is mandatory for all official ranked <i>Battlefield 2</i> servers, but optional for unranked servers.</p>
+
+<p><i>Battlefield 2</i> offers 15 maps for the players to play but shipped with 12. These maps are diverse, ranging from swamps such as <a href="https://en.wikipedia.org/wiki/Songhua_River">Songhua Stalemate</a>, to urban areas such as Strike at Karkand, to an unfinished dam known as Kubra Dam. The USMC is present in all maps and faces against either the MEC or the PLA depending on the map. The PLA is present in Far East theaters such as <a href="https://en.wikipedia.org/wiki/Min_Mountains">Dragon Valley</a> and <a href="https://en.wikipedia.org/wiki/Daqing_Field">Daqing Oilfields</a>. MEC is present in Middle East theaters such as <a href="https://en.wikipedia.org/wiki/Gulf_of_Oman">Gulf of Oman</a> and Zatar Wetlands. Including the expansion and booster packs, the total number of maps available in the Battlefield 2 series increases to 29.</p>
+
+<p><i>Battlefield 2</i> maps have 3 variations, each suited for a certain number of players. Each map has 16, 32, and 64 player-suggested variations in which the area of battlefield or playing field is relatively small, medium, and large, respectively. The only exceptions to this are <a href="https://en.wikipedia.org/wiki/Wake_Island">Wake Island</a> 2007, which is locked at 64-player size and the <i>Euro Force</i> maps, Operation Smokescreen, <a href="https://en.wikipedia.org/wiki/Great_Wall_of_China">Great Wall</a>, and Taraba Quarry, which have no 64-player size. 32 and 64 player maps are unavailable to offline players from retailers, but an option is given to download 64 Single player AI bot mods. Other contrasts between these variations other than the size are the number and position of control points and availability of vehicles. As a result, the gameplay of the map is different depending on the variation.</p>
+
+<h2>Plot</h2>
+
+<p>The game is set in 2007 during a <a href="https://en.wikipedia.org/wiki/World_War_III">world war</a> between various power blocs: the <a href="https://en.wikipedia.org/wiki/United_States">United States</a>, aided by the <a href="https://en.wikipedia.org/wiki/European_Union">European Union</a>, is at war against <a href="https://en.wikipedia.org/wiki/Russia">Russia</a>, <a href="https://en.wikipedia.org/wiki/China">China</a> and the fictional Middle Eastern Coalition (MEC), aided by various insurgents.</p>
+
+<p>There is no given reason as to how or why the war broke out. In-game, the European Union and the United States fight China and the MEC. It is mentioned in-game that the US and EU are allies and the EU has negotiated a truce with Russia, but it is unknown if China and the MEC are allies. The game also takes place in different <a href="https://en.wikipedia.org/wiki/Front_(military)">fronts</a>, as the Middle East and China are being invaded by US and EU forces, and the United States is being invaded by Chinese and MEC forces.</p>
+
+<h2>Additional content</h2>
+
+<h3><i>Battlefield 2: Special Forces</i></h3>
+
+<p><i>Battlefield 2'</i>s first expansion pack, <i>Special Forces</i>, first began its development sometime during or shortly before the release of the original <i>Battlefield 2</i>, and was worked on by DICE's Canadian division. <i>Battlefield</i> producer, Mike Doran, commented in August 2005 that "The truth is that work on <i>Battlefield 2: Special Forces</i> began several months ago." It was officially announced on July 14, 2005 and released on November 21 of the same year. The focus of the development was infantry-based combat as opposed to vehicle-centric combat from the original. As such, most of the additional content in the expansion pack can only be used by or for infantry.</p>
+
+<p>The expansion pack provides eight maps, 6 playable factions, and ten more vehicles such as the <a href="https://en.wikipedia.org/wiki/AH-64D_Apache">AH-64D Apache</a> and <a href="https://en.wikipedia.org/wiki/Mi-24">Mi-35 Hind</a>, though all jets have been removed. In addition to these new contents, players have access to new equipment such as <a href="https://en.wikipedia.org/wiki/Night_vision_goggles">night vision goggles</a>, <a href="https://en.wikipedia.org/wiki/Tear_gas">tear gas</a>, <a href="https://en.wikipedia.org/wiki/Gas_mask">gas masks</a>, zip lines and grappling hooks which can alter gameplay. There are eight more small arms weapons available such as the <a href="https://en.wikipedia.org/wiki/Heckler_&amp;_Koch_G36">G36K/E</a> and <a href="https://en.wikipedia.org/wiki/FN_SCAR">FN SCAR L/H</a> and several weapons from the original are replaced. The expansion offers more awards in the form of badges, ribbons, and medals that players can earn. Finally, many of the weapons from the expansion may be used in the original <i>Battlefield 2</i>.</p>
+
+<p>Booster packs are additional content released for <i>Battlefield 2</i> that are currently available for free download, and as with <i>Special Forces</i>, they were developed by DICE Canada. The booster packs were later available in retail form as the <i>Booster Pack Collection</i>, containing a <a href="https://en.wikipedia.org/wiki/DVD">DVD</a> which features these packs, as well as being included in "The Complete Collection", containing a <a href="https://en.wikipedia.org/wiki/DVD">DVD</a> with both the original game and all of the expansions/booster packs.</p>
+
+<p>Booster packs substantially expand the content to the game, but are different from expansion packs because they are intended to add to the original gameplay and not stand on their own (such as <i>Special Forces</i> does). The booster packs include new maps, vehicles, and a new <a href="https://en.wikipedia.org/wiki/European_Union">European Union</a> faction.</p>
+
+<p>The two booster packs were included free of charge in the 1.50 update released on September 1, 2009.</p>
+
+<h2>Soundtrack</h2>
+
+<p>The soundtrack of Battlefield 2 consists of 18 tracks composed and created by Fredrik Englund, David Tallroth, and Jonas Östholm.</p>
+
+<h2>Reception</h2>
+
+<p>The game received widespread critical acclaim, garnering an aggregate score of 91/100 from 55 reviews on <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. It received five stars out of five from publications <a href="https://en.wikipedia.org/wiki/Yahoo!_Games">Yahoo! Games</a>, <a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a>, <a href="https://en.wikipedia.org/wiki/X-Play">X-Play</a> and <a href="https://en.wikipedia.org/wiki/Computer_Gaming_World">Computer Gaming World</a>. <a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a> awarded it 94%, stating, "Its finely tuned maps and balanced gameplay prove that you <i>can</i> improve on perfection," and honored it as Game of the Year. <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> rated the game 9.3 out of 10 claiming that "when you experience <i>Battlefield 2</i> like it's meant to be played, with everyone working together and using real-time voice chat, the game quickly becomes unlike anything else that you've played before."</p>
+
+<p>Some of the lower scores were reactions to the large amount of <a href="https://en.wikipedia.org/wiki/Software_bug">bugs</a> and <a href="https://en.wikipedia.org/wiki/Glitch">glitches</a> in the initial release, including crash to desktop bugs and network problems. For example, Gaming Nexus (who awarded the game an 8.7 out of 10) reported, "I’ve had many cool experiences playing it and a lot of 'did I just see that' moments but all of that is crapped on by the bugs and quirks in the game."</p>
+
+<p><a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a> approved of the game, awarding a 90%, but added a disclaimer that the gaming experience is best "if your machine is up to it". GameSpot's review agreed with the high system requirements noting that "the load times are one of the biggest gripes that we have, as you will spend quite a bit of time waiting for a game to start up, even on high-end machines...also a bit demanding in the hardware department."</p>
+
+<p><i>Battlefield 2</i> sold 1.2 million copies in its first month after release. Total sales by July 2006 were 2,225,000. It received a "Gold" sales award from the <a href="https://en.wikipedia.org/wiki/Entertainment_and_Leisure_Software_Publishers_Association">Entertainment and Leisure Software Publishers Association</a> (ELSPA), indicating sales of at least 200,000 copies in the United Kingdom.</p>
+
+<p><i>Battlefield 2</i> won <i><a href="https://en.wikipedia.org/wiki/PC_Gamer_US">PC Gamer US</a></i>'s "Best Multiplayer Game 2005" and "Game of the Year 2005" awards. The magazine's Dan Stapleton wrote, "Few other games in the history of the medium have so effectively captured the visceral feeling of modern military combat in an urban environment".  The editors of <i><a href="https://en.wikipedia.org/wiki/Computer_Games_Magazine">Computer Games Magazine</a></i> presented <i>Battlefield 2</i> with their 2005 awards for "Best Action Game" and "Best Multiplayer", and named it the year's second-best computer game overall. They called it "perhaps the most thrilling example of how far shooters have come in the last few years."</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/9th_Annual_Interactive_Achievement_Awards">9th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> awarded <i>Battlefield 2</i> with "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Action_Game_of_the_Year">First-Person Action Game of the Year</a>" and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Online_Game_of_the_Year">Outstanding Achievement in Online Gameplay</a>", along with a nomination for "Computer Game of the Year".</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
