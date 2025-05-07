@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Battlefield 1942</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('53a12b02-c117-4497-b063-59d879967c05/9134468a-620d-4115-b9da-a838f8758c26.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="53a12b02-c117-4497-b063-59d879967c05/64fe216a-d853-410b-ae94-6f5d3b5ba573.png"/> Battlefield 1942</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="53a12b02-c117-4497-b063-59d879967c05/208d03a9-3e6e-44ba-96e0-1245e102bbbf.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 0:47:28</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 0:48:13</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-9/10/2002">9/10/2002</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-89">89</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-FPS">FPS</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Aspyr Media">Aspyr Media</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-DICE">DICE</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Battlefield_1942" target="_blank">PCGamingWiki</a><br/><a href="https://web.archive.org/web/20020604062147/http://www.ea.com:80/eagames/official/battlefield1942/home.jsp" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=931" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/battlefield-1942" target="_blank">IGDB</a><br/><a href="http://strategywiki.org/wiki/Battlefield_1942" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/7213" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Battlefield_1942" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/battlefield-1942" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Automobile">Automobile</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-Flight">Flight</a><br/><a href="#quicklink-Naval/watercraft">Naval/watercraft</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Refractor 2">Refractor 2</a><br/><a href="#quicklink-Tank">Tank</a><br/><a href="#quicklink-Transport">Transport</a><br/><a href="#quicklink-Truck">Truck</a><br/><a href="#quicklink-World War II">World War II</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Battlefield 1942</b></i> is a 2002 <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter game</a> developed by <a href="https://en.wikipedia.org/wiki/Digital_Illusions_CE">Digital Illusions CE</a> and published by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> and <a href="https://en.wikipedia.org/wiki/MacOS">Mac OS X</a>. The game can be played in <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> mode against the <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_(video_games)">video game AI</a> or in <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> mode against players on the <a href="https://en.wikipedia.org/wiki/Internet">Internet</a> or in a <a href="https://en.wikipedia.org/wiki/Local_area_network">local area network</a>. It is a popular platform for <a href="https://en.wikipedia.org/wiki/Mod_(computer_gaming)">mod</a> developers, with many released modifications that alter the gameplay and theme.</p>
+
+<p>In-game, players assume the role of one of five classes of <a href="https://en.wikipedia.org/wiki/Infantry">infantry</a>: Scout, Assault, Anti-Tank, Medic, and Engineer. Players also have the ability to fly various <a href="https://en.wikipedia.org/wiki/World_War_II">World War II</a> <a href="https://en.wikipedia.org/wiki/Fighter_aircraft">fighter aircraft</a> and <a href="https://en.wikipedia.org/wiki/Bomber">bombers</a>, navigate <a href="https://en.wikipedia.org/wiki/Capital_ship">capital ships</a>, <a href="https://en.wikipedia.org/wiki/Submarine">submarines</a>, and <a href="https://en.wikipedia.org/wiki/Aircraft_carrier">aircraft carriers</a>, man <a href="https://en.wikipedia.org/wiki/Coastal_artillery">coastal artillery</a> defenses, drive <a href="https://en.wikipedia.org/wiki/Tank">tanks</a>, <a href="https://en.wikipedia.org/wiki/Armoured_personnel_carrier">APCs</a> and <a href="https://en.wikipedia.org/wiki/Jeep">jeeps</a>, and take control of <a href="https://en.wikipedia.org/wiki/Anti-aircraft_guns">anti-aircraft guns</a> and mounted <a href="https://en.wikipedia.org/wiki/Machine_gun">machine guns</a>.</p>
+
+<p>Each battle takes place on one of several maps located in a variety of places and famous battlefields in all of the major theaters of World War II: the <a href="https://en.wikipedia.org/wiki/Pacific_War">Pacific</a>, <a href="https://en.wikipedia.org/wiki/European_Theater_of_World_War_II">European</a>, <a href="https://en.wikipedia.org/wiki/North_African_campaign">North African</a>, <a href="https://en.wikipedia.org/wiki/Eastern_Front_(World_War_II)">Eastern</a>, and <a href="https://en.wikipedia.org/wiki/Italian_Campaign_(World_War_II)">Italian</a> Fronts. Combat is between the <a href="https://en.wikipedia.org/wiki/Axis_powers">Axis powers</a> and the <a href="https://en.wikipedia.org/wiki/Allies_of_World_War_II">Allies</a>. The location determines which nation-specific armies are used (for example, on the <a href="https://en.wikipedia.org/wiki/Battle_of_Wake_Island">Wake Island</a> map, it is <a href="https://en.wikipedia.org/wiki/Imperial_Japanese_Army">Japan</a> versus the <a href="https://en.wikipedia.org/wiki/Military_history_of_the_United_States_during_World_War_II">United States</a>, while on the <a href="https://en.wikipedia.org/wiki/Battle_of_El_Alamein">El Alamein</a> map, it is <a href="https://en.wikipedia.org/wiki/Nazi_Germany">Germany</a> versus the <a href="https://en.wikipedia.org/wiki/British_Armed_Forces">United Kingdom</a>). The maps in <i>Battlefield 1942</i> are based on real battles and are somewhat realistically portrayed.</p>
+
+<p>Upon release, <i>Battlefield 1942</i> received generally favorable reviews, with particular praise directed towards the innovative gameplay, multiplayer, and World War II theme. The game went on to perform well commercially, with over 3 million copies sold by 2004. Since its release, the game has spawned numerous sequels and spin-offs, which became part of what ultimately would become the <i><a href="https://en.wikipedia.org/wiki/Battlefield_(video_game_series)">Battlefield</a></i> game series. <i>Battlefield 1942</i> is retrospectively considered to be <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">one of the best video games of all time</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p>The gameplay of <i>Battlefield 1942</i> generally has a more <a href="https://en.wikipedia.org/wiki/Co-operative_gameplay">co-operative</a> focus than previous games of this nature, as it is not only important to kill the opposition but to also hold certain "control points" around the map. Capturing control points allows the team to reinforce itself by enabling players and vehicles to spawn in a given area. Additionally, capturing and controlling control points also reduces enemy reinforcements. <i>Battlefield 1942</i> was one of the first mainstream FPS games to actively encourage teamwork and coordination over individual "lone wolf" style gameplay.</p>
+
+<p>The default gameplay mode, Conquest, centers on capturing "control points" which serve as locations for <a href="https://en.wikipedia.org/wiki/Respawn">respawning</a>, often referred to as "spawn points".  Rounds have a time limit and each team starts the round with a set number of tickets which are consumed when members of that team respawn.  If a team does not control any spawn points, members cannot spawn unless the remaining living members capture one.  If a team reaches zero tickets, members of that team cannot respawn for the rest of the match.</p>
+
+<p>A team loses tickets when its members are killed, but also at a fixed rate when the other team holds a greater number of capture points; the greater the disparity in held capture points, the greater the rate of ticket loss to the disadvantaged side, which encourages teams to focus on taking and defending control points.  A match is won by killing all members of the opposing team when they either have no remaining tickets, or no available spawn points.  Sometimes players on a losing team may <a href="https://en.wikipedia.org/wiki/Camping_(video_games)">hide</a> instead of fight when their team's tickets and respawn points are reduced to zero, forcing the winning team to methodically search for them in order to end the round before the round timer expires.</p>
+
+<h3>Roles</h3>
+
+<p>The player can choose to play as either the Allied team or the Axis team. The Allies consist of the United States, the United Kingdom, Canada and the Soviet Union, while the Axis consists of Nazi Germany and Imperial Japan. Regardless of which nation is chosen by the player, there are five different infantry roles the player can select from: <a href="https://en.wikipedia.org/wiki/Scout_Sniper">Scout</a>, Assault, <a href="https://en.wikipedia.org/wiki/Combat_Medic">Medic</a>, Anti-tank, and <a href="https://en.wikipedia.org/wiki/Combat_Engineer">Engineer</a>.</p>
+
+<p>Each role has its own strength and weakness. For example, the scout role has long-range surveillance, high <a href="https://en.wikipedia.org/wiki/Stopping_power">stopping power</a> and the ability to provide <a href="https://en.wikipedia.org/wiki/Spotter_(sniping)">spotting</a> for artillery shelling by another player.  Assault is the primary anti-infantry role, focused on directly engaging other players at short and medium range.  The Anti-tank role specializes in attacking tanks and other vehicles, but their main weapon is inaccurate against moving enemy infantry.  The Medic role has the ability to heal players including themselves, but their <a href="https://en.wikipedia.org/wiki/Sub-machine_gun">sub-machine gun</a> has less stopping power than the Assault class's rifle.  The Engineer has the ability to repair damaged vehicles and stationary weapons, and they also have the ability to deploy <a href="https://en.wikipedia.org/wiki/Composition_C">explosives</a>, which are highly effective against both enemy infantry and vehicles, and <a href="https://en.wikipedia.org/wiki/Land_mine">land mines</a>, which destroy enemy vehicles on contact.</p>
+
+<h2>Development</h2>
+
+<p>In 2000, <a href="https://en.wikipedia.org/wiki/DICE_(company)">DICE</a> acquired Refraction Games (developers of <i><a href="https://en.wikipedia.org/wiki/Codename_Eagle">Codename Eagle</a></i>) and inherited the in-development <i>Battlefield 1942</i>. The game was originally proposed by DICE as a <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> exclusive. Though satisfied with the proposal, negotiations never made it further because Nintendo had no online strategy. The game was developed by a team of 14 people at <a href="https://en.wikipedia.org/wiki/Digital_Illusions">Digital Illusions</a>. <i>Battlefield 1942</i> was built on the formula of the less well-known and successful <i><a href="https://en.wikipedia.org/wiki/Codename_Eagle">Codename Eagle</a></i> video game, set in an <a href="https://en.wikipedia.org/wiki/Alternate_history_(fiction)">alternate history</a> <a href="https://en.wikipedia.org/wiki/World_War_I">World War I</a>. It featured single and multiplayer modes. The earlier Refractor 1 engine had more arcade-style physics and a less realistic focus than its successor, Refractor 2, which was used in <i>Battlefield 2</i>. A Macintosh-compatible version of <i>Battlefield 1942</i> was made and released by <a href="https://en.wikipedia.org/wiki/Aspyr_Media">Aspyr Media</a> in mid-2004. An <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a> version of the game was also announced in early 2001 but was cancelled almost two years later so Electronic Arts could more closely work on an expansion pack for the PC.</p>
+
+<h2>Expansions</h2>
+
+<p>Two expansion packs would be released for <i>Battlefield 1942</i>, <i><a href="https://en.wikipedia.org/wiki/Battlefield_1942:_The_Road_to_Rome">Battlefield 1942: The Road to Rome</a></i> (adding the <a href="https://en.wikipedia.org/wiki/Italian_Campaign_(World_War_II)">Italian Front</a>) and <i><a href="https://en.wikipedia.org/wiki/Battlefield_1942:_Secret_Weapons_of_WWII">Battlefield 1942: Secret Weapons of WWII</a></i>, both adding various new gameplay modes, maps, and game concepts. <i>The Road to Rome</i> focuses on the Italian battles, allowing players to play as the <a href="https://en.wikipedia.org/wiki/Free_French_Forces">Free French forces</a> or as the <a href="https://en.wikipedia.org/wiki/Royal_Italian_Army_during_World_War_II">Royal Italian Army</a>. <i>Secret Weapons of WWII</i> focuses on prototypical, experimental, and rarely used weapons and vehicles (such as <a href="https://en.wikipedia.org/wiki/Jet_pack">jet packs</a>), and added subfactions to the German and British Armies, the German <a href="https://en.wikipedia.org/wiki/Fallschirmjäger_(World_War_II)">Elite</a> <a href="https://en.wikipedia.org/wiki/Waffen-SS">Troops</a> and <a href="https://en.wikipedia.org/wiki/Commandos_(United_Kingdom)">British Commandos</a>. Accompany each were <a href="https://en.wikipedia.org/wiki/Patch_(computing)">patches</a> to the base game that fixed <a href="https://en.wikipedia.org/wiki/Computer_bug">bugs</a>, and added extra content (such as the Battle of Britain map) to the base game. <i>Battlefield 1942 Deluxe Edition</i> includes the original game and <i>Battlefield 1942: The Road To Rome</i>, and the <i>Battlefield 1942: World War II Anthology</i> added <i>Battlefield 1942: Secret Weapons of WWII</i> expansion pack. <i>Battlefield 1942: The Complete Collection</i> later added <i><a href="https://en.wikipedia.org/wiki/Battlefield_Vietnam">Battlefield Vietnam</a></i> and <i>Battlefield Vietnam WWII Mod</i>.</p>
+
+<h2>Reception</h2>
+
+<p>In the United States, <i>Battlefield 1942</i> sold 680,000 copies and earned $27.1 million by August 2006. At the time, this led <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> to rank it as the country's 18th best-selling computer game released since January 2000. Combined sales of all <i>Battlefield</i> computer games, including <i>Battlefield 1942</i>, had reached 2.7 million units in the United States by August 2006. In December 2002, the game received a "Gold" sales award from the Verband der Unterhaltungssoftware Deutschland (VUD), indicating sales of at least 100,000 units across Germany, Austria and Switzerland. The game sold more than 3 million copies by July 2004.</p>
+
+<p>The game received "generally favorable reviews", just one point shy of "universal acclaim", according to the <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregation</a> website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. At 6th annual Interactive Achievement Awards, <i>Battlefield 1942</i> received awards for Online Gameplay, Innovation in PC Gaming, PC Game of the Year, and Game of the Year. In March 2010 <i>Battlefield 1942</i> was awarded with "Swedish game of the decade" award at the computer game gala hosted by Swedish Games Industry.</p>
+
+<p>Scott Osborne of <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> called it a "comic book version of WWII." The publication later named it the best computer game of September 2002. Steve Butts of <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> praised the multiplayer, but said that "the single-player game leaves much to be desired."</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/PC_Gamer_US">PC Gamer US</a></i> and <i><a href="https://en.wikipedia.org/wiki/Computer_Games_Magazine">Computer Games Magazine</a></i> named <i>Battlefield 1942</i> the best multiplayer computer game and best overall computer game of 2002; it tied with <i><a href="https://en.wikipedia.org/wiki/No_One_Lives_Forever_2:_A_Spy_in_H.A.R.M.'s_Way">No One Lives Forever 2</a></i> for the latter award in <i>Computer Games Magazine</i>. It also won <i>GameSpot</i>'s annual "Best Multiplayer Action Game on PC" and "Biggest Surprise on PC" awards, and was nominated in the publication's "Best Graphics (Technical) on PC" and "Game of the Year on PC" categories. <i>PC Gamer US</i>'s editors hailed it as "the realization of our 'dream PC game' — multiplayer battles in which every interesting element of combat is playable by human teammates and opponents."</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> awarded <i>Battlefield 1942</i> with four honors at the <a href="https://en.wikipedia.org/wiki/6th_Annual_Interactive_Achievement_Awards">6th Annual Interactive Achievement Awards</a> (now known as the <a href="https://en.wikipedia.org/wiki/D.I.C.E._Awards">D.I.C.E. Awards</a>): "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Game_of_the_Year">Game of the Year</a>", "Computer Game of the Year", "Outstanding Innovation in Computer Gaming", and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Online_Game_of_the_Year">Online Gameplay of the Year</a>"; it also received a nomination for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Game_Design">Outstanding Achievement in Game Design</a>".</p>
+
+<h2>Franchise</h2>
+
+<p><i>Battlefield 1942</i> was the first in the <i><a href="https://en.wikipedia.org/wiki/Battlefield_(video_game_series)">Battlefield</a></i> series and would go on to spawn many sequels and spin-offs set in different eras of war. Releases included <i><a href="https://en.wikipedia.org/wiki/Battlefield_Vietnam">Battlefield Vietnam</a></i> in 2004, <i><a href="https://en.wikipedia.org/wiki/Battlefield_2">Battlefield 2</a></i> in 2005, <i><a href="https://en.wikipedia.org/wiki/Battlefield_2142">Battlefield 2142</a></i> in 2006, <i><a href="https://en.wikipedia.org/wiki/Battlefield_1943">Battlefield 1943</a></i> in 2009, <i><a href="https://en.wikipedia.org/wiki/Battlefield:_Bad_Company">Battlefield: Bad Company</a></i> in 2008 and <a href="https://en.wikipedia.org/wiki/Battlefield:_Bad_Company_2">the 2010 sequel</a>, <i><a href="https://en.wikipedia.org/wiki/Battlefield_3">Battlefield 3</a></i> in 2011, <i><a href="https://en.wikipedia.org/wiki/Battlefield_4">Battlefield 4</a></i> in 2013, <i><a href="https://en.wikipedia.org/wiki/Battlefield_Hardline">Battlefield Hardline</a></i>, a cops-and-robbers spinoff, in 2015, <i><a href="https://en.wikipedia.org/wiki/Battlefield_1">Battlefield 1</a></i>, a <a href="https://en.wikipedia.org/wiki/World_War_I">World War I</a> based title, in 2016, <i><a href="https://en.wikipedia.org/wiki/Battlefield_V">Battlefield V</a></i>, the first time since <i>Battlefield 1943</i> that the series saw a return to a <a href="https://en.wikipedia.org/wiki/World_War_II">World War II</a> theater of operations, and the first since <i>Battlefield 1942</i> set outside the <a href="https://en.wikipedia.org/wiki/Pacific_Ocean_theater_of_World_War_II">Pacific Ocean theater of World War II</a><sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> in 2018, and <i><a href="https://en.wikipedia.org/wiki/Battlefield_2042">Battlefield 2042</a></i> in 2021. All of these releases have been overseen by <a href="https://en.wikipedia.org/wiki/DICE_(company)">DICE</a>, with <i>Hardline</i> being developed by <a href="https://en.wikipedia.org/wiki/Visceral_Games">Visceral Games</a>, with additional developers like <a href="https://en.wikipedia.org/wiki/Criterion_Games">Criterion Games</a>, <a href="https://en.wikipedia.org/wiki/EA_Gothenburg">EA Gothenburg</a> and <a href="https://en.wikipedia.org/wiki/Ripple_Effect_Studios">Ripple Effect Studios</a> providing additional development.</p>
+
+<h2>Mods</h2>
+
+<p>An October 2004 public release from EA noted the game's modding community.</p>
+
+<p>Like <i><a href="https://en.wikipedia.org/wiki/Half-Life_(video_game)">Half-Life</a></i> and some other popular FPS games, <i>Battlefield 1942</i> spawned a number of mods.  Most did not progress very far and were abandoned without ever producing a public release.  Some are very limited and just include some gameplay changes or even a different loading screen while others are total conversions that modify content and gameplay extensively. A few mods have become popular and are nearly games in their own right.  Early modifications of Battlefield 1942 were produced without a <a href="https://en.wikipedia.org/wiki/Software_development_kit">software development kit</a>.  Later a "Mod Development Kit", Battlefield Mod Development Toolkit, was produced by EA to help the development of mods. With the release of the Battlefield 1942 sequel <i><a href="https://en.wikipedia.org/wiki/Battlefield_Vietnam">Battlefield Vietnam</a></i> and <i><a href="https://en.wikipedia.org/wiki/Battlefield_2">Battlefield 2</a></i>, some mods have released a new version or have continued development with that game.  <i>Battlefield Vietnam</i> uses an updated version of the <i>Refractor 2</i> <a href="https://en.wikipedia.org/wiki/Game_engine">game engine</a>. Some mods have switched to the computer games <i><a href="https://en.wikipedia.org/wiki/Söldner:_Secret_Wars">Söldner: Secret Wars</a></i>, <i><a href="https://en.wikipedia.org/wiki/Half-Life_2">Half-Life 2</a></i> while others were releasing a standalone game after completed mod development for Battlefield 1942 (Eve of Destruction - REDUX and FinnWars).</p>
+
+<ul>
+  <li><i>Battlefield 1918</i>, A mod set during World War I which was first released in 2004 and as of December 2022 is still in active development.  Battlefield 1918 was mentioned as an inspiration for Battlefield 1 by key DICE employee Lars Gustavsson in a 2016 interview.</li>
+  <li><i>Battlefield Interstate 1982</i>, mentioned in <i>1UP</i> <i>"Free PC Games"</i> December 2003 article. (<i>Free PC Games</i> "1UP.ORG" December 2003.)</li>
+  <li><i>Battle G.I. Joe</i> was reviewed on <a href="https://en.wikipedia.org/wiki/About.com">About.com</a>, by Michael Klappenbach. The mod was also contacted by <a href="https://en.wikipedia.org/wiki/Hasbro">Hasbro</a> for <a href="https://en.wikipedia.org/wiki/Intellectual_property">IP</a> issues, as noted in <i>Am I Mod or Not?</i> (Nieborg, 2005)</li>
+  <li><i>Desert Combat</i>, produced by <a href="https://en.wikipedia.org/wiki/Trauma_Studios">Trauma Studios</a>, was winner of FilePlanet's <i>Best Mod of 2003 Award</i> and many other reviews and awards, such as the March 2003 <i><a href="https://en.wikipedia.org/wiki/PC_Magazine">PC Magazine</a></i>.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> <i>PC Gamer</i> described it as "Desert Combat is set in the white-hot conflict zone of the Middle East and pits the United States against Iraq."  Articles noted it was helped by the <a href="https://en.wikipedia.org/wiki/Iraq_War">Iraq War</a>, which increased the number of page views to approximately 15,000 per day, or even between 20,000 and 70,000.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> Desert Combat was pointed out as having two mods of its own, <i>DC Extended</i> and <i>Desert Combat Realism</i> in <i>Am I Mod or Not?</i> (Nieborg, 2005)</li>
+  <li><i>Eve Of Destruction</i> was the winner of <i>PC Gamer</i> 2003 Mod of the Year.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> Dan Morris of PC Gamer noted in the March 2004 issue of PC Gamer, "While Battlefield Vietnam was still a twinkle in its developers' eyes, this standout mod debuted to a rapturous reception from the Battlefield 1942 faithful."</li>
+  <li><i>Experience WWII</i> was described in PC Gamer as having substantial changes to be historically accurate that directly impacts gameplay.</li>
+  <li><i><a href="https://en.wikipedia.org/wiki/FinnWars">FinnWars</a></i> was featured in <i>Pelit</i> magazine in issue 9/2005, and <i>PC Pelaaja</i> in 2007. FinnWars is based in <a href="https://en.wikipedia.org/wiki/Winter_War">Winter</a> and <a href="https://en.wikipedia.org/wiki/Continuation_War">Continuation Wars</a> between Finland and the Soviet Union, as well as <a href="https://en.wikipedia.org/wiki/Lapland_War">Lapland War</a> between Finland and Nazi Germany.</li>
+  <li><i>Forgotten Hope</i>, a 2003 mod that aimed at a high degree of historical accuracy, was noted for including over 250 new pieces of authentic equipment (at the time more than any other World War II-themed FPS). It was awarded the Macologist Mod of the Year Award by <a href="https://en.wikipedia.org/wiki/Inside_Mac_Games">Inside Mac Games</a> in 2006 after the mod was ported to the Mac. It was followed by its 2006 <i>Battlefield 2</i> sequel, <i>Forgotten Hope 2</i>.</li>
+  <li><i>Galactic Conquest</i> was noted for its permission to blatantly use Lucasarts Star Wars universe material in <i>Am I Mod or Not?</i> (Nieborg, 2005).  It was mentioned in <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> in April 2004.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> <i>Galactic Conquest</i> was reviewed on <a href="https://en.wikipedia.org/wiki/TechTV">TechTV</a>'s <i><a href="https://en.wikipedia.org/wiki/X-Play">X-Play</a></i> show in 2004.</li>
+  <li><i>HydroRacers</i> was reviewed in <i><a href="https://en.wikipedia.org/wiki/PC_Zone">PC Zone</a></i> in 2004 by Tony Lamb, and also the <i>Madison Courier</i> in June 2004.</li>
+  <li><i>Siege</i> was pointed out in a study by Utrecht University, both for its original concept, and its medieval warfare theme. <i>Am I Mod or Not?</i> (Nieborg, 2005)</li>
+  <li><i><a href="https://en.wikipedia.org/wiki/SilentHeroes">SilentHeroes</a></i> won the <i>PC ACTION-Super Mod Award</i> in edition 07/2006 of the German gaming-magazine PC ACTION. Also, it was featured on many Norwegian and Swedish media websites, including <a href="https://en.wikipedia.org/wiki/Verdens_Gang">VG</a>, <a href="https://en.wikipedia.org/wiki/Aftonbladet">Aftonbladet</a> and IDG.</li>
+  <li><i>Who Dares Wins</i> was reviewed in August 2005 <a href="https://en.wikipedia.org/wiki/United_Kingdom">UK</a> edition of <i>PC Gamer</i> magazine and a copy of version 0.2 was distributed with the magazine on DVD-ROM to its readers.</li>
+</ul>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

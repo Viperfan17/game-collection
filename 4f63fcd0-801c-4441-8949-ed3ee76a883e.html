@@ -1,0 +1,423 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Assassin&#39;s Creed II</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('4f63fcd0-801c-4441-8949-ed3ee76a883e/cab9272a-511d-4a83-9a98-d2958dfd18d4.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="4f63fcd0-801c-4441-8949-ed3ee76a883e/fcc8d9dd-e5ca-4c90-bc42-6fcebcb4895a.ico"/> Assassin&#39;s Creed II</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="4f63fcd0-801c-4441-8949-ed3ee76a883e/88e96a9f-4711-40d7-9c37-b2aed3dbafe5.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/6/2025">5/6/2025</a> 23:30:07</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 0:46:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-3/9/2010">3/9/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-72">72</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-90">90</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Stealth">Stealth</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Ubisoft Montreal">Ubisoft Montreal</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Ubisoft Ukraine">Ubisoft Ukraine</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Akella">Akella</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Ubisoft">Ubisoft</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Assassin's_Creed_II" target="_blank">PCGamingWiki</a><br/><a href="https://www.ubisoft.com/en-us/game/assassins-creed-2/" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=651" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/assassin-s-creed-ii" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/33230/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Assassin%27s_Creed_II" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/73582" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Assassin%27s_Creed_II" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/assassins-creed-ii" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Anvil">Anvil</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Europe">Europe</a><br/><a href="#quicklink-Historical">Historical</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Renaissance">Renaissance</a><br/><a href="#quicklink-Third Person">Third Person</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Assassin's Creed II</b></i> is a 2009 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> developed by <a href="https://en.wikipedia.org/wiki/Ubisoft_Montreal">Ubisoft Montreal</a> and published by <a href="https://en.wikipedia.org/wiki/Ubisoft">Ubisoft</a>. It is the second major installment in the <a href="https://en.wikipedia.org/wiki/Assassin's_Creed"><i>Assassin's Creed</i> series</a>, and the sequel to 2007's <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed_(video_game)">Assassin's Creed</a></i>. The game was first released on the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> in November 2009, and was later made available on <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> in March 2010 and <a href="https://en.wikipedia.org/wiki/OS_X">OS X</a> in October 2010.</p>
+
+<p>The game's plot is set in a <a href="https://en.wikipedia.org/wiki/Historical_fiction">fictional history</a> of real-world events and follows the millennia-old struggle between the <a href="https://en.wikipedia.org/wiki/Order_of_Assassins">Assassins</a>, who fight to preserve peace and free will, and the <a href="https://en.wikipedia.org/wiki/Knights_Templar">Templars</a>, who desire peace through control. The framing story is set in the 21st century and follows <a href="https://en.wikipedia.org/wiki/Desmond_Miles">Desmond Miles</a> as he relives the <a href="https://en.wikipedia.org/wiki/Genetic_memory_(psychology)">genetic memories</a> of his ancestor, <a href="https://en.wikipedia.org/wiki/Ezio_Auditore_da_Firenze">Ezio Auditore da Firenze</a>, to uncover the mysteries left behind by an ancient race known as the First Civilization in the hope of ending the Assassin-Templar conflict. The main narrative takes place at the height of the <a href="https://en.wikipedia.org/wiki/Renaissance">Renaissance</a> in <a href="https://en.wikipedia.org/wiki/Italy">Italy</a> from 1476 to 1499, and follows Ezio's journey as an Assassin while seeking revenge against those responsible for the death of his father and brothers. Gameplay focuses on using Ezio's combat, stealth, and <a href="https://en.wikipedia.org/wiki/Parkour">parkour</a> abilities to defeat enemies and explore the environment. The game features a large <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> comprising several Italian cities, including <a href="https://en.wikipedia.org/wiki/Florence">Florence</a>, <a href="https://en.wikipedia.org/wiki/Venice">Venice</a>, <a href="https://en.wikipedia.org/wiki/Monteriggioni">Monteriggioni</a>, <a href="https://en.wikipedia.org/wiki/San_Gimignano">San Gimignano</a>, and <a href="https://en.wikipedia.org/wiki/Forlì">Forlì</a>, all of which have been accurately recreated to fit the game's historical setting.</p>
+
+<p>Using a newly updated <a href="https://en.wikipedia.org/wiki/Anvil_(game_engine)">Anvil</a> game engine, <i>Assassin's Creed II</i> began development shortly after the release of <i>Assassin's Creed</i>. As part of the marketing campaign for the game, Ubisoft released a three-part live-action <a href="https://en.wikipedia.org/wiki/Short_film">short film</a>, titled <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed:_Lineage">Assassin's Creed: Lineage</a></i>, which serves as a prequel to the main story and stars most of the game's cast. During development, two chapters—titled <i>The Battle of Forlì</i> and <i>Bonfire of the Vanities—</i>were cut from the game due to time constraints, but were eventually released as <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable</a> <a href="https://en.wikipedia.org/wiki/Expansion_packs">expansion packs</a> on <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a> and later to other platforms. Additional in-game bonuses such as missions, outfits, and weapons could be redeemed through Ubisoft's <a href="https://en.wikipedia.org/wiki/Uplay">Uplay</a> service.</p>
+
+<p><i>Assassin's Creed II</i> received universal critical acclaim from <a href="https://en.wikipedia.org/wiki/Video_game_journalism">video game publications</a>, with praise for its narrative, characters, world design, and improvements over the first game; however, the PC version was met with some criticism in relation to the <a href="https://en.wikipedia.org/wiki/Digital_rights_management">digital rights management</a> system, and thus had the <a href="https://en.wikipedia.org/wiki/Always-online_DRM">always-online DRM</a> permanently removed. Considered one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">best video games ever made</a>, it sold more than nine million copies within six months. The game spawned two direct sequels: <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed:_Brotherhood">Assassin's Creed: Brotherhood</a></i> (2010) and <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed:_Revelations">Assassin's Creed: Revelations</a></i> (2011), and a spin-off, <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed_II:_Discovery">Assassin's Creed II: Discovery</a></i> (2009), all of which expand on Ezio's story while introducing new plotlines, characters, and locations. The next numbered entry in the series, <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed_III">Assassin's Creed III</a></i>, was released in 2012. Remastered versions of <i>Assassin's Creed II</i>, along with <i>Brotherhood</i> and <i>Revelations</i>, were released as part of <i>The Ezio Collection</i> <a href="https://en.wikipedia.org/wiki/Video_game_compilation">compilation</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a> on November 15, 2016, and for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> on February 17, 2022.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Assassin's Creed II</i> is an action-adventure game played from a <a href="https://en.wikipedia.org/wiki/Third-person_view">third-person perspective</a> and set in an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> based on late 15th-century <a href="https://en.wikipedia.org/wiki/Italian_Renaissance">Renaissance Italy</a>. Gameplay is <a href="https://en.wikipedia.org/wiki/Nonlinear_gameplay">nonlinear</a>, and focuses on <a href="https://en.wikipedia.org/wiki/Hack_and_slash">hack and slash</a> combat, stealth, and exploration. The Animus 2.0, a new version of the machine of the same name present in <i>Assassin's Creed</i>, provides in-game context for changes and additions to several game elements. A database is also available, providing extra historical information about key landmarks, characters, and services that the player encounters. The health system has been made more dynamic, with synchronization to the Animus and causing the character to recover only from minor injuries. More grievous injuries require visiting a street-side <a href="https://en.wikipedia.org/wiki/Physician">doctor</a> or use of medicine (which can be purchased from doctors or found on bodies).</p>
+
+<p>The player may now swim in water, and Eagle Vision—the ability to identify specific people and landmarks—can now be used in third-person view and while moving. A young <a href="https://en.wikipedia.org/wiki/Leonardo_da_Vinci">Leonardo da Vinci</a> is present in the game, aiding the player by creating new weapons from translated "Codex pages" that <a href="https://en.wikipedia.org/wiki/Altaïr_Ibn-LaʼAhad">Altaïr</a>, the original game's main character, left behind for future Assassins' analysis and insight. Leonardo's <a href="https://en.wikipedia.org/wiki/Ornithopter">flying machine</a> (based on real-life aeroplanes) can also be used during one mission. Other means of transport available in the game include horses, which can only be ridden outside of the major cities; <a href="https://en.wikipedia.org/wiki/Gondola">gondolas</a>, found most prominently in Venice; and a carriage, which is also ridden during a mission involving Leonardo. Each of the places the player can visit is more detailed compared to <i>Assassin's Creed</i>, and <a href="https://en.wikipedia.org/wiki/Non-player_character">NPCs</a> have a more human-like behavior; for example, civilians can sometimes be caught coughing or sneezing. Additionally, the player can hire groups of <a href="https://en.wikipedia.org/wiki/Mercenaries">mercenaries</a>, <a href="https://en.wikipedia.org/wiki/Courtesans">courtesans</a>, or <a href="https://en.wikipedia.org/wiki/Thieves">thieves</a> to fight, distract, or lure guards, respectively. A day and night cycle has been added to the game, giving the game more of a sense of time, in addition to setting missions and events at certain times of the day.</p>
+
+<p>There are many ways to interact with NPCs. Money can be thrown to the ground, or a corpse carried and then deposited on the ground, may also serve as a distraction for both guards and peasants. There are also several different types of enemies, some more agile or stronger than others, and some of whom will actively search hiding places where Ezio was last seen. The player can also mock an enemy during combat.</p>
+
+<p>The combat system is more complex than that of its predecessor, with the ability to <a href="https://en.wikipedia.org/wiki/Disarmament">disarm</a> opponents using counter-attacks while unarmed. If the player steals an enemy's weapon, it is possible to follow up with an attack that instantly kills the enemy. Leonardo provides the player with specialized weaponry, such as dual hidden blades, poison blades, and the hidden gun (a miniature <a href="https://en.wikipedia.org/wiki/Wheellock">wheellock</a> firearm), which are all based on schematics found in Altaïr's Codex pages. Generic swords, <a href="https://en.wikipedia.org/wiki/Cutlasses">cutlasses</a>, <a href="https://en.wikipedia.org/wiki/Mace_(bludgeon)">maces</a>, axes, and daggers can all be purchased from vendors in each city. The player can also pick up any weapon on the ground or use improvised weapons, such as brooms or halves of a spear. In addition, players are able to purchase artwork for their villa, obtain new <a href="https://en.wikipedia.org/wiki/Armor">armor</a> as the game progresses, and even <a href="https://en.wikipedia.org/wiki/Dye">dye</a> Ezio's clothing with a number of different colors. Other equipment includes larger <a href="https://en.wikipedia.org/wiki/Bag">pouches</a> to carry more <a href="https://en.wikipedia.org/wiki/Throwing_knives">throwing knives</a> and medicine. Six additional weapons can be unlocked in the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> version of the game by connecting the console to a <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> which contains a copy of <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed:_Bloodlines">Assassin's Creed: Bloodlines</a></i>.</p>
+
+<p>The Auditore family's countryside villa, located in Monteriggioni, acts as Ezio's personal headquarters. The surrounding property, which includes vendors selling items such as medicine, weapons, and clothing dyes, can be upgraded with earned <a href="https://en.wikipedia.org/wiki/Florin">florins</a>, granting Ezio discounts at the shops and increasing the <a href="https://en.wikipedia.org/wiki/Passive_income">passive income</a> that is generated by the villa over time. This income is deposited in a chest inside the villa, and must be collected regularly. Purchasing upgrades for Ezio and paintings also increases the villa's overall worth.</p>
+
+<p>There is now a broader array of methods for hiding or blending in the area. One can dive underwater to break guards' line of sight, and blending may be performed with any group of people, rather than only a specific type (as in the first <i>Assassin's Creed</i>). The game features a notoriety system, with guards more alert to Ezio's presence depending on his behavior, location, and current mission. This infamy can be reduced through <a href="https://en.wikipedia.org/wiki/Bribery">bribery</a>, removing <a href="https://en.wikipedia.org/wiki/Wanted_poster">wanted posters</a>, or assassinating corrupt officials.</p>
+
+<p>The missions in the game now have an expanded variety, with different structuring. For example, a mission may have the objective to escort someone but may change to a chase and assassination. An investigation is less explicit, and instead, missions may follow people and/or a narrative. There are roughly 150 missions in the game, two thirds of which are part of the main storyline, while the rest are optional side quests, like assassination contracts and races. Cities also contain hidden locations such as <a href="https://en.wikipedia.org/wiki/Catacombs">catacombs</a> and caves (the design of which have been compared by the developers to the <i><a href="https://en.wikipedia.org/wiki/Prince_of_Persia">Prince of Persia</a></i> series), where the objective is to navigate the area. Exploring these locations eventually rewards the player with an Assassin's Seal; the collection of all six Seals allows the player to unlock the Armor of Altaïr, which is stored in a concealed section of the Villa.</p>
+
+<p>Like <i>Assassin's Creed</i>, characters based on historical figures are present in the game, including Leonardo da Vinci, <a href="https://en.wikipedia.org/wiki/Niccolò_Machiavelli">Niccolò Machiavelli</a>, <a href="https://en.wikipedia.org/wiki/Caterina_Sforza">Caterina Sforza</a>, <a href="https://en.wikipedia.org/wiki/Bartolomeo_d'Alviano">Bartolomeo d'Alviano</a>, the <a href="https://en.wikipedia.org/wiki/Medici_family">Medici family</a>, the <a href="https://en.wikipedia.org/wiki/Pazzi_family">Pazzi family</a>, the <a href="https://en.wikipedia.org/wiki/Barbarigo_family">Barbarigo family</a>, the <a href="https://en.wikipedia.org/wiki/House_of_Loredan">Loredan family</a>, and <a href="https://en.wikipedia.org/wiki/Pope_Alexander_VI">Pope Alexander VI</a>. Locations in the game include the <a href="https://en.wikipedia.org/wiki/Tuscany">Tuscany</a> region (<a href="https://en.wikipedia.org/wiki/Florence">Florence</a>, <a href="https://en.wikipedia.org/wiki/Monteriggioni">Monteriggioni</a> and <a href="https://en.wikipedia.org/wiki/San_Gimignano">San Gimignano</a>), the <a href="https://en.wikipedia.org/wiki/Apennine_Mountains">Apennine Mountains</a>, the <a href="https://en.wikipedia.org/wiki/Romagna">Romagna</a> region (<a href="https://en.wikipedia.org/wiki/Forlì">Forlì</a>), <a href="https://en.wikipedia.org/wiki/Venice">Venice</a>, and the <a href="https://en.wikipedia.org/wiki/Vatican_City">Vatican</a> (only available during the final mission of the game). Specific landmarks include <a href="https://en.wikipedia.org/wiki/St_Mark's_Basilica">St Mark's Basilica</a>, the <a href="https://en.wikipedia.org/wiki/Grand_Canal_(Venice)">Grand Canal</a>, the Little Canal, the <a href="https://en.wikipedia.org/wiki/Rialto_Bridge">Rialto Bridge</a>, <a href="https://en.wikipedia.org/wiki/Florence_Cathedral">Santa Maria del Fiore</a>, the <a href="https://en.wikipedia.org/wiki/Sistine_Chapel">Sistine Chapel</a>, <a href="https://en.wikipedia.org/wiki/Basilica_of_Santa_Croce,_Florence">Santa Croce</a>, <a href="https://en.wikipedia.org/wiki/Palazzo_Vecchio">Palazzo Vecchio</a>, <a href="https://en.wikipedia.org/wiki/Ponte_Vecchio">Ponte Vecchio</a>, and <a href="https://en.wikipedia.org/wiki/Basilica_of_Santa_Maria_Novella">Santa Maria Novella</a>.</p>
+
+<h2>Plot</h2>
+
+<p>After <a href="https://en.wikipedia.org/wiki/Assassin's_Creed_(video_game)">the events of the first game</a>, <a href="https://en.wikipedia.org/wiki/Desmond_Miles">Desmond Miles</a> (<a href="https://en.wikipedia.org/wiki/Nolan_North">Nolan North</a>) is rescued from Abstergo by undercover Assassin <a href="https://en.wikipedia.org/wiki/Lucy_Stillman">Lucy Stillman</a> (<a href="https://en.wikipedia.org/wiki/Kristen_Bell">Kristen Bell</a>) and taken to a safehouse, where he meets her team, consisting of historian and analyst Shaun Hastings (<a href="https://en.wikipedia.org/wiki/Danny_Wallace_(humorist)">Danny Wallace</a>) and technician Rebecca Crane (<a href="https://en.wikipedia.org/wiki/Eliza_Schneider">Eliza Schneider</a>). They have constructed their own Animus, which they intend to use to train Desmond as an Assassin through the "bleeding effect," which allows the user to learn their ancestor's skills at a rapid pace. Desmond is instructed to relive the memories of <a href="https://en.wikipedia.org/wiki/Ezio_Auditore_da_Firenze">Ezio Auditore da Firenze</a> (<a href="https://en.wikipedia.org/wiki/Roger_Craig_Smith">Roger Craig Smith</a>), born into a wealthy <a href="https://en.wikipedia.org/wiki/Florence">Florentine</a> family in 1459, during the <a href="https://en.wikipedia.org/wiki/Italian_Renaissance">Italian Renaissance</a>.</p>
+
+<p>By 1476, Ezio has grown into a charismatic but reckless young man. After his father Giovanni (<a href="https://en.wikipedia.org/wiki/Romano_Orzari">Romano Orzari</a>) and brothers Federico (<a href="https://en.wikipedia.org/wiki/Elias_Toufexis">Elias Toufexis</a>) and Petruccio are framed for treason and executed by corrupt magistrate Uberto Alberti (Michel Perron), Ezio retrieves his father's Assassin equipment and murders Uberto in revenge. Ezio and his remaining family—his mother Maria (<a href="https://en.wikipedia.org/wiki/Ellen_David">Ellen David</a>) and sister Claudia (<a href="https://en.wikipedia.org/wiki/Angela_Galuppo">Angela Galuppo</a>)—flee Florence and head to their ancestral home in <a href="https://en.wikipedia.org/wiki/Monteriggioni">Monteriggioni</a>. There, Ezio's uncle Mario (<a href="https://en.wikipedia.org/wiki/Fred_Tatasciore">Fred Tatasciore</a>) explains their family's role as members of the Assassin Brotherhood, and reveals that Giovanni was killed because <a href="https://en.wikipedia.org/wiki/Assassin's_Creed:_Lineage">he had uncovered a conspiracy</a> masterminded by the <a href="https://en.wikipedia.org/wiki/Templar_Order">Templar Order</a>, the Assassins' sworn enemies.</p>
+
+<p>After being trained as an Assassin, Ezio pursues vengeance against the Templars, most of whom are members of noble families like the <a href="https://en.wikipedia.org/wiki/Pazzi">Pazzi</a> and <a href="https://en.wikipedia.org/wiki/Barbarigo_family">Barbarigos</a>. His journey spans over a decade and leads Ezio to make several allies, including inventor <a href="https://en.wikipedia.org/wiki/Leonardo_da_Vinci">Leonardo da Vinci</a> (<a href="https://en.wikipedia.org/wiki/Carlos_Ferro_(American_actor)">Carlos Ferro</a>), who provides him with equipment based on information left by the Assassin <a href="https://en.wikipedia.org/wiki/Altaïr_Ibn-LaʼAhad">Altaïr Ibn-LaʼAhad</a>; statesman <a href="https://en.wikipedia.org/wiki/Lorenzo_de'_Medici">Lorenzo de' Medici</a> (Alex Ivanovici), whom he saves from the <a href="https://en.wikipedia.org/wiki/Pazzi_conspiracy">Pazzi's assassination plot</a>; and <a href="https://en.wikipedia.org/wiki/Caterina_Sforza">Caterina Sforza</a> (<a href="https://en.wikipedia.org/wiki/Cristina_Rosato">Cristina Rosato</a>), the Countess of <a href="https://en.wikipedia.org/wiki/Forlì">Forlì</a>. Eventually, Ezio uncovers the identity of the Templar <a href="https://en.wikipedia.org/wiki/Grand_master_(order)">Grand Master</a>, <a href="https://en.wikipedia.org/wiki/Pope_Alexander_VI">Rodrigo Borgia</a> (<a href="https://en.wikipedia.org/wiki/Manuel_Tadros">Manuel Tadros</a>), who plotted to secure control of Italy and obtain a powerful Apple of Eden. In 1488, Ezio intercepts the Apple and confronts Rodrigo, who reveals his intention to unlock "the Vault", which he believes will grant him <a href="https://en.wikipedia.org/wiki/Omnipotence">god-like powers</a>. Rodrigo almost overpowers Ezio, but is forced to flee and abandon the Apple when the latter's allies arrive to help. Believing Ezio to be "the Prophet" destined to open the Vault, Mario, along with other Assassins, formally induct him into the Brotherhood.</p>
+
+<p>In the present, Desmond suffers side-effects from the bleeding effect, experiencing a memory of Altaïr. Inside the Animus, he finds <a href="https://en.wikipedia.org/wiki/Glyphs">glyphs</a> similar to the drawings he found in his cell at Abstergo, which, when deciphered, reveal a video file of two human slaves stealing an Apple. The video ends with the ASCII codes for "EDEN". The team theorizes the two humans are <a href="https://en.wikipedia.org/wiki/Adam_and_Eve">Adam and Eve</a>, the first man and woman.</p>
+
+<p>With several memory sequences too corrupted to access (later made available as <a href="https://en.wikipedia.org/wiki/Downloadable_content">DLC</a>), the team sends Desmond to the final memory in 1499. After discovering the Vault is located underneath the <a href="https://en.wikipedia.org/wiki/Apostolic_Palace">Papal Palace</a>, Ezio infiltrates the <a href="https://en.wikipedia.org/wiki/Vatican_City">Vatican</a> and battles Rodrigo, now <a href="https://en.wikipedia.org/wiki/Pope_Alexander_VI">Pope Alexander VI</a>, who is empowered by the <a href="https://en.wikipedia.org/wiki/Papal_cross">Papal Staff</a>—another Piece of Eden. Ezio defeats Rodrigo, but spares his life, having overcome his desire for revenge. He then unlocks the Vault using the Apple and the Staff, and is contacted by the hologram of <a href="https://en.wikipedia.org/wiki/List_of_Assassin's_Creed_characters#Isu_(major_characters)">Minerva</a> (<a href="https://en.wikipedia.org/wiki/Margaret_Easley">Margaret Easley</a>). Aware that Desmond is listening, Minerva explains how her people, the First Civilization, created humanity to serve them, but were destroyed by a catastrophe. The survivors joined forces with humanity, building a network of vaults to preserve their technology and prevent a future disaster. Before vanishing, she tells Desmond that only he has the power to fulfill the "prophecy", leaving Desmond and Ezio confused.</p>
+
+<p>In the present, Abstergo agents led by <a href="https://en.wikipedia.org/wiki/Warren_Vidic">Warren Vidic</a> (<a href="https://en.wikipedia.org/wiki/Philip_Proctor">Philip Proctor</a>) attack the hideout, forcing the team to evacuate. As they head to a new location, Lucy informs Desmond that the Assassins have detected strange occurrences in the <a href="https://en.wikipedia.org/wiki/Earth's_magnetic_field">Earth's magnetic field</a>; a <a href="https://en.wikipedia.org/wiki/Solar_flare">solar flare</a> is scheduled to occur in a few months, which will likely trigger the same event that ended the First Civilization. Desmond prepares to reenter the Animus, leading into the events of <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed:_Brotherhood">Assassin's Creed: Brotherhood</a></i>.</p>
+
+<h3><i>The Battle of Forlì</i></h3>
+
+<p>In 1488, shortly after recovering the Apple of Eden from Rodrigo, Ezio meets with Mario, Leonardo, and the Assassin <a href="https://en.wikipedia.org/wiki/Niccolò_Machiavelli">Niccolò Machiavelli</a> (<a href="https://en.wikipedia.org/wiki/Shawn_Baichoo">Shawn Baichoo</a>) to discuss what to do in order to protect the artifact, ultimately deciding to send it to Caterina Sforza in Forlì. However, when Ezio and Machiavelli arrive in the city, they find it under siege by an army of mercenaries led by Checco and Ludovico Orsi, who have been hired by Rodrigo to obtain a map made by Caterina's <a href="https://en.wikipedia.org/wiki/Girolamo_Riario">late husband</a> showing the locations of Altaïr's Codex pages, which in turn lead to the Vault. The Orsi brothers kidnap Caterina's children to force her to surrender the map, but Ezio is able to assassinate Ludovico and rescue the children. However, he learns that while he was away, Checco stole the Apple, which Ezio had left with Caterina. Although Ezio ultimately kills Checco and retrieves the Apple, he is stabbed and collapses as an unknown black-robed individual walks up and steals the Apple. After being nursed back to health by Caterina, Ezio obtains the map from her and sets out to recover the Apple. Suspecting that the thief is a <a href="https://en.wikipedia.org/wiki/Friar">friar</a>, he travels to a nearby monastery and questions the local <a href="https://en.wikipedia.org/wiki/Abbot">abbot</a>, who reveals that the man who stole the Apple is <a href="https://en.wikipedia.org/wiki/Girolamo_Savonarola">Girolamo Savonarola</a>.</p>
+
+<p>In 1497, after searching for Savonarola and the Apple for nearly a decade, Ezio tracks them down to Florence, where Savonarola has used the Apple to remove the <a href="https://en.wikipedia.org/wiki/House_of_Medici">Medici</a> from power and take over. After meeting with Machiavelli, Ezio devises a plan to bring Savonarola out of hiding by assassinating his nine lieutenants, who preach in the city during the <a href="https://en.wikipedia.org/wiki/Bonfire_of_the_vanities">bonfire of the vanities</a>. After killing all the lieutenants, the people become furious and form a mob, prompting Savonarola to come out and preach to them. When this fails to dissuade the angry crowd, he tries to use the Apple on them, but Ezio disarms him with a throwing knife and recovers the artifact. Savonarola is then carried by the mob to the <a href="https://en.wikipedia.org/wiki/Piazza_della_Signoria">Piazza della Signoria</a>, where he is set to be <a href="https://en.wikipedia.org/wiki/Death_by_burning">burnt at the stake</a>. However, Ezio, believing no one deserves such a painful fate, quickly ends the friar's life by stabbing him in the neck with his hidden blade. He then stands before the confused crowd and declares that all should follow their own path, as he was taught by his mentors.</p>
+
+<h2>Development</h2>
+
+<p>Ubisoft's Yves Guillemot officially confirmed that <i>Assassin's Creed II</i> was in development on November 26, 2008, during the company's financial performance report. This was followed by Michael Pachter speculating in <a href="https://en.wikipedia.org/wiki/GameTrailers">GameTrailers</a>' "Bonus Round" that the game would change its setting to the events of the <a href="https://en.wikipedia.org/wiki/French_Revolution">French Revolution</a>, which turned out to be false. A promotional video was released by Ubisoft on April 6 showing a skull, some hidden blade designs, and <a href="https://en.wikipedia.org/wiki/Leonardo_da_Vinci">Leonardo da Vinci</a>'s flying machine on a scroll. On April 16, <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> released details of the game, including pictures of the protagonist Ezio, a new teaser trailer was released, and the game was "officially" announced by Ubisoft. In an interview in May 2009, Sebastien Puel stated that the development team working on <i>Assassin's Creed II</i> had increased to 450 members, and the development team's size had tripled since the first game.</p>
+
+<p>On June 1, 2009, <a href="https://en.wikipedia.org/wiki/Ubisoft">Ubisoft</a> released a new four-minute cinematic <i>Assassin's Creed II</i> trailer at <a href="https://en.wikipedia.org/wiki/E3_2009">E3</a>. On June 2, 2009, Ubisoft revealed the first live gameplay demo, lasting 6 minutes, at the Sony Press Conference. GameTrailers featured an exclusive developer walkthrough from E3 2009. In an interview with GameTrailers Ubisoft Montreal creative director Patrice Desilets stated Desmond would be doing more than walking around and discovering clues.</p>
+
+<p>It was announced at the <i>Assassin's Creed</i> panel at Comic-Con 2009 that a live-action mini-series, consisting of three episodes and titled <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed:_Lineage">Assassin's Creed: Lineage</a></i>, would be released showing the events leading up to the game and the history of Ezio and his father Giovanni. It was also revealed that the humorist <a href="https://en.wikipedia.org/wiki/Danny_Wallace_(humorist)">Danny Wallace</a> would be voicing a new character in <i>Assassin's Creed II</i>: Shaun Hastings, a sarcastic historian assisting Desmond. The character's face would also be modeled after him. Actress <a href="https://en.wikipedia.org/wiki/Kristen_Bell">Kristen Bell</a> was also announced to be reprising her role as Lucy Stillman.</p>
+
+<p>The game was originally due to be released at the same time on all three platforms, but Ubisoft announced on September 24, 2009, that the PC version would be delayed to the first quarter of 2010 in order to have "a bit more time for the dev team to deliver the best quality game."</p>
+
+<p>On June 1, 2021, online service for the game was closed.</p>
+
+<h2>Marketing</h2>
+
+<h3>Promotion</h3>
+
+<p>On October 20, 2009, Ubisoft announced a series of short films, to be broadcast via <a href="https://en.wikipedia.org/wiki/YouTube">YouTube</a>, that would provide additional back story and the introduction of some of the characters found in the game. The shorts, collectively called <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed:_Lineage">Assassin's Creed: Lineage</a></i>, came in three parts and were developed by Ubisoft's Hybride Technologies, who previously worked on the films <i><a href="https://en.wikipedia.org/wiki/300_(film)">300</a></i> and <i><a href="https://en.wikipedia.org/wiki/Sin_City_(film)">Sin City</a></i>.  The series focused on Ezio's father, Giovanni Auditore, and contained live-action and computer-generated imagery. The first of the films was released on October 27, 2009, with the remaining two released on November 13, 2009.</p>
+
+<p>On November 12, 2009, Ubisoft released <i>Assassin's Creed II</i> themed virtual items on <a href="https://en.wikipedia.org/wiki/PlayStation_Home">PlayStation Home</a> to promote the release of the game, as well as the game <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed:_Bloodlines">Assassin's Creed: Bloodlines</a></i> for PSP. <i>Assassin's Creed II</i> virtual items and an Ezio costume were also released on the <a href="https://en.wikipedia.org/wiki/Xbox_Live_Marketplace">Xbox Live Marketplace</a> for the Xbox 360's <a href="https://en.wikipedia.org/wiki/Avatar_(Xbox_360)">avatars</a>. On November 19, 2009, more <i>Assassin's Creed II</i> virtual items were released in PlayStation Home, along with a costume for Ezio, which was released on November 26, 2009, in which the player could obtain and roam PlayStation Home in it. On December 3, 2009, more 15th century Italian renaissance themed items were released in Home. Ezio's "Purple Assassin" costume is available to download on <i><a href="https://en.wikipedia.org/wiki/LittleBigPlanet_(PlayStation_3)">LittleBigPlanet</a></i>, as of December 8, 2009, on the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a>.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p><i>Assassin's Creed II</i> is the first game to be linked to Ubisoft's <a href="https://en.wikipedia.org/wiki/Uplay">Uplay</a> feature. Progression through the game allows Uplay members to acquire points that can be redeemed for bonuses for use in the game, including a new crypt to explore and an Altaïr costume.</p>
+
+<p>A novel based on the game, <i>Assassin's Creed: Renaissance</i> (by <a href="https://en.wikipedia.org/wiki/Oliver_Bowden">Oliver Bowden</a>), was published by <a href="https://en.wikipedia.org/wiki/Penguin_Books">Penguin Books</a> in November 2009.</p>
+
+<p>Ubisoft announced a <i>Play Your Part, Play At Home</i> campaign during the <a href="https://en.wikipedia.org/wiki/COVID-19_pandemic">COVID-19 pandemic</a>. As part of this campaign, PC users were able to redeem a free digital copy of <i>Assassin's Creed II</i> (among other games) via the Ubisoft website.</p>
+
+<p>There are several different limited editions of <i>Assassin's Creed II</i>. The "Black Edition" contains an Ezio figurine garbed in a black outfit and was released in Europe and Australia. Included also are three bonus areas and missions, an art book, a DVD with part of the game's soundtrack, one premium PS3/Xbox 360 theme, behind the scenes videos, and 2 desktop wallpapers. The "White Edition" contains one bonus area/mission and an Ezio figurine in his white outfit. The <i>Master Assassin's Edition</i> is the North American limited edition, which contains an Ezio figurine, two bonus areas, an art book and a Blu-ray with music and behind the scenes videos.</p>
+
+<p>After much complaining from <i>Assassin's Creed II</i> fans that they were unable to complete the game due to the need to complete the three Templar Lairs (only available on the "White" or "Black Edition") to earn 100% synchronization, Ubisoft released "The Complete Edition". Included in the package are download codes for the two <a href="https://en.wikipedia.org/wiki/Downloadable_content">DLCs</a>, <i>Battle of Forlì</i> and <i>Bonfire of the Vanities</i> and the three Templar Lairs. Later the "Game of the Year Edition" was released, containing the extra content incorporated on the game disc. Both versions also have the Bonus Skin, however, it needs to be unlocked through the game code.</p>
+
+<p>Eventually a "Deluxe Edition" was also released, containing the three bonus areas &amp; missions and the downloadable content <i>Battle of Forlì</i> and <i>Bonfire of the Vanities</i>. This Edition, however, is only available via Digital Download. The "Deluxe Edition" as of now is available only on the PlayStation 3 through the PlayStation Network and PC through Epic Games Store and Steam. It also has the Bonus Dye for Ezio's outfit, albeit it is unlocked from the very beginning of the game and available for free at Monteriggioni.</p>
+
+<p>The Windows version now requires a one-time online activation, after which the game, its activation key, and the Uplay Account will be bound together and the game can be played offline, even with the Uplay Launcher forced to run in Offline Mode in the Settings Menu. Even in Offline mode, users can log in into Uplay, provided they have already logged in online with a legitimate e-mail account when they started using the software for the first time.</p>
+
+<p>Users already owning the base game through Steam can upgrade to the "Deluxe Edition".</p>
+
+<h2>Music</h2>
+
+<p>The score to <i>Assassin's Creed II</i> was composed by <a href="https://en.wikipedia.org/wiki/Jesper_Kyd">Jesper Kyd</a>. It was recorded at <a href="https://en.wikipedia.org/wiki/Capitol_Records">Capitol Records</a> with a 35-piece string ensemble and 13-person choir, with featured vocals by <a href="https://en.wikipedia.org/wiki/Melissa_Kaplan">Melissa Kaplan</a>. A soundtrack was released via download on November 16, 2009. 14 tracks of the soundtrack were also released on the game disc available with the special pre-order Black edition of <i>Assassin's Creed II</i>.</p>
+
+<p>In the marketing, "Genesis" by <a href="https://en.wikipedia.org/wiki/Justice_(French_band)">Justice</a> was used in the "Visions of Venice" trailer.</p>
+
+<h2>Downloadable content</h2>
+
+<h3>Expansion packs</h3>
+
+<p>On December 1, 2009, Ubisoft announced <i>The Battle of Forlì</i>, the first of several <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC) expansions for the PlayStation 3 and Xbox 360 versions of <i>Assassin's Creed II</i>. Intended to flesh out <a href="https://en.wikipedia.org/wiki/Forlì">Forlì</a> and the character of <a href="https://en.wikipedia.org/wiki/Caterina_Sforza">Caterina Sforza</a>, who had only a minor role in the base game, the DLC was released on January 28, 2010. It was followed by <i>Bonfire of the Vanities</i> on February 18, 2010, which sees Ezio returning to Florence to deal with <a href="https://en.wikipedia.org/wiki/Girolamo_Savonarola">Girolamo Savonarola</a> during the <a href="https://en.wikipedia.org/wiki/Bonfire_of_the_vanities">mass burning of sinful objects</a> in the city. The two expansions are presented in-game as Sequences 12 and 13, respectively, and are seamlessly integrated into the main plot, taking place right before the final memory sequence of the game, Sequence 14. This is because the two sequences were originally intended to be included in the base game, but were cut due to time constraints and later released as DLC. The issue was written into the game's story as the Animus corrupting several memory sequences, which Rebecca was later able to fix through a computer patch, allowing Desmond to relive Ezio's missing memories.</p>
+
+<p>In addition to the new story missions, both expansions also include several unique features. For example, <i>The Battle of Forlì</i> features a replayable memory (the only one in the entire game) of Ezio piloting Leonardo's flying machine over Forlì, and <i>Bonfire of the Vanities</i> adds in Florence's southern district (which is inaccessible in the base game). Subsequent re-releases of <i>Assassin's Creed II</i> include both expansions, without the possibility of skipping them.</p>
+
+<p>Ubisoft's <a href="https://en.wikipedia.org/wiki/Uplay">Uplay</a> system enables further in-game enhancements which can be redeemed by points that are given when playing the game. The available awards are an <i>Assassin's Creed II</i> theme or wallpaper for PC and PlayStation 3, five additional throwing knives, Altaïr's outfit and the Uplay exclusive Auditore Family Crypt map.</p>
+
+<p>These three dungeons—<a href="https://en.wikipedia.org/wiki/Palazzo_Medici_Riccardi">Palazzo Medici</a>, <a href="https://en.wikipedia.org/wiki/Santa_Maria_Gloriosa_dei_Frari">Basilica di Santa Maria Gloriosa dei Frari</a> and <a href="https://en.wikipedia.org/wiki/Venetian_Arsenal">Arsenale di Venezia</a>—similar to the base game's Assassin Tombs but without special rewards other than treasure, were originally included in the "Black Edition" (European and Australian release) of <i>Assassin's Creed II</i>, with one included in the "White Edition" and two in the North American "Master Assassin's Edition". Ubisoft subsequently offered them as DLC via PlayStation Network and Xbox Live. They have since been added in the "Game of the Year Edition", "Complete Edition", "Deluxe Edition", and "Ezio Collection" versions of the game.</p>
+
+<p>This costume dye is unlocked by entering a code obtained after buying the <i>Assassin's Creed II</i> 3D mobile game from the Verizon App Store. This bonus skin is also included in the "Game of the Year Edition", "The Complete Edition", "Deluxe Edition", and "Ezio Collection" versions of the game.</p>
+
+<h2>Reception</h2>
+
+<h3>Critical reception</h3>
+
+<p>Upon release, <i>Assassin's Creed II</i> received universal acclaim on PlayStation 3 and Xbox 360 with generally favourable reviews on PC. Review aggregator site <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> gave the PlayStation 3 version a score of 91 and the Xbox 360 version a 90, making it the highest-rated game in the franchise on the site.</p>
+
+<p>In an exclusive review by <i>Official Xbox Magazine</i>, <i>Assassin's Creed II</i> scored 9/10. Its second review was a perfect score from the <i>Official PlayStation Magazine US</i>, while the <i>Official PlayStation Magazine UK</i> scored the game a 9/10. Jeremy Parish of <a href="https://en.wikipedia.org/wiki/1Up.com">1Up.com</a> gave the game an A− stating: "AC2 is everything a sequel ought to be: An improvement on the original in nearly every way. Perhaps more impressively, it actually has me interested to see where the series goes from here -- something I wouldn't have expected after I slogged my way through the original."</p>
+
+<p>German magazine <i>Computer Bild Spiele</i> reported that the game's publishers offered to provide a pre-release copy of the game if the magazine would guarantee a review score of "very good". The magazine rejected the request and instead opted to delay their review.</p>
+
+<p>GameSpot which reviewed the PC version of the game, said despite the game being "fun and beautiful" it was hard to justify the higher price point. It was also mentioned that the game was hindered by Ubisoft's DRM and the game "deserved better. For that matter, PC gamers deserved better too."</p>
+
+<p>According to pre-official sales estimates, Ubisoft announced that <i>Assassin's Creed II</i> sold 1.6 million copies worldwide during its first week of sale, representing a 32 percent increase over the first week retail performance of the original <i>Assassin's Creed</i>. As of May 2010, the game has sold 9 million copies.</p>
+
+<p>At the <a href="https://en.wikipedia.org/wiki/Spike_Video_Game_Awards">2009 Spike Video Game Awards</a>, <i>Assassin's Creed II</i> was named Best Action Adventure Game, and IGN named it as the Action Game of the Year for Xbox 360 and Xbox 360 Game of the Year. Game Informer also named it as Xbox 360 Game of the Year. It also received Game of the Year from <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> and <i><a href="https://en.wikipedia.org/wiki/The_New_York_Times">The New York Times</a></i>.</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/13th_Annual_Interactive_Achievement_Awards">13th Annual Interactive Achievement Awards</a> (now known as the <a href="https://en.wikipedia.org/wiki/D.I.C.E._Awards">D.I.C.E. Awards</a>), the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>Assassin's Creed II</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Game_of_the_Year">Game of the Year</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Adventure_Game_of_the_Year">Adventure Game of the Year</a>", and outstanding achievement in "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Animation">Animation</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Art_Direction">Art Direction</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Game_Direction">Game Direction</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Technical_Achievement">Gameplay Engineering</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Original_Music_Composition">Original Music Composition</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Story">Original Story</a>", "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Audio_Design">Sound Design</a>", and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Technical_Achievement">Visual Engineering</a>".</p>
+
+<p>The game was also nominated for several <a href="https://en.wikipedia.org/wiki/Game_Developers_Choice_Awards">Game Developers Choice Awards</a> including "Best Game Design", "Best Visual Art", "Best Technology", and "Game of the Year".</p>
+
+<p>The game is included in the 2010 book <i><a href="https://en.wikipedia.org/wiki/1001_Video_Games_You_Must_Play_Before_You_Die">1001 Video Games You Must Play Before You Die</a></i>.</p>
+
+<p>The Windows version of the game uses Ubisoft's <a href="https://en.wikipedia.org/wiki/Uplay">Uplay</a> platform, which includes a <a href="https://en.wikipedia.org/wiki/Digital_rights_management">digital rights management</a> (DRM) system that initially required all users to remain connected to the Internet while playing. In the initial retail version, any progress made subsequent to the last checkpoint was lost if the Internet connection was severed. Ubisoft stated that if the disconnection was temporary, the game would pause. In addition, the company argued that there were numerous checkpoints spread throughout <i>Assassin's Creed II</i>. The company was also criticized by overseas members of the U.S., who could not play the game while in locations with sporadic and expensive connections.</p>
+
+<p>Shortly after the release of the Windows version, Ubisoft claimed that a cracked version of the game had not been created, and was confirmed by at least one website. During the following weekend, the DRM servers for <i><a href="https://en.wikipedia.org/wiki/Silent_Hunter_5">Silent Hunter 5</a></i> and <i>Assassin's Creed II</i> were, according to Ubisoft, affected by a <a href="https://en.wikipedia.org/wiki/Denial-of-service_attack">denial-of-service attack</a>. Ubisoft later stated that "95 per cent of players were not affected, but a small group of players attempting to open a game session did receive denial of service errors." A server emulator to overcome the DRM has been developed. A cracked dynamic-link library bypassing the connection requirement entirely was released in late April.</p>
+
+<p>Following the series of server outages, Ubisoft offered owners of the Windows version all DLC from the <i>Assassin's Creed II Black Edition</i> (despite already having the Battle of Forli and Bonfire of the Vanities DLC incorporated into the story mode from the beginning by default), or a free copy of <i><a href="https://en.wikipedia.org/wiki/Heroes_Over_Europe">Heroes Over Europe</a></i>, <i><a href="https://en.wikipedia.org/wiki/Tom_Clancy's_EndWar">Tom Clancy's EndWar</a></i>, <i><a href="https://en.wikipedia.org/wiki/Tom_Clancy's_H.A.W.X">Tom Clancy's H.A.W.X</a></i>, or <a href="https://en.wikipedia.org/wiki/Prince_of_Persia_(2008_video_game)"><i>Prince of Persia</i> (2008)</a>.</p>
+
+<p>The DRM was modified in December 2010. By that time the game no longer required a constant Internet connection while playing. Instead, the player had to be connected to the Internet every time the game was launched. In 2012, Ubisoft announced that they would patch the game to remove internet access as a requirement to play, and would not require internet access for DRM henceforth. The Windows version now requires a one-time online activation, after which the game, its activation key, and the Uplay Account will be bound together and the game can be played offline, even with the Uplay Launcher forced to run in Offline Mode in the Settings Menu. The game can then be activated infinitely on the existing or a new machine if the game is ever reinstalled, and it can still be played offline. The same rule for <i>Assassin's Creed II</i> on PC now applies to any Ubisoft game on PC that once required a persistent online connection. However, none of these changes affected the Mac OS X version of the game which still requires a constant Internet connection and players still lose progress if the Internet connection is disrupted.</p>
+
+<h2>Sequel</h2>
+
+<p>Discussions about details of <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed_III">Assassin's Creed III</a></i> were already present before the release of <i>Assassin's Creed II</i>, with the game staff's notion of possibly having a female descendant in England during <a href="https://en.wikipedia.org/wiki/World_War_II">World War II</a>. However, co-writer <a href="https://en.wikipedia.org/wiki/Corey_May">Corey May</a> has stated that the series will never take place during that period, as a major goal was to take players to settings normally unvisited in games. Ubisoft's Philippe Bergeron stated that potential settings could include <a href="https://en.wikipedia.org/wiki/England_in_the_Middle_Ages">England in the Middle Ages</a>, during the era of <a href="https://en.wikipedia.org/wiki/King_Arthur">King Arthur</a>, and <a href="https://en.wikipedia.org/wiki/Feudal_Japan">feudal Japan</a>, the latter of which had been a "personal favorite" of many in the staff. However, on March 1, 2012, the setting for <i>Assassin's Creed III</i> was revealed to be colonial <a href="https://en.wikipedia.org/wiki/Boston">Boston</a> during the <a href="https://en.wikipedia.org/wiki/American_Revolution">American Revolution</a>, starring a <a href="https://en.wikipedia.org/wiki/Native_Americans_in_the_United_States">Native American</a> protagonist named <a href="https://en.wikipedia.org/wiki/Connor_(Assassin's_Creed)">Ratonhnaké:ton</a>. This game was released in October 2012.</p>
+
+<p>Two <i>Assassin's Creed</i> games were released concurrently with <i>Assassin's Creed II</i>: <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed:_Bloodlines">Assassin's Creed: Bloodlines</a></i> and <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed_II:_Discovery">Assassin's Creed II: Discovery</a></i>. <i>Discovery</i> is set during the missing chapters in <i>II</i> and features Ezio Auditore. A direct sequel, <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed:_Brotherhood">Assassin's Creed: Brotherhood</a></i> was released on November 16, 2010, for PlayStation 3 and Xbox 360, continuing directly after the events of <i>Assassin's Creed II</i>. The game once again features Ezio as the primary protagonist, and includes a new online multiplayer mode. The game takes place primarily in <a href="https://en.wikipedia.org/wiki/Rome">Rome</a>, the seat of power for the Borgia family and the Knights Templar. The game's primary antagonist is <a href="https://en.wikipedia.org/wiki/Cesare_Borgia">Cesare Borgia</a>, <a href="https://en.wikipedia.org/wiki/Pope_Alexander_VI">Rodrigo Borgia</a>'s son.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
