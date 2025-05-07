@@ -1,0 +1,423 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Grand Theft Auto III</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('3073053e-34f9-4fc9-a2c9-6de2a343eeb6/fd0d2b6c-1551-479c-af74-5fa61ff9fc98.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="3073053e-34f9-4fc9-a2c9-6de2a343eeb6/46d2d26b-0a5c-4e3c-a39c-58fdc356d307.ico"/> Grand Theft Auto III</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="3073053e-34f9-4fc9-a2c9-6de2a343eeb6/9af1db27-e56d-4101-a677-1a6781b3325b.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 1:26:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 1:28:49</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-5/20/2002">5/20/2002</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-93">93</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action">Action</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Open world">Open world</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-TPS">TPS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-DMA Design">DMA Design</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-TransGaming">TransGaming</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Buka Entertainment">Buka Entertainment</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Rockstar Games">Rockstar Games</a><br/><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Tech Dealer">Tech Dealer</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Grand_Theft_Auto_III" target="_blank">PCGamingWiki</a><br/><a href="https://web.archive.org/web/20030622085318/http://www.rockstargames.com/grandtheftauto3/pc/main.html" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=4061" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/grand-theft-auto-iii" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/12100/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Grand_Theft_Auto_III" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/5189" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Grand_Theft_Auto_III" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/grand-theft-auto-iii" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Automobile">Automobile</a><br/><a href="#quicklink-Bus">Bus</a><br/><a href="#quicklink-Contemporary">Contemporary</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Naval/watercraft">Naval/watercraft</a><br/><a href="#quicklink-North America">North America</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-RenderWare">RenderWare</a><br/><a href="#quicklink-Street racing">Street racing</a><br/><a href="#quicklink-Tank">Tank</a><br/><a href="#quicklink-Third Person">Third Person</a><br/><a href="#quicklink-Train">Train</a><br/><a href="#quicklink-Transport">Transport</a><br/><a href="#quicklink-Truck">Truck</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Grand Theft Auto III</b></i> is a 2001 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> developed by <a href="https://en.wikipedia.org/wiki/DMA_Design">DMA Design</a> and published by <a href="https://en.wikipedia.org/wiki/Rockstar_Games">Rockstar Games</a>. It was the first 3D game in the <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto">Grand Theft Auto</a></i> series. Set in Liberty City, loosely based on <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a>, the story follows Claude, a <a href="https://en.wikipedia.org/wiki/Silent_protagonist">silent protagonist</a> who becomes entangled in a world of crime, drugs, gang warfare and corruption. The game is played from a <a href="https://en.wikipedia.org/wiki/Third-person_(video_games)">third-person perspective</a> and its world is navigated on foot or by vehicle. Its <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> design lets players <a href="https://en.wikipedia.org/wiki/Nonlinear_gameplay">freely roam</a> Liberty City.</p>
+
+<p>Development was shared between DMA Design, based in <a href="https://en.wikipedia.org/wiki/Edinburgh">Edinburgh</a>, and Rockstar, based in New York City. Development involved transforming popular <i>Grand Theft Auto</i> elements into a fully 3D world for the first time. The game was delayed following the <a href="https://en.wikipedia.org/wiki/September_11_attacks">September 11 attacks</a> to allow the team to change references and gameplay deemed inappropriate. <i>Grand Theft Auto III</i> was released in October 2001 for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, in May 2002 for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and in November 2003 for the <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a>. Mobile ports were released for the tenth anniversary in 2011, followed by <a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_The_Trilogy_–_The_Definitive_Edition">a remastered version</a> for the twentieth in 2021.</p>
+
+<p><i>Grand Theft Auto III</i> received acclaim for its concept, gameplay, sound design, and visual fidelity, but generated controversies for its violence and sex. It received year-end accolades from several <a href="https://en.wikipedia.org/wiki/Gaming_publications">gaming publications</a>, and it is considered a landmark game in the open world concept, one of the most significant games of the <a href="https://en.wikipedia.org/wiki/Sixth_generation_of_video_game_consoles">sixth generation of consoles</a>, and among the <a href="https://en.wikipedia.org/wiki/Best_video_games_ever_made">best video games</a>. It was the best-selling video game of 2001 and among the <a href="https://en.wikipedia.org/wiki/Best-selling_PlayStation_2_games">best-selling PlayStation 2 games</a> with over 11.6 million copies sold; it has sold over 14.5 million copies overall. The game was followed by <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_Vice_City">Grand Theft Auto: Vice City</a></i> (2002) and two <a href="https://en.wikipedia.org/wiki/Prequel">prequels</a>, <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_Advance">Advance</a></i> (2004) and <i><a href="https://en.wikipedia.org/wiki/Liberty_City_Stories">Liberty City Stories</a></i> (2005).</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Grand Theft Auto III</i> is an <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> played from a <a href="https://en.wikipedia.org/wiki/Third-person_perspective">third-person perspective</a>. Players complete missions—linear scenarios with set objectives—to progress through the story. It is possible to have several missions available at a time, as some missions require players to wait for further instructions or events. Outside of missions, players can <a href="https://en.wikipedia.org/wiki/Nonlinear_gameplay">freely roam</a> the <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> and complete optional side missions. They begin in the borough of Portland, and unlocks Staunton Island and Shoreside Vale as they progress in the storyline.</p>
+
+<p>Players may run, jump or use vehicles to navigate the game world. In combat, <a href="https://en.wikipedia.org/wiki/Auto-aim">auto-aim</a> can be used as assistance against enemies. Should players take damage, their <a href="https://en.wikipedia.org/wiki/Health_(game_terminology)">health meter</a> can be fully regenerated through the use of health pick-ups. <a href="https://en.wikipedia.org/wiki/Body_armour">Body armour</a> can be used to absorb gunshots and explosive damage, but is used up in the process. When health is entirely depleted, gameplay stops and players <a href="https://en.wikipedia.org/wiki/Respawn">respawn</a> at the nearest hospital, at the expense of losing armour, weapons, and an amount of money.</p>
+
+<p>If players commit crimes while playing, the game's law enforcement agencies may respond as indicated by a "<a href="https://en.wikipedia.org/wiki/Fugitive">wanted</a>" meter in the <a href="https://en.wikipedia.org/wiki/HUD_(video_gaming)">head-up display</a> (HUD). On the meter, the displayed stars indicate the current wanted level (for example, at the maximum six-star level, efforts by law enforcement to incapacitate players become very aggressive). Law enforcement officers will search for players who leave the wanted vicinity. The wanted meter enters a <a href="https://en.wikipedia.org/wiki/Cooldown">cooldown</a> mode and eventually recedes when players are hidden from the officers' line of sight.</p>
+
+<p>The game lets players control the <a href="https://en.wikipedia.org/wiki/Muteness">mute</a> criminal Claude. Throughout the story, Claude meets various players from the criminal underworld. As players complete missions for different gangs and criminal organisations, fellow gang members will often defend players, while rival gang members will recognise players and subsequently shoot on sight. While free roaming the game world, players may engage in activities such as a <a href="https://en.wikipedia.org/wiki/Vigilante">vigilante</a> minigame, a <a href="https://en.wikipedia.org/wiki/Firefighting">firefighting</a> activity, a <a href="https://en.wikipedia.org/wiki/Paramedic">paramedic</a> service and a <a href="https://en.wikipedia.org/wiki/Taxi_cab">taxi cab</a> service. Completion of these activities grants players with context-specific rewards; for example, completing the vigilante mission allows players to <a href="https://en.wikipedia.org/wiki/Bribe">bribe</a> police after committing a crime.</p>
+
+<p>Players use <a href="https://en.wikipedia.org/wiki/Melee#Use_in_gaming">melee</a> attacks, firearms and explosives to fight enemies. The firearms include weapons such as the <a href="https://en.wikipedia.org/wiki/Micro_Uzi">Micro Uzi</a>, an <a href="https://en.wikipedia.org/wiki/M16_rifle">M16 rifle</a> and a <a href="https://en.wikipedia.org/wiki/Flamethrower">flamethrower</a>. The game's three-dimensional environment allows a <a href="https://en.wikipedia.org/wiki/First-person_(video_games)">first-person view</a> while aiming with the <a href="https://en.wikipedia.org/wiki/Sniper_rifle">sniper rifle</a>, <a href="https://en.wikipedia.org/wiki/Rocket_launcher">rocket launcher</a> and the M16 rifle. In addition, the game's combat was reworked to allow players to commit <a href="https://en.wikipedia.org/wiki/Drive-by_shooting">drive-by shootings</a> by facing sideways in a vehicle. The game gives players a wide variety of weapon options—they can be purchased from local <a href="https://en.wikipedia.org/wiki/Firearms_dealer">firearms dealers</a>, found on the ground, retrieved from dead enemies, or found around the city.</p>
+
+<h2>Plot</h2>
+
+<p>Small-time criminal Claude is betrayed and shot by his girlfriend Catalina (voiced by Cynthia Farrell) during a bank heist outside Liberty City. Claude is arrested but escapes during his transfer to prison when members of the <a href="https://en.wikipedia.org/wiki/Illegal_drug_trade_in_Colombia">Colombian Cartel</a> ambush his transport to abduct another prisoner. During his escape, Claude befriends explosives expert and fellow convict 8-Ball (<a href="https://en.wikipedia.org/wiki/Guru_(rapper)">Guru</a>), who shelters Claude and introduces him to the Leone <a href="https://en.wikipedia.org/wiki/American_Mafia">Mafia</a> family for work. Claude assists the Mafia with various operations, including winning a gang war against a local group of <a href="https://en.wikipedia.org/wiki/Triad_(organized_crime)">Triads</a>, earning him the respect of <a href="https://en.wikipedia.org/wiki/Crime_boss">Don</a> Salvatore Leone (<a href="https://en.wikipedia.org/wiki/Frank_Vincent">Frank Vincent</a>). After learning the Cartel are creating and selling a new street drug called SPANK to fund their expansion into Liberty City, Salvatore orders Claude to destroy their floating drug lab. Claude accomplishes this with 8-Ball's help.</p>
+
+<p>Salvatore later instructs Claude to deal with a minor problem, but his <a href="https://en.wikipedia.org/wiki/Trophy_wife">trophy wife</a> Maria (<a href="https://en.wikipedia.org/wiki/Debi_Mazar">Debi Mazar</a>), who took a liking to Claude, reveals it to be a set-up. Maria claims she lied to Salvatore about having an affair with Claude to make him jealous, and now Salvatore wants to kill him. Claude escapes to Staunton Island with Maria and her friend Asuka Kasen (Lianna Pai). After killing Salvatore to cut ties with the Mafia, Claude begins working for the <a href="https://en.wikipedia.org/wiki/Yakuza">yakuza</a>, led by Asuka and her brother Kenji (Les J.N. Mau). During this time, he also provides assistance to corrupt police inspector Ray Machowski (<a href="https://en.wikipedia.org/wiki/Robert_Loggia">Robert Loggia</a>), whom he eventually helps flee the city, and influential businessman Donald Love (<a href="https://en.wikipedia.org/wiki/Kyle_MacLachlan">Kyle MacLachlan</a>). Donald hires Claude to kill Kenji under the guise of a Cartel attack to start a gang war to allow Donald to obtain construction sites for his businesses. After the job's success, Claude carries out another task for Donald that leads him to encounter Catalina, now the leader of the Cartel, at a construction site. However, Catalina escapes after betraying and shooting her partner, Miguel (Al Espinosa).</p>
+
+<p>Asuka blames the Cartel for Kenji's death and seizes the construction site. The yakuza capture the wounded Miguel and torture him for information on Cartel operations in the city, allowing Claude to strike against them and hinder the Cartel. Enraged, Catalina murders both Asuka and Miguel and kidnaps Maria, demanding $500,000 for her release. Claude meets with her to pay the <a href="https://en.wikipedia.org/wiki/Ransom">ransom</a>, but Catalina deceives him again and traps him. Claude escapes, rescues Maria, and destroys the helicopter Catalina attempts to flee in, killing her. As Claude and Maria leave the scene, Maria begins to complain about the kidnapping, but is silenced by a gunshot.</p>
+
+<h2>Development</h2>
+
+<p>The core development team of <i>Grand Theft Auto III</i> consisted of about 23 people at <a href="https://en.wikipedia.org/wiki/DMA_Design">DMA Design</a> in <a href="https://en.wikipedia.org/wiki/Edinburgh">Edinburgh</a>, who worked closely with publisher <a href="https://en.wikipedia.org/wiki/Rockstar_Games">Rockstar Games</a> in New York City. The original <a href="https://en.wikipedia.org/wiki/Tech_demo">tech demo</a> was created on <a href="https://en.wikipedia.org/wiki/Sega">Sega</a>'s <a href="https://en.wikipedia.org/wiki/Dreamcast">Dreamcast</a> around the end of development on <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_2">Grand Theft Auto 2</a></i> (1999). Rockstar had been pressuring its teams to create a 3D open world, and the DMA group who developed <i><a href="https://en.wikipedia.org/wiki/Space_Station_Silicon_Valley">Space Station Silicon Valley</a></i> (1998) began working on a project separate from the <i>Grand Theft Auto 2</i> team. Alan Jack, a DMA support engineer, described it as combining <i><a href="https://en.wikipedia.org/wiki/Body_Harvest">Body Harvest</a></i>'s (1998) exploration with <i>Space Station Silicon Valley</i>'s city level.</p>
+
+<p>The team chose against using the <i>Grand Theft Auto</i> branding to avoid conflict with the <i>Grand Theft Auto 2</i> team and began developing their game as a <i><a href="https://en.wikipedia.org/wiki/Godzilla">Godzilla</a></i> project. After <a href="https://en.wikipedia.org/wiki/Take-Two_Interactive">Take-Two Interactive</a> acquired DMA from <a href="https://en.wikipedia.org/wiki/Infogrames">Infogrames</a> in September 1999, the <i>Space Station Silicon Valley</i> and <i>Grand Theft Auto 2</i> teams were combined. The combined team began developing <i>Grand Theft Auto III</i> for the Dreamcast, but shifted to the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> after four months. Technical director Obbe Vermeij said the shift was not due to hardware constraints, but because it became clear the Dreamcast was not commercially viable. He described the decision as disappointing, noting the DMA Design staff were big fans of <i><a href="https://en.wikipedia.org/wiki/Phantasy_Star_Online">Phantasy Star Online</a></i> (2000).</p>
+
+<p>During the Dreamcast phase, DMA Design developed city blocks with <a href="https://en.wikipedia.org/wiki/Brownstone">brownstones</a>, docks, and retail areas, alongside vehicles and pedestrians. By early 2001, the team had designed the city, cars and some weapons. Producer <a href="https://en.wikipedia.org/wiki/Leslie_Benzies">Leslie Benzies</a> described <i>Grand Theft Auto III</i> as a "crime simulation game". Rockstar offered <i>Grand Theft Auto III</i> to <a href="https://en.wikipedia.org/wiki/Microsoft_Game_Studios">Microsoft Game Studios</a> as an <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a> exclusive, but Microsoft declined due to its adult nature and poorly-performing predecessors. The game was released for the PlayStation 2 on 23 October 2001 in North America. When porting the game to <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, the team delayed it from the PlayStation 2 release in order to ensure quality, citing issues with the simultaneous platform release of previous <i>Grand Theft Auto</i> games. <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> published the game in Japan on 25 September 2003.</p>
+
+<h3>Design</h3>
+
+<p><i>Grand Theft Auto III</i> is the first 3D game in the series, using <a href="https://en.wikipedia.org/wiki/Criterion_Games">Criterion Games</a>'s <a href="https://en.wikipedia.org/wiki/RenderWare">RenderWare</a> <a href="https://en.wikipedia.org/wiki/Game_engine">game engine</a>. Executive producer <a href="https://en.wikipedia.org/wiki/Sam_Houser">Sam Houser</a> had always wanted the series to move to 3D, and DMA Design had experimented with 3D worlds in games like <i>Body Harvest</i> and <i>Space Station Silicon Valley</i>. With the release of the PlayStation 2, the team felt a large 3D world was possible. Art director Aaron Garbut felt other video games at the time "were a thing you played", wanting <i>Grand Theft Auto III</i> to be "a place you lived in". An <a href="https://en.wikipedia.org/wiki/Online_multiplayer">online multiplayer</a> mode was planned, but dropped due to time and resource limitations.</p>
+
+<p>When designing the game, the development team expanded upon concepts introduced in the previous <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto">Grand Theft Auto</a></i> games. Benzies said the intention was to recreate the "freedom and diversity" of the previous games in a "living, breathing 3D world", using the power of the PlayStation 2 to do so. The console's ability to use <a href="https://en.wikipedia.org/wiki/DVD">DVDs</a>, an improvement over the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a>'s limit to <a href="https://en.wikipedia.org/wiki/CD">CDs</a>, allowed the team to store more data, such as animations, music and environments. Despite this, the team found it difficult to fit the game into the PlayStation 2's 32 megabytes of <a href="https://en.wikipedia.org/wiki/RAM">RAM</a>, due to the scale. The game's size also created difficulties for the testers, due to the variety of options. Benzies felt creating a living city was the "underlying principle" of the game's concept during development. Sam Houser felt the game's 3D element allowed the "chemistry of the team [to come] together perfectly for the first time".</p>
+
+<p>A major difficulty the team encountered was converting all game elements into a fully 3D world, including the sound and radio stations, as well as designing and voicing the non-player characters, due to the amount that existed within the open world. Producer <a href="https://en.wikipedia.org/wiki/Dan_Houser">Dan Houser</a> said there were about 8,000 lines of recorded dialogue in the game, while audio programmer Raymond Usher estimated about 18,000. The basic technical elements of the game began to work together in mid-2000, with a carjacking mechanic prototype and stable <a href="https://en.wikipedia.org/wiki/Stream_(computing)">streaming</a> model. Streaming was initially intended to be reserved for music and map geometry, but other elements were eventually included when it became apparent to the team as more data was entered.</p>
+
+<p>When designing the game world, the team initially created a "hybrid city", which Dan Houser described as "a post industrial <a href="https://en.wikipedia.org/wiki/Midwest">Midwest</a> slash <a href="https://en.wikipedia.org/wiki/East_Coast_of_the_United_States">east coast</a> generic" city. Upon developing within this game world, the team realised basing the design on a real location meant "you have a lot of things you can say about it". As a result, they redesigned Liberty City, which had been previously featured in the first <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_(video_game)">Grand Theft Auto</a></i> (1997), basing it loosely on New York City. DMA Design worked with a team at Rockstar in New York for cultural references; the Rockstar team would regularly work long hours for full weeks, ensuring the references, such as in-game car manufacturers, were appropriate to the city.</p>
+
+<p>The city is broken into three islands: an industrial section representing <a href="https://en.wikipedia.org/wiki/Brooklyn">Brooklyn</a> and <a href="https://en.wikipedia.org/wiki/Queens">Queens</a>, a commercial centre resembling <a href="https://en.wikipedia.org/wiki/Manhattan">Manhattan</a>, and suburbs similar to <a href="https://en.wikipedia.org/wiki/New_Jersey">New Jersey</a>. The islands unlock as the story progresses; the team wanted players to "start out feeling poor and work to being richer". Dan Houser described Liberty City as a "hybrid of a generic American city", including <a href="https://en.wikipedia.org/wiki/Chicago">Chicago</a>, <a href="https://en.wikipedia.org/wiki/Pittsburgh">Pittsburgh</a>, <a href="https://en.wikipedia.org/wiki/Detroit">Detroit</a>, New York, and <a href="https://en.wikipedia.org/wiki/Philadelphia">Philadelphia</a>. He felt the parallel realism of the world allowed the team to make more social commentary. Sam Houser cited films and shows like <i><a href="https://en.wikipedia.org/wiki/Heat_(1995_film)">Heat</a></i> (1995) and <i><a href="https://en.wikipedia.org/wiki/The_Sopranos">The Sopranos</a></i> (1999–2007) as inspiration for the setting and wanted to emulate them in the game. He also cited the influence of <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda">The Legend of Zelda</a></i>, <i><a href="https://en.wikipedia.org/wiki/Super_Mario_64">Super Mario 64</a></i> and the 1990 film <i><a href="https://en.wikipedia.org/wiki/Goodfellas">Goodfellas</a></i>, describing <i>Grand Theft Auto III</i> as "a cross between a gangster movie and an RPG".</p>
+
+<p>The team developed the story and design simultaneously. Dan Houser said, "we use the story to expose the mechanics, and we use the mechanics to tell the story"; however, he found it difficult to create the narrative, as the game is so strongly focused on player freedom. He wanted the story to be more nuanced and interesting than the generic "rise and fall and rise again of a superhero bad guy". The game's script was also focused on mission objectives, attempting to implement high amounts of interactivity. Dan Houser felt each mission is "its own short story", and part of an "overarching story". He and co-writer James Worrall drew influence from films like <i><a href="https://en.wikipedia.org/wiki/The_Warriors_(film)">The Warriors</a></i>, <i><a href="https://en.wikipedia.org/wiki/Taxi_Driver">Taxi Driver</a></i>, <i><a href="https://en.wikipedia.org/wiki/Scarface_(1983_film)">Scarface</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Payback_(1999_film)">Payback</a></i>, and the depiction of mafiosi featured in <a href="https://en.wikipedia.org/wiki/Martin_Scorsese">Martin Scorsese</a>'s films; When writing the story, Dan Houser and Worrall regularly met with the designers, and filled a room with <a href="https://en.wikipedia.org/wiki/Post-it_note">post-it notes</a> to reconstruct the story components to shape the game.</p>
+
+<p>Many of the game characters were animated using <a href="https://en.wikipedia.org/wiki/Motion_capture">motion capture</a>, filmed at a rented studio at the <a href="https://en.wikipedia.org/wiki/Brooklyn_Navy_Yard">Brooklyn Navy Yard</a>, though this was limited by technical constraints. The character movement was also treated as being cinematic, though limited <a href="https://en.wikipedia.org/wiki/Polygon_(computer_graphics)">polygons</a> heavily inhibited this. Animating <a href="https://en.wikipedia.org/wiki/Non-player_character">non-player characters</a> entering and driving cars proved to be difficult for the team, due to the variety of vehicle designs. "It involved chaining together dozens of different animations and altering key frames in code", recalled software engineer <a href="https://en.wikipedia.org/wiki/Alan_Campbell_(writer)">Alan Campbell</a>. The team used varying camera angles when animating the game's cutscenes to evoke different emotions. For the voice acting, the team wanted "natural, subtle performances", which proved difficult as many of the actors "had in their head the idea that because video games are animated, their performances needed to be animated", explained motion capture director <a href="https://en.wikipedia.org/wiki/Navid_Khonsari">Navid Khonsari</a>.</p>
+
+<p>Claude is unnamed in the game, and his name is not officially revealed until his appearance in <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_San_Andreas">Grand Theft Auto: San Andreas</a></i> (2004). He is a <a href="https://en.wikipedia.org/wiki/Silent_protagonist">silent protagonist</a>, never speaking throughout his appearances; the team decided upon this primarily because it "did not seem like a major issue", due to the other challenges faced during development, and also partly to allow players to identify with the character, as he would be who the players want him to be. The developers did not have "any one single inspiration" for Claude; they liked the idea of a "strong, silent killer, who would be juxtaposed with all of these neurotic and verbose mobsters".</p>
+
+<p><i>Grand Theft Auto III</i> features about three and a half hours of in-game radio material. For the music, the team sought a broad diversity to recreate the real sensation of skipping through radio stations, reflecting the <a href="https://en.wikipedia.org/wiki/Mob_film">gangster movie</a> culture invoked by the game. The team used the talk radio stations to add character to the city and provide a "unique take on American life"; Sam Houser described it as "a very iconoclastic look at America". The team used real <a href="https://en.wikipedia.org/wiki/DJs">DJs</a> to portray those on the radio. In doing so, they wrote unusual dialogue for the DJs, seeking the effect of "high production values and absurd content". Music director Craig Conner assembled the assets of the radio station—music, advertisements, DJ dialogue, and station imaging.</p>
+
+<p>Chatterbox FM, one of the game's radio stations, is entirely <a href="https://en.wikipedia.org/wiki/Talk_radio">talk radio</a> hosted by <a href="https://en.wikipedia.org/wiki/Lazlow_Jones">Lazlow Jones</a>, who met Rockstar's managing director Terry Donovan in 2001 as they were both preparing to travel to Los Angeles for <a href="https://en.wikipedia.org/wiki/E3_2001">E3</a>. Donovan invited Jones to Rockstar's offices in Manhattan, where he met the development team, including Dan and Sam Houser and producer Jamie King, and they invited him to work on the game. The writing sessions took place at Dan Houser's apartment, and the entire process, including editing and recording, took around four to five months. With the station's guests and callers, the writers wanted to satirise American lifestyles, focusing on fictional stories as opposed to quickly outdated stories based on recent news. Jones found the conversations to be natural, having worked in radio for several years. The roles of the guests and callers were performed by Jones's friends and neighbours, including his father, and were recorded in New York.</p>
+
+<p>Prior to <i>Grand Theft Auto III</i>'s initial release, several modifications were made to the game. While changes are frequent during <a href="https://en.wikipedia.org/wiki/Game_development">game development</a>, these changes were noted to be around the time of the <a href="https://en.wikipedia.org/wiki/11_September_attacks">11 September attacks</a>, which led to speculation that the changes were motivated by the attacks. On 19 September 2001, Rockstar delayed the game's release by three weeks, citing the attacks as an influencing factor in the delay. "Everyone had someone who had an uncle or brother [who was impacted by the attack]", said <a href="https://en.wikipedia.org/wiki/Paul_Eibeler">Paul Eibeler</a>, then president of Take-Two Interactive.</p>
+
+<p>One of the changes made shortly after the 9/11 attacks was the colour scheme of the <a href="https://en.wikipedia.org/wiki/Police_cars">police cars</a>. Originally blue with white stripes, resembling the <a href="https://en.wikipedia.org/wiki/New_York_City_Police_Department">New York City Police Department</a>, it was changed to a black-and-white design common among several police departments in the United States, such as <a href="https://en.wikipedia.org/wiki/Los_Angeles_Police_Department">Los Angeles</a> and <a href="https://en.wikipedia.org/wiki/San_Francisco_Police_Department">San Francisco</a>. Other changes included altering the flight path of a plane to avoid appearing to fly into or behind a skyscraper and removing a mission referencing terrorists, as well as some changes to pedestrian dialogue and talk radio. Another cut to the game was the character of Darkel, a revolutionary urchin who vowed to bring down the city's economy. When references to Darkel were found in the game's code, speculation arose that he was related to 9/11, but Dan Houser explained the character had been cut "months before [release]". There were reports and previews stating the game featured schoolchildren as pedestrians prior to release, although Rockstar dismissed such rumours as "nonsense".</p>
+
+<p>Rockstar stated the game was "about 1% different" after 9/11, and the biggest change was the cover art. They felt the game's original cover, which was still used for its release in Europe, was "too raw" after 9/11, and it was changed to what became the "signature style" of the series. Sam Houser said the cover was designed in an evening and was instantly preferred over the original cover. The cover was inspired by the movie posters for 1960s films, such as <i><a href="https://en.wikipedia.org/wiki/The_Thomas_Crown_Affair_(1968_film)">The Thomas Crown Affair</a></i> (1968).</p>
+
+<h2>Reception</h2>
+
+<h3>Critical response</h3>
+
+<p><i>Grand Theft Auto III</i> was released to critical acclaim. <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> calculated an average score of 97 out of 100, indicating "universal acclaim", based on 56 reviews. It is tied with <i><a href="https://en.wikipedia.org/wiki/Tony_Hawk's_Pro_Skater_3">Tony Hawk's Pro Skater 3</a></i> as the highest-rated PlayStation 2 game on the site and tied with a number of others as the sixth-highest-rated game overall. Reviewers liked the game's sound, gameplay, and open world design, though some criticism was directed at the controls. Tom Bramwell of <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> called <i>Grand Theft Auto III</i> "a luscious, sprawling epic", and <i><a href="https://en.wikipedia.org/wiki/Official_U.S._PlayStation_Magazine">Official PlayStation Magazine</a></i> named it "the most innovative, outlandish, brilliant video game". <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i>'s <a href="https://en.wikipedia.org/wiki/Jeff_Gerstmann">Jeff Gerstmann</a> described the game as "an incredible experience that shouldn't be missed by anyone"; <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i>'s Doug Perry named it "one of the best titles of the year, on PlayStation 2, or on any system".</p>
+
+<p>Many reviewers found the 3D graphics a welcome change from the 2D of the previous games. <i>GameSpot</i>'s Gerstmann particularly praised the character and vehicle models, and the overall texture quality of the city. <i><a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a></i>'s Andrei Alupului found the graphics "really rather impressive", describing the car models as "greatly improved" over those in <i><a href="https://en.wikipedia.org/wiki/Midnight_Club">Midnight Club</a></i>. <i>Eurogamer</i>'s Bramwell considered the graphics "generally pleasant to look at", but considered it inferior to games like <i><a href="https://en.wikipedia.org/wiki/Gran_Turismo_3">Gran Turismo 3</a></i> and <i><a href="https://en.wikipedia.org/wiki/Ico">Ico</a></i>. Justin Leeper of <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> described game world as "stunning in scope and detail", and Perry of <i>IGN</i> found it to be "on a scale that's truly epic". <i><a href="https://en.wikipedia.org/wiki/Game_Revolution">Game Revolution</a></i>'s Ben Silverman called the city a "technological marvel ... that captures the essence of gritty city life in amazing detail".</p>
+
+<p><i>IGN</i>'s Perry considered the game's sound "unbelievably and meticulously delivered", particularly praising the soundtrack, voice acting and sound design, stating it was "really approached as if it were done for a movie". <i>Eurogamer</i>'s Bramwell echoed similar remarks, describing the city sounds as "perfect" and the soundtrack as "monstrous". The sound was described as "terrific" by <i>GameSpot</i>'s Gerstmann and <i>Game Revolution</i>'s Silverman, and <i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a></i> appreciated the subtlety of the in-game radio stations. <i><a href="https://en.wikipedia.org/wiki/AllGame">AllGame</a></i>'s Scott Alan Marriott named the music "the true star" of the game.</p>
+
+<p>Reviewers considered the style of the game's missions to be a welcoming departure from those in previous games. <i>1UP.com</i> described the missions as "wonderfully creative", while <i><a href="https://en.wikipedia.org/wiki/GamesMaster_(magazine)">GamesMaster</a></i> appreciated the diversity. <i>IGN</i>'s Perry similarly appreciated the variety and scale of the missions, and praised the amount of available side missions. <i>GameSpy</i>'s Alupului described the game's story as "well-paced" and "coherent", featuring plot elements akin to a mob film. <i>GameSpot</i>'s Gerstmann found the missions entertaining and challenging, but noted exploring the game world also offers "a great deal of fun" to players.</p>
+
+<p>Reactions to the game's controls were mixed. Alupului of <i>GameSpy</i> found the game "controls beautifully", both while driving and on-foot. <i>Game Revolution</i>'s Silverman identified the control issues as the game's only flaw, although praised the responsiveness of the driving mechanics. Matt Helgeson of <i>Game Informer</i> similarly described the driving as "great", but noted "clunky" combat. <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i>'s Four-Eyed Dragon found the cars simple to manoeuvre. <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> described the game's combat as "an awkward system that stymies play". <i>1UP.com</i> noted particular flaws in the targeting system, explaining it "often focuses on the wrong guy".</p>
+
+<h4>Windows version</h4>
+
+<p>When <i>Grand Theft Auto III</i> was released for Windows in May 2002, it received similar acclaim. Metacritic calculated an average score of 93 out of 100, indicating "universal acclaim", based on 20 reviews; it is the highest-rated 2002 Windows game on Metacritic. Reviewers liked the visual enhancements and control improvements, but criticised the port for its demanding system requirements.</p>
+
+<p>The in-game features and controls in the port were generally well received. <i>IGN</i>'s Tal Blevins praised the higher precision of the mouse controls, finding the aiming mechanic more precise. <i>GameSpot</i>'s <a href="https://en.wikipedia.org/wiki/Erik_Wolpaw">Erik Wolpaw</a> also commended the mouse controls, but disapproved the replay system, particularly due to the lack of options with timing and camera controls. <i><a href="https://en.wikipedia.org/wiki/X-Play">Extended Play</a></i>'s Andrew Bub appreciated the addition of a custom radio station, as well as the availability of custom skins. Daniel Morris of <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i> praised the gameplay tweaks provided by the port but criticised the lack of major additional features, such as an overhead map of the in-game city.</p>
+
+<p>The port's visuals received a positive response from reviewers. <i>GameSpot</i>'s Wolpaw praised the port's reworked textures but criticised the frequent <a href="https://en.wikipedia.org/wiki/Draw_distance">popup</a> and the advanced system requirements. <i>IGN</i>'s Blevins similarly criticised the necessity of an advanced system for stable play, but ultimately felt the port looks "a bit nicer" than the original game. <i>GameSpy</i>'s Sal Accardo felt the port "looks much sharper" than the PlayStation 2 version, though noted some "choppy" animations. <i>Extended Play</i>'s Bub mentioned the advanced settings resulted in slowdown and <a href="https://en.wikipedia.org/wiki/Crash_(computing)">crashes</a>. <i>Game Informer</i>'s Matt Helgeson noticed little difference between the visuals of the original and the port.</p>
+
+<h4>Mobile version</h4>
+
+<p>When <i>Grand Theft Auto III</i> was released to mobile devices in December 2011, it received generally positive reviews. Metacritic calculated an average score of 80 out of 100, based on 26 reviews. Reviewers liked the enhanced visuals, but criticism was directed at the touchscreen controls.</p>
+
+<p><i>IGN</i>'s Peter Eykemans commended the port's smoother textures, especially condensed on a mobile screen, while <i><a href="https://en.wikipedia.org/wiki/Destructoid">Destructoid</a></i>'s <a href="https://en.wikipedia.org/wiki/James_Stephanie_Sterling">James Stephanie Sterling</a> noted improvements in the character and vehicle models. Mark Walton of <i>GameSpot</i> wrote the game runs well on high-end devices like the <a href="https://en.wikipedia.org/wiki/Motorola_Xoom">Motorola Xoom</a> and <a href="https://en.wikipedia.org/wiki/Samsung_Galaxy_S_II">Samsung Galaxy S II</a>, but noticed significant <a href="https://en.wikipedia.org/wiki/Frame_rate">frame rate</a> and texture issues on the <a href="https://en.wikipedia.org/wiki/Xperia_Play">Xperia Play</a>. <i><a href="https://en.wikipedia.org/wiki/Pocket_Gamer">Pocket Gamer</a></i>'s Mark Brown identified the game's short draw distance leading to sudden popup, although still found the models and textures "have been given a tune-up" in the port.</p>
+
+<p>The touchscreen controls received a mixed response. <i>Eurogamer</i>'s Dan Whitehead appreciated the driving mechanics, but felt moving on-foot is "a flaky way of navigating" the world, and criticised the "clumsy" shooting mechanics as most of the guns cannot be manually targeted. <i>IGN</i>'s Eykemans felt the controls "make half the experience frustrating", and <i>Destructoid</i>'s Sterling described them as "by far the biggest barrier toward enjoying" the port. Brown of <i>Pocket Gamer</i> found the touchscreen "hasn't hindered [the game] too drastically", commending simple movement and "effortless" driving mechanics. Some critics identified better controls upon the use of external gamepads, but felt they hinder the game's portability.</p>
+
+<p><i>Grand Theft Auto III</i> received multiple nominations and awards from <a href="https://en.wikipedia.org/wiki/Gaming_publications">gaming publications</a>. It was awarded <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a> at the 2nd <a href="https://en.wikipedia.org/wiki/Game_Developers_Choice_Awards">Game Developers Choice Awards</a>, and from GameSpot and GameSpy. It was named the Best PlayStation 2 Game by <i>Game Revolution</i>, <i>GameSpot</i>, <i>GameSpy</i>, and <i>IGN</i>. It also won Best Action Game from <i>Game Revolution</i>, <i>GameSpot</i>, and <i>IGN</i>; Most Innovative from <i>GameSpot</i>; and Excellence in Game Design at the Game Developers Choice Awards. <i>GameSpy</i> also awarded the game Most Offensive, Best Use of Radio, and tied for Best Artificial Intelligence. It won the Global Award at the 7th <a href="https://en.wikipedia.org/wiki/CESA_Game_Awards">CESA Game Awards</a> in 2003 and an Award for Excellence at the 8th CESA Game Awards in 2004. At the <a href="https://en.wikipedia.org/wiki/5th_Annual_Interactive_Achievement_Awards">5th Annual Interactive Achievement Awards</a>, <i>Grand Theft Auto III</i> won <a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Game_Design">Outstanding Achievement in Game Design</a> and <a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Technical_Achievement">Outstanding Achievement in Game Play Engineering</a>, and was nominated for <a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Action_Game_of_the_Year">Console Action/Adventure Game of the Year</a>. The following year at the <a href="https://en.wikipedia.org/wiki/6th_Annual_Interactive_Achievement_Awards">6th Annual Interactive Achievement Awards</a>, the Windows version won Computer Action/Adventure Game of the Year and was nominated for Outstanding Innovation in Computer Gaming.</p>
+
+<h2>Sales</h2>
+
+<p>In the United States, <i>Grand Theft Auto III</i> was the highest-selling game of 2001, selling over two million units by February 2002. The game was also the second-best-selling game of 2002, only behind its sequel, <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_Vice_City">Grand Theft Auto: Vice City</a></i>. Take-Two stock significantly increased following the game's launch, and the game was included in PlayStation's <a href="https://en.wikipedia.org/wiki/Greatest_Hits_(PlayStation)">Greatest Hits</a> selection. Within a year of release, the game had sold six million copies and generated over US$250 million in revenue; by January 2003, it had sold seven million and generated over US$350 million. In the United States, the game had sold 5.35 million units by June 2004, and 6.55 million units by December 2007. The Windows version accounted for 420,000 sales and $16.9 million in earnings by August 2006 in the United States, where it was the 34th-best-selling computer game between January 2000 and August 2006.</p>
+
+<p>In Japan, <i>Grand Theft Auto III</i> sold around 75,000 copies in its first day, 120,000 in its first week, and roughly 300,000 by December 2003. The number rose above 350,000 copies by January 2008. In Europe, over a million copies of the game were reportedly sold by December 2001. The game earned a "Diamond" award in the United Kingdom, indicating over one million sales; it was the first game to receive this award in the region. The game became one of the <a href="https://en.wikipedia.org/wiki/Best-selling_PlayStation_2_games">best-selling PlayStation 2 games</a> with 11.6 million copies sold, and sold 14.5 million units overall by March 2008.</p>
+
+<h2>Controversies</h2>
+
+<p><i>Grand Theft Auto III</i> generated several controversies. <i>GameSpy</i> awarded it "Most Offensive Game of the Year"; calling it "absolutely reprehensible", they wrote the game rewards players for "causing mayhem" and "killing innocent people by the dozen", questioning its appropriateness. The notoriety led American retailer <a href="https://en.wikipedia.org/wiki/Wal-Mart">Wal-Mart</a> to check identification of purchasers who appeared under the age of 17 when purchasing mature games. In an essay, assistant professor Shira Chess identified the lack of consequence to player violence due to the ability to respawn upon death or incarceration, and found it denies the "reality of mortality and simultaneously [forces] it on players". Benzies claimed the violence was intended as comedic and the game is "not meant to be taken seriously", and Dan Houser said the team was conscious of the offence the game would attract, but "never marketed it in a way that exploited that".</p>
+
+<p>The game allows players to participate in sexual activities with prostitutes and murder them to reclaim the payment, which was met with widespread controversy. The game also received some backlash for its depiction of crime and allowing violence against police officers. Psychologist <a href="https://en.wikipedia.org/wiki/David_Walsh_(psychologist)">David Walsh</a> of the <a href="https://en.wikipedia.org/wiki/National_Institute_on_Media_and_the_Family">National Institute on Media and the Family</a> said the game "glamorizes antisocial and criminal activity", and "the purpose of the game is to perpetrate crime". In response, <i><a href="https://en.wikipedia.org/wiki/Kotaku">Kotaku</a></i> writer Owen Good wrote the game does not reward players for "proficiency at crime, no matter how much it is accused of doing so". Joanna Weiss of <i><a href="https://en.wikipedia.org/wiki/The_Boston_Globe">The Boston Globe</a></i> noted the "adrenaline" players feel when committing crimes in the game, excusing its violence due to its mature classification. In January 2002, the <a href="https://en.wikipedia.org/wiki/National_Organization_for_Women">National Organization for Women</a> called for Rockstar and Take-Two to withdraw the game from sale as it "encourages violence and the degradation of women". <a href="https://en.wikipedia.org/wiki/Matt_Richtel">Matt Richtel</a> of <i><a href="https://en.wikipedia.org/wiki/The_New_York_Times">The New York Times</a></i> wrote the activities within the game "crossed the line into bad taste".</p>
+
+<p><i>Grand Theft Auto III</i> was initially released in Australia with an MA15+ classification, but the <a href="https://en.wikipedia.org/wiki/Australian_Classification_Board">Office of Film and Literature Classification</a> (OFLC) later <a href="https://en.wikipedia.org/wiki/List_of_banned_video_games_in_Australia">banned it</a> after re-reviewing, citing its sexual content and violence against prostitutes. After Take-Two appealed, the OFLC reaffirmed its ban on 11 December 2001, having reanalysed the game alongside a forensic psychologist. Take-Two recalled the game in Australia and Rockstar made appropriate changes; a modified version was released with an MA15+ classification in January 2002, removing instances of sexual acts with prostitutes. The game was re-rated with an R18+ classification in September 2019, citing "sexual activities related to incentives and rewards". In Japan, the game was designated "harmful" for children in <a href="https://en.wikipedia.org/wiki/Kanagawa_Prefecture">Kanagawa Prefecture</a> in June 2005, essentially removing it from open shelves; Capcom criticised the decision and considered legal action but did not pursue further, and the designation ultimately led to a sales increase.</p>
+
+<p>On 25 June 2003, teenage stepbrothers William and Josh Buckner shot at motorists, killing Aaron Hamel and wounding Kimberly Bede. In statements to investigators, the perpetrators claimed their actions were inspired by <i>Grand Theft Auto III</i>. In response, on 20 October 2003, the families of Hamel and Bede filed a US$246 million lawsuit against Rockstar, Take-Two, <a href="https://en.wikipedia.org/wiki/Sony_Computer_Entertainment">Sony Computer Entertainment</a> and Wal-Mart. Rockstar and Take-Two filed for dismissal of the lawsuit, stating in <a href="https://en.wikipedia.org/wiki/United_States_district_court">United States district court</a> on 29 October 2003 that the "ideas and concepts", and the "purported psychological effects" of the perpetrators, are protected by the <a href="https://en.wikipedia.org/wiki/First_Amendment">First Amendment</a>'s free-speech clause. <a href="https://en.wikipedia.org/wiki/Jack_Thompson_(activist)">Jack Thompson</a>, the lawyer representing the victims, denied Rockstar's claims and attempted to move the lawsuit into a state court for consideration under Tennessee's consumer protection act.</p>
+
+<h2>Legacy</h2>
+
+<p><i>Grand Theft Auto III</i> has been frequently included among the <a href="https://en.wikipedia.org/wiki/Greatest_video_games_of_all_time">greatest video games of all time</a>. In 2007, <i>GamePro</i> called <i>Grand Theft Auto III</i> the most important video game of all time, explaining the "game's open-ended gameplay elements have revolutionized the way all video games are made". Similarly, <i>IGN</i> ranked the game among the "Top 10 Most Influential Games", and <i>GameSpot</i> listed it among the greatest games of all time. In 2009, <i>Game Informer</i> wrote that <i>Grand Theft Auto III</i> "changed the gaming landscape forever with its immersive open world sandbox", and in 2016, <i><a href="https://en.wikipedia.org/wiki/GamesRadar+">GamesRadar+</a></i> named it the "most important game" of the 2000s. <i><a href="https://en.wikipedia.org/wiki/Time_(magazine)">Time</a></i> named it one of the greatest video games of all time in November 2012 and August 2016. The game was selected as part of the <a href="https://en.wikipedia.org/wiki/Game_On_(exhibition)">Game On</a> touring exhibition, demonstrating some of the game's development plans and artwork. In 2016, <a href="https://en.wikipedia.org/wiki/The_Strong_National_Museum_of_Play">The Strong National Museum of Play</a> inducted <i>Grand Theft Auto III</i> to its <a href="https://en.wikipedia.org/wiki/World_Video_Game_Hall_of_Fame">World Video Game Hall of Fame</a>.</p>
+
+<p><i>Grand Theft Auto III</i> is considered to have a leading role in the popularisation of <a href="https://en.wikipedia.org/wiki/Sandbox_game">sandbox games</a>, inspiring those such as <i><a href="https://en.wikipedia.org/wiki/Crackdown_(video_game_series)">Crackdown</a></i>, <i><a href="https://en.wikipedia.org/wiki/Mafia_(series)">Mafia</a></i>, <i><a href="https://en.wikipedia.org/wiki/Saints_Row">Saints Row</a></i>, <i>True Crime</i>, and <i><a href="https://en.wikipedia.org/wiki/Watch_Dogs">Watch Dogs</a></i>. The term "<a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_clone"><i>Grand Theft Auto</i> clone</a>" is frequently used to describe subsequent video games released with similar open-ended gameplay as <i>Grand Theft Auto III</i>. While previous video games used open world design, including earlier <i>Grand Theft Auto</i> games, <i>Grand Theft Auto III</i> took this gameplay foundation and expanded it into a 3D world, offering an unprecedented variety of minigames and side-missions. Journalist and consultant Tom Bramwell felt the game did not invent a lot of its gameplay features, but "brought them all together". Due to its greater success over its predecessors, it is credited with popularising the open-world genre; Dan Houser felt the game made it "one of the most vibrant genres today", and Garbut felt it led to the complexities of Rockstar's future open world games, including the later <i>Grand Theft Auto</i> games and <i><a href="https://en.wikipedia.org/wiki/Red_Dead_Redemption_2">Red Dead Redemption 2</a></i> (2018). <i>IGN</i>'s Jack Harwood thought the game's talk radio station inspired similar inclusions in other open world games, such as <i><a href="https://en.wikipedia.org/wiki/Mafia_III">Mafia III</a></i> (2016) and <i><a href="https://en.wikipedia.org/wiki/Watch_Dogs:_Legion">Watch Dogs: Legion</a></i> (2020).</p>
+
+<p>The game also led the trend of mature video games; Dan Houser felt it allowed other developers to create violent shooters. <a href="https://en.wikipedia.org/wiki/Hal_Halpin">Hal Halpin</a>, president of the <a href="https://en.wikipedia.org/wiki/Entertainment_Consumers_Association">Entertainment Consumers Association</a>, described <i>Grand Theft Auto III</i> as the "lightning rod for the violence-in-games debate". <i><a href="https://en.wikipedia.org/wiki/Metro_(magazine)">Metro</a></i>'s Roger Hargreaves wrote it "emboldened a whole new wave of games that were ... fixated with violence [and] gang culture". Greg Ford of <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> felt the game allowed the medium to handle mature subject matter in a more serious manner than previously perceived, and noted the improvement of video game classification as a result of its controversy. King said video games at the time were often associated with children or nerds, and the development team "wanted the rest of the entertainment industry to pay attention" and understand the medium could also contain mature, adult content.</p>
+
+<p>Following the success, Rockstar developed further games in the series. <i>Vice City</i> and <i>San Andreas</i> are set in their titular locations in 1986 and 1992, respectively. <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_Advance">Grand Theft Auto Advance</a></i> (2004) is set in Liberty City roughly a year before the events of <i>Grand Theft Auto III</i>. <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_Liberty_City_Stories">Grand Theft Auto: Liberty City Stories</a></i> (2005) takes place three years before the events of <i>Grand Theft Auto III</i> in the same rendition of Liberty City. A completely redesigned version of the city was later used in <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_IV">Grand Theft Auto IV</a></i> (2008), <i><a href="https://en.wikipedia.org/wiki/The_Lost_and_Damned">The Lost and Damned</a></i> (2009), <i><a href="https://en.wikipedia.org/wiki/The_Ballad_of_Gay_Tony">The Ballad of Gay Tony</a></i> (2009), and <i><a href="https://en.wikipedia.org/wiki/Chinatown_Wars">Chinatown Wars</a></i> (2009).</p>
+
+<h3>Ports</h3>
+
+<p><i>Grand Theft Auto III</i> was released on 21 May 2002 for Windows, supporting higher screen resolutions and draw distance, and featuring more detailed textures. Analysts believed the game would eventually release on <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a>, though it never materialised. <i>Grand Theft Auto III</i> was bundled with <i>Vice City</i> in the compilation <i>Grand Theft Auto: Double Pack</i>, released on the Xbox on 4 November 2003 in North America and 2 January 2004 in Europe. The Xbox version featured a custom soundtrack support as well as improved audio, <a href="https://en.wikipedia.org/wiki/Model_(computer_games)">polygon models</a>, and reflections over the previous ports. <i>Double Pack</i> was later bundled with <i>San Andreas</i> as part of <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_The_Trilogy">Grand Theft Auto: The Trilogy</a></i>, released in October 2005. <i>The Trilogy</i> was also released for <a href="https://en.wikipedia.org/wiki/OS_X">OS X</a> on 12 November 2010. On 15 December 2011, for the game's tenth anniversary, War Drum Studios ported the game to <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> and <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a>; this port is almost identical to the Windows version, with the addition of enhanced models and textures and touchscreen controls. This port was also released on <a href="https://en.wikipedia.org/wiki/Fire_OS">Fire OS</a> on 15 May 2014. A <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> version was released on 25 September 2012 via the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a>. The original PlayStation 2 version was released for the <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> as a <a href="https://en.wikipedia.org/wiki/PS2_Classics">PS2 Classics</a> game, on 5 December 2015. In 2012, a <a href="https://en.wikipedia.org/wiki/Modding_in_Grand_Theft_Auto">modding</a> community under the name RAGE Classic Team ported the map over to <i>Grand Theft Auto IV</i>, named <i>Grand Theft Auto III: RAGE Classic</i>.</p>
+
+<p>An enhanced version of <i>The Trilogy,</i> <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto:_The_Trilogy_–_The_Definitive_Edition">The Definitive Edition</a></i>, including <i>Grand Theft Auto III</i>, was released for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, PlayStation 4, <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a>, Windows, <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a> on 11 November 2021, to celebrate the game's twentieth anniversary, and for Android and iOS on 14 December 2023. Existing versions of the game were removed from digital retailers in preparation for <i>The Definitive Edition</i>, but later restored as a bundle on the Rockstar Store.</p>
+
+<p>A core team of six fans <a href="https://en.wikipedia.org/wiki/Reverse-engineered">reverse-engineered</a> the game and released it as an <a href="https://en.wikipedia.org/wiki/Executable">executable</a> in April 2020, having worked on it since 2016. The project, <i>re3</i>, allows the game to be unofficially ported to platforms such as Nintendo Switch, <a href="https://en.wikipedia.org/wiki/PlayStation_Vita">PlayStation Vita</a>, and <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>. Take-Two issued a <a href="https://en.wikipedia.org/wiki/DMCA_takedown">DMCA takedown</a> for the project in February 2021, though it was restored in June after the team filed a counter-notice. In September 2021, Take-Two filed a lawsuit in California against the programmers, asserting the projects constitute copyright infringement. In July 2024, fan developer SKMP started creating a Dreamcast port, seen as a significant undertaking due to the console's limited memory; it was released in December.</p>
+
+<h2>Literature</h2>
+
+<ul>
+  <li>Chess, Shira (2006). "Playing the Bad Guy: Grand Theft Auto in the Panopticon". In <a href="https://en.wikipedia.org/wiki/Nate_Garrelts">Garrelts, Nate</a> (ed.). <i>The Meaning and Culture of Grand Theft Auto</i>. <a href="https://en.wikipedia.org/wiki/McFarland_&amp;_Company">McFarland &amp; Company</a>. pp. 80–90. <a href="https://en.wikipedia.org/wiki/ISBN_(identifier)">ISBN</a> <a href="https://en.wikipedia.org/wiki/Special:BookSources/978-0-7864-2822-9">978-0-7864-2822-9</a>.</li>
+  <li>Crookes, David (November 2013). "The Making of Grand Theft Auto III". <i><a href="https://en.wikipedia.org/wiki/Retro_Gamer">Retro Gamer</a></i> (122). United States: <a href="https://en.wikipedia.org/wiki/Imagine_Publishing">Imagine Publishing</a>: 58–83.</li>
+  <li><a href="https://en.wikipedia.org/wiki/DMA_Design">DMA Design</a> (2001). <i>Grand Theft Auto III Game Manual</i>. <a href="https://en.wikipedia.org/wiki/Rockstar_Games">Rockstar Games</a>.</li>
+  <li><a href="https://en.wikipedia.org/wiki/David_Kushner_(writer)">Kushner, David</a> (3 April 2012). <a href="https://en.wikipedia.org/wiki/Jacked:_The_Outlaw_Story_of_Grand_Theft_Auto"><i>Jacked: The Outlaw Story of Grand Theft Auto</i></a>. <a href="https://en.wikipedia.org/wiki/Turner_Publishing_Company">Turner Publishing Company</a>. <a href="https://en.wikipedia.org/wiki/ISBN_(identifier)">ISBN</a> <a href="https://en.wikipedia.org/wiki/Special:BookSources/978-0-4709-3637-5">978-0-4709-3637-5</a>.</li>
+  <li>"The Top 200 Games of All Time". <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>. No. 200. December 2009. pp. 44–79. <a href="https://en.wikipedia.org/wiki/ISSN_(identifier)">ISSN</a> <a href="https://search.worldcat.org/issn/1067-6392">1067-6392</a>. <a href="https://en.wikipedia.org/wiki/OCLC_(identifier)">OCLC</a> <a href="https://search.worldcat.org/oclc/27315596">27315596</a>.</li>
+</ul>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
