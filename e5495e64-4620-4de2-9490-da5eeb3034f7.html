@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Need for Speed™: Underground 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('e5495e64-4620-4de2-9490-da5eeb3034f7/79168549-ef7a-4026-8c27-3aa7b32b716f.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="e5495e64-4620-4de2-9490-da5eeb3034f7/239423f8-81c6-476e-a09b-001da3d630fc.png"/> Need for Speed™: Underground 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="e5495e64-4620-4de2-9490-da5eeb3034f7/ffde46e9-abe6-43f8-acf2-21607ca9fc6a.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 2:50:53</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 3:30:55</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/15/2004">11/15/2004</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-77">77</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-EA Black Box">EA Black Box</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Ideaworks Game Studio">Ideaworks Game Studio</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Pocketeers">Pocketeers</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Team Fusion">Team Fusion</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Underground_2" target="_blank">Wikipedia</a><br/><a href="https://www.mobygames.com/game/need-for-speed-underground-2" target="_blank">MobyGames</a><br/><a href="https://www.mobygames.com/game/gameboy-advance/need-for-speed-underground-2_" target="_blank">MobyGames</a><br/><a href="https://www.mobygames.com/game/psp/need-for-speed-underground-rivals" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[HLTB] 20 to 30 hours">[HLTB] 20 to 30 hours</a><br/><a href="#quicklink-[People] composer: Tom Salta">[People] composer: Tom Salta</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Need for Speed: Underground 2</b></i> is a 2004 <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing video game</a> developed by <a href="https://en.wikipedia.org/wiki/EA_Black_Box">EA Black Box</a> and published by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a>. It is the eighth installment in the <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed">Need for Speed</a></i> series and the direct sequel to <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Underground">Need for Speed: Underground</a></i>. It was developed for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a>. <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> and <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> versions were developed by Pocketeers, and a <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> version, titled <i><b>Need for Speed: Underground Rivals</b></i>, was developed by Team Fusion. Another version for <a href="https://en.wikipedia.org/wiki/Mobile_game">mobile phones</a> was also developed by <a href="https://en.wikipedia.org/wiki/Ideaworks_Game_Studio">Ideaworks Game Studio</a>. Like its predecessor, it was also commercially successful, selling around 11 million copies worldwide and breaking sales records in the United Kingdom.</p>
+
+<p>The game entails <a href="https://en.wikipedia.org/wiki/Import_scene">tuning cars</a> for <a href="https://en.wikipedia.org/wiki/Street_racing">street races</a>, resuming the <i>Need for Speed: Underground</i> storyline. <i>Need for Speed: Underground 2</i> provides several new features, such as broader customization, new methods of selecting races, set in a city known as Bayview. The game stars <a href="https://en.wikipedia.org/wiki/Brooke_Burke">Brooke Burke</a> as the voice of Rachel Teller - who guides the player throughout the game - and <a href="https://en.wikipedia.org/wiki/David_Palffy">David Palffy</a> as Caleb Reece, the game's main antagonist. The game's storyline is presented in a comic book strip. The Nintendo DS port introduces a new feature in which the player can design custom decals to adorn any vehicle in the game.</p>
+
+<h2>Plot</h2>
+
+<p>The story takes place after the initial events of <i>Underground</i>, shortly after the player beats Eddie and his <a href="https://en.wikipedia.org/wiki/Street_racing">street racing</a> gang <i>The Eastsiders</i> in Olympic City, along with Melissa. Revered as the best street racer in Olympic City, the player wins a <a href="https://en.wikipedia.org/wiki/Street_racing">race</a> while driving a blue <a href="https://en.wikipedia.org/wiki/Nissan_Skyline_GT-R">Nissan Skyline GT-R</a> and promptly receives a call from an unidentified individual with an "invitation" to join his team, followed by a threat explicitly disclaiming that he is not "taking no for an answer". Angered, the player immediately hangs up the call and drives to a celebratory party; while talking to Samantha on the phone, they are blinded and ambushed by a <a href="https://en.wikipedia.org/wiki/Hummer_H2">Hummer H2</a> from a dark alley, which rams and wrecks their Skyline. A man with a scythe tattoo on his hand calls to confirm that he "took care of a problem".</p>
+
+<p>Six months later, the player boards a plane to the fictional city of Bayview with a good luck note from Samantha, referring to her friend Rachel Teller, as well as being given a car key bearing the name 'Rachel'. The player arrives in Bayview and is contacted by Rachel, who has left them her <a href="https://en.wikipedia.org/wiki/Nissan_350Z">Nissan 350Z</a> at the airport car lot, asking to meet at a <a href="https://en.wikipedia.org/wiki/Car_dealership">car dealership</a>; the player can ignore these instructions and race in three events and outruns before Rachel calls demanding her car back, after which no more races will spawn. At the dealership, he buys his first car using the money provided by their insurance company over the totaled Nissan Skyline, and begins to race again.</p>
+
+<p>Rachel becomes the key contact within Bayview. She explains the layout of Bayview street racing scene, introducing the sponsorship mechanics, the <i>Underground Racing League</i> (URL) and actively aids the player afterwards by giving them tips on driving, secret shops, important events and sometimes hidden events. The player soon gains fame and obtains <a href="https://en.wikipedia.org/wiki/Sponsor_(commercial)">sponsorship deals</a> from winning races - this draws the attention of Caleb Reece and his racing crew <i>The Wraiths</i>.</p>
+
+<p>Rachel reveals to the player that Caleb is attempting to take control of the racing scene in Bayview by manipulating sponsorship deals in his favor, threatening the player's livelihood and Rachel's liaison with the sponsors. Caleb attempts to have the player lose an <i>Underground Racing League</i> tournament by placing Nikki Morris, a Wraith member, in the same tournament as the player. This backfires, and Nikki leaves the Wraiths after Caleb berates her for losing; she then joins Rachel and the player's side. Nikki warns them of the consequences of Caleb's plan if he takes over the city's street racing scene. Caleb is revealed to be the driver of the Hummer that wrecked the player's car in Olympic City.</p>
+
+<p>Desperate to stop the player, who has accrued too much reputation and hype, Caleb eventually pits all remaining Wraiths members in a URL tournament against them, which fails. Having lost another sponsor, Caleb challenges the player to a showdown. The player defeats Caleb, now left <a href="https://en.wikipedia.org/wiki/Insolvency">penniless</a>, and celebrates with Rachel and Nikki, solidifying their status as the best Underground racer in Bayview.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Underground 2</i> is the first game in the series to feature an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> called Bayview, which itself is based on the U.S. cities of <a href="https://en.wikipedia.org/wiki/San_Francisco">San Francisco</a>, and <a href="https://en.wikipedia.org/wiki/Los_Angeles">Los Angeles</a>. The players can drive freely around and explore the city, unlocking areas by winning races. Racing modes are roughly similar to <i>Underground</i>; one racing mode was dropped, this being the Knockout competitions. A Lap Knockout option is available when racing Circuit in non-career races.</p>
+
+<ul>
+  <li><b>Circuit race</b> is a standard race that involves up to four cars driving around a track that loops back to the start line of itself. A circuit race has typically a minimum of 2 laps to a maximum of 5 laps.</li>
+  <li><b>Sprint race</b> is a point-to-point race involving a maximum of four vehicles.</li>
+  <li><b><a href="https://en.wikipedia.org/wiki/Drifting_(motorsport)">Drifting</a></b> is one of the technical aspects of <i>Underground 2</i>. On the "parkade" tracks, the player drifts with up to 3 other competitors at the same time on the parkade tracks. Points are awarded when the player successfully slides the car and finishes each drift without hitting any walls or traffic. No <a href="https://en.wikipedia.org/wiki/Nitrous_oxide_engine">nitrous oxide</a> is allowed. There are also downhill drift events where the player drifts the car while progressing down the course from top to bottom. In the downhill drifts, there are no other racers, but there is normal city traffic. Players increase their points by sliding past city cars.</li>
+</ul>
+
+<p>Unlike <i>Underground</i>, time plays a crucial role here, especially in parkade tracks; if the opponents end up crossing the finish line way before the player, a 30-second timer will start within which the players will have to accumulate drift points until the timer runs out or they cross the finish line.</p>
+
+<ul>
+  <li><b><a href="https://en.wikipedia.org/wiki/Drag_racing">Drag racing</a></b> is another technical aspect of the game; a straight-line race that forces players to use the manual transmission. Like <i>Underground</i>, steering in this mode is simplified to simply allow for lane changes, while the game handles the steering along the lanes. The HUD in this mode is enlarged and displayed on either side of the screen; emphasizing on monitoring them, especially the <a href="https://en.wikipedia.org/wiki/Tachometer">tachometer</a> and the engine's temperature. The players' positions will get forfeited if they collide into traffic or barriers, or overheat their engine due to prolonged redlining.</li>
+</ul>
+
+<p>Apart from these, four new race variations have also been provided in <i>Underground 2</i>:</p>
+
+<ul>
+  <li><b>Street X</b> mode is similar to circuit races, except that they take place in closed and tight tracks. A maximum of 4 racers participates in this event. Like drift mode, this mode disables the use of nitrous oxide.</li>
+  <li><b>Underground Racing League (URL)</b> is a set of tournaments that takes place in a specific set of <a href="https://en.wikipedia.org/wiki/Race_track">closed tracks</a> outside city streets - either actual racing circuits or airport runways. URL tournaments typically consist of one to three races, with up to six cars (both in career mode and online). In tournaments with two or more races, a points system is used. At the end of each race, drivers receive a specific number of points according to their standing in a race. The total score at the end of these races determines the winner of the tournament.</li>
+  <li><b>Special events</b> - these are similar to sprints, intending to reach a target point on the map, which is a "photographer", and the player needs to reach the target within a specific time limit. Achieving this will reward the player with a magazine cover.</li>
+  <li><b>Outruns</b> - while in free roam, the player can challenge specific opponent cars (an outrun opponent car will have bright tail lights, similar to the player's cars when they use nitrous oxide) in an "outrun", where the goal is to start an outrun and then distance their car from the opponent's car by 300 metres (1,000 feet). The player can choose when to initiate an outrun and can take any path and/or use tactics to achieve this goal, provided they are in the lead. Each stage, including stage 1, has a limited number of outruns a player can win. For example, in the intro stage where the player is driving Rachel's car, 3 outruns can be won. After winning the number of outruns allowed for a stage, the outrun opponent cars cease to appear. After completing a career, there is no limit to the number of outruns wins allowed. Depending on the stage, after winning some number of outruns, the player is rewarded with a unique part. Some stages allow a player to do a series of outrun sequences, rewarding the player with multiple unique parts (one for each series of outruns won). The outrun mode is similar to that of <i><a href="https://en.wikipedia.org/wiki/Tokyo_Xtreme_Racer">Tokyo Xtreme Racer</a></i> and <i><a href="https://en.wikipedia.org/wiki/Wangan_Midnight">Wangan Midnight</a></i> video games, which use health bars instead of distance to determine the winner.</li>
+</ul>
+
+<p>The races are divided into 5 "stages". Once any stage is completed, the race locations of that stage will be replaced by the counterparts of the next stage. A "World Map" feature includes a menu of races for all prior stages, denoting races that have been completed and yet to be completed. After completing stage 2 through stage 5 (these stages require completing some number of "DVD" events), there will always be 8 sponsor races that will not be completed, since a player has to choose a single sponsor per stage and can only run 3 out of 11 unique sponsor races, leaving 8 sponsor races incomplete at the end of each stage. These can only be run using World Map. Due to a game bug (at least on the PC version), if running a non-completed race from the World Map, no credit (cash or rep) will be awarded unless the player restarts at least once after the race starts.</p>
+
+<p><i>Underground 2</i> is unique in the <i>Need for Speed</i> series in the sense that it requires a player to drive to a certain place in the city to begin a race (other games allow the player to select a race from a menu). Most races are marked on the in-game radar, but some are hidden and the player must search for them, should they decide to play them. The following features aid the players in this regard:</p>
+
+<ul>
+  <li><b>Cell phone / SMS system</b> - During gameplay, the players will occasionally receive phone calls or text messages. The game maintains a list of messages and game info that can be reviewed via a menu system.</li>
+  <li><b>Cash and info icons</b> - Each stage, including the intro stage, includes a set of hovering icons scattered throughout the game world. As the player explores the map in free roam, the player receives a cash reward and/or info as the player discovers and drives through each of the icons.</li>
+</ul>
+
+<p>The game also introduces nitrous refill; unlike <i>Underground</i> where nitrous can be used only once, nitrous can now be used multiple times, albeit the refill has to be done manually by performing stunts such as drifts, near misses, etc., earning style points which then get accumulated as nitrous. The more style points the player gets, the more the nitrous gets accumulated until the meter fills up twice.</p>
+
+<h3>Vehicles</h3>
+
+<p>As in <i>Need for Speed: Underground</i>, <i>Underground 2</i> continues to offer similar vehicles for purchase and modification with a focus on <a href="https://en.wikipedia.org/wiki/Tuner_Car">tuner cars</a>. Most of the available vehicles consist of Japanese models such as <a href="https://en.wikipedia.org/wiki/Nissan_240SX">Nissan 240SX</a>, <a href="https://en.wikipedia.org/wiki/Nissan_Skyline_R34">Nissan Skyline R34</a>, or <a href="https://en.wikipedia.org/wiki/Mitsubishi_Eclipse">Mitsubishi Eclipse</a>, with some European and American models. Also, as the tuner scene expanded to full-size SUVs, three <a href="https://en.wikipedia.org/wiki/Sport_utility_vehicle">SUVs</a> (which are the <a href="https://en.wikipedia.org/wiki/Hummer_H2">Hummer H2</a>, <a href="https://en.wikipedia.org/wiki/Cadillac_Escalade">Cadillac Escalade</a>, and <a href="https://en.wikipedia.org/wiki/Lincoln_Navigator">Lincoln Navigator</a>) appeared in the <i>Need for Speed</i> series for the first time. Muscle cars such as the <a href="https://en.wikipedia.org/wiki/Ford_Mustang">Ford Mustang</a> and <a href="https://en.wikipedia.org/wiki/Pontiac_GTO">Pontiac GTO</a> also returned to the series after being absent in <i>Underground</i>. It is the second game in the <i>Need for Speed</i> series after <i>Underground</i> to offer a <a href="https://en.wikipedia.org/wiki/South_Korea">Korean</a>-made car (<a href="https://en.wikipedia.org/wiki/Hyundai_Tiburon">Hyundai Tiburon</a>) as a racing vehicle. There are two versions of the game, US and EU, where each version has 29 of 31 possible cars: the US version has an <a href="https://en.wikipedia.org/wiki/Acura_RSX">Acura RSX</a> and a <a href="https://en.wikipedia.org/wiki/Honda_Civic_Si">Honda Civic Si</a>, while the EU version instead has a <a href="https://en.wikipedia.org/wiki/Peugeot_106">Peugeot 106</a> and a <a href="https://en.wikipedia.org/wiki/Vauxhall_Corsa">Vauxhall Corsa</a>, the rest of the 27 cars in both versions are the same.</p>
+
+<p>SUVs, also known as <a href="https://en.wikipedia.org/wiki/Sport_utility_vehicle">sport utility vehicles</a>, were a new element added to <i>Underground 2</i>. The SUVs can be upgraded and tuned in the same manner as cars. Some of the events in career mode are SUV-only events and only appear when a player is driving an SUV. In career or any offline mode, if the player is driving an SUV, the computer opponents also drive SUVs, but after completing a stage, the World Map allows a player to run any event from prior stages in either a car or an SUV.</p>
+
+<p>Customization in <i>Underground 2</i> was significantly expanded compared to previous iterations from the series. Visual customization has expanded with the ability to customize the car's front and rear <a href="https://en.wikipedia.org/wiki/Bumper_(car)">bumpers</a>, side skirts, <a href="https://en.wikipedia.org/wiki/Spoiler_(car)">spoiler</a>, <a href="https://en.wikipedia.org/wiki/Hood_(car)">hood</a>, <a href="https://en.wikipedia.org/wiki/Exhaust_system">exhaust</a> tips, doors, roof scoop, wheels (including the ability to put on <a href="https://en.wikipedia.org/wiki/Spinner_(wheel)">spinners</a>), <a href="https://en.wikipedia.org/wiki/Headlight">headlights</a> and <a href="https://en.wikipedia.org/wiki/Taillight">taillights</a>, <a href="https://en.wikipedia.org/wiki/Side_mirror">side mirrors</a> and paint. Vinyls and <a href="https://en.wikipedia.org/wiki/Decal">decals</a> can also be added, as well as <a href="https://en.wikipedia.org/wiki/Car_stereo">car stereos</a> (speakers, amplifiers &amp; subwoofers), <a href="https://en.wikipedia.org/wiki/Car_hydraulics">hydraulics</a>, <a href="https://en.wikipedia.org/wiki/Nitrous_oxide_engine">nitrous bottles</a>, and <a href="https://en.wikipedia.org/wiki/Underglow">underglow</a> neon. Most visual modifications to the car have no actual effect on vehicle performance. The sound systems, for example, could be put in the <a href="https://en.wikipedia.org/wiki/Trunk_(car)">trunk</a> of cars but served no purpose other than visual cues. Hydraulics can be used in combination with nitrous at a start of a race which can cause a car to do a <a href="https://en.wikipedia.org/wiki/Wheelie">wheelie</a> and for some cars get a better launch. The performance and handling of the car are affected by cosmetic modifications, like spoilers and hoods, which affect the downforce of the car - better spoilers allow better tuning of the downforce management both in front and in the back of the vehicle. Visual upgrades increase a car's visual rating, up to a rating of 10.0. At least one car in a career garage needs to be visually upgraded to a 10.0 rating to unlock all 10 DVD events (completing these rewards the player with a DVD cover), and each stage has a required number of DVD events.</p>
+
+<p>A car's performance can be enhanced by upgrading the car's engine, <a href="https://en.wikipedia.org/wiki/Engine_control_unit">engine control unit</a> (ECU), <a href="https://en.wikipedia.org/wiki/Transmission_(mechanical_device)">transmission</a>, <a href="https://en.wikipedia.org/wiki/Car_suspension">suspension</a>, <a href="https://en.wikipedia.org/wiki/Tire">tires</a>, <a href="https://en.wikipedia.org/wiki/Brake">brakes</a>, reducing the car's weight, and adding a <a href="https://en.wikipedia.org/wiki/Turbocharger">turbo</a> and/or nitrous. The player has the ability to either upgrade the performance through upgrade packages or by purchasing individual parts of each performance category. <i>Underground 2</i> also introduces a dyno-tuning system which allows players to specifically tune certain aspect of the car such as <a href="https://en.wikipedia.org/wiki/Electronic_control_unit">ECU</a>, <a href="https://en.wikipedia.org/wiki/Turbocharger">turbo</a>, <a href="https://en.wikipedia.org/wiki/Suspension_(vehicle)">suspension</a> springs, front and rear <a href="https://en.wikipedia.org/wiki/Shock_absorber">shock absorbers</a>, <a href="https://en.wikipedia.org/wiki/Gear_ratio">gear ratios</a>, <a href="https://en.wikipedia.org/wiki/Automotive_aerodynamics">aerodynamics</a>, <a href="https://en.wikipedia.org/wiki/Brake_bias">brake bias</a>, individual <a href="https://en.wikipedia.org/wiki/Tire">tire</a> grip, etc. The player can test the settings via a dyno run which will display a torque and power versus rpm graph, and an estimated 0–60 mph (0–100 km/h) time.</p>
+
+<p><i>Underground 2</i> had online multiplayer capability on PS2, PC, and Xbox, but by 2010, EA Games had shut down their servers, rendering the feature inoperable. The PC version has a multiplayer LAN mode, and multiplayer races over the internet can still be run using the games LAN mode and a virtual LAN (a virtual private network).</p>
+
+<h2>Soundtrack</h2>
+
+<p>Like its predecessor, the game features a licensed soundtrack by EA Trax. There is a mix of different genres ranging from <a href="https://en.wikipedia.org/wiki/Rap_music">rap</a>, <a href="https://en.wikipedia.org/wiki/Trance_music">trance</a>, <a href="https://en.wikipedia.org/wiki/Electronica">electronica</a>, and <a href="https://en.wikipedia.org/wiki/Rock_music">rock</a>, performed by artists such as <a href="https://en.wikipedia.org/wiki/Chingy">Chingy</a>, <a href="https://en.wikipedia.org/wiki/Paul_Van_Dyk">Paul Van Dyk</a>, <a href="https://en.wikipedia.org/wiki/Unwritten_Law">Unwritten Law</a>, <a href="https://en.wikipedia.org/wiki/Spiderbait">Spiderbait</a> (doing a cover of <a href="https://en.wikipedia.org/wiki/Ram_Jam">Ram Jam</a>'s Black Betty), <a href="https://en.wikipedia.org/wiki/Fluke_(band)">Fluke</a>, and <a href="https://en.wikipedia.org/wiki/Queens_of_the_Stone_Age">Queens of the Stone Age</a>. The game's theme song is a remix of <a href="https://en.wikipedia.org/wiki/The_Doors">The Doors</a>' <a href="https://en.wikipedia.org/wiki/Riders_on_the_Storm">Riders on the Storm</a> by <a href="https://en.wikipedia.org/wiki/Snoop_Dogg">Snoop Dogg</a>. The hip hop songs are heard in the main menu, while the trance, electronica, and rock music are heard during race sequences.</p>
+
+<h2>Reception</h2>
+
+<p><i>Need for Speed: Underground 2</i> received positive reviews. <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> and <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> gave it a score of 86% for the Mobile version; 83.50% and 82 out of 100 for the PC version, 82.61% and 83 out of 100 for the Xbox version, 80.77% and 82 out of 100 for the PlayStation 2 version, 79.98% and 77 out of 100 for the GameCube version, 76.44% and 74 out of 100 for the PSP version, 69.45% and 72 out of 100 for the Game Boy Advance version and 65.44% and 65 out of 100 for the DS version.</p>
+
+<p>The game was widely regarded as one of the best games of the series and is remembered for the quality of the gameplay, the length, the endless customization, the interesting side-missions, the graphics, and the addition of open-world free roam. However, some parts were criticized, such as the inability to fast travel to races and events. Reviewers noted the game's strong <a href="https://en.wikipedia.org/wiki/Product_placement">product placement</a> for companies with little or no connection to automobiles, such as <a href="https://en.wikipedia.org/wiki/Burger_King">Burger King</a>, <a href="https://en.wikipedia.org/wiki/Best_Buy">Best Buy</a> (in the US version), and former American mobile network company <a href="https://en.wikipedia.org/wiki/AT&amp;T_Mobility">Cingular</a>, which had their logo attached to the game's messaging system and shown on-screen for much of the gameplay. There was also some criticism for the game hip-hop slang used by the characters (such as using "bank" to refer to money), the comic book styled cutscenes, and the lack of police, which were last seen in <a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Hot_Pursuit_2">Need for Speed: Hot Pursuit 2</a>. The GameCube version was criticized for unstable <a href="https://en.wikipedia.org/wiki/Frame_rate">frame rate</a> and inferior graphics.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> gave the mobile phone version a score of 9.2 out of 10 and said that it "isn't just the best racing game ever made for a mobile phone (...) This game boasts game length and replay value so many orders beyond the mobile norm that it calls for a total paradigm shift." <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> gave the same version a score of eight out of ten and called it "a big step for mobile gaming."</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Detroit_Free_Press">Detroit Free Press</a></i> gave the <i>Rivals</i> version all four stars, exclaiming, "The racing here is just flat-out fun, with growling engines, jumps, and shortcuts that allow you to smash through fences. But there are thoughtful additions, including Party Play." <i><a href="https://en.wikipedia.org/wiki/The_Sydney_Morning_Herald">The Sydney Morning Herald</a></i>, however, gave the <i>Rivals</i> version three-and-a-half stars out of five and said, "While not PSP's best driving game, Rivals is an entertaining street racer that offers quick thrills." On the other hand, the same newspaper gave the GameCube, PS2, PC, and Xbox versions a score of four stars out of five and said, "While the driving action isn't quite as satisfying as the superb <i><a href="https://en.wikipedia.org/wiki/Burnout_3:_Takedown">Burnout 3</a></i>, it's still strong enough to keep you playing through the 150 or so races." <i><a href="https://en.wikipedia.org/wiki/The_Times">The Times</a></i> also gave the game four stars out of five and stated, "The courses in this game are just as much the stars as the cars. The dazzling downtown locations are massive, dominated by skyscrapers whose light bathes the streets in a radiant glow."</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/8th_Annual_Interactive_Achievement_Awards">8th Annual Interactive Achievement Awards</a>, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>Underground 2</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Original_Music_Composition">Outstanding Achievement in Soundtrack</a>".</p>
+
+<h3>Sales</h3>
+
+<p>According to Electronic Arts, <i>Need for Speed: Underground 2</i> sold above 8.4 million units worldwide by the end of 2004. The PlayStation 2 version of <i>Underground 2</i> received a "Double Platinum" sales award from the <a href="https://en.wikipedia.org/wiki/Entertainment_and_Leisure_Software_Publishers_Association">Entertainment and Leisure Software Publishers Association</a> (ELSPA), indicating sales of at least 600,000 copies in the United Kingdom. The game ultimately sold around 11 million copies and entered the "best-sellers" of each console, PS2's <a href="https://en.wikipedia.org/wiki/List_of_Sony_Greatest_Hits_games">Greatest Hits</a>,<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> Xbox's <a href="https://en.wikipedia.org/wiki/Platinum_Hits">Platinum Hits</a>,<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> and GameCube's <a href="https://en.wikipedia.org/wiki/Player's_Choice">Player's Choice</a>.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

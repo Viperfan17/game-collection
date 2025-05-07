@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sniper Elite III</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('da545cc2-5214-4570-a213-cc2679f662b9/7949b795-7d2a-4d74-aa86-e55d1373f919.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="da545cc2-5214-4570-a213-cc2679f662b9/3db77b12-bece-4c29-ae60-cb4fbaed6208.ico"/> Sniper Elite III</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="da545cc2-5214-4570-a213-cc2679f662b9/eb1adefd-4e75-40c2-a824-32487680a63c.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 5:20:51</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 5:50:54</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-6/27/2014">6/27/2014</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-FPS">FPS</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Stealth">Stealth</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Tactical shooter">Tactical shooter</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-TPS">TPS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Rebellion Developments">Rebellion Developments</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Rebellion Developments">Rebellion Developments</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Sniper_Elite_III" target="_blank">PCGamingWiki</a><br/><a href="http://www.rebellion.co.uk/games/sniper-elite-3" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=19547" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/sniper-elite-iii" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/238090/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Sniper_Elite_III" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/66826" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Sniper_Elite_3" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/sniper-elite-3/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Action">Action</a><br/><a href="#quicklink-Adventure">Adventure</a><br/><a href="#quicklink-Africa">Africa</a><br/><a href="#quicklink-Asura">Asura</a><br/><a href="#quicklink-Atmospheric">Atmospheric</a><br/><a href="#quicklink-Co-op">Co-op</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-FPS">FPS</a><br/><a href="#quicklink-Gore">Gore</a><br/><a href="#quicklink-Historical">Historical</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Online Co-Op">Online Co-Op</a><br/><a href="#quicklink-Open World">Open World</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Shooter">Shooter</a><br/><a href="#quicklink-Simulation">Simulation</a><br/><a href="#quicklink-Singleplayer">Singleplayer</a><br/><a href="#quicklink-Sniper">Sniper</a><br/><a href="#quicklink-Stealth">Stealth</a><br/><a href="#quicklink-Strategy">Strategy</a><br/><a href="#quicklink-Tactical">Tactical</a><br/><a href="#quicklink-Third Person">Third Person</a><br/><a href="#quicklink-Third-Person Shooter">Third-Person Shooter</a><br/><a href="#quicklink-War">War</a><br/><a href="#quicklink-World War II">World War II</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Sniper Elite III</b></i> is a 2014 <a href="https://en.wikipedia.org/wiki/Third-person_view">third-person</a> <a href="https://en.wikipedia.org/wiki/Tactical_shooter">tactical shooter</a> <a href="https://en.wikipedia.org/wiki/Stealth_game">stealth</a> video game developed and published by <a href="https://en.wikipedia.org/wiki/Rebellion_Developments">Rebellion Developments</a>. The game is a prequel to its 2012 predecessor <i><a href="https://en.wikipedia.org/wiki/Sniper_Elite_V2">Sniper Elite V2</a></i>, and is the third installment in the <i><a href="https://en.wikipedia.org/wiki/Sniper_Elite">Sniper Elite</a></i> series. A direct sequel, <i><a href="https://en.wikipedia.org/wiki/Sniper_Elite_4">Sniper Elite 4</a></i>, was released in 2017.</p>
+
+<p><i>Sniper Elite III</i> is set around three years prior to the events of <i>V2</i>, following the exploits of <a href="https://en.wikipedia.org/wiki/Office_of_Strategic_Services">OSS</a> officer Karl Fairburne as he participates in the <a href="https://en.wikipedia.org/wiki/Mediterranean_and_Middle_East_theatre_of_World_War_II">North African conflict</a> during <a href="https://en.wikipedia.org/wiki/World_War_II">World War II</a>, and works to stop the development of a deadly new <a href="https://en.wikipedia.org/wiki/Wonder_weapon">weapon</a> and eliminate the renegade Nazi commander responsible for it.</p>
+
+<h2>Gameplay</h2>
+
+<p>The game retains and builds on the mechanics of <i>Sniper Elite V2</i>. Players go through large sandbox-style battlefield maps based on locations from the <a href="https://en.wikipedia.org/wiki/Mediterranean_and_Middle_East_theatre_of_World_War_II">North African theater</a> of <a href="https://en.wikipedia.org/wiki/World_War_II">World War II</a>.</p>
+
+<p>The sniper rifle is the player's primary weapon, though additional weapons, including submachine guns and pistols (silenced or not depending on the situation) are available. In addition to hand grenades, the player can deploy tripwire booby traps, two different types of land mines, and dynamite. Binoculars can be used to tag enemies, displaying their position and movements. Small fires can be set to distract enemies or detonate explosives. The player-character can hold their breath while aiming to properly line up a shot. A red icon appears in the scope, marking the projected point of impact. There are weapon parts spread out all over the game or found when looting dead enemies, allowing players to customize their weapons in the pre-deployment menu; the menu also allows equipment loadouts.</p>
+
+<p>Stealth mechanics have been reworked. An eye icon squints or opens to denote the player's level of detection by the enemy. Enemy soldiers will also have a circle meter over their heads to indicate alert status. Players are also forced to relocate periodically to prevent detection with a white ghost image to mark their last known position if spotted; enemy soldiers will search the surrounding area either individually or in groups. As in the previous game, loud sounds may be used to mask sniper shots, however, the player now has the option to sabotage generators as a means of creating noise.</p>
+
+<p>A points system is instituted for actions such as stealth close-combat or using traps to kill enemies, with the points accumulating towards promotion to higher ranks. Players can go around the map to collect special reward items such as collectors' cards and unlock "sniper nests" built into the environment. Journal pages also provide further backstory into the events of the game.</p>
+
+<p><i>V2</i>'s X-Ray kill cam system is retained as well. Where the previous game only allowed the player to see the body's internal structure at point of impact, the new game expands to visualize the rest of the cardiovascular, skeletal, and muscular systems. The player can still target vehicles, but now has a chance to shoot the engines and disable the vehicle, making it easier to destroy.</p>
+
+<h3>Multiplayer</h3>
+
+<p>Multiplayer in <i>Sniper Elite III</i> consists of five modes of competitive gameplay: Team Deathmatch, Deathmatch, Distance King, No Cross, and Capture the Flag. Similar to the main campaign, there are a large selection of maps to play on with large open environments.</p>
+
+<h2>Plot</h2>
+
+<p>In June 1942, during the <a href="https://en.wikipedia.org/wiki/Battle_of_Gazala">Battle of Gazala</a>, American sniper Karl Fairburne (Tom Clarke-Hill) takes part in an effort by British troops to stop <a href="https://en.wikipedia.org/wiki/Erwin_Rommel">Erwin Rommel</a> and the <a href="https://en.wikipedia.org/wiki/Afrika_Korps">Afrika Korps</a> from seizing the vital port city of <a href="https://en.wikipedia.org/wiki/Tobruk">Tobruk</a>. Fairburne eliminates several German artillery positions, but the enemy takes the city and he is forced to abandon his fellow soldiers. Nevertheless, his performance in the battle brings him to the attention of British <a href="https://en.wikipedia.org/wiki/Special_Operations_Executive">Naval Intelligence</a>, who recruit him to hunt down General Franz Vahlen, a favorite of Hitler's who is rumored to be working on a top-secret weapon.</p>
+
+<p>Fairburne heads to the <a href="https://en.wikipedia.org/wiki/Gaberoun">Gaberoun</a> oasis in <a href="https://en.wikipedia.org/wiki/Libya">Libya</a>, assassinating several German and Italian officers at a supply and logistics outpost while searching for intel on Vahlen. He only finds a document revealing the name of Vahlen's project: "Project <i>Seuche</i>" (German for "plague"). Naval Intelligence then asks Fairburne to rescue one of their agents, who was captured while gathering information on Vahlen's work. The informant is being held at Fort Rifugio, a POW camp formerly occupied by the British during <a href="https://en.wikipedia.org/wiki/Operation_Compass">Operation Compass</a>. The <a href="https://en.wikipedia.org/wiki/Long_Range_Desert_Group">Long Range Desert Group</a> agrees to transport Fairburne in exchange for his help in capturing the German-held <a href="https://en.wikipedia.org/wiki/Halfaya_Pass">Halfaya Pass</a>; Fairburne infiltrates the enemy camp and destroys several <a href="https://en.wikipedia.org/wiki/8.8_cm_Flak_18/36/37/41">Flak 88s</a>.</p>
+
+<p>Fairburne successfully infiltrates Fort Rifugio and frees the informant, Brauer. He gives Fairburne the location of Vahlen's command, a desert village at the <a href="https://en.wikipedia.org/wiki/Siwa_Oasis">Siwa Oasis</a> in Western <a href="https://en.wikipedia.org/wiki/Egypt">Egypt</a>. Fairburne, now referred to as the <i>Wüstengeist</i> (Desert Ghost) by the Germans for his exploits, sneaks into the town and finds out that Vahlen's discontented officers plan to betray him, having stolen his personal notebook which reveals his plan to get rid of Rommel. Fairburne kills the officer tasked to take the notebook to <a href="https://en.wikipedia.org/wiki/Berlin">Berlin</a> and escapes with Brauer's help. He discovers that Vahlen, hungry for glory and fame, intends to use his new weapon to destroy the Allies in North Africa and then go on to conquer all of Europe.</p>
+
+<p>Fairburne and Brauer locate Vahlen's secret field HQ near the <a href="https://en.wikipedia.org/wiki/Kasserine_Pass">Kasserine Pass</a> and open the general's personal safe, which contains a film reel that reveals "Project <i>Seuche</i>" is a <a href="https://en.wikipedia.org/wiki/Super-heavy_tank">supertank</a> codenamed <i><a href="https://en.wikipedia.org/wiki/Landkreuzer_P._1000_Ratte">Ratte</a></i>. Brauer is subsequently killed by a round from a <a href="https://en.wikipedia.org/wiki/Tiger_I">Tiger I</a> before Fairburne is able to destroy it. He buries Brauer, taking a bullet from his gun. As the Africa Korps begin to lose ground to the Allies, Fairburne joins the LRDG in assaulting the German-controlled <a href="https://en.wikipedia.org/wiki/Pont_du_Fahs_Airfield">Pont du Fahs Airfield</a>, cutting off Vahlen's last supply line and finding a map leading to the <i>Ratte</i> production facility, which is nestled inside the <a href="https://en.wikipedia.org/wiki/Midès">Midès</a> canyon. Fairburne enters the factory, sabotages its electrical supply and plants explosive charges to destroy the <i>Ratte</i> prototype, before detonating a massive pile of ammunition to level the complex. Vahlen is trapped by debris while fleeing the crumbling factory; Fairburne takes his <a href="https://en.wikipedia.org/wiki/Luger_pistol">Luger</a>, loads it with Brauer's bullet, and shoots him in the head before escaping.</p>
+
+<p>A voiceover by Fairburne during the end credits reveals that the intelligence he acquired on the <i>Ratte</i> prompted the <a href="https://en.wikipedia.org/wiki/USAAF">USAAF</a> and the <a href="https://en.wikipedia.org/wiki/RAF">RAF</a> to launch  <a href="https://en.wikipedia.org/wiki/Operation_Chastise">Operation Chastise</a> and the <a href="https://en.wikipedia.org/wiki/Battle_of_the_Ruhr">Battle of the Ruhr</a>, resulting in extensive damage to German heavy industry and forcing the German high command to cancel efforts to build more <i>Ratte</i> tanks.</p>
+
+<h2>Release and downloadable content</h2>
+
+<p><i>Sniper Elite III</i> was released worldwide for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> on 27 June 2014. The game was simultaneously released in <a href="https://en.wikipedia.org/wiki/PAL">PAL</a> regions for <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, and in North America on 1 July by <a href="https://en.wikipedia.org/wiki/505_Games">505 Games</a>.</p>
+
+<p>On 21 July 2014, Rebellion Developments announced a new <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> (DLC) pack for <i>Sniper Elite III</i>. The DLC pack adds three new missions, one of which the player needs to save <a href="https://en.wikipedia.org/wiki/Winston_Churchill">Winston Churchill</a> from a German assassination attempt. In the first mission, "In Shadows", Fairburne must uncover the identity of Churchill's would-be assassins.  He does this by sneaking back into the Siwa Oasis in Western Egypt which by this point has been won and lost by the Allies since his last visit. In the process, he learns the identity of the assassins and their leader.  In the second mission, "Belly of the Beast", Fairburne must infiltrate the assassins' base in the Rif mountains in Morocco.  Along the way, he uncovers evidence of a dangerous prototype weapon, the plans that describe how the assassination will be carried out, and where it will take place.  During the final mission, "Confrontation", Fairburne must save Churchill from his would-be killers as the Prime Minister heads to the <a href="https://en.wikipedia.org/wiki/Casablanca_Conference">Casablanca Conference</a>. Fairburne must eliminate any and all threats to Churchill including mortars, mines, rocket launchers, tanks, elite German soldiers and a mysterious masked marksman known only as Raubvogel.  Other DLCs include new weapon packs. A definitive version of the game containing most of the DLC titled <i>Sniper Elite III Ultimate Edition</i> was released for consoles on 10 March 2015 in North America and on 13 March 2015 in Europe and <a href="https://en.wikipedia.org/wiki/Asia-Pacific">APAC</a> regions. A version for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> self-published by Rebellion Developments was released worldwide for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> on 1 October 2019.</p>
+
+<p>In October 2023, the game and all of its downloadable content were delisted from the Microsoft Store.</p>
+
+<h2>Reception</h2>
+
+<p><i>Sniper Elite III</i> received "mixed or average" reviews, according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>.</p>
+
+<p><i>Hardcore Gamer</i>'s Matt Whittaker gave the game a 3/5, writing: "Though its stealth-based sniping gameplay can provide some exciting moments, Sniper Elite III is a decidedly mixed bag. Its abysmal narrative, outdated mission design, boring protagonist and weak non-campaign modes overshadow everything that it does well."</p>
+
+<p>Tyler Wilde of <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i> criticised graphics ("the character faces are plastic-like") and enemy AI, but praised the player's freedom ("It's a lot of fun to come up with a plan and execute it, and Sniper Elite 3 gives me the freedom and tools to do that"). As far as stealth is concerned, Tyler enjoyed the fact that you can shoot during another sound, thus hiding your position. On the other hand he wrote "there are no surround sound settings, and the audio system is a terrible judge of distance". Finally, he wrote:  ”Some of <i>Sniper Elite 3</i>'s failures are funny [...] and some of them are frustrating, but its ideas are good and I hope they don't end here. [...] Realistically, I expect we'll have to wait for <i>Sniper Elite 4</i> for significant improvement" and scored the game a 70/100.</p>
+
+<p>Mikel Reparaz of <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> scored the game an 8.2/10 and wrote: "More than just a showcase for slow-motion gore, <i>Sniper Elite III</i> shines for its open-ended approach to stealth." Reparaz disliked the story, which, according to him, is "awash in clichés and occasionally laughable dialogue", as well as "shaky" <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">artificial intelligence</a>, but spoke positively of the interesting setting, large levels, "immensely satisfying" gore, and multiplayer modes. He also likes the freedom the player has ("how you reach and tackle those objectives is up to you").</p>
+
+<p>Josh Harmon of <i>EGM</i> criticised the plot further ("You go places and shoot bad people, and that’s all you really need to know"), calling the approach to plot "pornographer’s approach to game design". He writes about kill-cam: "The level of variety and detail verges on psychopathic", but "If you get a thrill out of wreaking that sort of anatomical havoc, then <i>Sniper Elite III</i> will offer plenty of excitement".</p>
+
+<p>The <i>EGM</i> reviewer, however, likes sniping. He finds weapons other than rifle badly designed ("The secondary weapons feel weightless, impotent, and inaccurate", "[...] trip mines and dynamite, are aggressively situational to the point of being practically worthless in the wide-open levels"), however he finds stealth using melee attacks and pistol enjoyable.</p>
+
+<p>He sums up: "What we’re left with, then, is a game that revels in split-seconds but struggles to fill the minutes in between." The <i>EGM's</i> review does not concern multiplayer, though.</p>
+
+<p>David Roberts from <i><a href="https://en.wikipedia.org/wiki/GamesRadar">GamesRadar</a></i> gave the game a 3 out of 5. He too praised the large environments for allowing strategic play, but felt that the Kill-cam, though a cool feature, "loses appeal fast". Roberts particularly enjoyed the feeling of nailing a perfect shot from a mile away, saying it "never gets old". Roberts' main problems with the game were concerning an "overall lack of polish", and the "flat narrative" and "generic objectives". "<i>Sniper Elite 3</i> certainly has its share of thrilling moments," Roberts said, "whether you’re hunting blissfully unaware soldiers or being tracked by countersnipers in ghillie suits, but there are too many technical and narrative issues to simply ignore."</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i>'s Dan Whitehead wrote in his review: "The package as a whole is still very much a rough diamond, but it's a definite improvement over its predecessor. The gruesome kill-cam remains a deliciously wrong thrill and the unifying force that holds the game together, but it's doubtful that it would be enough to paper over the cracks in a fourth game without a major overhaul of the AI and physics code. Even with its flaws, though, <i>Sniper Elite 3</i> is a solidly enjoyable mid-tier action game. It may not hit the bullseye, but it's getting closer with every shot." Whitehead gave the game a 7/10.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i>'s Tim Turi wrote: "I openly admit that I love gory kills and living the hero sniper fantasy, but <i>Sniper Elite III</i> only partially delivers on the latter. If you can't get enough of dramatic, transparent shots of enemies getting shredded by sniper fire, <i>Sniper Elite III</i> has you covered in spades. If you're interested in more motivation beyond the glory of the kill, look elsewhere." Turi scored the game a 6.5/10 and had mixed feeling about the visuals, sound, Kill-cam, and controls. The <i><a href="https://en.wikipedia.org/wiki/GameRevolution">GameRevolution</a></i> reviewer Gil Almogi wrote that kill-cam "was a visual novelty", however "The effect loses its luster after a few times". The reviewer wrote of "satisfying sniping and stealth gameplay", but complained about narrative: "<b>Sniper Elite III</b>, lacking an interesting or commanding narrative to guide Karl Fairburne’s actions, devolves into just a series of missions and objectives". The <i>GameRevolution</i> reviewer praised visuals: "The texture work is excellent, and various environmental effects like windswept sand and sunlight filtering through bushes keep the visuals feeling natural", but complained the player shoots "the same face over and over <i>ad nauseam</i>, regardless of whether he speaks German or Italian", even though the reviewer admitted this is not unique to this game only. The reviewer seemed to enjoy gadgets in the game, especially trip mines.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i>'s Josiah Renaudin gave the game a 6/10. Renaudin disliked the balance between sniping (which he admired) and stealth, opining that the stealth is dull and overstays its welcome. Renaudin called the slow-motion kill-camera "devilishly satisfying", and praised the colourful environments for being an improvement over the previous games' instalments. Lastly, even though Renaudin thought the story was "uninspired" and disliked online matchmaking for being "broken", he too praised the level design for encouraging creativity.</p>
+
+<h2>Sequels</h2>
+
+<p>A sequel, <i><a href="https://en.wikipedia.org/wiki/Sniper_Elite_4">Sniper Elite 4</a></i>, was released in February 2017 for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>. <a href="https://en.wikipedia.org/wiki/Sniper_Elite_5">Sniper Elite 5</a> and <a href="https://en.wikipedia.org/wiki/Sniper_Elite:_Resistance">Sniper Elite: Resistance</a> followed in 2022 and 2025 respectively.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

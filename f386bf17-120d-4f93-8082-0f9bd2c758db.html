@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Need for Speed™: Undercover</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('f386bf17-120d-4f93-8082-0f9bd2c758db/7d1532eb-2af8-4ab7-aa9b-bb4177518102.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="f386bf17-120d-4f93-8082-0f9bd2c758db/e65afb2d-4f5d-4871-a649-de8e084e28b3.ico"/> Need for Speed™: Undercover</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="f386bf17-120d-4f93-8082-0f9bd2c758db/4860a2fd-b014-415b-8681-f9c657db3121.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 2:53:29</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 5:11:43</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/18/2008">11/18/2008</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-57">57</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-EA Black Box">EA Black Box</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/Need_for_Speed:_Undercover" target="_blank">PCGamingWiki</a><br/><a href="https://www.ea.com/games/need-for-speed/need-for-speed-undercover" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=6484" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/need-for-speed-undercover" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/17430/" target="_blank">SteamDB</a><br/><a href="http://strategywiki.org/wiki/Need_for_Speed:_Undercover" target="_blank">StrategyWiki</a><br/><a href="https://www.mobygames.com/game/37711" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/Need_for_Speed:_Undercover" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/need-speed-undercover" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[HLTB] 10 to 20 hours">[HLTB] 10 to 20 hours</a><br/><a href="#quicklink-Action">Action</a><br/><a href="#quicklink-Arcade">Arcade</a><br/><a href="#quicklink-Automobile">Automobile</a><br/><a href="#quicklink-Automobile Sim">Automobile Sim</a><br/><a href="#quicklink-Classic">Classic</a><br/><a href="#quicklink-Contemporary">Contemporary</a><br/><a href="#quicklink-Controller">Controller</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Driving">Driving</a><br/><a href="#quicklink-EAGL 4">EAGL 4</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-Great Soundtrack">Great Soundtrack</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Online Co-Op">Online Co-Op</a><br/><a href="#quicklink-Open World">Open World</a><br/><a href="#quicklink-Racing">Racing</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-Simulation">Simulation</a><br/><a href="#quicklink-Singleplayer">Singleplayer</a><br/><a href="#quicklink-Story Rich">Story Rich</a><br/><a href="#quicklink-Street racing">Street racing</a><br/><a href="#quicklink-Third Person">Third Person</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Need for Speed: Undercover</b></i> is a 2008 <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing video game</a>, and is the twelfth installment in the <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed">Need for Speed</a></i> series following <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_ProStreet">Need for Speed: ProStreet</a></i> (2007). Developed by <a href="https://en.wikipedia.org/wiki/EA_Black_Box">EA Black Box</a> and published by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a>, it was released on November 18, 2008, for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>, <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>, and then on a number of <a href="https://en.wikipedia.org/wiki/Mobile_phone">mobile phone</a> platforms in 2009.</p>
+
+<p>The game sees players conducting illegal <a href="https://en.wikipedia.org/wiki/Street_race">street races</a> within the fictional Tri-City Area, with the main mode's story focused on the player operating as an <a href="https://en.wikipedia.org/wiki/Undercover_police_officer">undercover police officer</a> to investigate links between a criminal syndicate, stolen cars, and street racers. Gameplay operates on the same manner as previous entries such as <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Most_Wanted_(2005_video_game)">Need for Speed: Most Wanted</a></i> and <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Carbon">Need for Speed: Carbon</a></i>, now including a larger selection of licensed real-world cars, and RPG-styled system in the game's main story mode.</p>
+
+<p>Upon its release, the game received mixed reviews, many of which criticized the game's difficulty, story, setting, and repetitive elements, with some editions receiving lower scores due to severe issues. As of 2021, <i>Undercover</i> is no longer available for purchase <a href="https://en.wikipedia.org/wiki/Digital_distribution_of_video_games">digitally</a> in any online stores. <i>Undercover</i> was succeeded by <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Shift">Need for Speed: Shift</a></i> (2009), the <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a>-exclusive <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Nitro">Need for Speed: Nitro</a></i> (2009), and the <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_World">Need for Speed: World</a></i> (2010) <a href="https://en.wikipedia.org/wiki/Massively_multiplayer_online_game">MMO</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p>In the game, players take part in illegal street races that focus on different styles of races, utilizing a variety of licensed real-world cars (available at the time of the game's development and release) that can be upgraded and customized with new parts, while contending with the involvement of the police in their efforts to impede the player. Racing events featured in the game include the series' standard of circuit, point-to-point, and checkpoint races, alongside the return of <a href="https://en.wikipedia.org/wiki/Police_pursuit">Police Pursuit</a> events featured in <i>Most Wanted</i> and <i>Carbon</i>. In addition, <i>Undercover</i> includes new events such as "Outrun" - players must overtake a rival and stay ahead of them for a period of time - and "Highway Battle" - similar to <i>Carbon</i>'s "Duel" and <i>Underground 2</i>'s "Outrun" event, players attempt to stay ahead of a rival on a highway, battling against both them and local traffic, winning instantly if they pull far ahead and losing for the exact opposite - with its game modes consisting of Career, Single Event, and Multiplayer; both the PlayStation 2 and Wii editions also feature a fourth mode, Challenge Series, which operates similar in function as in <i>Most Wanted</i> and <i>Carbon</i>.</p>
+
+<p>In Career mode, players take on the role of an undercover police officer seeking to break up a syndicate operating within the underground street race world. Like <i>Most Wanted</i>, players achieve this by completing both Racing Events and Pursuit events - the majority of events in this mode include the opportunity to "dominate" them by completing them faster than a specified time record for domination. In <i>Undercover</i>, progress in the story involves completing events that not only earn money, but also experience (or Wheelman Rep) and a special performance bonus - these bonuses either improve the player's driving abilities with all cars or provide other bonuses to the player's playthrough (i.e. an increase in race earnings). Earning enough experience levels up the player's Wheelman level, unlocking a larger performance bonus, new cars and upgrade parts, as well additional events including Jobs - special story-based missions in which the player must complete a specific task such as taking down a criminal's car. Police pursuits in this mode function like in previous editions, though the player's Wheelman level directly impacts how aggressive the police are when in pursuit of the player; the higher the level, the more tactics and vehicle types used in the pursuit.</p>
+
+<p>Players can freely select any event from the game's map, or by using a hotkey to move on to a highlighted event after completing their current one, and are able to replay previous events but only for a reduced amount of cash. The game features a wide variety of licensed real-world cars which are divided into three tiers of performance and four classes - <a href="https://en.wikipedia.org/wiki/Exotic_car">Exotic</a>, <a href="https://en.wikipedia.org/wiki/Import_Scene">Tuner</a>, <a href="https://en.wikipedia.org/wiki/Muscle_car">Muscle</a>, and <a href="https://en.wikipedia.org/wiki/Sports_car">Sport</a>. Players begin Career mode with a limited selection of cars to use and purchase, but unlock more as they level up and can earn additional cars by defeating criminals in the story. Cars, upgrades and customisation can now be done by visiting the player's safehouse, rather than separate stores, with fine-tuning of a car's performance also conducted in this manner. For the Nintendo DS, PlayStation 2, PlayStation Portable, and Wii editions of the game, players can also use police vehicles but only upon unlocking them during the main mode. Cars receive only cosmetic damage during the game, except in Highway Battles and Job events, where it is possible to "<a href="https://en.wikipedia.org/wiki/Car_wreck">total</a>" a car in these event, the latter per specific parameters assigned to the Job the player is undertaking.</p>
+
+<p>Multiplayer mode varies across the platforms the game was launched on - online multiplayer is possible on Windows, PlayStation 3, Xbox 360 and DS editions; PlayStation 2 and Wii editions feature split-screen multiplayer, while mobile phone platforms do not include the game mode. For online multiplayer, events consist of multiplayer versions of Sprint racing and Highway Battle, along with a team-based event entitled "Cops and Robbers" - two teams of players compete against each other to score points across two rounds; in the first round, the "Robbers" collect flags and deliver them to specified areas to score points, while the "Cops" attempt to arrest them to earn points, whereupon in the second round, the teams switch roles, with the team with the highest score winning the match. While the PlayStation 2 and Wii features Cops and Robbers in its multiplayer mode, albeit with fewer players allowed, they also feature two exclusive events - "Lap Knockout", in which players compete across a circuit, with the last player at the end of a lap being knocked out and the winner being the remaining player at the end; and "Timed Circuit", in which players compete across a circuit over a predetermined length of laps and time, with the player in first place at the end winning the event.</p>
+
+<h2>Plot</h2>
+
+<h3>Setting</h3>
+
+<p>The game's story and events take place in the fictional region of the Tri-City Bay, mainly during the daytime between sunrise and sunset. The region consists of four boroughs - Palm Harbor, a downtown city district; Port Crescent, an industrial port that also houses a naval base; Gold Coast Mountains, a mountainous region of observatories and wind farms; and Sunset Hills, a suburban town with rural farms - with each borough linked to the other by a series of highways. The region's design was heavily influenced by the real-life city of <a href="https://en.wikipedia.org/wiki/Miami">Miami</a>, alongside locations visited by the development team across the Gulf Coast and California Coast, with the setting's <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> map consisting of around 109 miles (175 km) of road.</p>
+
+<p>In the Nintendo DS edition, the boroughs are named Metropolis, North Port Crescent, South Port Crescent and Riverton, while in the Wii and PlayStation 2 editions, the game's setting takes place within a carbon-copy of two boroughs taken from <i>Most Wanted</i>'s setting leaving Beach borough.</p>
+
+<p>The player, an <a href="https://en.wikipedia.org/wiki/Undercover_police_officer">undercover police officer</a> for the Tri-City Bay Police Department (TCBPD), is called in to Palm Harbor police station by their superior Lt. Jack Keller (<a href="https://en.wikipedia.org/wiki/Paul_Pape">Paul Pape</a>). The player is informed that their current investigation into the region's underground street racing world is to be joined by Inspector Chase Linh (<a href="https://en.wikipedia.org/wiki/Maggie_Q">Maggie Q</a>), a federal agent of the <a href="https://en.wikipedia.org/wiki/FBI">FBI</a>, who wants to bring down an international criminal syndicate operating in the region that is involved in smuggling stolen cars. The player is instructed to pose as a new street racer and join in on major illegal street races, along with gaining infamy with the TCBPD, in order to secure entry into the syndicate. The player achieves this by being recruited into a gang that works with the syndicate, run by Hector Maio (<a href="https://en.wikipedia.org/wiki/Kurt_Caceres">Kurt Caceres</a>) and his brother Zack (Joshua Alba). At the same time, they befriend Carmen Mendez (<a href="https://en.wikipedia.org/wiki/Christina_Milian">Christina Milian</a>), a member of the gang. The brothers quickly assign the player to steal cars for them during their racing activities. Upon completing the jobs, Chase instructs the player to arrest the gang, including the brothers.</p>
+
+<p>With Hector's gang out of action, the player is sent to Sunset Hills in order to get recruited by a crew operated by Gregory "GMAC" McDonald (<a href="https://en.wikipedia.org/wiki/David_Rees_Snell">David Rees Snell</a>) - a former TCBPD police officer - Rose Largo (Heather Fox) - an honor student who turned to crime - and Brad "Nickel" Rogers (Lawrence B. Adisa) - a former boxer. Whilst conducting races along with jobs for the crew, the player is instructed by GMAC to steal a car from Chau Wu (Jack Yang), the <a href="https://en.wikipedia.org/wiki/Triad_(organized_crime)">Triad</a> leader of the syndicate the player is investigating. When the player finds themselves confronted by Chau, he offers to overlook the theft in exchange for the player's help in recovering a car he lost that he needs back, believing it was stolen by GMAC's crew; a meeting with Carmen suggests the theft was likely committed by someone else. Eventually, the player is instructed to arrest GMAC and his crew, though is unable to locate the stolen car in their possession.</p>
+
+<p>Shortly after arresting GMAC's crew, Carmen contacts the player and requests a meeting. Upon reaching her, she reveals that Zack and Hector unknowingly stole the missing car from Chau, and asks them to get rid of it for her. Chau quickly contacts the player the moment they take possession, and receive instructions to deliver it to a warehouse, learning that he knows them to be a police officer and that they have kidnapped Chase to coerce compliance from them. Upon delivering the car, Chase reveals herself to be a corrupt federal agent, who was working with Chau to recover the car as it possessed vital evidence of his activities and a sizeable quantity of cash. Before Chau can dispose of the player, Chase betrays him, murdering him and his henchman, before framing the player for their murder while escaping with the money and evidence.</p>
+
+<p>The player is forced to flee from the TCBPD upon being wanted for the killings, but finds support from Keller. On his instructions, they proceed to take down Chase before she can flee the region, as it is the only way to clear their name. After successfully arresting Chase, Keller commends the player for their hard work at recovering the evidence and managing to not forget themselves during their undercover work, informing them that Carmen made a plea bargain with him in exchange for her testimony against the arrested crews. Some time later, the player meets with Carmen to give them a ride to the local university where she is studying as a med <a href="https://en.wikipedia.org/wiki/Student">student</a>.</p>
+
+<h2>Development</h2>
+
+<p>Electronic Arts <a href="https://en.wikipedia.org/wiki/Chief_executive_officer">CEO</a> <a href="https://en.wikipedia.org/wiki/John_Riccitiello">John Riccitiello</a> stated that the previous release in the series (<i>ProStreet</i>) was only "an okay game...[and was] not good" and that <i>Undercover</i> would "be a much better game". He stated <i>Undercover</i> would have a considerably longer <a href="https://en.wikipedia.org/wiki/Software_development_process">development cycle</a> than its predecessors because the <i>Need for Speed</i> development team had been split up into two teams, both of which would work on a "two-year" development cycle with future titles, alternating releases between them. Riccitiello stated he was "torturing" the development team with a tight development cycle in the past. "When this change was implemented in mid-summer 2007, one team started working on <i>Undercover</i> (giving it only a 16.5 month development cycle), while the other team (that finished <i>ProStreet</i>) would start working on the next title." Riccitiello also stated <i>Undercover</i> took inspiration from <a href="https://en.wikipedia.org/wiki/Action_film">action films</a> such as <i><a href="https://en.wikipedia.org/wiki/The_Transporter">The Transporter</a></i>, with a large <a href="https://en.wikipedia.org/wiki/Embedded_narrative">embedded narrative</a>.</p>
+
+<p>Frank Gibeau, President of the <a href="https://en.wikipedia.org/wiki/Electronic_Arts">EA Games</a> label, stated during development that due to the fact that the sales of <i>ProStreet</i> didn't live up to EA's hopes for the game, the <i>Need for Speed</i> <a href="https://en.wikipedia.org/wiki/Media_franchise">franchise</a> would go back to its roots (although <i>Undercover</i> was already being developed before <i>ProStreet</i>). "John Doyle (Developer at EA Black Box) said that <i>Undercover</i> would feature a brand new <a href="https://en.wikipedia.org/wiki/Game_mechanic">game mechanic</a> and a '<i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Most_Wanted_(2005_video_game)">Most Wanted</a></i>-ish' <a href="https://en.wikipedia.org/wiki/Nonlinear_gameplay">sandbox</a> style of <a href="https://en.wikipedia.org/wiki/Gameplay">gameplay</a>." The game was also provided with an all new damage system. Andy Blackmore (Senior Vehicle Concept Artist at EA) explained how one of the <a href="https://en.wikipedia.org/wiki/Porsche">Porsche</a> cars that was "conceptualized" in the game was then brought to life for the game from a brief description to being approved by Porsche.</p>
+
+<p>A few days before <i>Undercover</i>'s release, EA revealed a few plot details. A video was uploaded that showed the player evading capture from the Tri-City Police Department (TCPD).</p>
+
+<h2>Reception</h2>
+
+<p>Reception of <i>Undercover</i> was mixed. There were complaints about the game's easy difficulty, repetitiveness, and poor texture maintenance.  The <i>IGN</i> review went as far as recommending the game's rivals such as <a href="https://en.wikipedia.org/wiki/Rockstar_Games">Rockstar Games</a>' <i><a href="https://en.wikipedia.org/wiki/Midnight_Club:_Los_Angeles">Midnight Club: Los Angeles</a></i> and EA's own <i><a href="https://en.wikipedia.org/wiki/Burnout_Paradise">Burnout Paradise</a></i>.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> review was critical of the PS3 version of <i>Undercover</i> giving it a 4/10, calling it a "poor game with a ton of problems" and with "practically no redeeming qualities". <i>IGN</i> also commented on how the reason for having an open world environment was lost because a player could only start an event from the map. However, the Xbox 360 and the PC versions received a higher score in contrast to the PS3 version in the <i>IGN</i> review, due to the fewer severe problems that occurred.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/1UP.com">1UP.com</a> review called the game only "fairly successful," but praised the game's selection of cars and tighter handling on the vehicles. However, the "leveling" system that unlocks cars and upgrades was criticized for resembling "<a href="https://en.wikipedia.org/wiki/Grinding_(video_games)">grinding</a>". In general, sparse traffic, wide-open roads, and poor AI led to complaints about extremely low difficulty, however, one reviewer commented on how this may have been a marketing ploy to target a wider audience.</p>
+
+<p>The reception to the live-action cutscenes was almost universally negative, with many critics noting that the videos were poorly acted and lacked purpose. Some compared the cutscenes to a <a href="https://en.wikipedia.org/wiki/Michael_Bay">Michael Bay</a> or <a href="https://en.wikipedia.org/wiki/Roland_Emmerich">Roland Emmerich</a> film. The lack of connection between the crime fighting undercover cop story and the racing game play was particularly criticized by <i>IGN</i> who said, "You ... run missions where you steal cars, make 'special' deliveries and things like this now and again, but you never actually see any sequences that show how the cops are putting the evidence together or anything of that sort. Chase Linh will tell you [what] you need to do to get on the inside of a racing group in order to get dirt on them, and then after a race she'll say 'We have enough, let's move in.' [But you're left asking: How did that help at all?]" Finally, the in-game <a href="https://en.wikipedia.org/wiki/Frame_rate">frame rate</a> received little praise, and <i>GameSpot</i> particularly criticized the PS3 version for this problem resulting in a lower score on the platform compared to the Xbox 360 and PC versions.</p>
+
+<p><i>Need for Speed: Undercover</i> has sold 1.4 million copies in the United States.</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Portal:Video_games">Video games portal</a></li>
+</ul>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

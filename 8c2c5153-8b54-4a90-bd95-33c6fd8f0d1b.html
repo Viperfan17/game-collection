@@ -1,0 +1,381 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>The Crew</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('8c2c5153-8b54-4a90-bd95-33c6fd8f0d1b/56bfa24d-94ca-4cc7-9594-27b1f297ddd7.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="8c2c5153-8b54-4a90-bd95-33c6fd8f0d1b/0c54ab24-0a68-4219-8ec0-ec7c92ad9419.png"/> The Crew</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="8c2c5153-8b54-4a90-bd95-33c6fd8f0d1b/50edb665-f427-40c2-ab85-8bb8424b0c32.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 4:42:24</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 5:11:45</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-12/2/2014">12/2/2014</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-62">62</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-MMO">MMO</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Ivory Tower">Ivory Tower</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Ubisoft Reflections">Ubisoft Reflections</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Ubisoft">Ubisoft</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Controller Support">Controller Support</a><br/><a href="#quicklink-Full Controller Support">Full Controller Support</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.pcgamingwiki.com/wiki/The_Crew" target="_blank">PCGamingWiki</a><br/><a href="https://www.ubisoft.com/en-us/game/the-crew/" target="_blank">Official site</a><br/><a href="https://howlongtobeat.com/game?id=19268" target="_blank">HowLongToBeat</a><br/><a href="https://www.igdb.com/games/the-crew" target="_blank">IGDB</a><br/><a href="https://steamdb.info/app/241560/" target="_blank">SteamDB</a><br/><a href="https://www.mobygames.com/game/70189" target="_blank">MobyGames</a><br/><a href="http://en.wikipedia.org/wiki/The_Crew_(video_game)" target="_blank">Wikipedia</a><br/><a href="https://www.wsgf.org/dr/crew/en" target="_blank">WSGF</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-Action">Action</a><br/><a href="#quicklink-America">America</a><br/><a href="#quicklink-Arcade">Arcade</a><br/><a href="#quicklink-Atmospheric">Atmospheric</a><br/><a href="#quicklink-Automobile Sim">Automobile Sim</a><br/><a href="#quicklink-Babel">Babel</a><br/><a href="#quicklink-Contemporary">Contemporary</a><br/><a href="#quicklink-Co-op">Co-op</a><br/><a href="#quicklink-Direct control">Direct control</a><br/><a href="#quicklink-Driving">Driving</a><br/><a href="#quicklink-First-Person">First-Person</a><br/><a href="#quicklink-Great Soundtrack">Great Soundtrack</a><br/><a href="#quicklink-Massively Multiplayer">Massively Multiplayer</a><br/><a href="#quicklink-Motorcycle">Motorcycle</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-North America">North America</a><br/><a href="#quicklink-Offroad">Offroad</a><br/><a href="#quicklink-Off-roading">Off-roading</a><br/><a href="#quicklink-Online Co-Op">Online Co-Op</a><br/><a href="#quicklink-Open World">Open World</a><br/><a href="#quicklink-Racing">Racing</a><br/><a href="#quicklink-Realistic">Realistic</a><br/><a href="#quicklink-Real-Time">Real-Time</a><br/><a href="#quicklink-RPG">RPG</a><br/><a href="#quicklink-Sandbox">Sandbox</a><br/><a href="#quicklink-Simulation">Simulation</a><br/><a href="#quicklink-Singleplayer">Singleplayer</a><br/><a href="#quicklink-Street racing">Street racing</a><br/><a href="#quicklink-Team-Based">Team-Based</a><br/><a href="#quicklink-Third Person">Third Person</a><br/><a href="#quicklink-Truck">Truck</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>The Crew</b></i> was a 2014 <a href="https://en.wikipedia.org/wiki/Online_game">online-only</a> <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing video game</a> co-developed by <a href="https://en.wikipedia.org/wiki/List_of_Ubisoft_subsidiaries#Ubisoft_Ivory_Tower">Ubisoft Ivory Tower</a> and <a href="https://en.wikipedia.org/wiki/Ubisoft_Reflections">Ubisoft Reflections</a> and published by <a href="https://en.wikipedia.org/wiki/Ubisoft">Ubisoft</a>. The game was released for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, with an <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> port developed by <a href="https://en.wikipedia.org/wiki/Asobo_Studio">Asobo Studio</a> in December 2014. It featured a <a href="https://en.wikipedia.org/wiki/Persistent_world">persistent</a> <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> environment for free-roaming across a scaled-down recreation of the <a href="https://en.wikipedia.org/wiki/Contiguous_United_States">contiguous United States</a> and included both <a href="https://en.wikipedia.org/wiki/Role-playing_game">role-playing</a> and <a href="https://en.wikipedia.org/wiki/Massively_multiplayer_online_game">large-scale multiplayer</a> elements.</p>
+
+<p>Upon release, <i>The Crew</i> received mixed reviews from critics who praised the game's world design but criticized the always-online aspect, which created technical glitches and other issues, the difficult-to-understand user interface, and the presence of <a href="https://en.wikipedia.org/wiki/Microtransactions">microtransactions</a>. The game shipped two million units by January 1, 2015. The first expansion, titled <i>The Crew: Wild Run</i>, was released on November 17, 2015. The second expansion, entitled <i>The Crew: Calling All Units</i>, was announced at Gamescom 2016 and released on November 29, 2016.</p>
+
+<p><i>The Crew</i> was later followed by two sequels, <i><a href="https://en.wikipedia.org/wiki/The_Crew_2">The Crew 2</a></i> in 2018 and <i><a href="https://en.wikipedia.org/wiki/The_Crew_Motorfest">The Crew Motorfest</a></i> in 2023. Ubisoft shut down the game's servers in 2024, rendering it unplayable. The game's shutdown would lead to the game being subject of the campaign called "Stop Killing Games".</p>
+
+<h2>Gameplay</h2>
+
+<p><i>The Crew</i> was a <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing game</a> set in a <a href="https://en.wikipedia.org/wiki/Persistent_world">persistent</a> <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> environment for free-roaming across a scaled-down recreation of the <a href="https://en.wikipedia.org/wiki/Contiguous_United_States">contiguous United States</a>. The map was split into five regions: <a href="https://en.wikipedia.org/wiki/Midwestern_United_States">The Midwest</a>, <!-- See comment to the right of the following wikilink --><a href="https://en.wikipedia.org/wiki/Northeastern_United_States">East Coast</a>,<!-- "East Coast" in the game is a misnomer; the game region covers the Northeastern part of the country, not the entire East Coast of the United States itself --> <a href="https://en.wikipedia.org/wiki/Southern_United_States">The South</a>, <a href="https://en.wikipedia.org/wiki/Mountain_States">Mountain States</a>, and <a href="https://en.wikipedia.org/wiki/West_Coast_of_the_United_States">West Coast</a>. Each region had its own unique geographical features. Six main cities (one in each region, two in the Midwest) were featured in the game: <a href="https://en.wikipedia.org/wiki/Detroit">Detroit</a> and <a href="https://en.wikipedia.org/wiki/Chicago">Chicago</a> in the Midwest, <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a> on the East Coast, <a href="https://en.wikipedia.org/wiki/Miami">Miami</a> in The South, <a href="https://en.wikipedia.org/wiki/Las_Vegas">Las Vegas</a> in the Mountain States, and <a href="https://en.wikipedia.org/wiki/Los_Angeles">Los Angeles</a> on the West Coast. Various other cities, namely <a href="https://en.wikipedia.org/wiki/St._Louis">St. Louis</a>, <a href="https://en.wikipedia.org/wiki/Washington,_D.C.">Washington, D.C.</a>, <a href="https://en.wikipedia.org/wiki/New_Orleans">New Orleans</a>, <a href="https://en.wikipedia.org/wiki/Dallas">Dallas</a>, <a href="https://en.wikipedia.org/wiki/Salt_Lake_City">Salt Lake City</a>, <a href="https://en.wikipedia.org/wiki/Santa_Fe,_New_Mexico">Santa Fe</a>, <a href="https://en.wikipedia.org/wiki/San_Francisco">San Francisco</a>, and <a href="https://en.wikipedia.org/wiki/Seattle">Seattle</a>, were also featured in the game. Over thirty smaller cities and towns lined the countryside, such as <a href="https://en.wikipedia.org/wiki/Nashville,_Tennessee">Nashville</a>, <a href="https://en.wikipedia.org/wiki/Norfolk,_Virginia">Norfolk</a> and others. It would take approximately 45 minutes in real time to drive from coast to coast in-game.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Single-player_video_game">single-player</a> campaign was up to 20 hours long, and entailed infiltrating criminal groups with protagonist Alex Taylor (<a href="https://en.wikipedia.org/wiki/Troy_Baker">Troy Baker</a>). Players also had the ability to participate in mini-games called Skills Challenges that could be found across the world. They were triggered by driving through them and included objectives such as weaving through gates and staying as close to a racing line as possible for a period of time. Players' scores were automatically saved so friends could try to beat their scores, in similar fashion to how <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a>' <a href="https://en.wikipedia.org/wiki/EA_Autolog">Autolog</a> works in games of the <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed">Need for Speed</a></i> franchise. Missions could be played alone, with friends, or with online co-op matchmaking. The <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> mode allowed a maximum of eight players to compete in races and other gametypes. There were no in-game loading screens or pauses. Players could also build cars with a <a href="https://en.wikipedia.org/wiki/Tie-in">tie-in</a> app for <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> and <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a>.</p>
+
+<p><i>The Crew</i> creative director Julian Gerighty has called the game a <a href="https://en.wikipedia.org/wiki/Role-playing_game">role-playing game</a> with <a href="https://en.wikipedia.org/wiki/Massively_multiplayer_online_game">large-scale multiplayer</a> elements. The multiplayer was not separate from the single-player. Players had the ability to form "<a href="https://en.wikipedia.org/wiki/Clan_(video_gaming)">crews</a>" to race together or against <a href="https://en.wikipedia.org/wiki/Ghost_(video_gaming)">ghost</a> records.</p>
+
+<p>The game required a constant internet connection to play.</p>
+
+<h2>Plot</h2>
+
+<p>The story begins with player character Alex Taylor pursued by local law enforcement near <a href="https://en.wikipedia.org/wiki/Detroit">Detroit</a>. After losing the cops, he finds a <a href="https://en.wikipedia.org/wiki/Chevrolet_Camaro_(first_generation)">car</a> loaned to him by his friend and father figure, Harry. Harry explains to him that Alex's older brother and the founder of the 5-10 motor club, Dayton, wants to speak to him. Dayton arrives and orders Alex to drive him to <a href="https://en.wikipedia.org/wiki/Ambassador_Bridge">Ambassador Bridge</a>. Once there, Dayton tells him to keep his head down. A <a href="https://en.wikipedia.org/wiki/Ford_GT">sports car</a> pulls up, Dayton goes and talks with the driver, but before he can get back to Alex's car, the driver shoots him and hastily drives off. Alex rushes to Dayton's side as the police arrives to arrest him. Dayton succumbs to his wound, while Alex is charged and later convicted of murder by <a href="https://en.wikipedia.org/wiki/Federal_Bureau_of_Investigation">FBI</a> Special Agent Bill Coburn.</p>
+
+<p>Five years later, Alex, now in prison, encounters FBI Agent Zoe Winters, who informs him that he will be temporarily released if he agrees to cooperate with the FBI in exposing Coburn's corruption, and finding the truth behind Dayton's murder, which has been committed by the new leader of the 5-10s, Dennis “Shiv” Jefferson. In doing so, Alex has to infiltrate the 5-10 and climb up its hierarchy, with ranks named after <a href="https://en.wikipedia.org/wiki/V_engine">V engines</a> and Shiv being the “<a href="https://en.wikipedia.org/wiki/V8_engine">V8</a>” (King V/Big Block/Big Eight). Alex has to work his way to become the “<a href="https://en.wikipedia.org/wiki/V-twin_engine">V2</a>” (V-twin), the “<a href="https://en.wikipedia.org/wiki/V4_engine">V4</a>” (Four Block/Four Banger), and the “<a href="https://en.wikipedia.org/wiki/V6_engine">V6</a>” (Hard Six).</p>
+
+<p>After getting released from prison, Alex accepts his first mission to help the Detroit 5-10 lieutenant Troy. After doing several missions for him, Alex is sent to <a href="https://en.wikipedia.org/wiki/St._Louis">St. Louis</a> to kill that city's V2. Alex and Zoe fake the V2's death, but Troy finds out that she is still alive and proceeds to kill her himself. Alex then gets a call from Herschel Craig, the <a href="https://en.wikipedia.org/wiki/Chicago">Chicago</a> 5-10 and Troy's rival. Craig asks Alex for help to claim territory from Troy. Alex is able to get his 5-10 ink by helping Craig recover a car smuggled from Europe. Alex is sent to <a href="https://en.wikipedia.org/wiki/New_York_City">New York City</a> soon after to help a V6 and Shiv's childhood friend, Eric Tsu .</p>
+
+<p>Alex goes to New York and is reunited with Harry, who agrees to help him. Alex gets an <a href="https://en.wikipedia.org/wiki/Off-road_vehicle">off-road vehicle</a> and meets Eric, racing him and later doing missions for him. Meanwhile, Zoe and Alex are suspicious of Harry when he gets secretive. As it turns out, car shipments for the 5-10s went missing, and Harry had been behind them. It is later revealed that Harry is helping Dayton's girlfriend, Connie, and her five-year-old son, Ben, by stealing a proper escape vehicle to evade the 5-10s and get out of town after hearing about Dayton's death. Alex also has to do a delivery for a mysterious person, later revealed to be Coburn. Harry has Alex follow him with Connie and Ben in the car so they can flee the city safely. Alex gets his V2 ink and is asked to go to <a href="https://en.wikipedia.org/wiki/Miami">Miami</a>.</p>
+
+<p>Alex goes to Miami and meets Alita, Shiv's ex-girlfriend. After winning a race against her crew, and later Alita herself, Alex is tasked with claiming <a href="https://en.wikipedia.org/wiki/Southern_United_States">The South</a> from Cameron “Cam” Rockport, who has been killing various 5-10s to stay in power. Coburn, using a voice scrambler, then calls Alex for help in taking down Shiv. After winning the South from Cam in a race, Alex notices Coburn's plan of killing Cam and saves him. In return for the rescue, Cam comes to support Alex after catching up on the latter's plan to take down Shiv. Afterwards, Shiv notices Alex's activities, giving him the V4 ink and sending him to <a href="https://en.wikipedia.org/wiki/Las_Vegas">Las Vegas</a>.</p>
+
+<p>In <a href="https://en.wikipedia.org/wiki/Las_Vegas">Las Vegas</a>, Alex meets Roxanne, a technology whiz whose missing sister, Daria, joined the 5-10s. After several missions, including one revealing that Daria had been killed by Shiv sometime before, Zoe finds out that Coburn is selling impounded contraband. She then orders Alex to travel to <a href="https://en.wikipedia.org/wiki/Death_Valley">Death Valley</a> to collect evidence against Coburn. After collecting sufficient evidence, Coburn eventually shows up. Alex proceeds to chase Coburn across Las Vegas, and eventually Zoe arrests the corrupt FBI agent for a slew of charges, including his involvement in Dayton's murder. With Coburn finished, Alex gets a call from Shiv, saying he has been invited as a V6 to "The 5-10 Face-Off" on the <a href="https://en.wikipedia.org/wiki/West_Coast_of_the_United_States">West Coast</a>.</p>
+
+<p>Alex goes to <a href="https://en.wikipedia.org/wiki/Los_Angeles">Los Angeles</a> and meets Vincent, a former pro racer. Vincent agrees to help Alex, but Shiv sabotages Alex in the races. With the help of his crew, Alex overcomes all these odds and manages to win. Shiv discovers Alex's desire of vengeance and sends his henchmen to go after Alex. Alex escapes and goes to Shiv's victory party with the intent of assassinating him, but Alex realizes that the people he has met before are now his new family. Refusing to kill Shiv, Alex suggests to settle it in a race instead. At the end of the race, Alex wins, but Shiv refuses to give up. As the police arrives, Shiv pins the blame on Alex, swearing he will kill Alex for selling him out, leading up to a chase along the <a href="https://en.wikipedia.org/wiki/Orange_County,_California">coast</a>.</p>
+
+<p>At the end of the game, Shiv is confronted by the police as his car is totaled. In the subsequent epilogue, Alex explains his love for racing as he is named the new V8.</p>
+
+<h2>Development</h2>
+
+<p>The Ubisoft Ivory Tower development team included former <a href="https://en.wikipedia.org/wiki/Eden_Games">Eden Games</a> employees, and received assistance from <a href="https://en.wikipedia.org/wiki/Ubisoft_Reflections">Ubisoft Reflections</a>. The game was planned with the intention to use the new consoles' social and cooperative play features. On 13 August 2014, Ubisoft confirmed that the game would be released on the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> the same date as the other versions, with Asobo Studio leading the development and Ivory Tower, Ubisoft Reflections and <a href="https://en.wikipedia.org/wiki/Ubisoft_Shanghai">Ubisoft Shanghai</a> providing support.</p>
+
+<p><i>The Crew</i> used Dunia as its <a href="https://en.wikipedia.org/wiki/Video_game_engine">video game engine</a> modified with Ubisoft Ivory Tower's proprietary tools.</p>
+
+<p>On 21 July 2014, Ubisoft released a closed beta of <i>The Crew</i> on the PC for a limited time only. The beta allowed players to play a portion of the story-driven missions in the Midwest and East Coast and free roam the entire United States of America at their own pace. Cars and a variety of other things such as driver levels and specifications for cars were limited. The second closed beta for PC took place from 25 to 29 August 2014. A PlayStation 4 and Xbox One console beta was released on 30 September 2014. Another closed beta for PlayStation 4 and Xbox One took place on 6 to 10 November 2014. An open beta for <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a> members also took place from 25 to 27 November 2014. As part of UBI30, a promotion which would bring seven Ubisoft free games to PC in 2016 as part of Ubisoft's 30th anniversary, the game was free to download from <a href="https://en.wikipedia.org/wiki/Uplay">Uplay</a> from September 14 to mid-October 2016, while the Xbox One version was made available free to <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a> Gold subscribers as part of Microsoft's Games with Gold program from June 16 to July 15, 2016.</p>
+
+<p>The soundtrack for <i>The Crew</i> was composed by <a href="https://en.wikipedia.org/wiki/Joseph_Trapanese">Joseph Trapanese</a>. The track "Heavy As a Feather" was used in the official launch trailer for <i>The Crew</i>.</p>
+
+<h2>Downloadable content</h2>
+
+<h3><i>The Crew: Wild Run</i></h3>
+
+<p><i>The Crew: Wild Run</i> was the first <a href="https://en.wikipedia.org/wiki/Expansion_pack">expansion pack</a> to the 2014 game. It was developed by <a href="https://en.wikipedia.org/wiki/Ivory_Tower_(company)">Ubisoft Ivory Tower</a> and published by <a href="https://en.wikipedia.org/wiki/Ubisoft">Ubisoft</a> for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>. The expansion was announced at <a href="https://en.wikipedia.org/wiki/E3_2015">E3 2015</a> during Ubisoft's press conference. It was released on November 17, 2015.</p>
+
+<p>Adding to the base gameplay, the expansion introduced motorcycles and a range of new cars, and new vehicle specifications such as monster trucks, drift cars, and dragsters, as well as a new multiplayer event, The Summit. In addition, the release of the expansion introduced a graphical overhaul for the game, via an update available to all players whether or not they owned the expansion.</p>
+
+<p>Simultaneously with the DLC release, the game received a mandatory free update for all players. The update includes an "overhaul", which many players believe was a downgrade to the game's graphics. It changed/broke many of the game mechanics, i.e. physics of vehicles.</p>
+
+<p><i>The Crew: Calling All Units</i> was the second expansion pack to the 2014 game. It was announced at <a href="https://en.wikipedia.org/wiki/Gamescom">Gamescom</a> 2016 and was released on November 29, 2016, for PlayStation 4, Windows, and Xbox One alongside the <i>Ultimate Edition</i>, which bundled the base game, all the previously released downloadable content, and both <i>Calling All Units</i> and <i>Wild Run</i> expansions.</p>
+
+<p>In <i>Calling All Units</i>, the player had the ability to play as a police officer, tasked with arresting street racers and smugglers. The expansion introduced a great number of police equipments as well as various types of cars for this purpose, in addition to more vehicles.</p>
+
+<h2>Shutdown and lawsuit</h2>
+
+<p>On December 14, 2023, Ubisoft delisted <i>The Crew</i> and its expansions from digital platforms, suspended sales of microtransactions, and announced that the game's servers would be shut down on March 31, 2024, citing "upcoming server infrastructure and licensing constraints". The servers were shut down as planned on that date. In early April 2024, days after the shutdown, Ubisoft began revoking licenses from players who have bought <i>The Crew</i> without providing refunds or any way to download the game files. The license revocations were criticized for setting a bad precedent for <a href="https://en.wikipedia.org/wiki/Video_game_preservation">video game preservation</a> and ownership, especially when players discovered that the game had unutilized programming for an offline mode.</p>
+
+<p>The shutdown and revocations led to players <a href="https://en.wikipedia.org/wiki/Review_bomb">review bombing</a> the game's sequels, <i><a href="https://en.wikipedia.org/wiki/The_Crew_2">The Crew 2</a></i> and <i><a href="https://en.wikipedia.org/wiki/The_Crew_Motorfest">The Crew Motorfest</a></i>, on <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a>.</p>
+
+<p>On the week of the server shutdown, Ross Scott, a YouTuber who created the <a href="https://en.wikipedia.org/wiki/Machinima">machinima</a> series <i><a href="https://en.wikipedia.org/wiki/Freeman's_Mind">Freeman's Mind</a></i> who has expressed opposition to video game shutdowns like The Crew's in videos uploaded to his YouTube channel since 2015 and had released a video about the game in 2018 noting the game would be shutdown in the future due to its online only nature, launched an initiative called "Stop Killing Games" to encourage players to file a complaint with France's <a href="https://en.wikipedia.org/wiki/Politics_of_France#Some_important_directorates_and_establishments">General Directorate of Competition, Consumption &amp; Repression of Frauds</a> (DGCCRF) to act on video game shutdowns, including that of <i>The Crew</i>. In July 2024, Scott's initiative became an active ballot within the <a href="https://en.wikipedia.org/wiki/European_Citizens'_Initiative">European Citizens' Initiative</a>, requiring 1 million signatures for the <a href="https://en.wikipedia.org/wiki/European_Union">European Union</a> to consider passing relevant legislation. Within several weeks, the petition had accrued over 200,000 signatures.</p>
+
+<p>On November 4, 2024, two Californians—Matthew Cassell and Alan Liu, who respectively purchased physical copies of the game from <a href="https://en.wikipedia.org/wiki/GameStop">GameStop</a> stores in early 2020 and November 2018—filed a <a href="https://en.wikipedia.org/wiki/Class_action">class action</a> lawsuit against Ubisoft in the <a href="https://en.wikipedia.org/wiki/United_States_District_Court_for_the_Eastern_District_of_California">United States District Court for the Eastern District of California</a>. Cassell and Liu accused the company of misleading players into believing that their purchases of the game were permanent instead of buying limited licenses and for "falsely represent[ing]" that the physical copies contained the game's files instead of simply a key to unlock the <a href="https://en.wikipedia.org/wiki/Digital_rights_management">DRM</a> for the game. In the filed complaint, the two compared the shutdown of the game's servers to a person purchasing a <a href="https://en.wikipedia.org/wiki/Pinball">pinball</a> machine and placing it in their home, only to find it years later having suddenly been stripped of its parts, including "paddles" (<a href="https://en.wikipedia.org/wiki/Pinball#Flippers">flippers</a>), the pinball, bumpers, and "<a href="https://en.wikipedia.org/wiki/Pinball#Backglass">the monitor</a> that proudly displayed your unassailable high score", by the pinball machine's own manufacturer, rendering it unplayable.</p>
+
+<p>Ubisoft, in its motion to dismiss the case, emphasized that there was no "unfettered ownership rights in the game" implied when a user purchased the game, and that the shutdown followed a notification period, following terms that were published on the game's retail box and in its digital EULA.</p>
+
+<h3>Fan revival</h3>
+
+<p>After the shutdown of the game, efforts have been made to make the game functional again. A group of fans known as "The Crew Unlimited" ("TCU"), are currently developing a <a href="https://en.wikipedia.org/wiki/Private_server">server emulator</a>. The unofficial server software is being made using dumps of game's network activity from the time that the official servers were available, using a custom <a href="https://en.wikipedia.org/wiki/DLL_file">DLL</a> file provided by authors of the software. The game will be playable either offline, by hosting the server by the player themselves, or online, by connection to server hosted by TCU.</p>
+
+<h2>Reception</h2>
+
+<p><i>The Crew</i> received mixed reviews from critics. Critics overall praised the game's immense world, but disliked the game's technical issues relating to its online-only gameplay, as well as its complicated user interface and use of microtransactions. Aggregating review websites <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> and <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> gave the Windows version 72% based on 7 reviews and 71/100 based on 12 reviews, the Xbox One version 60% based on 14 reviews and 64/100 based on 18 reviews and the PlayStation 4 version 59% based on 37 reviews and 61/100 based on 60 reviews.</p>
+
+<p>Mike Channell from <a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a> gave the game an 8/10, praising its rich content, worthy side-missions and activities, enormous driveable space, successful blend between the story and the multiplayer, huge variety of scenery and rewarding and entertaining co-operative gameplay, but criticizing its poor story and lead character, "outrageous" AI, as well as the inclusion of microtransactions. He stated that "<i>The Crew</i> is an astonishing achievement, not only because of its vastness but also its level of fidelity and the authenticity of its character."</p>
+
+<p>Matthew Kato from <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> gave the game a 7/10, praising the satisfying upgrade and car-purchasing system, as well as the decent voice-acting. However, he criticized the clichéd story and stated that "<i>The Crew</i> feels like an average arcade racer. There are some fun times, but you may be surprised to discover that America is a pretty empty place."</p>
+
+<p>Josh Harmon from <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> gave the game a 6/10, praising the game world, which he stated "has captured the spirit of America" and described the game as "the best open world in a racing game to date". However, he criticized the off-putting microtransactions, as well as poor story-telling and the pay-to-win model of the game. He stated that "Despite delivering an impressive playground, <i>The Crew</i> struggles to build out a worthwhile game experience around it."</p>
+
+<p>Peter Brown from <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> gave the game a 5/10, also praising the massive game world, as well as the single-player mission, but criticizing the automatically activated missions, frustrating side-missions, such as the raid car missions and the fleeing missions, as well as outdated graphics, poor physics, AI and user interface, texture pop-in and disappointing cars, buildings and environment models. He also criticized the game for not encouraging players to form a crew to play missions. He summarized the review by saying that "<i>The Crew</i> isn't that good after all. When you can't play due to server issues, you find a new game to play and leave <i>The Crew</i> in your dust."</p>
+
+<p>Despite the mixed reviews, the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>The Crew</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Racing_Game_of_the_Year">Racing Game of the Year</a>" during the <a href="https://en.wikipedia.org/wiki/18th_Annual_D.I.C.E._Awards">18th Annual D.I.C.E. Awards</a>.</p>
+
+<p><i>The Crew</i> had shipped 2 million units by January 1, 2015. In May 2016, Ivory Tower announced that the game had been played by over 5 million players. On May 12, 2017, the game had reached 12 million players.</p>
+
+<h2>Sequels</h2>
+
+<p>In May 2017, Ubisoft announced its sequel, <i><a href="https://en.wikipedia.org/wiki/The_Crew_2">The Crew 2</a></i>. It was scheduled to be released worldwide in early 2018 for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>. In the sequel, the roster of vehicles expands to include planes, boats and motorcycles. The game was released on June 29, 2018.</p>
+
+<p>In late January 2023, Ubisoft announced its second sequel, <i><a href="https://en.wikipedia.org/wiki/The_Crew_Motorfest">The Crew Motorfest</a></i>. It was released on September 14, 2023 for PlayStation 4, <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a>, Windows, Xbox One, and <a href="https://en.wikipedia.org/wiki/Xbox_Series_X_and_Series_S">Xbox Series X/S</a>. Unlike the two previous <i>The Crew</i> games, <i>Motorfest</i> is set in scaled-down recreations of the <a href="https://en.wikipedia.org/wiki/Hawaiian_Islands">Hawaiian Islands</a> of <a href="https://en.wikipedia.org/wiki/Oahu">Oʻahu</a> and <a href="https://en.wikipedia.org/wiki/Maui">Maui</a><!--Not in the sources of this page but in the sources of the game's page-->.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

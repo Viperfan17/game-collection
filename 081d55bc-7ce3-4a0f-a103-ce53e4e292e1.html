@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Need for Speed™: ProStreet</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('081d55bc-7ce3-4a0f-a103-ce53e4e292e1/9789a466-233a-45c2-bcae-242fd047e9b7.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="081d55bc-7ce3-4a0f-a103-ce53e4e292e1/fe62ab6b-af5c-4bd9-87b1-05eb3ca8c623.png"/> Need for Speed™: ProStreet</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="081d55bc-7ce3-4a0f-a103-ce53e4e292e1/e7690dac-1709-4ede-a6ee-25dfb75050aa.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 2:52:52</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 3:58:19</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/26/2007">10/26/2007</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-68">68</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-EA Black Box">EA Black Box</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_ProStreet" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[HLTB] 10 to 20 hours">[HLTB] 10 to 20 hours</a><br/><a href="#quicklink-[People] composer: Junkie XL">[People] composer: Junkie XL</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Need for Speed: ProStreet</b></i> is a 2007 <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing video game</a> developed by <a href="https://en.wikipedia.org/wiki/EA_Black_Box">EA Black Box</a> and published by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a>. It is the eleventh installment in the <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed">Need for Speed</a></i> series and a follow-up to <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Carbon">Need for Speed: Carbon</a></i> (2006). Unlike its immediate predecessors, which focused on the contemporary <a href="https://en.wikipedia.org/wiki/Illegal_street_racing">illegal street racing</a> scene, <i>ProStreet</i> focuses on legal circuit races that take place on <a href="https://en.wikipedia.org/wiki/Race_track">closed tracks</a>. The game blends elements of both <a href="https://en.wikipedia.org/wiki/Sim_racing">sim</a> and <a href="https://en.wikipedia.org/wiki/Arcade_racing">arcade racing</a> games, requiring players to customize and <a href="https://en.wikipedia.org/wiki/Car_tuning">tune</a> cars for various race modes. Most races take place in real-world locations such as the <a href="https://en.wikipedia.org/wiki/Portland_International_Raceway">Portland International Raceway</a>, <a href="https://en.wikipedia.org/wiki/Mondello_Park">Mondello Park</a>, and <a href="https://en.wikipedia.org/wiki/Autopolis">Autopolis</a>.</p>
+
+<p>Developed over the course of almost two years, <i>ProStreet</i> was conceived by the same team who led the production of <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Most_Wanted_(2005_video_game)">Need for Speed: Most Wanted</a></i>. It is the first <i>Need for Speed</i> game that was primarily developed for high-definition consoles such as the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, although versions for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, and <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> were also released. The game features a new <a href="https://en.wikipedia.org/wiki/Physics_engine">physics engine</a>, which allows cars to handle in a more realistic way and take damage in accidents, and introduced a <a href="https://en.wikipedia.org/wiki/Wind_tunnel">wind tunnel</a> feature where players can see how their car's <a href="https://en.wikipedia.org/wiki/Automotive_aerodynamics">aerodynamics</a> work. Musician <a href="https://en.wikipedia.org/wiki/Junkie_XL">Junkie XL</a> was hired to compose the score of the game. Several <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> packs were released for the game, expanding its content with more cars, tracks, and races.</p>
+
+<p><i>ProStreet</i> received mixed reviews from critics, who generally criticized the lack of <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> gameplay of its predecessors. The game's numerous online features and car customization options were highlighted as some of its strongest features. Although <i>ProStreet</i> sold more than five million units worldwide, it did not meet sales expectations according to Electronic Arts. Portable adaptations for <a href="https://en.wikipedia.org/wiki/Mobile_phone">mobile phones</a>, <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>, and <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> were released to varying success. These differ greatly from their console and PC counterparts, offering simpler gameplay mechanics and a reduced amount of features. <i>ProStreet</i> was succeeded by <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Undercover">Need for Speed: Undercover</a></i> (2008).</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Need for Speed: ProStreet</i> is a <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing</a> game where the player must <a href="https://en.wikipedia.org/wiki/Car_tuning">tune</a> and drive cars on various <a href="https://en.wikipedia.org/wiki/Race_track">race tracks</a>. Although it is an <a href="https://en.wikipedia.org/wiki/Arcade_racing">arcade racing</a> game, cars handle in a more realistic way than in previous <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed">Need for Speed</a></i> games. The player assumes the role of Ryan Cooper, a former street racer who enters a series of showdown events run by several racing organizations. Each event comprises a number of races where the player must compete against <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_in_video_games">computer-controlled</a> opponents to earn points and cash. Points allow the player to unlock more challenging events and progress through the game, while cash can be used to purchase or upgrade cars. The overall objective of the game is to ultimately confront a number of elite drivers called Kings. By individually beating every King, Cooper will be crowned the Street King.</p>
+
+<p>The game features four race modes: Grip, Drag, Drift, and Speed. Grip races involve the player racing around a circuit over several laps, where the win condition depends on four variations. These include crossing the finish line in the first position or ahead of a class of drivers based on their car performance, recording the best lap time, and recording the best sector times, with each sector representing a section of the circuit. In Drag, the player must be the first to cross a finish line on a short and straight course, changing gears manually. Some also require the player to perform long <a href="https://en.wikipedia.org/wiki/Wheelie">wheelies</a>. Drag races always start out with a mini-game where the player can gain a good starting grip by heating up car tires while in braked position. Drift races require the player to score points by <a href="https://en.wikipedia.org/wiki/Drifting_(motorsport)">drifting</a> around bends, while Speed races involve the player maintaining very high speeds on a relatively straight point-to-point course. The win condition of Speed races depends on two variants, which include crossing the finish line in the first position or reaching the highest speed at designated checkpoints. Most races take place in real-world locations such as <a href="https://en.wikipedia.org/wiki/Texas_World_Speedway">Texas World Speedway</a>, <a href="https://en.wikipedia.org/wiki/Portland_International_Raceway">Portland International Raceway</a>, <a href="https://en.wikipedia.org/wiki/Mondello_Park">Mondello Park</a>, and <a href="https://en.wikipedia.org/wiki/Autopolis">Autopolis</a>.</p>
+
+<p><i>ProStreet</i> features a large number of cars, ranging from affordable tuner-friendly <a href="https://en.wikipedia.org/wiki/Sedan_(automobile)">sedans</a> to <a href="https://en.wikipedia.org/wiki/Exotic_car">exotic cars</a>. Each car can be highly customized, including its performance, handling, and appearance. Body modifications such as <a href="https://en.wikipedia.org/wiki/Spoiler_(car)">spoilers</a> and <a href="https://en.wikipedia.org/wiki/Hood_(car)">hoods</a> affect the car's <a href="https://en.wikipedia.org/wiki/Automotive_aerodynamics">aerodynamics</a> and can be sculpted accordingly. Cars and <a href="https://en.wikipedia.org/wiki/Automotive_aftermarket">aftermarket</a> parts are grouped into four tiers that represent performance levels, which are gradually unlocked as the player progresses through the game. Each car can have a maximum of three blueprints associated with it, with each blueprint representing a different customization. Choosing and tuning the right car for the right race mode is critical to complete the game. For example, Grip races favour cars with fast acceleration and strong <a href="https://en.wikipedia.org/wiki/Drag_(physics)">drag</a> force, while Speed races favour cars with high top speeds and stability. Cars can be damaged or completely totalled in accidents, and the player must often repair them with cash or by using repair markers, which can be awarded in events or bought separately.</p>
+
+<p>In addition to the game's main career mode, <i>ProStreet</i> features a number of predefined and stand-alone events where the player can race against computer-controlled opponents on any track without the consequences of having to spend cash to repair cars. They also serve as social areas for multiple players to compete online or via <a href="https://en.wikipedia.org/wiki/Split_screen_(video_games)">split screen</a>. Each event has its own leaderboard, allowing the player to compare their records against top players. Although a variety of pre-tuned cars are available for each event, players also have the option to race with their custom cars from the game's career mode. Players may also create their own custom events. Options such as the location, type, and the number of races, as well as the difficulty of computer-controlled opponents and the number of repair markers available, can be individually configured. Both custom events and car blueprints can be shared with other players. Once a blueprint is shared with another player, it can no longer be modified because the records associated with it are tracked on leaderboards. Private leaderboards are automatically created for each custom event that is shared.</p>
+
+<h2>Development</h2>
+
+<p><i>ProStreet</i> was developed by <a href="https://en.wikipedia.org/wiki/EA_Black_Box">EA Black Box</a> as a follow-up to <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Carbon">Need for Speed: Carbon</a></i>. Unlike its immediate predecessors, which focused on the contemporary illegal <a href="https://en.wikipedia.org/wiki/Street_racing">street racing</a> scene, <i>ProStreet</i> was conceived as an interpretation of where the culture was heading. After spending a lot of time familiarizing with the scene, Black Box came to the conclusion that the culture was moving away from the streets and getting more organized because the penalties for street racing were too harsh. This resulted in a stronger emphasis on car performance and driving skills, without external factors such as traffic and police chases. According to producer Andrew Hahn, the main idea for the game was to deliver "the ultimate proving ground". Development of the game started in early 2006 by the same team who led the production of <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Most_Wanted_(2005_video_game)">Need for Speed: Most Wanted</a></i>. The development team was initially composed of 20 people, who did not work on <i>Carbon</i>, but gradually grew to over 100 people by June 2007.</p>
+
+<p><i>ProStreet</i> is the first <i>Need for Speed</i> game that was primarily developed for high-definition consoles such as the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>. As a result, the development team had to strip down graphical features to make it run on less powerful hardware such as the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> and <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>. This was the reverse process of what the team used to do with previous games, which were primarily developed for the PlayStation 2 and original <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a> and then <a href="https://en.wikipedia.org/wiki/Porting">ported</a> up to their successors with higher fidelity. The game's near two-year development cycle gave developers time to create technologies for the car damage system and smoke effects. A new <a href="https://en.wikipedia.org/wiki/Physics_engine">physics engine</a> was specifically built for the game, which required a physics team to collect real data from the <a href="https://en.wikipedia.org/wiki/Porsche">Porsche</a> test track in <a href="https://en.wikipedia.org/wiki/Leipzig">Leipzig</a>, Germany. Although cars behave in a realistic way, visual aids and systems such as <a href="https://en.wikipedia.org/wiki/Anti-lock_braking_system">anti-lock braking</a>, <a href="https://en.wikipedia.org/wiki/Electronic_stability_control">stability management</a>, and <a href="https://en.wikipedia.org/wiki/Traction_control">traction control</a>, which can optionally be turned on, were developed to make the game accessible to players who are not racing enthusiasts. Because the game features licensed cars that can be completely totaled in accidents, full damage and customization had to be signed off by their manufacturers.</p>
+
+<p>An audio team of 12 people spent several months auditioning cars to record the loud sound effects the game required. Ultimately, racing cars without <a href="https://en.wikipedia.org/wiki/Muffler">mufflers</a>, such as the <a href="https://en.wikipedia.org/wiki/Chevrolet_Corvette_C6.R">Chevrolet Corvette C6.R</a>, the <a href="https://en.wikipedia.org/wiki/Cadillac_CTS-V">Cadillac CTS-V</a>, and the <a href="https://en.wikipedia.org/wiki/Dodge_Viper">Dodge Viper</a>, were considered the best choice. Although car engines, <a href="https://en.wikipedia.org/wiki/Turbocharger">turbochargers</a>, and tire <a href="https://en.wikipedia.org/wiki/Skid_(automobile)">skids</a> were individually recorded from real cars, sounds effects such as whooshes and crashes are synthetic. For example, crashes were recorded in multiple layers, combining car drops from cranes and metal hits in the studio, and then edited in post-production. Because the <a href="https://en.wikipedia.org/wiki/Nissan_GT-R">Nissan GT-R</a> featured in the game was not yet out on the market, its sound effects were created from other car recordings. A new crash audio system was built to support the game's real-time damage modelling feature, allowing car parts to sound different when taking damage. Seven surface types were also modelled, resulting in collisions sounding different depending on the surface players hit, even if they hit it in the exact same way.</p>
+
+<p>The game's Auto-sculpt system, which was introduced in <i>Carbon</i> as a visual customization option, allowing players to sculpt body parts of their car, was improved so it affects the car's performance. This was complemented with a <a href="https://en.wikipedia.org/wiki/Wind_tunnel">wind tunnel</a> feature, which allows players to see how their car's aerodynamics work. Artificial intelligence was made more aggressive, allowing computer-controlled opponents to crash cars in accidents. Online features were expanded and improved with asynchronous gameplay, allowing players to compete with each other without being online at the same exact time. Australian model and former <i><a href="https://en.wikipedia.org/wiki/Big_Brother_(Australian_TV_series)">Big Brother</a></i> contestant <a href="https://en.wikipedia.org/wiki/Krystal_Forscutt">Krystal Forscutt</a>, as well as Japanese model <a href="https://en.wikipedia.org/wiki/Sayoko_Ohashi">Sayoko Ohashi</a>, was hired to appear as one of the game's flag girls. The promotional shots and video footage to capture Forscutt's animations were done in four days. Although musician <a href="https://en.wikipedia.org/wiki/Junkie_XL">Junkie XL</a> was hired to compose the score of the game, <i>ProStreet</i> features a large number of songs from international artists. Junkie XL worked closely with the developers to make the score fully interactive and match the style of the licensed tracks, which ranges from <a href="https://en.wikipedia.org/wiki/Electronic_rock">electronic rock</a> to <a href="https://en.wikipedia.org/wiki/Electroclash">electroclash</a>, <a href="https://en.wikipedia.org/wiki/Punk_rock">punk rock</a>, and <a href="https://en.wikipedia.org/wiki/Dance-punk">dance-punk</a>.</p>
+
+<h2>Marketing and release</h2>
+
+<p>Although the game's title was leaked by Russian distributor Soft Club in February 2007, <i>ProStreet</i> was officially announced on May 31. The game was then presented at <a href="https://en.wikipedia.org/wiki/E3_2007">E3 2007</a>, receiving a nomination for Best Racing Game at the <a href="https://en.wikipedia.org/wiki/Game_Critics_Awards">Game Critics Awards</a>. A playable demonstration of the game was showcased at the <a href="https://en.wikipedia.org/wiki/Games_Convention">Games Convention</a> in August, while an in-game single by Junkie XL, entitled "More", was digitally released on September 25, serving as a lead-up to his 2008 album <i><a href="https://en.wikipedia.org/wiki/Booming_Back_at_You">Booming Back at You</a></i>. Shortly before the game was released, a <a href="https://en.wikipedia.org/wiki/Game_demo">demo</a> was made available for download on <a href="https://en.wikipedia.org/wiki/Xbox_Live">Xbox Live</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a>, and on the Internet for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> users. In the United Kingdom, advertisements for the game appeared on <i><a href="https://en.wikipedia.org/wiki/The_Sun_(United_Kingdom)">The Sun</a></i>'s <a href="https://en.wikipedia.org/wiki/Page_3">Page 3</a> site, featuring topless models posing with a <a href="https://en.wikipedia.org/wiki/Ferrari">Ferrari</a>. Publisher <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> later removed the material, claiming that it "slipped" through their proper approval process.</p>
+
+<p><i>ProStreet</i> was released for PlayStation 3, Xbox 360, Microsoft Windows, PlayStation 2, and Wii in North America on November 14, 2007. In Europe, the game was released for Xbox 360, PlayStation 3, Microsoft Windows, and PlayStation 2 on November 23, and for Wii on November 30. Multiple <a href="https://en.wikipedia.org/wiki/Downloadable_content">downloadable content</a> packs for the game were released between November 2007 and February 2008 on Xbox Live and PlayStation Network. These expand the game with new cars, tracks, and career mode races. Notable cars include the <a href="https://en.wikipedia.org/wiki/Lamborghini_Murciélago_LP640">Lamborghini Murciélago LP640</a>, the <a href="https://en.wikipedia.org/wiki/Porsche_Cayman_S">Porsche Cayman S</a>, the <a href="https://en.wikipedia.org/wiki/Shelby_GT500">Shelby GT500</a>, the <a href="https://en.wikipedia.org/wiki/McLaren_F1">McLaren F1</a>, and the <a href="https://en.wikipedia.org/wiki/Bugatti_Veyron_16.4">Bugatti Veyron 16.4</a>, while the new tracks are the Leipzig Test Track and the <a href="https://en.wikipedia.org/wiki/Shuto_Expressway">Shuto Expressway</a>. One of the updates caused technical issues such as <a href="https://en.wikipedia.org/wiki/Hang_(computing)">freezes</a> and <a href="https://en.wikipedia.org/wiki/Crash_(computing)">crashes</a> in the Microsoft Windows and PlayStation 3 versions. All of the game's online features were discontinued in April 2012.</p>
+
+<h2>Reception</h2>
+
+<p><i>ProStreet</i> received mixed reviews from critics according to review aggregator <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> described <i>ProStreet</i> as a solid racing game, but remarked that it misses most of the features that made its predecessors interesting. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> agreed, stating that the game lacks extra features outside of the races themselves, especially when compared to the <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> aspect and police chases of previous <i>Need for Speed</i> games. Other publications were more positive towards the game. <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> praised <i>ProStreet</i> for its high-definition graphics, solid online features, and rewarding career mode, while <i><a href="https://en.wikipedia.org/wiki/1Up.com">1Up.com</a></i> highlighted the game's sense of realism due to its new physics engine. The PlayStation 2 and Wii versions were considered inferior to their PlayStation 3 and Xbox 360 counterparts due to their lack of online features, while the Microsoft Windows version was criticized for running poorly on high graphic settings and for lacking online players.</p>
+
+<p>The game's visuals were generally well received, although the PlayStation 2 and Wii versions were criticized for their notable <a href="https://en.wikipedia.org/wiki/Aliasing">aliasing</a>. <i>1Up.com</i> noted the game's gritty and realistic style, stating that racing through the game's depiction of the <a href="https://en.wikipedia.org/wiki/Nevada">Nevada</a> desert feels very authentic. <i><a href="https://en.wikipedia.org/wiki/GameRevolution">GameRevolution</a></i> praised the smooth graphics, but remarked that the lack of elaborate cityscapes makes the track environments less interesting than those of its predecessors. <i>GameSpot</i> highlighted the detailed car models, especially when they are damaged, while <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> felt that the event meetings between races give the game a suitable atmosphere. However, the game's announcers annoyed some critics. According to <i>GameSpot</i>, they are poorly voiced, have a bad script, yell into the microphone, insist on calling the players by their names every time they refer to them (which is hundreds of times over the course of the game), and it becomes annoying the whole time.</p>
+
+<p>The fact that <i>ProStreet</i> combines elements of both simulation and <a href="https://en.wikipedia.org/wiki/Arcade_racing">arcade racing</a> games confused some critics. <i>GameRevolution</i> felt that the game's navigation aids were too distracting and unintuitive, while <i>IGN</i> remarked that the driving physics were not realistic enough, stating that cars feel very reluctant to want to turn. In contrast, <i>1Up.com</i> highly praised the new physics engine because more variables come into play, giving the game much more depth. <i><a href="https://en.wikipedia.org/wiki/Nintendo_Life">Nintendo Life</a></i> remarked that, while the motion controls of the Wii version worked well, they were not as responsive as those of <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a>'s <i><a href="https://en.wikipedia.org/wiki/Excite_Truck">Excite Truck</a></i>. Some critics found the gameplay to be very repetitive, especially during Drag races. <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> explained that each involves completing several rounds of heating up car tires before starting a race that only lasts for a few seconds, resulting in players losing interest quickly. The car customization options and new Auto-sculpt system were credited for giving the game a lot of depth.</p>
+
+<p>The Xbox 360 version was condemned for its <a href="https://en.wikipedia.org/wiki/Video_game_monetization">monetization</a> practices, which allow players to alternatively upgrade and purchase cars with <a href="https://en.wikipedia.org/wiki/Microsoft_Points">Microsoft Points</a> instead of in-game cash. The fact that Microsoft Points also give players the ability to purchase any car at any point in the game's career mode was criticized for unbalancing the game mechanics, as it allows players to easily complete early courses with more powerful cars. The online features were highlighted as one of the best aspects of <i>ProStreet</i>. Critics noted that the flexibility of options, leaderboard system, as well as the ability to create events and share blueprints, make the game a highly social experience. Asynchronous multiplayer events were equally praised, as they allow players to compete without having to worry about time zone differences.</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/11th_Annual_Interactive_Achievement_Awards">11th Annual Interactive Achievement Awards</a>, <i>Need for Speed: ProStreet</i> received nominations for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Racing_Game_of_the_Year">Racing Game of the Year</a>" and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Audio_Design">Outstanding Achievement in Sound Design</a>" by the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a>.</p>
+
+<h3>Sales</h3>
+
+<p>In February 2008, Electronic Arts reported that <i>ProStreet</i> had sold 5.5 million copies worldwide and that 65% of these were sold out of North America. In the United Kingdom, the game debuted at number two in the all formats charts, behind <i><a href="https://en.wikipedia.org/wiki/Assassin's_Creed_(video_game)">Assassin's Creed</a></i>. The PlayStation 2 version received a "Platinum" sales award from the <a href="https://en.wikipedia.org/wiki/Entertainment_and_Leisure_Software_Publishers_Association">Entertainment and Leisure Software Publishers Association</a>, indicating sales of at least 300,000 copies in the United Kingdom. As of October 2009, the game had sold 2.4 million copies in the United States according to <a href="https://en.wikipedia.org/wiki/The_NPD_Group">The NPD Group</a>. Although <i>ProStreet</i> performed well internationally, <a href="https://en.wikipedia.org/wiki/EA_Games">EA Games</a> president Frank Gibeau remarked that it did not meet sales expectations, stating that the game was a major departure from the tuner culture and police evasion aspects consumers expected, and promised that the <i>Need for Speed</i> series would go back to its roots with subsequent games.</p>
+
+<h2>Portable adaptations</h2>
+
+<p><i>ProStreet</i> was adapted for <a href="https://en.wikipedia.org/wiki/Mobile_phone">mobile phones</a> and <a href="https://en.wikipedia.org/wiki/Handheld_game_console">handheld game consoles</a>. These adaptations differ greatly from their console and computer counterparts, offering simpler gameplay mechanics and a reduced amount of features. The mobile edition, which was developed by <a href="https://en.wikipedia.org/wiki/IronMonkey_Studios">IronMonkey Studios</a>, was released by <a href="https://en.wikipedia.org/wiki/EA_Mobile">EA Mobile</a> in Europe and North America in October 2007. The gameplay involves the player drifting around corners as their car automatically modulates its speed on a track. By successfully drifting, the player gains <a href="https://en.wikipedia.org/wiki/Nitrous_oxide">nitrous oxide</a>, which can then be used to boost the car's speed on straights. Drifting also awards the player with cash, which can be spent on upgrading a car's performance or purchasing a new one. To progress through the game, the player must complete three events comprising three races each. Completing an event gives the player a code that can be used to unlock features in the console and computer editions of the game.</p>
+
+<p>An adaptation for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> was developed by <a href="https://en.wikipedia.org/wiki/Exient_Entertainment">Exient Entertainment</a> and released in 2007 (in North America on November 14, and in Europe on November 23). In addition to the game's four race modes, the Nintendo DS adaptation includes a rhythm mini-game where players must show off their car's <a href="https://en.wikipedia.org/wiki/Car_hydraulics">hydraulics</a> system by tapping buttons to the beat of a song. The game features a multiplayer mode that allows up to eight players to compete against each other via a single-cartridge <a href="https://en.wikipedia.org/wiki/Download_Play">Download Play</a> session or a multi-cartridge <a href="https://en.wikipedia.org/wiki/Wireless_LAN">Wireless LAN</a> connection. In Download Play mode, every player must drive the same car as the host. The game also supports online play for up to four players via the <a href="https://en.wikipedia.org/wiki/Nintendo_Wi-Fi_Connection">Nintendo Wi-Fi Connection</a> service. Critical reception was slightly more positive than that of its console and computer counterparts, with <i>IGN</i> describing the game as a successful conversion for Nintendo DS standards.</p>
+
+<p>An adaptation for the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> was released in North America and Europe in February 2008. Unlike previous <i>ProStreet</i> releases, the PlayStation Portable edition has no backstory and features six race modes. These include Circuit and Sprint, which involve the player racing around a circuit over several laps or on a point-to-point course, Lap KO and Gate KO, which are races where the last player is eliminated at the end of each lap or a designated checkpoint, Time Attack, which requires the player to reach the finish line before a timer runs out, and Speed Trap, where the player must accumulate the fastest cumulative speed at designated checkpoints. The game introduces an assist tool called Driver Intuition, which temporarily gives players an acceleration and traction boost if they keep their car on an ideal driving path. A multiplayer mode is also included, allowing players to compete against each other online or wirelessly via <a href="https://en.wikipedia.org/wiki/Wireless_ad_hoc_network">ad hoc</a>. Critical reception for the PlayStation Portable adaptation was more negative, with journalists criticizing its substandard controls and generic race modes.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Need for Speed™: Underground</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('fa0be738-5b9d-46a2-8d8a-4a99f7efc584/871b1a6f-82bb-4744-a8ba-675310a09584.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="fa0be738-5b9d-46a2-8d8a-4a99f7efc584/688d2fff-c3ee-40d6-9a6c-62316dfac99a.png"/> Need for Speed™: Underground</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="fa0be738-5b9d-46a2-8d8a-4a99f7efc584/375cb809-6a6c-4d06-b336-86d754c8d394.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 2:50:35</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/7/2025">5/7/2025</a> 3:29:42</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="index.html#quicklink-$PC (Windows)">$PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/17/2003">11/17/2003</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_ascending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-82">82</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-EA Black Box">EA Black Box</a><br/><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Pocketeers">Pocketeers</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Underground" target="_blank">Wikipedia</a><br/><a href="https://www.mobygames.com/game/need-for-speed-underground" target="_blank">MobyGames</a><br/><a href="https://www.mobygames.com/game/need-for-speed-underground_" target="_blank">MobyGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Need for Speed: Underground</b></i> is a 2003 <a href="https://en.wikipedia.org/wiki/Racing_video_game">racing video game</a> and the seventh installment in the <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed">Need for Speed</a></i> series following <a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Hot_Pursuit_2"><i>Hot Pursuit 2</i></a> (2002). It was developed by <a href="https://en.wikipedia.org/wiki/EA_Black_Box">EA Black Box</a> and published by <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a>. Three different versions of the game were produced: one for consoles and <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, and another for the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a>. An <a href="https://en.wikipedia.org/wiki/Arcade_game">arcade</a> version developed by <a href="https://en.wikipedia.org/wiki/Global_VR">Global VR</a> and co-published by <a href="https://en.wikipedia.org/wiki/Konami">Konami</a> came out two years later.</p>
+
+<p>Unlike previous <i>Need for Speed</i> games, which featured <a href="https://en.wikipedia.org/wiki/Sports_car">sports cars</a> and <a href="https://en.wikipedia.org/wiki/Exotic_car">exotics</a>, <i>Underground</i> featured vehicles associated with the <a href="https://en.wikipedia.org/wiki/Import_scene">import scene</a>. It was the first game in the series to offer a career mode that features a comprehensive storyline, and a garage mode that allowed players to fully customize their cars with a large variety of brand-name performance and visual upgrades. All races take place in the fictional Olympic City.</p>
+
+<p><i>Underground</i> was critically and commercially successful, selling around 15 million units and receiving positive reviews. It was followed by <i><a href="https://en.wikipedia.org/wiki/Need_for_Speed:_Underground_2">Need for Speed: Underground 2</a></i> in 2004.</p>
+
+<h2>Plot</h2>
+
+<p>The game begins with a circuit race set in Olympic City (fictional city based mainly on the city of <a href="https://en.wikipedia.org/wiki/Seattle">Seattle</a> and named after nearby <a href="https://en.wikipedia.org/wiki/Olympic_National_Park">Olympic National Park</a>), with the player driving a white <a href="https://en.wikipedia.org/wiki/Honda_Integra#Integra_Type_R">Honda/Acura Integra Type R</a> that sports a unique set of vinyl and a wide <a href="https://en.wikipedia.org/wiki/Body_kit">body kit</a>. They dominantly win the race; only to be awakened from a daydream by a woman named Samantha.</p>
+
+<p>Samantha is the player's contact in Olympic City, touring them across the <a href="https://en.wikipedia.org/wiki/Import_scene">import culture scene</a> and <a href="https://en.wikipedia.org/wiki/Illegal_street_racing">illegal street racing</a> therein. Albeit poking fun at the player's choice of car, she helps the player buy their first car and kickstarts the player by introducing them to local street racers such as Jose (who offers circuit events), Klutch (who offers <a href="https://en.wikipedia.org/wiki/Drag_racing">drag events</a>), and Dirt (who offers <a href="https://en.wikipedia.org/wiki/Drifting_(motorsport)">drift events</a>). In event #7, she introduces him to T.J., a mechanic who rewards them with numerous performance upgrades and parts, provided they win their time trial challenges. Samantha also issues time trials to the player, her rewards being unique visual modifications instead.</p>
+
+<p>Eventually, the player draws the attention of <i>The Eastsiders</i>, after racing their members Chad, Kurt, and Todd to climb up the racing ranking boards. Eddie, the leader of the gang and his girlfriend Melissa take notice of the player. Eddie is the current best underground racer in Olympic City - unimpressed by the player, he insults them for their racing skills, going as far as demanding they "take a taxi home so that he can get home faster" while throwing cash at their face, and signaling for a taxi cab to pick up the player in an event.</p>
+
+<p>In time, the player develops too much reputation and hype to be ignored by Eddie, who proceeds to challenge them to race Samantha to continue upward in the ranking boards. She gets infuriated by the player's acceptance and loses after she totals the engine of her <a href="https://en.wikipedia.org/wiki/Honda_Civic_Si">Honda Civic Si</a> during the race. Her car is taken by T.J. for himself thereafter. Deeply saddened by the player's willingness to race her and the loss of her car to T.J., Samantha distances herself from the player, but they continue receiving race offers nonetheless.</p>
+
+<p>Building up to the endgame, the player faces and defeats Chad, Kurt, Todd, and Dirt for the #1 rank of their respective boards, then faces T.J. in Samantha's vandalized Civic in a pink slip race. They win the car back and return it to Samantha, rekindling their friendship. Samantha rewards the player with a unique body kit choice.</p>
+
+<p>Eddie then challenges the player to a sprint race and loses; before the player's crew can celebrate, an unidentified racer in a grey <a href="https://en.wikipedia.org/wiki/Nissan_350Z">Nissan 350Z</a> challenges the player to a final 4-lap circuit race; the driver of the 350Z is revealed to be Melissa. The player accepts her challenge and wins, solidifying their status as the best underground racer in Olympic City.</p>
+
+<h2>Gameplay</h2>
+
+<p>Gameplay in <i>Underground</i> typically involves the player defeating opponents in an illegal <a href="https://en.wikipedia.org/wiki/Street_racing">street races</a> in the fictional Olympic City (which was largely based on many real-life cities such as Vancouver, London, Paris, Los Angeles, New York City, and San Francisco.) The game introduces <a href="https://en.wikipedia.org/wiki/Nitrous_oxide">nitrous oxide</a> for the first time in the series which can be used to boost the acceleration of the car for maximum speed; however, it can only be used once and cannot be used again until the player restarts the race.</p>
+
+<h3>Game modes</h3>
+
+<p>There are several game modes present in <i>Underground</i>:</p>
+
+<ul>
+  <li><b>Circuit</b> is a standard race that involves racing with up to three opponents <a href="https://en.wikipedia.org/wiki/Automobile">cars</a> around a loop track for two or more laps. It is the main mode of the game.</li>
+</ul>
+
+<ul>
+  <li><b>Knockout Mode</b> is similar to previous <i>Need for Speed</i> titles. It is played on the circuit tracks and involves "knocking out" the last racer who passes the finish line in each lap until the final leader of the race remains and wins the race. In <i>Underground</i>, Knockout sessions have a maximum of three laps for four racers.</li>
+</ul>
+
+<ul>
+  <li><b>Sprint</b> mode is a variation on the Circuit mode, where the contestants race in a point-to-point track instead of loop tracks. These races are typically shorter than "circuits" (with a maximum of 8 km in length), so players are required to be more cautious of any mistakes during racing, such as crashing into barriers or vehicles.</li>
+</ul>
+
+<ul>
+  <li><b><a href="https://en.wikipedia.org/wiki/Drifting_(motorsport)">Drifting</a></b> is the most challenging and <a href="https://en.wiktionary.org/wiki/technical">technical</a> aspect of the game. Drift mode consists of one player in a short loop track, where the objective is to collect as many points as possible by drifting along the track. The player competes with three other contestants, who appear to accumulate scores along with the player during the drift session. The player would be required to beat these scores to obtain top positions. Bonuses are awarded for players who drift in the outer borders of the track, drift vertically, or perform chained-drifting (continuous drifting by constantly steering the vehicle during drifts to maintain speed); if the player succeeds in ending a drift without collisions onto the sides of the track, the collected points are added into the score, otherwise, the collected points are canceled. Drift mode is the only type of racing where <a href="https://en.wikipedia.org/wiki/Time">time</a> taken to complete the track does not matter, since players are given the freedom to complete the allocated number of laps at their own pace, hence there is no <a href="https://en.wikipedia.org/wiki/Nitrous_oxide_engine">nitrous oxide</a> in this mode.</li>
+</ul>
+
+<ul>
+  <li><b><a href="https://en.wikipedia.org/wiki/Drag_racing">Drag racing</a></b> is the second most technical form of race in the game. It involves racing against one or three cars on typically straight tracks and attempting to obtain top positions to win. To master Drag mode, players must employ good timing and reflexes for gear shifting, <a href="https://en.wikipedia.org/wiki/Redline">redlining</a>, overtaking, and the use of <a href="https://en.wikipedia.org/wiki/Nitrous_oxide_engine">nitrous oxide</a> boosts. Since players must use manual transmission, drag races place particular emphasis on monitoring the <a href="https://en.wikipedia.org/wiki/Tachometer">tachometer</a> and the engine temperature during races, which is enlarged and displayed on the left side of the screen. Steering in this mode is simplified to simply allow for lane changes, while the computer handles the steering along the lanes, and the player focuses more on maintaining an optimum speed for the car. Two conditions will result in players being forfeited during a drag race: head-on collisions with an opponent, barriers, traffic cars, or dividers (being 'totaled'); or blown engines as a result from <a href="https://en.wikipedia.org/wiki/Rev_limiter">prolonged redlining</a> and the subsequent overheating of the engine.</li>
+</ul>
+
+<p>In the car customization menu, cars can be altered with performance upgrades and visual upgrades, such as paint colors, vinyl, <a href="https://en.wikipedia.org/wiki/Underglow">underglow</a> neon, custom front, and rear <a href="https://en.wikipedia.org/wiki/Bumper_(car)">bumpers</a>, custom side skirts, <a href="https://en.wikipedia.org/wiki/Spoiler_(car)">spoilers</a>, custom <a href="https://en.wikipedia.org/wiki/Hood_(car)">hoods</a>, <a href="https://en.wikipedia.org/wiki/Exhaust_system">exhaust</a> tips, roof scoops, custom <a href="https://en.wikipedia.org/wiki/Tire">tires</a> and <a href="https://en.wikipedia.org/wiki/Tire_lettering">stickers</a>, and wide <a href="https://en.wikipedia.org/wiki/Body_kit">body kits</a>.</p>
+
+<p>Players can apply performance upgrades to their vehicles. The player can upgrade their car's engine, <a href="https://en.wikipedia.org/wiki/Drivetrain">drivetrain</a>, <a href="https://en.wikipedia.org/wiki/Car_suspension">suspension</a>, tires, <a href="https://en.wikipedia.org/wiki/Engine_control_unit">engine control unit</a> (ECU) as well as add <a href="https://en.wikipedia.org/wiki/Nitrous_oxide_engine">nitrous oxide</a>, <a href="https://en.wikipedia.org/wiki/Turbocharger">turbochargers</a> and reduce the car's weight (in the form of "weight reduction packages"). Performance upgrades are earned by completing certain races in the story mode.</p>
+
+<p><i>Underground</i> features a total of 20 fully licensed cars. In contrast to previous installments that featured predominantly exotic cars, the cars in <i>Underground</i> are exclusively tuner-type cars (such as the <a href="https://en.wikipedia.org/wiki/Dodge_Neon">Dodge Neon</a>, <a href="https://en.wikipedia.org/wiki/Mazda_RX-7">Mazda RX-7</a>, <a href="https://en.wikipedia.org/wiki/Toyota_Supra">Toyota Supra</a>, <a href="https://en.wikipedia.org/wiki/Honda_Civic_Si">Honda Civic Si</a>, <a href="https://en.wikipedia.org/wiki/Nissan_350Z">Nissan 350Z</a>, and <a href="https://en.wikipedia.org/wiki/Volkswagen_Golf_GTI">Volkswagen Golf GTI</a>). <i>Underground</i> is also notable for being the first game in the <i>Need for Speed</i> series to offer a <a href="https://en.wikipedia.org/wiki/South_Korea">Korean</a>-made car, the <a href="https://en.wikipedia.org/wiki/Hyundai_Tiburon">Hyundai Tiburon</a>, as a playable vehicle.</p>
+
+<p>First introduced in <i>Underground</i> was the <i>Style Points</i> system, strongly influenced by "The Kudos" system in <i><a href="https://en.wikipedia.org/wiki/Metropolis_Street_Racer">Metropolis Street Racer</a></i> and <i><a href="https://en.wikipedia.org/wiki/Project_Gotham_Racing_(video_game)">Project Gotham Racing</a></i>. Style Points are rewarded to the player for performing stunts and being competitive in race events. <i>Style Points</i> can be multiplied by the <i>Style Modifier</i>, which can be increased by visually modifying the player's car. The more "tricked out" the design of the player's car, the higher their score gets multiplied. Style Points are earned by drafting, power sliding, taking shortcuts, closely avoiding traffic, and avoiding walls. Style Points gradually unlock visual upgrades for the player's car, as well as custom cars they can drive.</p>
+
+<h2>Soundtrack</h2>
+
+<p>The game's soundtrack contains 26 licensed songs, ranging from <a href="https://en.wikipedia.org/wiki/Rap">rap</a>, <a href="https://en.wikipedia.org/wiki/Hip_hop_music">hip hop</a>, <a href="https://en.wikipedia.org/wiki/Rock_music">rock</a>, <a href="https://en.wikipedia.org/wiki/Electronic_dance_music">EDM</a>, and <a href="https://en.wikipedia.org/wiki/Drum_and_bass">drum and bass</a>, performed by artists like <a href="https://en.wikipedia.org/wiki/Nate_Dogg">Nate Dogg</a>, <a href="https://en.wikipedia.org/wiki/T.I.">T.I.</a>, as well as <a href="https://en.wikipedia.org/wiki/Lil_Jon">Lil Jon &amp; The East Side Boyz</a> (who are best known for performing the game's theme song, <a href="https://en.wikipedia.org/wiki/Get_Low_(Lil_Jon_&amp;_the_East_Side_Boyz_song)">Get Low</a>), <a href="https://en.wikipedia.org/wiki/Petey_Pablo">Petey Pablo</a>, <a href="https://en.wikipedia.org/wiki/Static-X">Static-X</a>, <a href="https://en.wikipedia.org/wiki/Rob_Zombie">Rob Zombie</a>, <a href="https://en.wikipedia.org/wiki/Lostprophets">Lostprophets</a>, <a href="https://en.wikipedia.org/wiki/The_Crystal_Method">The Crystal Method</a>, <a href="https://en.wikipedia.org/wiki/Junkie_XL">Junkie XL</a>, <a href="https://en.wikipedia.org/wiki/Andy_Hunter_(DJ)">Andy Hunter</a>, <a href="https://en.wikipedia.org/wiki/Asian_Dub_Foundation">Asian Dub Foundation</a> and <a href="https://en.wikipedia.org/wiki/BT_(musician)">BT</a> (who is best known for producing the game's opening song, "Kimosabe"). The main menu mostly plays hip-hop music, while the race sequences mostly play electronica, metal, techno, and disco music, though it is also optional for the player to integrate the main menu music into the race sequences or the race music into the main menu.</p>
+
+<h2>Development</h2>
+
+<p><i>Need for Speed: Underground</i> was first announced in April 2003. <i>Underground</i> features 20 fully customizable licensed Vehicles from thirteen manufacturers, and hundreds of aftermarket parts from no fewer than 52 aftermarket parts manufacturers, including <a href="https://en.wikipedia.org/wiki/ThyssenKrupp_Bilstein">Bilstein</a>, <a href="https://en.wikipedia.org/wiki/Holley_Performance_Products">Holley Performance Products</a>, <a href="https://en.wikipedia.org/wiki/GReddy">GReddy</a>, <a href="https://en.wikipedia.org/wiki/Sparco">Sparco</a>, <a href="https://en.wikipedia.org/wiki/HKS_(company)">HKS Power</a>, <a href="https://en.wikipedia.org/wiki/PIAA_Corporation">PIAA Corporation</a> and <a href="https://en.wikipedia.org/wiki/Enkei_Corporation">Enkei</a>. The game's visual effects was designed under the supervision of <a href="https://en.wikipedia.org/wiki/Habib_Zargarpour">Habib Zargarpour</a>, who previously worked on the pod-racing sequence in <i><a href="https://en.wikipedia.org/wiki/Star_Wars:_Episode_I_–_The_Phantom_Menace">Star Wars: Episode I – The Phantom Menace</a></i>. <i>Need for Speed: Underground</i> was released worldwide in November 2003 for PC, PlayStation 2, Xbox and Nintendo GameCube (with the exception of Japan for PlayStation 2 and GameCube on December 25).</p>
+
+<p>The game had a marketing budget of $5.8 million.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Arcade_game">arcade</a> version was developed by <a href="https://en.wikipedia.org/wiki/Global_VR">Global VR</a> and published by <a href="https://en.wikipedia.org/wiki/Konami">Konami</a> with assistance from Electronic Arts, released in late 2005.</p>
+
+<h2>Reception</h2>
+
+<p><i>Need for Speed: Underground</i> received positive reviews according to review aggregators <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> and <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. Both gave it a score of 84.29% and 85 out of 100 for the PlayStation 2 version, 83.73% and 83 out of 100 for the GameCube version, 82.29% and 82 out of 100 for the PC version, 81.76% and 83 out of 100 for the Xbox version and 77.33% and 77 out of 100 for the Game Boy Advance version. The only complaints critics had were the repetitive tracks, unbalanced <a href="https://en.wikipedia.org/wiki/Dynamic_game_difficulty_balancing">rubberband AI</a>, especially in the game's Easy mode, and the lack of free roam and damage in the game, with the latter only confining to detachment of license plates and side mirrors from cars during collisions, especially during Drag races.</p>
+
+<p>In the UK, <i><a href="https://en.wikipedia.org/wiki/PlayStation_Official_Magazine_-_UK">Official UK PlayStation 2 Magazine</a></i> gave the PS2 version a score of nine out of ten and made much of the illegal nature of the gameplay. They praised the speed but called the title as another driving game with Hollywood sparkle. In Japan, <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave the GameCube and PS2 versions a score of two eights and two nines, bringing it to a score of 34 out of 40.</p>
+
+<h3>Sales</h3>
+
+<p>According to Electronic Arts, <i>Need for Speed: Underground</i> was a commercial hit, with sales above 7 million units worldwide by mid-2004. <i>Underground</i> ultimately sold 15 million copies worldwide.</p>
+
+<p>By July 2006, the PlayStation 2 version of <i>Underground</i> had sold 2.6 million copies and earned $115 million in the United States alone. <i><a href="https://en.wikipedia.org/wiki/Next_Generation_(magazine)">Next Generation</a></i> ranked it as the sixth highest-selling game launched for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a> or <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> between January 2000 and July 2006 in that country. It was the highest-selling <i>Need for Speed</i> game released between those dates in the United States. The PlayStation 2 version also received a "Double Platinum" sales award from the <a href="https://en.wikipedia.org/wiki/Entertainment_and_Leisure_Software_Publishers_Association">Entertainment and Leisure Software Publishers Association</a> (ELSPA), indicating sales of at least 600,000 copies in the United Kingdom, where it had sold 700,000 copies by January 2004.</p>
+
+<p>The editors of <i><a href="https://en.wikipedia.org/wiki/Computer_Gaming_World">Computer Gaming World</a></i> presented <i>Underground</i> with their 2003 "Racing Game of the Year" award.</p>
+
+<p><i>Need for Speed: Underground</i> also won <i><a href="https://en.wikipedia.org/wiki/EP_Daily">The Electric Playground</a></i>'s 2003 "Best Driving Game for PC" award, the <a href="https://en.wikipedia.org/wiki/7th_Annual_Interactive_Achievement_Awards">Interactive Achievement Award</a> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Racing_Game_of_the_Year">Console Racing Game of the Year</a>", and  <a href="https://en.wikipedia.org/wiki/Japan_Game_Awards">The CESA Game Awards</a> for "Global Awards (overseas works)" from <a href="https://en.wikipedia.org/wiki/Computer_Entertainment_Supplier's_Association">CESA</a> and <a href="https://en.wikipedia.org/wiki/Ministry_of_Economy,_Trade_and_Industry">Ministry of Economy, Trade and Industry</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
